@@ -1,0 +1,4678 @@
+{
+  "schema_version": 1,
+  "scope": [
+    "765AS",
+    "Million Live",
+    "SideM",
+    "Dearly Stars / 876",
+    "vα-liv",
+    "Starlit Season / 961",
+    "All brands"
+  ],
+  "sources": [
+    {
+      "url": "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+      "title": "밀리시타 공식 아이돌 52명"
+    },
+    {
+      "url": "https://millionlive-anime.idolmaster-official.jp/character/",
+      "title": "밀리언 라이브 공식 캐릭터·성우·Team 목록"
+    },
+    {
+      "url": "https://www.idolmaster-anime.jp/staff-cast/",
+      "title": "아이돌마스터 극장판 공식 캐스트"
+    },
+    {
+      "url": "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+      "title": "공식 오피셜숍 SideM 49명·16유닛 목록"
+    },
+    {
+      "url": "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+      "title": "SideM 11th 공식 캐스트"
+    },
+    {
+      "url": "https://www.lantis.jp/sidem/4thlive/",
+      "title": "SideM 4th 공식 캐스트 및 과거 성우"
+    },
+    {
+      "url": "https://columbia.jp/idolmaster/imasnews/260904.html",
+      "title": "일본 컬럼비아 Dearly Stars 가창 크레딧"
+    },
+    {
+      "url": "https://idolmaster-official.jp/va-liv",
+      "title": "vα-liv 공식 아이돌 소개"
+    },
+    {
+      "url": "https://starlit-season.idolmaster.jp/idol/",
+      "title": "스타릿 시즌 공식 로스터"
+    },
+    {
+      "url": "https://columbia.jp/prod-info/COCX-41710/",
+      "title": "스타릿 시즌02 공식 가창·성우 크레딧"
+    },
+    {
+      "url": "https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_million.pdf",
+      "title": "밀리언 공식 MTG·MTW·시즌 음반 목록"
+    },
+    {
+      "url": "https://www.lantis.jp/imas/",
+      "title": "밀리언 라이브 란티스 공식 음반 목록"
+    },
+    {
+      "url": "https://idolmaster.jp/blog/?m=20140701",
+      "title": "레전드 데이즈·소녀 스톰 공식 소개"
+    },
+    {
+      "url": "https://columbia.jp/idolmaster/news/101126.html",
+      "title": "765PRO ALLSTARS 및 류구 코마치 공식 음반 크레딧"
+    },
+    {
+      "url": "https://steamcommunity.com/app/1046480/announcements/",
+      "title": "스타릿 시즌 개발사 공식 Project LUMINOUS·DIAMANT 안내"
+    },
+    {
+      "url": "https://www.lantis.jp/imas/release_LACA-15433.html",
+      "title": "란티스 LTH 3 공식 가창 유닛"
+    },
+    {
+      "url": "https://www.lantis.jp/imas/release_LACA-15434.html",
+      "title": "란티스 LTH 4 공식 가창 유닛"
+    },
+    {
+      "url": "https://www.lantis.jp/imas/release_LACA-15435.html",
+      "title": "란티스 LTH 5 공식 가창 유닛"
+    },
+    {
+      "url": "https://www.lantis.jp/imas/release_LACA-15436.html",
+      "title": "란티스 LTH 6 공식 가창 유닛"
+    },
+    {
+      "url": "https://www.lantis.jp/imas/release_LACA-15437.html",
+      "title": "란티스 LTH 7 공식 가창 유닛"
+    },
+    {
+      "url": "https://www.lantis.jp/imas/release_LACA-15438.html",
+      "title": "란티스 LTH 8 공식 가창 유닛"
+    },
+    {
+      "url": "https://www.lantis.jp/imas/release_LACA-15439.html",
+      "title": "란티스 LTH 9 공식 가창 유닛"
+    },
+    {
+      "url": "https://www.lantis.jp/imas/release_LACA-15440.html",
+      "title": "란티스 LTH 10 공식 가창 유닛"
+    },
+    {
+      "url": "https://www.lantis.jp/imas/release_LACA-15611.html",
+      "title": "란티스 LTF 1 공식 가창 유닛"
+    },
+    {
+      "url": "https://www.lantis.jp/imas/release_LACA-15612.html",
+      "title": "란티스 LTF 2 공식 가창 유닛"
+    },
+    {
+      "url": "https://www.lantis.jp/imas/release_LACA-15613.html",
+      "title": "란티스 LTF 3 공식 가창 유닛"
+    },
+    {
+      "url": "https://lantis.jp/release-item/LACM-14897.html",
+      "title": "Jus-2-Mint 공식 읽기·음반 크레딧"
+    },
+    {
+      "url": "https://www.lantis.jp/release-item/LACM-34627.html",
+      "title": "315 ALLSTARS 및 315 STARS 공식 크레딧"
+    },
+    {
+      "url": "https://columbia.jp/prod-info/COKM-43445/",
+      "title": "THE IDOLM@STER FIVE STARS 공식 가창 크레딧"
+    },
+    {
+      "url": "https://columbia.jp/idolmaster/2009/news/100108.html",
+      "title": "이전 유키호 성우 개명·가창 크레딧"
+    }
+  ],
+  "entries": [
+    {
+      "name": "天海 春香",
+      "ko": "아마미 하루카",
+      "kind": "idol",
+      "franchise": "765AS",
+      "aliases": [
+        "天海春香",
+        "Haruka Amami",
+        "Amami Haruka"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://www.idolmaster-anime.jp/staff-cast/"
+      ]
+    },
+    {
+      "name": "如月 千早",
+      "ko": "키사라기 치하야",
+      "kind": "idol",
+      "franchise": "765AS",
+      "aliases": [
+        "如月千早",
+        "Chihaya Kisaragi",
+        "Kisaragi Chihaya"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://www.idolmaster-anime.jp/staff-cast/"
+      ]
+    },
+    {
+      "name": "星井 美希",
+      "ko": "호시이 미키",
+      "kind": "idol",
+      "franchise": "765AS",
+      "aliases": [
+        "星井美希",
+        "Miki Hoshii",
+        "Hoshii Miki"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://www.idolmaster-anime.jp/staff-cast/"
+      ]
+    },
+    {
+      "name": "萩原 雪歩",
+      "ko": "하기와라 유키호",
+      "kind": "idol",
+      "franchise": "765AS",
+      "aliases": [
+        "萩原雪歩",
+        "Yukiho Hagiwara",
+        "Hagiwara Yukiho"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://www.idolmaster-anime.jp/staff-cast/"
+      ]
+    },
+    {
+      "name": "高槻 やよい",
+      "ko": "타카츠키 야요이",
+      "kind": "idol",
+      "franchise": "765AS",
+      "aliases": [
+        "高槻やよい",
+        "Yayoi Takatsuki",
+        "Takatsuki Yayoi"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://www.idolmaster-anime.jp/staff-cast/"
+      ]
+    },
+    {
+      "name": "秋月 律子",
+      "ko": "아키즈키 리츠코",
+      "kind": "idol",
+      "franchise": "765AS",
+      "aliases": [
+        "秋月律子",
+        "Ritsuko Akizuki",
+        "Akizuki Ritsuko"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://www.idolmaster-anime.jp/staff-cast/"
+      ]
+    },
+    {
+      "name": "三浦 あずさ",
+      "ko": "미우라 아즈사",
+      "kind": "idol",
+      "franchise": "765AS",
+      "aliases": [
+        "三浦あずさ",
+        "Azusa Miura",
+        "Miura Azusa"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://www.idolmaster-anime.jp/staff-cast/"
+      ]
+    },
+    {
+      "name": "水瀬 伊織",
+      "ko": "미나세 이오리",
+      "kind": "idol",
+      "franchise": "765AS",
+      "aliases": [
+        "水瀬伊織",
+        "Iori Minase",
+        "Minase Iori"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://www.idolmaster-anime.jp/staff-cast/"
+      ]
+    },
+    {
+      "name": "菊地 真",
+      "ko": "키쿠치 마코토",
+      "kind": "idol",
+      "franchise": "765AS",
+      "aliases": [
+        "菊地真",
+        "Makoto Kikuchi",
+        "Kikuchi Makoto"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://www.idolmaster-anime.jp/staff-cast/"
+      ]
+    },
+    {
+      "name": "双海 亜美",
+      "ko": "후타미 아미",
+      "kind": "idol",
+      "franchise": "765AS",
+      "aliases": [
+        "双海亜美",
+        "Ami Futami",
+        "Futami Ami"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://www.idolmaster-anime.jp/staff-cast/"
+      ]
+    },
+    {
+      "name": "双海 真美",
+      "ko": "후타미 마미",
+      "kind": "idol",
+      "franchise": "765AS",
+      "aliases": [
+        "双海真美",
+        "Mami Futami",
+        "Futami Mami"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://www.idolmaster-anime.jp/staff-cast/"
+      ]
+    },
+    {
+      "name": "四条 貴音",
+      "ko": "시죠 타카네",
+      "kind": "idol",
+      "franchise": "765AS",
+      "aliases": [
+        "四条貴音",
+        "Takane Shijou",
+        "Takane Shijo",
+        "Shijou Takane"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://www.idolmaster-anime.jp/staff-cast/"
+      ]
+    },
+    {
+      "name": "我那覇 響",
+      "ko": "가나하 히비키",
+      "kind": "idol",
+      "franchise": "765AS",
+      "aliases": [
+        "我那覇響",
+        "Hibiki Ganaha",
+        "Ganaha Hibiki"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://www.idolmaster-anime.jp/staff-cast/"
+      ]
+    },
+    {
+      "name": "音無 小鳥",
+      "ko": "오토나시 코토리",
+      "kind": "idol",
+      "franchise": "765AS",
+      "cv": ["滝田樹里"],
+      "voice_actor_sources": ["https://millionlive-anime.idolmaster-official.jp/character/"],
+      "aliases": [
+        "音無小鳥",
+        "Kotori Otonashi",
+        "Otonashi Kotori"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://www.idolmaster-anime.jp/staff-cast/"
+      ]
+    },
+    {
+      "name": "中村 繪里子",
+      "ko": "나카무라 에리코",
+      "kind": "voice_actor",
+      "franchise": "765AS",
+      "aliases": [
+        "中村繪里子",
+        "Eriko Nakamura",
+        "Nakamura Eriko"
+      ],
+      "source_urls": [
+        "https://www.idolmaster-anime.jp/staff-cast/"
+      ]
+    },
+    {
+      "name": "今井 麻美",
+      "ko": "이마이 아사미",
+      "kind": "voice_actor",
+      "franchise": "765AS",
+      "aliases": [
+        "今井麻美",
+        "Asami Imai",
+        "Imai Asami"
+      ],
+      "source_urls": [
+        "https://www.idolmaster-anime.jp/staff-cast/"
+      ]
+    },
+    {
+      "name": "長谷川 明子",
+      "ko": "하세가와 아키코",
+      "kind": "voice_actor",
+      "franchise": "765AS",
+      "aliases": [
+        "長谷川明子",
+        "Akiko Hasegawa",
+        "Hasegawa Akiko"
+      ],
+      "source_urls": [
+        "https://www.idolmaster-anime.jp/staff-cast/"
+      ]
+    },
+    {
+      "name": "浅倉 杏美",
+      "ko": "아사쿠라 아즈미",
+      "kind": "voice_actor",
+      "franchise": "765AS",
+      "aliases": [
+        "浅倉杏美",
+        "Azumi Asakura",
+        "Asakura Azumi"
+      ],
+      "source_urls": [
+        "https://www.idolmaster-anime.jp/staff-cast/"
+      ]
+    },
+    {
+      "name": "仁後 真耶子",
+      "ko": "니고 마야코",
+      "kind": "voice_actor",
+      "franchise": "765AS",
+      "aliases": [
+        "仁後真耶子",
+        "Mayako Nigo",
+        "Nigo Mayako"
+      ],
+      "source_urls": [
+        "https://www.idolmaster-anime.jp/staff-cast/"
+      ]
+    },
+    {
+      "name": "若林 直美",
+      "ko": "와카바야시 나오미",
+      "kind": "voice_actor",
+      "franchise": "765AS",
+      "aliases": [
+        "若林直美",
+        "Naomi Wakabayashi",
+        "Wakabayashi Naomi"
+      ],
+      "source_urls": [
+        "https://www.idolmaster-anime.jp/staff-cast/"
+      ]
+    },
+    {
+      "name": "たかはし 智秋",
+      "ko": "타카하시 치아키",
+      "kind": "voice_actor",
+      "franchise": "765AS",
+      "aliases": [
+        "たかはし智秋",
+        "Chiaki Takahashi",
+        "Takahashi Chiaki"
+      ],
+      "source_urls": [
+        "https://www.idolmaster-anime.jp/staff-cast/"
+      ]
+    },
+    {
+      "name": "釘宮 理恵",
+      "ko": "쿠기미야 리에",
+      "kind": "voice_actor",
+      "franchise": "765AS",
+      "aliases": [
+        "釘宮理恵",
+        "Rie Kugimiya",
+        "Kugimiya Rie"
+      ],
+      "source_urls": [
+        "https://www.idolmaster-anime.jp/staff-cast/"
+      ]
+    },
+    {
+      "name": "平田 宏美",
+      "ko": "히라타 히로미",
+      "kind": "voice_actor",
+      "franchise": "765AS",
+      "aliases": [
+        "平田宏美",
+        "Hiromi Hirata",
+        "Hirata Hiromi"
+      ],
+      "source_urls": [
+        "https://www.idolmaster-anime.jp/staff-cast/"
+      ]
+    },
+    {
+      "name": "下田 麻美",
+      "ko": "시모다 아사미",
+      "kind": "voice_actor",
+      "franchise": "765AS",
+      "aliases": [
+        "下田麻美",
+        "Asami Shimoda",
+        "Shimoda Asami"
+      ],
+      "source_urls": [
+        "https://www.idolmaster-anime.jp/staff-cast/"
+      ]
+    },
+    {
+      "name": "原 由実",
+      "ko": "하라 유미",
+      "kind": "voice_actor",
+      "franchise": "765AS",
+      "aliases": [
+        "原由実",
+        "Yumi Hara",
+        "Hara Yumi"
+      ],
+      "source_urls": [
+        "https://www.idolmaster-anime.jp/staff-cast/"
+      ]
+    },
+    {
+      "name": "沼倉 愛美",
+      "ko": "누마쿠라 마나미",
+      "kind": "voice_actor",
+      "franchise": "765AS",
+      "aliases": [
+        "沼倉愛美",
+        "Manami Numakura",
+        "Numakura Manami"
+      ],
+      "source_urls": [
+        "https://www.idolmaster-anime.jp/staff-cast/"
+      ]
+    },
+    {
+      "name": "滝田 樹里",
+      "ko": "타키타 쥬리",
+      "kind": "voice_actor",
+      "franchise": "765AS",
+      "aliases": [
+        "滝田樹里",
+        "Juri Takita",
+        "Takita Juri"
+      ],
+      "source_urls": [
+        "https://www.idolmaster-anime.jp/staff-cast/"
+      ]
+    },
+    {
+      "name": "春日 未来",
+      "ko": "카스가 미라이",
+      "kind": "idol",
+      "franchise": "Million Live",
+      "aliases": [
+        "春日未来",
+        "Mirai Kasuga",
+        "Kasuga Mirai"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "最上 静香",
+      "ko": "모가미 시즈카",
+      "kind": "idol",
+      "franchise": "Million Live",
+      "aliases": [
+        "最上静香",
+        "Shizuka Mogami",
+        "Mogami Shizuka"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "伊吹 翼",
+      "ko": "이부키 츠바사",
+      "kind": "idol",
+      "franchise": "Million Live",
+      "aliases": [
+        "伊吹翼",
+        "Tsubasa Ibuki",
+        "Ibuki Tsubasa"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "エミリー スチュアート",
+      "ko": "에밀리 스튜어트",
+      "kind": "idol",
+      "franchise": "Million Live",
+      "aliases": [
+        "エミリースチュアート",
+        "Emily Stewart",
+        "エミリー・スチュアート"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://millionlive-anime.idolmaster-official.jp/character/",
+        "https://www.lantis.jp/imas/release_LACA-15611.html"
+      ]
+    },
+    {
+      "name": "大神 環",
+      "ko": "오오가미 타마키",
+      "kind": "idol",
+      "franchise": "Million Live",
+      "aliases": [
+        "大神環",
+        "Tamaki Ogami",
+        "Tamaki Oogami",
+        "Ogami Tamaki"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "北上 麗花",
+      "ko": "키타카미 레이카",
+      "kind": "idol",
+      "franchise": "Million Live",
+      "aliases": [
+        "北上麗花",
+        "Reika Kitakami",
+        "Kitakami Reika"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "北沢 志保",
+      "ko": "키타자와 시호",
+      "kind": "idol",
+      "franchise": "Million Live",
+      "aliases": [
+        "北沢志保",
+        "Shiho Kitazawa",
+        "Kitazawa Shiho"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "木下 ひなた",
+      "ko": "키노시타 히나타",
+      "kind": "idol",
+      "franchise": "Million Live",
+      "aliases": [
+        "木下ひなた",
+        "Hinata Kinoshita",
+        "Kinoshita Hinata"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "高坂 海美",
+      "ko": "코사카 우미",
+      "kind": "idol",
+      "franchise": "Million Live",
+      "aliases": [
+        "高坂海美",
+        "Umi Kousaka",
+        "Umi Kosaka",
+        "Kousaka Umi"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "桜守 歌織",
+      "ko": "사쿠라모리 카오리",
+      "kind": "idol",
+      "franchise": "Million Live",
+      "aliases": [
+        "桜守歌織",
+        "Kaori Sakuramori",
+        "Sakuramori Kaori"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "佐竹 美奈子",
+      "ko": "사타케 미나코",
+      "kind": "idol",
+      "franchise": "Million Live",
+      "aliases": [
+        "佐竹美奈子",
+        "Minako Satake",
+        "Satake Minako"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "篠宮 可憐",
+      "ko": "시노미야 카렌",
+      "kind": "idol",
+      "franchise": "Million Live",
+      "aliases": [
+        "篠宮可憐",
+        "Karen Shinomiya",
+        "Shinomiya Karen"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "島原 エレナ",
+      "ko": "시마바라 엘레나",
+      "kind": "idol",
+      "franchise": "Million Live",
+      "aliases": [
+        "島原エレナ",
+        "Elena Shimabara",
+        "Shimabara Elena"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "ジュリア",
+      "ko": "줄리아",
+      "kind": "idol",
+      "franchise": "Million Live",
+      "aliases": [],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "白石 紬",
+      "ko": "시라이시 츠무기",
+      "kind": "idol",
+      "franchise": "Million Live",
+      "aliases": [
+        "白石紬",
+        "Tsumugi Shiraishi",
+        "Shiraishi Tsumugi"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "周防 桃子",
+      "ko": "스오 모모코",
+      "kind": "idol",
+      "franchise": "Million Live",
+      "aliases": [
+        "周防桃子",
+        "Momoko Suou",
+        "Momoko Suo",
+        "Suou Momoko"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "高山 紗代子",
+      "ko": "타카야마 사요코",
+      "kind": "idol",
+      "franchise": "Million Live",
+      "aliases": [
+        "高山紗代子",
+        "Sayoko Takayama",
+        "Takayama Sayoko"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "田中 琴葉",
+      "ko": "타나카 코토하",
+      "kind": "idol",
+      "franchise": "Million Live",
+      "aliases": [
+        "田中琴葉",
+        "Kotoha Tanaka",
+        "Tanaka Kotoha"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "天空橋 朋花",
+      "ko": "텐쿠바시 토모카",
+      "kind": "idol",
+      "franchise": "Million Live",
+      "aliases": [
+        "天空橋朋花",
+        "Tomoka Tenkubashi",
+        "Tenkubashi Tomoka"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "徳川 まつり",
+      "ko": "토쿠가와 마츠리",
+      "kind": "idol",
+      "franchise": "Million Live",
+      "aliases": [
+        "徳川まつり",
+        "Matsuri Tokugawa",
+        "Tokugawa Matsuri"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "所 恵美",
+      "ko": "토코로 메구미",
+      "kind": "idol",
+      "franchise": "Million Live",
+      "aliases": [
+        "所恵美",
+        "Megumi Tokoro",
+        "Tokoro Megumi"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "豊川 風花",
+      "ko": "토요카와 후카",
+      "kind": "idol",
+      "franchise": "Million Live",
+      "aliases": [
+        "豊川風花",
+        "Fuka Toyokawa",
+        "Fuuka Toyokawa",
+        "Toyokawa Fuka"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "中谷 育",
+      "ko": "나카타니 이쿠",
+      "kind": "idol",
+      "franchise": "Million Live",
+      "aliases": [
+        "中谷育",
+        "Iku Nakatani",
+        "Nakatani Iku"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "永吉 昴",
+      "ko": "나가요시 스바루",
+      "kind": "idol",
+      "franchise": "Million Live",
+      "aliases": [
+        "永吉昴",
+        "Subaru Nagayoshi",
+        "Nagayoshi Subaru"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "七尾 百合子",
+      "ko": "나나오 유리코",
+      "kind": "idol",
+      "franchise": "Million Live",
+      "aliases": [
+        "七尾百合子",
+        "Yuriko Nanao",
+        "Nanao Yuriko"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "二階堂 千鶴",
+      "ko": "니카이도 치즈루",
+      "kind": "idol",
+      "franchise": "Million Live",
+      "aliases": [
+        "二階堂千鶴",
+        "Chizuru Nikaido",
+        "Chizuru Nikaidou",
+        "Nikaido Chizuru"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "野々原 茜",
+      "ko": "노노하라 아카네",
+      "kind": "idol",
+      "franchise": "Million Live",
+      "aliases": [
+        "野々原茜",
+        "Akane Nonohara",
+        "Nonohara Akane"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "箱崎 星梨花",
+      "ko": "하코자키 세리카",
+      "kind": "idol",
+      "franchise": "Million Live",
+      "aliases": [
+        "箱崎星梨花",
+        "Serika Hakozaki",
+        "Hakozaki Serika"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "馬場 このみ",
+      "ko": "바바 코노미",
+      "kind": "idol",
+      "franchise": "Million Live",
+      "aliases": [
+        "馬場このみ",
+        "Konomi Baba",
+        "Baba Konomi"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "福田 のり子",
+      "ko": "후쿠다 노리코",
+      "kind": "idol",
+      "franchise": "Million Live",
+      "aliases": [
+        "福田のり子",
+        "Noriko Fukuda",
+        "Fukuda Noriko"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "舞浜 歩",
+      "ko": "마이하마 아유무",
+      "kind": "idol",
+      "franchise": "Million Live",
+      "aliases": [
+        "舞浜歩",
+        "Ayumu Maihama",
+        "Maihama Ayumu"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "真壁 瑞希",
+      "ko": "마카베 미즈키",
+      "kind": "idol",
+      "franchise": "Million Live",
+      "aliases": [
+        "真壁瑞希",
+        "Mizuki Makabe",
+        "Makabe Mizuki"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "松田 亜利沙",
+      "ko": "마츠다 아리사",
+      "kind": "idol",
+      "franchise": "Million Live",
+      "aliases": [
+        "松田亜利沙",
+        "Arisa Matsuda",
+        "Matsuda Arisa"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "宮尾 美也",
+      "ko": "미야오 미야",
+      "kind": "idol",
+      "franchise": "Million Live",
+      "aliases": [
+        "宮尾美也",
+        "Miya Miyao",
+        "Miyao Miya"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "望月 杏奈",
+      "ko": "모치즈키 안나",
+      "kind": "idol",
+      "franchise": "Million Live",
+      "aliases": [
+        "望月杏奈",
+        "Anna Mochizuki",
+        "Mochizuki Anna"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "百瀬 莉緒",
+      "ko": "모모세 리오",
+      "kind": "idol",
+      "franchise": "Million Live",
+      "aliases": [
+        "百瀬莉緒",
+        "Rio Momose",
+        "Momose Rio"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "矢吹 可奈",
+      "ko": "야부키 카나",
+      "kind": "idol",
+      "franchise": "Million Live",
+      "aliases": [
+        "矢吹可奈",
+        "Kana Yabuki",
+        "Yabuki Kana"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "横山 奈緒",
+      "ko": "요코야마 나오",
+      "kind": "idol",
+      "franchise": "Million Live",
+      "aliases": [
+        "横山奈緒",
+        "Nao Yokoyama",
+        "Yokoyama Nao"
+      ],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "ロコ",
+      "ko": "로코",
+      "kind": "idol",
+      "franchise": "Million Live",
+      "aliases": ["伴田路子", "Roco", "Roco Handa", "Handa Roco"],
+      "cv": ["中村温姫"],
+      "voice_actor_sources": ["https://millionlive-anime.idolmaster-official.jp/character/"],
+      "source_urls": [
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/",
+        "https://millionlive-anime.idolmaster-official.jp/character/",
+        "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf"
+      ]
+    },
+    {
+      "name": "山崎 はるか",
+      "ko": "야마자키 하루카",
+      "kind": "voice_actor",
+      "franchise": "Million Live",
+      "aliases": [
+        "山崎はるか",
+        "Haruka Yamazaki",
+        "Yamazaki Haruka"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "田所 あずさ",
+      "ko": "타도코로 아즈사",
+      "kind": "voice_actor",
+      "franchise": "Million Live",
+      "aliases": [
+        "田所あずさ",
+        "Azusa Tadokoro",
+        "Tadokoro Azusa"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "Machico",
+      "ko": "마치코",
+      "kind": "voice_actor",
+      "franchise": "Million Live",
+      "aliases": [],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "郁原 ゆう",
+      "ko": "카하라 유우",
+      "kind": "voice_actor",
+      "franchise": "Million Live",
+      "aliases": [
+        "郁原ゆう",
+        "Yuu Kahara",
+        "Kahara Yuu"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "稲川 英里",
+      "ko": "이나가와 에리",
+      "kind": "voice_actor",
+      "franchise": "Million Live",
+      "aliases": [
+        "稲川英里",
+        "Eri Inagawa",
+        "Inagawa Eri"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "平山 笑美",
+      "ko": "히라야마 에미",
+      "kind": "voice_actor",
+      "franchise": "Million Live",
+      "aliases": [
+        "平山笑美",
+        "Emi Hirayama",
+        "Hirayama Emi"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "雨宮 天",
+      "ko": "아마미야 소라",
+      "kind": "voice_actor",
+      "franchise": "Million Live",
+      "aliases": [
+        "雨宮天",
+        "Sora Amamiya",
+        "Amamiya Sora"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "田村 奈央",
+      "ko": "타무라 나오",
+      "kind": "voice_actor",
+      "franchise": "Million Live",
+      "aliases": [
+        "田村奈央",
+        "Nao Tamura",
+        "Tamura Nao"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "上田 麗奈",
+      "ko": "우에다 레이나",
+      "kind": "voice_actor",
+      "franchise": "Million Live",
+      "aliases": [
+        "上田麗奈",
+        "Reina Ueda",
+        "Ueda Reina"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "香里 有佐",
+      "ko": "코리 아리사",
+      "kind": "voice_actor",
+      "franchise": "Million Live",
+      "aliases": [
+        "香里有佐",
+        "Arisa Kori",
+        "Kori Arisa"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "大関 英里",
+      "ko": "오오제키 에리",
+      "kind": "voice_actor",
+      "franchise": "Million Live",
+      "aliases": [
+        "大関英里",
+        "Eri Ozeki",
+        "Ozeki Eri"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "近藤 唯",
+      "ko": "콘도 유이",
+      "kind": "voice_actor",
+      "franchise": "Million Live",
+      "aliases": [
+        "近藤唯",
+        "Yui Kondo",
+        "Kondo Yui"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "角元 明日香",
+      "ko": "카쿠모토 아스카",
+      "kind": "voice_actor",
+      "franchise": "Million Live",
+      "aliases": [
+        "角元明日香",
+        "Asuka Kakumoto",
+        "Kakumoto Asuka"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "愛美",
+      "ko": "아이미",
+      "kind": "voice_actor",
+      "franchise": "Million Live",
+      "aliases": [
+        "寺川愛美",
+        "寺川 愛美"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/",
+        "https://ameblo.jp/aimi-sound/entry-11737024720.html"
+      ]
+    },
+    {
+      "name": "南 早紀",
+      "ko": "미나미 사키",
+      "kind": "voice_actor",
+      "franchise": "Million Live",
+      "aliases": [
+        "南早紀",
+        "Saki Minami",
+        "Minami Saki"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "渡部 恵子",
+      "ko": "와타나베 케이코",
+      "kind": "voice_actor",
+      "franchise": "Million Live",
+      "aliases": [
+        "渡部恵子",
+        "Keiko Watanabe",
+        "Watanabe Keiko"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "駒形 友梨",
+      "ko": "코마가타 유리",
+      "kind": "voice_actor",
+      "franchise": "Million Live",
+      "aliases": [
+        "駒形友梨",
+        "Yuri Komagata",
+        "Komagata Yuri"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "種田 梨沙",
+      "ko": "타네다 리사",
+      "kind": "voice_actor",
+      "franchise": "Million Live",
+      "aliases": [
+        "種田梨沙",
+        "Risa Taneda",
+        "Taneda Risa"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "小岩井 ことり",
+      "ko": "코이와이 코토리",
+      "kind": "voice_actor",
+      "franchise": "Million Live",
+      "aliases": [
+        "小岩井ことり",
+        "Kotori Koiwai",
+        "Koiwai Kotori"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "諏訪 彩花",
+      "ko": "스와 아야카",
+      "kind": "voice_actor",
+      "franchise": "Million Live",
+      "aliases": [
+        "諏訪彩花",
+        "Ayaka Suwa",
+        "Suwa Ayaka"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "藤井 ゆきよ",
+      "ko": "후지이 유키요",
+      "kind": "voice_actor",
+      "franchise": "Million Live",
+      "aliases": [
+        "藤井ゆきよ",
+        "Yukiyo Fujii",
+        "Fujii Yukiyo"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "末柄 里恵",
+      "ko": "스에가라 리에",
+      "kind": "voice_actor",
+      "franchise": "Million Live",
+      "aliases": [
+        "末柄里恵",
+        "Rie Suegara",
+        "Suegara Rie"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "原嶋 あかり",
+      "ko": "하라시마 아카리",
+      "kind": "voice_actor",
+      "franchise": "Million Live",
+      "aliases": [
+        "原嶋あかり",
+        "Akari Harashima",
+        "Harashima Akari"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "斉藤 佑圭",
+      "ko": "사이토 유카",
+      "kind": "voice_actor",
+      "franchise": "Million Live",
+      "aliases": [
+        "斉藤佑圭",
+        "Yuka Saito",
+        "Saito Yuka"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "伊藤 美来",
+      "ko": "이토 미쿠",
+      "kind": "voice_actor",
+      "franchise": "Million Live",
+      "aliases": [
+        "伊藤美来",
+        "Miku Ito",
+        "Ito Miku"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "野村 香菜子",
+      "ko": "노무라 카나코",
+      "kind": "voice_actor",
+      "franchise": "Million Live",
+      "aliases": [
+        "野村香菜子",
+        "Kanako Nomura",
+        "Nomura Kanako"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "小笠原 早紀",
+      "ko": "오가사와라 사키",
+      "kind": "voice_actor",
+      "franchise": "Million Live",
+      "aliases": [
+        "小笠原早紀",
+        "Saki Ogasawara",
+        "Ogasawara Saki"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "麻倉 もも",
+      "ko": "아사쿠라 모모",
+      "kind": "voice_actor",
+      "franchise": "Million Live",
+      "aliases": [
+        "麻倉もも",
+        "Momo Asakura",
+        "Asakura Momo"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "髙橋 ミナミ",
+      "ko": "타카하시 미나미",
+      "kind": "voice_actor",
+      "franchise": "Million Live",
+      "aliases": [
+        "髙橋ミナミ",
+        "高橋ミナミ",
+        "高橋未奈美",
+        "Minami Takahashi",
+        "Takahashi Minami"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/",
+        "https://haikyo.co.jp/news/index.php?ActorID=&page=46"
+      ]
+    },
+    {
+      "name": "浜崎 奈々",
+      "ko": "하마사키 나나",
+      "kind": "voice_actor",
+      "franchise": "Million Live",
+      "aliases": [
+        "浜崎奈々",
+        "Nana Hamasaki",
+        "Hamasaki Nana"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "戸田 めぐみ",
+      "ko": "토다 메구미",
+      "kind": "voice_actor",
+      "franchise": "Million Live",
+      "aliases": [
+        "戸田めぐみ",
+        "Megumi Toda",
+        "Toda Megumi"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "阿部 里果",
+      "ko": "아베 리카",
+      "kind": "voice_actor",
+      "franchise": "Million Live",
+      "aliases": [
+        "阿部里果",
+        "Rika Abe",
+        "Abe Rika"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "村川 梨衣",
+      "ko": "무라카와 리에",
+      "kind": "voice_actor",
+      "franchise": "Million Live",
+      "aliases": [
+        "村川梨衣",
+        "Rie Murakawa",
+        "Murakawa Rie"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "桐谷 蝶々",
+      "ko": "키리타니 쵸쵸",
+      "kind": "voice_actor",
+      "franchise": "Million Live",
+      "aliases": [
+        "桐谷蝶々",
+        "Choucho Kiritani",
+        "Kiritani Choucho"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "夏川 椎菜",
+      "ko": "나츠카와 시이나",
+      "kind": "voice_actor",
+      "franchise": "Million Live",
+      "aliases": [
+        "夏川椎菜",
+        "Shiina Natsukawa",
+        "Natsukawa Shiina"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "山口 立花子",
+      "ko": "야마구치 리카코",
+      "kind": "voice_actor",
+      "franchise": "Million Live",
+      "aliases": [
+        "山口立花子",
+        "Rikako Yamaguchi",
+        "Yamaguchi Rikako"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "木戸 衣吹",
+      "ko": "키도 이부키",
+      "kind": "voice_actor",
+      "franchise": "Million Live",
+      "aliases": [
+        "木戸衣吹",
+        "Ibuki Kido",
+        "Kido Ibuki"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "渡部 優衣",
+      "ko": "와타나베 유이",
+      "kind": "voice_actor",
+      "franchise": "Million Live",
+      "aliases": [
+        "渡部優衣",
+        "Yui Watanabe",
+        "Watanabe Yui"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "中村 温姫",
+      "ko": "나카무라 아츠키",
+      "kind": "voice_actor",
+      "franchise": "Million Live",
+      "aliases": [
+        "中村温姫",
+        "Atsuki Nakamura",
+        "Nakamura Atsuki"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "天ヶ瀬 冬馬",
+      "ko": "아마가세 토우마",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "天ヶ瀬冬馬",
+        "Touma Amagase",
+        "Toma Amagase",
+        "Amagase Touma"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "御手洗 翔太",
+      "ko": "미타라이 쇼타",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "御手洗翔太",
+        "Shota Mitarai",
+        "Mitarai Shota"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "伊集院 北斗",
+      "ko": "이쥬인 호쿠토",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "伊集院北斗",
+        "Hokuto Ijuin",
+        "Ijuin Hokuto"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "天道 輝",
+      "ko": "텐도 테루",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "天道輝",
+        "Teru Tendo",
+        "Tendo Teru"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "桜庭 薫",
+      "ko": "사쿠라바 카오루",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "桜庭薫",
+        "Kaoru Sakuraba",
+        "Sakuraba Kaoru"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "柏木 翼",
+      "ko": "카시와기 츠바사",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "柏木翼",
+        "Tsubasa Kashiwagi",
+        "Kashiwagi Tsubasa"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "都築 圭",
+      "ko": "츠즈키 케이",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "都築圭",
+        "Kei Tsuzuki",
+        "Tsuzuki Kei"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "神楽 麗",
+      "ko": "카구라 레이",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "神楽麗",
+        "Rei Kagura",
+        "Kagura Rei"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "鷹城 恭二",
+      "ko": "타카죠 쿄지",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "鷹城恭二",
+        "Kyoji Takajo",
+        "Takajo Kyoji"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "ピエール",
+      "ko": "피에르",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "渡辺 みのり",
+      "ko": "와타나베 미노리",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "渡辺みのり",
+        "Minori Watanabe",
+        "Watanabe Minori"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "蒼井 悠介",
+      "ko": "아오이 유스케",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "蒼井悠介",
+        "Yusuke Aoi",
+        "Aoi Yusuke"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "蒼井 享介",
+      "ko": "아오이 쿄스케",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "蒼井享介",
+        "Kyosuke Aoi",
+        "Aoi Kyosuke"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "握野 英雄",
+      "ko": "아쿠노 히데오",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "握野英雄",
+        "Hideo Akuno",
+        "Akuno Hideo"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "木村 龍",
+      "ko": "키무라 류",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "木村龍",
+        "Ryu Kimura",
+        "Kimura Ryu"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "信玄 誠司",
+      "ko": "신겐 세이지",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "信玄誠司",
+        "Seiji Shingen",
+        "Shingen Seiji"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "華村 翔真",
+      "ko": "하나무라 쇼마",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "華村翔真",
+        "Shoma Hanamura",
+        "Hanamura Shoma"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "猫柳 キリオ",
+      "ko": "네코야나기 키리오",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "猫柳キリオ",
+        "Kirio Nekoyanagi",
+        "Nekoyanagi Kirio"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "清澄 九郎",
+      "ko": "키요스미 쿠로",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "清澄九郎",
+        "Kuro Kiyosumi",
+        "Kiyosumi Kuro"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "秋山 隼人",
+      "ko": "아키야마 하야토",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "秋山隼人",
+        "Hayato Akiyama",
+        "Akiyama Hayato"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "冬美 旬",
+      "ko": "후유미 쥰",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "冬美旬",
+        "Jun Fuyumi",
+        "Fuyumi Jun"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "榊 夏来",
+      "ko": "사카키 나츠키",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "榊夏来",
+        "Natsuki Sakaki",
+        "Sakaki Natsuki"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "若里 春名",
+      "ko": "와카자토 하루나",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "若里春名",
+        "Haruna Wakazato",
+        "Wakazato Haruna"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "伊瀬谷 四季",
+      "ko": "이세야 시키",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "伊瀬谷四季",
+        "Shiki Iseya",
+        "Iseya Shiki"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "紅井 朱雀",
+      "ko": "아카이 스자쿠",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "紅井朱雀",
+        "Suzaku Akai",
+        "Akai Suzaku"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "黒野 玄武",
+      "ko": "쿠로노 겐부",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "黒野玄武",
+        "Genbu Kurono",
+        "Kurono Genbu"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "神谷 幸広",
+      "ko": "카미야 유키히로",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "神谷幸広",
+        "Yukihiro Kamiya",
+        "Kamiya Yukihiro"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "東雲 荘一郎",
+      "ko": "시노노메 소이치로",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "東雲荘一郎",
+        "Soichiro Shinonome",
+        "Shinonome Soichiro"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "アスラン＝ベルゼビュートⅡ世",
+      "ko": "아스란 벨제뷔트 2세",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "アスラン=ベルゼビュートⅡ世",
+        "アスラン＝ベルゼビュート Ⅱ世",
+        "アスラン=BBⅡ世",
+        "アスラン＝BBⅡ世",
+        "Aslan BB II"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "卯月 巻緒",
+      "ko": "우즈키 마키오",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "卯月巻緒",
+        "Makio Uzuki",
+        "Uzuki Makio"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "水嶋 咲",
+      "ko": "미즈시마 사키",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "水嶋咲",
+        "Saki Mizushima",
+        "Mizushima Saki"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "岡村 直央",
+      "ko": "오카무라 나오",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "岡村直央",
+        "Nao Okamura",
+        "Okamura Nao"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "橘 志狼",
+      "ko": "타치바나 시로",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "橘志狼",
+        "Shiro Tachibana",
+        "Tachibana Shiro"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "姫野 かのん",
+      "ko": "히메노 카논",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "姫野かのん",
+        "Kanon Himeno",
+        "Himeno Kanon"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "硲 道夫",
+      "ko": "하자마 미치오",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "硲道夫",
+        "Michio Hazama",
+        "Hazama Michio"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "舞田 類",
+      "ko": "마이타 루이",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "舞田類",
+        "Rui Maita",
+        "Maita Rui"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "山下 次郎",
+      "ko": "야마시타 지로",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "山下次郎",
+        "Jiro Yamashita",
+        "Yamashita Jiro"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "大河 タケル",
+      "ko": "타이가 타케루",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "大河タケル",
+        "Takeru Taiga",
+        "Taiga Takeru"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "円城寺 道流",
+      "ko": "엔죠지 미치루",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "円城寺道流",
+        "Michiru Enjoji",
+        "Enjoji Michiru"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "牙崎 漣",
+      "ko": "키자키 렌",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "牙崎漣",
+        "Ren Kizaki",
+        "Kizaki Ren"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "秋月 涼",
+      "ko": "아키즈키 료",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "秋月涼",
+        "Ryo Akizuki",
+        "Akizuki Ryo"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/",
+        "https://columbia.jp/idolmaster/imasnews/260904.html"
+      ]
+    },
+    {
+      "name": "兜 大吾",
+      "ko": "카부토 다이고",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "兜大吾",
+        "Daigo Kabuto",
+        "Kabuto Daigo"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "九十九 一希",
+      "ko": "츠쿠모 카즈키",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "九十九一希",
+        "Kazuki Tsukumo",
+        "Tsukumo Kazuki"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "葛之葉 雨彦",
+      "ko": "쿠즈노하 아메히코",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "葛之葉雨彦",
+        "Amehiko Kuzunoha",
+        "Kuzunoha Amehiko"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "北村 想楽",
+      "ko": "키타무라 소라",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "北村想楽",
+        "Sora Kitamura",
+        "Kitamura Sora"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "古論 クリス",
+      "ko": "코론 크리스",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "古論クリス",
+        "Chris Koron",
+        "Koron Chris"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "天峰 秀",
+      "ko": "아마미네 슈",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "天峰秀",
+        "Shu Amamine",
+        "Amamine Shu"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "花園 百々人",
+      "ko": "하나조노 모모히토",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "花園百々人",
+        "Momohito Hanazono",
+        "Hanazono Momohito"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "眉見 鋭心",
+      "ko": "마유미 에이신",
+      "kind": "idol",
+      "franchise": "SideM",
+      "aliases": [
+        "眉見鋭心",
+        "Eishin Mayumi",
+        "Mayumi Eishin"
+      ],
+      "source_urls": [
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html",
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "寺島 拓篤",
+      "ko": "테라시마 타쿠마",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "寺島拓篤",
+        "Takuma Terashima",
+        "Terashima Takuma"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "松岡 禎丞",
+      "ko": "마츠오카 요시츠구",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "松岡禎丞",
+        "Yoshitsugu Matsuoka",
+        "Matsuoka Yoshitsugu"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "神原 大地",
+      "ko": "칸바라 다이치",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "神原大地",
+        "Daichi Kanbara",
+        "Kanbara Daichi"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "仲村 宗悟",
+      "ko": "나카무라 슈고",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "仲村宗悟",
+        "Shugo Nakamura",
+        "Nakamura Shugo"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "内田 雄馬",
+      "ko": "우치다 유마",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "内田雄馬",
+        "Yuma Uchida",
+        "Uchida Yuma"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "八代 拓",
+      "ko": "야시로 타쿠",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "八代拓",
+        "Taku Yashiro",
+        "Yashiro Taku"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "土岐 隼一",
+      "ko": "토키 슌이치",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "土岐隼一",
+        "Shunichi Toki",
+        "Toki Shunichi"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "永野 由祐",
+      "ko": "나가노 유스케",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "永野由祐",
+        "Yusuke Nagano",
+        "Nagano Yusuke"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "梅原 裕一郎",
+      "ko": "우메하라 유이치로",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "梅原裕一郎",
+        "Yuichiro Umehara",
+        "Umehara Yuichiro"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "堀江 瞬",
+      "ko": "호리에 슌",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "堀江瞬",
+        "Shun Horie",
+        "Horie Shun"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "高塚 智人",
+      "ko": "타카츠카 토모히토",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "高塚智人",
+        "Tomohito Takatsuka",
+        "Takatsuka Tomohito"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "菊池 勇成",
+      "ko": "키쿠치 타케루",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "菊池勇成",
+        "Takeru Kikuchi",
+        "Kikuchi Takeru"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "山谷 祥生",
+      "ko": "야마야 요시타카",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "山谷祥生",
+        "Yoshitaka Yamaya",
+        "Yamaya Yoshitaka"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "熊谷 健太郎",
+      "ko": "쿠마가이 켄타로",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "熊谷健太郎",
+        "Kentaro Kumagai",
+        "Kumagai Kentaro"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "濱 健人",
+      "ko": "하마 켄토",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "濱健人",
+        "Kento Hama",
+        "Hama Kento"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "増元 拓也",
+      "ko": "마스모토 타쿠야",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "増元拓也",
+        "Takuya Masumoto",
+        "Masumoto Takuya"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "バレッタ 裕",
+      "ko": "발레타 유타카",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "バレッタ裕",
+        "Yutaka Balletta",
+        "Balletta Yutaka"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "山下 大輝",
+      "ko": "야마시타 다이키",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "山下大輝",
+        "Daiki Yamashita",
+        "Yamashita Daiki"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "中田 祐矢",
+      "ko": "나카다 유야",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "中田祐矢",
+        "Yuya Nakada",
+        "Nakada Yuya"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "千葉 翔也",
+      "ko": "치바 쇼야",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "千葉翔也",
+        "Shoya Chiba",
+        "Chiba Shoya"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "永塚 拓馬",
+      "ko": "나가츠카 타쿠마",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "永塚拓馬",
+        "Takuma Nagatsuka",
+        "Nagatsuka Takuma"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "渡辺 紘",
+      "ko": "와타나베 히로시",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "渡辺紘",
+        "Hiroshi Watanabe",
+        "Watanabe Hiroshi"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "白井 悠介",
+      "ko": "시라이 유스케",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "白井悠介",
+        "Yusuke Shirai",
+        "Shirai Yusuke"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "野上 翔",
+      "ko": "노가미 쇼",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "野上翔",
+        "Sho Nogami",
+        "Nogami Sho"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "益山 武明",
+      "ko": "마스야마 타케아키",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "益山武明",
+        "Takeaki Masuyama",
+        "Masuyama Takeaki"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "深町 寿成",
+      "ko": "후카마치 토시나리",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "深町寿成",
+        "Toshinari Fukamachi",
+        "Fukamachi Toshinari"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "狩野 翔",
+      "ko": "카리노 쇼",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "狩野翔",
+        "Sho Karino",
+        "Karino Sho"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "天﨑 滉平",
+      "ko": "아마사키 코헤이",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "天﨑滉平",
+        "天崎滉平",
+        "Kohei Amasaki",
+        "Amasaki Kohei"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "古川 慎",
+      "ko": "후루카와 마코토",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "古川慎",
+        "Makoto Furukawa",
+        "Furukawa Makoto"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "児玉 卓也",
+      "ko": "코다마 타쿠야",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "児玉卓也",
+        "Takuya Kodama",
+        "Kodama Takuya"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "小林 大紀",
+      "ko": "코바야시 다이키",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "小林大紀",
+        "Daiki Kobayashi",
+        "Kobayashi Daiki"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "矢野 奨吾",
+      "ko": "야노 쇼고",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "矢野奨吾",
+        "Shogo Yano",
+        "Yano Shogo"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "古畑 恵介",
+      "ko": "후루하타 케이스케",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "古畑恵介",
+        "Keisuke Furuhata",
+        "Furuhata Keisuke"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "村瀬 歩",
+      "ko": "무라세 아유무",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "村瀬歩",
+        "Ayumu Murase",
+        "Murase Ayumu"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "伊東 健人",
+      "ko": "이토 켄토",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "伊東健人",
+        "Kento Ito",
+        "Ito Kento"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "榎木 淳弥",
+      "ko": "에노키 쥰야",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "榎木淳弥",
+        "Junya Enoki",
+        "Enoki Junya"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "中島 ヨシキ",
+      "ko": "나카지마 요시키",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "中島ヨシキ",
+        "Yoshiki Nakajima",
+        "Nakajima Yoshiki"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "寺島 惇太",
+      "ko": "테라시마 쥰타",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "寺島惇太",
+        "Junta Terashima",
+        "Terashima Junta"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "濱野 大輝",
+      "ko": "하마노 다이키",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "濱野大輝",
+        "Daiki Hamano",
+        "Hamano Daiki"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "小松 昌平",
+      "ko": "코마츠 쇼헤이",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "小松昌平",
+        "Shohei Komatsu",
+        "Komatsu Shohei"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "三瓶 由布子",
+      "ko": "산페이 유코",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "三瓶由布子",
+        "Yuko Sanpei",
+        "Sanpei Yuko"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/",
+        "https://columbia.jp/idolmaster/imasnews/260904.html"
+      ]
+    },
+    {
+      "name": "浦尾 岳大",
+      "ko": "우라오 타케히로",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "浦尾岳大",
+        "Takehiro Urao",
+        "Urao Takehiro"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "比留間 俊哉",
+      "ko": "히루마 슌야",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "比留間俊哉",
+        "Shunya Hiruma",
+        "Hiruma Shunya"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "徳武 竜也",
+      "ko": "토쿠타케 타츠야",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "徳武竜也",
+        "Tatsuya Tokutake",
+        "Tokutake Tatsuya"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "笠間 淳",
+      "ko": "카사마 쥰",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "笠間淳",
+        "Jun Kasama",
+        "Kasama Jun"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "汐谷 文康",
+      "ko": "시오야 후미요시",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "汐谷文康",
+        "Fumiyoshi Shioya",
+        "Shioya Fumiyoshi"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "駒田 航",
+      "ko": "코마다 와타루",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "駒田航",
+        "Wataru Komada",
+        "Komada Wataru"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "伊瀬 結陸",
+      "ko": "이세 유리",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "伊瀬結陸",
+        "Yuri Ise",
+        "Ise Yuri"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "宮﨑 雅也",
+      "ko": "미야자키 마사야",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "宮﨑雅也",
+        "宮崎雅也",
+        "Masaya Miyazaki",
+        "Miyazaki Masaya"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "大塚 剛央",
+      "ko": "오오츠카 타케오",
+      "kind": "voice_actor",
+      "franchise": "SideM",
+      "aliases": [
+        "大塚剛央",
+        "Takeo Otsuka",
+        "Otsuka Takeo"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://www.lantis.jp/sidem/4thlive/"
+      ]
+    },
+    {
+      "name": "日高 愛",
+      "ko": "히다카 아이",
+      "kind": "idol",
+      "franchise": "Dearly Stars",
+      "aliases": [
+        "日高愛",
+        "Ai Hidaka",
+        "Hidaka Ai"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/imasnews/260904.html"
+      ]
+    },
+    {
+      "name": "水谷 絵理",
+      "ko": "미즈타니 에리",
+      "kind": "idol",
+      "franchise": "Dearly Stars",
+      "aliases": [
+        "水谷絵理",
+        "Eri Mizutani",
+        "Mizutani Eri"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/imasnews/260904.html"
+      ]
+    },
+    {
+      "name": "戸松 遥",
+      "ko": "토마츠 하루카",
+      "kind": "voice_actor",
+      "franchise": "Dearly Stars",
+      "aliases": [
+        "戸松遥",
+        "Haruka Tomatsu",
+        "Tomatsu Haruka"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/imasnews/260904.html"
+      ]
+    },
+    {
+      "name": "花澤 香菜",
+      "ko": "하나자와 카나",
+      "kind": "voice_actor",
+      "franchise": "Dearly Stars",
+      "aliases": [
+        "花澤香菜",
+        "Kana Hanazawa",
+        "Hanazawa Kana"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/imasnews/260904.html"
+      ]
+    },
+    {
+      "name": "上水流 宇宙",
+      "ko": "카미즈루 코스모",
+      "kind": "idol",
+      "franchise": "vα-liv",
+      "aliases": [
+        "上水流宇宙",
+        "Cosmo Kamizuru",
+        "Kamizuru Cosmo"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/va-liv"
+      ]
+    },
+    {
+      "name": "灯里 愛夏",
+      "ko": "토모리 마나카",
+      "kind": "idol",
+      "franchise": "vα-liv",
+      "aliases": [
+        "灯里愛夏",
+        "Manaka Tomori",
+        "Tomori Manaka"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/va-liv"
+      ]
+    },
+    {
+      "name": "レトラ",
+      "ko": "레트라",
+      "kind": "idol",
+      "franchise": "vα-liv",
+      "aliases": [
+        "Letora",
+        "Utagawa Letora",
+        "Sara Letora Oliveira Utagawa",
+        "サラ・レトラ・オリヴェイラ・ウタガワ",
+        "サラ レトラ オリヴェイラ ウタガワ"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/va-liv",
+        "https://prtimes.jp/main/html/rd/p/000001308.000051316.html"
+      ]
+    },
+    {
+      "name": "奥空 心白",
+      "ko": "오쿠조라 코하쿠",
+      "kind": "idol",
+      "franchise": "Starlit Season / 961",
+      "cv": ["田中あいみ"],
+      "voice_actor_sources": ["https://starlit-season.idolmaster.jp/idol/idol.php?idol=kohaku-okuzora"],
+      "aliases": [
+        "奥空心白",
+        "奧空心白",
+        "Kohaku Okuzora",
+        "Okuzora Kohaku"
+      ],
+      "source_urls": [
+        "https://starlit-season.idolmaster.jp/idol/",
+        "https://columbia.jp/prod-info/COCX-41710/"
+      ]
+    },
+    {
+      "name": "玲音",
+      "ko": "레온",
+      "kind": "idol",
+      "franchise": "Starlit Season / 961",
+      "aliases": [],
+      "source_urls": [
+        "https://starlit-season.idolmaster.jp/idol/",
+        "https://columbia.jp/prod-info/COCX-41710/"
+      ]
+    },
+    {
+      "name": "詩花",
+      "ko": "시이카",
+      "kind": "idol",
+      "franchise": "Starlit Season / 961",
+      "aliases": [],
+      "source_urls": [
+        "https://starlit-season.idolmaster.jp/idol/",
+        "https://columbia.jp/prod-info/COCX-41710/"
+      ]
+    },
+    {
+      "name": "亜夜",
+      "ko": "아야",
+      "kind": "idol",
+      "franchise": "Starlit Season / 961",
+      "aliases": [],
+      "source_urls": [
+        "https://starlit-season.idolmaster.jp/idol/",
+        "https://columbia.jp/prod-info/COCX-41710/"
+      ]
+    },
+    {
+      "name": "田中 あいみ",
+      "ko": "타나카 아이미",
+      "kind": "voice_actor",
+      "franchise": "Starlit Season / 961",
+      "aliases": [
+        "田中あいみ",
+        "Aimi Tanaka",
+        "Tanaka Aimi"
+      ],
+      "source_urls": [
+        "https://columbia.jp/prod-info/COCX-41710/"
+      ]
+    },
+    {
+      "name": "茅原 実里",
+      "ko": "치하라 미노리",
+      "kind": "voice_actor",
+      "franchise": "Starlit Season / 961",
+      "aliases": [
+        "茅原実里",
+        "Minori Chihara",
+        "Chihara Minori"
+      ],
+      "source_urls": [
+        "https://columbia.jp/prod-info/COCX-41710/"
+      ]
+    },
+    {
+      "name": "高橋 李依",
+      "ko": "타카하시 리에",
+      "kind": "voice_actor",
+      "franchise": "Starlit Season / 961",
+      "aliases": [
+        "高橋李依",
+        "Rie Takahashi",
+        "Takahashi Rie"
+      ],
+      "source_urls": [
+        "https://columbia.jp/prod-info/COCX-41710/"
+      ]
+    },
+    {
+      "name": "日高 里菜",
+      "ko": "히다카 리나",
+      "kind": "voice_actor",
+      "franchise": "Starlit Season / 961",
+      "aliases": [
+        "日高里菜",
+        "Rina Hidaka",
+        "Hidaka Rina"
+      ],
+      "source_urls": [
+        "https://columbia.jp/prod-info/COCX-41710/"
+      ]
+    },
+    {
+      "name": "765PRO ALLSTARS",
+      "ko": "765프로 올스타즈",
+      "kind": "group",
+      "franchise": "765AS",
+      "aliases": [
+        "765PROALLSTARS",
+        "765 PRO ALLSTARS",
+        "765プロオールスターズ",
+        "THE IDOLM@STER 765PRO ALLSTARS"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/news/101126.html"
+      ]
+    },
+    {
+      "name": "竜宮小町",
+      "ko": "류구 코마치",
+      "kind": "group",
+      "franchise": "765AS",
+      "aliases": [
+        "Ryuuguu Komachi",
+        "Ryugu Komachi"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/news/101126.html"
+      ]
+    },
+    {
+      "name": "765 MILLION ALLSTARS",
+      "ko": "765 밀리언 올스타즈",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "765MILLIONALLSTARS",
+        "765MILLION ALLSTARS",
+        "765 Million All Stars"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/",
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "MILLIONSTARS",
+      "ko": "밀리언 스타즈",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "MILLION STARS",
+        "765 MILLIONSTARS"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/",
+        "https://millionlive-theaterdays.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "フェアリースターズ",
+      "ko": "페어리 스타즈",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "Fairy Stars",
+        "FairyStars"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_million.pdf"
+      ]
+    },
+    {
+      "name": "エンジェルスターズ",
+      "ko": "엔젤 스타즈",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "Angel Stars",
+        "AngelStars"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_million.pdf"
+      ]
+    },
+    {
+      "name": "プリンセススターズ",
+      "ko": "프린세스 스타즈",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "Princess Stars",
+        "PrincessStars"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_million.pdf"
+      ]
+    },
+    {
+      "name": "夜想令嬢 -GRAC&E NOCTURNE-",
+      "ko": "야상영애 -그레이스 녹턴-",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "夜想令嬢-GRAC&ENOCTURNE-",
+        "夜想令嬢",
+        "GRAC&E NOCTURNE",
+        "Yasou Reijou"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_million.pdf"
+      ]
+    },
+    {
+      "name": "Cleasky",
+      "ko": "클리어스카이",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_million.pdf"
+      ]
+    },
+    {
+      "name": "トゥインクルリズム",
+      "ko": "트윙클 리듬",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "Twinkle Rhythm"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_million.pdf"
+      ]
+    },
+    {
+      "name": "EScape",
+      "ko": "이스케이프",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_million.pdf"
+      ]
+    },
+    {
+      "name": "4Luxury",
+      "ko": "포 럭셔리",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "4 Luxury",
+        "フォーラグジュアリー"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_million.pdf"
+      ]
+    },
+    {
+      "name": "閃光☆HANABI団",
+      "ko": "섬광 하나비단",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "閃光HANABI団",
+        "Senkou HANABI Dan",
+        "Senkou☆HANABI Dan"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_million.pdf"
+      ]
+    },
+    {
+      "name": "D/Zeal",
+      "ko": "디질",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "ディズィール"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_million.pdf"
+      ]
+    },
+    {
+      "name": "りるきゃん ～3 little candy～",
+      "ko": "리루캔 ~3 리틀 캔디~",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "りるきゃん～3littlecandy～",
+        "りるきゃん",
+        "りるきゃん ~3 little candy~",
+        "LilCan",
+        "LilCan ~3 little candy~"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_million.pdf"
+      ]
+    },
+    {
+      "name": "Charlotte・Charlotte",
+      "ko": "샬럿 샬럿",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "Charlotte Charlotte",
+        "Charlotte･Charlotte"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_million.pdf"
+      ]
+    },
+    {
+      "name": "Jelly PoP Beans",
+      "ko": "젤리 팝 빈즈",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "JellyPoPBeans"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_million.pdf"
+      ]
+    },
+    {
+      "name": "ピコピコプラネッツ",
+      "ko": "피코피코 플래닛츠",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "Piko Piko Planets",
+        "Pikopiko Planets"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_million.pdf"
+      ]
+    },
+    {
+      "name": "STAR ELEMENTS",
+      "ko": "스타 엘리먼츠",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "STARELEMENTS"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_million.pdf"
+      ]
+    },
+    {
+      "name": "Chrono-Lexica",
+      "ko": "크로노 렉시카",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_million.pdf"
+      ]
+    },
+    {
+      "name": "Xs",
+      "ko": "키스",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_million.pdf"
+      ]
+    },
+    {
+      "name": "Sherry 'n Cherry",
+      "ko": "셰리 앤 체리",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "Sherry'nCherry",
+        "Sherry ’n Cherry"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_million.pdf"
+      ]
+    },
+    {
+      "name": "ARCANA",
+      "ko": "아르카나",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_million.pdf"
+      ]
+    },
+    {
+      "name": "花咲夜",
+      "ko": "하나사쿠야",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "Hanasakuya"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_million.pdf"
+      ]
+    },
+    {
+      "name": "Jus-2-Mint",
+      "ko": "재스민",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "ジャスミン"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_million.pdf",
+        "https://lantis.jp/release-item/LACM-14897.html"
+      ]
+    },
+    {
+      "name": "miraclesonic★expassion",
+      "ko": "미라클소닉 익스패션",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "miraclesonic expassion"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_million.pdf"
+      ]
+    },
+    {
+      "name": "Fleuranges",
+      "ko": "플루랑쥬",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_million.pdf"
+      ]
+    },
+    {
+      "name": "オペラセリア・煌輝座",
+      "ko": "오페라세리아 황휘좌",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "オペラセリア煌輝座",
+        "Operaseria Kiramekiza"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_million.pdf"
+      ]
+    },
+    {
+      "name": "ダイヤモンドダイバー◇",
+      "ko": "다이아몬드 다이버",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "ダイヤモンドダイバー",
+        "Diamond Diver"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_million.pdf"
+      ]
+    },
+    {
+      "name": "TIntMe!",
+      "ko": "틴트 미!",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "TIntMe"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_million.pdf"
+      ]
+    },
+    {
+      "name": "TRICK&TREAT",
+      "ko": "트릭 앤 트리트",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "TRICK & TREAT"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_million.pdf"
+      ]
+    },
+    {
+      "name": "chicAAmor",
+      "ko": "시크아모르",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_million.pdf"
+      ]
+    },
+    {
+      "name": "≡君彩≡",
+      "ko": "키미도리",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "君彩"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_million.pdf"
+      ]
+    },
+    {
+      "name": "ARMooo",
+      "ko": "아르모",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_million.pdf"
+      ]
+    },
+    {
+      "name": "ストロベリーポップムーン",
+      "ko": "스트로베리 팝 문",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "Strawberry Pop Moon"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_million.pdf"
+      ]
+    },
+    {
+      "name": "BRIGHT DIAMOND",
+      "ko": "브라이트 다이아몬드",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "BRIGHTDIAMOND"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_million.pdf"
+      ]
+    },
+    {
+      "name": "CLEVER CLOVER",
+      "ko": "클레버 클로버",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "CLEVERCLOVER"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_million.pdf"
+      ]
+    },
+    {
+      "name": "LOVERS HEART",
+      "ko": "러버즈 하트",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "LOVERSHEART"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_million.pdf"
+      ]
+    },
+    {
+      "name": "SHADE OF SPADE",
+      "ko": "셰이드 오브 스페이드",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "SHADEOFSPADE"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_million.pdf"
+      ]
+    },
+    {
+      "name": "レジェンドデイズ",
+      "ko": "레전드 데이즈",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "Legend Days"
+      ],
+      "source_urls": [
+        "https://idolmaster.jp/blog/?m=20140701"
+      ]
+    },
+    {
+      "name": "乙女ストーム！",
+      "ko": "소녀 스톰!",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "乙女ストーム!",
+        "Otome Storm!"
+      ],
+      "source_urls": [
+        "https://idolmaster.jp/blog/?m=20140701"
+      ]
+    },
+    {
+      "name": "クレシェンドブルー",
+      "ko": "크레센도 블루",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "Crescendo Blue"
+      ],
+      "source_urls": [
+        "https://www.lantis.jp/imas/release_LACA-15433.html"
+      ]
+    },
+    {
+      "name": "エターナルハーモニー",
+      "ko": "이터널 하모니",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "Eternal Harmony"
+      ],
+      "source_urls": [
+        "https://www.lantis.jp/imas/release_LACA-15434.html"
+      ]
+    },
+    {
+      "name": "リコッタ",
+      "ko": "리코타",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "Ricotta"
+      ],
+      "source_urls": [
+        "https://www.lantis.jp/imas/release_LACA-15435.html"
+      ]
+    },
+    {
+      "name": "灼熱少女",
+      "ko": "작열소녀",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "灼熱少女(バーニングガール)",
+        "Burning Girl"
+      ],
+      "source_urls": [
+        "https://www.lantis.jp/imas/release_LACA-15436.html"
+      ]
+    },
+    {
+      "name": "BIRTH",
+      "ko": "버스",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [],
+      "source_urls": [
+        "https://www.lantis.jp/imas/release_LACA-15437.html"
+      ]
+    },
+    {
+      "name": "ミックスナッツ",
+      "ko": "믹스너츠",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "Mixnuts",
+        "Mix Nuts"
+      ],
+      "source_urls": [
+        "https://www.lantis.jp/imas/release_LACA-15438.html"
+      ]
+    },
+    {
+      "name": "ミルキーウェイ",
+      "ko": "밀키 웨이",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "Milky Way"
+      ],
+      "source_urls": [
+        "https://www.lantis.jp/imas/release_LACA-15439.html"
+      ]
+    },
+    {
+      "name": "ARRIVE",
+      "ko": "어라이브",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [],
+      "source_urls": [
+        "https://www.lantis.jp/imas/release_LACA-15440.html"
+      ]
+    },
+    {
+      "name": "キャンサー",
+      "ko": "캔서",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [],
+      "source_urls": [
+        "https://www.lantis.jp/imas/release_LACA-15611.html"
+      ]
+    },
+    {
+      "name": "レオ",
+      "ko": "레오",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [],
+      "source_urls": [
+        "https://www.lantis.jp/imas/release_LACA-15611.html"
+      ]
+    },
+    {
+      "name": "リブラ",
+      "ko": "리브라",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [],
+      "source_urls": [
+        "https://www.lantis.jp/imas/release_LACA-15611.html"
+      ]
+    },
+    {
+      "name": "カプリコーン",
+      "ko": "카프리콘",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [],
+      "source_urls": [
+        "https://www.lantis.jp/imas/release_LACA-15611.html"
+      ]
+    },
+    {
+      "name": "Sunshine Rhythm",
+      "ko": "선샤인 리듬",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "SunshineRhythm"
+      ],
+      "source_urls": [
+        "https://www.lantis.jp/imas/release_LACA-15611.html"
+      ]
+    },
+    {
+      "name": "サジタリアス",
+      "ko": "사지타리우스",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [],
+      "source_urls": [
+        "https://www.lantis.jp/imas/release_LACA-15612.html"
+      ]
+    },
+    {
+      "name": "ピスケス",
+      "ko": "피스케스",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [],
+      "source_urls": [
+        "https://www.lantis.jp/imas/release_LACA-15612.html"
+      ]
+    },
+    {
+      "name": "ウィルゴ",
+      "ko": "비르고",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [],
+      "source_urls": [
+        "https://www.lantis.jp/imas/release_LACA-15612.html"
+      ]
+    },
+    {
+      "name": "アクアリウス",
+      "ko": "아쿠아리우스",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [],
+      "source_urls": [
+        "https://www.lantis.jp/imas/release_LACA-15612.html"
+      ]
+    },
+    {
+      "name": "BlueMoon Harmony",
+      "ko": "블루문 하모니",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "BlueMoonHarmony",
+        "Blue Moon Harmony"
+      ],
+      "source_urls": [
+        "https://www.lantis.jp/imas/release_LACA-15612.html"
+      ]
+    },
+    {
+      "name": "スコーピオ",
+      "ko": "스코피오",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [],
+      "source_urls": [
+        "https://www.lantis.jp/imas/release_LACA-15613.html"
+      ]
+    },
+    {
+      "name": "アリエス",
+      "ko": "아리에스",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [],
+      "source_urls": [
+        "https://www.lantis.jp/imas/release_LACA-15613.html"
+      ]
+    },
+    {
+      "name": "タウラス",
+      "ko": "타우러스",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [],
+      "source_urls": [
+        "https://www.lantis.jp/imas/release_LACA-15613.html"
+      ]
+    },
+    {
+      "name": "ジェミニ",
+      "ko": "제미니",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [],
+      "source_urls": [
+        "https://www.lantis.jp/imas/release_LACA-15613.html"
+      ]
+    },
+    {
+      "name": "Starlight Melody",
+      "ko": "스타라이트 멜로디",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "StarlightMelody"
+      ],
+      "source_urls": [
+        "https://www.lantis.jp/imas/release_LACA-15613.html"
+      ]
+    },
+    {
+      "name": "MILLIONSTARS Team1st",
+      "ko": "밀리언 스타즈 팀 1st",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "MILLIONSTARSTeam1st",
+        "MILLIONSTARS Team 1st"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "MILLIONSTARS Team2nd",
+      "ko": "밀리언 스타즈 팀 2nd",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "MILLIONSTARSTeam2nd",
+        "MILLIONSTARS Team 2nd"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "MILLIONSTARS Team3rd",
+      "ko": "밀리언 스타즈 팀 3rd",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "MILLIONSTARSTeam3rd",
+        "MILLIONSTARS Team 3rd"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "MILLIONSTARS Team4th",
+      "ko": "밀리언 스타즈 팀 4th",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "MILLIONSTARSTeam4th",
+        "MILLIONSTARS Team 4th"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "MILLIONSTARS Team5th",
+      "ko": "밀리언 스타즈 팀 5th",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "MILLIONSTARSTeam5th",
+        "MILLIONSTARS Team 5th"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "MILLIONSTARS Team6th",
+      "ko": "밀리언 스타즈 팀 6th",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "MILLIONSTARSTeam6th",
+        "MILLIONSTARS Team 6th"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "MILLIONSTARS Team7th",
+      "ko": "밀리언 스타즈 팀 7th",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "MILLIONSTARSTeam7th",
+        "MILLIONSTARS Team 7th"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "MILLIONSTARS Team8th",
+      "ko": "밀리언 스타즈 팀 8th",
+      "kind": "group",
+      "franchise": "Million Live",
+      "aliases": [
+        "MILLIONSTARSTeam8th",
+        "MILLIONSTARS Team 8th"
+      ],
+      "source_urls": [
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ]
+    },
+    {
+      "name": "Jupiter",
+      "ko": "쥬피터",
+      "kind": "group",
+      "franchise": "SideM",
+      "aliases": [
+        "ジュピター"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html"
+      ]
+    },
+    {
+      "name": "DRAMATIC STARS",
+      "ko": "드라마틱 스타즈",
+      "kind": "group",
+      "franchise": "SideM",
+      "aliases": [
+        "DRAMATICSTARS",
+        "ドラマチックスターズ"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html"
+      ]
+    },
+    {
+      "name": "Altessimo",
+      "ko": "알테시모",
+      "kind": "group",
+      "franchise": "SideM",
+      "aliases": [
+        "アルテッシモ"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html"
+      ]
+    },
+    {
+      "name": "Beit",
+      "ko": "바이트",
+      "kind": "group",
+      "franchise": "SideM",
+      "aliases": [
+        "バイト"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html"
+      ]
+    },
+    {
+      "name": "W",
+      "ko": "더블",
+      "kind": "group",
+      "franchise": "SideM",
+      "aliases": [
+        "ダブル"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html"
+      ]
+    },
+    {
+      "name": "FRAME",
+      "ko": "프레임",
+      "kind": "group",
+      "franchise": "SideM",
+      "aliases": [
+        "フレーム"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html"
+      ]
+    },
+    {
+      "name": "彩",
+      "ko": "사이",
+      "kind": "group",
+      "franchise": "SideM",
+      "aliases": [
+        "彩（さい）"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html"
+      ]
+    },
+    {
+      "name": "High×Joker",
+      "ko": "하이 조커",
+      "kind": "group",
+      "franchise": "SideM",
+      "aliases": [
+        "HighxJoker",
+        "High x Joker",
+        "High × Joker",
+        "ハイジョーカー"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html"
+      ]
+    },
+    {
+      "name": "神速一魂",
+      "ko": "신속일혼",
+      "kind": "group",
+      "franchise": "SideM",
+      "aliases": [
+        "Shinsoku Ikkon"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html"
+      ]
+    },
+    {
+      "name": "Café Parade",
+      "ko": "카페 퍼레이드",
+      "kind": "group",
+      "franchise": "SideM",
+      "aliases": [
+        "CaféParade",
+        "Cafe Parade",
+        "カフェパレード"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html"
+      ]
+    },
+    {
+      "name": "もふもふえん",
+      "ko": "모후모후엔",
+      "kind": "group",
+      "franchise": "SideM",
+      "aliases": [
+        "Mofumofuen"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html"
+      ]
+    },
+    {
+      "name": "S.E.M",
+      "ko": "셈",
+      "kind": "group",
+      "franchise": "SideM",
+      "aliases": [
+        "S.E.M.",
+        "SEM",
+        "セム"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html"
+      ]
+    },
+    {
+      "name": "THE 虎牙道",
+      "ko": "더 코가도",
+      "kind": "group",
+      "franchise": "SideM",
+      "aliases": [
+        "THE虎牙道",
+        "THE Kogadou",
+        "THE Kogado"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html"
+      ]
+    },
+    {
+      "name": "F-LAGS",
+      "ko": "플래그스",
+      "kind": "group",
+      "franchise": "SideM",
+      "aliases": [
+        "FLAGS",
+        "フラッグス"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html"
+      ]
+    },
+    {
+      "name": "Legenders",
+      "ko": "레젠더즈",
+      "kind": "group",
+      "franchise": "SideM",
+      "aliases": [
+        "レジェンダーズ"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html"
+      ]
+    },
+    {
+      "name": "C.FIRST",
+      "ko": "클래스 퍼스트",
+      "kind": "group",
+      "franchise": "SideM",
+      "aliases": [
+        "C.FIRST.",
+        "クラスファースト"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/sidem11th/cast/",
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html"
+      ]
+    },
+    {
+      "name": "Dearly Stars",
+      "ko": "디어리 스타즈",
+      "kind": "group",
+      "franchise": "Dearly Stars",
+      "aliases": [
+        "DearlyStars",
+        "ディアリースターズ"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/imasnews/260904.html"
+      ]
+    },
+    {
+      "name": "vα-liv",
+      "ko": "브이아라이브",
+      "kind": "group",
+      "franchise": "vα-liv",
+      "aliases": [
+        "PROJECT vα-liv",
+        "PROJECT IM@S vα-liv",
+        "ヴイアライヴ",
+        "ヴイアラ"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/va-liv"
+      ]
+    },
+    {
+      "name": "ZWEIGLANZ",
+      "ko": "츠바이글란츠",
+      "kind": "group",
+      "franchise": "Starlit Season / 961",
+      "aliases": [
+        "ツヴァイグランツ"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_million.pdf"
+      ]
+    },
+    {
+      "name": "Project LUMINOUS",
+      "ko": "프로젝트 루미너스",
+      "kind": "group",
+      "franchise": "Starlit Season / 961",
+      "aliases": [
+        "ProjectLUMINOUS",
+        "プロジェクトルミナス"
+      ],
+      "source_urls": [
+        "https://steamcommunity.com/app/1046480/announcements/"
+      ]
+    },
+    {
+      "name": "DIAMANT",
+      "ko": "디아만트",
+      "kind": "group",
+      "franchise": "Starlit Season / 961",
+      "aliases": [
+        "ディアマント"
+      ],
+      "source_urls": [
+        "https://steamcommunity.com/app/1046480/announcements/"
+      ]
+    },
+    {
+      "name": "315 ALLSTARS",
+      "ko": "315 올스타즈",
+      "kind": "group",
+      "franchise": "SideM",
+      "aliases": [
+        "315ALLSTARS",
+        "315 All Stars"
+      ],
+      "source_urls": [
+        "https://www.lantis.jp/release-item/LACM-34627.html"
+      ]
+    },
+    {
+      "name": "315 STARS",
+      "ko": "315 스타즈",
+      "kind": "group",
+      "franchise": "SideM",
+      "aliases": [
+        "315STARS"
+      ],
+      "source_urls": [
+        "https://www.lantis.jp/release-item/LACM-34627.html",
+        "https://columbia.jp/prod-info/COKM-43445/"
+      ]
+    },
+    {
+      "name": "THE IDOLM@STER FIVE STARS!!!!!",
+      "ko": "아이돌마스터 파이브 스타즈!!!!!",
+      "kind": "group",
+      "franchise": "All brands",
+      "aliases": [
+        "THE IDOLM@STER FIVE STARS"
+      ],
+      "source_urls": [
+        "https://columbia.jp/prod-info/COKM-43445/"
+      ]
+    },
+    {
+      "name": "長谷 優里奈",
+      "ko": "하세 유리나",
+      "kind": "voice_actor",
+      "franchise": "765AS",
+      "aliases": [
+        "長谷優里奈",
+        "Yurina Hase",
+        "Hase Yurina"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/2009/news/100108.html"
+      ]
+    },
+    {
+      "name": "落合 祐里香",
+      "ko": "오치아이 유리카",
+      "kind": "voice_actor",
+      "franchise": "765AS",
+      "aliases": [
+        "落合祐里香",
+        "Yurika Ochiai",
+        "Ochiai Yurika"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/2009/news/100108.html"
+      ]
+    }
+  ],
+  "coverage": {
+    "verified_date": "2026-10-01",
+    "entry_count": 317,
+    "counts": {
+      "765AS": {
+        "idol": 14,
+        "group": 2,
+        "voice_actor": 15
+      },
+      "Million Live": {
+        "idol": 39,
+        "group": 70,
+        "voice_actor": 39
+      },
+      "SideM": {
+        "idol": 49,
+        "group": 18,
+        "voice_actor": 50
+      },
+      "Dearly Stars": {
+        "idol": 2,
+        "group": 1,
+        "voice_actor": 2
+      },
+      "vα-liv": {
+        "idol": 3,
+        "group": 1,
+        "voice_actor": 0
+      },
+      "Starlit Season / 961": {
+        "idol": 4,
+        "group": 3,
+        "voice_actor": 4
+      },
+      "All brands": {
+        "idol": 0,
+        "group": 1,
+        "voice_actor": 0
+      }
+    },
+    "roster_coverage": {
+      "765AS": "13명 전원 + 가창 크레딧이 있는 사무원 오토나시 코토리. 현재 성우 12명 및 코토리 성우, 이전 유키호 성우의 두 활동명.",
+      "Million Live": "765AS와 중복되지 않는 MILLIONSTARS 39명 전원 및 39명 성우. 765AS와 합쳐 밀리시타52명.",
+      "SideM": "현재 로스터49명 전원, 정규16유닛 전원, 315 ALLSTARS/315 STARS. 현 성우49명 및 이전 츠쿠모 카즈키 성우1명.",
+      "Dearly Stars": "주인공3명 중 아키즈키 료 및 산페이 유코는 SideM 항목과 공유. 히다카 아이·미즈타니 에리와 성우2명 추가.",
+      "vα-liv": "공식 로스터3명 전원 및 프로젝트 그룹.",
+      "Starlit Season / 961": "오쿠조라 코하쿠·레온·시이카·아야 및 성우4명, Project LUMINOUS·DIAMANT·ZWEIGLANZ."
+    },
+    "group_coverage": "밀리언 LTH10유닛, LTF12별자리유닛/3통합그룹, MTG12유닛/3속성그룹, MTW16유닛, 시즌4그룹, 애니Team1~8, MILLIONSTARS/765 MILLION ALLSTARS. 정규 SideM16유닛과 대표 전체그룹. 765 류구 코마치.",
+    "limitations": [
+      "한국어 표기는 일본어 공식 읽기와 국내에서 흔히 쓰는 음역을 바탕으로 작성한 표시용 번역이며, 공식 한국어 현지화 인증 목록은 아니다.",
+      "자료명·인명·크레딧만 수집했다. 가사, 사진, 약력 전문은 포함하지 않는다.",
+      "각종 한시·코믹스·애니 외전·라디오·콜라보·전세계 현지화 파생 유닛과 모든 음반별 변형 크레딧의 전수 목록은 아니다.",
+      "XENOGLOSSIA 전용 성우/그룹, 아이돌마스터.KR, 푸치마스 마스코트, 비가창 조연 전원은 미포함.",
+      "로마자 이름은 공식 이름/읽기의 검색 별칭이며 모든 서비스의 공식 영문 크레딧과 동일함을 보장하지 않는다.",
+      "W·彩는 SideM의 실제 공식 1자 그룹명이다. 전체 가수 토큰에만 적용해야 하며 가사·제목에 부분 치환해서는 안 된다.",
+      "줄리아·레온·아야 등 다른 가수와 겹칠 수 있는 단독 로마자 별칭은 제외했다.",
+      "같은 사람의 개명 전후 가창 크레딧은 원래 표시 이름을 보존해 각각 번역한다."
+    ]
+  }
+}

@@ -1,0 +1,3749 @@
+{
+  "schema_version": 1,
+  "verified_at": "2026-10-02",
+  "note": "Exact release, recording ID and title evidence. Studio records remain separate; instrumental arrangements do not establish vocal work associations.",
+  "entries": [
+    {
+      "release_id": "a2772e7f-8163-4105-b629-3411ff811334",
+      "release_title": "THE IDOLM@STER ANIM@TION MASTER 生っすかSPECIAL 弦楽四重奏 初恋組曲",
+      "kind": "instrumental",
+      "source_urls": [
+        "https://columbia.jp/prod-info/COCX-37926-7/"
+      ],
+      "recordings": [
+        {
+          "id": "71466e07-8e77-4e58-a6a6-0b1d5ffec2f7",
+          "title": "弦楽四重奏「初恋組曲」 序章"
+        },
+        {
+          "id": "96dc77fe-e5bd-4c18-abca-6f5b2309ef51",
+          "title": "弦楽四重奏「初恋組曲」 一章 片想いの桜"
+        },
+        {
+          "id": "8d41b751-78bf-4952-92f2-a01e8de8a6bb",
+          "title": "弦楽四重奏「初恋組曲」 二章 告白の花火"
+        },
+        {
+          "id": "5a7da52c-92b1-490f-b040-ca10f4fe5cb8",
+          "title": "弦楽四重奏「初恋組曲」 三章 幸せの紅葉"
+        },
+        {
+          "id": "962bea26-c4f3-4280-a1c0-53aeb5d9eff3",
+          "title": "弦楽四重奏「初恋組曲」 四章 運命のイヴ"
+        },
+        {
+          "id": "4396c202-ae04-4870-b029-0c6d27e98c50",
+          "title": "弦楽四重奏「初恋組曲」 五章 永遠のクリスマス"
+        },
+        {
+          "id": "aa30a332-52a5-4b40-94d2-e7e72993555e",
+          "title": "弦楽四重奏「初恋組曲」 終章"
+        }
+      ]
+    },
+    {
+      "release_id": "8a36f3f7-65a3-4dd6-a965-6d6df5d587da",
+      "release_title": "THE IDOLM@STER 20th Anniversary Piano Collection",
+      "kind": "instrumental",
+      "source_urls": [
+        "https://idolmaster-official.jp/news/01_19349",
+        "https://shop.asobistore.jp/s/products/detail/244075-00-00-00"
+      ],
+      "recordings": [
+        {
+          "id": "3e1bd66f-a66c-488f-8772-85590a5f5802",
+          "title": "アイ NEED YOU(FOR WONDERFUL STORY) (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "bedc4013-0e5c-4a38-b361-63e8c8e4b364",
+          "title": "CRYST@LOUD (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "e0f669ad-3720-4136-b596-8e95fbec484e",
+          "title": "VOY@GER (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "e3ff49a7-58b6-4bb0-b99f-64f80b01c4f2",
+          "title": "なんどでも笑おう (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "9791aa2a-eb58-4d34-a776-91d66301ce36",
+          "title": "アイ MUST GO! (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "90c685c8-13eb-4126-a263-526c257b7ee2",
+          "title": "IDOL POWER RAINBOW (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "b28bab8c-6c2f-4e69-a993-d1cb8c17c519",
+          "title": "READY!! (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "2de0cace-1a70-489d-ae51-f0fcf60df30a",
+          "title": "CHANGE!!!! (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "67ab1330-a7a7-4d6f-aff6-d097e4ddcd6b",
+          "title": "私たちはずっと…でしょう? (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "e9badd8d-8e4d-47e6-b425-d66fac89fb6d",
+          "title": "MUSIC♪ - M@STER VERSION (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "f22ee9e6-65de-4455-bd3b-8a50fcfd5675",
+          "title": "The world is all one !! - M@STER VERSION (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "f3e683c9-4c85-4209-8f8a-c24a38495821",
+          "title": "i (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "9f12bd37-94af-4c3d-a8f4-9a353f32faea",
+          "title": "Destiny (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "519596b1-c80c-4796-91da-6954a70d15a9",
+          "title": "THE IDOLM@STER (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "b4577b3e-fea8-4fcb-a0cf-fdf532092027",
+          "title": "GO MY WAY!! (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "31e70b6d-dafe-4ccb-8e08-c7985734fc6c",
+          "title": "目が逢う瞬間 (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "3e58cb2d-05a7-4d61-b8f1-5b656aa08bf2",
+          "title": "relations (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "dc746f07-bcd4-4129-8c88-f8dc8c1617d1",
+          "title": "Kosmos, Cosmos (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "48537f75-5d10-49d9-8813-95782bae772b",
+          "title": "キラメキラリ (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "0264dab6-d063-4977-9ed1-2b700328ccce",
+          "title": "エージェント夜を往く (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "bc1a00e0-2140-4818-af7e-ed1447bc1247",
+          "title": "風花 (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "2a8c0b7c-5b8c-41d2-a020-01e7152b6613",
+          "title": "魔法をかけて！ (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "88239d7f-0503-4e37-b5df-55a8afede933",
+          "title": "隣に… (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "7ac5f6f2-20dc-4878-bfd1-d098983c1b18",
+          "title": "黎明スターライン (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "7c57f743-711d-40f2-a2f3-a0c46d9c0355",
+          "title": "shiny smile (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "d8c079fe-152f-42f2-aeae-938eeb1eaa6b",
+          "title": "空 (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "e3e1ea3f-2c6e-484a-8bec-8ee320ee565b",
+          "title": "M@STERPIECE (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "d4322b10-ccfa-41e0-bbc4-c6b7bfb5e77c",
+          "title": "お願い！シンデレラ (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "1a0ec3ed-1162-4be5-8c48-fb94bd399277",
+          "title": "Yes! Party Time! (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "1ab775cf-c9d3-4404-86af-f62939cc9d2d",
+          "title": "Shine In The Sky☆ (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "0edc4cf0-48e6-45b2-9bc5-24cc431fc927",
+          "title": "O-Ku-Ri-Mo-No Sunday! (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "33c6a652-04cc-414c-8069-02e9399f4bc9",
+          "title": "Kawaii make MY day! (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "355acb52-691c-4f84-8b35-5ccd56ee65e9",
+          "title": "ラブレター (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "81d36561-5302-427b-ab84-0cbacff18f8c",
+          "title": "情熱ファンファンファーレ (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "440b1513-60a4-4d6f-ac7e-c929f892f912",
+          "title": "ハイファイ☆デイズ (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "f46862ac-c52f-4f6d-afc8-0e4f7041533b",
+          "title": "Brand new! (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "5cecee71-3be4-4e17-aaae-6bd861ac65bd",
+          "title": "不埒なCANVAS (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "87926ed6-a0bf-48e6-aa5b-1122e59de5ca",
+          "title": "君のステージ衣装、本当は… (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "4418427e-53d6-4425-8bc2-4cefb252dac8",
+          "title": "さよならアンドロメダ (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "9ae706d0-e55e-4113-93e6-d57e0e1996b3",
+          "title": "always (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "32c33552-7235-4120-84ff-9b4c8b781d11",
+          "title": "レッド・ソール (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "873e86d2-e46d-407c-8da7-b78858dae78a",
+          "title": "Love∞Destiny (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "ae655030-02d8-4e8d-a9a0-11711fec9d6d",
+          "title": "Tulip (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "843c7054-6ef0-40a2-89ee-e996871cb19a",
+          "title": "Trancing Pulse (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "18dc1d9b-740c-4152-a549-e5014d850b7a",
+          "title": "ガールズ・イン・ザ・フロンティア (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "24791500-429b-4c9b-b890-2c227dbe9870",
+          "title": "Stage Bye Stage (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "def03d6e-0164-4033-8e6f-4ec44c5d0d32",
+          "title": "GOIN'!!! (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "5505f28b-1ecd-4b15-a8cd-997dc9c54f72",
+          "title": "Thank You! (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "739b8fc4-f8b1-43d5-9e7f-450e87f1a467",
+          "title": "Welcome!! (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "8c112f49-d385-4eb7-b954-2acd7157df79",
+          "title": "Dreaming! (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "3c58f98f-d1c2-49b9-ad11-edb71139a376",
+          "title": "DIAMOND DAYS (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "3c6e3e10-a1a1-4220-86f0-90950a5aef91",
+          "title": "Brand New Theater! (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "d9afd47d-53ff-41f3-afe2-0190622892dd",
+          "title": "UNION!! (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "7a050509-9404-42c4-865a-103a8579c2b1",
+          "title": "Flyers!!! (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "5bf3c0c2-cb2e-482a-a702-f0da98750597",
+          "title": "Glow Map (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "d2d4bcc6-6330-48e2-932f-7c7022ba621f",
+          "title": "Harmony 4 You (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "27542848-0ce5-4b04-b496-378f71f356f7",
+          "title": "セブンカウント (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "12e16c3b-f343-4fdc-b8a8-eb10f8d6178b",
+          "title": "夢にかけるRainbow (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "c1b9ed25-5308-4571-8fb2-789cecfba0a9",
+          "title": "Crossing! (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "e507b1d5-86d2-472f-98be-a2fe082e3f09",
+          "title": "グッドサイン (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "c3ec52cf-0615-4c85-9455-765f62cbccbf",
+          "title": "Rat A Tat!!! (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "9d37ffbe-224f-4ae7-9efc-91e59344a33d",
+          "title": "REFRAIN REL@TION (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "299412d8-cea9-4ed9-b763-f5b0231aaa8a",
+          "title": "7Days A Week!! (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "570f5f4c-a87a-4ab3-9162-4c05871cf280",
+          "title": "蝶々むすび (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "38252a01-a0e3-411d-891f-1e67371e7a9e",
+          "title": "DRIVE A LIVE (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "3e06c415-4bab-4842-85b7-16e72b14742f",
+          "title": "Take a StuMp! (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "e2e863d6-04d8-4458-a2e0-061310f471ad",
+          "title": "PRIDE STAR (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "14c0c9a1-23f9-45c8-8db4-7067cc894955",
+          "title": "SUPREME STARS !!! (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "57a66565-5335-4f5f-bf23-c1c8f10a652a",
+          "title": "MOON NIGHTのせいにして (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "fbf24893-4b51-47db-b4f0-bb8d61da6946",
+          "title": "Inner Dignity (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "e9f2b339-c09d-49a4-854f-a70197450ff3",
+          "title": "Infinite Octave! (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "79a7a190-4211-4efa-b0e0-fae81a3f4916",
+          "title": "TOMORROW DIAMOND (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "4904889d-f996-4c6c-9cc1-64006c40d529",
+          "title": "YELL OF DELIGHT (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "81589fa8-4789-4938-944f-4a3d8a09fbab",
+          "title": "Swing Your Leaves (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "a464bd99-9d3e-4283-b7f6-165ee231b7d5",
+          "title": "いとをかし！～一彩×合彩～ (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "b00c6b4b-1844-4cc9-8f69-918e03b408db",
+          "title": "SEASON IN THE FIVE (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "ff4b4120-45b3-4709-83b1-2101aedb8280",
+          "title": "喜怒哀楽万国共通-Burn it up!- (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "6a7c1204-44fb-414b-8324-a28c7eef4b8a",
+          "title": "Dear you, Cheers!! (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "7cec62bd-48e3-4c3f-b278-0b33cb6bfcb2",
+          "title": "はるかぜバトン (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "7382adb6-271a-49f9-894e-24c64c7cf2f8",
+          "title": "From Teacher To Future! (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "3429ef48-cf4a-4ea8-b57a-517626b574a3",
+          "title": "Hungry? (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "1b3d22c9-1fd5-4d1b-aabc-688a7a929ba4",
+          "title": "♡Cupids! (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "09353e38-861d-40ba-b3d1-b12b12b03568",
+          "title": "FOCUS ON YOUR LIFE (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "7ee3ae12-af5e-4f80-a188-ceb7b36ed82d",
+          "title": "We're the one (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "e677b921-67f7-47d7-a5ed-c729ab2b17d8",
+          "title": "Dye the sky. (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "fdc080a6-d10f-46c6-ad61-71e93fb505f1",
+          "title": "星の声 (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "dcd6163e-a17d-4183-b51d-81658991df51",
+          "title": "シャイノグラフィ (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "436a91eb-2d6f-42ca-829b-92103bd3fcd0",
+          "title": "Poison Berry Daughters (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "00f45820-8cff-4f6b-9df3-bae9a79c3ab9",
+          "title": "アルストロメリア (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "5c3071b8-10cb-4d62-9ca3-72c74d34591f",
+          "title": "Spread the Wings!! (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "154425cc-a646-4e95-913f-87d8f9429e58",
+          "title": "Migratory Echoes (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "22382fdf-0a36-4904-80ca-3b4fdd425c15",
+          "title": "ツバサグラビティ (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "a23a9700-dbbc-4207-ad83-0e0f2403f147",
+          "title": "プリズムフレア (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "f8052817-db5b-40ee-9f98-e6ed0464df41",
+          "title": "SWEET♡STEP (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "c3d005d6-9a20-4f6d-9cbe-fba8dfd2eb1f",
+          "title": "Ambitious Eve (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "694404fc-8e44-46c3-b1d3-9f66c72f7a9e",
+          "title": "スマイルシンフォニア (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "09d511c0-1e5f-4eac-aad1-350cc4a9fa66",
+          "title": "太陽キッス (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "09c84851-50b2-4fdc-a57a-2b81f2bf9523",
+          "title": "SOS (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "b04d19d4-205d-4ea3-8c7d-51530039161d",
+          "title": "よりみちサンセット (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "8a889ff2-66e3-434a-9cf7-f820f678d0ad",
+          "title": "虹になれ (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "156eafce-bfdf-4b0e-8447-8a96ad9f89e2",
+          "title": "いつだって僕らは (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "a5400607-6bd5-4a3f-9653-179257ccd8d0",
+          "title": "Let's get a chance (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "6925e886-007e-4829-a309-8e9930a82186",
+          "title": "Color Days (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "641fd627-a1f0-4623-8183-c7afb9e6bf38",
+          "title": "Campus mode!! (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "13937d23-0fb8-4fec-a709-810f6cba684c",
+          "title": "初 (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "6c33fde6-4b6d-465a-92aa-0e4368d9f26b",
+          "title": "標 (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "88ef13bf-db14-414d-bb62-f3538cdb905f",
+          "title": "Luna say maybe (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "f1cb20d3-f945-4ca0-a53a-54e7317d4e40",
+          "title": "Fighting My Way (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "7fb115e0-9753-4a2d-a1f7-cab0785b8dc8",
+          "title": "世界一可愛い私 (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "c53ddeea-b43f-48c2-b7c4-cb5dead63eb4",
+          "title": "Tame-Lie-One-Step (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "f662058c-8f06-4eec-bd2c-74bb3d49e37e",
+          "title": "Fluorite (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "540940c6-4324-436e-97e5-78df30f479a7",
+          "title": "白線 (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "ce84ecc4-6988-4e56-a8cb-a18c2f4a7855",
+          "title": "Wonder Scale (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "9b6e0461-b9a9-4c38-b942-2407c5013e6c",
+          "title": "clumsy trick (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "b5f9024a-84d9-496a-af3f-cc162b760206",
+          "title": "光景 (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "dcd8d244-9615-4916-a8dd-14e903c6e728",
+          "title": "The Rolling Riceball (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "58d214ee-8654-4037-b532-18d6e1a15c3e",
+          "title": "小さな野望 (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "879b72d0-8c56-4cc2-8cf6-9145fe94b5a4",
+          "title": "ツキノカメ (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        },
+        {
+          "id": "0c55824a-d122-4d73-bfc9-cca5d114d2b0",
+          "title": "理論武装して (THE IDOLM@STER 20th Anniversary Piano Arrange Version)"
+        }
+      ]
+    },
+    {
+      "release_id": "52509973-0d20-4742-a521-bf692914b22a",
+      "release_title": "THE IDOLM@STER No Make!",
+      "kind": "spoken",
+      "source_urls": [
+        "https://columbia.jp/idolmaster/imasnews/120615.html",
+        "https://columbia.jp/idolmaster/news/121012.html",
+        "https://www.idolmaster-anime.jp/tv/news/index.html?p=36"
+      ],
+      "recordings": [
+        {
+          "id": "76f8ee13-83ac-4802-973c-f1eca740c527",
+          "title": "Episode1 これからが彼女たちのはじまり Scene1 取材終了後の天海春香"
+        },
+        {
+          "id": "eb5a53ef-135d-4f29-976c-5f3fc4c9d123",
+          "title": "Episode1 これからが彼女たちのはじまり Scene2 響とハム蔵の反省会"
+        },
+        {
+          "id": "95f4c327-be20-4545-8674-c8df97674953",
+          "title": "Episode1 これからが彼女たちのはじまり Scene3 律子と美希の日常"
+        },
+        {
+          "id": "2a782bb7-7d5c-4eb6-9ed8-90eea12ab43e",
+          "title": "Episode2 “準備”をはじめた少女たち Scene1 クマやよい"
+        },
+        {
+          "id": "43131ed3-2c3c-4b14-9692-3ca02f82ce6d",
+          "title": "Episode2 “準備”をはじめた少女たち Scene2 宣材撮影後の控え室"
+        },
+        {
+          "id": "2a2b9fa0-20a8-42d0-a37c-7b034e332c58",
+          "title": "Episode2 “準備”をはじめた少女たち Scene3 春香たちのその後"
+        },
+        {
+          "id": "1b82c8d0-f8c1-4d08-b21b-68a485be973d",
+          "title": "Episode3 すべては一歩の勇気から Scene1 夏祭りのワンシーン"
+        },
+        {
+          "id": "11f53fb0-ea01-4b3e-a8c1-58eff6c55e4f",
+          "title": "Episode3 すべては一歩の勇気から Scene2 雪歩はいったいどこ?"
+        },
+        {
+          "id": "57918a0d-ad66-4080-a049-5567b09c6cd8",
+          "title": "Episode3 すべては一歩の勇気から Scene3 雪歩、着替え中"
+        },
+        {
+          "id": "19102544-36ed-4e54-be3b-041269051733",
+          "title": "Episode4 自分を変えるということ Scene1 ゲロゲロキッチン、収録前夜"
+        },
+        {
+          "id": "ab94b985-598a-4f55-8e38-32a01910d67c",
+          "title": "Episode4 自分を変えるということ Scene2 真&亜美真美、ゲロゲロキッチン視聴中"
+        },
+        {
+          "id": "8b1bfc4f-07a4-4004-a7ac-e89157f90f84",
+          "title": "Episode4 自分を変えるということ Scene3 打ち上げはスイーツで?"
+        },
+        {
+          "id": "6160d828-f379-41b7-9acc-3a1e1d6d0f04",
+          "title": "Episode5 みんなとすごす夏休み Scene1 海辺の2人"
+        },
+        {
+          "id": "b1f7b576-47dc-4af3-a7ea-4003036d59f3",
+          "title": "Episode5 みんなとすごす夏休み Scene2 BBQでの決意"
+        },
+        {
+          "id": "2b682cb0-bca2-4fd5-899f-8427e361a2f1",
+          "title": "Episode5 みんなとすごす夏休み Scene3 月夜の真実"
+        },
+        {
+          "id": "9447dfa0-9959-45b8-a2bd-09a119dff055",
+          "title": "Episode6 先に進むという選択 Scene1 竜宮小町・忙しい日々(1)"
+        },
+        {
+          "id": "52ca022d-b8d6-4648-924d-613d119a04a4",
+          "title": "Episode6 先に進むという選択 Scene2 竜宮小町・忙しい日々(2)"
+        },
+        {
+          "id": "fcb6749d-1acc-444b-9790-6f14ee9ab4e1",
+          "title": "Episode6 先に進むという選択 Scene3 雪歩、奮闘中"
+        },
+        {
+          "id": "6eb5e0db-7aab-4319-a444-780992623259",
+          "title": "Episode7 大好きなもの、大切なもの Scene1 やよいのお財布"
+        },
+        {
+          "id": "f12e5486-ccab-47b4-997f-7eda1f46205b",
+          "title": "Episode7 大好きなもの、大切なもの Scene2 TVを見ている春香と雪歩"
+        },
+        {
+          "id": "01074e16-0639-46dc-a420-e9192a619ccf",
+          "title": "Episode7 大好きなもの、大切なもの Scene3 TV放送後の反響"
+        },
+        {
+          "id": "99814d67-38a4-46d9-8e4a-791eb18632e8",
+          "title": "Episode8 しあわせへの回り道 Scene1 撮影前日"
+        },
+        {
+          "id": "de2db9af-fa54-4db7-ae76-1604e0259006",
+          "title": "Episode8 しあわせへの回り道 Scene2 真の心配事"
+        },
+        {
+          "id": "10674dd2-747e-433f-ac01-0ab2d6dfa97a",
+          "title": "Episode8 しあわせへの回り道 Scene3 雑誌発売後、事務所でのひととき"
+        },
+        {
+          "id": "bcfd910f-93a5-4b75-9c1f-278b962f8e1b",
+          "title": "Episode9 ふたりだから出来ること Scene1 事件の前に～亜美と真美の欲しいモノ"
+        },
+        {
+          "id": "5ced11ed-3a86-4da0-bee9-eec30413b5b5",
+          "title": "Episode9 ふたりだから出来ること Scene2 事件の中心～伊織がプリンを買ったワケ"
+        },
+        {
+          "id": "523b264b-a3e2-46df-9625-1f75ad42d916",
+          "title": "Episode9 ふたりだから出来ること Scene3 事件を余所に～仕事中の千早と美希"
+        },
+        {
+          "id": "4a6ae7c8-aa1e-423d-b28f-01c033e2876e",
+          "title": "Episode10 みんなで、少しでも前へ Scene1 真と雪歩のRoad to 運動会!"
+        },
+        {
+          "id": "92036d8e-66b2-413a-ae81-76cb0b2c9333",
+          "title": "Episode10 みんなで、少しでも前へ Scene2 真とあずさのRoad to 運動会!"
+        },
+        {
+          "id": "8a939c37-1c1e-4c10-b2aa-a50b514c26b8",
+          "title": "Episode10 みんなで、少しでも前へ Scene3 真と美希のRoad to 運動会!"
+        },
+        {
+          "id": "89c9cc00-94c1-4bd4-9aa3-ac23b74d4545",
+          "title": "Episode11 期待、不安、そして予兆 Scene1 美希、全力でレッスン中!"
+        },
+        {
+          "id": "66fd5b8f-b97e-467a-9f3f-6a90b7967fdf",
+          "title": "Episode11 期待、不安、そして予兆 Scene2 影の功労者"
+        },
+        {
+          "id": "c9f147ef-fdfc-4a47-a0ab-e9aab4933d3c",
+          "title": "Episode11 期待、不安、そして予兆 Scene3 響と真美の帰り道"
+        },
+        {
+          "id": "5d10987a-08dd-454e-bc58-ed1c2040203e",
+          "title": "Episode12 一方通行の終着点 Scene1 新しい衣装、新しい目標"
+        },
+        {
+          "id": "2bc47e9a-8d71-40d4-bdc8-35229c95cb4a",
+          "title": "Episode12 一方通行の終着点 Scene2 ハム蔵のお悩み相談室"
+        },
+        {
+          "id": "4a30c777-5831-4865-b07d-6f74238992b1",
+          "title": "Episode12 一方通行の終着点 Scene3 千早の想い"
+        },
+        {
+          "id": "56fe3ce3-aeec-4851-bdd8-91ab61a2568c",
+          "title": "Episode13 そして、彼女たちはきらめくステージへ Scene1 Are You Ready !? (1)"
+        },
+        {
+          "id": "901c38ad-4bf2-4b8e-b29c-d32ccb119283",
+          "title": "Episode13 そして、彼女たちはきらめくステージへ Scene2 Are You Ready !? (2)"
+        },
+        {
+          "id": "ce896da9-ce6e-403f-9590-fd2665b5064e",
+          "title": "Episode13 そして、彼女たちはきらめくステージへ Scene3 Are You Ready !? (3)"
+        },
+        {
+          "id": "0b3d17af-f6b2-41b9-8475-6f2e6b9c74e4",
+          "title": "Episode14 変わりはじめた世界! Scene1 CHANGE!!!! (1)"
+        },
+        {
+          "id": "9f06c0d4-06c9-4db9-a6eb-bd46fb7e7566",
+          "title": "Episode14 変わりはじめた世界! Scene2 CHANGE!!!! (2)"
+        },
+        {
+          "id": "28e04e7c-af53-490e-ae4f-87454cdc1980",
+          "title": "Episode14 変わりはじめた世界! Scene3 CHANGE!!!! (3)"
+        },
+        {
+          "id": "99d3157a-2ea2-43c3-885e-d2ceccb78d51",
+          "title": "Episode15 みんな揃って、生放送ですよ生放送! Scene1 あずさのヒラメキ"
+        },
+        {
+          "id": "9b819a49-5609-4dc1-9ea0-55563939e633",
+          "title": "Episode15 みんな揃って、生放送ですよ生放送! Scene2 響に迫る黒い影"
+        },
+        {
+          "id": "f2eff3ff-eb01-46c2-b5fd-3c86a2e7d0df",
+          "title": "Episode15 みんな揃って、生放送ですよ生放送! Scene3 続・菊地真改造計画"
+        },
+        {
+          "id": "7a929504-d392-4c4b-aacd-3a5b7a2fa8cb",
+          "title": "Episode16 ひとりぼっちの気持ち Scene1 雪歩といぬ美"
+        },
+        {
+          "id": "d6d8cbc9-d9ac-4000-8be6-de1c4fb185a6",
+          "title": "Episode16 ひとりぼっちの気持ち Scene2 亜美と真美"
+        },
+        {
+          "id": "f267370b-5076-4499-bee4-6670435f9d60",
+          "title": "Episode16 ひとりぼっちの気持ち Scene3 踏切にて"
+        },
+        {
+          "id": "c6c7a6fe-8fa2-469c-9bef-9e82c19fba08",
+          "title": "Episode17 真、まことの王子様 Scene1 ニアミス"
+        },
+        {
+          "id": "dc2e552f-a1c2-432b-9c13-d4ee452d5a74",
+          "title": "Episode17 真、まことの王子様 Scene2 恐怖のメール"
+        },
+        {
+          "id": "45282d3f-b74c-4162-a6e8-1d13723f2406",
+          "title": "Episode17 真、まことの王子様 Scene3 大人の魅力"
+        },
+        {
+          "id": "d155a022-2232-43ab-acfc-a7eb167766d3",
+          "title": "Episode18 たくさんの、いっぱい Scene1 お見舞い"
+        },
+        {
+          "id": "e393f993-afc5-4719-8b1b-9c21b1b9793a",
+          "title": "Episode18 たくさんの、いっぱい Scene2 立場逆転"
+        },
+        {
+          "id": "96b26a79-4177-43e1-a8b4-801b8311af5b",
+          "title": "Episode18 たくさんの、いっぱい Scene3 サプライズ大作戦"
+        },
+        {
+          "id": "db171b03-d519-4e84-a955-3fcb276f6b2c",
+          "title": "Episode19 雲間に隠れる月の如く Scene1 1日署長、その後"
+        },
+        {
+          "id": "623369e8-095f-475a-9f39-3836224a2bb3",
+          "title": "Episode19 雲間に隠れる月の如く Scene2 ダブルリボンと唐揚"
+        },
+        {
+          "id": "783c8ee2-96f9-4ebd-89a2-c04d21ad8902",
+          "title": "Episode19 雲間に隠れる月の如く Scene3 響の秘密?"
+        },
+        {
+          "id": "8c2d8c04-eb3a-427c-a641-48dfae92cbf0",
+          "title": "Episode20 約束 Scene1 千早のために(1)"
+        },
+        {
+          "id": "aa88e238-9454-4729-a29c-034f613712f2",
+          "title": "Episode20 約束 Scene2 千早のために(2)"
+        },
+        {
+          "id": "07a97685-260d-47a0-8d0c-f0baf88c29db",
+          "title": "Episode20 約束 Scene3 千早のために(3)"
+        },
+        {
+          "id": "e49257a2-c660-4cf8-903a-fe7e0708adc1",
+          "title": "Episode21 まるで花が咲くように Scene1 大人になるということ"
+        },
+        {
+          "id": "d41d7ebb-90bd-4df5-9958-a6bbaf726874",
+          "title": "Episode21 まるで花が咲くように Scene2 あまとう?"
+        },
+        {
+          "id": "2014b72f-75d5-4565-970b-8c3719dc37a3",
+          "title": "Episode21 まるで花が咲くように Scene3 たどり着きたい未来"
+        },
+        {
+          "id": "c4d1bdc9-b48f-4dfd-a4ee-93e3bbbb47f4",
+          "title": "Episode22 聖夜の夜に Scene1 クリスマスは家族と一緒に"
+        },
+        {
+          "id": "289a1f83-65b9-435c-9832-cd52d84bb1ee",
+          "title": "Episode22 聖夜の夜に Scene2 竜宮小町のプレゼント選び"
+        },
+        {
+          "id": "54bd228a-a35d-47a8-9293-31270137c029",
+          "title": "Episode22 聖夜の夜に Scene3 クリスマスバースデイ"
+        },
+        {
+          "id": "5fed00cd-b6c9-4054-9ced-5ce935864437",
+          "title": "Episode23 私 Scene1 電話(1)"
+        },
+        {
+          "id": "7c820ea9-eea8-4aba-aff1-fd845e6b6eb1",
+          "title": "Episode23 私 Scene2 電話(2)"
+        },
+        {
+          "id": "61ee004c-bb3d-49e8-9f0d-66648f513b6b",
+          "title": "Episode23 私 Scene3 電話(3)"
+        },
+        {
+          "id": "3dcf8a1f-2317-49e9-aa4b-59689fbdf9c2",
+          "title": "Episode24 夢 Scene1 あなたの代わりに(1)"
+        },
+        {
+          "id": "4d12be47-ac92-4483-8bc0-890b6c13c3cf",
+          "title": "Episode24 夢 Scene2 あなたの代わりに(2)"
+        },
+        {
+          "id": "49358d80-e95f-42a6-9fe3-12e63edddaf2",
+          "title": "Episode24 夢 Scene3 あなたの代わりに(3)"
+        },
+        {
+          "id": "faab538b-1582-4b1f-b92b-475c70bc7f43",
+          "title": "Episode25 みんなと、いっしょに! Scene1 私たちのプロデューサーさんへ(1)"
+        },
+        {
+          "id": "dcc23dbb-2760-45d6-ae53-a14171c10395",
+          "title": "Episode25 みんなと、いっしょに! Scene2 私たちのプロデューサーさんへ(2)"
+        },
+        {
+          "id": "54381cc0-011d-4639-b4d5-dab0a72b857d",
+          "title": "Episode25 みんなと、いっしょに! Scene3 私たちのプロデューサーさんへ(3)"
+        }
+      ]
+    },
+    {
+      "release_id": "bcb2b23c-4422-4bbb-a8b9-8a4b349ddf27",
+      "release_title": "283 Production MUSICAL Performance 騎士団のヴェール – Veil of Order – Music Collection",
+      "kind": "instrumental",
+      "source_urls": [
+        "https://shinycolors.lantis.jp/releaseinfo/laca-35264/",
+        "https://shinycolors.lantis.jp/extra/251206_1/"
+      ],
+      "recordings": [
+        {
+          "id": "2464afde-0c18-4cc4-abed-001af30380bd",
+          "title": "Norsfelus"
+        },
+        {
+          "id": "ab7e6f0b-aa44-4aff-901c-9cb316b3b7c8",
+          "title": "Exercitatio et Chivalria"
+        },
+        {
+          "id": "e3484214-fa6e-487e-af12-e006dc16d685",
+          "title": "Conflagratio"
+        },
+        {
+          "id": "af64460a-5bb7-4bf3-a274-7f244c164da8",
+          "title": "Rumores Norsfelii"
+        },
+        {
+          "id": "a14d8bd9-f65a-4ed4-acf4-0f5ab17168ae",
+          "title": "Angor Lirae"
+        },
+        {
+          "id": "bc603935-6416-455b-a493-a3c0eb1b384c",
+          "title": "Concordia"
+        },
+        {
+          "id": "a819761f-9c69-45ba-a49b-5a90dc2d4895",
+          "title": "Iustitia Norsfelii"
+        },
+        {
+          "id": "fc59f549-1509-4c41-b8bb-b4a8491d314e",
+          "title": "Epilogus: Acedia"
+        },
+        {
+          "id": "51622e24-b4e4-4377-8504-4f709c7c55e4",
+          "title": "Epilogus: Odium"
+        }
+      ]
+    },
+    {
+      "release_id": "9caf5392-52f4-410d-a1c5-f32471e68281",
+      "release_title": "THE IDOLM@STER SideM INSTRUMENTAL MUSIC COLLECTION 01",
+      "kind": "instrumental",
+      "source_urls": [
+        "https://www.lantis.jp/sidem/releaseinfo/release_LACZ-10057.html"
+      ],
+      "recordings": [
+        {
+          "id": "291b9852-3f17-4abc-862f-5e51e6231083",
+          "title": "ASTERISK"
+        },
+        {
+          "id": "04d35097-f25a-4c19-ab06-d2f09ba454a1",
+          "title": "オモイノウタ"
+        },
+        {
+          "id": "870161d9-9492-4eaa-a438-8f19da488768",
+          "title": "Waving FLAGS"
+        },
+        {
+          "id": "5c36d5a8-ab7e-4064-ac1a-abc5cea4c541",
+          "title": "Fine Day! Find Way!"
+        },
+        {
+          "id": "1b28acbd-5aa9-4bb4-8d63-a21ecbbf67bd",
+          "title": "Great Sympathy"
+        },
+        {
+          "id": "997e212e-317f-42a6-a763-8be0fd1bc2b4",
+          "title": "Present for You!!!!! ~A Day in the Café~"
+        },
+        {
+          "id": "b137472b-e4c6-4e46-988e-cfa263e10f6c",
+          "title": "はんどめいど・きみはーと！"
+        },
+        {
+          "id": "44c6bd79-0f9b-4c3d-8815-e307903fd2e2",
+          "title": "ミュージアムジカ"
+        },
+        {
+          "id": "6ee36fff-6486-4575-8708-42382301b500",
+          "title": "スリーブレス"
+        },
+        {
+          "id": "59599b1d-fad6-41d5-bd07-8102bb31f153",
+          "title": "√EVOLUTION"
+        },
+        {
+          "id": "2b883da5-655b-4d18-861a-f057b669da16",
+          "title": "Make New Legend"
+        },
+        {
+          "id": "73f37059-ec9e-491c-9031-99c07093246b",
+          "title": "Bet your intuition!"
+        },
+        {
+          "id": "8486582e-c3eb-475d-829f-b178a51eb249",
+          "title": "mermaid fermata"
+        },
+        {
+          "id": "b956a260-5c60-4ee1-8cb5-c0fef84a84b7",
+          "title": "祝彩！"
+        },
+        {
+          "id": "62a919a8-132d-403a-a237-49014b7c5087",
+          "title": "SEASON IN THE FIVE"
+        },
+        {
+          "id": "b0df05ff-1362-4354-b748-a27507ce46a8",
+          "title": "Singing Explorers"
+        },
+        {
+          "id": "1dc957f1-354f-4761-9b63-04a37fe1c5aa",
+          "title": "運命光年"
+        },
+        {
+          "id": "6a0821dd-abb8-49d0-acbe-94598014051a",
+          "title": "Avenue Illusion!"
+        },
+        {
+          "id": "93ee72eb-087a-4f2c-906a-bee1d444000b",
+          "title": "PROOF OF ONESELF"
+        },
+        {
+          "id": "ac6593bc-33e5-455f-959d-3152d47b541b",
+          "title": "いつかのトライアングル"
+        }
+      ]
+    },
+    {
+      "release_id": "22020d6f-b4e5-476a-ab9b-3aa6748b2a67",
+      "release_title": "THE IDOLM@STER SideM INSTRUMENTAL MUSIC COLLECTION 02",
+      "kind": "instrumental",
+      "source_urls": [
+        "https://www.lantis.jp/sidem/releaseinfo/release_LACZ-10072.html"
+      ],
+      "recordings": [
+        {
+          "id": "f4cee80b-6403-4102-b61b-38af39c9f828",
+          "title": "夜空を煌めく星のように"
+        },
+        {
+          "id": "e1cefe8b-f349-4684-a1bf-d2bfb8d98154",
+          "title": "MOON NIGHTのせいにして"
+        },
+        {
+          "id": "6dfb96f7-0320-469b-ba62-5d31161f0af2",
+          "title": "OUR SONG -それは世界でひとつだけ-"
+        },
+        {
+          "id": "24cbc73e-934d-4beb-a5f7-a90e821dccb2",
+          "title": "エウレカダイアリー"
+        },
+        {
+          "id": "a57edf65-f40c-40e3-8ab6-2a3283019d8e",
+          "title": "Fun! Fun! Festa!"
+        },
+        {
+          "id": "e9eadb85-4fcb-4532-971f-bb6c28ac1553",
+          "title": "サ・ヨ・ナ・ラ Summer Holiday"
+        },
+        {
+          "id": "c051138d-19d3-401f-b117-df4e7d010528",
+          "title": "カレイド TOURHYTHM"
+        },
+        {
+          "id": "0c748c72-4913-499f-a176-865a8094086d",
+          "title": "GLORIA MOMENT"
+        },
+        {
+          "id": "5a189900-2f30-4101-b121-0cc43d374339",
+          "title": "LEADING YOUR DREAM"
+        },
+        {
+          "id": "2304628e-9b7f-4c7f-a694-9d2b50db07f3",
+          "title": "Reversed Masquerade"
+        },
+        {
+          "id": "23c2da7e-74e4-426c-b0a3-87487223f4a8",
+          "title": "Tone's Destiny"
+        },
+        {
+          "id": "15f6d9de-04a4-4720-ad3c-5b2c72cae125",
+          "title": "Symphonic Brave"
+        },
+        {
+          "id": "f33a7bfb-a770-4ce8-bbae-01fbf48385b0",
+          "title": "Eternal Fantasia"
+        },
+        {
+          "id": "24fc4cb6-f696-48dd-af99-f8ce69442553",
+          "title": "Swing Your Leaves"
+        },
+        {
+          "id": "df9bfbf4-054a-42df-b074-6f7b711f0f51",
+          "title": "伝えたいのはこんなきもち"
+        },
+        {
+          "id": "ea246715-e143-4896-97a7-48a0b9c5cd60",
+          "title": "♡Cupids!"
+        },
+        {
+          "id": "d093e5b5-c6d5-448d-81f2-a6181b96abe1",
+          "title": "Compass Gripper!!!"
+        },
+        {
+          "id": "4d22bf63-429d-4f4d-bd5a-ec81fe0b0833",
+          "title": "桜彩"
+        },
+        {
+          "id": "4d10c9ea-abde-4745-bedf-2420f0c1a339",
+          "title": "RIGHT WAY, SOUL MATE"
+        },
+        {
+          "id": "aa31cbc5-176f-4306-ab48-36eebf39bb52",
+          "title": "RAY OF LIGHT"
+        },
+        {
+          "id": "ee9e7c63-a6f3-4fa4-9044-a764173ae667",
+          "title": "笑顔の祭りにゃ、福来る"
+        }
+      ]
+    },
+    {
+      "release_id": "49a02f91-48eb-4653-8f70-cb0e446bec14",
+      "release_title": "THE IDOLM@STER SideM INSTRUMENTAL MUSIC COLLECTION 03",
+      "kind": "instrumental",
+      "source_urls": [
+        "https://www.lantis.jp/sidem/releaseinfo/release_LACZ-10075.html"
+      ],
+      "recordings": [
+        {
+          "id": "2fd3920c-16cc-4a7b-a77d-03b90576e732",
+          "title": "THE FIRST STAR"
+        },
+        {
+          "id": "8e6a3497-a6ba-4bd1-8536-44cf870ba051",
+          "title": "GOLD ～No.79～"
+        },
+        {
+          "id": "ef4c3761-5fbb-4f8b-91ff-e810faedeb26",
+          "title": "だいぶ・いんとぅ・にゅ～・わあるど！"
+        },
+        {
+          "id": "bb9129f7-bec0-42af-a510-c6a39d9fe969",
+          "title": "我が混沌のサバト・マリアージュ"
+        },
+        {
+          "id": "c7309553-eb31-4389-8e9f-dca66a3a6cd2",
+          "title": "新世代ワールド・ビッグスター！"
+        },
+        {
+          "id": "54287c44-b753-4745-bc31-97db46cba096",
+          "title": "Flying Hawk"
+        },
+        {
+          "id": "0540abdc-502f-439e-9afa-d11e7aaaa504",
+          "title": "ぴんとこな ～蝶よ華よ～"
+        },
+        {
+          "id": "2a94d627-a62c-4d94-9e0a-abf292f84efb",
+          "title": "Happy-Go-Unlucky!"
+        },
+        {
+          "id": "3042030d-f1bb-4741-b305-d3e23a02b4d5",
+          "title": "Echoes My Note"
+        },
+        {
+          "id": "47f81cac-e8c4-44d2-b5f5-054c53e1e1f2",
+          "title": "羽ばたきのMy Soul"
+        },
+        {
+          "id": "43b7d463-d723-4f82-9602-d458b215b719",
+          "title": "約束はドリーミングフライト"
+        },
+        {
+          "id": "8aafc55d-da2a-48fe-8e3d-02525251f6d6",
+          "title": "サイコーCOUNT UP!"
+        },
+        {
+          "id": "4ff6eb13-b2b7-4b33-8bb5-0c503a00c0ae",
+          "title": "Piece Montee"
+        },
+        {
+          "id": "2cab53d7-6ce4-4b58-a26d-2270428c3944",
+          "title": "ふわもこシフォンなゆめのなか♪"
+        },
+        {
+          "id": "d7b73b1d-3909-4f1f-a57d-1b537b446e14",
+          "title": "Undiscovered WORLD"
+        },
+        {
+          "id": "0eb2a563-600b-4dd3-b16e-e5dcc54501c3",
+          "title": "ROMANTIC SHAKER"
+        },
+        {
+          "id": "dabb57ce-4c19-49b9-ac55-a1f7a9521910",
+          "title": "Because"
+        },
+        {
+          "id": "4a1a49e3-8d47-41be-9e35-af737e1bbf1d",
+          "title": "流るゝ風の如く ～和敬清寂～"
+        },
+        {
+          "id": "25c05f5d-ff39-47c8-880f-c0ad327dc343",
+          "title": "フェイバリットに踊らせて"
+        },
+        {
+          "id": "0e73bebf-bab6-4aa1-87ea-063b432e99c5",
+          "title": "Sanctuary World"
+        },
+        {
+          "id": "ff715c51-fe03-430e-958d-cd0c8f8eff8e",
+          "title": "“W”onderful Tactics!"
+        },
+        {
+          "id": "333a6aab-f1dc-4e6a-918c-07432c8bd6a0",
+          "title": "威風堂々と"
+        },
+        {
+          "id": "b8ac3bf2-e5c5-4bd9-82a0-37694dc86204",
+          "title": "RULE～牙ヲ穿テヨ～"
+        },
+        {
+          "id": "eadef726-1671-4b96-93f9-a2312b34bc44",
+          "title": "ほっぷ・すてっぷ・ハイ、しーぷ!"
+        },
+        {
+          "id": "609138d3-09d1-432c-ba02-d1ea05df3ebb",
+          "title": "Sweep Your Gloom"
+        }
+      ]
+    },
+    {
+      "release_id": "2836c76a-d462-4c9a-9d4a-b5ebcb5237ff",
+      "release_title": "THE IDOLM@STER SideM INSTRUMENTAL MUSIC COLLECTION 04",
+      "kind": "instrumental",
+      "source_urls": [
+        "https://www.lantis.jp/sidem/releaseinfo/release_LACZ-10077.html"
+      ],
+      "recordings": [
+        {
+          "id": "4b50677c-5f2f-4c31-aead-572fbcc3bf21",
+          "title": "HAPPY×HAPPYミーティング"
+        },
+        {
+          "id": "21449f06-0445-4bb5-bba5-9aa56f3c7685",
+          "title": "青春！サティスファクション"
+        },
+        {
+          "id": "4b0ae017-f111-4793-b8d9-5237dee25839",
+          "title": "GO AHEAD SMILE!"
+        },
+        {
+          "id": "df8100c0-6786-4f32-8b84-6da640a65a63",
+          "title": "漢一貫ロックン・ロール"
+        },
+        {
+          "id": "facf5be2-2759-4c78-a6fb-2f3684ec8d97",
+          "title": "ROAD TO THE FUTURE"
+        },
+        {
+          "id": "84885415-6d74-428f-8ed2-015b4abb104a",
+          "title": "Flowing Freedom"
+        },
+        {
+          "id": "cde385ba-c1f8-4ea6-bcbb-f792a1b44f07",
+          "title": "BACK FLIP☆EMOTION"
+        },
+        {
+          "id": "b401dee7-2172-44fb-b8ee-3c54c06a5375",
+          "title": "ナツゾラRecords"
+        },
+        {
+          "id": "c105d775-5803-4745-ad6d-611643a96bd9",
+          "title": "A CUP OF HAPPINESS"
+        },
+        {
+          "id": "0506880c-6e05-436c-93b8-88046cf5f45c",
+          "title": "その場所へ行くために-KEEP ON FIGHTING-"
+        },
+        {
+          "id": "98ea55fd-7ece-4c81-8e08-ab8e8e2a84d5",
+          "title": "…掲げよう、偽りなき自分を。"
+        },
+        {
+          "id": "c24ec4be-e1d0-45fc-bcb9-3da98285a4bd",
+          "title": "Cherish BOUQUET"
+        },
+        {
+          "id": "69210eb4-86d6-465b-bc5b-8467e68f0778",
+          "title": "Genuine feelings"
+        },
+        {
+          "id": "524f9fc6-7b66-43d1-9832-8daa458bc25d",
+          "title": "Learning Message"
+        },
+        {
+          "id": "16b088e6-f647-4ff9-9fde-57d49afcbef7",
+          "title": "ハートフル・パトローラー"
+        },
+        {
+          "id": "596bda28-7dd0-4e38-ae7a-7c6a47337d20",
+          "title": "HANAMARU LIFE"
+        },
+        {
+          "id": "5b8c933e-f5bf-4e20-95aa-408f25a92f14",
+          "title": "魔法のステアー"
+        },
+        {
+          "id": "2c75fa36-20ee-4bbd-b6ce-3fee9c8edbbf",
+          "title": "PRECIOUS TONE"
+        },
+        {
+          "id": "42e38617-4d0b-4db5-8656-292f1c644767",
+          "title": "“W”orldwide Ambitions!"
+        },
+        {
+          "id": "081b420c-a956-41b6-9507-22f835bfffcb",
+          "title": "THIS IS IT!"
+        },
+        {
+          "id": "ba386ad2-ab0e-45ee-9c7d-2770b5f04c18",
+          "title": "ワンホール＝ワンダーランド！"
+        }
+      ]
+    },
+    {
+      "release_id": "d61cf714-c416-46c3-a2bd-22a8d16a5ce8",
+      "release_title": "THE IDOLM@STER SideM INSTRUMENTAL MUSIC COLLECTION 05",
+      "kind": "instrumental",
+      "source_urls": [
+        "https://www.lantis.jp/sidem/releaseinfo/release_LACZ-10079.html"
+      ],
+      "recordings": [
+        {
+          "id": "693e7982-9763-4a23-86cc-3d0cb7f1df7a",
+          "title": "Reason!!"
+        },
+        {
+          "id": "5b943872-dda0-4060-9bbc-5e182d6ec614",
+          "title": "流星PARADE"
+        },
+        {
+          "id": "efaa4ce4-7db4-4aa5-bead-1448f53d5dd9",
+          "title": "夏時間グラフィティ"
+        },
+        {
+          "id": "b240cb10-f417-46dc-904d-b6a4c97cafef",
+          "title": "GLORIOUS RO@D"
+        },
+        {
+          "id": "4e2d8de9-8847-494f-808d-5cfaedce78b6",
+          "title": "MEET THE WORLD!"
+        },
+        {
+          "id": "fcaaa4d8-5d14-4ede-ae66-713f580a9c5f",
+          "title": "Genesis Contact"
+        },
+        {
+          "id": "3efe13e6-aaea-472e-9b27-83f5d6d0102b",
+          "title": "ALL nOR NOTHING"
+        },
+        {
+          "id": "fde6d406-7b0e-4243-8d79-038d6b3325e9",
+          "title": "Braver Beat"
+        },
+        {
+          "id": "f4cafb07-f5fd-40e3-8449-840e5b98ae75",
+          "title": "Stories"
+        },
+        {
+          "id": "c5fcc331-2cd2-4ec0-ae6f-3972fc2152ea",
+          "title": "わんだー×まーちんぐ!"
+        },
+        {
+          "id": "ed18da94-d39e-434d-9660-a385346b165e",
+          "title": "Hungry?"
+        },
+        {
+          "id": "86b5fe4d-4054-4944-95bf-7d383ebf7a7a",
+          "title": "Radiant Letter"
+        },
+        {
+          "id": "66921726-9554-4209-b896-7e07b88415de",
+          "title": "Delicious Delivery"
+        },
+        {
+          "id": "f66034e0-bc78-4464-9bc2-0172725836aa",
+          "title": "Secret Ornament"
+        },
+        {
+          "id": "0a493990-8aee-4986-92c3-37d8739ec774",
+          "title": "喜怒哀楽万国共通-Burn it up!-"
+        },
+        {
+          "id": "0f83df05-116c-4f8c-a79d-7d2de9c411a0",
+          "title": "Attacca Scenery"
+        },
+        {
+          "id": "ac4fdb23-4816-42d5-b44e-1d98014b4544",
+          "title": "Smiles In Wonderland!"
+        },
+        {
+          "id": "772f8d28-07aa-4b22-b2c0-725ef6af9a73",
+          "title": "YELL OF DELIGHT"
+        },
+        {
+          "id": "4682fd00-6f26-4ca0-aa3b-079d05865c46",
+          "title": "FOCUS ON YOUR LIFE"
+        },
+        {
+          "id": "e67b2c25-3afc-49f3-8457-9567e526eea1",
+          "title": "リビングアイズヒーロー"
+        },
+        {
+          "id": "9249c606-a42f-4bbd-a5e7-3962f69a7915",
+          "title": "GOOD NEW MORNING"
+        },
+        {
+          "id": "98dc4601-182e-4c4e-a144-71ef4f8ac639",
+          "title": "Happy's Birthday"
+        },
+        {
+          "id": "b9c9d37f-256b-40ea-8851-3a522c9ab1e7",
+          "title": "装 -So Beautiful-"
+        },
+        {
+          "id": "27f00467-b931-4300-826c-3ed9b05f7f44",
+          "title": "Hope's Journey"
+        }
+      ]
+    },
+    {
+      "release_id": "42a1ae7e-01ea-46da-891c-db10e8ce0df8",
+      "release_title": "THE IDOLM@STER LIVE THE@TER PERFORMANCE Instrumental 01",
+      "kind": "instrumental",
+      "source_urls": [
+        "https://shop.asobistore.jp/products/detail/155188-00-00-Instr_01"
+      ],
+      "recordings": [
+        {
+          "id": "90ed2e89-ec49-4f9e-886c-12189ff8f6b4",
+          "title": "キラメキ進行形"
+        },
+        {
+          "id": "adb590e5-e236-4f3c-8305-bd797794c58c",
+          "title": "透明なプロローグ"
+        },
+        {
+          "id": "5d7f2aa1-0050-4afb-a96e-9e0fc3ce4bbf",
+          "title": "トキメキの音符になって"
+        },
+        {
+          "id": "f62ee5da-8f7c-48e5-a5a8-e5d02e11490e",
+          "title": "Maria Trap"
+        },
+        {
+          "id": "6ee68a52-92ae-4e23-a202-00a7e642e62d",
+          "title": "Precious Grain"
+        },
+        {
+          "id": "f3a31902-d404-4675-a63b-a53b695d3e97",
+          "title": "Legend Girls!!"
+        },
+        {
+          "id": "9bba2ae8-636f-45e9-b46c-7406d6c00f79",
+          "title": "素敵なキセキ"
+        },
+        {
+          "id": "1df71c7a-583b-4091-a06a-cb2abc184832",
+          "title": "ハッピー☆ラッキー☆ジェットマシーン"
+        },
+        {
+          "id": "b13acdbb-133f-471c-8811-3423c21e7e16",
+          "title": "Happy Darling"
+        },
+        {
+          "id": "42df75e0-c164-4163-9bcc-211dc91718be",
+          "title": "オレンジの空の下"
+        },
+        {
+          "id": "8b2b9372-4650-4c29-babe-f258d7a23a90",
+          "title": "Rebellion"
+        },
+        {
+          "id": "430e8e6b-d5ff-4b09-b13b-2fc69fa031ac",
+          "title": "PRETTY DREAMER"
+        }
+      ]
+    },
+    {
+      "release_id": "1f22b5d8-06e5-40de-b364-81682479af0b",
+      "release_title": "THE IDOLM@STER LIVE THE@TER PERFORMANCE Instrumental 02",
+      "kind": "instrumental",
+      "source_urls": [
+        "https://shop.asobistore.jp/products/detail/155188-00-00-Instr_02"
+      ],
+      "recordings": [
+        {
+          "id": "ce474b41-91a1-4a57-88ac-7fbf28f9944b",
+          "title": "アフタースクールパーリータイム"
+        },
+        {
+          "id": "8be6f8d0-d909-41dd-97c2-195da06eb356",
+          "title": "朝焼けのクレッシェンド"
+        },
+        {
+          "id": "ba4739fe-a06b-4b63-8418-a9ac4e15022b",
+          "title": "ライアー・ルージュ"
+        },
+        {
+          "id": "eb261258-f726-4e5b-8414-081d7fff4005",
+          "title": "Snow White"
+        },
+        {
+          "id": "8e992199-1eda-4c21-bdd3-768f9a115638",
+          "title": "Blue Symphony"
+        },
+        {
+          "id": "861b3100-3d97-4117-b930-e6f2cc7113bc",
+          "title": "微笑み日和"
+        },
+        {
+          "id": "981e6869-eb63-406e-91e6-01daeee1bd14",
+          "title": "POKER POKER"
+        },
+        {
+          "id": "db73b8cd-8626-4ad1-88fd-be49b98ddd48",
+          "title": "Be My Boy"
+        },
+        {
+          "id": "b580bddd-08ad-4b22-a3b7-777ab5a31b9c",
+          "title": "プライヴェイト・ロードショウ (playback, Weekday)"
+        },
+        {
+          "id": "d8df4938-c287-4772-97a9-8a37ca5ce817",
+          "title": "Sentimental Venus"
+        }
+      ]
+    },
+    {
+      "release_id": "1b202c43-8d25-463a-bfa8-e14e0e10c118",
+      "release_title": "THE IDOLM@STER LIVE THE@TER PERFORMANCE Instrumental 03",
+      "kind": "instrumental",
+      "source_urls": [
+        "https://shop.asobistore.jp/products/detail/155188-00-00-Instr_03"
+      ],
+      "recordings": [
+        {
+          "id": "7da567ff-a9d5-4c84-8ec0-c8b3c60acbec",
+          "title": "恋のLesson初級編"
+        },
+        {
+          "id": "3c773848-8959-476f-9165-80d409f11ab5",
+          "title": "FIND YOUR WIND!"
+        },
+        {
+          "id": "029818e8-e28b-4510-8f1c-bf323eac1010",
+          "title": "追憶のサンドグラス"
+        },
+        {
+          "id": "1af9c72d-e46f-4e14-b47c-fb594e3827c3",
+          "title": "流星群"
+        },
+        {
+          "id": "fefe321d-427f-4ea0-bb99-b421eb0c68fe",
+          "title": "Marionetteは眠らない"
+        },
+        {
+          "id": "163057d7-8f27-4a2a-82a6-e28dbb48175b",
+          "title": "マイペース☆マイウェイ"
+        },
+        {
+          "id": "a0d9edfc-5746-4cba-a6b9-f05801ad7e9e",
+          "title": "君想いBirthday"
+        },
+        {
+          "id": "b5ff1cc6-0f23-4232-9cb1-8cc0730a148d",
+          "title": "ちいさな恋の足音"
+        },
+        {
+          "id": "631aa507-9621-410e-befc-eb6e193654e8",
+          "title": "嘆きのFRACTION"
+        },
+        {
+          "id": "7b0d2fa0-3939-4c53-a357-d508ed73e986",
+          "title": "カワラナイモノ"
+        }
+      ]
+    },
+    {
+      "release_id": "ba335dd4-e983-45a9-9ae0-dda924dba213",
+      "release_title": "THE IDOLM@STER LIVE THE@TER PERFORMANCE Instrumental 04",
+      "kind": "instrumental",
+      "source_urls": [
+        "https://shop.asobistore.jp/products/detail/155188-00-00-Instr_04"
+      ],
+      "recordings": [
+        {
+          "id": "841ef7d1-96be-4076-b618-bde4ae82837c",
+          "title": "ホップ♪ステップ♪レインボウ♪"
+        },
+        {
+          "id": "262b19f9-8a01-4fae-9bd7-613c796deb21",
+          "title": "グッデイ・サンシャイン！"
+        },
+        {
+          "id": "3392117f-6bd8-46bf-a7fd-609087d142cf",
+          "title": "オリジナル声になって"
+        },
+        {
+          "id": "2c795d21-4d29-40b5-b444-6811efcd36dd",
+          "title": "ハートウォーミング"
+        },
+        {
+          "id": "b787f91e-ff12-4ec2-94d7-033e8c941fd2",
+          "title": "Good-Sleep, Baby♡"
+        },
+        {
+          "id": "145367e3-d07b-4b57-86ed-1bac72b0536a",
+          "title": "Helloコンチェルト"
+        },
+        {
+          "id": "60a2037f-5e50-4cab-8165-d180eb64dcbd",
+          "title": "スマイルいちばん"
+        },
+        {
+          "id": "06ba32f9-7ab8-49b6-9c6c-e6770805ff91",
+          "title": "あのね、聞いてほしいことがあるんだ"
+        },
+        {
+          "id": "976f7b7c-b966-494f-a334-51e112f8e251",
+          "title": "チョー↑元気Show☆アイドルch@ng!"
+        },
+        {
+          "id": "b3adc64e-6996-41c5-9dcb-e1b42c5b5ca4",
+          "title": "GREEDY GIRL"
+        }
+      ]
+    },
+    {
+      "release_id": "68f8b846-7057-4b95-b2fd-2745ce29a3c8",
+      "release_title": "THE IDOLM@STER LIVE THE@TER PERFORMANCE Instrumental 05",
+      "kind": "instrumental",
+      "source_urls": [
+        "https://shop.asobistore.jp/products/detail/155188-00-00-Instr_05"
+      ],
+      "recordings": [
+        {
+          "id": "dab3c3de-71e8-487f-9b24-d987450f46b8",
+          "title": "フェスタ・イルミネーション"
+        },
+        {
+          "id": "42746308-83f7-41d8-a59f-35e1555091b2",
+          "title": "ココロ☆エクササイズ"
+        },
+        {
+          "id": "52228ed4-5cb6-4815-9e28-2a5e613032bb",
+          "title": "ハッピ～ エフェクト！"
+        },
+        {
+          "id": "0aa3bb0c-dd7c-4661-85f3-7a0339328e77",
+          "title": "恋花"
+        },
+        {
+          "id": "d77684f4-c9fa-45a5-8205-cf16110c1679",
+          "title": "瞳の中のシリウス"
+        },
+        {
+          "id": "95332091-6490-4818-a2f9-8e7090ec875d",
+          "title": "想いはCarnaval"
+        },
+        {
+          "id": "c2107703-c60e-4dce-9a29-02fd6fb19635",
+          "title": "Get My Shinin’"
+        },
+        {
+          "id": "a1806724-4abc-4240-b7bb-8175f37f9cb8",
+          "title": "FLY TO EVERYWHERE"
+        },
+        {
+          "id": "98260c01-3d91-4de0-a12a-909282c670b1",
+          "title": "DETECTIVE HIGH! ～恋探偵物語～"
+        },
+        {
+          "id": "cee61c65-34cc-4203-87f1-d859efbd04a0",
+          "title": "Fu-Wa-Du-Wa"
+        }
+      ]
+    },
+    {
+      "release_id": "8dc9a6af-ad13-4387-98c9-e80896b28c14",
+      "release_title": "THE IDOLM@STER LIVE THE@TER PERFORMANCE Instrumental 06",
+      "kind": "instrumental",
+      "source_urls": [
+        "https://shop.asobistore.jp/products/detail/155188-00-00-Instr_06"
+      ],
+      "recordings": [
+        {
+          "id": "195b7eb5-9d3b-4a7c-a874-dc0b155c7a06",
+          "title": "IMPRESSION→LOCOMOTION！"
+        },
+        {
+          "id": "54c6f49e-abc5-4079-af17-a9710c89e223",
+          "title": "恋心マスカレード"
+        },
+        {
+          "id": "8099796b-eb13-471a-a92e-5c40ddc016db",
+          "title": "ハミングロード"
+        },
+        {
+          "id": "cd76bd86-3d4b-4c14-b504-406e3073f883",
+          "title": "デコレーション・ドリ～ミンッ♪"
+        },
+        {
+          "id": "223feb36-ab45-44cf-bf1c-a37472e270a1",
+          "title": "ココロがかえる場所"
+        },
+        {
+          "id": "4a32c36b-635a-4ae4-8fd0-dcc652aead99",
+          "title": "Heart♡・デイズ・Night☆"
+        },
+        {
+          "id": "ff27eb91-a732-4768-b8b0-8791ad252c3c",
+          "title": "微笑んだから、気づいたんだ。"
+        },
+        {
+          "id": "22bac5ca-3167-415d-bac8-61888e155432",
+          "title": "dear..."
+        },
+        {
+          "id": "71af8462-c201-4293-a9cd-48f36a79c0ce",
+          "title": "ビギナーズ☆ストライク"
+        },
+        {
+          "id": "55fe9730-ed71-4ff7-b3fb-0809c978dc64",
+          "title": "Bigバルーン◎"
+        }
+      ]
+    },
+    {
+      "release_id": "bc523195-2dd1-4070-aa8b-cbfde1998e86",
+      "release_title": "THE IDOLM@STER LIVE THE@TER HARMONY Instrumental 01",
+      "kind": "instrumental",
+      "source_urls": [
+        "https://shop.asobistore.jp/products/detail/166657-00-00-Instr_01"
+      ],
+      "recordings": [
+        {
+          "id": "74005e07-9139-4b7f-bb68-c133cde7fc24",
+          "title": "合言葉はスタートアップ！"
+        },
+        {
+          "id": "12a6bf68-370b-40eb-8600-2c0eed9b03b5",
+          "title": "地球ミラーボウル"
+        },
+        {
+          "id": "25d3d22a-b2bb-42a5-b869-f0cce910cf54",
+          "title": "ストロベリー・キューピッド"
+        },
+        {
+          "id": "300f95e0-e076-4039-98a2-eb3092b49a5c",
+          "title": "Liar's good bye"
+        },
+        {
+          "id": "47e304b3-b536-4483-a793-c141620783ba",
+          "title": "タイムマシンに飛び乗って！"
+        },
+        {
+          "id": "936ed51d-2abd-44be-a640-fdd86c86ab4f",
+          "title": "smiley days"
+        },
+        {
+          "id": "7438d383-2237-4787-8468-97ccf0f31505",
+          "title": "Growing Storm!"
+        },
+        {
+          "id": "86b1018b-30aa-45ff-ae1f-da6e54e99cc0",
+          "title": "...In The Name Of。 ...LOVE?"
+        },
+        {
+          "id": "086145cb-ae20-4458-99f6-4f7018a62ac3",
+          "title": "VIVID イマジネーション"
+        },
+        {
+          "id": "d6a8ea00-c278-4b4b-b82b-ab1597286e5b",
+          "title": "空想文学少女"
+        },
+        {
+          "id": "fa510f19-db11-4e67-a9a0-82581586f03c",
+          "title": "Believe my change!"
+        },
+        {
+          "id": "8ca3472b-2fd5-4d0b-84cb-ff5815646b88",
+          "title": "未来飛行"
+        }
+      ]
+    },
+    {
+      "release_id": "caa76f90-da8d-4d49-9fc0-4076dcbe7b52",
+      "release_title": "THE IDOLM@STER LIVE THE@TER HARMONY Instrumental 02",
+      "kind": "instrumental",
+      "source_urls": [
+        "https://shop.asobistore.jp/products/detail/166657-00-00-Instr_02"
+      ],
+      "recordings": [
+        {
+          "id": "22fbadc1-9a0f-491d-aed0-a4f1a5e60f97",
+          "title": "Shooting Stars"
+        },
+        {
+          "id": "fa60786a-ab13-4d5b-abd9-da1e1883f941",
+          "title": "夢色トレイン"
+        },
+        {
+          "id": "81d71fc5-448a-4108-aff4-cff9ec999c95",
+          "title": "サマ☆トリ ~Summer trip~"
+        },
+        {
+          "id": "8d79ccf0-783f-4950-91bd-3fae1fb7df06",
+          "title": "プリティ～～～ッ→ニャンニャンッ！"
+        },
+        {
+          "id": "426e99f6-b902-430f-9763-ca7d306ac47c",
+          "title": "絵本"
+        },
+        {
+          "id": "2a4239a2-8dc6-4d53-ae66-61ee4280ba6a",
+          "title": "Catch my dream"
+        },
+        {
+          "id": "eee88aaa-59f9-4e90-b7fe-2a287e52532e",
+          "title": "Eternal Harmony"
+        },
+        {
+          "id": "baca9d6d-414b-464b-babc-80f2485b8fae",
+          "title": "カーニヴァル・ジャパネスク"
+        },
+        {
+          "id": "907f31f2-c3fb-41aa-80cf-003817f831e8",
+          "title": "プラリネ"
+        },
+        {
+          "id": "fd70ad27-08b0-42ec-b0b2-1c78c40b12de",
+          "title": "bitter sweet"
+        },
+        {
+          "id": "55571c35-85db-45b9-b43c-731e06137ee0",
+          "title": "君だけの欠片"
+        },
+        {
+          "id": "54710051-0ae3-498e-8920-b678763e29a0",
+          "title": "Just be myself!!"
+        }
+      ]
+    },
+    {
+      "release_id": "39fa0a16-7da5-4444-b3a7-83558ddefe80",
+      "release_title": "THE IDOLM@STER LIVE THE@TER HARMONY Instrumental 03",
+      "kind": "instrumental",
+      "source_urls": [
+        "https://shop.asobistore.jp/products/detail/166657-00-00-Instr_03"
+      ],
+      "recordings": [
+        {
+          "id": "a2c6cf2f-efbc-4e4f-90da-164e9f5237ec",
+          "title": "HOME, SWEET FRIENDSHIP"
+        },
+        {
+          "id": "a805e0d6-f96c-4174-93f7-572034efeeff",
+          "title": "MY STYLE! OUR STYLE!!!!"
+        },
+        {
+          "id": "7786504a-1cef-456b-9abd-254771c28372",
+          "title": "Super Lover"
+        },
+        {
+          "id": "c9da10c2-fe53-4c14-9f56-907934b25248",
+          "title": "求ム VS マイ・フューチャー"
+        },
+        {
+          "id": "dc6764f7-7a5b-4884-9d12-2e6b7d64039b",
+          "title": "Up!10sion♪Pleeeeeeeeease!"
+        },
+        {
+          "id": "582932b4-3543-42da-818f-30b30bcb84d7",
+          "title": "キミがいて夢になる"
+        },
+        {
+          "id": "8a124c00-9ef6-49f1-90ab-f1a0129cecb0",
+          "title": "ジレるハートに火をつけて"
+        },
+        {
+          "id": "8bd6c39d-23b8-4f66-ad1d-7f9150d7e791",
+          "title": "恋愛ロードランナー"
+        },
+        {
+          "id": "1f75c1bd-1888-4321-967d-745c44e6c2a6",
+          "title": "BOUNCING♪ SMILE!"
+        },
+        {
+          "id": "4d2f567f-94ca-452b-81ae-b97318eabd68",
+          "title": "初恋バタフライ"
+        },
+        {
+          "id": "ec9d7cd6-cbcd-4000-91db-169a66be71d6",
+          "title": "フローズン・ワード"
+        },
+        {
+          "id": "02856a30-a890-4f3c-97f4-11c3c45a74a1",
+          "title": "ホントウノワタシ"
+        }
+      ]
+    },
+    {
+      "release_id": "75765e68-22ba-4773-ae65-96ffc9191cdb",
+      "release_title": "THE IDOLM@STER LIVE THE@TER HARMONY Instrumental 04",
+      "kind": "instrumental",
+      "source_urls": [
+        "https://shop.asobistore.jp/products/detail/166657-00-00-Instr_04"
+      ],
+      "recordings": [
+        {
+          "id": "4dc93179-7740-4d44-af62-0e537a1cab61",
+          "title": "Birth of Color"
+        },
+        {
+          "id": "db48a011-de48-4e2f-a8b8-9bb63babeacf",
+          "title": "WORLD WIDE DANCE!!!"
+        },
+        {
+          "id": "a1bd33eb-e125-4705-9e44-a8a1ef509ec4",
+          "title": "ユニゾン☆ビート"
+        },
+        {
+          "id": "b42fc7bc-745b-4352-b869-2fb27fb7be75",
+          "title": "月のほとりで"
+        },
+        {
+          "id": "c5ffb86b-8a75-4fb4-82dd-161fab70464f",
+          "title": "Impervious Resolution"
+        },
+        {
+          "id": "aeda8191-ec85-45d3-970b-1beab057aa7a",
+          "title": "おまじない"
+        },
+        {
+          "id": "81a2a5bf-64bc-47c6-8d97-8b7b490aad23",
+          "title": "ドリームトラベラー"
+        },
+        {
+          "id": "e10b2f74-8d89-442b-ae39-81a7d2028586",
+          "title": "SUPER SIZE LOVE!!"
+        },
+        {
+          "id": "62371309-5a1f-4c5b-bab3-9869b5ef2cda",
+          "title": "アニマル☆ステイション!"
+        },
+        {
+          "id": "231ca7d8-8575-4a76-97a5-c00806c9caff",
+          "title": "りんごのマーチ"
+        },
+        {
+          "id": "7680133b-6dd4-4df1-b0b8-8137c6c3ef63",
+          "title": "WOW! I NEED!! ～シンギングモンキー 歌唱拳～"
+        },
+        {
+          "id": "bc49a1bb-b74e-4296-b0f9-6e658c917370",
+          "title": "水中キャンディ"
+        }
+      ]
+    },
+    {
+      "release_id": "331efd5a-1b88-4e05-b276-fc4a32b70fdb",
+      "release_title": "THE IDOLM@STER LIVE THE@TER HARMONY Instrumental 05",
+      "kind": "instrumental",
+      "source_urls": [
+        "https://shop.asobistore.jp/products/detail/166657-00-00-Instr_05"
+      ],
+      "recordings": [
+        {
+          "id": "c1eea423-b11d-4640-b3d2-8cdb1740cf51",
+          "title": "星屑のシンフォニア"
+        },
+        {
+          "id": "ca1cf9d2-b026-4ce9-836a-76afc87a1272",
+          "title": "FAKE SELF×TRUE SELF"
+        },
+        {
+          "id": "bc2ccffd-831d-48d4-ac00-95a82489770d",
+          "title": "恋の音色ライン"
+        },
+        {
+          "id": "1ab2bdbd-fcf1-4758-86b4-ab9ca2490ee2",
+          "title": "Day After “ Yesterday”"
+        },
+        {
+          "id": "ce329614-3853-466a-af80-1085ee30d3f0",
+          "title": "鳥籠スクリプチュア"
+        },
+        {
+          "id": "232fc5ed-3792-4740-a00e-08cf24bc4e3e",
+          "title": "vivid color"
+        },
+        {
+          "id": "a2cfa5ab-e836-425c-b53a-cc364f0fb6c4",
+          "title": "STANDING ALIVE"
+        },
+        {
+          "id": "a4e7be08-09cd-4792-9cbd-77f831143eca",
+          "title": "ファンタジスタ・カーニバル"
+        },
+        {
+          "id": "6f0514f3-6d78-4848-b0d6-0e79c9d4f767",
+          "title": "WHY?"
+        },
+        {
+          "id": "d57432d5-5dee-409f-af55-01b66ce74ea1",
+          "title": "STEREOPHONIC ISOTONIC"
+        },
+        {
+          "id": "0b82f2b0-b5f2-44d3-9e3a-e7d5a4e1ed4a",
+          "title": "addicted"
+        },
+        {
+          "id": "204f583f-917c-458a-a78e-a654d39ce25a",
+          "title": "夕風のメロディー"
+        }
+      ]
+    },
+    {
+      "release_id": "786f3e34-23cf-41fd-b32d-50281eb52480",
+      "release_title": "THE IDOLM@STER LIVE THE@TER DREAMERS Instrumental 01",
+      "kind": "instrumental",
+      "source_urls": [
+        "https://shop.asobistore.jp/products/detail/178891-00-00-Instr_01"
+      ],
+      "recordings": [
+        {
+          "id": "1b25d0d4-fa8d-44cb-83f4-03f4a077ff2c",
+          "title": "ハルカナミライ"
+        },
+        {
+          "id": "d33ade34-db24-4cc2-8d06-cd0f3c8782be",
+          "title": "成長Chu→LOVER!!"
+        },
+        {
+          "id": "991fb036-9267-4afe-b1e8-b49fb63f7924",
+          "title": "エスケープ"
+        },
+        {
+          "id": "8d55d451-b93e-40cf-9128-d3346d51e7c0",
+          "title": "Eternal Spiral"
+        },
+        {
+          "id": "a5bb1685-94b1-4b2f-b6c0-c21284f498d3",
+          "title": "piece of cake"
+        },
+        {
+          "id": "969344b6-af51-40d1-8cbc-a6100794ae14",
+          "title": "アライブファクター"
+        },
+        {
+          "id": "e37581ab-22de-433f-96e7-4ab29cf1c4a3",
+          "title": "Persona Voice"
+        },
+        {
+          "id": "08eeb805-d941-4726-8ee3-edc246538a67",
+          "title": "Cut. Cut. Cut."
+        },
+        {
+          "id": "425120fe-97ba-43a5-8c5f-f909abc6d62e",
+          "title": "Smiling Crescent"
+        },
+        {
+          "id": "9e962613-8434-44b0-a9d5-1bbb7e1f67bd",
+          "title": "Decided"
+        }
+      ]
+    },
+    {
+      "release_id": "1fd2af15-b0b1-4385-b0d7-51197219463e",
+      "release_title": "THE IDOLM@STER LIVE THE@TER DREAMERS Instrumental 02",
+      "kind": "instrumental",
+      "source_urls": [
+        "https://shop.asobistore.jp/products/detail/178891-00-00-Instr_02"
+      ],
+      "recordings": [
+        {
+          "id": "ab53d1aa-987d-44b4-88b2-c9adf9527ba2",
+          "title": "深層マーメイド"
+        },
+        {
+          "id": "06c9cf17-f3b3-4f8d-85aa-c05190490526",
+          "title": "HELLO, YOUR ANGEL♪"
+        },
+        {
+          "id": "2c8340af-3add-4881-b7e1-65b1895cf8c6",
+          "title": "G♡F"
+        },
+        {
+          "id": "626d51e1-908f-4661-97e7-af5745e8ee35",
+          "title": "little trip around the world"
+        },
+        {
+          "id": "f961e5e2-320f-45e2-b0e3-fa07dc7646b1",
+          "title": "Melody in scape"
+        },
+        {
+          "id": "bb7b0158-22df-4655-8938-50a3bd871f1c",
+          "title": "”Your” HOME TOWN"
+        },
+        {
+          "id": "ea53f261-799d-4305-81cb-00cd60e8e97a",
+          "title": "fruity love"
+        },
+        {
+          "id": "44f6239f-d26d-4434-9808-4d9b61743827",
+          "title": "夜に輝く星座のように"
+        },
+        {
+          "id": "ecfe16dd-26f7-4fe4-8f1e-05ddd519c4eb",
+          "title": "秘密のメモリーズ"
+        },
+        {
+          "id": "f0d13b98-3ec6-492c-a0bb-cae8f6a4444b",
+          "title": "たしかな足跡"
+        },
+        {
+          "id": "a90107e2-e5a0-41ff-b7b4-dbc10b8ce69e",
+          "title": "Understand? Understand!"
+        },
+        {
+          "id": "3a5f3418-8fde-4478-a815-a8694de7ad0a",
+          "title": "ジャングル☆パーティー"
+        },
+        {
+          "id": "cfdb82e5-7aa8-4eec-8b87-2b8d93752292",
+          "title": "Beat the World!!!"
+        },
+        {
+          "id": "eb00d7ee-8b6d-433f-829c-3915ba5c0988",
+          "title": "Emergence Vibe"
+        },
+        {
+          "id": "4a72ec79-4ac3-4731-b832-f62fe35aff34",
+          "title": "Dreamscape"
+        }
+      ]
+    },
+    {
+      "release_id": "fba69043-f75d-49ec-807a-4e870b84878c",
+      "release_title": "THE IDOLM@STER LIVE THE@TER FORWARD Instrumental",
+      "kind": "instrumental",
+      "source_urls": [
+        "https://shop.asobistore.jp/products/detail/178893-00-00-00",
+        "https://www.lantis.jp/imas/extra_log2022_1.html"
+      ],
+      "recordings": [
+        {
+          "id": "81c25dd1-3e4d-44a6-ac5f-534be15a4846",
+          "title": "ランニング・ハイッ"
+        },
+        {
+          "id": "3503cfd6-1fb4-4fb8-aa38-2dfca8091430",
+          "title": "ゲキテキ!ムテキ!恋したい!"
+        },
+        {
+          "id": "f17881b3-b868-48ac-b23c-2102b1bffbcb",
+          "title": "Bonnes! Bonnes!! Vacances!!!"
+        },
+        {
+          "id": "575de60e-9cfe-4788-921e-ab8ac1978e5e",
+          "title": "NO CURRY NO LIFE"
+        },
+        {
+          "id": "e43e51b7-dadf-4cc6-8e24-71ae3b8e0433",
+          "title": "サンリズム・オーケストラ♪"
+        },
+        {
+          "id": "eb35e024-9596-47f7-b21e-0953e8213d5d",
+          "title": "Raise the FLAG"
+        },
+        {
+          "id": "360033d0-0d05-40a4-8f82-a0fc60df1113",
+          "title": "P.S I Love You"
+        },
+        {
+          "id": "52de78a8-18a3-42dd-871e-67a8812adb95",
+          "title": "プリムラ"
+        },
+        {
+          "id": "06b5370d-7c32-4d48-bfde-c83ccf18fc0c",
+          "title": "待ちぼうけのLacrima"
+        },
+        {
+          "id": "1e723012-d4ea-416f-8202-12073d64764e",
+          "title": "brave HARMONY"
+        },
+        {
+          "id": "6e199ff3-e224-41b5-9b79-6cba622633f7",
+          "title": "リフレインキス"
+        },
+        {
+          "id": "91c303e3-202f-4d45-aaf7-626918a76eea",
+          "title": "Sweet Sweet Soul"
+        },
+        {
+          "id": "0064c6a7-4497-4be3-b54c-9a874f45f449",
+          "title": "メメント?モメント♪ルルルルル☆"
+        },
+        {
+          "id": "3a382009-4140-4949-a2c6-a79d26736e6c",
+          "title": "永遠の花"
+        },
+        {
+          "id": "4ecc905a-2c5b-4e23-815e-66a4a8cc159c",
+          "title": "Starry Melody"
+        }
+      ]
+    },
+    {
+      "release_id": "b1f8fe4b-9d34-4688-a3b9-82518a9bf661",
+      "release_title": "THE IDOLM@STER MILLION THE@TER GENERATION Instrumental 01",
+      "kind": "instrumental",
+      "source_urls": [
+        "https://catalog.bandainamcomusiclive.co.jp/release/71531/"
+      ],
+      "recordings": [
+        {
+          "id": "dbedf147-bd9a-469b-bc27-1ffa3368b3c8",
+          "title": "Brand New Theater!"
+        },
+        {
+          "id": "ecea85ed-07cd-4d5c-ba0a-0e14ebd0466d",
+          "title": "インヴィンシブル・ジャスティス"
+        },
+        {
+          "id": "788c5a8b-8361-4ae0-8586-7162300c0218",
+          "title": "FairyTaleじゃいられない"
+        },
+        {
+          "id": "c8448326-bbbb-4f16-be7a-796fe4ed213f",
+          "title": "Angelic Parade♪"
+        },
+        {
+          "id": "1d9ca978-e302-48a9-8fd2-b2773cfa678a",
+          "title": "Princess Be Ambitious!!"
+        },
+        {
+          "id": "5028d3ab-7167-4a9a-9bb2-43fe5d9e1229",
+          "title": "LEADER!!"
+        }
+      ]
+    },
+    {
+      "release_id": "61242762-9b92-4877-8596-fbf77cf180e0",
+      "release_title": "THE IDOLM@STER MILLION THE@TER GENERATION Instrumental 02",
+      "kind": "instrumental",
+      "source_urls": [
+        "https://catalog.bandainamcomusiclive.co.jp/release/71532/"
+      ],
+      "recordings": [
+        {
+          "id": "0c213552-7d22-49ed-bfc4-8ef09360ffac",
+          "title": "昏き星、遠い月"
+        },
+        {
+          "id": "14f87566-ae18-4fc8-81ad-332bb3d2bb7a",
+          "title": "Everlasting"
+        },
+        {
+          "id": "f137ae44-7f43-48db-b468-ba52f84e7908",
+          "title": "虹色letters"
+        },
+        {
+          "id": "abb9373d-a757-4737-997b-7e439f389c9c",
+          "title": "想い出はクリアスカイ"
+        },
+        {
+          "id": "cecc63df-5cb6-4e11-b17c-dc8e406d28ef",
+          "title": "ZETTAI × BREAK!! トゥインクルリズム"
+        },
+        {
+          "id": "b890a369-dbe0-4a4f-994e-00685d9ee967",
+          "title": "Tomorrow Program"
+        },
+        {
+          "id": "7d85cf93-0f03-45d2-9f51-12c7ca793aec",
+          "title": "Melty Fantasia"
+        },
+        {
+          "id": "0bb61f0d-f56b-4b3a-8f05-e558a1e0e60d",
+          "title": "I.D ～EScape from Utopia～"
+        },
+        {
+          "id": "90851e62-5ac3-4905-95a7-8c26d15b5733",
+          "title": "RED ZONE"
+        },
+        {
+          "id": "da5d02ed-174c-4210-a922-0af1f23759b9",
+          "title": "咲くは浮世の君花火"
+        },
+        {
+          "id": "877bd540-d80c-450b-8fad-be82c30a025c",
+          "title": "BORN ON DREAM! ～HANABI☆NIGHT～"
+        }
+      ]
+    },
+    {
+      "release_id": "c1fd50e6-cc55-42a4-96f7-26345bd1ea03",
+      "release_title": "THE IDOLM@STER MILLION THE@TER GENERATION Instrumental 03",
+      "kind": "instrumental",
+      "source_urls": [
+        "https://catalog.bandainamcomusiclive.co.jp/release/71533/"
+      ],
+      "recordings": [
+        {
+          "id": "247f212f-1208-4f63-a256-d0403ce23235",
+          "title": "ハーモニクス"
+        },
+        {
+          "id": "c0eacaec-7423-4608-845e-a73b0b631f09",
+          "title": "餞の鳥"
+        },
+        {
+          "id": "a435e751-af98-4db0-9ad6-381eec9a8a70",
+          "title": "ハルマチ女子"
+        },
+        {
+          "id": "1b1d2bbc-57bf-44db-8c9e-38df04a06703",
+          "title": "彼氏になってよ。"
+        },
+        {
+          "id": "38d2a62d-1f11-468a-ba91-75a60b80d802",
+          "title": "だってあなたはプリンセス"
+        },
+        {
+          "id": "e4480e75-bb11-4094-96c8-fc921e7a3e52",
+          "title": "ミラージュ・ミラー"
+        },
+        {
+          "id": "000a5c4f-6d7a-4e37-8d8c-7787c08f5927",
+          "title": "月曜日のクリームソーダ"
+        },
+        {
+          "id": "741a5e00-f2aa-4e8c-9acf-579c35c56b9c",
+          "title": "I did+I will"
+        },
+        {
+          "id": "b97b8abf-7a06-4378-b886-c7fcbd256509",
+          "title": "ピコピコIIKO! インベーダー"
+        },
+        {
+          "id": "3d008788-517b-4469-a85a-135eb16eb955",
+          "title": "Get lol! Get lol! SONG"
+        },
+        {
+          "id": "445f16c8-ac61-4063-bce3-cee6b65f7bc1",
+          "title": "Episode. Tiara"
+        },
+        {
+          "id": "604e37de-fca6-4d57-878e-7596a1f7358a",
+          "title": "ギブミーメタファー"
+        }
+      ]
+    },
+    {
+      "release_id": "d57fd28d-a3b5-4b5b-b434-1291ef98c5f7",
+      "release_title": "THE IDOLM@STER THE@TER ABC Instrumental",
+      "kind": "instrumental",
+      "source_urls": [
+        "https://a-onstore.jp/item/item-1000225965/",
+        "https://www.lantis.jp/imas/extra_log2022_1.html"
+      ],
+      "recordings": [
+        {
+          "id": "8061cc87-946a-42cd-bfac-835bae8b279c",
+          "title": "創造は始まりの風を連れて"
+        },
+        {
+          "id": "72f7e765-98f2-43b8-8199-6ed38359758c",
+          "title": "俠気乱舞"
+        },
+        {
+          "id": "a34032d8-37b9-4850-a7d2-1b4689223264",
+          "title": "赤い世界が消える頃"
+        },
+        {
+          "id": "415354f0-2812-4bda-8af8-171120f1e640",
+          "title": "ビッグバンズバリボー!!!!!"
+        },
+        {
+          "id": "015734ec-9b55-4c98-be41-efd2646b9bd7",
+          "title": "オーディナリィ・クローバー"
+        },
+        {
+          "id": "6b611a54-69e5-4ee7-a607-e0d4f0779cc1",
+          "title": "ラスト・アクトレス"
+        },
+        {
+          "id": "f8895c8f-6d00-4d83-a29b-53bbb561f584",
+          "title": "Girl meets Wonder"
+        },
+        {
+          "id": "6d324e6d-a52d-4e80-a5c7-b1cdf3d6e722",
+          "title": "World Changer"
+        },
+        {
+          "id": "67aaeee8-e015-4d5c-bd86-8b740b14e156",
+          "title": "クルリウタ"
+        },
+        {
+          "id": "23524798-995a-4d47-b15f-ae225cfe2bb9",
+          "title": "DIAMOND DAYS"
+        }
+      ]
+    },
+    {
+      "release_id": "bdf4b5f5-739e-4f4b-9181-e01b75b05a0e",
+      "release_title": "THE IDOLM@STER ANIM@TION MASTER 02",
+      "kind": "instrumental",
+      "source_urls": [
+        "https://columbia.jp/idolmaster/COCX-36899.html"
+      ],
+      "recordings": [
+        {
+          "id": "7010155e-3b5b-4a24-a096-f133240e473d",
+          "title": "レッスン"
+        },
+        {
+          "id": "3b50fe52-7b57-4372-8c9f-3459b51f9e82",
+          "title": "少女たち"
+        },
+        {
+          "id": "2ca601e3-9101-4d5f-9b4c-112be7322c2a",
+          "title": "友情"
+        },
+        {
+          "id": "6b3ac2ae-b66d-4c86-840f-63652a67a42c",
+          "title": "うれしい気持ち"
+        },
+        {
+          "id": "83f0551f-cae9-41dd-af9a-c134e2dbe10f",
+          "title": "なかよし"
+        },
+        {
+          "id": "387ac696-e49b-4fdf-8291-6222e99e8d5f",
+          "title": "夢見るアイドル"
+        },
+        {
+          "id": "6476c78f-74c6-4bdc-9694-5d117abf31a9",
+          "title": "気乗りしない…"
+        },
+        {
+          "id": "d7a94c31-a225-411a-8c95-57f77b7cba36",
+          "title": "明るく楽しく"
+        },
+        {
+          "id": "a515cd9a-b7b0-4cd5-a368-92b3d0ecf4e9",
+          "title": "多忙な日々"
+        },
+        {
+          "id": "3f847b78-a969-49f0-b447-5fea4e205b1a",
+          "title": "ゲンキです"
+        },
+        {
+          "id": "b6c00ed0-cd01-4f11-ac4f-98d105554784",
+          "title": "いつもの空"
+        }
+      ]
+    },
+    {
+      "release_id": "d3fce05e-2b38-43f5-b4dc-da71303c6a09",
+      "release_title": "THE IDOLM@STER ANIM@TION MASTER 03",
+      "kind": "instrumental",
+      "source_urls": [
+        "https://columbia.jp/idolmaster/COCX-36900.html"
+      ],
+      "recordings": [
+        {
+          "id": "d7866904-d4a6-4769-98a5-ef8afc247144",
+          "title": "真剣なまなざし"
+        },
+        {
+          "id": "031b9a34-574a-4a2e-8ef5-b43d82cc56da",
+          "title": "プロデューサー、走る!"
+        },
+        {
+          "id": "4bff46e5-86fc-466d-9e89-665aa7bbbc51",
+          "title": "いつも明るい"
+        },
+        {
+          "id": "6423a5d6-a0b2-440b-8259-8f9ebcbe9d60",
+          "title": "心情"
+        },
+        {
+          "id": "e8dc2b27-b55d-4b1f-9e01-79653ebdaac8",
+          "title": "緊迫感"
+        },
+        {
+          "id": "5f6414d4-d55a-4e34-a462-90299cec16fb",
+          "title": "ガンバル…"
+        },
+        {
+          "id": "381ec957-a499-4009-b9da-897bb916a7b2",
+          "title": "トラブル"
+        },
+        {
+          "id": "6c44e42b-4ebf-43ba-83e7-07ba28b66fbd",
+          "title": "感情ダウン"
+        },
+        {
+          "id": "4813df96-5e08-4b68-a0cc-03ca8e7138a7",
+          "title": "THE IDOLM@STER (BGM Version)"
+        },
+        {
+          "id": "48655342-f7db-4a87-bb1c-0f5a92257adb",
+          "title": "がんばるアイドルたち"
+        }
+      ]
+    },
+    {
+      "release_id": "f2a992ff-08b0-4b40-a77c-2c83438b1f0d",
+      "release_title": "THE IDOLM@STER ANIM@TION MASTER 05",
+      "kind": "instrumental",
+      "source_urls": [
+        "https://columbia.jp/idolmaster/COCX-36901.html"
+      ],
+      "recordings": [
+        {
+          "id": "b57a610f-0b77-413d-beb6-e8abb56be88c",
+          "title": "今日も元気!"
+        },
+        {
+          "id": "1af63e8f-7a09-47c5-b98b-4de9e5d25918",
+          "title": "GO MY WAY!! (BGM VERSION)"
+        }
+      ]
+    },
+    {
+      "release_id": "d5dccf20-bac0-4bf4-b711-eac3c4ae7125",
+      "release_title": "THE IDOLM@STER ANIM@TION MASTER 06",
+      "kind": "instrumental",
+      "source_urls": [
+        "https://columbia.jp/idolmaster/COCX-36902.html"
+      ],
+      "recordings": [
+        {
+          "id": "cce92a10-a84e-4a6d-9231-2ddc97731d34",
+          "title": "過去の出来事"
+        },
+        {
+          "id": "7910f423-1e2c-445c-97ea-4905185abc95",
+          "title": "一生懸命"
+        },
+        {
+          "id": "f896da3b-e6d1-47ad-9db2-6afd89d8c3fa",
+          "title": "Jupiterのテーマ その1"
+        },
+        {
+          "id": "b8074f9f-1d77-434f-8a02-002e6570972a",
+          "title": "Jupiterのテーマ その2"
+        },
+        {
+          "id": "8b3a017b-64ba-49e0-9001-d53ce528e0a5",
+          "title": "ゆったりのんびり"
+        },
+        {
+          "id": "98e51d2f-d1ce-48c9-b4c8-e5c8b644c389",
+          "title": "みんなとの…"
+        }
+      ]
+    },
+    {
+      "release_id": "4e05733f-6888-4598-9c72-77b35a7dd86a",
+      "release_title": "THE IDOLM@STER ANIM@TION MASTER 07",
+      "kind": "instrumental",
+      "source_urls": [
+        "https://columbia.jp/idolmaster/COCX-36903.html"
+      ],
+      "recordings": [
+        {
+          "id": "a9d10c92-a975-4898-bfa5-b42bc21e0467",
+          "title": "春香の葛藤"
+        },
+        {
+          "id": "ac337637-1ddd-464f-874a-b33fdc94159f",
+          "title": "The world is all one !!（BGM VERSION)"
+        },
+        {
+          "id": "0feb1896-81ca-4ee3-860c-116c33613e1b",
+          "title": "relations (BGM VERSION)"
+        },
+        {
+          "id": "f2107e71-9e2d-479a-9991-b3f7e3ce9fa0",
+          "title": "激励"
+        }
+      ]
+    },
+    {
+      "release_id": "dc601d3a-e407-4c03-80d1-0ff2da42416e",
+      "release_title": "THE IDOLM@STER CINDERELLA GIRLS U149 ANIMATION MASTER 07 ORIGINAL SOUNDTRACK",
+      "kind": "instrumental",
+      "source_urls": [
+        "https://columbia.jp/prod-info/COCX-42151-3/",
+        "https://columbia.jp/idolmaster/COCX-42151.html"
+      ],
+      "alternate_releases": [
+        {
+          "id": "35319e59-81da-4c92-b6a2-cb8cd36e615a",
+          "title": "THE IDOLM@STER CINDERELLA GIRLS U149 ANIMATION MASTER 07 ORIGINAL SOUNDTRACK"
+        }
+      ],
+      "recordings": [
+        {
+          "id": "9c2d0ef5-da2f-409f-8d63-f84c0d28c98b",
+          "title": "U149メインテーマ"
+        },
+        {
+          "id": "3faf688a-1d74-4a0e-8948-fee74e0a96ca",
+          "title": "夏休み"
+        },
+        {
+          "id": "49baf2be-318d-4013-866d-7f4d9cd207a6",
+          "title": "キックオフ！"
+        },
+        {
+          "id": "ebbb43bc-b32e-489f-9b25-6922d63af8e5",
+          "title": "ほんわか"
+        },
+        {
+          "id": "8ea147fe-94e6-43d4-8ac4-84e54f36eaf8",
+          "title": "エンジョイカンバセーション"
+        },
+        {
+          "id": "bb96b17b-8376-4597-9ac8-015d7261b3dc",
+          "title": "うきうき"
+        },
+        {
+          "id": "316377d7-f010-41dd-8d0a-425df1f461b2",
+          "title": "幸せな昼下がり"
+        },
+        {
+          "id": "536a9266-7eca-4894-bfea-8661d95ce2f4",
+          "title": "お昼寝"
+        },
+        {
+          "id": "9a5bc613-8cdc-464b-b37b-0bddb9485f48",
+          "title": "元気いっぱい"
+        },
+        {
+          "id": "5164c202-ee53-41cc-ac00-625fa1b7b99a",
+          "title": "ワクワクするね！"
+        },
+        {
+          "id": "35851751-3127-4f0f-bace-604d8057c74d",
+          "title": "かえりみち"
+        },
+        {
+          "id": "0e6da526-c56f-42ce-8396-c36cf33241e4",
+          "title": "こころの中"
+        },
+        {
+          "id": "71a02f17-5dbd-4077-95ba-c449d1e4e183",
+          "title": "ちょっぴり不安"
+        },
+        {
+          "id": "ba9c6e80-b496-4001-8592-e6c98b17fa7d",
+          "title": "ゆめのせかい"
+        },
+        {
+          "id": "c1528a0d-11a7-479d-adab-2af10f01fa4b",
+          "title": "むかむか"
+        },
+        {
+          "id": "ff4ce6c6-ceac-4112-b4f0-fe338eacf433",
+          "title": "ドキドキ…"
+        },
+        {
+          "id": "b02fa74e-49b5-4964-aa97-34a046115ff5",
+          "title": "せーの!"
+        },
+        {
+          "id": "86e68710-0251-4d92-8a7a-9062d4397c66",
+          "title": "憧れ"
+        },
+        {
+          "id": "e1fc90b8-0e58-4d5c-af05-99400a428d44",
+          "title": "ドタバタバタ"
+        },
+        {
+          "id": "678d77d1-6755-4fc5-a39c-b7a5d0712b6d",
+          "title": "どうしようか"
+        },
+        {
+          "id": "62c535cf-595e-410d-be20-6a91a00c76e3",
+          "title": "マズイ…"
+        },
+        {
+          "id": "eeab99f4-f0bc-4661-837a-a485bd45fd3a",
+          "title": "いそげ!"
+        },
+        {
+          "id": "bd7bca82-b387-4ea4-8623-584ad83df051",
+          "title": "to you for me -BGM ver.-"
+        },
+        {
+          "id": "f5a673c9-ce0a-47bf-8097-f1e4527b9034",
+          "title": "愛の讃歌 -BGM ver.-"
+        },
+        {
+          "id": "25fd3d49-6666-4481-97da-a6c7008d9b8c",
+          "title": "GEMSTONE -BGM ver.-"
+        },
+        {
+          "id": "d731b32a-8629-4bf2-889b-2de9b60445d9",
+          "title": "ACE -BGM ver.-"
+        },
+        {
+          "id": "c7916fae-44c0-4d7a-865a-094635dbc47e",
+          "title": "アイム・ア・リトル・プリンセス 〜お星さまにお願い〜 -BGM ver.-"
+        },
+        {
+          "id": "e7cdeb3f-b622-4bdb-8d98-719f852a2e2f",
+          "title": "Romantic Now -BGM ver.-"
+        },
+        {
+          "id": "c93ccd9c-d4d9-4675-bca6-f0035ae7d219",
+          "title": "あこがれステッチ -BGM ver.-"
+        },
+        {
+          "id": "523ac4c0-c4fe-4b9a-bd49-598db0205c0f",
+          "title": "みんなのきもち -BGM ver.-"
+        },
+        {
+          "id": "b210da60-bdda-448b-9dea-9de461c51462",
+          "title": "ひまわりマークをさがせ！ -BGM ver.-"
+        },
+        {
+          "id": "b1448337-ebe0-4389-8a7f-3b362013be47",
+          "title": "ほんとうの気持ち"
+        },
+        {
+          "id": "de717c63-ec34-4c3a-bc09-87cdc8027639",
+          "title": "思いやり"
+        },
+        {
+          "id": "8ea5b7bf-1e0e-4de5-974b-2a0127bbfd5d",
+          "title": "アイドルデビューへの想い"
+        },
+        {
+          "id": "fc72d996-fafa-436d-9eb2-4eb4eda2a642",
+          "title": "がむしゃらに"
+        },
+        {
+          "id": "fce78ca4-901b-4a76-b60d-d41207e82da4",
+          "title": "悲しみの音"
+        },
+        {
+          "id": "44ad8d8e-188a-4950-9301-39d3123a7eb4",
+          "title": "すれ違い…"
+        },
+        {
+          "id": "15775b85-8c7f-4a50-b823-dc90ae03cc8a",
+          "title": "寂しさのその先に"
+        },
+        {
+          "id": "7e29e5db-19eb-4f97-bfa9-5d1e36a185e7",
+          "title": "ワクワクのその先に"
+        },
+        {
+          "id": "60a41a74-e199-4308-b737-d04ac2d0049c",
+          "title": "胸の奥の不安、葛藤"
+        },
+        {
+          "id": "fada2667-1bcb-4efe-95af-3243a0092957",
+          "title": "ひとりぼっち"
+        },
+        {
+          "id": "5fb6ece4-d051-45c0-a11b-9407d7e4c075",
+          "title": "目覚めよ！"
+        },
+        {
+          "id": "0028f7d1-4bdb-4b23-95d6-e675d56d5bb0",
+          "title": "メインテーマ -バラードver.-"
+        },
+        {
+          "id": "4e49358d-8c1a-4ae1-9dd0-8af4e6dac705",
+          "title": "キラキラの粒"
+        },
+        {
+          "id": "db7e1d3a-c3e0-42e7-866d-4b3bac4c58e9",
+          "title": "たくらみ"
+        },
+        {
+          "id": "24a559dc-e5ff-4bc6-8589-b3e7b19bbde1",
+          "title": "焦り"
+        },
+        {
+          "id": "cecc1d35-44ac-4dfc-a063-00001edb7518",
+          "title": "笑顔でバイバイ"
+        },
+        {
+          "id": "67aa9ea2-bb60-4c6a-a4d9-52570b6afbdc",
+          "title": "Shine In The Sky☆ -ピアノver.-"
+        },
+        {
+          "id": "91b5b3ac-cdc7-4014-a1cb-5828cda4c2cb",
+          "title": "グッデイ・グッナイ -アコースティックギターver.-"
+        }
+      ]
+    },
+    {
+      "release_id": "0ec05fad-f3fa-4e08-924a-b157e0ca332e",
+      "release_title": "THE IDOLM@STER CINDERELLA GIRLS ANIMATION PROJECT ORIGINAL SOUNDTRACK",
+      "kind": "instrumental",
+      "source_urls": [
+        "https://columbia.jp/prod-info/COZX-1151-4/",
+        "https://columbia.jp/idolmaster/COZX-1151.html"
+      ],
+      "recordings": [
+        {
+          "id": "53925191-b831-4931-9813-ecf5aa3ddef0",
+          "title": "Theme of Cinderella Girls (M01A)"
+        },
+        {
+          "id": "ea93620d-5ac6-48e8-b56e-6de7060e39e9",
+          "title": "Theme of Cinderella Girls (TypeB) (M01B)"
+        },
+        {
+          "id": "44d043cc-5c39-4473-9cd0-1630de232c3b",
+          "title": "Primula Julian (M01C)"
+        },
+        {
+          "id": "053ec017-c62a-498d-9ce9-a33e5816a1f8",
+          "title": "Anemone (M02)"
+        },
+        {
+          "id": "87108d21-e04f-4eb7-8948-25a946ca21f9",
+          "title": "Carriage for Cutie (M03)"
+        },
+        {
+          "id": "f4ae34e4-e297-4eb9-9c5d-36d3c5c4c66a",
+          "title": "Passione (M04)"
+        },
+        {
+          "id": "f2f07c86-eee2-4ef4-ba81-99de8105d6e8",
+          "title": "April Tango (M05)"
+        },
+        {
+          "id": "a86ea8f1-233e-47eb-8baf-095975e57c2a",
+          "title": "Waltz for Dreamers (M06)"
+        },
+        {
+          "id": "dc61147a-11c2-4af1-bb8d-3eede89168a3",
+          "title": "Puzzling Pizzicato (M07)"
+        },
+        {
+          "id": "f2c5dd7c-e451-4c3d-84f1-fef060dd546e",
+          "title": "The Reversible Heart (M08)"
+        },
+        {
+          "id": "632829f2-6cbc-4a75-9295-4f09104ea4b8",
+          "title": "Motif\"Awake\" (M09)"
+        },
+        {
+          "id": "9de1365d-a708-479d-a6ef-275bcf0a32d8",
+          "title": "The Second Line of MIO (M10A)"
+        },
+        {
+          "id": "9e279f6d-72df-44ca-a640-5eccdba89ee0",
+          "title": "The Second Line of MIO (TypeB) (M10B)"
+        },
+        {
+          "id": "6b0721e0-1eca-49bd-9ab5-030f73b6c8ce",
+          "title": "Count It Basis! (M11)"
+        },
+        {
+          "id": "2d5144f1-60dd-419b-9526-a96ff309ede0",
+          "title": "Someone Behind the Door (M12)"
+        },
+        {
+          "id": "c44de470-025d-4e6f-a351-886009c5ffb6",
+          "title": "RANKO's Grimoire (M13A)"
+        },
+        {
+          "id": "127730a6-34a1-42f0-a60f-72d286ab5ca6",
+          "title": "RANKO's Grimoire (M13B)"
+        },
+        {
+          "id": "7253fc9a-47b3-4215-9690-ff2784313db2",
+          "title": "Eight Days OFF A Week (M14A)"
+        },
+        {
+          "id": "611e12fd-d305-4090-b12f-92a71b382282",
+          "title": "Eight Days OFF A Week (TypeB) (M14B)"
+        },
+        {
+          "id": "5419c14b-2478-4f13-bd92-a88682c947a8",
+          "title": "A Demon in Shibuya (M15A)"
+        },
+        {
+          "id": "ca2fbefd-f138-439b-85d0-8a0e91eb66d2",
+          "title": "A Demon in Shibuya (TypeB) (M15B)"
+        },
+        {
+          "id": "350faa42-b64f-4e3a-8e08-9224e45c155b",
+          "title": "The Dotted Anxiety (M16)"
+        },
+        {
+          "id": "e672d036-4823-4167-a7c9-e537685888da",
+          "title": "Trial and Error (M17A)"
+        },
+        {
+          "id": "2f940c4e-984d-4497-859f-827845036f83",
+          "title": "1159 Tinnitus (M18)"
+        },
+        {
+          "id": "24371626-c4bb-479a-9d68-c1b8e4d95ddd",
+          "title": "Just Curious. (M19)"
+        },
+        {
+          "id": "329e320e-a4b7-401f-a041-eac837a0199f",
+          "title": "Honesty (M20)"
+        },
+        {
+          "id": "55734d0c-107b-40a2-a2cb-15e61287c944",
+          "title": "Dress! Dress! Dress! (M21)"
+        },
+        {
+          "id": "7a5c296f-8691-4a06-838d-088571cf8f4b",
+          "title": "The Girls Etiquette (M22)"
+        },
+        {
+          "id": "4509acf5-ba1f-455a-bed2-0fca86fa354c",
+          "title": "Mondo Monday (M23)"
+        },
+        {
+          "id": "440753de-6b04-4c93-849f-318bb79eb2a6",
+          "title": "Sunday Montuno (M24)"
+        },
+        {
+          "id": "e881698b-7012-435a-859a-32a14e69f902",
+          "title": "The Dancing Glass Slippers (M25)"
+        },
+        {
+          "id": "7127de79-2d6f-41b0-a83a-48ebe54009ce",
+          "title": "Impatience (M26)"
+        },
+        {
+          "id": "9e51677f-eb75-4650-a886-a85b5eda5a3c",
+          "title": "The Days of Effort (M27)"
+        },
+        {
+          "id": "2b70fb41-883e-4e83-9038-7cb511beead7",
+          "title": "Your Smile (M28)"
+        },
+        {
+          "id": "f5b43fa6-0a12-4f56-ad06-4842a7f3443f",
+          "title": "Tears of Joy (M29)"
+        },
+        {
+          "id": "c7ec3b24-f033-4353-a5a8-ccd704542927",
+          "title": "The Cat Ears' Opinions (M30A)"
+        },
+        {
+          "id": "480374d8-25ce-41ec-bb88-a8f0ccd2c42c",
+          "title": "The Cat Ears' Opinions (TypeB) (M30B)"
+        },
+        {
+          "id": "b364eeb3-24fd-45bb-b7fa-9b8d9010f6cf",
+          "title": "Ambiguous Dialogue (M31A)"
+        },
+        {
+          "id": "5d26ee7e-c170-426a-880b-8d310e0e8390",
+          "title": "Ambiguous Dialogue (TypeB) (M31B)"
+        },
+        {
+          "id": "f23f64d5-65a1-4d76-8d2a-1cc953480122",
+          "title": "Tut-Tut Blues (M32A)"
+        },
+        {
+          "id": "7aed1b31-469b-4577-9edb-7168d2dfd48f",
+          "title": "Why Don't You Be a Cinderella? (M33A)"
+        },
+        {
+          "id": "4b5266ae-c599-4945-838f-a1aac54e66a7",
+          "title": "Why Don't You Be a Cinderella? (TypeB) (M33B)"
+        },
+        {
+          "id": "0aa69455-3151-4c4c-83a9-8691dd93e866",
+          "title": "Flower Language (M34A)"
+        },
+        {
+          "id": "55c5ba94-d765-4cc6-a603-aa7a4c0f426e",
+          "title": "Flower Language (TypeB) (M34B)"
+        },
+        {
+          "id": "727a81c1-ee68-4111-b70b-2a514293a95c",
+          "title": "THE TWO SELFIE MONSTERS (M35)"
+        },
+        {
+          "id": "9215b49f-4019-4ca5-a936-caabc7d00f71",
+          "title": "Fortunately, Ordinary (M36)"
+        },
+        {
+          "id": "2099db4d-1402-404b-804d-98758bef6f1a",
+          "title": "Bedtime Nocturne (M37A)"
+        },
+        {
+          "id": "e510a408-debc-45d0-b281-72dfdba1f4c4",
+          "title": "Teatime (in the Magic Hour) (M38)"
+        },
+        {
+          "id": "0e409401-47ed-46ac-8c32-f3e3babb4c98",
+          "title": "All Right in the End (M39)"
+        },
+        {
+          "id": "420e1b22-80cf-4ef2-80ee-11eb4ebd1ea5",
+          "title": "Never Was a Cloudy Twilight (M40)"
+        },
+        {
+          "id": "d50fcad7-5143-4810-b233-6cbaf2481276",
+          "title": "Sly & The Girls Jewelries (M41)"
+        },
+        {
+          "id": "87357303-c35e-4a20-bf64-a260d20778ea",
+          "title": "Thanks For Our Work (M42)"
+        },
+        {
+          "id": "c48310a9-ef19-493a-9e95-a926ad43cf9a",
+          "title": "See You (M43)"
+        },
+        {
+          "id": "f09e56d4-b9a5-4763-a4d7-561ab5a2aebc",
+          "title": "The Beautiful Creeps (M44)"
+        },
+        {
+          "id": "e499b95b-8b09-4e15-b9c0-502847c2a465",
+          "title": "Emergency (M45)"
+        },
+        {
+          "id": "6015180b-e5b4-4846-869c-4db82456c4d6",
+          "title": "Heartbeats (M46)"
+        },
+        {
+          "id": "c65eaa6b-e75c-44f6-8a76-bc94902f4d8d",
+          "title": "Nothing's Gonna Be Alright (M48)"
+        },
+        {
+          "id": "02b3186e-16fe-4f35-b2b1-f5f871e7561f",
+          "title": "A Lost Princess (M49)"
+        },
+        {
+          "id": "b05665dc-da39-4cc2-9556-c8dbbd86580e",
+          "title": "Eyecatch (TypeA) (M50)"
+        },
+        {
+          "id": "11b8aa77-2ee2-428d-bc19-4b2d4a7a77a7",
+          "title": "Eyecatch (TypeB) (M51)"
+        },
+        {
+          "id": "1e12bd21-1dde-4ac9-811f-6ddea3805b59",
+          "title": "Eyecatch (TypeC) (M52)"
+        },
+        {
+          "id": "ed8e2fc8-3daa-447f-bc0a-b35a1bd9fac6",
+          "title": "Regal No.346 (M60A)"
+        },
+        {
+          "id": "cf52236b-56f5-4ec5-922f-14081c6ae04b",
+          "title": "Erosional Authority (M60B)"
+        },
+        {
+          "id": "c55cd0d1-02a2-44e3-8878-31606739a84f",
+          "title": "Thistle Castle (M60C)"
+        },
+        {
+          "id": "52d6d1db-5c8b-4a71-87d5-e7cec9b73763",
+          "title": "A Ripple of Courage (M61)"
+        },
+        {
+          "id": "b077acdc-459e-46e3-847f-8a81329ac9c0",
+          "title": "Starting Over (M62)"
+        },
+        {
+          "id": "f0aa079f-a7b7-452f-810b-bdc7113503ac",
+          "title": "Serendipity (M63)"
+        },
+        {
+          "id": "0ab866d8-d5f8-41b4-8375-c7b5a4126ddb",
+          "title": "Elder Sisters' Pain (M64)"
+        },
+        {
+          "id": "9eb08ac8-92a7-4df7-842f-33639eb4ce4d",
+          "title": "If So (or Not So) (M65)"
+        },
+        {
+          "id": "949f1f03-2f3b-41fb-b69b-fb46680925e1",
+          "title": "Wishful Thinking (M66)"
+        },
+        {
+          "id": "5eca212f-3f2b-441a-a3fe-33e9e59166b5",
+          "title": "Playing Spies (M67)"
+        },
+        {
+          "id": "b12ef4e4-31a3-4612-b703-f36860b78251",
+          "title": "TOTOKIRA Kindergarten (M68)"
+        },
+        {
+          "id": "65359325-d281-4c24-bc29-84f5dd617d46",
+          "title": "SHINSEN Girls (Ep26)"
+        },
+        {
+          "id": "949b5e9a-79ef-43d9-85f7-abb32450d909",
+          "title": "お願い!シンデレラ (BGM Version) (C01)"
+        },
+        {
+          "id": "ea7cfc97-1df0-43dc-9054-1cf85886c2a8",
+          "title": "メッセージ (BGM Version) (C02)"
+        },
+        {
+          "id": "7a312f6b-e0d6-4044-89e5-9da9aa0d5bc4",
+          "title": "ススメ☆オトメ 〜jewel parade〜 (BGM Version) (C03)"
+        },
+        {
+          "id": "bb373c15-6719-48b5-be2f-c018bce5205a",
+          "title": "We're the friends! (BGM Version) (C04)"
+        },
+        {
+          "id": "e982418b-c9be-44df-8058-7939d3a3ba96",
+          "title": "Nation Blue (BGM Version) (C05)"
+        },
+        {
+          "id": "68f3e6ac-1f4e-4b1f-8ce6-b070ae708cea",
+          "title": "Orange Sapphire (BGM Version) (C06)"
+        },
+        {
+          "id": "cf298891-366b-491c-b772-1dd8c7ee5ecd",
+          "title": "アタシポンコツアンドロイド (BGM Version) (C07)"
+        },
+        {
+          "id": "9498d283-dc31-4d96-b28d-d3140ff36a73",
+          "title": "夕映えプレゼント (BGM Version) (C09)"
+        },
+        {
+          "id": "aed62d29-5f4e-4fd2-bd30-bb5f0e673be9",
+          "title": "できたてEvo! Revo! Generation! (BGM Version) (C10)"
+        },
+        {
+          "id": "bcf59512-a4b3-4ec4-9e84-8bef709fe0ef",
+          "title": "オルゴールの小箱 (BGM Version) (C11)"
+        },
+        {
+          "id": "9cfd7a7f-a395-4ee6-bb31-c73e80eb3108",
+          "title": "輝く世界の魔法 (BGM Version) (C15)"
+        },
+        {
+          "id": "76140322-4eab-434d-8289-23eb32dec64d",
+          "title": "Never say never (BGM Version) (C16)"
+        },
+        {
+          "id": "20df0b24-99a5-425a-bd5c-2428c97b0f47",
+          "title": "S(mile)ING! (BGM Version) (C17)"
+        },
+        {
+          "id": "fbd9765e-887f-4088-9d02-1c8d19b77e7f",
+          "title": "ミツボシ☆☆★ (BGM Version) (C18)"
+        },
+        {
+          "id": "0e99e97c-6c2c-49c0-88e7-9cf0b21f2f99",
+          "title": "Shine!! (BGM Version) (C19)"
+        },
+        {
+          "id": "f41e31cd-9e6b-439e-82ce-948ef593d45b",
+          "title": "夢色ハーモニー (BGM Version) (C20)"
+        },
+        {
+          "id": "e23695af-2e3f-4cb9-b78b-db5737d8b50a",
+          "title": "GOIN'!!! (BGM Version) (C21)"
+        },
+        {
+          "id": "30ca2a6c-eea7-4ee6-a311-25588bddfa6f",
+          "title": "つぼみ (BGM Version) (C23)"
+        },
+        {
+          "id": "b88e6679-757b-426c-aefa-f20723d55f09",
+          "title": "Star!! (オルゴールVersion)"
+        },
+        {
+          "id": "80813eac-eead-4e65-abed-ded7f3b621ef",
+          "title": "お願い!シンデレラ (オルゴールVersion)"
+        }
+      ]
+    },
+    {
+      "release_id": "5daefbb3-642e-4277-a628-7fb38bce419e",
+      "release_title": "THE IDOLM@STER SideM WakeMini! MUSIC COLLECTION 01",
+      "alternate_releases": [
+        {
+          "id": "249a80f6-f93d-4e05-bc47-6e7cf8a324a0",
+          "title": "THE IDOLM@STER SideM WakeMini! MUSIC COLLECTION 01"
+        }
+      ],
+      "kind": "instrumental",
+      "source_urls": [
+        "https://www.lantis.jp/sidem/releaseinfo/release_LACA-15771.html",
+        "https://catalog.bandainamcomusiclive.co.jp/release/68124/"
+      ],
+      "recordings": [
+        {
+          "id": "51826c49-7d60-49c0-a55f-6fec688a3d20",
+          "title": "どらいぶ あ らいぶ (WakeMini Version) -Short Size-"
+        },
+        {
+          "id": "c9a50c50-367f-4815-a02f-97faa954c51c",
+          "title": "理由あってMini!タイトル!"
+        },
+        {
+          "id": "465eabbc-a6fc-4a6a-b5ea-2907c37b58ea",
+          "title": "はじまり"
+        },
+        {
+          "id": "74c78565-374d-4b78-ab38-3c6e67849a23",
+          "title": "315プロダクションの日常"
+        },
+        {
+          "id": "0003b9b8-2a3a-4283-8494-6cd865ea1cab",
+          "title": "大喜利に挑戦!"
+        },
+        {
+          "id": "240a84e1-3c15-452e-9ada-49112289b19a",
+          "title": "シンキングタイム"
+        },
+        {
+          "id": "905b630c-477a-4188-b2a5-bf760698854f",
+          "title": "あれれ...?"
+        },
+        {
+          "id": "98bac5e2-eb97-4501-b9d4-5191dc488649",
+          "title": "Go!Go!ハイテンション!!"
+        },
+        {
+          "id": "8c70635d-16fd-458e-9296-c6eda990e263",
+          "title": "開店準備!"
+        },
+        {
+          "id": "b35dbcc8-b046-4694-b921-b2cf3580d81e",
+          "title": "LET'S GO!! (BGM Version)"
+        },
+        {
+          "id": "cec85496-9ec3-4f42-ad82-660fe5125f78",
+          "title": "どらいぶ あ らいぶ (WakeMini Version)"
+        }
+      ]
+    },
+    {
+      "release_id": "d3429a17-b46d-4cac-98f9-d9d2c84e028c",
+      "release_title": "THE IDOLM@STER SideM WakeMini! MUSIC COLLECTION 02",
+      "alternate_releases": [
+        {
+          "id": "5945ce01-9693-496a-85b3-cd45802c9a1b",
+          "title": "THE IDOLM@STER SideM WakeMini! MUSIC COLLECTION 02"
+        }
+      ],
+      "kind": "instrumental",
+      "source_urls": [
+        "https://www.lantis.jp/sidem/releaseinfo/release_LACA-15772.html"
+      ],
+      "recordings": [
+        {
+          "id": "87196870-9d9e-46bc-91f1-bcd337ff236e",
+          "title": "理由あってほのぼの"
+        },
+        {
+          "id": "6beed638-7fe7-45d3-a68a-d35e593152d0",
+          "title": "もののふプリティー"
+        },
+        {
+          "id": "c75972f4-2c27-440f-9dbe-f0e098349e34",
+          "title": "目指せトップアイドル!"
+        },
+        {
+          "id": "5ce8002a-1b36-4f75-84b7-7fc631078189",
+          "title": "海の家 男道らーめんへようこそ!"
+        },
+        {
+          "id": "73d4fc2d-d8ff-49ba-8cf3-69bbe938848a",
+          "title": "最高の仲間とともに"
+        },
+        {
+          "id": "3d61688f-5f04-4c30-b8ba-ce5466353f2a",
+          "title": "迷いと不安"
+        },
+        {
+          "id": "9ff004fb-96bd-4309-8214-40bb0ce7552b",
+          "title": "ほっこりドーナツ"
+        },
+        {
+          "id": "bdca1b06-5027-45c3-9daa-24306897865a",
+          "title": "Otoboke Life"
+        },
+        {
+          "id": "7f03dedb-85e6-4b67-b724-c929adcf4cb7",
+          "title": "レッツクッキング!"
+        },
+        {
+          "id": "2310220f-a565-4b77-a9d1-f3b923638239",
+          "title": "Friendly Smile (BGM Version)"
+        }
+      ]
+    },
+    {
+      "release_id": "ad633ad2-4b4c-49ef-a440-9512ff0bc9a7",
+      "release_title": "THE IDOLM@STER SideM WakeMini! MUSIC COLLECTION 03",
+      "alternate_releases": [
+        {
+          "id": "23011159-4031-45ca-9f89-05e34d7bdb91",
+          "title": "THE IDOLM@STER SideM WakeMini! MUSIC COLLECTION 03"
+        }
+      ],
+      "kind": "instrumental",
+      "source_urls": [
+        "https://www.lantis.jp/sidem/releaseinfo/release_LACA-15773.html"
+      ],
+      "recordings": [
+        {
+          "id": "99898483-50df-48bc-b92e-427ba5d5bf43",
+          "title": "今日はのんびりと"
+        },
+        {
+          "id": "aedcb5d2-678d-4345-9795-0607bc053a22",
+          "title": "てんやわんやです!"
+        },
+        {
+          "id": "aeea53fe-4bf4-4c97-85b5-c21293feaf8e",
+          "title": "信じ合う絆"
+        },
+        {
+          "id": "4945f05f-9c75-4429-8765-3a1a8cae2eb3",
+          "title": "アイドルヒーロー参上!!"
+        },
+        {
+          "id": "aec3ea85-da69-4f53-b4bc-a7bc39866f09",
+          "title": "不穏なムード"
+        },
+        {
+          "id": "4b6e807a-7aae-456b-8b10-44f27dc18403",
+          "title": "心の行方"
+        },
+        {
+          "id": "e4c1474a-6016-47f1-bf75-d3799778be8a",
+          "title": "315の幸せを"
+        },
+        {
+          "id": "7bfadd80-dba9-4663-9455-ce226f837217",
+          "title": "大冒険スペクタクル!"
+        },
+        {
+          "id": "e7e84257-1455-4261-a9f5-bd683140400d",
+          "title": "一日の終わりに"
+        },
+        {
+          "id": "9982882b-b42d-4f9a-8479-61de55427243",
+          "title": "POKER FAITH -ポーカーフェイス- (BGM Version)"
+        }
+      ]
+    },
+    {
+      "release_id": "44ecd02b-995e-4a36-b206-d07b00662109",
+      "release_title": "THE IDOLM@STER SideM ANIMATION PROJECT 08 GLORIOUS RO@D",
+      "alternate_releases": [
+        {
+          "id": "39788c54-dddd-4650-9962-386d812a648d",
+          "title": "THE IDOLM@STER SideM ANIMATION PROJECT 08 Original Soundtrack: GLORIOUS RO@D"
+        }
+      ],
+      "kind": "instrumental",
+      "source_urls": [
+        "https://www.lantis.jp/sidem/releaseinfo/release_LACA-9571.html",
+        "https://catalog.bandainamcomusiclive.co.jp/release/67643/"
+      ],
+      "recordings": [
+        {
+          "id": "0089d091-fc4f-4cfe-abd6-2386b58431f9",
+          "title": "We Are 315!!"
+        },
+        {
+          "id": "eb7131aa-fb2d-41ab-9bbf-b74f779a98f6",
+          "title": "一番星の誓い"
+        },
+        {
+          "id": "5bbeefae-42e9-4bd6-a8d1-7fa854602b3a",
+          "title": "リスタート"
+        },
+        {
+          "id": "c876328b-52e3-4079-8b03-aeeb70adf310",
+          "title": "出会いはひょんなことから"
+        },
+        {
+          "id": "0a3c27e4-d3ef-45e0-ba95-6dcc9b8f7cfa",
+          "title": "生まれた光"
+        },
+        {
+          "id": "c8a134ca-3126-4484-974c-bdd6ddf9779b",
+          "title": "人を笑顔にするということ"
+        },
+        {
+          "id": "7930de80-d9e6-4872-85da-45918eb444dd",
+          "title": "世界は動き出す"
+        },
+        {
+          "id": "688615b9-bca6-46f2-a255-013195fbac36",
+          "title": "彼らの日常"
+        },
+        {
+          "id": "0cc706ea-e367-4893-b97c-86f995f0adff",
+          "title": "スタートダッシュ!"
+        },
+        {
+          "id": "62ec10a6-d7f6-46d7-9f24-ef1d4ff61e04",
+          "title": "デコボコユニット"
+        },
+        {
+          "id": "22d9a615-6426-4e4f-bb21-5ecbeb300b03",
+          "title": "見慣れた風景"
+        },
+        {
+          "id": "2f1c9be6-1db9-4cbf-9a40-f558367562b2",
+          "title": "夢を絆に変えて"
+        },
+        {
+          "id": "e8d1d901-6ffa-4e9c-ad2c-05f416603aea",
+          "title": "トホホ..."
+        },
+        {
+          "id": "29593ff0-ab5c-481d-8c36-0ca059e4f85c",
+          "title": "おかしいな?"
+        },
+        {
+          "id": "5c94f5fd-66c0-4c71-bf65-4cd659c9798a",
+          "title": "ソボクな疑問"
+        },
+        {
+          "id": "334e1fd7-0e21-41cd-ba9d-417aae70a83f",
+          "title": "不穏"
+        },
+        {
+          "id": "34b1f3de-8686-471a-845a-d3feb1e32442",
+          "title": "最強のチームワーク"
+        },
+        {
+          "id": "419e728c-5ed1-418a-a086-fce98e903194",
+          "title": "夢に向かって"
+        },
+        {
+          "id": "c2c2b996-c39a-4844-88f8-9a4a29b493f2",
+          "title": "自慢のアイドル"
+        },
+        {
+          "id": "e24c8150-1896-4a2e-b4be-9c0093502893",
+          "title": "穏やかな一日"
+        },
+        {
+          "id": "8a99fd90-7880-4d6d-abfa-3a5723923a37",
+          "title": "動揺"
+        },
+        {
+          "id": "b4e37e93-37cf-45b6-8808-35446a53fecf",
+          "title": "同じ願いを持つ仲間"
+        },
+        {
+          "id": "82ee1e6d-5383-4276-8dc7-9a8cfc1aab89",
+          "title": "あたたかい場所"
+        },
+        {
+          "id": "82637097-04c4-490e-b714-6636f794a3cd",
+          "title": "ポジティブシンキング"
+        },
+        {
+          "id": "ef2a9646-4935-42ef-84aa-0c0fd8e55b80",
+          "title": "青春100パーセント!"
+        },
+        {
+          "id": "bb8f668d-648d-4e84-9f47-23bfff6ef486",
+          "title": "小さな違和感"
+        },
+        {
+          "id": "f0dc836a-f76d-4146-bf0a-c32f155c71d8",
+          "title": "トラブル発生"
+        },
+        {
+          "id": "2014262d-b5d6-4051-aa27-40ff733ebc9b",
+          "title": "出発進行!"
+        },
+        {
+          "id": "671b354f-d44a-42f4-bab3-66f70d7440e6",
+          "title": "春夏秋冬四季おり"
+        },
+        {
+          "id": "aced33fa-f9c2-4a2a-9bd7-6aae61cf0031",
+          "title": "日常は今日も続く"
+        },
+        {
+          "id": "5ce47fa2-ca97-4233-92de-de84c5211281",
+          "title": "テーブルを囲んで"
+        },
+        {
+          "id": "8c9d4a6b-e26a-4855-b908-758b98fc35db",
+          "title": "広まる噂"
+        },
+        {
+          "id": "59445aae-37a4-4168-bf04-966a047faf04",
+          "title": "始まりのこの場所で"
+        },
+        {
+          "id": "6392b534-a4a2-4c3f-bb19-fd0d26402e4c",
+          "title": "信念を胸に"
+        },
+        {
+          "id": "09a2d0d6-f881-480a-a3f6-8eeea5e0a78d",
+          "title": "想いをひとつにして"
+        },
+        {
+          "id": "7719032f-1031-40fb-8bc8-4fba21ea863a",
+          "title": "幕を上げよう"
+        },
+        {
+          "id": "dfb8fc72-85d0-490a-8605-61852e416fb6",
+          "title": "さぁ、行こう!この道の先へ"
+        },
+        {
+          "id": "16371563-1964-49a9-a4ce-0ee79338a134",
+          "title": "理由あって、アイドル!"
+        },
+        {
+          "id": "171a102f-90fd-44f0-a909-eccc0ce39de2",
+          "title": "パッション!パッション!!"
+        },
+        {
+          "id": "ca310b0d-699b-41c1-90af-47858dc79355",
+          "title": "ドタバタコメディ"
+        },
+        {
+          "id": "6e0fbbd5-cea9-47ff-858b-a6fd08da3b53",
+          "title": "スキャンダル!?"
+        },
+        {
+          "id": "9a92e66e-06aa-4e11-8537-8c600b9b0463",
+          "title": "熱血大陸"
+        },
+        {
+          "id": "72809a12-3727-47a4-a510-0c5f9541fdd9",
+          "title": "二人の旋律"
+        },
+        {
+          "id": "8f820a6a-56af-4e78-8bfc-b3a92cba31f7",
+          "title": "Next Episode"
+        },
+        {
+          "id": "ce3df1aa-ea7e-493c-bd23-e6207564742d",
+          "title": "DRIVE A LIVE (Common BGM Version)"
+        },
+        {
+          "id": "3b949636-dd74-4b7c-afac-c298b301e721",
+          "title": "DRIVE A LIVE (Classic BGM Version)"
+        },
+        {
+          "id": "8e081d91-f036-47bc-a0b9-9c8ef2dd413f",
+          "title": "DRIVE A LIVE (Piano BGM Version)"
+        },
+        {
+          "id": "2de41192-8204-4cb7-8082-aa660f4d7387",
+          "title": "Beyond The Dream (BGM Version)"
+        },
+        {
+          "id": "45b9916e-3941-4b04-9f61-ddbd4749f7f4",
+          "title": "STARLIGHT CELEBRATE! (BGM Version)"
+        },
+        {
+          "id": "e0252774-8a50-479b-8a67-2136af76e82e",
+          "title": "想いはETERNITY (BGM Version)"
+        },
+        {
+          "id": "082ccef3-8140-4d59-9b47-9d894c27c604",
+          "title": "Study Equal Magic! (BGM Version)"
+        },
+        {
+          "id": "2c85d51c-0d63-4c9a-9ab6-e013695cdf89",
+          "title": "VICTORY BELIEVER (BGM Version)"
+        },
+        {
+          "id": "2f6cca9a-f2e3-40cd-9447-b3156f224302",
+          "title": "HIGH JUMP NO LIMIT (BGM Version)"
+        },
+        {
+          "id": "0f5f1b2c-7eaa-4b3f-938c-c4007976ee2a",
+          "title": "BRAND NEW FIELD (BGM Version)"
+        },
+        {
+          "id": "200a4d27-b5f5-49b5-90d4-3731b704836f",
+          "title": "DRAMATIC NONFICTION (BGM Version)"
+        },
+        {
+          "id": "32c7d600-e560-477c-a315-ad75e2d91072",
+          "title": "Reason!! (BGM Version)"
+        },
+        {
+          "id": "1e4904d6-6254-4a30-ac4e-1624d9e96c2f",
+          "title": "GLORIOUS RO@D (BGM Version)"
+        }
+      ]
+    },
+    {
+      "release_id": "7dec0fed-5e25-495d-8331-39c08805af35",
+      "release_title": "THE IDOLM@STER BEST OF 765+876=!! Vol.3",
+      "kind": "instrumental",
+      "source_urls": [
+        "https://columbia.jp/prod-info/COCX-36239-40/"
+      ],
+      "recordings": [
+        {
+          "id": "ce487b0e-9c8e-44bc-a11e-ff68734dd959",
+          "title": "Main BGM"
+        },
+        {
+          "id": "59fe6e6c-488a-4642-9204-7312edda8f09",
+          "title": "Morning"
+        },
+        {
+          "id": "8a6d8133-02be-4d63-9941-472ef52c6978",
+          "title": "Thinking"
+        },
+        {
+          "id": "4c6c5c42-4620-46c0-8d75-c0a71f6cebd3",
+          "title": "Appeal"
+        },
+        {
+          "id": "92afd0cc-9470-496a-81b7-079f183d441a",
+          "title": "Refresh"
+        },
+        {
+          "id": "685e135f-07d8-4e46-a0d6-f11847871025",
+          "title": "Energy"
+        },
+        {
+          "id": "fbd07a35-adf3-41e2-bee0-d0574d71ed9e",
+          "title": "Bright"
+        },
+        {
+          "id": "222999e4-0bb2-42a9-b69d-6df8257fb7b8",
+          "title": "Town"
+        },
+        {
+          "id": "b34965be-1b43-4b9d-9081-eb0aaa7acb2a",
+          "title": "Tender"
+        },
+        {
+          "id": "3fb16ff3-895e-40db-b0e4-41b7409f941b",
+          "title": "Country"
+        },
+        {
+          "id": "5ed7fc35-a900-484e-8b39-480aefd01fba",
+          "title": "Painful"
+        },
+        {
+          "id": "99a8a844-77bb-405a-989f-a6477a2421cb",
+          "title": "Sentaku2"
+        },
+        {
+          "id": "9f92ecb6-8ff0-41e1-940e-d44034d9875e",
+          "title": "Matching"
+        },
+        {
+          "id": "82ba6174-09b9-4473-bb8a-61da36c8458f",
+          "title": "TV"
+        },
+        {
+          "id": "ef167314-9dcc-4c3d-b5a6-8d99395e59ea",
+          "title": "Morning0"
+        },
+        {
+          "id": "a3bab487-86d4-4a9f-80fe-9fb9fd5afe32",
+          "title": "Stardust"
+        },
+        {
+          "id": "4b3a4417-b2c8-49f6-92e5-6f3c4ffa918e",
+          "title": "Night"
+        },
+        {
+          "id": "1a090085-7c2a-4674-9155-11092271c96d",
+          "title": "ED_Morning"
+        },
+        {
+          "id": "cc9c613d-6189-461e-82a2-e173018809d8",
+          "title": "Dark"
+        },
+        {
+          "id": "8894a9be-c82e-4488-a290-7644bca39a4e",
+          "title": "Speed"
+        },
+        {
+          "id": "6ba84993-a2a1-4ada-85d4-05e805eb15be",
+          "title": "ED_Sippai"
+        },
+        {
+          "id": "5f21ad72-7aa6-4648-a5c2-56d57e9d0f3f",
+          "title": "ED_Seikou"
+        },
+        {
+          "id": "892e3adb-51ce-41de-ada1-55dddb269b15",
+          "title": "ED_Daiseikou"
+        },
+        {
+          "id": "f6dadbd0-eeab-4ae6-9f57-2bbe1d80fc68",
+          "title": "G_Vocal"
+        },
+        {
+          "id": "87854c1a-d0b6-4f0a-a5fa-4e576586df56",
+          "title": "G_Dance"
+        },
+        {
+          "id": "8f51f225-2d08-442f-b2b2-4486724f2687",
+          "title": "G_Visual"
+        },
+        {
+          "id": "87600ecf-3d31-4331-a2a4-3c85d2a26a63",
+          "title": "IM_Dance"
+        },
+        {
+          "id": "e2a1405f-55e7-46f9-a0f2-51d51e998c33",
+          "title": "IM_Expression"
+        },
+        {
+          "id": "c3681b0b-d3d9-47c4-9fc3-14c2269b64bd",
+          "title": "IM_Performance"
+        },
+        {
+          "id": "6e84231e-bbe8-401e-a6ab-62e36bfc1be9",
+          "title": "IM_Voice"
+        },
+        {
+          "id": "4fd217c6-ae68-4fd9-b0d5-6d2cf566d49d",
+          "title": "IM_Words"
+        },
+        {
+          "id": "ec79b960-38fa-466e-9830-df076762700c",
+          "title": "961pro"
+        },
+        {
+          "id": "b342793b-0045-43bb-bfa9-ee95c7065254",
+          "title": "“HELLO!!” (DS Electro ver.)"
+        },
+        {
+          "id": "8dd4ac77-df6c-4db7-96a2-5920186e127c",
+          "title": "“HELLO!!” (DS Jingle ver.)"
+        },
+        {
+          "id": "3b97812a-58fa-4594-8556-22ae77b06083",
+          "title": "Ai (DS Pop ver.)"
+        },
+        {
+          "id": "bdeccb69-ba65-462b-9c31-1594423681f5",
+          "title": "Ai (DS Pf ver.)"
+        },
+        {
+          "id": "9ee3b768-55af-4acf-a0bc-295c57eb777b",
+          "title": "DS Game BGM"
+        },
+        {
+          "id": "7b7d8d1f-7c66-4ec7-8eea-26601cc6e908",
+          "title": "Eri (DS Pop ver.)"
+        },
+        {
+          "id": "b35b5e20-1a63-4775-850a-4f054aecc69b",
+          "title": "Eri (DS Pf ver.)"
+        },
+        {
+          "id": "0bab3e01-678f-4dd0-9243-000b662204f8",
+          "title": "DS Game BGM (Type A)"
+        },
+        {
+          "id": "8a71e7f6-d534-4a6f-8750-90313fcc434f",
+          "title": "Ryo (DS Pop ver.)"
+        },
+        {
+          "id": "d6fdbb00-a251-41a2-8a2d-5c0a539147ae",
+          "title": "Ryo (DS Pf ver.)"
+        },
+        {
+          "id": "1226e4d0-fb10-4f38-bd58-7262d5a6a655",
+          "title": "“HELLO!!” (DS Ending ver.)"
+        }
+      ]
+    }
+  ]
+}

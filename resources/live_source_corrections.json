@@ -1,0 +1,199 @@
+{
+  "schema_version": 1,
+  "verified_at": "2026-10-02",
+  "note": "공식 공연 일정으로 개별 대조한 날짜 교정 근거. 세트리스트의 출처는 계속 비공식 아이마스DB이며, 다른 날짜 오류에 일반화하지 않습니다.",
+  "corrections": [
+    {
+      "database_url": "https://imas-db.jp/song/event/gakuen_shirube_fukuoka.html",
+      "event_title": "学園アイドルマスター LIVE TOUR -標- 福岡公演",
+      "observed_index_dates": [
+        "2026-09-05",
+        "2026-09-06"
+      ],
+      "observed_page_dates": [
+        "2026-08-20",
+        "2026-08-21"
+      ],
+      "official_url": "https://idolmaster-official.jp/live_event/gkmas_livetour_shirube/information/fukuoka.php",
+      "official_source_name": "학원 아이돌마스터 공식 공연 안내",
+      "reason": "공식 후쿠오카 공연 안내에 9월 5일·6일이 명시됩니다. 팬 DB 본문의 8월 20일·21일과 충돌하므로 이 페이지의 두 회차만 교정합니다.",
+      "sessions": [
+        {
+          "source_table_label": "DAY1 セットリスト",
+          "date": "2026-09-05",
+          "session": "DAY1"
+        },
+        {
+          "source_table_label": "DAY2 セットリスト",
+          "date": "2026-09-06",
+          "session": "DAY2"
+        }
+      ]
+    },
+    {
+      "database_url": "https://imas-db.jp/song/event/cinderella_cg_musical_dd.html",
+      "event_title": "CINDERELLA GIRLS MUSICAL DERE of the DEAD",
+      "observed_index_dates": [
+        "2026-07-04",
+        "2026-07-05"
+      ],
+      "observed_page_dates": [
+        "2026-07-04",
+        "2026-07-05",
+        "2026-07-09",
+        "2026-07-10"
+      ],
+      "official_url": "https://idolmaster-official.jp/live_event/cg_musical_dd/",
+      "official_source_name": "신데렐라 걸즈 뮤지컬 공식 공연 안내",
+      "reason": "공식 일정은 7월 4일 밤과 7월 5일 낮·밤 3회입니다. 공식 안내는 전공연 동일 프로그램 예정, DB 세트리스트 표는 전공연공통임을 명시합니다. 날짜가 틀린 상세 일정만 교정하고 동일 표의 3회 사용 근거를 보존합니다.",
+      "shared_setlist_explicit": true,
+      "sessions": [
+        {
+          "source_table_label": "公演内容(セットリスト) (※全公演共通)",
+          "date": "2026-07-04",
+          "session": "夜公演"
+        },
+        {
+          "source_table_label": "公演内容(セットリスト) (※全公演共通)",
+          "date": "2026-07-05",
+          "session": "昼公演"
+        },
+        {
+          "source_table_label": "公演内容(セットリスト) (※全公演共通)",
+          "date": "2026-07-05",
+          "session": "夜公演"
+        }
+      ]
+    },
+    {
+      "database_url": "https://imas-db.jp/song/event/mnf2025.html",
+      "event_title": "MaiNote Festival 2025",
+      "observed_index_dates": [
+        "2024-04-11"
+      ],
+      "observed_page_dates": [
+        "2025-04-11"
+      ],
+      "official_url": "https://avex.jp/djkoo/schedule/detail.php?id=1110258",
+      "official_source_name": "Avex · DJ KOO 공식 출연 일정",
+      "reason": "공식 출연자 일정에 2025년 4월 11일과 Zepp DiverCity 공연명이 명시됩니다. 팬 DB 색인의 2024년은 해당 공연의 공식 일정과 다릅니다.",
+      "sessions": [
+        {
+          "source_table_label": "セットリスト",
+          "date": "2025-04-11",
+          "session": ""
+        }
+      ]
+    },
+    {
+      "database_url": "https://imas-db.jp/song/event/million_10th_act3_day2.html",
+      "event_title": "THE IDOLM@STER MILLION LIVE! 10thLIVE TOUR Act-3 R@ISE THE DREAM!!! [DAY2]",
+      "observed_index_dates": [
+        "2023-11-05"
+      ],
+      "observed_page_dates": [
+        "2023-11-06"
+      ],
+      "official_url": "https://idolmaster-official.jp/live_event/million10th/information/act3.php",
+      "official_source_name": "밀리언 10th Act-3 공식 공연 안내",
+      "reason": "공식 Act-3 일정은 11월 4일·5일이며, DAY2는 5일입니다. 팬 DB 본문의 6일과 충돌하므로 이 DAY2 페이지에만 교정합니다.",
+      "sessions": [
+        {
+          "source_table_label": "セットリスト",
+          "date": "2023-11-05",
+          "session": "DAY2"
+        }
+      ]
+    },
+    {
+      "database_url": "https://imas-db.jp/song/event/shinycolors20201031.html",
+      "event_title": "THE IDOLM@STER SHINY COLORS MUSIC DAWN [DAY1]",
+      "observed_index_dates": [
+        "2020-10-30"
+      ],
+      "observed_page_dates": [
+        "2020-10-31"
+      ],
+      "official_url": "https://idolmaster-official.jp/live_event/shinycolors_musicdawn/",
+      "official_source_name": "샤이니 컬러즈 MUSIC DAWN 공식 공연 안내",
+      "reason": "공식 일정은 2020년 10월 31일·11월 1일이며 첫날은 10월 31일입니다. 팬 DB 색인의 30일과 충돌합니다.",
+      "sessions": [
+        {
+          "source_table_label": "セットリスト",
+          "date": "2020-10-31",
+          "session": "DAY1"
+        }
+      ]
+    },
+    {
+      "database_url": "https://imas-db.jp/song/event/sidem_fclive_ct_da.html",
+      "event_title": "315 Production presents F@NTASTIC COMBINATION LIVE 〜CONNECTIME!!!!〜 \"DIMENSION ARROW\"",
+      "observed_index_dates": [
+        "2023-11-18",
+        "2023-11-19"
+      ],
+      "observed_page_dates": [
+        "2023-11-18",
+        "2023-11-19"
+      ],
+      "official_url": "https://idolmaster-official.jp/live_event/sidem_fclive_ct/",
+      "official_source_name": "SideM CONNECTIME!!!! 공식 공연 일정",
+      "reason": "공식 일정표로 낮·밤 회차를 개별 확인했습니다. 공식 본문은 이 프로그램의 전2회가 동일 내용임을 명시합니다. 곡목은 비공식 팬 DB의 해당 프로그램 표이며, 별도 프로그램 표와 혼합하지 않습니다.",
+      "shared_setlist_explicit": true,
+      "shared_setlist_official_evidence": {
+        "url": "https://idolmaster-official.jp/live_event/sidem_fclive_ct/",
+        "statement": "DIMENSION ARROW全2公演は同様の内容になります。",
+        "schedule_image_url": "https://idolmaster-official.jp/live_event/sidem_fclive_ct/images/schedule/img_schedule.png",
+        "schedule_image_sha256": "d40dd3ea21d0ff6a41c8bdabb8122ecc121f5d43106a09f4ca02656034b9150a",
+        "source_table_sha256": "b21f2812914f98d6f4a8fcc5169b88c94b8e5d8e8dda92f7f3678b9e894945f9"
+      },
+      "sessions": [
+        {
+          "source_table_label": "セットリスト",
+          "date": "2023-11-18",
+          "session": "昼公演"
+        },
+        {
+          "source_table_label": "セットリスト",
+          "date": "2023-11-19",
+          "session": "夜公演"
+        }
+      ]
+    },
+    {
+      "database_url": "https://imas-db.jp/song/event/sidem_fclive_ct_hc.html",
+      "event_title": "315 Production presents F@NTASTIC COMBINATION LIVE 〜CONNECTIME!!!!〜 \"共鳴和音(harmony chord)\"",
+      "observed_index_dates": [
+        "2023-11-18",
+        "2023-11-19"
+      ],
+      "observed_page_dates": [
+        "2023-11-18",
+        "2023-11-19"
+      ],
+      "official_url": "https://idolmaster-official.jp/live_event/sidem_fclive_ct/",
+      "official_source_name": "SideM CONNECTIME!!!! 공식 공연 일정",
+      "reason": "공식 일정표로 낮·밤 회차를 개별 확인했습니다. 공식 본문은 이 프로그램의 전2회가 동일 내용임을 명시합니다. 곡목은 비공식 팬 DB의 해당 프로그램 표이며, 별도 프로그램 표와 혼합하지 않습니다.",
+      "shared_setlist_explicit": true,
+      "shared_setlist_official_evidence": {
+        "url": "https://idolmaster-official.jp/live_event/sidem_fclive_ct/",
+        "statement": "共鳴和音(harmony chord)全2公演は同様の内容になります。",
+        "schedule_image_url": "https://idolmaster-official.jp/live_event/sidem_fclive_ct/images/schedule/img_schedule.png",
+        "schedule_image_sha256": "d40dd3ea21d0ff6a41c8bdabb8122ecc121f5d43106a09f4ca02656034b9150a",
+        "source_table_sha256": "2f4fc6fb41e4f8d2e816a1eef0f65796af277f3eb3ffe8001928a9e3cea62a83"
+      },
+      "sessions": [
+        {
+          "source_table_label": "セットリスト",
+          "date": "2023-11-18",
+          "session": "夜公演"
+        },
+        {
+          "source_table_label": "セットリスト",
+          "date": "2023-11-19",
+          "session": "昼公演"
+        }
+      ]
+    }
+  ]
+}

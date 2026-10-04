@@ -1,0 +1,2678 @@
+{
+  "schema_version": 1,
+  "verified_at": "2026-10-02",
+  "scope": [
+    "Cinderella Girls",
+    "Shiny Colors",
+    "Gakuen Idolmaster"
+  ],
+  "sources": [
+    {
+      "url": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "title": "Cinderella Girls official 2026 election idol palette"
+    },
+    {
+      "url": "https://idolmaster-official.jp/_next/static/chunks/3795-9a2b02e2ede94026.js",
+      "title": "Official public idol data: 189 colorCode HEX values and Helen normal gold display color"
+    },
+    {
+      "url": "https://github.com/imas/imasparql/blob/master/RDFs/283.rdf",
+      "title": "im@sparql 283 idol image colors (community-maintained RDF)"
+    },
+    {
+      "url": "https://github.com/imas/imasparql/blob/master/RDFs/Units/ShinyColors.rdf",
+      "title": "im@sparql seven Shiny Colors unit image colors (community-maintained RDF)"
+    },
+    {
+      "url": "https://gakuen.idolmaster-official.jp/assets/css/share.css?date=251119",
+      "title": "Gakuen Idolmaster official character name colors (.footer-chara__inner character rules)"
+    },
+    {
+      "url": "https://github.com/imas/imasparql/blob/master/RDFs/Units/CinderellaGirls.rdf",
+      "title": "im@sparql Cinderella Girls unit memberships (community-maintained RDF)"
+    },
+    {
+      "url": "https://github.com/imas/imasparql/blob/master/RDFs/CinderellaGirls.rdf",
+      "title": "im@sparql Cinderella Girls canonical idol names for membership normalization"
+    },
+    {
+      "url": "https://shinycolors.lantis.jp/releaseinfo/laca-25115/",
+      "title": "Official Shiny Colors ECHOES 09 full 28-idol roster"
+    },
+    {
+      "url": "https://shinycolors.lantis.jp/releaseinfo/laca-25301/",
+      "title": "Official HOPEFUL FE@THERS Stella current nine-member roster"
+    },
+    {
+      "url": "https://shinycolors.lantis.jp/releaseinfo/laca-25302/",
+      "title": "Official HOPEFUL FE@THERS Luna current nine-member roster"
+    },
+    {
+      "url": "https://shinycolors.lantis.jp/releaseinfo/laca-25303/",
+      "title": "Official HOPEFUL FE@THERS Sol current ten-member roster"
+    },
+    {
+      "url": "https://idolmaster-official.jp/live_event/REFRAC7IONS_Still_blue/information/",
+      "title": "Official REFRAC7IONS Still blue announced seven unit lineups"
+    },
+    {
+      "url": "https://gakuen-label.idolmaster-official.jp/news/unr0zjrrmu",
+      "title": "Official Re;IRIS and Begrazia debut single membership announcement"
+    },
+    {
+      "url": "https://gakuen.idolmaster-official.jp/idol/",
+      "title": "Official Gakuen idol roster, including Amaya Tsubame"
+    },
+    {
+      "url": "https://idolmaster-official.jp/live_event/cg_unittour/information/iwate.php",
+      "title": "Official ConnecTrip Iwate unit memberships"
+    },
+    {
+      "url": "https://idolmaster-official.jp/live_event/cg_unittour/information/tokyo.php",
+      "title": "Official ConnecTrip Tokyo UNICUS membership"
+    },
+    {
+      "url": "https://idolmaster-official.jp/live_event/cg_unittour/information/ishikawa.php",
+      "title": "Official ConnecTrip Ishikawa unit memberships"
+    }
+  ],
+  "coverage_note": "All 231 modern catalog idols retain their recorded colors: 190 Cinderella Girls, 28 Shiny Colors and 13 Gakuen idols. All 61 groups are covered: seven Shiny Colors units retain community image colors; the three franchise ensembles Shiny Colors, Cinderella Girls and Hatsuboshi Gakuen use official-site brand display accents instead of full-roster gradients; the remaining 51 units use verified member palettes. Explicit colors take priority. Brand display accents and community image colors are not claimed as official group HEX standards. Team.Stella/Luna/Sol retain the official September 2026 HOPEFUL FE@THERS lineups. REFRAC7IONS groups retain the union of announced December 2026 lineups. Stored rosters are not song-specific performer lists; members refer to canonical idols, not nested groups.",
+  "entries": [
+    {
+      "name": "相川千夏",
+      "color": "#7a508f",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "愛野渚",
+      "color": "#ffcb49",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "相葉夕美",
+      "color": "#f0e991",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "相原雪乃",
+      "color": "#d06447",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "赤城みりあ",
+      "color": "#ffcd00",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "赤西瑛梨華",
+      "color": "#eb306d",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "浅野風香",
+      "color": "#618d75",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "浅利七海",
+      "color": "#009cbd",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "アナスタシア",
+      "color": "#b1c9e8",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "安部菜々",
+      "color": "#ef4a81",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "綾瀬穂乃香",
+      "color": "#f5d6ff",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "荒木比奈",
+      "color": "#a0d884",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "有浦柑奈",
+      "color": "#ec4b6e",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "安斎都",
+      "color": "#fa9063",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "イヴ・サンタクロース",
+      "color": "#e5e1e6",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "五十嵐響子",
+      "color": "#fabbcb",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "池袋晶葉",
+      "color": "#de2f4d",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "伊集院惠",
+      "color": "#521078",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "一ノ瀬志希",
+      "color": "#a50050",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "市原仁奈",
+      "color": "#f8e08e",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "今井加奈",
+      "color": "#ff3de5",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "井村雪菜",
+      "color": "#ed3767",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "上田鈴帆",
+      "color": "#cc8a00",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "氏家むつみ",
+      "color": "#375637",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "梅木音葉",
+      "color": "#75bbae",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "江上椿",
+      "color": "#e95b64",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "衛藤美紗希",
+      "color": "#fe85c7",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "海老原菜帆",
+      "color": "#819832",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "及川雫",
+      "color": "#ffffff",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "大石泉",
+      "color": "#74d1ea",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "太田優",
+      "color": "#f851a7",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "大槻唯",
+      "color": "#f6be00",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "大西由里子",
+      "color": "#c90f74",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "大沼くるみ",
+      "color": "#ffc1bd",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "大原みちる",
+      "color": "#d8843e",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "岡崎泰葉",
+      "color": "#ade5f6",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "緒方智絵里",
+      "color": "#6cc24a",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "奥山沙織",
+      "color": "#e87487",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "乙倉悠貴",
+      "color": "#e4bec3",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "片桐早苗",
+      "color": "#fc4c02",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "上条春菜",
+      "color": "#5bc2e7",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "神谷奈緒",
+      "color": "#9678d3",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "川島瑞樹",
+      "color": "#485cc7",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "神崎蘭子",
+      "color": "#84329b",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "岸部彩華",
+      "color": "#f14fee",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "北川真尋",
+      "color": "#4fd962",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "喜多日菜子",
+      "color": "#fcd757",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "喜多見柚",
+      "color": "#f8f283",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "木場真奈美",
+      "color": "#8d8696",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "木村夏樹",
+      "color": "#53565a",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "キャシー・グラハム",
+      "color": "#ffdc00",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "桐野アヤ",
+      "color": "#c3396c",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "桐生つかさ",
+      "color": "#ab4ec6",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "日下部若葉",
+      "color": "#c4d673",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "工藤忍",
+      "color": "#eb3249",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "クラリス",
+      "color": "#ffda7b",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "栗原ネネ",
+      "color": "#0f7bf8",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "黒川千秋",
+      "color": "#bc1212",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "黒埼ちとせ",
+      "color": "#ef3340",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "ケイト",
+      "color": "#cf142b",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "古賀小春",
+      "color": "#c2e189",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "輿水幸子",
+      "color": "#c1a0da",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "小関麗奈",
+      "color": "#9b26b6",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "小早川紗枝",
+      "color": "#e56db1",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "小日向美穂",
+      "color": "#db3eb1",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "小松伊吹",
+      "color": "#fffb4e",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "小室千奈美",
+      "color": "#acc0e6",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "西園寺琴歌",
+      "color": "#e8cdd0",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "財前時子",
+      "color": "#7d0837",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "斉藤洋子",
+      "color": "#cbfc9f",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "冴島清美",
+      "color": "#f6bd30",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "榊原里美",
+      "color": "#fec520",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "鷺沢文香",
+      "color": "#606eb2",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "佐久間まゆ",
+      "color": "#da1884",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "櫻井桃華",
+      "color": "#ef95cf",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "佐々木千枝",
+      "color": "#0072ce",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "佐城雪美",
+      "color": "#171c8f",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "佐藤心",
+      "color": "#f04e98",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "沢田麻理菜",
+      "color": "#fca538",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "椎名法子",
+      "color": "#f8485e",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "塩見周子",
+      "color": "#dce6ed",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "篠原礼",
+      "color": "#bb68fe",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "渋谷凛",
+      "color": "#009cde",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "島村卯月",
+      "color": "#f67599",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "首藤葵",
+      "color": "#fbe983",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "城ヶ崎美嘉",
+      "color": "#fe9d1a",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "城ヶ崎莉嘉",
+      "color": "#fedd00",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "白菊ほたる",
+      "color": "#c964cf",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "白坂小梅",
+      "color": "#abcae9",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "白雪千夜",
+      "color": "#efd7e5",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "杉坂海",
+      "color": "#d83c6a",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "涼宮星花",
+      "color": "#f994c4",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "砂塚あきら",
+      "color": "#7e93a7",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "関裕美",
+      "color": "#ffb3ab",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "瀬名詩織",
+      "color": "#52c6c3",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "仙崎恵磨",
+      "color": "#d30d85",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "相馬夏美",
+      "color": "#fcc138",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "高垣楓",
+      "color": "#47d7ac",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "高橋礼子",
+      "color": "#781000",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "鷹富士茄子",
+      "color": "#5c068c",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "高峯のあ",
+      "color": "#9fe1fd",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "高森藍子",
+      "color": "#cdea80",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "多田李衣菜",
+      "color": "#0077c8",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "橘ありす",
+      "color": "#5c88da",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "月宮雅",
+      "color": "#ffd9db",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "辻野あかり",
+      "color": "#e10600",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "土屋亜子",
+      "color": "#ffbe60",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "東郷あい",
+      "color": "#9b274a",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "道明寺歌鈴",
+      "color": "#d22630",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "十時愛梨",
+      "color": "#df4661",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "長富蓮実",
+      "color": "#ea8a91",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "中野有香",
+      "color": "#e277cd",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "ナターリア",
+      "color": "#f4633a",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "並木芽衣子",
+      "color": "#feea9c",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "成宮由愛",
+      "color": "#2b5cd5",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "南条光",
+      "color": "#e4002b",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "難波笑美",
+      "color": "#e03c31",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "西川保奈美",
+      "color": "#5756d8",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "西島櫂",
+      "color": "#f16029",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "新田美波",
+      "color": "#71c5e8",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "二宮飛鳥",
+      "color": "#5f259f",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "丹羽仁美",
+      "color": "#a80826",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "野々村そら",
+      "color": "#fc6e2e",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "服部瞳子",
+      "color": "#633aa1",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "浜川愛結奈",
+      "color": "#a42678",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "浜口あやめ",
+      "color": "#440099",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "早坂美玲",
+      "color": "#c800a1",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "速水奏",
+      "color": "#003087",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "原田美世",
+      "color": "#e94047",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "柊志乃",
+      "color": "#ad1e66",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "久川凪",
+      "color": "#f8a4bd",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "久川颯",
+      "color": "#7eddd3",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "日野茜",
+      "color": "#f9423a",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "姫川友紀",
+      "color": "#ed8b00",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "兵藤レナ",
+      "color": "#d8076b",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "福山舞",
+      "color": "#ff68b5",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "藤居朋",
+      "color": "#9b58c2",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "藤本里奈",
+      "color": "#623b2a",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "藤原肇",
+      "color": "#9595d2",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "双葉杏",
+      "color": "#f8a3bc",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "古澤頼子",
+      "color": "#3f3c8b",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "ヘレン",
+      "color": "#e5bf5e",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official",
+      "note": "Official colorCode is none/gold; this is the explicit normal gold display color, not an inferred HEX for metallic gold."
+    },
+    {
+      "name": "北条加蓮",
+      "color": "#2ad2c9",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "星輝子",
+      "color": "#a6093d",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "堀裕子",
+      "color": "#eca154",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "本田未央",
+      "color": "#ffb81c",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "前川みく",
+      "color": "#ce0037",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "槙原志保",
+      "color": "#f97f4b",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "松尾千鶴",
+      "color": "#99e3fc",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "松永涼",
+      "color": "#211551",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "松原早耶",
+      "color": "#f743a6",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "松本沙理奈",
+      "color": "#2943cb",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "松山久美子",
+      "color": "#ff7b2c",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "的場梨沙",
+      "color": "#ff00a0",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "間中美里",
+      "color": "#d1f9e6",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "真鍋いつき",
+      "color": "#58eabd",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "水木聖來",
+      "color": "#86dbff",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "水野翠",
+      "color": "#43a0ab",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "水本ゆかり",
+      "color": "#eabedb",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "三船美優",
+      "color": "#12bfb2",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "三村かな子",
+      "color": "#ffb1bb",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "宮本フレデリカ",
+      "color": "#a20067",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "三好紗南",
+      "color": "#45f05b",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "向井拓海",
+      "color": "#b0008e",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "棟方愛海",
+      "color": "#c7579a",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "村上巴",
+      "color": "#ab192c",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "村松さくら",
+      "color": "#eb6174",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "メアリー・コクラン",
+      "color": "#f196ff",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "持田亜里沙",
+      "color": "#fd9286",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "望月聖",
+      "color": "#b7dde1",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "桃井あずき",
+      "color": "#93256c",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "森久保乃々",
+      "color": "#9cdbd9",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "諸星きらり",
+      "color": "#ffd100",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "楊菲菲",
+      "color": "#e56f66",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "八神マキノ",
+      "color": "#a6a4e0",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "矢口美羽",
+      "color": "#ec5800",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "柳清良",
+      "color": "#e7cbee",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "柳瀬美由紀",
+      "color": "#ff5d14",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "大和亜季",
+      "color": "#28724f",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "結城晴",
+      "color": "#71dad4",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "遊佐こずえ",
+      "color": "#f4a6d7",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "夢見りあむ",
+      "color": "#e89cdc",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "横山千佳",
+      "color": "#fc87bf",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "吉岡沙紀",
+      "color": "#1b24c2",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "依田芳乃",
+      "color": "#c4bcb7",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "ライラ",
+      "color": "#7ce0d3",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "龍崎薫",
+      "color": "#fae053",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "若林智香",
+      "color": "#fdff4e",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "脇山珠美",
+      "color": "#407ec9",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "和久井留美",
+      "color": "#2e347e",
+      "kind": "idol",
+      "source": "https://idolmaster-official.jp/cinderellagirls/vote2026/vote",
+      "basis": "official"
+    },
+    {
+      "name": "櫻木真乃",
+      "color": "#ffbad6",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/283.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "風野灯織",
+      "color": "#144384",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/283.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "八宮めぐる",
+      "color": "#ffe012",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/283.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "月岡恋鐘",
+      "color": "#f84cad",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/283.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "田中摩美々",
+      "color": "#a846fb",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/283.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "白瀬咲耶",
+      "color": "#006047",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/283.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "三峰結華",
+      "color": "#3b91c4",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/283.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "幽谷霧子",
+      "color": "#d9f2ff",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/283.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "小宮果穂",
+      "color": "#e5461c",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/283.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "園田智代子",
+      "color": "#f93b90",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/283.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "西城樹里",
+      "color": "#ffc602",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/283.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "杜野凛世",
+      "color": "#89c3eb",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/283.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "有栖川夏葉",
+      "color": "#90e667",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/283.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "大崎甘奈",
+      "color": "#f54275",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/283.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "大崎甜花",
+      "color": "#e75bec",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/283.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "桑山千雪",
+      "color": "#fbfafa",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/283.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "芹沢あさひ",
+      "color": "#f30100",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/283.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "黛冬優子",
+      "color": "#5ce626",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/283.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "和泉愛依",
+      "color": "#ff00ff",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/283.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "浅倉透",
+      "color": "#50d0d0",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/283.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "樋口円香",
+      "color": "#be1e3e",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/283.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "福丸小糸",
+      "color": "#7967c3",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/283.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "市川雛菜",
+      "color": "#ffc639",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/283.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "七草にちか",
+      "color": "#a5cfb6",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/283.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "緋田美琴",
+      "color": "#760e10",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/283.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "斑鳩ルカ",
+      "color": "#24130d",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/283.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "鈴木羽那",
+      "color": "#e0b5d3",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/283.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "郁田はるき",
+      "color": "#ead7a4",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/283.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "花海咲季",
+      "color": "#e30f25",
+      "kind": "idol",
+      "source": "https://gakuen.idolmaster-official.jp/assets/css/share.css?date=251119",
+      "basis": "official"
+    },
+    {
+      "name": "月村手毬",
+      "color": "#0c7bbb",
+      "kind": "idol",
+      "source": "https://gakuen.idolmaster-official.jp/assets/css/share.css?date=251119",
+      "basis": "official"
+    },
+    {
+      "name": "藤田ことね",
+      "color": "#f8c112",
+      "kind": "idol",
+      "source": "https://gakuen.idolmaster-official.jp/assets/css/share.css?date=251119",
+      "basis": "official"
+    },
+    {
+      "name": "有村麻央",
+      "color": "#7f1184",
+      "kind": "idol",
+      "source": "https://gakuen.idolmaster-official.jp/assets/css/share.css?date=251119",
+      "basis": "official"
+    },
+    {
+      "name": "葛城リーリヤ",
+      "color": "#eafdff",
+      "kind": "idol",
+      "source": "https://gakuen.idolmaster-official.jp/assets/css/share.css?date=251119",
+      "basis": "official"
+    },
+    {
+      "name": "倉本千奈",
+      "color": "#f68b1f",
+      "kind": "idol",
+      "source": "https://gakuen.idolmaster-official.jp/assets/css/share.css?date=251119",
+      "basis": "official"
+    },
+    {
+      "name": "紫雲清夏",
+      "color": "#7cfc00",
+      "kind": "idol",
+      "source": "https://gakuen.idolmaster-official.jp/assets/css/share.css?date=251119",
+      "basis": "official"
+    },
+    {
+      "name": "篠澤広",
+      "color": "#00afcc",
+      "kind": "idol",
+      "source": "https://gakuen.idolmaster-official.jp/assets/css/share.css?date=251119",
+      "basis": "official"
+    },
+    {
+      "name": "姫崎莉波",
+      "color": "#f6adc6",
+      "kind": "idol",
+      "source": "https://gakuen.idolmaster-official.jp/assets/css/share.css?date=251119",
+      "basis": "official"
+    },
+    {
+      "name": "花海佑芽",
+      "color": "#ea533a",
+      "kind": "idol",
+      "source": "https://gakuen.idolmaster-official.jp/assets/css/share.css?date=251119",
+      "basis": "official"
+    },
+    {
+      "name": "秦谷美鈴",
+      "color": "#7a99cf",
+      "kind": "idol",
+      "source": "https://gakuen.idolmaster-official.jp/assets/css/share.css?date=251119",
+      "basis": "official"
+    },
+    {
+      "name": "十王星南",
+      "color": "#f6ae54",
+      "kind": "idol",
+      "source": "https://gakuen.idolmaster-official.jp/assets/css/share.css?date=251119",
+      "basis": "official"
+    },
+    {
+      "name": "雨夜燕",
+      "color": "#7b68ee",
+      "kind": "idol",
+      "source": "https://gakuen.idolmaster-official.jp/assets/css/share.css?date=251119",
+      "basis": "official"
+    },
+    {
+      "name": "イルミネーションスターズ",
+      "color": "#ffa200",
+      "kind": "group",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/ShinyColors.rdf",
+      "basis": "community",
+      "members": [
+        "櫻木真乃",
+        "八宮めぐる",
+        "風野灯織"
+      ],
+      "membership_sources": [
+        "https://github.com/imas/imasparql/blob/master/RDFs/Units/ShinyColors.rdf"
+      ]
+    },
+    {
+      "name": "アンティーカ",
+      "color": "#833696",
+      "kind": "group",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/ShinyColors.rdf",
+      "basis": "community",
+      "members": [
+        "月岡恋鐘",
+        "三峰結華",
+        "田中摩美々",
+        "白瀬咲耶",
+        "幽谷霧子"
+      ],
+      "membership_sources": [
+        "https://github.com/imas/imasparql/blob/master/RDFs/Units/ShinyColors.rdf"
+      ]
+    },
+    {
+      "name": "放課後クライマックスガールズ",
+      "color": "#ff4800",
+      "kind": "group",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/ShinyColors.rdf",
+      "basis": "community",
+      "members": [
+        "小宮果穂",
+        "西城樹里",
+        "有栖川夏葉",
+        "杜野凛世",
+        "園田智代子"
+      ],
+      "membership_sources": [
+        "https://github.com/imas/imasparql/blob/master/RDFs/Units/ShinyColors.rdf"
+      ]
+    },
+    {
+      "name": "アルストロメリア",
+      "color": "#e6277c",
+      "kind": "group",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/ShinyColors.rdf",
+      "basis": "community",
+      "members": [
+        "桑山千雪",
+        "大崎甜花",
+        "大崎甘奈"
+      ],
+      "membership_sources": [
+        "https://github.com/imas/imasparql/blob/master/RDFs/Units/ShinyColors.rdf"
+      ]
+    },
+    {
+      "name": "ストレイライト",
+      "color": "#a51f24",
+      "kind": "group",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/ShinyColors.rdf",
+      "basis": "community",
+      "members": [
+        "黛冬優子",
+        "芹沢あさひ",
+        "和泉愛依"
+      ],
+      "membership_sources": [
+        "https://github.com/imas/imasparql/blob/master/RDFs/Units/ShinyColors.rdf"
+      ]
+    },
+    {
+      "name": "ノクチル",
+      "color": "#34498f",
+      "kind": "group",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/ShinyColors.rdf",
+      "basis": "community",
+      "members": [
+        "浅倉透",
+        "樋口円香",
+        "福丸小糸",
+        "市川雛菜"
+      ],
+      "membership_sources": [
+        "https://github.com/imas/imasparql/blob/master/RDFs/Units/ShinyColors.rdf"
+      ]
+    },
+    {
+      "name": "シーズ",
+      "color": "#1c8971",
+      "kind": "group",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/ShinyColors.rdf",
+      "basis": "community",
+      "members": [
+        "七草にちか",
+        "緋田美琴"
+      ],
+      "membership_sources": [
+        "https://github.com/imas/imasparql/blob/master/RDFs/Units/ShinyColors.rdf"
+      ]
+    },
+    {
+      "name": "コメティック",
+      "kind": "group",
+      "members": [
+        "斑鳩ルカ",
+        "鈴木羽那",
+        "郁田はるき"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/ShinyColors.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "シャイニーカラーズ",
+      "kind": "group",
+      "members": [
+        "櫻木真乃",
+        "風野灯織",
+        "八宮めぐる",
+        "月岡恋鐘",
+        "田中摩美々",
+        "白瀬咲耶",
+        "三峰結華",
+        "幽谷霧子",
+        "小宮果穂",
+        "園田智代子",
+        "西城樹里",
+        "杜野凛世",
+        "有栖川夏葉",
+        "大崎甘奈",
+        "大崎甜花",
+        "桑山千雪",
+        "芹沢あさひ",
+        "黛冬優子",
+        "和泉愛依",
+        "浅倉透",
+        "樋口円香",
+        "福丸小糸",
+        "市川雛菜",
+        "七草にちか",
+        "緋田美琴",
+        "斑鳩ルカ",
+        "鈴木羽那",
+        "郁田はるき"
+      ],
+      "source": "https://idolmaster-official.jp/_next/static/css/73251a727460c594.css",
+      "basis": "official-site-brand-accent",
+      "note": "Uses the official portal /shinycolors brand-page navigation accent (#7cb0ff) as a representative brand display color, not a standardized group image-color claim. The preserved roster is not a song-specific performer list.",
+      "color": "#7cb0ff",
+      "membership_sources": [
+        "https://shinycolors.lantis.jp/releaseinfo/laca-25115/"
+      ]
+    },
+    {
+      "name": "I'm a Cutie Finder",
+      "kind": "group",
+      "members": [
+        "黛冬優子",
+        "園田智代子",
+        "鈴木羽那",
+        "七草にちか",
+        "大崎甜花"
+      ],
+      "source": "https://idolmaster-official.jp/live_event/REFRAC7IONS_Still_blue/information/",
+      "basis": "member-gradient",
+      "note": "Union of the officially announced 2026-12-19/20 unit lineups, verified 2026-10-02."
+    },
+    {
+      "name": "Fumage",
+      "kind": "group",
+      "members": [
+        "浅倉透",
+        "幽谷霧子"
+      ],
+      "source": "https://idolmaster-official.jp/live_event/REFRAC7IONS_Still_blue/information/",
+      "basis": "member-gradient",
+      "note": "Union of the officially announced 2026-12-19/20 unit lineups, verified 2026-10-02."
+    },
+    {
+      "name": "Sonic Heart (and Signal)",
+      "kind": "group",
+      "members": [
+        "八宮めぐる",
+        "市川雛菜",
+        "月岡恋鐘",
+        "小宮果穂"
+      ],
+      "source": "https://idolmaster-official.jp/live_event/REFRAC7IONS_Still_blue/information/",
+      "basis": "member-gradient",
+      "note": "Union of the officially announced 2026-12-19/20 unit lineups, verified 2026-10-02."
+    },
+    {
+      "name": "∑ Desire",
+      "kind": "group",
+      "members": [
+        "芹沢あさひ",
+        "樋口円香",
+        "緋田美琴",
+        "斑鳩ルカ",
+        "西城樹里",
+        "田中摩美々"
+      ],
+      "source": "https://idolmaster-official.jp/live_event/REFRAC7IONS_Still_blue/information/",
+      "basis": "member-gradient",
+      "note": "Union of the officially announced 2026-12-19/20 unit lineups, verified 2026-10-02."
+    },
+    {
+      "name": "ザ・ふたりトラベラー",
+      "kind": "group",
+      "members": [
+        "郁田はるき",
+        "櫻木真乃"
+      ],
+      "source": "https://idolmaster-official.jp/live_event/REFRAC7IONS_Still_blue/information/",
+      "basis": "member-gradient",
+      "note": "Union of the officially announced 2026-12-19/20 unit lineups, verified 2026-10-02."
+    },
+    {
+      "name": "彼岸流",
+      "kind": "group",
+      "members": [
+        "有栖川夏葉",
+        "和泉愛依",
+        "桑山千雪",
+        "風野灯織",
+        "白瀬咲耶"
+      ],
+      "source": "https://idolmaster-official.jp/live_event/REFRAC7IONS_Still_blue/information/",
+      "basis": "member-gradient",
+      "note": "Union of the officially announced 2026-12-19/20 unit lineups, verified 2026-10-02."
+    },
+    {
+      "name": "No 1 feel alone",
+      "kind": "group",
+      "members": [
+        "杜野凛世",
+        "大崎甘奈",
+        "福丸小糸",
+        "三峰結華"
+      ],
+      "source": "https://idolmaster-official.jp/live_event/REFRAC7IONS_Still_blue/information/",
+      "basis": "member-gradient",
+      "note": "Union of the officially announced 2026-12-19/20 unit lineups, verified 2026-10-02."
+    },
+    {
+      "name": "Team.Stella",
+      "kind": "group",
+      "members": [
+        "櫻木真乃",
+        "月岡恋鐘",
+        "小宮果穂",
+        "園田智代子",
+        "大崎甘奈",
+        "芹沢あさひ",
+        "樋口円香",
+        "緋田美琴",
+        "鈴木羽那"
+      ],
+      "source": "https://shinycolors.lantis.jp/releaseinfo/laca-25301/",
+      "basis": "member-gradient",
+      "note": "Current HOPEFUL FE@THERS roster (2026-09-16); used for the group palette, not as song-specific singing credits."
+    },
+    {
+      "name": "Team.Luna",
+      "kind": "group",
+      "members": [
+        "風野灯織",
+        "田中摩美々",
+        "三峰結華",
+        "幽谷霧子",
+        "杜野凛世",
+        "大崎甜花",
+        "和泉愛依",
+        "福丸小糸",
+        "斑鳩ルカ"
+      ],
+      "source": "https://shinycolors.lantis.jp/releaseinfo/laca-25302/",
+      "basis": "member-gradient",
+      "note": "Current HOPEFUL FE@THERS roster (2026-09-16); used for the group palette, not as song-specific singing credits."
+    },
+    {
+      "name": "Team.Sol",
+      "kind": "group",
+      "members": [
+        "八宮めぐる",
+        "白瀬咲耶",
+        "西城樹里",
+        "有栖川夏葉",
+        "桑山千雪",
+        "黛冬優子",
+        "浅倉透",
+        "市川雛菜",
+        "七草にちか",
+        "郁田はるき"
+      ],
+      "source": "https://shinycolors.lantis.jp/releaseinfo/laca-25303/",
+      "basis": "member-gradient",
+      "note": "Current HOPEFUL FE@THERS roster (2026-09-16); used for the group palette, not as song-specific singing credits."
+    },
+    {
+      "name": "初星学園",
+      "kind": "group",
+      "color": "#f39800",
+      "members": [
+        "花海咲季",
+        "月村手毬",
+        "藤田ことね",
+        "有村麻央",
+        "葛城リーリヤ",
+        "倉本千奈",
+        "紫雲清夏",
+        "篠澤広",
+        "姫崎莉波",
+        "花海佑芽",
+        "秦谷美鈴",
+        "十王星南",
+        "雨夜燕"
+      ],
+      "source": "https://gakuen.idolmaster-official.jp/assets/css/share.css?date=251119",
+      "basis": "official-site-brand-accent",
+      "note": "Uses Gakuen Idolmaster's shared official-site orange (#f39800; .common__h2, ::selection and navigation accents) as a representative display color, not as a claim of a standardized official group image color. The retained roster comes from https://gakuen.idolmaster-official.jp/idol/ and does not assert that all members sing on the current track."
+    },
+    {
+      "name": "Re;IRIS",
+      "kind": "group",
+      "members": [
+        "花海咲季",
+        "月村手毬",
+        "藤田ことね"
+      ],
+      "source": "https://gakuen-label.idolmaster-official.jp/news/unr0zjrrmu",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "Begrazia",
+      "kind": "group",
+      "members": [
+        "花海佑芽",
+        "秦谷美鈴",
+        "十王星南"
+      ],
+      "source": "https://gakuen-label.idolmaster-official.jp/news/unr0zjrrmu",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "シンデレラガールズ",
+      "kind": "group",
+      "members": [
+        "相川千夏",
+        "愛野渚",
+        "相葉夕美",
+        "相原雪乃",
+        "赤城みりあ",
+        "赤西瑛梨華",
+        "浅野風香",
+        "浅利七海",
+        "アナスタシア",
+        "安部菜々",
+        "綾瀬穂乃香",
+        "荒木比奈",
+        "有浦柑奈",
+        "安斎都",
+        "イヴ・サンタクロース",
+        "五十嵐響子",
+        "池袋晶葉",
+        "伊集院惠",
+        "一ノ瀬志希",
+        "市原仁奈",
+        "今井加奈",
+        "井村雪菜",
+        "上田鈴帆",
+        "氏家むつみ",
+        "梅木音葉",
+        "江上椿",
+        "衛藤美紗希",
+        "海老原菜帆",
+        "及川雫",
+        "大石泉",
+        "太田優",
+        "大槻唯",
+        "大西由里子",
+        "大沼くるみ",
+        "大原みちる",
+        "岡崎泰葉",
+        "緒方智絵里",
+        "奥山沙織",
+        "乙倉悠貴",
+        "片桐早苗",
+        "上条春菜",
+        "神谷奈緒",
+        "川島瑞樹",
+        "神崎蘭子",
+        "岸部彩華",
+        "北川真尋",
+        "喜多日菜子",
+        "喜多見柚",
+        "木場真奈美",
+        "木村夏樹",
+        "キャシー・グラハム",
+        "桐野アヤ",
+        "桐生つかさ",
+        "日下部若葉",
+        "工藤忍",
+        "クラリス",
+        "栗原ネネ",
+        "黒川千秋",
+        "黒埼ちとせ",
+        "ケイト",
+        "古賀小春",
+        "輿水幸子",
+        "小関麗奈",
+        "小早川紗枝",
+        "小日向美穂",
+        "小松伊吹",
+        "小室千奈美",
+        "西園寺琴歌",
+        "財前時子",
+        "斉藤洋子",
+        "冴島清美",
+        "榊原里美",
+        "鷺沢文香",
+        "佐久間まゆ",
+        "櫻井桃華",
+        "佐々木千枝",
+        "佐城雪美",
+        "佐藤心",
+        "沢田麻理菜",
+        "椎名法子",
+        "塩見周子",
+        "篠原礼",
+        "渋谷凛",
+        "島村卯月",
+        "首藤葵",
+        "城ヶ崎美嘉",
+        "城ヶ崎莉嘉",
+        "白菊ほたる",
+        "白坂小梅",
+        "白雪千夜",
+        "杉坂海",
+        "涼宮星花",
+        "砂塚あきら",
+        "関裕美",
+        "瀬名詩織",
+        "仙崎恵磨",
+        "相馬夏美",
+        "高垣楓",
+        "高橋礼子",
+        "鷹富士茄子",
+        "高峯のあ",
+        "高森藍子",
+        "多田李衣菜",
+        "橘ありす",
+        "月宮雅",
+        "辻野あかり",
+        "土屋亜子",
+        "東郷あい",
+        "道明寺歌鈴",
+        "十時愛梨",
+        "長富蓮実",
+        "中野有香",
+        "ナターリア",
+        "並木芽衣子",
+        "成宮由愛",
+        "南条光",
+        "難波笑美",
+        "西川保奈美",
+        "西島櫂",
+        "新田美波",
+        "二宮飛鳥",
+        "丹羽仁美",
+        "野々村そら",
+        "服部瞳子",
+        "浜川愛結奈",
+        "浜口あやめ",
+        "早坂美玲",
+        "速水奏",
+        "原田美世",
+        "柊志乃",
+        "久川凪",
+        "久川颯",
+        "日野茜",
+        "姫川友紀",
+        "兵藤レナ",
+        "福山舞",
+        "藤居朋",
+        "藤本里奈",
+        "藤原肇",
+        "双葉杏",
+        "古澤頼子",
+        "ヘレン",
+        "北条加蓮",
+        "星輝子",
+        "堀裕子",
+        "本田未央",
+        "前川みく",
+        "槙原志保",
+        "松尾千鶴",
+        "松永涼",
+        "松原早耶",
+        "松本沙理奈",
+        "松山久美子",
+        "的場梨沙",
+        "間中美里",
+        "真鍋いつき",
+        "水木聖來",
+        "水野翠",
+        "水本ゆかり",
+        "三船美優",
+        "三村かな子",
+        "宮本フレデリカ",
+        "三好紗南",
+        "向井拓海",
+        "棟方愛海",
+        "村上巴",
+        "村松さくら",
+        "メアリー・コクラン",
+        "持田亜里沙",
+        "望月聖",
+        "桃井あずき",
+        "森久保乃々",
+        "諸星きらり",
+        "楊菲菲",
+        "八神マキノ",
+        "矢口美羽",
+        "柳清良",
+        "柳瀬美由紀",
+        "大和亜季",
+        "結城晴",
+        "遊佐こずえ",
+        "夢見りあむ",
+        "横山千佳",
+        "吉岡沙紀",
+        "依田芳乃",
+        "ライラ",
+        "龍崎薫",
+        "若林智香",
+        "脇山珠美",
+        "和久井留美"
+      ],
+      "source": "https://idolmaster-official.jp/_next/static/css/73251a727460c594.css",
+      "basis": "official-site-brand-accent",
+      "note": "Uses the official portal /cinderellagirls brand-page navigation accent (#2581c7) as a representative brand display color, not a standardized group image-color claim. The preserved roster is not a song-specific performer list.",
+      "color": "#2581c7",
+      "membership_sources": [
+        "https://idolmaster-official.jp/cinderellagirls/vote2026/vote"
+      ]
+    },
+    {
+      "name": "CINDERELLA PROJECT",
+      "kind": "group",
+      "members": [
+        "島村卯月",
+        "渋谷凛",
+        "本田未央",
+        "赤城みりあ",
+        "アナスタシア",
+        "緒方智絵里",
+        "神崎蘭子",
+        "城ヶ崎莉嘉",
+        "多田李衣菜",
+        "新田美波",
+        "双葉杏",
+        "前川みく",
+        "三村かな子",
+        "諸星きらり"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/CinderellaGirls.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "new generations",
+      "kind": "group",
+      "members": [
+        "島村卯月",
+        "渋谷凛",
+        "本田未央"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/CinderellaGirls.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "LOVE LAIKA",
+      "kind": "group",
+      "members": [
+        "新田美波",
+        "アナスタシア"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/CinderellaGirls.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "Rosenburg Engel",
+      "kind": "group",
+      "members": [
+        "神崎蘭子"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/CinderellaGirls.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "CANDY ISLAND",
+      "kind": "group",
+      "members": [
+        "三村かな子",
+        "双葉杏",
+        "緒方智絵里"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/CinderellaGirls.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "凸レーション",
+      "kind": "group",
+      "members": [
+        "諸星きらり",
+        "城ヶ崎莉嘉",
+        "赤城みりあ"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/CinderellaGirls.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "＊(Asterisk)",
+      "kind": "group",
+      "members": [
+        "前川みく",
+        "多田李衣菜"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/CinderellaGirls.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "LiPPS",
+      "kind": "group",
+      "members": [
+        "速水奏",
+        "塩見周子",
+        "宮本フレデリカ",
+        "一ノ瀬志希",
+        "城ヶ崎美嘉"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/CinderellaGirls.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "ワンステップス",
+      "kind": "group",
+      "members": [
+        "関裕美",
+        "白菊ほたる",
+        "森久保乃々"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/CinderellaGirls.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "セクシーギャルズ",
+      "kind": "group",
+      "members": [
+        "大槻唯",
+        "城ヶ崎美嘉",
+        "藤本里奈"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/CinderellaGirls.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "Triad Primus",
+      "kind": "group",
+      "members": [
+        "渋谷凛",
+        "神谷奈緒",
+        "北条加蓮"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/CinderellaGirls.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "ダークイルミネイト",
+      "kind": "group",
+      "members": [
+        "二宮飛鳥",
+        "神崎蘭子"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/CinderellaGirls.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "VelvetRose",
+      "kind": "group",
+      "members": [
+        "黒埼ちとせ",
+        "白雪千夜"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/CinderellaGirls.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "miroir",
+      "kind": "group",
+      "members": [
+        "久川凪",
+        "久川颯"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/CinderellaGirls.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "デア・アウローラ",
+      "kind": "group",
+      "members": [
+        "速水奏",
+        "新田美波"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/CinderellaGirls.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "レイジー・レイジー",
+      "kind": "group",
+      "members": [
+        "宮本フレデリカ",
+        "一ノ瀬志希"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/CinderellaGirls.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "ルビーカウンテス",
+      "kind": "group",
+      "members": [
+        "大槻唯",
+        "桐生つかさ",
+        "八神マキノ"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/CinderellaGirls.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "Sola-iris",
+      "kind": "group",
+      "members": [
+        "久川颯",
+        "乙倉悠貴"
+      ],
+      "source": "https://idolmaster-official.jp/live_event/cg_unittour/information/iwate.php",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "フェアリーテイル＊マイテイル",
+      "kind": "group",
+      "members": [
+        "小日向美穂",
+        "藤原肇"
+      ],
+      "source": "https://idolmaster-official.jp/live_event/cg_unittour/information/iwate.php",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "ヒーローヴァーサス",
+      "kind": "group",
+      "members": [
+        "小関麗奈",
+        "南条光"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/CinderellaGirls.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "ビートシューター",
+      "kind": "group",
+      "members": [
+        "結城晴",
+        "的場梨沙"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/CinderellaGirls.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "セクシーギルティ",
+      "kind": "group",
+      "members": [
+        "及川雫",
+        "片桐早苗",
+        "堀裕子"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/CinderellaGirls.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "ポジティブパッション",
+      "kind": "group",
+      "members": [
+        "本田未央",
+        "日野茜",
+        "高森藍子"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/CinderellaGirls.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "星纏天女",
+      "kind": "group",
+      "members": [
+        "鷺沢文香",
+        "鷹富士茄子"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/CinderellaGirls.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "#UNICUS",
+      "kind": "group",
+      "members": [
+        "辻野あかり",
+        "砂塚あきら",
+        "夢見りあむ"
+      ],
+      "source": "https://idolmaster-official.jp/live_event/cg_unittour/information/tokyo.php",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "羽衣小町",
+      "kind": "group",
+      "members": [
+        "小早川紗枝",
+        "塩見周子"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/CinderellaGirls.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "かくりよがたり",
+      "kind": "group",
+      "members": [
+        "依田芳乃",
+        "白坂小梅"
+      ],
+      "source": "https://idolmaster-official.jp/live_event/cg_unittour/information/ishikawa.php",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "可惜夜月",
+      "kind": "group",
+      "members": [
+        "浜口あやめ",
+        "脇山珠美",
+        "道明寺歌鈴"
+      ],
+      "source": "https://idolmaster-official.jp/live_event/cg_unittour/information/ishikawa.php",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "フォーリンシーサイド",
+      "kind": "group",
+      "members": [
+        "川島瑞樹",
+        "村上巴"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/CinderellaGirls.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "ピンクチェックスクール",
+      "kind": "group",
+      "members": [
+        "島村卯月",
+        "小日向美穂",
+        "五十嵐響子"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/CinderellaGirls.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "サイバーグラス",
+      "kind": "group",
+      "members": [
+        "上条春菜",
+        "荒木比奈"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/CinderellaGirls.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "エルドリッチ・ロアテラー",
+      "kind": "group",
+      "members": [
+        "白坂小梅",
+        "松永涼"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/CinderellaGirls.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "ブルーナポレオン",
+      "kind": "group",
+      "members": [
+        "佐々木千枝",
+        "荒木比奈",
+        "川島瑞樹",
+        "上条春菜",
+        "松本沙理奈"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/CinderellaGirls.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "GIRLS BE NEXT STEP",
+      "kind": "group",
+      "members": [
+        "関裕美",
+        "白菊ほたる",
+        "松尾千鶴",
+        "岡崎泰葉"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/CinderellaGirls.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "フリルドスクエア",
+      "kind": "group",
+      "members": [
+        "工藤忍",
+        "綾瀬穂乃香",
+        "喜多見柚",
+        "桃井あずき"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/CinderellaGirls.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "ROCK THE BEAT",
+      "kind": "group",
+      "members": [
+        "多田李衣菜",
+        "木村夏樹"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/CinderellaGirls.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "炎陣",
+      "kind": "group",
+      "members": [
+        "向井拓海",
+        "藤本里奈",
+        "松永涼",
+        "大和亜季",
+        "木村夏樹"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/CinderellaGirls.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "U149",
+      "kind": "group",
+      "members": [
+        "赤城みりあ",
+        "市原仁奈",
+        "古賀小春",
+        "的場梨沙",
+        "龍崎薫",
+        "櫻井桃華",
+        "佐々木千枝",
+        "橘ありす",
+        "結城晴"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/CinderellaGirls.rdf",
+      "basis": "member-gradient"
+    }
+  ]
+}

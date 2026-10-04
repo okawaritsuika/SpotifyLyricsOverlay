@@ -1,0 +1,2162 @@
+{
+  "schema_version": 1,
+  "verified_at": "2026-10-02",
+  "scope": [
+    "765AS",
+    "Million Live",
+    "SideM",
+    "Dearly Stars / 876",
+    "vα-liv",
+    "Starlit Season / 961"
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/imas/imasparql/blob/master/RDFs/765AS.rdf",
+      "title": "im@sparql 765AS image colors (community-maintained RDF)"
+    },
+    {
+      "url": "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf",
+      "title": "im@sparql 765MillionStars image colors (community-maintained RDF)"
+    },
+    {
+      "url": "https://github.com/imas/imasparql/blob/master/RDFs/876.rdf",
+      "title": "im@sparql 876 image colors (community-maintained RDF)"
+    },
+    {
+      "url": "https://github.com/imas/imasparql/blob/master/RDFs/961.rdf",
+      "title": "im@sparql 961 image colors (community-maintained RDF)"
+    },
+    {
+      "url": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "title": "im@sparql SideM image colors (community-maintained RDF)"
+    },
+    {
+      "url": "https://github.com/imas/imasparql/blob/master/RDFs/Staff.rdf",
+      "title": "im@sparql Staff image colors (community-maintained RDF)"
+    },
+    {
+      "url": "https://github.com/imas/imasparql/blob/master/RDFs/Other.rdf",
+      "title": "im@sparql Other image colors (community-maintained RDF)"
+    },
+    {
+      "url": "https://github.com/imas/imasparql/blob/master/RDFs/Units/SideM.rdf",
+      "title": "im@sparql Units/SideM image colors (community-maintained RDF)"
+    },
+    {
+      "url": "https://github.com/imas/imasparql/blob/master/RDFs/Units/765AS.rdf",
+      "title": "Verified group membership for member-color blending (765PRO ALLSTARS)"
+    },
+    {
+      "url": "https://millionlive-anime.idolmaster-official.jp/character/",
+      "title": "Verified group membership for member-color blending (765PRO ALLSTARS)"
+    },
+    {
+      "url": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "title": "Verified group membership for member-color blending (765 MILLION ALLSTARS)"
+    },
+    {
+      "url": "https://github.com/imas/imasparql/blob/master/RDFs/Units/Other.rdf",
+      "title": "Verified group membership for member-color blending (Dearly Stars)"
+    },
+    {
+      "url": "https://idolmaster-official.jp/va-liv",
+      "title": "Verified group membership for member-color blending (vα-liv)"
+    },
+    {
+      "url": "https://dengekionline.com/elem/000/001/883/1883057/",
+      "title": "Verified group membership for member-color blending (Clover)"
+    },
+    {
+      "url": "https://millionlive-anime.idolmaster-official.jp/news/863/",
+      "title": "Verified group membership for member-color blending (MILLIONSTARS Team1st)"
+    },
+    {
+      "url": "https://lantis.jp/imas/release_LACM-24426.html",
+      "title": "Verified group membership for member-color blending (MILLIONSTARS Team6th)"
+    },
+    {
+      "url": "https://lantis.jp/imas/release_LACM-24427.html",
+      "title": "Verified group membership for member-color blending (MILLIONSTARS Team7th)"
+    },
+    {
+      "url": "https://lantis.jp/imas/release_LACM-24428.html",
+      "title": "Verified group membership for member-color blending (MILLIONSTARS Team8th)"
+    }
+  ],
+  "coverage_note": "Community-maintained im@sparql image-color values are not a claim of official HEX standardization. Preserves all 111 idols and 16 SideM unit colors. Of 95 groups, 765PRO ALLSTARS, 765 MILLION ALLSTARS, MILLIONSTARS, 315 ALLSTARS and 315 STARS use official-portal brand display accents; the other 74 roster-based units use member-color gradients. Brand accents and inferred gradients are not official group image-color standards. Roster lists do not infer the singers in an individual track. Akizuki Ryo uses the SideM catalog color. Project LUMINOUS and THE IDOLM@STER FIVE STARS!!!!! remain unassigned.",
+  "entries": [
+    {
+      "name": "天海 春香",
+      "color": "#e22b30",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765AS.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "如月 千早",
+      "color": "#2743d2",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765AS.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "星井 美希",
+      "color": "#b4e04b",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765AS.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "萩原 雪歩",
+      "color": "#d3dde9",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765AS.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "高槻 やよい",
+      "color": "#f39939",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765AS.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "秋月 律子",
+      "color": "#01a860",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765AS.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "三浦 あずさ",
+      "color": "#9238be",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765AS.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "水瀬 伊織",
+      "color": "#fd99e1",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765AS.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "菊地 真",
+      "color": "#515558",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765AS.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "双海 亜美",
+      "color": "#ffe43f",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765AS.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "双海 真美",
+      "color": "#ffe43f",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765AS.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "四条 貴音",
+      "color": "#a6126a",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765AS.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "我那覇 響",
+      "color": "#01adb9",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765AS.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "音無 小鳥",
+      "color": "#fff09f",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Staff.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "春日 未来",
+      "color": "#ea5b76",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "最上 静香",
+      "color": "#6495cf",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "伊吹 翼",
+      "color": "#fed552",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "エミリー スチュアート",
+      "color": "#554171",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "大神 環",
+      "color": "#ee762e",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "北上 麗花",
+      "color": "#6bb6b0",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "北沢 志保",
+      "color": "#afa690",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "木下 ひなた",
+      "color": "#d1342c",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "高坂 海美",
+      "color": "#e9739b",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "桜守 歌織",
+      "color": "#274079",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "佐竹 美奈子",
+      "color": "#58a6dc",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "篠宮 可憐",
+      "color": "#b63b40",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "島原 エレナ",
+      "color": "#9bce92",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "ジュリア",
+      "color": "#d7385f",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "白石 紬",
+      "color": "#ebe1ff",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "周防 桃子",
+      "color": "#efb864",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "高山 紗代子",
+      "color": "#7f6575",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "田中 琴葉",
+      "color": "#92cfbb",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "天空橋 朋花",
+      "color": "#bee3e3",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "徳川 まつり",
+      "color": "#5abfb7",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "所 恵美",
+      "color": "#454341",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "豊川 風花",
+      "color": "#7278a8",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "中谷 育",
+      "color": "#f7e78e",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "永吉 昴",
+      "color": "#aeb49c",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "七尾 百合子",
+      "color": "#c7b83c",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "二階堂 千鶴",
+      "color": "#f19557",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "野々原 茜",
+      "color": "#eb613f",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "箱崎 星梨花",
+      "color": "#ed90ba",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "馬場 このみ",
+      "color": "#f1becb",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "福田 のり子",
+      "color": "#eceb70",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "舞浜 歩",
+      "color": "#e25a9b",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "真壁 瑞希",
+      "color": "#99b7dc",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "松田 亜利沙",
+      "color": "#b54461",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "宮尾 美也",
+      "color": "#d7a96b",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "望月 杏奈",
+      "color": "#7e6ca8",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "百瀬 莉緒",
+      "color": "#f19591",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "矢吹 可奈",
+      "color": "#f5ad3b",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "横山 奈緒",
+      "color": "#788bc5",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "ロコ",
+      "color": "#fff03c",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/765MillionStars.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "天ヶ瀬 冬馬",
+      "color": "#f32333",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "御手洗 翔太",
+      "color": "#94d509",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "伊集院 北斗",
+      "color": "#1c23aa",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "天道 輝",
+      "color": "#e31c1a",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "桜庭 薫",
+      "color": "#1945ba",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "柏木 翼",
+      "color": "#3baf29",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "都築 圭",
+      "color": "#c5a6e2",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "神楽 麗",
+      "color": "#3d5ac8",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "鷹城 恭二",
+      "color": "#6ac4e9",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "ピエール",
+      "color": "#8bdc63",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "渡辺 みのり",
+      "color": "#fa90a2",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "蒼井 悠介",
+      "color": "#fee806",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "蒼井 享介",
+      "color": "#23cd7a",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "握野 英雄",
+      "color": "#57b3e5",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "木村 龍",
+      "color": "#ee7220",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "信玄 誠司",
+      "color": "#78853a",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "華村 翔真",
+      "color": "#7664a0",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "猫柳 キリオ",
+      "color": "#f7bd05",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "清澄 九郎",
+      "color": "#79a5df",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "秋山 隼人",
+      "color": "#fe6b02",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "冬美 旬",
+      "color": "#1845b9",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "榊 夏来",
+      "color": "#24cad2",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "若里 春名",
+      "color": "#71d448",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "伊瀬谷 四季",
+      "color": "#f125c1",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "紅井 朱雀",
+      "color": "#e63c2e",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "黒野 玄武",
+      "color": "#0f0c9f",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "神谷 幸広",
+      "color": "#f09079",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "東雲 荘一郎",
+      "color": "#02946c",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "アスラン＝ベルゼビュートⅡ世",
+      "color": "#606cb2",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "卯月 巻緒",
+      "color": "#f8c559",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "水嶋 咲",
+      "color": "#fa7eb4",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "岡村 直央",
+      "color": "#1f1451",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "橘 志狼",
+      "color": "#d13037",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "姫野 かのん",
+      "color": "#f7b5c4",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "硲 道夫",
+      "color": "#436ca9",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "舞田 類",
+      "color": "#f5d24b",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "山下 次郎",
+      "color": "#ee7602",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "大河 タケル",
+      "color": "#0e0c9f",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "円城寺 道流",
+      "color": "#ca9111",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "牙崎 漣",
+      "color": "#ac162a",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "秋月 涼",
+      "color": "#70b449",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "兜 大吾",
+      "color": "#e41c1a",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "九十九 一希",
+      "color": "#cf9e51",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "葛之葉 雨彦",
+      "color": "#111721",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "北村 想楽",
+      "color": "#477525",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "古論 クリス",
+      "color": "#1fc1dd",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "天峰 秀",
+      "color": "#1d9add",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "花園 百々人",
+      "color": "#a2d55e",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "眉見 鋭心",
+      "color": "#d72630",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "日高 愛",
+      "color": "#e85786",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/876.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "水谷 絵理",
+      "color": "#00adb9",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/876.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "上水流 宇宙",
+      "color": "#56ccf2",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/876.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "灯里 愛夏",
+      "color": "#ff4554",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/876.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "レトラ",
+      "color": "#d7f930",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/876.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "奥空 心白",
+      "color": "#fcfad4",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Other.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "玲音",
+      "color": "#5a2b8d",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/961.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "詩花",
+      "color": "#e5f9e4",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/961.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "亜夜",
+      "color": "#3f3538",
+      "kind": "idol",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/961.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "Jupiter",
+      "color": "#42db42",
+      "kind": "group",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "DRAMATIC STARS",
+      "color": "#ffa90a",
+      "kind": "group",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "Altessimo",
+      "color": "#f6f45e",
+      "kind": "group",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "Beit",
+      "color": "#26d4ff",
+      "kind": "group",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "W",
+      "color": "#f7d828",
+      "kind": "group",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "FRAME",
+      "color": "#338033",
+      "kind": "group",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "彩",
+      "color": "#7f31cc",
+      "kind": "group",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "High×Joker",
+      "color": "#ff0000",
+      "kind": "group",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "神速一魂",
+      "color": "#9fa5ab",
+      "kind": "group",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "Café Parade",
+      "color": "#cc66cc",
+      "kind": "group",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "もふもふえん",
+      "color": "#ff99d6",
+      "kind": "group",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "S.E.M",
+      "color": "#ff70e2",
+      "kind": "group",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "THE 虎牙道",
+      "color": "#4a4a4a",
+      "kind": "group",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "F-LAGS",
+      "color": "#3d50ff",
+      "kind": "group",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "Legenders",
+      "color": "#6880a0",
+      "kind": "group",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "C.FIRST",
+      "color": "#00ccbb",
+      "kind": "group",
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/SideM.rdf",
+      "basis": "community"
+    },
+    {
+      "name": "765PRO ALLSTARS",
+      "kind": "group",
+      "members": [
+        "三浦 あずさ",
+        "萩原 雪歩",
+        "秋月 律子",
+        "双海 真美",
+        "高槻 やよい",
+        "星井 美希",
+        "天海 春香",
+        "如月 千早",
+        "我那覇 響",
+        "水瀬 伊織",
+        "四条 貴音",
+        "双海 亜美",
+        "菊地 真"
+      ],
+      "source": "https://idolmaster-official.jp/_next/static/css/73251a727460c594.css",
+      "basis": "official-site-brand-accent",
+      "membership_sources": [
+        "https://github.com/imas/imasparql/blob/master/RDFs/Units/765AS.rdf",
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ],
+      "note": "Uses the official portal /idolmaster brand-page navigation accent (#ff74b8) as a representative brand display color, not a standardized group image-color claim. The preserved roster is not a song-specific performer list.",
+      "color": "#ff74b8"
+    },
+    {
+      "name": "竜宮小町",
+      "kind": "group",
+      "members": [
+        "双海 亜美",
+        "三浦 あずさ",
+        "水瀬 伊織"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/765AS.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "765 MILLION ALLSTARS",
+      "kind": "group",
+      "members": [
+        "ジュリア",
+        "佐竹 美奈子",
+        "春日 未来",
+        "所 恵美",
+        "中谷 育",
+        "三浦 あずさ",
+        "松田 亜利沙",
+        "萩原 雪歩",
+        "秋月 律子",
+        "双海 真美",
+        "伊吹 翼",
+        "舞浜 歩",
+        "高坂 海美",
+        "島原 エレナ",
+        "横山 奈緒",
+        "七尾 百合子",
+        "豊川 風花",
+        "北沢 志保",
+        "高山 紗代子",
+        "高槻 やよい",
+        "北上 麗花",
+        "永吉 昴",
+        "大神 環",
+        "馬場 このみ",
+        "宮尾 美也",
+        "矢吹 可奈",
+        "ロコ",
+        "百瀬 莉緒",
+        "徳川 まつり",
+        "望月 杏奈",
+        "木下 ひなた",
+        "天空橋 朋花",
+        "星井 美希",
+        "天海 春香",
+        "最上 静香",
+        "如月 千早",
+        "福田 のり子",
+        "我那覇 響",
+        "二階堂 千鶴",
+        "エミリー スチュアート",
+        "篠宮 可憐",
+        "真壁 瑞希",
+        "水瀬 伊織",
+        "四条 貴音",
+        "双海 亜美",
+        "田中 琴葉",
+        "周防 桃子",
+        "野々原 茜",
+        "菊地 真",
+        "箱崎 星梨花",
+        "白石 紬",
+        "桜守 歌織"
+      ],
+      "source": "https://idolmaster-official.jp/_next/static/css/73251a727460c594.css",
+      "basis": "official-site-brand-accent",
+      "membership_sources": [
+        "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ],
+      "note": "Uses the official portal /millionlive brand-page navigation accent (#ffc000) as a representative brand display color, not a standardized group image-color claim. The preserved roster is not a song-specific performer list.",
+      "color": "#ffc000"
+    },
+    {
+      "name": "MILLIONSTARS",
+      "kind": "group",
+      "members": [
+        "ジュリア",
+        "佐竹 美奈子",
+        "春日 未来",
+        "所 恵美",
+        "中谷 育",
+        "松田 亜利沙",
+        "伊吹 翼",
+        "舞浜 歩",
+        "高坂 海美",
+        "島原 エレナ",
+        "横山 奈緒",
+        "七尾 百合子",
+        "豊川 風花",
+        "北沢 志保",
+        "高山 紗代子",
+        "北上 麗花",
+        "永吉 昴",
+        "大神 環",
+        "馬場 このみ",
+        "宮尾 美也",
+        "矢吹 可奈",
+        "ロコ",
+        "百瀬 莉緒",
+        "徳川 まつり",
+        "望月 杏奈",
+        "木下 ひなた",
+        "天空橋 朋花",
+        "最上 静香",
+        "福田 のり子",
+        "二階堂 千鶴",
+        "エミリー スチュアート",
+        "篠宮 可憐",
+        "真壁 瑞希",
+        "田中 琴葉",
+        "周防 桃子",
+        "野々原 茜",
+        "箱崎 星梨花",
+        "白石 紬",
+        "桜守 歌織"
+      ],
+      "source": "https://idolmaster-official.jp/_next/static/css/73251a727460c594.css",
+      "basis": "official-site-brand-accent",
+      "membership_sources": [
+        "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+        "https://millionlive-anime.idolmaster-official.jp/character/"
+      ],
+      "note": "Uses the official portal /millionlive brand-page navigation accent (#ffc000) as a representative brand display color, not a standardized group image-color claim. The preserved roster is not a song-specific performer list.",
+      "color": "#ffc000"
+    },
+    {
+      "name": "フェアリースターズ",
+      "kind": "group",
+      "members": [
+        "所 恵美",
+        "舞浜 歩",
+        "真壁 瑞希",
+        "ロコ",
+        "永吉 昴",
+        "百瀬 莉緒",
+        "天空橋 朋花",
+        "周防 桃子",
+        "白石 紬",
+        "最上 静香",
+        "二階堂 千鶴",
+        "北沢 志保",
+        "ジュリア"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "エンジェルスターズ",
+      "kind": "group",
+      "members": [
+        "野々原 茜",
+        "桜守 歌織",
+        "島原 エレナ",
+        "箱崎 星梨花",
+        "馬場 このみ",
+        "伊吹 翼",
+        "大神 環",
+        "宮尾 美也",
+        "木下 ひなた",
+        "望月 杏奈",
+        "豊川 風花",
+        "篠宮 可憐",
+        "北上 麗花"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "プリンセススターズ",
+      "kind": "group",
+      "members": [
+        "松田 亜利沙",
+        "エミリー スチュアート",
+        "横山 奈緒",
+        "福田 のり子",
+        "高山 紗代子",
+        "矢吹 可奈",
+        "春日 未来",
+        "高坂 海美",
+        "田中 琴葉",
+        "七尾 百合子",
+        "佐竹 美奈子",
+        "徳川 まつり",
+        "中谷 育"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "夜想令嬢 -GRAC&E NOCTURNE-",
+      "kind": "group",
+      "members": [
+        "所 恵美",
+        "天空橋 朋花",
+        "二階堂 千鶴",
+        "百瀬 莉緒"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "Cleasky",
+      "kind": "group",
+      "members": [
+        "宮尾 美也",
+        "島原 エレナ"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "トゥインクルリズム",
+      "kind": "group",
+      "members": [
+        "中谷 育",
+        "七尾 百合子",
+        "松田 亜利沙"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "EScape",
+      "kind": "group",
+      "members": [
+        "真壁 瑞希",
+        "北沢 志保",
+        "白石 紬"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "4Luxury",
+      "kind": "group",
+      "members": [
+        "桜守 歌織",
+        "北上 麗花",
+        "豊川 風花",
+        "馬場 このみ"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "閃光☆HANABI団",
+      "kind": "group",
+      "members": [
+        "高山 紗代子",
+        "横山 奈緒",
+        "高坂 海美",
+        "佐竹 美奈子",
+        "福田 のり子"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "D/Zeal",
+      "kind": "group",
+      "members": [
+        "最上 静香",
+        "ジュリア"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "りるきゃん ～3 little candy～",
+      "kind": "group",
+      "members": [
+        "野々原 茜",
+        "篠宮 可憐",
+        "伊吹 翼"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "Charlotte・Charlotte",
+      "kind": "group",
+      "members": [
+        "徳川 まつり",
+        "エミリー スチュアート"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "Jelly PoP Beans",
+      "kind": "group",
+      "members": [
+        "ロコ",
+        "舞浜 歩",
+        "永吉 昴",
+        "周防 桃子"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "ピコピコプラネッツ",
+      "kind": "group",
+      "members": [
+        "木下 ひなた",
+        "箱崎 星梨花",
+        "大神 環",
+        "望月 杏奈"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "STAR ELEMENTS",
+      "kind": "group",
+      "members": [
+        "春日 未来",
+        "矢吹 可奈",
+        "田中 琴葉"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "Chrono-Lexica",
+      "kind": "group",
+      "members": [
+        "七尾 百合子",
+        "望月 杏奈",
+        "永吉 昴",
+        "真壁 瑞希",
+        "ロコ"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "Xs",
+      "kind": "group",
+      "members": [
+        "星井 美希",
+        "萩原 雪歩",
+        "菊地 真",
+        "水瀬 伊織"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "Sherry 'n Cherry",
+      "kind": "group",
+      "members": [
+        "馬場 このみ",
+        "百瀬 莉緒"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "ARCANA",
+      "kind": "group",
+      "members": [
+        "三浦 あずさ",
+        "如月 千早",
+        "四条 貴音"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "花咲夜",
+      "kind": "group",
+      "members": [
+        "エミリー スチュアート",
+        "白石 紬",
+        "天空橋 朋花"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "Jus-2-Mint",
+      "kind": "group",
+      "members": [
+        "佐竹 美奈子",
+        "横山 奈緒"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "miraclesonic★expassion",
+      "kind": "group",
+      "members": [
+        "舞浜 歩",
+        "福田 のり子",
+        "島原 エレナ",
+        "高坂 海美"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "Fleuranges",
+      "kind": "group",
+      "members": [
+        "篠宮 可憐",
+        "箱崎 星梨花",
+        "宮尾 美也",
+        "木下 ひなた"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "オペラセリア・煌輝座",
+      "kind": "group",
+      "members": [
+        "北沢 志保",
+        "桜守 歌織",
+        "徳川 まつり",
+        "田中 琴葉"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "ダイヤモンドダイバー◇",
+      "kind": "group",
+      "members": [
+        "高槻 やよい",
+        "天海 春香",
+        "我那覇 響"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "TIntMe!",
+      "kind": "group",
+      "members": [
+        "大神 環",
+        "中谷 育",
+        "周防 桃子"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "TRICK&TREAT",
+      "kind": "group",
+      "members": [
+        "北上 麗花",
+        "野々原 茜"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "chicAAmor",
+      "kind": "group",
+      "members": [
+        "高山 紗代子",
+        "豊川 風花",
+        "ジュリア",
+        "二階堂 千鶴"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "≡君彩≡",
+      "kind": "group",
+      "members": [
+        "所 恵美",
+        "松田 亜利沙",
+        "矢吹 可奈"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "ARMooo",
+      "kind": "group",
+      "members": [
+        "双海 真美",
+        "秋月 律子",
+        "双海 亜美"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "ストロベリーポップムーン",
+      "kind": "group",
+      "members": [
+        "春日 未来",
+        "最上 静香",
+        "伊吹 翼"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "BRIGHT DIAMOND",
+      "kind": "group",
+      "members": [
+        "徳川 まつり",
+        "所 恵美",
+        "四条 貴音",
+        "伊吹 翼",
+        "田中 琴葉",
+        "萩原 雪歩",
+        "双海 真美",
+        "百瀬 莉緒",
+        "桜守 歌織",
+        "春日 未来",
+        "宮尾 美也",
+        "周防 桃子",
+        "水瀬 伊織"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "CLEVER CLOVER",
+      "kind": "group",
+      "members": [
+        "高坂 海美",
+        "ロコ",
+        "箱崎 星梨花",
+        "三浦 あずさ",
+        "木下 ひなた",
+        "秋月 律子",
+        "馬場 このみ",
+        "横山 奈緒",
+        "大神 環",
+        "真壁 瑞希",
+        "二階堂 千鶴",
+        "菊地 真",
+        "島原 エレナ"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "LOVERS HEART",
+      "kind": "group",
+      "members": [
+        "天空橋 朋花",
+        "高槻 やよい",
+        "佐竹 美奈子",
+        "七尾 百合子",
+        "福田 のり子",
+        "松田 亜利沙",
+        "高山 紗代子",
+        "如月 千早",
+        "北上 麗花",
+        "ジュリア",
+        "矢吹 可奈",
+        "望月 杏奈",
+        "天海 春香"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "SHADE OF SPADE",
+      "kind": "group",
+      "members": [
+        "中谷 育",
+        "舞浜 歩",
+        "星井 美希",
+        "篠宮 可憐",
+        "最上 静香",
+        "北沢 志保",
+        "永吉 昴",
+        "エミリー スチュアート",
+        "双海 亜美",
+        "豊川 風花",
+        "我那覇 響",
+        "野々原 茜",
+        "白石 紬"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "レジェンドデイズ",
+      "kind": "group",
+      "members": [
+        "我那覇 響",
+        "秋月 律子",
+        "高槻 やよい",
+        "双海 亜美",
+        "水瀬 伊織"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "乙女ストーム！",
+      "kind": "group",
+      "members": [
+        "春日 未来",
+        "伊吹 翼",
+        "七尾 百合子",
+        "真壁 瑞希",
+        "望月 杏奈"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "クレシェンドブルー",
+      "kind": "group",
+      "members": [
+        "最上 静香",
+        "北上 麗花",
+        "北沢 志保",
+        "野々原 茜",
+        "箱崎 星梨花"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "エターナルハーモニー",
+      "kind": "group",
+      "members": [
+        "ジュリア",
+        "如月 千早",
+        "エミリー スチュアート",
+        "徳川 まつり",
+        "豊川 風花"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "リコッタ",
+      "kind": "group",
+      "members": [
+        "天海 春香",
+        "周防 桃子",
+        "福田 のり子",
+        "松田 亜利沙",
+        "横山 奈緒"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "灼熱少女",
+      "kind": "group",
+      "members": [
+        "田中 琴葉",
+        "大神 環",
+        "高坂 海美",
+        "所 恵美",
+        "宮尾 美也"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "BIRTH",
+      "kind": "group",
+      "members": [
+        "菊地 真",
+        "萩原 雪歩",
+        "舞浜 歩",
+        "三浦 あずさ",
+        "矢吹 可奈"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "ミックスナッツ",
+      "kind": "group",
+      "members": [
+        "馬場 このみ",
+        "木下 ひなた",
+        "佐竹 美奈子",
+        "中谷 育",
+        "双海 真美"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "ミルキーウェイ",
+      "kind": "group",
+      "members": [
+        "星井 美希",
+        "高山 紗代子",
+        "天空橋 朋花",
+        "永吉 昴",
+        "二階堂 千鶴"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "ARRIVE",
+      "kind": "group",
+      "members": [
+        "篠宮 可憐",
+        "四条 貴音",
+        "島原 エレナ",
+        "百瀬 莉緒",
+        "ロコ"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "キャンサー",
+      "kind": "group",
+      "members": [
+        "エミリー スチュアート",
+        "木下 ひなた",
+        "横山 奈緒"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "レオ",
+      "kind": "group",
+      "members": [
+        "島原 エレナ",
+        "中谷 育",
+        "ロコ"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "リブラ",
+      "kind": "group",
+      "members": [
+        "伊吹 翼",
+        "佐竹 美奈子",
+        "福田 のり子"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "カプリコーン",
+      "kind": "group",
+      "members": [
+        "望月 杏奈",
+        "百瀬 莉緒",
+        "矢吹 可奈"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "Sunshine Rhythm",
+      "kind": "group",
+      "members": [
+        "伊吹 翼",
+        "エミリー スチュアート",
+        "木下 ひなた",
+        "桜守 歌織",
+        "佐竹 美奈子",
+        "島原 エレナ",
+        "中谷 育",
+        "福田 のり子",
+        "望月 杏奈",
+        "百瀬 莉緒",
+        "矢吹 可奈",
+        "横山 奈緒",
+        "ロコ"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "サジタリアス",
+      "kind": "group",
+      "members": [
+        "所 恵美",
+        "舞浜 歩",
+        "真壁 瑞希"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "ピスケス",
+      "kind": "group",
+      "members": [
+        "篠宮 可憐",
+        "天空橋 朋花",
+        "二階堂 千鶴"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "ウィルゴ",
+      "kind": "group",
+      "members": [
+        "永吉 昴",
+        "七尾 百合子",
+        "最上 静香"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "アクアリウス",
+      "kind": "group",
+      "members": [
+        "ジュリア",
+        "北上 麗花",
+        "高山 紗代子"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "BlueMoon Harmony",
+      "kind": "group",
+      "members": [
+        "北上 麗花",
+        "篠宮 可憐",
+        "ジュリア",
+        "白石 紬",
+        "高山 紗代子",
+        "天空橋 朋花",
+        "所 恵美",
+        "永吉 昴",
+        "七尾 百合子",
+        "二階堂 千鶴",
+        "舞浜 歩",
+        "真壁 瑞希",
+        "最上 静香"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "スコーピオ",
+      "kind": "group",
+      "members": [
+        "北沢 志保",
+        "高坂 海美",
+        "松田 亜利沙",
+        "田中 琴葉"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "アリエス",
+      "kind": "group",
+      "members": [
+        "大神 環",
+        "野々原 茜",
+        "箱崎 星梨花"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "タウラス",
+      "kind": "group",
+      "members": [
+        "春日 未来",
+        "徳川 まつり",
+        "宮尾 美也"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "ジェミニ",
+      "kind": "group",
+      "members": [
+        "周防 桃子",
+        "豊川 風花",
+        "馬場 このみ"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "Starlight Melody",
+      "kind": "group",
+      "members": [
+        "大神 環",
+        "春日 未来",
+        "北沢 志保",
+        "高坂 海美",
+        "周防 桃子",
+        "田中 琴葉",
+        "徳川 まつり",
+        "豊川 風花",
+        "野々原 茜",
+        "箱崎 星梨花",
+        "馬場 このみ",
+        "松田 亜利沙",
+        "宮尾 美也"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "Dearly Stars",
+      "kind": "group",
+      "members": [
+        "日高 愛",
+        "水谷 絵理",
+        "秋月 涼"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/Other.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "vα-liv",
+      "kind": "group",
+      "members": [
+        "灯里 愛夏",
+        "上水流 宇宙",
+        "レトラ"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/Other.rdf",
+      "basis": "member-gradient",
+      "membership_sources": [
+        "https://github.com/imas/imasparql/blob/master/RDFs/Units/Other.rdf",
+        "https://idolmaster-official.jp/va-liv"
+      ]
+    },
+    {
+      "name": "ZWEIGLANZ",
+      "kind": "group",
+      "members": [
+        "玲音",
+        "詩花"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "DIAMANT",
+      "kind": "group",
+      "members": [
+        "玲音",
+        "詩花",
+        "亜夜"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/765AS.rdf",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "Clover",
+      "kind": "group",
+      "members": [
+        "北沢 志保",
+        "高坂 海美",
+        "矢吹 可奈",
+        "箱崎 星梨花"
+      ],
+      "source": "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+      "basis": "member-gradient",
+      "membership_sources": [
+        "https://github.com/imas/imasparql/blob/master/RDFs/Units/MillionLive.rdf",
+        "https://dengekionline.com/elem/000/001/883/1883057/"
+      ]
+    },
+    {
+      "name": "MILLIONSTARS Team1st",
+      "kind": "group",
+      "members": [
+        "望月 杏奈",
+        "佐竹 美奈子",
+        "北沢 志保",
+        "天空橋 朋花"
+      ],
+      "source": "https://millionlive-anime.idolmaster-official.jp/news/863/",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "MILLIONSTARS Team2nd",
+      "kind": "group",
+      "members": [
+        "篠宮 可憐",
+        "真壁 瑞希",
+        "高坂 海美",
+        "福田 のり子",
+        "百瀬 莉緒"
+      ],
+      "source": "https://millionlive-anime.idolmaster-official.jp/news/863/",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "MILLIONSTARS Team3rd",
+      "kind": "group",
+      "members": [
+        "豊川 風花",
+        "七尾 百合子",
+        "田中 琴葉",
+        "所 恵美",
+        "大神 環"
+      ],
+      "source": "https://millionlive-anime.idolmaster-official.jp/news/863/",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "MILLIONSTARS Team4th",
+      "kind": "group",
+      "members": [
+        "ロコ",
+        "横山 奈緒",
+        "馬場 このみ",
+        "周防 桃子",
+        "松田 亜利沙",
+        "二階堂 千鶴"
+      ],
+      "source": "https://millionlive-anime.idolmaster-official.jp/news/863/",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "MILLIONSTARS Team5th",
+      "kind": "group",
+      "members": [
+        "野々原 茜",
+        "宮尾 美也",
+        "高山 紗代子",
+        "箱崎 星梨花",
+        "中谷 育"
+      ],
+      "source": "https://millionlive-anime.idolmaster-official.jp/news/863/",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "MILLIONSTARS Team6th",
+      "kind": "group",
+      "members": [
+        "徳川 まつり",
+        "エミリー スチュアート",
+        "木下 ひなた",
+        "島原 エレナ",
+        "永吉 昴"
+      ],
+      "source": "https://lantis.jp/imas/release_LACM-24426.html",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "MILLIONSTARS Team7th",
+      "kind": "group",
+      "members": [
+        "ジュリア",
+        "北上 麗花",
+        "舞浜 歩",
+        "矢吹 可奈"
+      ],
+      "source": "https://lantis.jp/imas/release_LACM-24427.html",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "MILLIONSTARS Team8th",
+      "kind": "group",
+      "members": [
+        "春日 未来",
+        "最上 静香",
+        "伊吹 翼",
+        "桜守 歌織",
+        "白石 紬"
+      ],
+      "source": "https://lantis.jp/imas/release_LACM-24428.html",
+      "basis": "member-gradient"
+    },
+    {
+      "name": "315 ALLSTARS",
+      "kind": "group",
+      "members": [
+        "天ヶ瀬 冬馬",
+        "御手洗 翔太",
+        "伊集院 北斗",
+        "天道 輝",
+        "桜庭 薫",
+        "柏木 翼",
+        "都築 圭",
+        "神楽 麗",
+        "鷹城 恭二",
+        "ピエール",
+        "渡辺 みのり",
+        "蒼井 悠介",
+        "蒼井 享介",
+        "握野 英雄",
+        "木村 龍",
+        "信玄 誠司",
+        "華村 翔真",
+        "猫柳 キリオ",
+        "清澄 九郎",
+        "秋山 隼人",
+        "冬美 旬",
+        "榊 夏来",
+        "若里 春名",
+        "伊瀬谷 四季",
+        "紅井 朱雀",
+        "黒野 玄武",
+        "神谷 幸広",
+        "東雲 荘一郎",
+        "アスラン＝ベルゼビュートⅡ世",
+        "卯月 巻緒",
+        "水嶋 咲",
+        "岡村 直央",
+        "橘 志狼",
+        "姫野 かのん",
+        "硲 道夫",
+        "舞田 類",
+        "山下 次郎",
+        "大河 タケル",
+        "円城寺 道流",
+        "牙崎 漣",
+        "秋月 涼",
+        "兜 大吾",
+        "九十九 一希",
+        "葛之葉 雨彦",
+        "北村 想楽",
+        "古論 クリス",
+        "天峰 秀",
+        "花園 百々人",
+        "眉見 鋭心"
+      ],
+      "membership_sources": [
+        "https://www.lantis.jp/sidem/releaseinfo/release_LACM-24181.html",
+        "https://bandainamco-am.co.jp/chara_shop/idolmaster/NEWS/nipponbashi/20260106.html"
+      ],
+      "color": "#11be93",
+      "source": "https://idolmaster-official.jp/_next/static/css/73251a727460c594.css",
+      "basis": "official-site-brand-accent",
+      "identity_source": "https://idolmaster-official.jp/live_event/sidem9th/goods/",
+      "note": "Uses the official portal /sidem brand-page navigation accent as a representative brand display color, not a standardized group image-color claim. The 49-member roster is the ensemble since C.FIRST joined in 2021; older recordings can have fewer singers. Membership never establishes a recording's singer credits."
+    },
+    {
+      "name": "315 STARS",
+      "kind": "group",
+      "color": "#11be93",
+      "source": "https://idolmaster-official.jp/_next/static/css/73251a727460c594.css",
+      "basis": "official-site-brand-accent",
+      "identity_source": "https://idolmaster-official.jp/live_event/sidem9th/goods/",
+      "note": "Uses the official portal /sidem brand-page navigation accent as a representative brand display color, not a standardized group image-color claim. No fixed ensemble membership or song-specific singers are inferred."
+    }
+  ]
+}

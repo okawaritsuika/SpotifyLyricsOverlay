@@ -1,0 +1,217 @@
+{
+  "schema_version": 1,
+  "verified_at": "2026-10-02",
+  "source_url": "https://imas-db.jp/song/event/",
+  "links": [
+    {
+      "official_id": "sidem-11th-day2",
+      "database_url": "https://imas-db.jp/song/event/sidem_11th_day2.html",
+      "date": "2026-09-13",
+      "database_section": "セットリスト",
+      "database_title": "THE IDOLM@STER SideM 11th STAGE 〜EVER EVER@FTER〜 [DAY2]"
+    },
+    {
+      "official_id": "sidem-11th-day1",
+      "database_url": "https://imas-db.jp/song/event/sidem_11th_day1.html",
+      "date": "2026-09-12",
+      "database_section": "セットリスト",
+      "database_title": "THE IDOLM@STER SideM 11th STAGE 〜EVER EVER@FTER〜 [DAY1]"
+    },
+    {
+      "official_id": "million-13th-day2",
+      "database_url": "https://imas-db.jp/song/event/million_13th_day2.html",
+      "date": "2026-05-06",
+      "database_section": "セットリスト",
+      "database_title": "THE IDOLM@STER MILLION LIVE! 13thLIVE DAY2 Grand bal masqué [主演:二階堂千鶴]"
+    },
+    {
+      "official_id": "million-13th-day1",
+      "database_url": "https://imas-db.jp/song/event/million_13th_day1.html",
+      "date": "2026-05-05",
+      "database_section": "セットリスト",
+      "database_title": "THE IDOLM@STER MILLION LIVE! 13thLIVE DAY1 全力援走 [主演:高山紗代子]"
+    },
+    {
+      "official_id": "shiny-8th-day2",
+      "database_url": "https://imas-db.jp/song/event/shinycolors_8th_day2.html",
+      "date": "2026-04-26",
+      "database_section": "セットリスト",
+      "database_title": "THE IDOLM@STER SHINY COLORS ∞th LIVE iと夢 [DAY2]"
+    },
+    {
+      "official_id": "shiny-8th-day1",
+      "database_url": "https://imas-db.jp/song/event/shinycolors_8th_day1.html",
+      "date": "2026-04-25",
+      "database_section": "セットリスト",
+      "database_title": "THE IDOLM@STER SHINY COLORS ∞th LIVE iと夢 [DAY1]"
+    },
+    {
+      "official_id": "shiny-7th-spiral-day2",
+      "database_url": "https://imas-db.jp/song/event/shinycolors_7th_rasen_day2.html",
+      "date": "2025-10-26",
+      "database_section": "セットリスト",
+      "database_title": "THE IDOLM@STER SHINY COLORS 7th LIVE TOUR 螺旋 -Halo around- \"The origin on the axes\" [DAY2]"
+    },
+    {
+      "official_id": "shiny-7th-spiral-day1",
+      "database_url": "https://imas-db.jp/song/event/shinycolors_7th_rasen_day1.html",
+      "date": "2025-10-25",
+      "database_section": "セットリスト",
+      "database_title": "THE IDOLM@STER SHINY COLORS 7th LIVE TOUR 螺旋 -Halo around- \"The origin on the axes\" [DAY1]"
+    },
+    {
+      "official_id": "765-never-end-day1",
+      "database_url": "https://imas-db.jp/song/event/765as_never_end_idol_day1.html",
+      "date": "2025-08-02",
+      "database_section": "セットリスト",
+      "database_title": "THE IDOLM@STER 765PRO ALLSTARS LIVE 〜NEVER END IDOL!!!!!!!!!!!!!〜 [DAY1]"
+    },
+    {
+      "official_id": "shiny-7th-second-day2",
+      "database_url": "https://imas-db.jp/song/event/shinycolors_7th_second.html",
+      "date": "2025-07-06",
+      "database_section": "DAY2 セットリスト",
+      "database_title": "THE IDOLM@STER SHINY COLORS 7th UNITLIVE TOUR 円環 -Halo around- second quadrant (横浜公演)"
+    },
+    {
+      "official_id": "shiny-7th-second-day1",
+      "database_url": "https://imas-db.jp/song/event/shinycolors_7th_second.html",
+      "date": "2025-07-05",
+      "database_section": "DAY1 セットリスト",
+      "database_title": "THE IDOLM@STER SHINY COLORS 7th UNITLIVE TOUR 円環 -Halo around- second quadrant (横浜公演)"
+    },
+    {
+      "official_id": "shiny-7th-first-day2",
+      "database_url": "https://imas-db.jp/song/event/shinycolors_7th_first.html",
+      "date": "2025-06-22",
+      "database_section": "DAY2 セットリスト",
+      "database_title": "THE IDOLM@STER SHINY COLORS 7th UNITLIVE TOUR 円環 -Halo around- first quadrant (福岡公演)"
+    },
+    {
+      "official_id": "shiny-7th-first-day1",
+      "database_url": "https://imas-db.jp/song/event/shinycolors_7th_first.html",
+      "date": "2025-06-21",
+      "database_section": "DAY1 セットリスト",
+      "database_title": "THE IDOLM@STER SHINY COLORS 7th UNITLIVE TOUR 円環 -Halo around- first quadrant (福岡公演)"
+    },
+    {
+      "official_id": "gakuen-1st-harmony-day1",
+      "database_url": "https://imas-db.jp/song/event/gakuen_1stperiod_hs_day1.html",
+      "date": "2025-05-31",
+      "database_section": "セットリスト",
+      "database_title": "学園アイドルマスター The 1st Period Harmony Star [DAY1]"
+    },
+    {
+      "official_id": "gakuen-1st-spotlight-day1",
+      "database_url": "https://imas-db.jp/song/event/gakuen_1stperiod_ss_day1.html",
+      "date": "2025-05-24",
+      "database_section": "セットリスト",
+      "database_title": "学園アイドルマスター The 1st Period Spotlight Star [DAY1]"
+    },
+    {
+      "official_id": "gakuen-debut-20240818",
+      "database_url": "https://imas-db.jp/song/event/gakuen_debutlivehajime_ubugoe_umeda.html",
+      "date": "2024-08-18",
+      "database_section": "昼公演セットリスト",
+      "database_title": "学園アイドルマスター DEBUT LIVE 初 TOUR -初声公演- 梅田公演"
+    },
+    {
+      "official_id": "gakuen-debut-20240810",
+      "database_url": "https://imas-db.jp/song/event/gakuen_debutlivehajime_ubugoe_nagoya.html",
+      "date": "2024-08-10",
+      "database_section": "セットリスト",
+      "database_title": "学園アイドルマスター DEBUT LIVE 初 TOUR -初声公演- 名古屋公演"
+    },
+    {
+      "official_id": "shiny-6th-ff-day2",
+      "database_url": "https://imas-db.jp/song/event/shinycolors_6th_ff_day2.html",
+      "date": "2024-04-21",
+      "database_section": "セットリスト",
+      "database_title": "THE IDOLM@STER SHINY COLORS 6thLIVE TOUR Come and Unite! Fantastic Fireworks (横浜公演) [DAY2]"
+    },
+    {
+      "official_id": "shiny-6th-ff-day1",
+      "database_url": "https://imas-db.jp/song/event/shinycolors_6th_ff_day1.html",
+      "date": "2024-04-20",
+      "database_section": "セットリスト",
+      "database_title": "THE IDOLM@STER SHINY COLORS 6thLIVE TOUR Come and Unite! Fantastic Fireworks (横浜公演) [DAY1]"
+    },
+    {
+      "official_id": "million-10th-act4-day2",
+      "database_url": "https://imas-db.jp/song/event/million_10th_act4_day2.html",
+      "date": "2024-02-25",
+      "database_section": "セットリスト",
+      "database_title": "THE IDOLM@STER MILLION LIVE! 10thLIVE TOUR Act-4 MILLION THE@TER!!!! [DAY2]"
+    },
+    {
+      "official_id": "million-10th-act4-day1",
+      "database_url": "https://imas-db.jp/song/event/million_10th_act4_day1.html",
+      "date": "2024-02-24",
+      "database_section": "セットリスト",
+      "database_title": "THE IDOLM@STER MILLION LIVE! 10thLIVE TOUR Act-4 MILLION THE@TER!!!! [DAY1]"
+    },
+    {
+      "official_id": "sidem-8th-day2",
+      "database_url": "https://imas-db.jp/song/event/sidem_8th_stage_day2.html",
+      "date": "2023-10-29",
+      "database_section": "セットリスト",
+      "database_title": "THE IDOLM@STER SideM 8th STAGE 〜ALL H@NDS TOGETHER〜 DAY2 \"CLAP OUR H@NDS\""
+    },
+    {
+      "official_id": "sidem-8th-day1",
+      "database_url": "https://imas-db.jp/song/event/sidem_8th_stage_day1.html",
+      "date": "2023-10-28",
+      "database_section": "セットリスト",
+      "database_title": "THE IDOLM@STER SideM 8th STAGE 〜ALL H@NDS TOGETHER〜 DAY1 \"CATCH MY H@NDS\""
+    },
+    {
+      "official_id": "cinderella-shout-day2",
+      "database_url": "https://imas-db.jp/song/event/cinderella_cg_shoutoutlive_day2.html",
+      "date": "2023-09-10",
+      "database_section": "セットリスト",
+      "database_title": "THE IDOLM@STER CINDERELLA GIRLS Shout out Live!!! [DAY2]"
+    },
+    {
+      "official_id": "cinderella-yomatsuri-day1",
+      "database_url": "https://imas-db.jp/song/event/cinderella_cg_kagayaki_yomatsuri_day1.html",
+      "date": "2023-06-10",
+      "database_section": "セットリスト",
+      "database_title": "THE IDOLM@STER CINDERELLA GIRLS 燿城夜祭 -かがやきよまつり- [DAY1]"
+    },
+    {
+      "official_id": "million-10th-act1-day1",
+      "database_url": "https://imas-db.jp/song/event/million_10th_act1_day1.html",
+      "date": "2023-04-22",
+      "database_section": "セットリスト",
+      "database_title": "THE IDOLM@STER MILLION LIVE! 10thLIVE TOUR Act-1 H@PPY 4 YOU! [DAY1]"
+    },
+    {
+      "official_id": "765-sunrich-day2",
+      "database_url": "https://imas-db.jp/song/event/765as_sunrich_day2.html",
+      "date": "2022-07-10",
+      "database_section": "セットリスト",
+      "database_title": "THE IDOLM@STER 765PRO ALLSTARS LIVE SUNRICH COLORFUL [DAY2]"
+    },
+    {
+      "official_id": "765-sunrich-day1",
+      "database_url": "https://imas-db.jp/song/event/765as_sunrich_day1.html",
+      "date": "2022-07-09",
+      "database_section": "セットリスト",
+      "database_title": "THE IDOLM@STER 765PRO ALLSTARS LIVE SUNRICH COLORFUL [DAY1]"
+    },
+    {
+      "official_id": "cinderella-magical-day2",
+      "database_url": "https://imas-db.jp/song/event/cinderella10th_final_day2.html",
+      "date": "2022-04-03",
+      "database_section": "セットリスト",
+      "database_title": "THE IDOLM@STER CINDERELLA GIRLS 10th ANNIVERSARY M@GICAL WONDERLAND!!! (ツアーファイナル公演) [DAY2]"
+    },
+    {
+      "official_id": "cinderella-magical-day1",
+      "database_url": "https://imas-db.jp/song/event/cinderella10th_final_day1.html",
+      "date": "2022-04-02",
+      "database_section": "セットリスト",
+      "database_title": "THE IDOLM@STER CINDERELLA GIRLS 10th ANNIVERSARY M@GICAL WONDERLAND!!! (ツアーファイナル公演) [DAY1]"
+    }
+  ]
+}

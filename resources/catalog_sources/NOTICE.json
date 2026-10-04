@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "description": "Public factual metadata sources used by the bundled song dictionary. Audio, lyrics, images and long descriptive prose are not included.",
+  "sources": [
+    {
+      "id": "imas_db",
+      "name": "アイマスDB (unofficial fan database)",
+      "url": "https://imas-db.jp/",
+      "usage_url": "https://info.imas-db.jp/about/reffer/",
+      "included": [
+        "indexed live dates and setlists",
+        "credited performers",
+        "character/CV facts and dated replacements",
+        "color evidence"
+      ],
+      "excluded": [
+        "lyrics",
+        "images",
+        "biographies",
+        "descriptive prose"
+      ],
+      "note": "Source URL attribution is retained per event/credit. Live index begins in 2013; the separate song/CD database is an older, incomplete catalog through 2017. Official date corrections have independent evidence. This source does not guarantee completeness or recording identity."
+    },
+    {
+      "id": "musicbrainz",
+      "name": "MusicBrainz core metadata",
+      "url": "https://musicbrainz.org",
+      "license": "CC0-1.0",
+      "license_url": "https://musicbrainz.org/doc/About/Data_License",
+      "api_documentation": "https://musicbrainz.org/doc/MusicBrainz_API",
+      "search_documentation": "https://musicbrainz.org/doc/Indexed_Search_Syntax",
+      "included": [
+        "recording IDs",
+        "titles",
+        "artist credits",
+        "releases",
+        "dates",
+        "duration",
+        "ISRC"
+      ],
+      "excluded": [
+        "annotations",
+        "ratings",
+        "tags",
+        "cover art"
+      ],
+      "service_note": "The public API is free for non-commercial use. Requests identify the app and are limited to at most one per second. Commercial API usage requires a separate review of MusicBrainz service terms."
+    },
+    {
+      "id": "imasparql",
+      "name": "im@sparql",
+      "url": "https://github.com/imas/imasparql",
+      "license": "MIT",
+      "license_file": "imasparql-LICENSE.txt",
+      "included": [
+        "idol names",
+        "unit names",
+        "membership",
+        "voice actor names",
+        "colors",
+        "name readings",
+        "limited recording metadata"
+      ],
+      "excluded": [
+        "descriptive prose",
+        "pictures",
+        "dialogue",
+        "lyrics"
+      ]
+    },
+    {
+      "id": "app_artist_names",
+      "name": "Existing verified Korean display-name catalogs",
+      "paths": [
+        "resources/artist_names/imas_legacy.json",
+        "resources/artist_names/imas_modern.json"
+      ],
+      "note": "Original display-name catalogs retain their own source lists. Korean aliases improve local search; they never change the original recording identity."
+    },
+    {
+      "id": "official_release_reviews",
+      "name": "Official label product track lists and release dates",
+      "paths": [
+        "resources/reviewed_recording_releases.json",
+        "resources/recording_kind_corrections.json"
+      ],
+      "included": [
+        "exact reviewed release and recording identities",
+        "track titles",
+        "instrumental or spoken kinds",
+        "series attribution",
+        "format-specific release dates with independent source URLs"
+      ],
+      "excluded": [
+        "audio",
+        "lyrics",
+        "cover art",
+        "descriptive prose"
+      ],
+      "note": "Physical product dates use the official label page. Digital dates retain their separate MusicBrainz source. These reviewed facts never merge different recording IDs."
+    }
+  ],
+  "limitations": [
+    "This catalog does not claim complete coverage of the franchise or all recording versions.",
+    "Unbranded albums require an Official release and explicit franchise artist evidence or an independently reviewed exact recording/release ID and title match; voice-actor solo careers and title-only similarities are not sufficient.",
+    "A MusicBrainz release marked Official is a community-maintained metadata fact, not a rights or Spotify availability guarantee.",
+    "Unverified work-to-recording relationships are not inferred from matching titles.",
+    "Series use explicit release branding, a Gakuen credit, or exact reviewed recording/release evidence; ambiguous records remain other.",
+    "Instrumental and spoken classifications use explicit dialogue credits, conservative title hints and exact independently reviewed track lists, not audio analysis.",
+    "Music genre and current account-specific Spotify availability remain separate from this snapshot."
+  ]
+}

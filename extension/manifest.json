@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "Spotify 가사창 연결",
+  "version": "2.7.0",
+  "minimum_chrome_version": "120",
+  "description": "원본 가사 표를 PC의 가사창에 연결합니다. 확인한 가사는 앱이 PC에 보관해 다음 재생 때 바로 표시합니다.",
+  "permissions": ["activeTab", "scripting", "storage", "alarms"],
+  "optional_host_permissions": ["https://namu.wiki/*", "https://sidem-ko.fandom.com/*", "http://127.0.0.1/*"],
+  "background": {"service_worker": "background.js"},
+  "action": {"default_popup": "popup.html", "default_title": "Spotify 가사창 연결"}
+}

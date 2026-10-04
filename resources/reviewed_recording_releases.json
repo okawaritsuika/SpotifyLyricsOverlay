@@ -1,0 +1,702 @@
+{
+  "schema_version": 1,
+  "verified_at": "2026-10-02",
+  "entries": [
+    {
+      "release_id": "b3435596-15e9-4bef-90c6-d88f06919628",
+      "release_title": "283 Production MUSICAL Performance 騎士団のヴェール – Veil of Order – Music Collection",
+      "series": "shiny",
+      "source_urls": [
+        "https://shinycolors.lantis.jp/releaseinfo/laca-25264/"
+      ],
+      "recordings": [
+        {
+          "id": "3d433ba7-85b7-4b93-8e47-228b8f093bbe",
+          "title": "銀翼のアレジアンス -blade of truth-"
+        },
+        {
+          "id": "fc69d565-d973-4ccd-8d86-60f55eee8040",
+          "title": "メモワール・アンタクト"
+        },
+        {
+          "id": "d66ac2d9-faff-4ff5-bd04-251d2eef7184",
+          "title": "運命前夜"
+        },
+        {
+          "id": "53673f0f-247e-4b45-a114-b2f8571b76f0",
+          "title": "月影のアンシェネ"
+        },
+        {
+          "id": "0f22a2e2-edcf-49c5-b727-52c3a30800a7",
+          "title": "Once Upon a Secret"
+        },
+        {
+          "id": "5cbbea5b-34d8-4ae5-97fe-f870165d7684",
+          "title": "銀翼のアヴニール -become the brave-"
+        },
+        {
+          "id": "e39ffa59-cd6f-4a3e-95cd-ec0017d11c3f",
+          "title": "銀翼のアレジアンス -blade of truth- (Off Vocal)"
+        },
+        {
+          "id": "337ba6ba-34c8-4c1d-b321-c46985961ccb",
+          "title": "メモワール・アンタクト (Off Vocal)"
+        },
+        {
+          "id": "28e5be84-214c-4cac-bc59-3550edb7b96f",
+          "title": "運命前夜 (Off Vocal)"
+        },
+        {
+          "id": "3d10443d-fbf2-4ab4-aa38-f075f3373686",
+          "title": "月影のアンシェネ (Off Vocal)"
+        },
+        {
+          "id": "c2105820-c4e9-4306-a566-90810a7e6872",
+          "title": "Once Upon a Secret (Off Vocal)"
+        },
+        {
+          "id": "1b8e44d9-073b-45db-9565-5664357e000b",
+          "title": "銀翼のアヴニール -become the brave- (Off Vocal)"
+        }
+      ],
+      "date": "2026-03-11",
+      "date_source_url": "https://shinycolors.lantis.jp/releaseinfo/laca-25264/",
+      "date_source_kind": "official_label",
+      "formats": [
+        "CD"
+      ],
+      "format_source_url": "https://musicbrainz.org/release/b3435596-15e9-4bef-90c6-d88f06919628"
+    },
+    {
+      "release_id": "bcb2b23c-4422-4bbb-a8b9-8a4b349ddf27",
+      "release_title": "283 Production MUSICAL Performance 騎士団のヴェール – Veil of Order – Music Collection",
+      "series": "shiny",
+      "source_urls": [
+        "https://shinycolors.lantis.jp/releaseinfo/laca-35264/"
+      ],
+      "recordings": [
+        {
+          "id": "3d433ba7-85b7-4b93-8e47-228b8f093bbe",
+          "title": "銀翼のアレジアンス -blade of truth-"
+        },
+        {
+          "id": "fc69d565-d973-4ccd-8d86-60f55eee8040",
+          "title": "メモワール・アンタクト"
+        },
+        {
+          "id": "d66ac2d9-faff-4ff5-bd04-251d2eef7184",
+          "title": "運命前夜"
+        },
+        {
+          "id": "53673f0f-247e-4b45-a114-b2f8571b76f0",
+          "title": "月影のアンシェネ"
+        },
+        {
+          "id": "0f22a2e2-edcf-49c5-b727-52c3a30800a7",
+          "title": "Once Upon a Secret"
+        },
+        {
+          "id": "5cbbea5b-34d8-4ae5-97fe-f870165d7684",
+          "title": "銀翼のアヴニール -become the brave-"
+        },
+        {
+          "id": "e39ffa59-cd6f-4a3e-95cd-ec0017d11c3f",
+          "title": "銀翼のアレジアンス -blade of truth- (Off Vocal)"
+        },
+        {
+          "id": "337ba6ba-34c8-4c1d-b321-c46985961ccb",
+          "title": "メモワール・アンタクト (Off Vocal)"
+        },
+        {
+          "id": "28e5be84-214c-4cac-bc59-3550edb7b96f",
+          "title": "運命前夜 (Off Vocal)"
+        },
+        {
+          "id": "3d10443d-fbf2-4ab4-aa38-f075f3373686",
+          "title": "月影のアンシェネ (Off Vocal)"
+        },
+        {
+          "id": "c2105820-c4e9-4306-a566-90810a7e6872",
+          "title": "Once Upon a Secret (Off Vocal)"
+        },
+        {
+          "id": "1b8e44d9-073b-45db-9565-5664357e000b",
+          "title": "銀翼のアヴニール -become the brave- (Off Vocal)"
+        },
+        {
+          "id": "2464afde-0c18-4cc4-abed-001af30380bd",
+          "title": "Norsfelus"
+        },
+        {
+          "id": "ab7e6f0b-aa44-4aff-901c-9cb316b3b7c8",
+          "title": "Exercitatio et Chivalria"
+        },
+        {
+          "id": "e3484214-fa6e-487e-af12-e006dc16d685",
+          "title": "Conflagratio"
+        },
+        {
+          "id": "af64460a-5bb7-4bf3-a274-7f244c164da8",
+          "title": "Rumores Norsfelii"
+        },
+        {
+          "id": "a14d8bd9-f65a-4ed4-acf4-0f5ab17168ae",
+          "title": "Angor Lirae"
+        },
+        {
+          "id": "bc603935-6416-455b-a493-a3c0eb1b384c",
+          "title": "Concordia"
+        },
+        {
+          "id": "a819761f-9c69-45ba-a49b-5a90dc2d4895",
+          "title": "Iustitia Norsfelii"
+        },
+        {
+          "id": "fc59f549-1509-4c41-b8bb-b4a8491d314e",
+          "title": "Epilogus: Acedia"
+        },
+        {
+          "id": "51622e24-b4e4-4377-8504-4f709c7c55e4",
+          "title": "Epilogus: Odium"
+        },
+        {
+          "id": "d400452b-5ab4-4123-8501-cd4392ab3924",
+          "title": "愚者の独白 (283 Production LIVE Performance Uka, Ver.)"
+        }
+      ],
+      "date": "2026-03-11",
+      "date_source_url": "https://shinycolors.lantis.jp/releaseinfo/laca-35264/",
+      "date_source_kind": "official_label",
+      "formats": [
+        "CD"
+      ],
+      "format_source_url": "https://musicbrainz.org/release/bcb2b23c-4422-4bbb-a8b9-8a4b349ddf27"
+    },
+    {
+      "release_id": "ba94ae05-d910-4096-a5ab-8dd66f084899",
+      "release_title": "283 Production XXXX Performance XXX= S/N-GUL4R1TY MUSIC COLLECTION",
+      "series": "shiny",
+      "source_urls": [
+        "https://shinycolors.lantis.jp/releaseinfo/lacm-34828/"
+      ],
+      "recordings": [
+        {
+          "id": "ca0a47fc-87b3-4ecd-aa41-35f9ac83f5c2",
+          "title": "One Live One Love"
+        },
+        {
+          "id": "77b27b69-abb0-44dc-9bfb-01d397e437f0",
+          "title": "One Live One Love (Mortal Remix)"
+        },
+        {
+          "id": "7e10204a-ccae-44ed-9d0c-26a4d056d0d1",
+          "title": "VOY@GER (283 Production XXXX Performance XXX= S/N-GUL4R1TY Ver.)"
+        },
+        {
+          "id": "fde0a336-cdc5-48bb-8e78-b161db29d92f",
+          "title": "LINKs (283 Production LIVE Performance Uka, Ver.)"
+        },
+        {
+          "id": "b87d8243-13c5-4f5d-92be-4db92f613d63",
+          "title": "283 Production XXXX Performance XXX= S/N-GUL4R1TY Non-Stop Remix"
+        },
+        {
+          "id": "1d1be388-96d0-4a24-baa2-85856249dbb3",
+          "title": "One Live One Love (Game Size)"
+        },
+        {
+          "id": "5fe06811-7b7e-4f35-9105-06a5b00b47d7",
+          "title": "One Live One Love (Off Vocal)"
+        }
+      ],
+      "date": "2026-04-22",
+      "date_source_url": "https://shinycolors.lantis.jp/releaseinfo/lacm-34828/",
+      "date_source_kind": "official_label",
+      "formats": [
+        "CD"
+      ],
+      "format_source_url": "https://musicbrainz.org/release/ba94ae05-d910-4096-a5ab-8dd66f084899"
+    },
+    {
+      "release_id": "0c0052c1-0018-49a7-8a58-040db1523bee",
+      "release_title": "283 Production MUSICAL Performance 騎士団のヴェール – Veil of Order – Music Collection",
+      "series": "shiny",
+      "source_urls": [
+        "https://shinycolors.lantis.jp/releaseinfo/laca-25264/"
+      ],
+      "recordings": [
+        {
+          "id": "3d433ba7-85b7-4b93-8e47-228b8f093bbe",
+          "title": "銀翼のアレジアンス -blade of truth-"
+        },
+        {
+          "id": "fc69d565-d973-4ccd-8d86-60f55eee8040",
+          "title": "メモワール・アンタクト"
+        },
+        {
+          "id": "d66ac2d9-faff-4ff5-bd04-251d2eef7184",
+          "title": "運命前夜"
+        },
+        {
+          "id": "53673f0f-247e-4b45-a114-b2f8571b76f0",
+          "title": "月影のアンシェネ"
+        },
+        {
+          "id": "0f22a2e2-edcf-49c5-b727-52c3a30800a7",
+          "title": "Once Upon a Secret"
+        },
+        {
+          "id": "5cbbea5b-34d8-4ae5-97fe-f870165d7684",
+          "title": "銀翼のアヴニール -become the brave-"
+        },
+        {
+          "id": "e39ffa59-cd6f-4a3e-95cd-ec0017d11c3f",
+          "title": "銀翼のアレジアンス -blade of truth- (Off Vocal)"
+        },
+        {
+          "id": "337ba6ba-34c8-4c1d-b321-c46985961ccb",
+          "title": "メモワール・アンタクト (Off Vocal)"
+        },
+        {
+          "id": "28e5be84-214c-4cac-bc59-3550edb7b96f",
+          "title": "運命前夜 (Off Vocal)"
+        },
+        {
+          "id": "3d10443d-fbf2-4ab4-aa38-f075f3373686",
+          "title": "月影のアンシェネ (Off Vocal)"
+        },
+        {
+          "id": "c2105820-c4e9-4306-a566-90810a7e6872",
+          "title": "Once Upon a Secret (Off Vocal)"
+        },
+        {
+          "id": "1b8e44d9-073b-45db-9565-5664357e000b",
+          "title": "銀翼のアヴニール -become the brave- (Off Vocal)"
+        }
+      ],
+      "date": "2026-03-20",
+      "date_source_url": "https://musicbrainz.org/release/0c0052c1-0018-49a7-8a58-040db1523bee",
+      "date_source_kind": "musicbrainz",
+      "formats": [
+        "Digital Media"
+      ],
+      "format_source_url": "https://musicbrainz.org/release/0c0052c1-0018-49a7-8a58-040db1523bee"
+    },
+    {
+      "release_id": "e0836fb1-d1b5-4617-bbf2-f2eed2e5d89e",
+      "release_title": "283 Production XXXX Performance XXX= S/N-GUL4R1TY MUSIC COLLECTION",
+      "series": "shiny",
+      "source_urls": [
+        "https://shinycolors.lantis.jp/releaseinfo/lacm-24828/"
+      ],
+      "recordings": [
+        {
+          "id": "ca0a47fc-87b3-4ecd-aa41-35f9ac83f5c2",
+          "title": "One Live One Love"
+        },
+        {
+          "id": "77b27b69-abb0-44dc-9bfb-01d397e437f0",
+          "title": "One Live One Love (Mortal Remix)"
+        },
+        {
+          "id": "1d1be388-96d0-4a24-baa2-85856249dbb3",
+          "title": "One Live One Love (Game Size)"
+        },
+        {
+          "id": "5fe06811-7b7e-4f35-9105-06a5b00b47d7",
+          "title": "One Live One Love (Off Vocal)"
+        }
+      ],
+      "date": "2026-05-16",
+      "date_source_url": "https://musicbrainz.org/release/e0836fb1-d1b5-4617-bbf2-f2eed2e5d89e",
+      "date_source_kind": "musicbrainz",
+      "formats": [
+        "Digital Media"
+      ],
+      "format_source_url": "https://musicbrainz.org/release/e0836fb1-d1b5-4617-bbf2-f2eed2e5d89e"
+    },
+    {
+      "release_id": "5083bff5-7f6d-411c-9eba-1e04aff3b969",
+      "release_title": "ラムネ色 青春",
+      "series": "765",
+      "source_urls": [
+        "https://columbia.jp/idolmaster/COCC-16883.html"
+      ],
+      "recordings": [
+        {
+          "id": "7d91f702-eb78-4b10-8e4c-bbb206854023",
+          "title": "ラムネ色 青春"
+        },
+        {
+          "id": "236d5e01-b6ea-452d-8caa-8c7f8f1de364",
+          "title": "待ち受けプリンス (M@STER VERSION)"
+        },
+        {
+          "id": "f5a9397a-7d90-4833-921b-c19675e89d5f",
+          "title": "ボーナスドラマ ～合宿編～"
+        },
+        {
+          "id": "b5e58c51-c1b7-4d80-a15a-d089cddb4566",
+          "title": "ラムネ色 青春 (オリジナル・カラオケ)"
+        },
+        {
+          "id": "e99061d0-7b84-422f-8000-f9c33776e2ab",
+          "title": "待ち受けプリンス (M@STER VERSION) (オリジナル・カラオケ)"
+        }
+      ],
+      "date": "2014-06-18",
+      "date_source_url": "https://columbia.jp/idolmaster/COCC-16883.html",
+      "date_source_kind": "official_label",
+      "formats": [
+        "CD"
+      ],
+      "format_source_url": "https://musicbrainz.org/release/5083bff5-7f6d-411c-9eba-1e04aff3b969"
+    },
+    {
+      "release_id": "7bad9784-6eee-4616-99b0-b7a80c52b510",
+      "release_title": "ラムネ色 青春",
+      "series": "765",
+      "source_urls": [
+        "https://columbia.jp/idolmaster/COCC-16883.html"
+      ],
+      "recordings": [
+        {
+          "id": "7d91f702-eb78-4b10-8e4c-bbb206854023",
+          "title": "ラムネ色 青春"
+        },
+        {
+          "id": "236d5e01-b6ea-452d-8caa-8c7f8f1de364",
+          "title": "待ち受けプリンス (M@STER VERSION)"
+        },
+        {
+          "id": "f5a9397a-7d90-4833-921b-c19675e89d5f",
+          "title": "ボーナスドラマ ～合宿編～"
+        },
+        {
+          "id": "b5e58c51-c1b7-4d80-a15a-d089cddb4566",
+          "title": "ラムネ色 青春 (オリジナル・カラオケ)"
+        },
+        {
+          "id": "e99061d0-7b84-422f-8000-f9c33776e2ab",
+          "title": "待ち受けプリンス (M@STER VERSION) (オリジナル・カラオケ)"
+        },
+        {
+          "id": "cff15249-bf90-4fd0-8b5c-4ebb810bb6c9",
+          "title": "ラムネ色 青春"
+        },
+        {
+          "id": "266a88b8-fd0a-41bc-8268-5f80ce1db96c",
+          "title": "待ち受けプリンス (M@STER VERSION)"
+        },
+        {
+          "id": "f53d5880-25b2-4e02-97fe-c1efb5a7cd05",
+          "title": "READY!! (M@STER VERSION)"
+        },
+        {
+          "id": "100bd3db-38a5-4856-a9a9-dbb90d6b6d79",
+          "title": "自分REST@RT (M@STER VERSION)"
+        },
+        {
+          "id": "58c8b0db-d7a1-4b24-8537-228ebacc60fc",
+          "title": "READY!! (M@STER VERSION)",
+          "release_when_missing_artists": [
+            "765PRO ALLSTARS"
+          ]
+        },
+        {
+          "id": "305801de-7d3e-4d84-9bd6-2a3ae193e028",
+          "title": "自分REST@RT (M@STER VERSION)",
+          "release_when_missing_artists": [
+            "天海春香",
+            "中村繪里子",
+            "星井美希",
+            "長谷川明子",
+            "如月千早",
+            "今井麻美",
+            "高槻やよい",
+            "仁後真耶子",
+            "萩原雪歩",
+            "浅倉杏美",
+            "菊地真",
+            "平田宏美",
+            "双海真美",
+            "下田麻美",
+            "四条貴音",
+            "原由実",
+            "我那覇響",
+            "沼倉愛美"
+          ]
+        }
+      ],
+      "date": "2014-06-18",
+      "date_source_url": "https://columbia.jp/idolmaster/COCC-16883.html",
+      "date_source_kind": "official_label",
+      "formats": [
+        "CD",
+        "Blu-ray"
+      ],
+      "format_source_url": "https://musicbrainz.org/release/7bad9784-6eee-4616-99b0-b7a80c52b510"
+    },
+    {
+      "release_id": "392452c7-0efb-4ef0-bf54-daa0e6973cc0",
+      "release_title": "虹色ミラクル",
+      "series": "765",
+      "source_urls": [
+        "https://columbia.jp/idolmaster/COCC-16884.html"
+      ],
+      "recordings": [
+        {
+          "id": "88881629-e385-406b-8666-ebdf9ebb0c0f",
+          "title": "虹色ミラクル"
+        },
+        {
+          "id": "855d2747-c559-48d8-8fa0-676d1d6b0b09",
+          "title": "Fate of the World"
+        },
+        {
+          "id": "e53663db-d308-4a97-9079-7ce495455964",
+          "title": "ボーナスドラマ ～眠り姫編～"
+        },
+        {
+          "id": "112ed211-a6e3-4b56-9fc8-45923a6d038d",
+          "title": "虹色ミラクル (オリジナル・カラオケ)"
+        },
+        {
+          "id": "2ca92a0c-7fb5-443d-8ceb-de99e2b7b6c2",
+          "title": "Fate of the World (オリジナル・カラオケ)"
+        }
+      ],
+      "date": "2014-08-13",
+      "date_source_url": "https://columbia.jp/idolmaster/COCC-16884.html",
+      "date_source_kind": "official_label",
+      "formats": [
+        "CD"
+      ],
+      "format_source_url": "https://musicbrainz.org/release/392452c7-0efb-4ef0-bf54-daa0e6973cc0"
+    },
+    {
+      "release_id": "dcc00cb9-565c-4a15-907f-144e588b7a8c",
+      "release_title": "虹色ミラクル",
+      "series": "765",
+      "source_urls": [
+        "https://columbia.jp/idolmaster/COCC-16884.html"
+      ],
+      "recordings": [
+        {
+          "id": "88881629-e385-406b-8666-ebdf9ebb0c0f",
+          "title": "虹色ミラクル"
+        },
+        {
+          "id": "855d2747-c559-48d8-8fa0-676d1d6b0b09",
+          "title": "Fate of the World"
+        },
+        {
+          "id": "e53663db-d308-4a97-9079-7ce495455964",
+          "title": "ボーナスドラマ ～眠り姫編～"
+        },
+        {
+          "id": "112ed211-a6e3-4b56-9fc8-45923a6d038d",
+          "title": "虹色ミラクル (オリジナル・カラオケ)"
+        },
+        {
+          "id": "2ca92a0c-7fb5-443d-8ceb-de99e2b7b6c2",
+          "title": "Fate of the World (オリジナル・カラオケ)"
+        },
+        {
+          "id": "59b58ac1-6882-47cd-906e-ba9341728060",
+          "title": "虹色ミラクル"
+        },
+        {
+          "id": "73dff476-e979-4821-bf50-44fca6ef904f",
+          "title": "Fate of the World"
+        },
+        {
+          "id": "8da8eaf5-257e-4da4-b630-160801e251d4",
+          "title": "CHANGE!!!! (M@STER VERSION)"
+        },
+        {
+          "id": "04bce249-57ae-47fd-bf70-c796266b4f0a",
+          "title": "私たちはずっと…でしょう?"
+        },
+        {
+          "id": "1cc8a342-ba02-4220-8791-a88b254c35ce",
+          "title": "CHANGE!!!! (M@STER VERSION)",
+          "release_when_missing_artists": [
+            "765PRO ALLSTARS"
+          ]
+        },
+        {
+          "id": "40487468-40f3-4368-afb7-b62d39b4c056",
+          "title": "私たちはずっと…でしょう？",
+          "release_when_missing_artists": [
+            "765PRO ALLSTARS"
+          ]
+        }
+      ],
+      "date": "2014-08-13",
+      "date_source_url": "https://columbia.jp/idolmaster/COCC-16884.html",
+      "date_source_kind": "official_label",
+      "formats": [
+        "CD",
+        "Blu-ray"
+      ],
+      "format_source_url": "https://musicbrainz.org/release/dcc00cb9-565c-4a15-907f-144e588b7a8c"
+    },
+    {
+      "release_id": "d57fd28d-a3b5-4b5b-b434-1291ef98c5f7",
+      "release_title": "THE IDOLM@STER THE@TER ABC Instrumental",
+      "recordings": [
+        {
+          "id": "8061cc87-946a-42cd-bfac-835bae8b279c",
+          "title": "創造は始まりの風を連れて"
+        },
+        {
+          "id": "72f7e765-98f2-43b8-8199-6ed38359758c",
+          "title": "俠気乱舞"
+        },
+        {
+          "id": "a34032d8-37b9-4850-a7d2-1b4689223264",
+          "title": "赤い世界が消える頃"
+        },
+        {
+          "id": "415354f0-2812-4bda-8af8-171120f1e640",
+          "title": "ビッグバンズバリボー!!!!!"
+        },
+        {
+          "id": "015734ec-9b55-4c98-be41-efd2646b9bd7",
+          "title": "オーディナリィ・クローバー"
+        },
+        {
+          "id": "6b611a54-69e5-4ee7-a607-e0d4f0779cc1",
+          "title": "ラスト・アクトレス"
+        },
+        {
+          "id": "f8895c8f-6d00-4d83-a29b-53bbb561f584",
+          "title": "Girl meets Wonder"
+        },
+        {
+          "id": "6d324e6d-a52d-4e80-a5c7-b1cdf3d6e722",
+          "title": "World Changer"
+        },
+        {
+          "id": "67aaeee8-e015-4d5c-bd86-8b740b14e156",
+          "title": "クルリウタ"
+        },
+        {
+          "id": "23524798-995a-4d47-b15f-ae225cfe2bb9",
+          "title": "DIAMOND DAYS"
+        }
+      ],
+      "source_urls": [
+        "https://a-onstore.jp/item/item-1000225965/",
+        "https://www.lantis.jp/imas/extra_log2022_1.html"
+      ],
+      "series": "million",
+      "date": "2023-01-18",
+      "incorrect_date": "2013-01-18",
+      "date_source_url": "https://a-onstore.jp/item/item-1000225965/",
+      "date_source_kind": "official_label"
+    },
+    {
+      "release_id": "d5dccf20-bac0-4bf4-b711-eac3c4ae7125",
+      "release_title": "THE IDOLM@STER ANIM@TION MASTER 06",
+      "series": "765",
+      "source_urls": [
+        "https://columbia.jp/prod-info/COCX-36902/"
+      ],
+      "recordings": [
+        {
+          "id": "f896da3b-e6d1-47ad-9db2-6afd89d8c3fa",
+          "title": "Jupiterのテーマ その1"
+        },
+        {
+          "id": "b8074f9f-1d77-434f-8a02-002e6570972a",
+          "title": "Jupiterのテーマ その2"
+        },
+        {
+          "id": "98e51d2f-d1ce-48c9-b4c8-e5c8b644c389",
+          "title": "みんなとの…"
+        },
+        {
+          "id": "8b3a017b-64ba-49e0-9001-d53ce528e0a5",
+          "title": "ゆったりのんびり"
+        },
+        {
+          "id": "7910f423-1e2c-445c-97ea-4905185abc95",
+          "title": "一生懸命"
+        },
+        {
+          "id": "cce92a10-a84e-4a6d-9231-2ddc97731d34",
+          "title": "過去の出来事"
+        }
+      ],
+      "date": "2011-12-28",
+      "incorrect_date": "2011-11-30",
+      "date_source_url": "https://columbia.jp/prod-info/COCX-36902/",
+      "date_source_kind": "official_label"
+    },
+    {
+      "release_id": "4e05733f-6888-4598-9c72-77b35a7dd86a",
+      "release_title": "THE IDOLM@STER ANIM@TION MASTER 07",
+      "series": "765",
+      "source_urls": [
+        "https://columbia.jp/prod-info/COCX-36903/"
+      ],
+      "recordings": [
+        {
+          "id": "0feb1896-81ca-4ee3-860c-116c33613e1b",
+          "title": "relations (BGM VERSION)"
+        },
+        {
+          "id": "ac337637-1ddd-464f-874a-b33fdc94159f",
+          "title": "The world is all one !!（BGM VERSION)"
+        },
+        {
+          "id": "a9d10c92-a975-4898-bfa5-b42bc21e0467",
+          "title": "春香の葛藤"
+        },
+        {
+          "id": "f2107e71-9e2d-479a-9991-b3f7e3ce9fa0",
+          "title": "激励"
+        },
+        {
+          "id": "3c9b368d-4e6c-4ec0-9322-efc6e806e61a",
+          "title": "見つめて(TV VERSION) Instrumental"
+        }
+      ],
+      "date": "2012-02-01",
+      "incorrect_date": "2011-09-07",
+      "date_source_url": "https://columbia.jp/prod-info/COCX-36903/",
+      "date_source_kind": "official_label"
+    },
+    {
+      "release_id": "0ec05fad-f3fa-4e08-924a-b157e0ca332e",
+      "release_title": "THE IDOLM@STER CINDERELLA GIRLS ANIMATION PROJECT ORIGINAL SOUNDTRACK",
+      "series": "cinderella",
+      "source_urls": [
+        "https://columbia.jp/prod-info/COZX-1151-4/",
+        "https://columbia.jp/idolmaster/COZX-1151.html"
+      ],
+      "recordings": [
+        {
+          "id": "63dbb5f8-a6a1-4055-9493-82f67b8719b8",
+          "title": "Absolute NIne",
+          "artist_correction": {
+            "original_artists": [
+              "田中秀和"
+            ],
+            "original_artist_credit": "田中秀和",
+            "artists": [
+              "new generations"
+            ],
+            "artist_credit": "new generations",
+            "source_urls": [
+              "https://columbia.jp/prod-info/COZX-1151-4/",
+              "https://columbia.jp/idolmaster/COZX-1151.html"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

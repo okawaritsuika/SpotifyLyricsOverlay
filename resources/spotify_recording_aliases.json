@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "entries": [
+    {
+      "catalog_id": "mb:3eeb92e5-a6ce-4081-8712-f63bb6f7fa09",
+      "catalog_title": "VOY@GER (シャイニーカラーズVer.)",
+      "spotify_id": "1XpmPaXl4Hct0ZTtTZnEPb",
+      "spotify_title": "VOY@GER",
+      "source_url": "https://catalog.bandainamcomusiclive.co.jp/release/69669/",
+      "source_track_number": 3,
+      "spotify_source_url": "https://open.spotify.com/album/7A4Smsvs75oTc1uHBwzlF4"
+    },
+    {
+      "catalog_id": "mb:79e86cd1-d26a-4197-a4c5-653bca53cc24",
+      "catalog_title": "VOY@GER (有栖川夏葉Ver.)",
+      "spotify_id": "0qfONM3Bl2aXLStJmPBLhZ",
+      "spotify_title": "VOY@GER",
+      "source_url": "https://catalog.bandainamcomusiclive.co.jp/release/69669/",
+      "source_track_number": 4,
+      "spotify_source_url": "https://open.spotify.com/album/7A4Smsvs75oTc1uHBwzlF4"
+    },
+    {
+      "catalog_id": "mb:133cf56c-74f6-437c-be3b-50d773844b88",
+      "catalog_title": "VOY@GER (黛冬優子Ver.)",
+      "spotify_id": "36gtZbfNvPdXgwyyuqVmr4",
+      "spotify_title": "VOY@GER",
+      "source_url": "https://catalog.bandainamcomusiclive.co.jp/release/69669/",
+      "source_track_number": 5,
+      "spotify_source_url": "https://open.spotify.com/album/7A4Smsvs75oTc1uHBwzlF4"
+    },
+    {
+      "catalog_id": "mb:bd3a6f85-a6e3-45d8-88d1-79939227aeb4",
+      "catalog_title": "VOY@GER (浅倉透Ver.)",
+      "spotify_id": "2k4FSL5gnbyWp28ZR3ZmjU",
+      "spotify_title": "VOY@GER",
+      "source_url": "https://catalog.bandainamcomusiclive.co.jp/release/69669/",
+      "source_track_number": 6,
+      "spotify_source_url": "https://open.spotify.com/album/7A4Smsvs75oTc1uHBwzlF4"
+    }
+  ]
+}

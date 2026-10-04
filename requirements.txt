@@ -1,0 +1,16 @@
+winrt-runtime==3.2.1; sys_platform == 'win32'
+winrt-Windows.Foundation==3.2.1; sys_platform == 'win32'
+winrt-Windows.Foundation.Collections==3.2.1; sys_platform == 'win32'
+winrt-Windows.Media.Control==3.2.1; sys_platform == 'win32'
+pykakasi==2.3.0
+Pillow==12.3.0
+beautifulsoup4==4.15.0
+mutagen==1.48.1
+fugashi==1.5.2
+unidic-lite==1.0.8
+
+winrt-Windows.Media.Ocr==3.2.1; sys_platform == 'win32'
+winrt-Windows.Globalization==3.2.1; sys_platform == 'win32'
+winrt-Windows.Graphics.Imaging==3.2.1; sys_platform == 'win32'
+winrt-Windows.Storage.Streams==3.2.1; sys_platform == 'win32'
+uiautomation==2.0.29; sys_platform == 'win32'

@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "note": "원제와 수록 버전은 공식 출처로 확인했습니다. readings는 한글 검색용 읽기이며 search_translations는 앱에서 편집한 비공식 검색용 번역입니다. source_urls는 일본어 원제의 근거이며 한국어 정식 제목의 근거가 아닙니다.",
+  "entries": [
+    {
+      "matching_titles": ["KAWAII♡めたもる交響曲", "KAWAII♡めたもる交響曲 (Game Size)", "KAWAII♡めたもる交響曲 (Off Vocal)"],
+      "series": ["shiny"],
+      "korean_titles": [],
+      "readings": ["카와이 메타모르 코쿄쿄쿠", "카와이 메타모루 코쿄쿄쿠"],
+      "search_translations": ["귀여운 메타모르 교향곡", "귀여운 교향곡", "카와이 메타모르 교향곡"],
+      "source_urls": ["https://shinycolors.lantis.jp/releaseinfo/lacm-24821/"]
+    },
+    {
+      "matching_titles": ["カウントダウンラブ", "カウントダウンラブ (Game Size)", "カウントダウンラブ (Off Vocal)"],
+      "series": ["shiny"],
+      "korean_titles": [],
+      "readings": ["카운트다운 러브"],
+      "search_translations": [],
+      "source_urls": ["https://shinycolors.lantis.jp/releaseinfo/lacm-24821/"]
+    }
+  ]
+}

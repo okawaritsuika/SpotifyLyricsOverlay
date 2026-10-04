@@ -1,0 +1,3 @@
+# Optional NVIDIA runtime for faster-whisper on Windows; keeps CPU Torch intact.
+nvidia-cublas-cu12==12.8.4.1
+nvidia-cudnn-cu12==9.10.2.21

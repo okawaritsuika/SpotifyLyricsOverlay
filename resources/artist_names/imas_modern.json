@@ -1,0 +1,6460 @@
+{
+  "schema_version": 1,
+  "scope": [
+    "Cinderella Girls",
+    "Shiny Colors",
+    "Gakuen Idolmaster"
+  ],
+  "verified_at": "2026-10-01",
+  "sources": [
+    {
+      "url": "https://cinderellagirls.idolmaster-official.jp/idol/",
+      "title": "Cinderella Girls official idol roster (190 idols)"
+    },
+    {
+      "url": "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/",
+      "title": "Shiny Colors Song for Prism official idols and current voice cast"
+    },
+    {
+      "url": "https://shinycolors.lantis.jp/releaseinfo/laca-25115/",
+      "title": "Shiny Colors ECHOES 09: eight original units"
+    },
+    {
+      "url": "https://idolmaster-official.jp/live_event/REFRAC7IONS_Still_blue/information/",
+      "title": "REFRAC7IONS official seven-unit names and cast"
+    },
+    {
+      "url": "https://shinycolors.lantis.jp/releaseinfo/",
+      "title": "Shiny Colors official releases: HOPEFUL FE@THERS and Team.Stella/Luna/Sol"
+    },
+    {
+      "url": "https://gakuen.idolmaster-official.jp/idol/",
+      "title": "Gakuen Idolmaster official current idol roster"
+    },
+    {
+      "url": "https://gakuen-label.idolmaster-official.jp/news/unr0zjrrmu",
+      "title": "Gakuen Idolmaster official Re;IRIS and Begrazia singles"
+    },
+    {
+      "url": "https://columbia.jp/idolmaster/imasnews/150417.html",
+      "title": "Cinderella Project and six anime units"
+    },
+    {
+      "url": "https://columbia.jp/idolmaster/imasnews/191115.html",
+      "title": "LiPPS, One Steps, Sexy Gals official releases"
+    },
+    {
+      "url": "https://columbia.jp/idolmaster/imasnews/241206.html",
+      "title": "Cinderella Girls ConnecTrip: eighteen featured units"
+    },
+    {
+      "url": "https://columbia.jp/idolmaster/imasnews/190315.html",
+      "title": "VelvetRose official single"
+    },
+    {
+      "url": "https://columbia.jp/idolmaster/imasnews/190412.html",
+      "title": "miroir official single"
+    },
+    {
+      "url": "https://columbia.jp/idolmaster/imasnews/200403.html",
+      "title": "Falling Seaside and Beat Shooter official singles"
+    },
+    {
+      "url": "https://columbia.jp/idolmaster/imasnews/191213.html",
+      "title": "Pink Check School official single"
+    },
+    {
+      "url": "https://columbia.jp/idolmaster/imasnews/190301.html",
+      "title": "Cyber Glass official single"
+    },
+    {
+      "url": "https://columbia.jp/idolmaster/imasnews/190823.html",
+      "title": "Eldritch Lore Teller official single"
+    },
+    {
+      "url": "https://cinderella-library.idolmaster-official.jp/history/detail/?p=20220430_1",
+      "title": "Official Cinderella Library: Blue Napoleon and Girls Be Next Step"
+    },
+    {
+      "url": "https://cinderella-library.idolmaster-official.jp/history/detail/?p=20210419_3",
+      "title": "Official Cinderella Library: Frilled Square"
+    },
+    {
+      "url": "https://cinderella-library.idolmaster-official.jp/history/detail/?p=20170813_1",
+      "title": "Official Cinderella Library: Rock the Beat and Enjin live"
+    },
+    {
+      "url": "https://columbia.jp/idolmaster/COCX-42151.html",
+      "title": "U149 official soundtrack artist credit"
+    }
+  ],
+  "entries": [
+    {
+      "name": "相川千夏",
+      "ko": "아이카와 치나츠",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "相川 千夏",
+        "相川　千夏",
+        "Chinatsu Aikawa",
+        "Aikawa Chinatsu"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/chinatsu/"
+      ]
+    },
+    {
+      "name": "愛野渚",
+      "ko": "아이노 나기사",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "愛野 渚",
+        "愛野　渚",
+        "Nagisa Aino",
+        "Aino Nagisa"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/nagisa/"
+      ]
+    },
+    {
+      "name": "相葉夕美",
+      "ko": "아이바 유미",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "相葉 夕美",
+        "相葉　夕美",
+        "Yumi Aiba",
+        "Aiba Yumi"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/yumi/"
+      ]
+    },
+    {
+      "name": "相原雪乃",
+      "ko": "아이하라 유키노",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "相原 雪乃",
+        "相原　雪乃",
+        "Yukino Aihara",
+        "Aihara Yukino"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/yukino/"
+      ]
+    },
+    {
+      "name": "赤城みりあ",
+      "ko": "아카기 미리아",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "赤城 みりあ",
+        "赤城　みりあ",
+        "Miria Akagi",
+        "Akagi Miria"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/miria/"
+      ]
+    },
+    {
+      "name": "赤西瑛梨華",
+      "ko": "아카니시 에리카",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "赤西 瑛梨華",
+        "赤西　瑛梨華",
+        "Erika Akanishi",
+        "Akanishi Erika"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/erika/"
+      ]
+    },
+    {
+      "name": "浅野風香",
+      "ko": "아사노 후카",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "浅野 風香",
+        "浅野　風香",
+        "Fuka Asano",
+        "Asano Fuka"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/fuka/"
+      ]
+    },
+    {
+      "name": "浅利七海",
+      "ko": "아사리 나나미",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "浅利 七海",
+        "浅利　七海",
+        "Nanami Asari",
+        "Asari Nanami"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/nanami/"
+      ]
+    },
+    {
+      "name": "アナスタシア",
+      "ko": "아나스타샤",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/anastasia/"
+      ]
+    },
+    {
+      "name": "安部菜々",
+      "ko": "아베 나나",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "安部 菜々",
+        "安部　菜々",
+        "Nana Abe",
+        "Abe Nana"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/nana/"
+      ]
+    },
+    {
+      "name": "綾瀬穂乃香",
+      "ko": "아야세 호노카",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "綾瀬 穂乃香",
+        "綾瀬　穂乃香",
+        "Honoka Ayase",
+        "Ayase Honoka"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/honoka/"
+      ]
+    },
+    {
+      "name": "荒木比奈",
+      "ko": "아라키 히나",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "荒木 比奈",
+        "荒木　比奈",
+        "Hina Araki",
+        "Araki Hina"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/hina/"
+      ]
+    },
+    {
+      "name": "有浦柑奈",
+      "ko": "아리우라 칸나",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "有浦 柑奈",
+        "有浦　柑奈",
+        "Kanna Ariura",
+        "Ariura Kanna"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/kanna/"
+      ]
+    },
+    {
+      "name": "安斎都",
+      "ko": "안자이 미야코",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "安斎 都",
+        "安斎　都",
+        "Miyako Anzai",
+        "Anzai Miyako"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/miyako/"
+      ]
+    },
+    {
+      "name": "イヴ・サンタクロース",
+      "ko": "이브 산타클로스",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "Eve Santaclaus",
+        "Santaclaus Eve"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/eve/"
+      ]
+    },
+    {
+      "name": "五十嵐響子",
+      "ko": "이가라시 쿄코",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "五十嵐 響子",
+        "五十嵐　響子",
+        "Kyoko Igarashi",
+        "Igarashi Kyoko"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/kyoko/"
+      ]
+    },
+    {
+      "name": "池袋晶葉",
+      "ko": "이케부쿠로 아키하",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "池袋 晶葉",
+        "池袋　晶葉",
+        "Akiha Ikebukuro",
+        "Ikebukuro Akiha"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/akiha/"
+      ]
+    },
+    {
+      "name": "伊集院惠",
+      "ko": "이쥬인 메구미",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "伊集院 惠",
+        "伊集院　惠",
+        "Megumi Ijuin",
+        "Ijuin Megumi"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/megumi/"
+      ]
+    },
+    {
+      "name": "一ノ瀬志希",
+      "ko": "이치노세 시키",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "一ノ瀬 志希",
+        "一ノ瀬　志希",
+        "Shiki Ichinose",
+        "Ichinose Shiki"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/shiki/"
+      ]
+    },
+    {
+      "name": "市原仁奈",
+      "ko": "이치하라 니나",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "市原 仁奈",
+        "市原　仁奈",
+        "Nina Ichihara",
+        "Ichihara Nina"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/nina/"
+      ]
+    },
+    {
+      "name": "今井加奈",
+      "ko": "이마이 카나",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "今井 加奈",
+        "今井　加奈",
+        "Kana Imai",
+        "Imai Kana"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/kana/"
+      ]
+    },
+    {
+      "name": "井村雪菜",
+      "ko": "이무라 세츠나",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "井村 雪菜",
+        "井村　雪菜",
+        "Setsuna Imura",
+        "Imura Setsuna"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/setsuna/"
+      ]
+    },
+    {
+      "name": "上田鈴帆",
+      "ko": "우에다 스즈호",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "上田 鈴帆",
+        "上田　鈴帆",
+        "Suzuho Ueda",
+        "Ueda Suzuho"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/suzuho/"
+      ]
+    },
+    {
+      "name": "氏家むつみ",
+      "ko": "우지이에 무츠미",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "氏家 むつみ",
+        "氏家　むつみ",
+        "Mutsumi Ujiie",
+        "Ujiie Mutsumi"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/mutsumi/"
+      ]
+    },
+    {
+      "name": "梅木音葉",
+      "ko": "우메키 오토하",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "梅木 音葉",
+        "梅木　音葉",
+        "Otoha Umeki",
+        "Umeki Otoha"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/otoha/"
+      ]
+    },
+    {
+      "name": "江上椿",
+      "ko": "에가미 츠바키",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "江上 椿",
+        "江上　椿",
+        "Tsubaki Egami",
+        "Egami Tsubaki"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/tsubaki/"
+      ]
+    },
+    {
+      "name": "衛藤美紗希",
+      "ko": "에토 미사키",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "衛藤 美紗希",
+        "衛藤　美紗希",
+        "Misaki Eto",
+        "Eto Misaki"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/misaki/"
+      ]
+    },
+    {
+      "name": "海老原菜帆",
+      "ko": "에비하라 나호",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "海老原 菜帆",
+        "海老原　菜帆",
+        "Naho Ebihara",
+        "Ebihara Naho"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/naho/"
+      ]
+    },
+    {
+      "name": "及川雫",
+      "ko": "오이카와 시즈쿠",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "及川 雫",
+        "及川　雫",
+        "Shizuku Oikawa",
+        "Oikawa Shizuku"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/shizuku/"
+      ]
+    },
+    {
+      "name": "大石泉",
+      "ko": "오오이시 이즈미",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "大石 泉",
+        "大石　泉",
+        "Izumi Ohishi",
+        "Ohishi Izumi",
+        "Izumi Oishi",
+        "Oishi Izumi"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/izumi/"
+      ]
+    },
+    {
+      "name": "太田優",
+      "ko": "오오타 유우",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "太田 優",
+        "太田　優",
+        "Yuu Ohta",
+        "Ohta Yuu"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/yuu/"
+      ]
+    },
+    {
+      "name": "大槻唯",
+      "ko": "오오츠키 유이",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "大槻 唯",
+        "大槻　唯",
+        "Yui Ohtsuki",
+        "Ohtsuki Yui",
+        "Yui Otsuki",
+        "Otsuki Yui"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/yui/"
+      ]
+    },
+    {
+      "name": "大西由里子",
+      "ko": "오오니시 유리코",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "大西 由里子",
+        "大西　由里子",
+        "Yuriko Ohnishi",
+        "Ohnishi Yuriko",
+        "Yuriko Onishi",
+        "Onishi Yuriko"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/yuriko/"
+      ]
+    },
+    {
+      "name": "大沼くるみ",
+      "ko": "오오누마 쿠루미",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "大沼 くるみ",
+        "大沼　くるみ",
+        "Kurumi Ohnuma",
+        "Ohnuma Kurumi",
+        "Kurumi Onuma",
+        "Onuma Kurumi"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/kurumi/"
+      ]
+    },
+    {
+      "name": "大原みちる",
+      "ko": "오오하라 미치루",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "大原 みちる",
+        "大原　みちる",
+        "Michiru Ohara",
+        "Ohara Michiru"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/michiru/"
+      ]
+    },
+    {
+      "name": "岡崎泰葉",
+      "ko": "오카자키 야스하",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "岡崎 泰葉",
+        "岡崎　泰葉",
+        "Yasuha Okazaki",
+        "Okazaki Yasuha"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/yasuha/"
+      ]
+    },
+    {
+      "name": "緒方智絵里",
+      "ko": "오가타 치에리",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "緒方 智絵里",
+        "緒方　智絵里",
+        "Chieri Ogata",
+        "Ogata Chieri"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/chieri/"
+      ]
+    },
+    {
+      "name": "奥山沙織",
+      "ko": "오쿠야마 사오리",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "奥山 沙織",
+        "奥山　沙織",
+        "Saori Okuyama",
+        "Okuyama Saori"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/saori/"
+      ]
+    },
+    {
+      "name": "乙倉悠貴",
+      "ko": "오토쿠라 유우키",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "乙倉 悠貴",
+        "乙倉　悠貴",
+        "Yuuki Otokura",
+        "Otokura Yuuki"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/yuuki/"
+      ]
+    },
+    {
+      "name": "片桐早苗",
+      "ko": "카타기리 사나에",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "片桐 早苗",
+        "片桐　早苗",
+        "Sanae Katagiri",
+        "Katagiri Sanae"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/sanae/"
+      ]
+    },
+    {
+      "name": "上条春菜",
+      "ko": "카미죠 하루나",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "上条 春菜",
+        "上条　春菜",
+        "Haruna Kamijo",
+        "Kamijo Haruna"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/haruna/"
+      ]
+    },
+    {
+      "name": "神谷奈緒",
+      "ko": "카미야 나오",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "神谷 奈緒",
+        "神谷　奈緒",
+        "Nao Kamiya",
+        "Kamiya Nao"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/nao/"
+      ]
+    },
+    {
+      "name": "川島瑞樹",
+      "ko": "카와시마 미즈키",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "川島 瑞樹",
+        "川島　瑞樹",
+        "Mizuki Kawashima",
+        "Kawashima Mizuki"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/mizuki/"
+      ]
+    },
+    {
+      "name": "神崎蘭子",
+      "ko": "칸자키 란코",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "神崎 蘭子",
+        "神崎　蘭子",
+        "Ranko Kanzaki",
+        "Kanzaki Ranko"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/ranko/"
+      ]
+    },
+    {
+      "name": "岸部彩華",
+      "ko": "키시베 아야카",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "岸部 彩華",
+        "岸部　彩華",
+        "Ayaka Kishibe",
+        "Kishibe Ayaka"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/ayaka/"
+      ]
+    },
+    {
+      "name": "北川真尋",
+      "ko": "키타가와 마히로",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "北川 真尋",
+        "北川　真尋",
+        "Mahiro Kitagawa",
+        "Kitagawa Mahiro"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/mahiro/"
+      ]
+    },
+    {
+      "name": "喜多日菜子",
+      "ko": "키타 히나코",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "喜多 日菜子",
+        "喜多　日菜子",
+        "Hinako Kita",
+        "Kita Hinako"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/hinako/"
+      ]
+    },
+    {
+      "name": "喜多見柚",
+      "ko": "키타미 유즈",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "喜多見 柚",
+        "喜多見　柚",
+        "Yuzu Kitami",
+        "Kitami Yuzu"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/yuzu/"
+      ]
+    },
+    {
+      "name": "木場真奈美",
+      "ko": "키바 마나미",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "木場 真奈美",
+        "木場　真奈美",
+        "Manami Kiba",
+        "Kiba Manami"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/manami/"
+      ]
+    },
+    {
+      "name": "木村夏樹",
+      "ko": "키무라 나츠키",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "木村 夏樹",
+        "木村　夏樹",
+        "Natsuki Kimura",
+        "Kimura Natsuki"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/natsuki/"
+      ]
+    },
+    {
+      "name": "キャシー・グラハム",
+      "ko": "캐시 그라함",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "Cathy Graham",
+        "Graham Cathy"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/cathy/"
+      ]
+    },
+    {
+      "name": "桐野アヤ",
+      "ko": "키리노 아야",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "桐野 アヤ",
+        "桐野　アヤ",
+        "Aya Kirino",
+        "Kirino Aya"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/aya/"
+      ]
+    },
+    {
+      "name": "桐生つかさ",
+      "ko": "키류 츠카사",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "桐生 つかさ",
+        "桐生　つかさ",
+        "Tsukasa Kiryu",
+        "Kiryu Tsukasa"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/tsukasa/"
+      ]
+    },
+    {
+      "name": "日下部若葉",
+      "ko": "쿠사카베 와카바",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "日下部 若葉",
+        "日下部　若葉",
+        "Wakaba Kusakabe",
+        "Kusakabe Wakaba"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/wakaba/"
+      ]
+    },
+    {
+      "name": "工藤忍",
+      "ko": "쿠도 시노부",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "工藤 忍",
+        "工藤　忍",
+        "Shinobu Kudo",
+        "Kudo Shinobu"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/shinobu/"
+      ]
+    },
+    {
+      "name": "クラリス",
+      "ko": "클라리스",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/clarice/"
+      ]
+    },
+    {
+      "name": "栗原ネネ",
+      "ko": "쿠리하라 네네",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "栗原 ネネ",
+        "栗原　ネネ",
+        "Nene Kurihara",
+        "Kurihara Nene"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/nene/"
+      ]
+    },
+    {
+      "name": "黒川千秋",
+      "ko": "쿠로카와 치아키",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "黒川 千秋",
+        "黒川　千秋",
+        "Chiaki Kurokawa",
+        "Kurokawa Chiaki"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/chiaki/"
+      ]
+    },
+    {
+      "name": "黒埼ちとせ",
+      "ko": "쿠로사키 치토세",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "黒埼 ちとせ",
+        "黒埼　ちとせ",
+        "Chitose Kurosaki",
+        "Kurosaki Chitose"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/chitose/"
+      ]
+    },
+    {
+      "name": "ケイト",
+      "ko": "케이트",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/kate/"
+      ]
+    },
+    {
+      "name": "古賀小春",
+      "ko": "코가 코하루",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "古賀 小春",
+        "古賀　小春",
+        "Koharu Koga",
+        "Koga Koharu"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/koharu/"
+      ]
+    },
+    {
+      "name": "輿水幸子",
+      "ko": "코시미즈 사치코",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "輿水 幸子",
+        "輿水　幸子",
+        "Sachiko Koshimizu",
+        "Koshimizu Sachiko"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/sachiko/"
+      ]
+    },
+    {
+      "name": "小関麗奈",
+      "ko": "코세키 레이나",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "小関 麗奈",
+        "小関　麗奈",
+        "Reina Koseki",
+        "Koseki Reina"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/reina/"
+      ]
+    },
+    {
+      "name": "小早川紗枝",
+      "ko": "코바야카와 사에",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "小早川 紗枝",
+        "小早川　紗枝",
+        "Sae Kobayakawa",
+        "Kobayakawa Sae"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/sae/"
+      ]
+    },
+    {
+      "name": "小日向美穂",
+      "ko": "코히나타 미호",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "小日向 美穂",
+        "小日向　美穂",
+        "Miho Kohinata",
+        "Kohinata Miho"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/miho/"
+      ]
+    },
+    {
+      "name": "小松伊吹",
+      "ko": "코마츠 이부키",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "小松 伊吹",
+        "小松　伊吹",
+        "Ibuki Komatsu",
+        "Komatsu Ibuki"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/ibuki/"
+      ]
+    },
+    {
+      "name": "小室千奈美",
+      "ko": "코무로 치나미",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "小室 千奈美",
+        "小室　千奈美",
+        "Chinami Komuro",
+        "Komuro Chinami"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/chinami/"
+      ]
+    },
+    {
+      "name": "西園寺琴歌",
+      "ko": "사이온지 코토카",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "西園寺 琴歌",
+        "西園寺　琴歌",
+        "Kotoka Saionji",
+        "Saionji Kotoka"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/kotoka/"
+      ]
+    },
+    {
+      "name": "財前時子",
+      "ko": "자이젠 토키코",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "財前 時子",
+        "財前　時子",
+        "Tokiko Zaizen",
+        "Zaizen Tokiko"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/tokiko/"
+      ]
+    },
+    {
+      "name": "斉藤洋子",
+      "ko": "사이토 요코",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "斉藤 洋子",
+        "斉藤　洋子",
+        "Yoko Saito",
+        "Saito Yoko"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/yoko/"
+      ]
+    },
+    {
+      "name": "冴島清美",
+      "ko": "사에지마 키요미",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "冴島 清美",
+        "冴島　清美",
+        "Kiyomi Saejima",
+        "Saejima Kiyomi"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/kiyomi/"
+      ]
+    },
+    {
+      "name": "榊原里美",
+      "ko": "사카키바라 사토미",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "榊原 里美",
+        "榊原　里美",
+        "Satomi Sakakibara",
+        "Sakakibara Satomi"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/satomi/"
+      ]
+    },
+    {
+      "name": "鷺沢文香",
+      "ko": "사기사와 후미카",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "鷺沢 文香",
+        "鷺沢　文香",
+        "Fumika Sagisawa",
+        "Sagisawa Fumika"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/fumika/"
+      ]
+    },
+    {
+      "name": "佐久間まゆ",
+      "ko": "사쿠마 마유",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "佐久間 まゆ",
+        "佐久間　まゆ",
+        "Mayu Sakuma",
+        "Sakuma Mayu"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/mayu/"
+      ]
+    },
+    {
+      "name": "櫻井桃華",
+      "ko": "사쿠라이 모모카",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "櫻井 桃華",
+        "櫻井　桃華",
+        "Momoka Sakurai",
+        "Sakurai Momoka"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/momoka/"
+      ]
+    },
+    {
+      "name": "佐々木千枝",
+      "ko": "사사키 치에",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "佐々木 千枝",
+        "佐々木　千枝",
+        "Chie Sasaki",
+        "Sasaki Chie"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/chie/"
+      ]
+    },
+    {
+      "name": "佐城雪美",
+      "ko": "사죠 유키미",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "佐城 雪美",
+        "佐城　雪美",
+        "Yukimi Sajo",
+        "Sajo Yukimi"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/yukimi/"
+      ]
+    },
+    {
+      "name": "佐藤心",
+      "ko": "사토 신",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "佐藤 心",
+        "佐藤　心",
+        "Shin Sato",
+        "Sato Shin",
+        "Shin Satou",
+        "Satou Shin"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/shin/"
+      ]
+    },
+    {
+      "name": "沢田麻理菜",
+      "ko": "사와다 마리나",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "沢田 麻理菜",
+        "沢田　麻理菜",
+        "Marina Sawada",
+        "Sawada Marina"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/marina/"
+      ]
+    },
+    {
+      "name": "椎名法子",
+      "ko": "시이나 노리코",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "椎名 法子",
+        "椎名　法子",
+        "Noriko Shiina",
+        "Shiina Noriko"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/noriko/"
+      ]
+    },
+    {
+      "name": "塩見周子",
+      "ko": "시오미 슈코",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "塩見 周子",
+        "塩見　周子",
+        "Syuko Shiomi",
+        "Shiomi Syuko",
+        "Shuko Shiomi",
+        "Shiomi Shuko",
+        "Shuuko Shiomi",
+        "Shiomi Shuuko"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/syuko/"
+      ]
+    },
+    {
+      "name": "篠原礼",
+      "ko": "시노하라 레이",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "篠原 礼",
+        "篠原　礼",
+        "Rei Shinohara",
+        "Shinohara Rei"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/rei/"
+      ]
+    },
+    {
+      "name": "渋谷凛",
+      "ko": "시부야 린",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "渋谷 凛",
+        "渋谷　凛",
+        "Rin Shibuya",
+        "Shibuya Rin"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/rin/"
+      ]
+    },
+    {
+      "name": "島村卯月",
+      "ko": "시마무라 우즈키",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "島村 卯月",
+        "島村　卯月",
+        "Uzuki Shimamura",
+        "Shimamura Uzuki"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/uzuki/"
+      ]
+    },
+    {
+      "name": "首藤葵",
+      "ko": "슈토 아오이",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "首藤 葵",
+        "首藤　葵",
+        "Aoi Shuto",
+        "Shuto Aoi"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/aoi/"
+      ]
+    },
+    {
+      "name": "城ヶ崎美嘉",
+      "ko": "죠가사키 미카",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "城ヶ崎 美嘉",
+        "城ヶ崎　美嘉",
+        "Mika Jougasaki",
+        "Jougasaki Mika"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/mika/"
+      ]
+    },
+    {
+      "name": "城ヶ崎莉嘉",
+      "ko": "죠가사키 리카",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "城ヶ崎 莉嘉",
+        "城ヶ崎　莉嘉",
+        "Rika Jougasaki",
+        "Jougasaki Rika"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/rika/"
+      ]
+    },
+    {
+      "name": "白菊ほたる",
+      "ko": "시라기쿠 호타루",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "白菊 ほたる",
+        "白菊　ほたる",
+        "Hotaru Shiragiku",
+        "Shiragiku Hotaru"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/hotaru/"
+      ]
+    },
+    {
+      "name": "白坂小梅",
+      "ko": "시라사카 코우메",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "白坂 小梅",
+        "白坂　小梅",
+        "Koume Shirasaka",
+        "Shirasaka Koume"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/koume/"
+      ]
+    },
+    {
+      "name": "白雪千夜",
+      "ko": "시라유키 치요",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "白雪 千夜",
+        "白雪　千夜",
+        "Chiyo Shirayuki",
+        "Shirayuki Chiyo"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/chiyo/"
+      ]
+    },
+    {
+      "name": "杉坂海",
+      "ko": "스기사카 우미",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "杉坂 海",
+        "杉坂　海",
+        "Umi Sugisaka",
+        "Sugisaka Umi"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/umi/"
+      ]
+    },
+    {
+      "name": "涼宮星花",
+      "ko": "스즈미야 세이카",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "涼宮 星花",
+        "涼宮　星花",
+        "Seika Suzumiya",
+        "Suzumiya Seika"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/seika/"
+      ]
+    },
+    {
+      "name": "砂塚あきら",
+      "ko": "스나즈카 아키라",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "砂塚 あきら",
+        "砂塚　あきら",
+        "Akira Sunazuka",
+        "Sunazuka Akira"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/akira/"
+      ]
+    },
+    {
+      "name": "関裕美",
+      "ko": "세키 히로미",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "関 裕美",
+        "関　裕美",
+        "Hiromi Seki",
+        "Seki Hiromi"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/hiromi/"
+      ]
+    },
+    {
+      "name": "瀬名詩織",
+      "ko": "세나 시오리",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "瀬名 詩織",
+        "瀬名　詩織",
+        "Shiori Sena",
+        "Sena Shiori"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/shiori/"
+      ]
+    },
+    {
+      "name": "仙崎恵磨",
+      "ko": "센자키 에마",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "仙崎 恵磨",
+        "仙崎　恵磨",
+        "Ema Senzaki",
+        "Senzaki Ema"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/ema/"
+      ]
+    },
+    {
+      "name": "相馬夏美",
+      "ko": "소마 나츠미",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "相馬 夏美",
+        "相馬　夏美",
+        "Natsumi Soma",
+        "Soma Natsumi"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/natsumi/"
+      ]
+    },
+    {
+      "name": "高垣楓",
+      "ko": "타카가키 카에데",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "高垣 楓",
+        "高垣　楓",
+        "Kaede Takagaki",
+        "Takagaki Kaede"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/kaede/"
+      ]
+    },
+    {
+      "name": "高橋礼子",
+      "ko": "타카하시 레이코",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "高橋 礼子",
+        "高橋　礼子",
+        "Reiko Takahashi",
+        "Takahashi Reiko"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/reiko/"
+      ]
+    },
+    {
+      "name": "鷹富士茄子",
+      "ko": "타카후지 카코",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "鷹富士 茄子",
+        "鷹富士　茄子",
+        "Kako Takafuji",
+        "Takafuji Kako"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/kako/"
+      ]
+    },
+    {
+      "name": "高峯のあ",
+      "ko": "타카미네 노아",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "高峯 のあ",
+        "高峯　のあ",
+        "Noa Takamine",
+        "Takamine Noa"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/noa/"
+      ]
+    },
+    {
+      "name": "高森藍子",
+      "ko": "타카모리 아이코",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "高森 藍子",
+        "高森　藍子",
+        "Aiko Takamori",
+        "Takamori Aiko"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/aiko/"
+      ]
+    },
+    {
+      "name": "多田李衣菜",
+      "ko": "타다 리이나",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "多田 李衣菜",
+        "多田　李衣菜",
+        "Riina Tada",
+        "Tada Riina"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/riina/"
+      ]
+    },
+    {
+      "name": "橘ありす",
+      "ko": "타치바나 아리스",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "橘 ありす",
+        "橘　ありす",
+        "Arisu Tachibana",
+        "Tachibana Arisu"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/arisu/"
+      ]
+    },
+    {
+      "name": "月宮雅",
+      "ko": "츠키미야 미야비",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "月宮 雅",
+        "月宮　雅",
+        "Miyabi Tsukimiya",
+        "Tsukimiya Miyabi"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/miyabi/"
+      ]
+    },
+    {
+      "name": "辻野あかり",
+      "ko": "츠지노 아카리",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "辻野 あかり",
+        "辻野　あかり",
+        "Akari Tsujino",
+        "Tsujino Akari"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/akari/"
+      ]
+    },
+    {
+      "name": "土屋亜子",
+      "ko": "츠치야 아코",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "土屋 亜子",
+        "土屋　亜子",
+        "Ako Tsuchiya",
+        "Tsuchiya Ako"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/ako/"
+      ]
+    },
+    {
+      "name": "東郷あい",
+      "ko": "토고 아이",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "東郷 あい",
+        "東郷　あい",
+        "Ai Togo",
+        "Togo Ai"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/ai/"
+      ]
+    },
+    {
+      "name": "道明寺歌鈴",
+      "ko": "도묘지 카린",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "道明寺 歌鈴",
+        "道明寺　歌鈴",
+        "Karin Domyoji",
+        "Domyoji Karin"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/karin/"
+      ]
+    },
+    {
+      "name": "十時愛梨",
+      "ko": "토토키 아이리",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "十時 愛梨",
+        "十時　愛梨",
+        "Airi Totoki",
+        "Totoki Airi"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/airi/"
+      ]
+    },
+    {
+      "name": "長富蓮実",
+      "ko": "나가토미 하스미",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "長富 蓮実",
+        "長富　蓮実",
+        "Hasumi Nagatomi",
+        "Nagatomi Hasumi"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/hasumi/"
+      ]
+    },
+    {
+      "name": "中野有香",
+      "ko": "나카노 유카",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "中野 有香",
+        "中野　有香",
+        "Yuka Nakano",
+        "Nakano Yuka"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/yuka/"
+      ]
+    },
+    {
+      "name": "ナターリア",
+      "ko": "나탈리아",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/natalia/"
+      ]
+    },
+    {
+      "name": "並木芽衣子",
+      "ko": "나미키 메이코",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "並木 芽衣子",
+        "並木　芽衣子",
+        "Meiko Namiki",
+        "Namiki Meiko"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/meiko/"
+      ]
+    },
+    {
+      "name": "成宮由愛",
+      "ko": "나루미야 유메",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "成宮 由愛",
+        "成宮　由愛",
+        "Yume Narumiya",
+        "Narumiya Yume"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/yume/"
+      ]
+    },
+    {
+      "name": "南条光",
+      "ko": "난죠 히카루",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "南条 光",
+        "南条　光",
+        "Hikaru Nanjo",
+        "Nanjo Hikaru"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/hikaru/"
+      ]
+    },
+    {
+      "name": "難波笑美",
+      "ko": "난바 에미",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "難波 笑美",
+        "難波　笑美",
+        "Emi Namba",
+        "Namba Emi"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/emi/"
+      ]
+    },
+    {
+      "name": "西川保奈美",
+      "ko": "니시카와 호나미",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "西川 保奈美",
+        "西川　保奈美",
+        "Honami Nishikawa",
+        "Nishikawa Honami"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/honami/"
+      ]
+    },
+    {
+      "name": "西島櫂",
+      "ko": "니시지마 카이",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "西島 櫂",
+        "西島　櫂",
+        "Kai Nishijima",
+        "Nishijima Kai"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/kai/"
+      ]
+    },
+    {
+      "name": "新田美波",
+      "ko": "닛타 미나미",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "新田 美波",
+        "新田　美波",
+        "Minami Nitta",
+        "Nitta Minami"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/minami/"
+      ]
+    },
+    {
+      "name": "二宮飛鳥",
+      "ko": "니노미야 아스카",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "二宮 飛鳥",
+        "二宮　飛鳥",
+        "Asuka Ninomiya",
+        "Ninomiya Asuka"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/asuka/"
+      ]
+    },
+    {
+      "name": "丹羽仁美",
+      "ko": "니와 히토미",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "丹羽 仁美",
+        "丹羽　仁美",
+        "Hitomi Niwa",
+        "Niwa Hitomi"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/hitomi/"
+      ]
+    },
+    {
+      "name": "野々村そら",
+      "ko": "노노무라 소라",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "野々村 そら",
+        "野々村　そら",
+        "Sora Nonomura",
+        "Nonomura Sora"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/sora/"
+      ]
+    },
+    {
+      "name": "服部瞳子",
+      "ko": "핫토리 토코",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "服部 瞳子",
+        "服部　瞳子",
+        "Toko Hattori",
+        "Hattori Toko"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/toko/"
+      ]
+    },
+    {
+      "name": "浜川愛結奈",
+      "ko": "하마카와 아유나",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "浜川 愛結奈",
+        "浜川　愛結奈",
+        "Ayuna Hamakawa",
+        "Hamakawa Ayuna"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/ayuna/"
+      ]
+    },
+    {
+      "name": "浜口あやめ",
+      "ko": "하마구치 아야메",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "浜口 あやめ",
+        "浜口　あやめ",
+        "Ayame Hamaguchi",
+        "Hamaguchi Ayame"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/ayame/"
+      ]
+    },
+    {
+      "name": "早坂美玲",
+      "ko": "하야사카 미레이",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "早坂 美玲",
+        "早坂　美玲",
+        "Mirei Hayasaka",
+        "Hayasaka Mirei"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/mirei/"
+      ]
+    },
+    {
+      "name": "速水奏",
+      "ko": "하야미 카나데",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "速水 奏",
+        "速水　奏",
+        "Kanade Hayami",
+        "Hayami Kanade"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/kanade/"
+      ]
+    },
+    {
+      "name": "原田美世",
+      "ko": "하라다 미요",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "原田 美世",
+        "原田　美世",
+        "Miyo Harada",
+        "Harada Miyo"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/miyo/"
+      ]
+    },
+    {
+      "name": "柊志乃",
+      "ko": "히이라기 시노",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "柊 志乃",
+        "柊　志乃",
+        "Shino Hiiragi",
+        "Hiiragi Shino"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/shino/"
+      ]
+    },
+    {
+      "name": "久川凪",
+      "ko": "히사카와 나기",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "久川 凪",
+        "久川　凪",
+        "Nagi Hisakawa",
+        "Hisakawa Nagi"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/nagi/"
+      ]
+    },
+    {
+      "name": "久川颯",
+      "ko": "히사카와 하야테",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "久川 颯",
+        "久川　颯",
+        "Hayate Hisakawa",
+        "Hisakawa Hayate"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/hayate/"
+      ]
+    },
+    {
+      "name": "日野茜",
+      "ko": "히노 아카네",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "日野 茜",
+        "日野　茜",
+        "Akane Hino",
+        "Hino Akane"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/akane/"
+      ]
+    },
+    {
+      "name": "姫川友紀",
+      "ko": "히메카와 유키",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "姫川 友紀",
+        "姫川　友紀",
+        "Yuki Himekawa",
+        "Himekawa Yuki"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/yuki/"
+      ]
+    },
+    {
+      "name": "兵藤レナ",
+      "ko": "효도 레나",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "兵藤 レナ",
+        "兵藤　レナ",
+        "Rena Hyodo",
+        "Hyodo Rena"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/rena/"
+      ]
+    },
+    {
+      "name": "福山舞",
+      "ko": "후쿠야마 마이",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "福山 舞",
+        "福山　舞",
+        "Mai Fukuyama",
+        "Fukuyama Mai"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/mai/"
+      ]
+    },
+    {
+      "name": "藤居朋",
+      "ko": "후지이 토모",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "藤居 朋",
+        "藤居　朋",
+        "Tomo Fujii",
+        "Fujii Tomo"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/tomo/"
+      ]
+    },
+    {
+      "name": "藤本里奈",
+      "ko": "후지모토 리나",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "藤本 里奈",
+        "藤本　里奈",
+        "Rina Fujimoto",
+        "Fujimoto Rina"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/rina/"
+      ]
+    },
+    {
+      "name": "藤原肇",
+      "ko": "후지와라 하지메",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "藤原 肇",
+        "藤原　肇",
+        "Hajime Fujiwara",
+        "Fujiwara Hajime"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/hajime/"
+      ]
+    },
+    {
+      "name": "双葉杏",
+      "ko": "후타바 안즈",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "双葉 杏",
+        "双葉　杏",
+        "Anzu Futaba",
+        "Futaba Anzu"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/anzu/"
+      ]
+    },
+    {
+      "name": "古澤頼子",
+      "ko": "후루사와 요리코",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "古澤 頼子",
+        "古澤　頼子",
+        "Yoriko Furusawa",
+        "Furusawa Yoriko"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/yoriko/"
+      ]
+    },
+    {
+      "name": "ヘレン",
+      "ko": "헬렌",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/helen/"
+      ]
+    },
+    {
+      "name": "北条加蓮",
+      "ko": "호죠 카렌",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "北条 加蓮",
+        "北条　加蓮",
+        "Karen Hojo",
+        "Hojo Karen"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/karen/"
+      ]
+    },
+    {
+      "name": "星輝子",
+      "ko": "호시 쇼코",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "星 輝子",
+        "星　輝子",
+        "Syoko Hoshi",
+        "Hoshi Syoko",
+        "Shoko Hoshi",
+        "Hoshi Shoko",
+        "Shouko Hoshi",
+        "Hoshi Shouko"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/syoko/"
+      ]
+    },
+    {
+      "name": "堀裕子",
+      "ko": "호리 유코",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "堀 裕子",
+        "堀　裕子",
+        "Yuko Hori",
+        "Hori Yuko"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/yuko/"
+      ]
+    },
+    {
+      "name": "本田未央",
+      "ko": "혼다 미오",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "本田 未央",
+        "本田　未央",
+        "Mio Honda",
+        "Honda Mio"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/mio/"
+      ]
+    },
+    {
+      "name": "前川みく",
+      "ko": "마에카와 미쿠",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "前川 みく",
+        "前川　みく",
+        "Miku Maekawa",
+        "Maekawa Miku"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/miku/"
+      ]
+    },
+    {
+      "name": "槙原志保",
+      "ko": "마키하라 시호",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "槙原 志保",
+        "槙原　志保",
+        "Shiho Makihara",
+        "Makihara Shiho"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/shiho/"
+      ]
+    },
+    {
+      "name": "松尾千鶴",
+      "ko": "마츠오 치즈루",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "松尾 千鶴",
+        "松尾　千鶴",
+        "Chizuru Matsuo",
+        "Matsuo Chizuru"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/chizuru/"
+      ]
+    },
+    {
+      "name": "松永涼",
+      "ko": "마츠나가 료",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "松永 涼",
+        "松永　涼",
+        "Ryo Matsunaga",
+        "Matsunaga Ryo"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/ryo/"
+      ]
+    },
+    {
+      "name": "松原早耶",
+      "ko": "마츠바라 사야",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "松原 早耶",
+        "松原　早耶",
+        "Saya Matsubara",
+        "Matsubara Saya"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/saya/"
+      ]
+    },
+    {
+      "name": "松本沙理奈",
+      "ko": "마츠모토 사리나",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "松本 沙理奈",
+        "松本　沙理奈",
+        "Sarina Matsumoto",
+        "Matsumoto Sarina"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/sarina/"
+      ]
+    },
+    {
+      "name": "松山久美子",
+      "ko": "마츠야마 쿠미코",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "松山 久美子",
+        "松山　久美子",
+        "Kumiko Matsuyama",
+        "Matsuyama Kumiko"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/kumiko/"
+      ]
+    },
+    {
+      "name": "的場梨沙",
+      "ko": "마토바 리사",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "的場 梨沙",
+        "的場　梨沙",
+        "Risa Matoba",
+        "Matoba Risa"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/risa/"
+      ]
+    },
+    {
+      "name": "間中美里",
+      "ko": "마나카 미사토",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "間中 美里",
+        "間中　美里",
+        "Misato Manaka",
+        "Manaka Misato"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/misato/"
+      ]
+    },
+    {
+      "name": "真鍋いつき",
+      "ko": "마나베 이츠키",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "真鍋 いつき",
+        "真鍋　いつき",
+        "Itsuki Manabe",
+        "Manabe Itsuki"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/itsuki/"
+      ]
+    },
+    {
+      "name": "水木聖來",
+      "ko": "미즈키 세이라",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "水木 聖來",
+        "水木　聖來",
+        "Seira Mizuki",
+        "Mizuki Seira"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/seira/"
+      ]
+    },
+    {
+      "name": "水野翠",
+      "ko": "미즈노 미도리",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "水野 翠",
+        "水野　翠",
+        "Midori Mizuno",
+        "Mizuno Midori"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/midori/"
+      ]
+    },
+    {
+      "name": "水本ゆかり",
+      "ko": "미즈모토 유카리",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "水本 ゆかり",
+        "水本　ゆかり",
+        "Yukari Mizumoto",
+        "Mizumoto Yukari"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/yukari/"
+      ]
+    },
+    {
+      "name": "三船美優",
+      "ko": "미후네 미유",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "三船 美優",
+        "三船　美優",
+        "Miyu Mifune",
+        "Mifune Miyu"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/miyu/"
+      ]
+    },
+    {
+      "name": "三村かな子",
+      "ko": "미무라 카나코",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "三村 かな子",
+        "三村　かな子",
+        "Kanako Mimura",
+        "Mimura Kanako"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/kanako/"
+      ]
+    },
+    {
+      "name": "宮本フレデリカ",
+      "ko": "미야모토 프레데리카",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "宮本 フレデリカ",
+        "宮本　フレデリカ",
+        "Frederica Miyamoto",
+        "Miyamoto Frederica"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/frederica/"
+      ]
+    },
+    {
+      "name": "三好紗南",
+      "ko": "미요시 사나",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "三好 紗南",
+        "三好　紗南",
+        "Sana Miyoshi",
+        "Miyoshi Sana"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/sana/"
+      ]
+    },
+    {
+      "name": "向井拓海",
+      "ko": "무카이 타쿠미",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "向井 拓海",
+        "向井　拓海",
+        "Takumi Mukai",
+        "Mukai Takumi"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/takumi/"
+      ]
+    },
+    {
+      "name": "棟方愛海",
+      "ko": "무나카타 아츠미",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "棟方 愛海",
+        "棟方　愛海",
+        "Atsumi Munakata",
+        "Munakata Atsumi"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/atsumi/"
+      ]
+    },
+    {
+      "name": "村上巴",
+      "ko": "무라카미 토모에",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "村上 巴",
+        "村上　巴",
+        "Tomoe Murakami",
+        "Murakami Tomoe"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/tomoe/"
+      ]
+    },
+    {
+      "name": "村松さくら",
+      "ko": "무라마츠 사쿠라",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "村松 さくら",
+        "村松　さくら",
+        "Sakura Muramatsu",
+        "Muramatsu Sakura"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/sakura/"
+      ]
+    },
+    {
+      "name": "メアリー・コクラン",
+      "ko": "메어리 코크란",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "Mary Cochran",
+        "Cochran Mary"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/mary/"
+      ]
+    },
+    {
+      "name": "持田亜里沙",
+      "ko": "모치다 아리사",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "持田 亜里沙",
+        "持田　亜里沙",
+        "Arisa Mochida",
+        "Mochida Arisa"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/arisa/"
+      ]
+    },
+    {
+      "name": "望月聖",
+      "ko": "모치즈키 히지리",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "望月 聖",
+        "望月　聖",
+        "Hijiri Mochizuki",
+        "Mochizuki Hijiri"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/hijiri/"
+      ]
+    },
+    {
+      "name": "桃井あずき",
+      "ko": "모모이 아즈키",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "桃井 あずき",
+        "桃井　あずき",
+        "Azuki Momoi",
+        "Momoi Azuki"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/azuki/"
+      ]
+    },
+    {
+      "name": "森久保乃々",
+      "ko": "모리쿠보 노노",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "森久保 乃々",
+        "森久保　乃々",
+        "Nono Morikubo",
+        "Morikubo Nono"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/nono/"
+      ]
+    },
+    {
+      "name": "諸星きらり",
+      "ko": "모로보시 키라리",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "諸星 きらり",
+        "諸星　きらり",
+        "Kirari Moroboshi",
+        "Moroboshi Kirari"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/kirari/"
+      ]
+    },
+    {
+      "name": "楊菲菲",
+      "ko": "야오 페이페이",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "楊 菲菲",
+        "楊　菲菲",
+        "Feifei Yao",
+        "Yao Feifei"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/yao/"
+      ]
+    },
+    {
+      "name": "八神マキノ",
+      "ko": "야가미 마키노",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "八神 マキノ",
+        "八神　マキノ",
+        "Makino Yagami",
+        "Yagami Makino"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/makino/"
+      ]
+    },
+    {
+      "name": "矢口美羽",
+      "ko": "야구치 미우",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "矢口 美羽",
+        "矢口　美羽",
+        "Miu Yaguchi",
+        "Yaguchi Miu"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/miu/"
+      ]
+    },
+    {
+      "name": "柳清良",
+      "ko": "야나기 키요라",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "柳 清良",
+        "柳　清良",
+        "Kiyora Yanagi",
+        "Yanagi Kiyora"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/kiyora/"
+      ]
+    },
+    {
+      "name": "柳瀬美由紀",
+      "ko": "야나세 미유키",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "柳瀬 美由紀",
+        "柳瀬　美由紀",
+        "Miyuki Yanase",
+        "Yanase Miyuki"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/miyuki/"
+      ]
+    },
+    {
+      "name": "大和亜季",
+      "ko": "야마토 아키",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "大和 亜季",
+        "大和　亜季",
+        "Aki Yamato",
+        "Yamato Aki"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/aki/"
+      ]
+    },
+    {
+      "name": "結城晴",
+      "ko": "유우키 하루",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "結城 晴",
+        "結城　晴",
+        "Haru Yuuki",
+        "Yuuki Haru"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/haru/"
+      ]
+    },
+    {
+      "name": "遊佐こずえ",
+      "ko": "유사 코즈에",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "遊佐 こずえ",
+        "遊佐　こずえ",
+        "Kozue Yusa",
+        "Yusa Kozue"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/kozue/"
+      ]
+    },
+    {
+      "name": "夢見りあむ",
+      "ko": "유메미 리아무",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "夢見 りあむ",
+        "夢見　りあむ",
+        "Riamu Yumemi",
+        "Yumemi Riamu"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/riamu/"
+      ]
+    },
+    {
+      "name": "横山千佳",
+      "ko": "요코야마 치카",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "横山 千佳",
+        "横山　千佳",
+        "Chika Yokoyama",
+        "Yokoyama Chika"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/chika/"
+      ]
+    },
+    {
+      "name": "吉岡沙紀",
+      "ko": "요시오카 사키",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "吉岡 沙紀",
+        "吉岡　沙紀",
+        "Saki Yoshioka",
+        "Yoshioka Saki"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/saki/"
+      ]
+    },
+    {
+      "name": "依田芳乃",
+      "ko": "요리타 요시노",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "依田 芳乃",
+        "依田　芳乃",
+        "Yoshino Yorita",
+        "Yorita Yoshino"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/yoshino/"
+      ]
+    },
+    {
+      "name": "ライラ",
+      "ko": "라이라",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/layla/"
+      ]
+    },
+    {
+      "name": "龍崎薫",
+      "ko": "류자키 카오루",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "龍崎 薫",
+        "龍崎　薫",
+        "Kaoru Ryuzaki",
+        "Ryuzaki Kaoru"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/kaoru/"
+      ]
+    },
+    {
+      "name": "若林智香",
+      "ko": "와카바야시 토모카",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "若林 智香",
+        "若林　智香",
+        "Tomoka Wakabayashi",
+        "Wakabayashi Tomoka"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/tomoka/"
+      ]
+    },
+    {
+      "name": "脇山珠美",
+      "ko": "와키야마 타마미",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "脇山 珠美",
+        "脇山　珠美",
+        "Tamami Wakiyama",
+        "Wakiyama Tamami"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/tamami/"
+      ]
+    },
+    {
+      "name": "和久井留美",
+      "ko": "와쿠이 루미",
+      "kind": "idol",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "和久井 留美",
+        "和久井　留美",
+        "Rumi Wakui",
+        "Wakui Rumi"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/rumi/"
+      ]
+    },
+    {
+      "name": "木村珠莉",
+      "ko": "키무라 쥬리",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "木村 珠莉",
+        "木村　珠莉",
+        "Juri Kimura",
+        "Kimura Juri"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/yumi/"
+      ]
+    },
+    {
+      "name": "黒沢ともよ",
+      "ko": "쿠로사와 토모요",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "黒沢 ともよ",
+        "黒沢　ともよ",
+        "Tomoyo Kurosawa",
+        "Kurosawa Tomoyo"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/miria/"
+      ]
+    },
+    {
+      "name": "井上ほの花",
+      "ko": "이노우에 호노카",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "井上 ほの花",
+        "井上　ほの花",
+        "Honoka Inoue",
+        "Inoue Honoka"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/nanami/"
+      ]
+    },
+    {
+      "name": "上坂すみれ",
+      "ko": "우에사카 스미레",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "上坂 すみれ",
+        "上坂　すみれ",
+        "Sumire Uesaka",
+        "Uesaka Sumire"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/anastasia/"
+      ]
+    },
+    {
+      "name": "三宅麻理恵",
+      "ko": "미야케 마리에",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "三宅 麻理恵",
+        "三宅　麻理恵",
+        "Marie Miyake",
+        "Miyake Marie"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/nana/"
+      ]
+    },
+    {
+      "name": "田辺留依",
+      "ko": "타나베 루이",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "田辺 留依",
+        "田辺　留依",
+        "Rui Tanabe",
+        "Tanabe Rui"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/hina/"
+      ]
+    },
+    {
+      "name": "松永あかね",
+      "ko": "마츠나가 아카네",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "松永 あかね",
+        "松永　あかね",
+        "Akane Matsunaga",
+        "Matsunaga Akane"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/eve/"
+      ]
+    },
+    {
+      "name": "種﨑敦美",
+      "ko": "타네자키 아츠미",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "種﨑 敦美",
+        "種﨑　敦美",
+        "Atsumi Tanezaki",
+        "Tanezaki Atsumi",
+        "種崎敦美",
+        "種崎 敦美"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/kyoko/"
+      ]
+    },
+    {
+      "name": "藍原ことみ",
+      "ko": "아이하라 코토미",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "藍原 ことみ",
+        "藍原　ことみ",
+        "Kotomi Aihara",
+        "Aihara Kotomi"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/shiki/"
+      ]
+    },
+    {
+      "name": "久野美咲",
+      "ko": "쿠노 미사키",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "久野 美咲",
+        "久野　美咲",
+        "Misaki Kuno",
+        "Kuno Misaki"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/nina/"
+      ]
+    },
+    {
+      "name": "春野ななみ",
+      "ko": "하루노 나나미",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "春野 ななみ",
+        "春野　ななみ",
+        "Nanami Haruno",
+        "Haruno Nanami"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/suzuho/"
+      ]
+    },
+    {
+      "name": "のぐちゆり",
+      "ko": "노구치 유리",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "のぐち ゆり",
+        "のぐち　ゆり",
+        "Yuri Noguchi",
+        "Noguchi Yuri"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/shizuku/"
+      ]
+    },
+    {
+      "name": "大木咲絵子",
+      "ko": "오오키 사에코",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "大木 咲絵子",
+        "大木　咲絵子",
+        "Saeko Oki",
+        "Oki Saeko"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/izumi/"
+      ]
+    },
+    {
+      "name": "山下七海",
+      "ko": "야마시타 나나미",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "山下 七海",
+        "山下　七海",
+        "Nanami Yamashita",
+        "Yamashita Nanami"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/yui/"
+      ]
+    },
+    {
+      "name": "大空直美",
+      "ko": "오오조라 나오미",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "大空 直美",
+        "大空　直美",
+        "Naomi Ohzora",
+        "Ohzora Naomi",
+        "Naomi Ozora",
+        "Ozora Naomi"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/chieri/"
+      ]
+    },
+    {
+      "name": "中島由貴",
+      "ko": "나카시마 유키",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "中島 由貴",
+        "中島　由貴",
+        "Yuki Nakashima",
+        "Nakashima Yuki"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/yuuki/"
+      ]
+    },
+    {
+      "name": "和氣あず未",
+      "ko": "와키 아즈미",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "和氣 あず未",
+        "和氣　あず未",
+        "Azumi Waki",
+        "Waki Azumi"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/sanae/"
+      ]
+    },
+    {
+      "name": "長島光那",
+      "ko": "나가시마 미나",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "長島 光那",
+        "長島　光那",
+        "Mina Nagashima",
+        "Nagashima Mina"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/haruna/"
+      ]
+    },
+    {
+      "name": "松井恵理子",
+      "ko": "마츠이 에리코",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "松井 恵理子",
+        "松井　恵理子",
+        "Eriko Matsui",
+        "Matsui Eriko"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/nao/"
+      ]
+    },
+    {
+      "name": "東山奈央",
+      "ko": "토야마 나오",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "東山 奈央",
+        "東山　奈央",
+        "Nao Toyama",
+        "Toyama Nao"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/mizuki/"
+      ]
+    },
+    {
+      "name": "内田真礼",
+      "ko": "우치다 마아야",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "内田 真礼",
+        "内田　真礼",
+        "Maaya Uchida",
+        "Uchida Maaya"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/ranko/"
+      ]
+    },
+    {
+      "name": "深川芹亜",
+      "ko": "후카가와 세리아",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "深川 芹亜",
+        "深川　芹亜",
+        "Seria Fukagawa",
+        "Fukagawa Seria"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/hinako/"
+      ]
+    },
+    {
+      "name": "武田羅梨沙多胡",
+      "ko": "타케다 라리사 타고",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "武田 羅梨沙多胡",
+        "武田　羅梨沙多胡",
+        "Larissa Tago Takeda",
+        "Takeda Larissa Tago"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/yuzu/"
+      ]
+    },
+    {
+      "name": "安野希世乃",
+      "ko": "야스노 키요노",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "安野 希世乃",
+        "安野　希世乃",
+        "Kiyono Yasuno",
+        "Yasuno Kiyono"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/natsuki/"
+      ]
+    },
+    {
+      "name": "河瀬茉希",
+      "ko": "카와세 마키",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "河瀬 茉希",
+        "河瀬　茉希",
+        "Maki Kawase",
+        "Kawase Maki"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/tsukasa/"
+      ]
+    },
+    {
+      "name": "佐倉薫",
+      "ko": "사쿠라 카오루",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "佐倉 薫",
+        "佐倉　薫",
+        "Kaoru Sakura",
+        "Sakura Kaoru"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/chitose/"
+      ]
+    },
+    {
+      "name": "小森結梨",
+      "ko": "코모리 유리",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "小森 結梨",
+        "小森　結梨",
+        "Yuri Komori",
+        "Komori Yuri"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/koharu/"
+      ]
+    },
+    {
+      "name": "竹達彩奈",
+      "ko": "타케타츠 아야나",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "竹達 彩奈",
+        "竹達　彩奈",
+        "Ayana Taketatsu",
+        "Taketatsu Ayana"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/sachiko/"
+      ]
+    },
+    {
+      "name": "長野佑紀",
+      "ko": "나가노 유키",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "長野 佑紀",
+        "長野　佑紀",
+        "Yuki Nagano",
+        "Nagano Yuki"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/reina/"
+      ]
+    },
+    {
+      "name": "立花理香",
+      "ko": "타치바나 리카",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "立花 理香",
+        "立花　理香",
+        "Rika Tachibana",
+        "Tachibana Rika"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/sae/"
+      ]
+    },
+    {
+      "name": "津田美波",
+      "ko": "츠다 미나미",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "津田 美波",
+        "津田　美波",
+        "Minami Tsuda",
+        "Tsuda Minami"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/miho/"
+      ]
+    },
+    {
+      "name": "安齋由香里",
+      "ko": "안자이 유카리",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "安齋 由香里",
+        "安齋　由香里",
+        "Yukari Anzai",
+        "Anzai Yukari",
+        "安斎由香里",
+        "安斎 由香里"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/kotoka/"
+      ]
+    },
+    {
+      "name": "M・A・O",
+      "ko": "마오",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "M.A.O",
+        "M･A･O"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/fumika/"
+      ]
+    },
+    {
+      "name": "牧野由依",
+      "ko": "마키노 유이",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "牧野 由依",
+        "牧野　由依",
+        "Yui Makino",
+        "Makino Yui"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/mayu/"
+      ]
+    },
+    {
+      "name": "照井春佳",
+      "ko": "테루이 하루카",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "照井 春佳",
+        "照井　春佳",
+        "Haruka Terui",
+        "Terui Haruka"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/momoka/"
+      ]
+    },
+    {
+      "name": "今井麻夏",
+      "ko": "이마이 아사카",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "今井 麻夏",
+        "今井　麻夏",
+        "Asaka Imai",
+        "Imai Asaka"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/chie/"
+      ]
+    },
+    {
+      "name": "中澤ミナ",
+      "ko": "나카자와 미나",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "中澤 ミナ",
+        "中澤　ミナ",
+        "Mina Nakazawa",
+        "Nakazawa Mina"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/yukimi/"
+      ]
+    },
+    {
+      "name": "花守ゆみり",
+      "ko": "하나모리 유미리",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "花守 ゆみり",
+        "花守　ゆみり",
+        "Yumiri Hanamori",
+        "Hanamori Yumiri"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/shin/"
+      ]
+    },
+    {
+      "name": "都丸ちよ",
+      "ko": "토마루 치요",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "都丸 ちよ",
+        "都丸　ちよ",
+        "Chiyo Tomaru",
+        "Tomaru Chiyo"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/noriko/"
+      ]
+    },
+    {
+      "name": "ルゥティン",
+      "ko": "루 팅",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "ルゥ ティン",
+        "ルゥ　ティン",
+        "Lu Ting",
+        "Ting Lu"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/syuko/"
+      ]
+    },
+    {
+      "name": "福原綾香",
+      "ko": "후쿠하라 아야카",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "福原 綾香",
+        "福原　綾香",
+        "Ayaka Fukuhara",
+        "Fukuhara Ayaka"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/rin/"
+      ]
+    },
+    {
+      "name": "大橋彩香",
+      "ko": "오오하시 아야카",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "大橋 彩香",
+        "大橋　彩香",
+        "Ayaka Ohashi",
+        "Ohashi Ayaka"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/uzuki/"
+      ]
+    },
+    {
+      "name": "佳村はるか",
+      "ko": "요시무라 하루카",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "佳村 はるか",
+        "佳村　はるか",
+        "Haruka Yoshimura",
+        "Yoshimura Haruka"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/mika/"
+      ]
+    },
+    {
+      "name": "山本希望",
+      "ko": "야마모토 노조미",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "山本 希望",
+        "山本　希望",
+        "Nozomi Yamamoto",
+        "Yamamoto Nozomi"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/rika/"
+      ]
+    },
+    {
+      "name": "天野聡美",
+      "ko": "아마노 사토미",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "天野 聡美",
+        "天野　聡美",
+        "Satomi Amano",
+        "Amano Satomi"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/hotaru/"
+      ]
+    },
+    {
+      "name": "桜咲千依",
+      "ko": "오우사키 치요",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "桜咲 千依",
+        "桜咲　千依",
+        "Chiyo Ousaki",
+        "Ousaki Chiyo",
+        "櫻咲千依",
+        "櫻咲 千依"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/koume/"
+      ]
+    },
+    {
+      "name": "関口理咲",
+      "ko": "세키구치 리사",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "関口 理咲",
+        "関口　理咲",
+        "Risa Sekiguchi",
+        "Sekiguchi Risa"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/chiyo/"
+      ]
+    },
+    {
+      "name": "富田美憂",
+      "ko": "토미타 미유",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "富田 美憂",
+        "富田　美憂",
+        "Miyu Tomita",
+        "Tomita Miyu"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/akira/"
+      ]
+    },
+    {
+      "name": "会沢紗弥",
+      "ko": "아이자와 사야",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "会沢 紗弥",
+        "会沢　紗弥",
+        "Saya Aizawa",
+        "Aizawa Saya"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/hiromi/"
+      ]
+    },
+    {
+      "name": "早見沙織",
+      "ko": "하야미 사오리",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "早見 沙織",
+        "早見　沙織",
+        "Saori Hayami",
+        "Hayami Saori"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/kaede/"
+      ]
+    },
+    {
+      "name": "森下来奈",
+      "ko": "모리시타 라나",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "森下 来奈",
+        "森下　来奈",
+        "Rana Morishita",
+        "Morishita Rana"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/kako/"
+      ]
+    },
+    {
+      "name": "金子有希",
+      "ko": "카네코 유키",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "金子 有希",
+        "金子　有希",
+        "Yuki Kaneko",
+        "Kaneko Yuki"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/aiko/"
+      ]
+    },
+    {
+      "name": "青木瑠璃子",
+      "ko": "아오키 루리코",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "青木 瑠璃子",
+        "青木　瑠璃子",
+        "Ruriko Aoki",
+        "Aoki Ruriko"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/riina/"
+      ]
+    },
+    {
+      "name": "佐藤亜美菜",
+      "ko": "사토 아미나",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "佐藤 亜美菜",
+        "佐藤　亜美菜",
+        "Amina Sato",
+        "Sato Amina"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/arisu/"
+      ]
+    },
+    {
+      "name": "梅澤めぐ",
+      "ko": "우메자와 메구",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "梅澤 めぐ",
+        "梅澤　めぐ",
+        "Megu Umezawa",
+        "Umezawa Megu"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/akari/"
+      ]
+    },
+    {
+      "name": "新田ひより",
+      "ko": "닛타 히요리",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "新田 ひより",
+        "新田　ひより",
+        "Hiyori Nitta",
+        "Nitta Hiyori"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/karin/"
+      ]
+    },
+    {
+      "name": "原田ひとみ",
+      "ko": "하라다 히토미",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "原田 ひとみ",
+        "原田　ひとみ",
+        "Hitomi Harada",
+        "Harada Hitomi"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/airi/"
+      ]
+    },
+    {
+      "name": "下地紫野",
+      "ko": "시모지 시노",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "下地 紫野",
+        "下地　紫野",
+        "Shino Shimoji",
+        "Shimoji Shino"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/yuka/"
+      ]
+    },
+    {
+      "name": "生田輝",
+      "ko": "이쿠타 테루",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "生田 輝",
+        "生田　輝",
+        "Teru Ikuta",
+        "Ikuta Teru"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/natalia/"
+      ]
+    },
+    {
+      "name": "神谷早矢佳",
+      "ko": "카미타니 사야카",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "神谷 早矢佳",
+        "神谷　早矢佳",
+        "Sayaka Kamitani",
+        "Kamitani Sayaka"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/hikaru/"
+      ]
+    },
+    {
+      "name": "伊達朱里紗",
+      "ko": "다테 아리사",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "伊達 朱里紗",
+        "伊達　朱里紗",
+        "Arisa Date",
+        "Date Arisa"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/emi/"
+      ]
+    },
+    {
+      "name": "洲崎綾",
+      "ko": "스자키 아야",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "洲崎 綾",
+        "洲崎　綾",
+        "Aya Suzaki",
+        "Suzaki Aya"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/minami/"
+      ]
+    },
+    {
+      "name": "青木志貴",
+      "ko": "아오키 시키",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "青木 志貴",
+        "青木　志貴",
+        "Shiki Aoki",
+        "Aoki Shiki"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/asuka/"
+      ]
+    },
+    {
+      "name": "田澤茉純",
+      "ko": "타자와 마스미",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "田澤 茉純",
+        "田澤　茉純",
+        "Masumi Tazawa",
+        "Tazawa Masumi"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/ayame/"
+      ]
+    },
+    {
+      "name": "朝井彩加",
+      "ko": "아사이 아야카",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "朝井 彩加",
+        "朝井　彩加",
+        "Ayaka Asai",
+        "Asai Ayaka"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/mirei/"
+      ]
+    },
+    {
+      "name": "飯田友子",
+      "ko": "이이다 유우코",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "飯田 友子",
+        "飯田　友子",
+        "Yuko Iida",
+        "Iida Yuko"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/kanade/"
+      ]
+    },
+    {
+      "name": "立花日菜",
+      "ko": "타치바나 히나",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "立花 日菜",
+        "立花　日菜",
+        "Hina Tachibana",
+        "Tachibana Hina"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/nagi/"
+      ]
+    },
+    {
+      "name": "長江里加",
+      "ko": "나가에 리카",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "長江 里加",
+        "長江　里加",
+        "Rika Nagae",
+        "Nagae Rika"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/hayate/"
+      ]
+    },
+    {
+      "name": "赤﨑千夏",
+      "ko": "아카사키 치나츠",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "赤﨑 千夏",
+        "赤﨑　千夏",
+        "Chinatsu Akasaki",
+        "Akasaki Chinatsu",
+        "赤崎千夏",
+        "赤崎 千夏"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/akane/"
+      ]
+    },
+    {
+      "name": "杜野まこ",
+      "ko": "모리노 마코",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "杜野 まこ",
+        "杜野　まこ",
+        "Mako Morino",
+        "Morino Mako"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/yuki/"
+      ]
+    },
+    {
+      "name": "金子真由美",
+      "ko": "카네코 마유미",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "金子 真由美",
+        "金子　真由美",
+        "Mayumi Kaneko",
+        "Kaneko Mayumi"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/rina/"
+      ]
+    },
+    {
+      "name": "鈴木みのり",
+      "ko": "스즈키 미노리",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "鈴木 みのり",
+        "鈴木　みのり",
+        "Minori Suzuki",
+        "Suzuki Minori"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/hajime/"
+      ]
+    },
+    {
+      "name": "五十嵐裕美",
+      "ko": "이가라시 히로미",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "五十嵐 裕美",
+        "五十嵐　裕美",
+        "Hiromi Igarashi",
+        "Igarashi Hiromi"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/anzu/"
+      ]
+    },
+    {
+      "name": "渕上舞",
+      "ko": "후치가미 마이",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "渕上 舞",
+        "渕上　舞",
+        "Mai Fuchigami",
+        "Fuchigami Mai"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/karen/"
+      ]
+    },
+    {
+      "name": "松田颯水",
+      "ko": "마츠다 사츠미",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "松田 颯水",
+        "松田　颯水",
+        "Satsumi Matsuda",
+        "Matsuda Satsumi"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/syoko/"
+      ]
+    },
+    {
+      "name": "鈴木絵理",
+      "ko": "스즈키 에리",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "鈴木 絵理",
+        "鈴木　絵理",
+        "Eri Suzuki",
+        "Suzuki Eri"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/yuko/"
+      ]
+    },
+    {
+      "name": "原紗友里",
+      "ko": "하라 사유리",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "原 紗友里",
+        "原　紗友里",
+        "Sayuri Hara",
+        "Hara Sayuri"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/mio/"
+      ]
+    },
+    {
+      "name": "高森奈津美",
+      "ko": "타카모리 나츠미",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "高森 奈津美",
+        "高森　奈津美",
+        "Natsumi Takamori",
+        "Takamori Natsumi"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/miku/"
+      ]
+    },
+    {
+      "name": "千菅春香",
+      "ko": "치스가 하루카",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "千菅 春香",
+        "千菅　春香",
+        "Haruka Chisuga",
+        "Chisuga Haruka"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/ryo/"
+      ]
+    },
+    {
+      "name": "集貝はな",
+      "ko": "타메가이 하나",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "集貝 はな",
+        "集貝　はな",
+        "Hana Tamegai",
+        "Tamegai Hana"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/risa/"
+      ]
+    },
+    {
+      "name": "藤田茜",
+      "ko": "후지타 아카네",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "藤田 茜",
+        "藤田　茜",
+        "Akane Fujita",
+        "Fujita Akane"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/yukari/"
+      ]
+    },
+    {
+      "name": "原田彩楓",
+      "ko": "하라다 사야카",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "原田 彩楓",
+        "原田　彩楓",
+        "Sayaka Harada",
+        "Harada Sayaka"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/miyu/"
+      ]
+    },
+    {
+      "name": "大坪由佳",
+      "ko": "오오츠보 유카",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "大坪 由佳",
+        "大坪　由佳",
+        "Yuka Otsubo",
+        "Otsubo Yuka"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/kanako/"
+      ]
+    },
+    {
+      "name": "髙野麻美",
+      "ko": "타카노 아사미",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "髙野 麻美",
+        "髙野　麻美",
+        "Asami Takano",
+        "Takano Asami",
+        "高野麻美",
+        "高野 麻美"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/frederica/"
+      ]
+    },
+    {
+      "name": "原優子",
+      "ko": "하라 유코",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "原 優子",
+        "原　優子",
+        "Yuko Hara",
+        "Hara Yuko"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/takumi/"
+      ]
+    },
+    {
+      "name": "藤本彩花",
+      "ko": "후지모토 아야카",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "藤本 彩花",
+        "藤本　彩花",
+        "Ayaka Fujimoto",
+        "Fujimoto Ayaka"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/atsumi/"
+      ]
+    },
+    {
+      "name": "花井美春",
+      "ko": "하나이 미하루",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "花井 美春",
+        "花井　美春",
+        "Miharu Hanai",
+        "Hanai Miharu"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/tomoe/"
+      ]
+    },
+    {
+      "name": "原涼子",
+      "ko": "하라 료코",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "原 涼子",
+        "原　涼子",
+        "Ryoko Hara",
+        "Hara Ryoko"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/hijiri/"
+      ]
+    },
+    {
+      "name": "高橋花林",
+      "ko": "타카하시 카린",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "高橋 花林",
+        "高橋　花林",
+        "Karin Takahashi",
+        "Takahashi Karin"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/nono/"
+      ]
+    },
+    {
+      "name": "松嵜麗",
+      "ko": "마츠자키 레이",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "松嵜 麗",
+        "松嵜　麗",
+        "Rei Matsuzaki",
+        "Matsuzaki Rei"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/kirari/"
+      ]
+    },
+    {
+      "name": "二ノ宮ゆい",
+      "ko": "니노미야 유이",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "二ノ宮 ゆい",
+        "二ノ宮　ゆい",
+        "Yui Ninomiya",
+        "Ninomiya Yui"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/makino/"
+      ]
+    },
+    {
+      "name": "村中知",
+      "ko": "무라나카 토모",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "村中 知",
+        "村中　知",
+        "Tomo Muranaka",
+        "Muranaka Tomo"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/aki/"
+      ]
+    },
+    {
+      "name": "小市眞琴",
+      "ko": "코이치 마코토",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "小市 眞琴",
+        "小市　眞琴",
+        "Makoto Koichi",
+        "Koichi Makoto"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/haru/"
+      ]
+    },
+    {
+      "name": "花谷麻妃",
+      "ko": "하나타니 마키",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "花谷 麻妃",
+        "花谷　麻妃",
+        "Maki Hanatani",
+        "Hanatani Maki"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/kozue/"
+      ]
+    },
+    {
+      "name": "星希成奏",
+      "ko": "호시키 세에나",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "星希 成奏",
+        "星希　成奏",
+        "Seena Hoshiki",
+        "Hoshiki Seena"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/riamu/"
+      ]
+    },
+    {
+      "name": "高田憂希",
+      "ko": "타카다 유키",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "高田 憂希",
+        "高田　憂希",
+        "Yuki Takada",
+        "Takada Yuki"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/yoshino/"
+      ]
+    },
+    {
+      "name": "市ノ瀬加那",
+      "ko": "이치노세 카나",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "市ノ瀬 加那",
+        "市ノ瀬　加那",
+        "Kana Ichinose",
+        "Ichinose Kana"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/layla/"
+      ]
+    },
+    {
+      "name": "春瀬なつみ",
+      "ko": "하루세 나츠미",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "春瀬 なつみ",
+        "春瀬　なつみ",
+        "Natsumi Haruse",
+        "Haruse Natsumi"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/kaoru/"
+      ]
+    },
+    {
+      "name": "嘉山未紗",
+      "ko": "카야마 미사",
+      "kind": "voice_actor",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "嘉山 未紗",
+        "嘉山　未紗",
+        "Misa Kayama",
+        "Kayama Misa"
+      ],
+      "source_urls": [
+        "https://cinderellagirls.idolmaster-official.jp/idol/tamami/"
+      ]
+    },
+    {
+      "name": "櫻木真乃",
+      "ko": "사쿠라기 마노",
+      "kind": "idol",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "櫻木 真乃",
+        "櫻木　真乃",
+        "Mano Sakuragi",
+        "Sakuragi Mano"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "風野灯織",
+      "ko": "카자노 히오리",
+      "kind": "idol",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "風野 灯織",
+        "風野　灯織",
+        "Hiori Kazano",
+        "Kazano Hiori"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "八宮めぐる",
+      "ko": "하치미야 메구루",
+      "kind": "idol",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "八宮 めぐる",
+        "八宮　めぐる",
+        "Meguru Hachimiya",
+        "Hachimiya Meguru"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "月岡恋鐘",
+      "ko": "츠키오카 코가네",
+      "kind": "idol",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "月岡 恋鐘",
+        "月岡　恋鐘",
+        "Kogane Tsukioka",
+        "Tsukioka Kogane"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "田中摩美々",
+      "ko": "타나카 마미미",
+      "kind": "idol",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "田中 摩美々",
+        "田中　摩美々",
+        "Mamimi Tanaka",
+        "Tanaka Mamimi"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "白瀬咲耶",
+      "ko": "시라세 사쿠야",
+      "kind": "idol",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "白瀬 咲耶",
+        "白瀬　咲耶",
+        "Sakuya Shirase",
+        "Shirase Sakuya"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "三峰結華",
+      "ko": "미츠미네 유이카",
+      "kind": "idol",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "三峰 結華",
+        "三峰　結華",
+        "Yuika Mitsumine",
+        "Mitsumine Yuika"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "幽谷霧子",
+      "ko": "유코쿠 키리코",
+      "kind": "idol",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "幽谷 霧子",
+        "幽谷　霧子",
+        "Kiriko Yukoku",
+        "Yukoku Kiriko"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "小宮果穂",
+      "ko": "코미야 카호",
+      "kind": "idol",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "小宮 果穂",
+        "小宮　果穂",
+        "Kaho Komiya",
+        "Komiya Kaho"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "園田智代子",
+      "ko": "소노다 치요코",
+      "kind": "idol",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "園田 智代子",
+        "園田　智代子",
+        "Chiyoko Sonoda",
+        "Sonoda Chiyoko"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "西城樹里",
+      "ko": "사이죠 쥬리",
+      "kind": "idol",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "西城 樹里",
+        "西城　樹里",
+        "Juri Saijo",
+        "Saijo Juri",
+        "사이조 쥬리"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "杜野凛世",
+      "ko": "모리노 린제",
+      "kind": "idol",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "杜野 凛世",
+        "杜野　凛世",
+        "Rinze Morino",
+        "Morino Rinze"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "有栖川夏葉",
+      "ko": "아리스가와 나츠하",
+      "kind": "idol",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "有栖川 夏葉",
+        "有栖川　夏葉",
+        "Natsuha Arisugawa",
+        "Arisugawa Natsuha"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "大崎甘奈",
+      "ko": "오사키 아마나",
+      "kind": "idol",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "大崎 甘奈",
+        "大崎　甘奈",
+        "Amana Osaki",
+        "Osaki Amana"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "大崎甜花",
+      "ko": "오사키 텐카",
+      "kind": "idol",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "大崎 甜花",
+        "大崎　甜花",
+        "Tenka Osaki",
+        "Osaki Tenka"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "桑山千雪",
+      "ko": "쿠와야마 치유키",
+      "kind": "idol",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "桑山 千雪",
+        "桑山　千雪",
+        "Chiyuki Kuwayama",
+        "Kuwayama Chiyuki"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "芹沢あさひ",
+      "ko": "세리자와 아사히",
+      "kind": "idol",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "芹沢 あさひ",
+        "芹沢　あさひ",
+        "Asahi Serizawa",
+        "Serizawa Asahi"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "黛冬優子",
+      "ko": "마유즈미 후유코",
+      "kind": "idol",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "黛 冬優子",
+        "黛　冬優子",
+        "Fuyuko Mayuzumi",
+        "Mayuzumi Fuyuko"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "和泉愛依",
+      "ko": "이즈미 메이",
+      "kind": "idol",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "和泉 愛依",
+        "和泉　愛依",
+        "Mei Izumi",
+        "Izumi Mei"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "浅倉透",
+      "ko": "아사쿠라 토오루",
+      "kind": "idol",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "浅倉 透",
+        "浅倉　透",
+        "Toru Asakura",
+        "Asakura Toru",
+        "Tooru Asakura",
+        "Asakura Tooru"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "樋口円香",
+      "ko": "히구치 마도카",
+      "kind": "idol",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "樋口 円香",
+        "樋口　円香",
+        "Madoka Higuchi",
+        "Higuchi Madoka"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "福丸小糸",
+      "ko": "후쿠마루 코이토",
+      "kind": "idol",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "福丸 小糸",
+        "福丸　小糸",
+        "Koito Fukumaru",
+        "Fukumaru Koito"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "市川雛菜",
+      "ko": "이치카와 히나나",
+      "kind": "idol",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "市川 雛菜",
+        "市川　雛菜",
+        "Hinana Ichikawa",
+        "Ichikawa Hinana"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "七草にちか",
+      "ko": "나나쿠사 니치카",
+      "kind": "idol",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "七草 にちか",
+        "七草　にちか",
+        "Nichika Nanakusa",
+        "Nanakusa Nichika"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "緋田美琴",
+      "ko": "아케타 미코토",
+      "kind": "idol",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "緋田 美琴",
+        "緋田　美琴",
+        "Mikoto Aketa",
+        "Aketa Mikoto"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "斑鳩ルカ",
+      "ko": "이카루가 루카",
+      "kind": "idol",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "斑鳩 ルカ",
+        "斑鳩　ルカ",
+        "Luca Ikaruga",
+        "Ikaruga Luca",
+        "Ruka Ikaruga",
+        "Ikaruga Ruka"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "鈴木羽那",
+      "ko": "스즈키 하나",
+      "kind": "idol",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "鈴木 羽那",
+        "鈴木　羽那",
+        "Hana Suzuki",
+        "Suzuki Hana"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "郁田はるき",
+      "ko": "이쿠타 하루키",
+      "kind": "idol",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "郁田 はるき",
+        "郁田　はるき",
+        "Haruki Ikuta",
+        "Ikuta Haruki"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "関根瞳",
+      "ko": "세키네 히토미",
+      "kind": "voice_actor",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "関根 瞳",
+        "関根　瞳",
+        "Hitomi Sekine",
+        "Sekine Hitomi"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "近藤玲奈",
+      "ko": "콘도 레이나",
+      "kind": "voice_actor",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "近藤 玲奈",
+        "近藤　玲奈",
+        "Reina Kondo",
+        "Kondo Reina"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "峯田茉優",
+      "ko": "미네다 마유",
+      "kind": "voice_actor",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "峯田 茉優",
+        "峯田　茉優",
+        "Mayu Mineda",
+        "Mineda Mayu"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "礒部花凜",
+      "ko": "이소베 카린",
+      "kind": "voice_actor",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "礒部 花凜",
+        "礒部　花凜",
+        "Karin Isobe",
+        "Isobe Karin"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "菅沼千紗",
+      "ko": "스가누마 치사",
+      "kind": "voice_actor",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "菅沼 千紗",
+        "菅沼　千紗",
+        "Chisa Suganuma",
+        "Suganuma Chisa"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "八巻アンナ",
+      "ko": "야마키 안나",
+      "kind": "voice_actor",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "八巻 アンナ",
+        "八巻　アンナ",
+        "Anna Yamaki",
+        "Yamaki Anna"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "希水しお",
+      "ko": "키스이 시오",
+      "kind": "voice_actor",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "希水 しお",
+        "希水　しお",
+        "Shio Kisui",
+        "Kisui Shio"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "結名美月",
+      "ko": "유이나 미즈키",
+      "kind": "voice_actor",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "結名 美月",
+        "結名　美月",
+        "Mizuki Yuina",
+        "Yuina Mizuki"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "河野ひより",
+      "ko": "코노 히요리",
+      "kind": "voice_actor",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "河野 ひより",
+        "河野　ひより",
+        "Hiyori Kono",
+        "Kono Hiyori"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "白石晴香",
+      "ko": "시라이시 하루카",
+      "kind": "voice_actor",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "白石 晴香",
+        "白石　晴香",
+        "Haruka Shiraishi",
+        "Shiraishi Haruka"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "永井真里子",
+      "ko": "나가이 마리코",
+      "kind": "voice_actor",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "永井 真里子",
+        "永井　真里子",
+        "Mariko Nagai",
+        "Nagai Mariko"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "丸岡和佳奈",
+      "ko": "마루오카 와카나",
+      "kind": "voice_actor",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "丸岡 和佳奈",
+        "丸岡　和佳奈",
+        "Wakana Maruoka",
+        "Maruoka Wakana"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "涼本あきほ",
+      "ko": "스즈모토 아키호",
+      "kind": "voice_actor",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "涼本 あきほ",
+        "涼本　あきほ",
+        "Akiho Suzumoto",
+        "Suzumoto Akiho"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "黒木ほの香",
+      "ko": "쿠로키 호노카",
+      "kind": "voice_actor",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "黒木 ほの香",
+        "黒木　ほの香",
+        "Honoka Kuroki",
+        "Kuroki Honoka"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "前川涼子",
+      "ko": "마에카와 료코",
+      "kind": "voice_actor",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "前川 涼子",
+        "前川　涼子",
+        "Ryoko Maekawa",
+        "Maekawa Ryoko"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "芝崎典子",
+      "ko": "시바사키 노리코",
+      "kind": "voice_actor",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "芝崎 典子",
+        "芝崎　典子",
+        "Noriko Shibasaki",
+        "Shibasaki Noriko"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "田中有紀",
+      "ko": "타나카 유키",
+      "kind": "voice_actor",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "田中 有紀",
+        "田中　有紀",
+        "Yuki Tanaka",
+        "Tanaka Yuki"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "幸村恵理",
+      "ko": "유키무라 에리",
+      "kind": "voice_actor",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "幸村 恵理",
+        "幸村　恵理",
+        "Eri Yukimura",
+        "Yukimura Eri"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "北原沙弥香",
+      "ko": "키타하라 사야카",
+      "kind": "voice_actor",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "北原 沙弥香",
+        "北原　沙弥香",
+        "Sayaka Kitahara",
+        "Kitahara Sayaka"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "和久井優",
+      "ko": "와쿠이 유우",
+      "kind": "voice_actor",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "和久井 優",
+        "和久井　優",
+        "Yu Wakui",
+        "Wakui Yu"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "土屋李央",
+      "ko": "츠치야 리오",
+      "kind": "voice_actor",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "土屋 李央",
+        "土屋　李央",
+        "Rio Tsuchiya",
+        "Tsuchiya Rio"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "田嶌紗蘭",
+      "ko": "타지마 사란",
+      "kind": "voice_actor",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "田嶌 紗蘭",
+        "田嶌　紗蘭",
+        "Saran Tajima",
+        "Tajima Saran"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "岡咲美保",
+      "ko": "오카사키 미호",
+      "kind": "voice_actor",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "岡咲 美保",
+        "岡咲　美保",
+        "Miho Okasaki",
+        "Okasaki Miho"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "紫月杏朱彩",
+      "ko": "시즈키 아즈사",
+      "kind": "voice_actor",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "紫月 杏朱彩",
+        "紫月　杏朱彩",
+        "Azusa Shizuki",
+        "Shizuki Azusa"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "山根綺",
+      "ko": "야마네 아야",
+      "kind": "voice_actor",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "山根 綺",
+        "山根　綺",
+        "Aya Yamane",
+        "Yamane Aya"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "川口莉奈",
+      "ko": "카와구치 리나",
+      "kind": "voice_actor",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "川口 莉奈",
+        "川口　莉奈",
+        "Rina Kawaguchi",
+        "Kawaguchi Rina"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "三川華月",
+      "ko": "미카와 하루나",
+      "kind": "voice_actor",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "三川 華月",
+        "三川　華月",
+        "Haruna Mikawa",
+        "Mikawa Haruna"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "小澤麗那",
+      "ko": "오자와 레나",
+      "kind": "voice_actor",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "小澤 麗那",
+        "小澤　麗那",
+        "Rena Ozawa",
+        "Ozawa Rena"
+      ],
+      "source_urls": [
+        "https://shinycolors-song-for-prism.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "花海咲季",
+      "ko": "하나미 사키",
+      "kind": "idol",
+      "franchise": "Gakuen Idolmaster",
+      "aliases": [
+        "花海 咲季",
+        "花海　咲季",
+        "Saki Hanami",
+        "Hanami Saki"
+      ],
+      "source_urls": [
+        "https://gakuen.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "月村手毬",
+      "ko": "츠키무라 테마리",
+      "kind": "idol",
+      "franchise": "Gakuen Idolmaster",
+      "aliases": [
+        "月村 手毬",
+        "月村　手毬",
+        "Temari Tsukimura",
+        "Tsukimura Temari"
+      ],
+      "source_urls": [
+        "https://gakuen.idolmaster-official.jp/idol/temari/"
+      ]
+    },
+    {
+      "name": "藤田ことね",
+      "ko": "후지타 코토네",
+      "kind": "idol",
+      "franchise": "Gakuen Idolmaster",
+      "aliases": [
+        "藤田 ことね",
+        "藤田　ことね",
+        "Kotone Fujita",
+        "Fujita Kotone"
+      ],
+      "source_urls": [
+        "https://gakuen.idolmaster-official.jp/idol/kotone/"
+      ]
+    },
+    {
+      "name": "有村麻央",
+      "ko": "아리무라 마오",
+      "kind": "idol",
+      "franchise": "Gakuen Idolmaster",
+      "aliases": [
+        "有村 麻央",
+        "有村　麻央",
+        "Mao Arimura",
+        "Arimura Mao"
+      ],
+      "source_urls": [
+        "https://gakuen.idolmaster-official.jp/idol/mao/"
+      ]
+    },
+    {
+      "name": "葛城リーリヤ",
+      "ko": "카츠라기 릴리야",
+      "kind": "idol",
+      "franchise": "Gakuen Idolmaster",
+      "aliases": [
+        "葛城 リーリヤ",
+        "葛城　リーリヤ",
+        "Lilja Katsuragi",
+        "Katsuragi Lilja",
+        "Liliya Katsuragi",
+        "Katsuragi Liliya"
+      ],
+      "source_urls": [
+        "https://gakuen.idolmaster-official.jp/idol/lilja/"
+      ]
+    },
+    {
+      "name": "倉本千奈",
+      "ko": "쿠라모토 치나",
+      "kind": "idol",
+      "franchise": "Gakuen Idolmaster",
+      "aliases": [
+        "倉本 千奈",
+        "倉本　千奈",
+        "China Kuramoto",
+        "Kuramoto China"
+      ],
+      "source_urls": [
+        "https://gakuen.idolmaster-official.jp/idol/china/"
+      ]
+    },
+    {
+      "name": "紫雲清夏",
+      "ko": "시운 스미카",
+      "kind": "idol",
+      "franchise": "Gakuen Idolmaster",
+      "aliases": [
+        "紫雲 清夏",
+        "紫雲　清夏",
+        "Sumika Shiun",
+        "Shiun Sumika"
+      ],
+      "source_urls": [
+        "https://gakuen.idolmaster-official.jp/idol/sumika/"
+      ]
+    },
+    {
+      "name": "篠澤広",
+      "ko": "시노사와 히로",
+      "kind": "idol",
+      "franchise": "Gakuen Idolmaster",
+      "aliases": [
+        "篠澤 広",
+        "篠澤　広",
+        "Hiro Shinosawa",
+        "Shinosawa Hiro"
+      ],
+      "source_urls": [
+        "https://gakuen.idolmaster-official.jp/idol/hiro/"
+      ]
+    },
+    {
+      "name": "姫崎莉波",
+      "ko": "히메사키 리나미",
+      "kind": "idol",
+      "franchise": "Gakuen Idolmaster",
+      "aliases": [
+        "姫崎 莉波",
+        "姫崎　莉波",
+        "Rinami Himesaki",
+        "Himesaki Rinami"
+      ],
+      "source_urls": [
+        "https://gakuen.idolmaster-official.jp/idol/rinami/"
+      ]
+    },
+    {
+      "name": "花海佑芽",
+      "ko": "하나미 우메",
+      "kind": "idol",
+      "franchise": "Gakuen Idolmaster",
+      "aliases": [
+        "花海 佑芽",
+        "花海　佑芽",
+        "Ume Hanami",
+        "Hanami Ume"
+      ],
+      "source_urls": [
+        "https://gakuen.idolmaster-official.jp/idol/ume/"
+      ]
+    },
+    {
+      "name": "秦谷美鈴",
+      "ko": "하타야 미스즈",
+      "kind": "idol",
+      "franchise": "Gakuen Idolmaster",
+      "aliases": [
+        "秦谷 美鈴",
+        "秦谷　美鈴",
+        "Misuzu Hataya",
+        "Hataya Misuzu"
+      ],
+      "source_urls": [
+        "https://gakuen.idolmaster-official.jp/idol/misuzu/"
+      ]
+    },
+    {
+      "name": "十王星南",
+      "ko": "쥬오 세나",
+      "kind": "idol",
+      "franchise": "Gakuen Idolmaster",
+      "aliases": [
+        "十王 星南",
+        "十王　星南",
+        "Sena Juo",
+        "Juo Sena"
+      ],
+      "source_urls": [
+        "https://gakuen.idolmaster-official.jp/idol/sena/"
+      ]
+    },
+    {
+      "name": "雨夜燕",
+      "ko": "아마야 츠바메",
+      "kind": "idol",
+      "franchise": "Gakuen Idolmaster",
+      "aliases": [
+        "雨夜 燕",
+        "雨夜　燕",
+        "Tsubame Amaya",
+        "Amaya Tsubame"
+      ],
+      "source_urls": [
+        "https://gakuen.idolmaster-official.jp/idol/tsubame/"
+      ]
+    },
+    {
+      "name": "長月あおい",
+      "ko": "나가츠키 아오이",
+      "kind": "voice_actor",
+      "franchise": "Gakuen Idolmaster",
+      "aliases": [
+        "長月 あおい",
+        "長月　あおい",
+        "Aoi Nagatsuki",
+        "Nagatsuki Aoi"
+      ],
+      "source_urls": [
+        "https://gakuen.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "小鹿なお",
+      "ko": "오지카 나오",
+      "kind": "voice_actor",
+      "franchise": "Gakuen Idolmaster",
+      "aliases": [
+        "小鹿 なお",
+        "小鹿　なお",
+        "Nao Ojika",
+        "Ojika Nao"
+      ],
+      "source_urls": [
+        "https://gakuen.idolmaster-official.jp/idol/temari/"
+      ]
+    },
+    {
+      "name": "飯田ヒカル",
+      "ko": "이이다 히카루",
+      "kind": "voice_actor",
+      "franchise": "Gakuen Idolmaster",
+      "aliases": [
+        "飯田 ヒカル",
+        "飯田　ヒカル",
+        "Hikaru Iida",
+        "Iida Hikaru"
+      ],
+      "source_urls": [
+        "https://gakuen.idolmaster-official.jp/idol/kotone/"
+      ]
+    },
+    {
+      "name": "七瀬つむぎ",
+      "ko": "나나세 츠무기",
+      "kind": "voice_actor",
+      "franchise": "Gakuen Idolmaster",
+      "aliases": [
+        "七瀬 つむぎ",
+        "七瀬　つむぎ",
+        "Tsumugi Nanase",
+        "Nanase Tsumugi"
+      ],
+      "source_urls": [
+        "https://gakuen.idolmaster-official.jp/idol/mao/"
+      ]
+    },
+    {
+      "name": "花岩香奈",
+      "ko": "하나이와 카나",
+      "kind": "voice_actor",
+      "franchise": "Gakuen Idolmaster",
+      "aliases": [
+        "花岩 香奈",
+        "花岩　香奈",
+        "Kana Hanaiwa",
+        "Hanaiwa Kana"
+      ],
+      "source_urls": [
+        "https://gakuen.idolmaster-official.jp/idol/lilja/"
+      ]
+    },
+    {
+      "name": "伊藤舞音",
+      "ko": "이토 마오",
+      "kind": "voice_actor",
+      "franchise": "Gakuen Idolmaster",
+      "aliases": [
+        "伊藤 舞音",
+        "伊藤　舞音",
+        "Mao Ito",
+        "Ito Mao"
+      ],
+      "source_urls": [
+        "https://gakuen.idolmaster-official.jp/idol/china/"
+      ]
+    },
+    {
+      "name": "湊みや",
+      "ko": "미나토 미야",
+      "kind": "voice_actor",
+      "franchise": "Gakuen Idolmaster",
+      "aliases": [
+        "湊 みや",
+        "湊　みや",
+        "Miya Minato",
+        "Minato Miya"
+      ],
+      "source_urls": [
+        "https://gakuen.idolmaster-official.jp/idol/sumika/"
+      ]
+    },
+    {
+      "name": "川村玲奈",
+      "ko": "카와무라 레이나",
+      "kind": "voice_actor",
+      "franchise": "Gakuen Idolmaster",
+      "aliases": [
+        "川村 玲奈",
+        "川村　玲奈",
+        "Reina Kawamura",
+        "Kawamura Reina"
+      ],
+      "source_urls": [
+        "https://gakuen.idolmaster-official.jp/idol/hiro/"
+      ]
+    },
+    {
+      "name": "薄井友里",
+      "ko": "우스이 유리",
+      "kind": "voice_actor",
+      "franchise": "Gakuen Idolmaster",
+      "aliases": [
+        "薄井 友里",
+        "薄井　友里",
+        "Yuri Usui",
+        "Usui Yuri"
+      ],
+      "source_urls": [
+        "https://gakuen.idolmaster-official.jp/idol/rinami/"
+      ]
+    },
+    {
+      "name": "松田彩音",
+      "ko": "마츠다 아야네",
+      "kind": "voice_actor",
+      "franchise": "Gakuen Idolmaster",
+      "aliases": [
+        "松田 彩音",
+        "松田　彩音",
+        "Ayane Matsuda",
+        "Matsuda Ayane"
+      ],
+      "source_urls": [
+        "https://gakuen.idolmaster-official.jp/idol/ume/"
+      ]
+    },
+    {
+      "name": "春咲暖",
+      "ko": "하루사키 논",
+      "kind": "voice_actor",
+      "franchise": "Gakuen Idolmaster",
+      "aliases": [
+        "春咲 暖",
+        "春咲　暖",
+        "Non Harusaki",
+        "Harusaki Non"
+      ],
+      "source_urls": [
+        "https://gakuen.idolmaster-official.jp/idol/misuzu/"
+      ]
+    },
+    {
+      "name": "陽高真白",
+      "ko": "히다카 마시로",
+      "kind": "voice_actor",
+      "franchise": "Gakuen Idolmaster",
+      "aliases": [
+        "陽高 真白",
+        "陽高　真白",
+        "Mashiro Hidaka",
+        "Hidaka Mashiro"
+      ],
+      "source_urls": [
+        "https://gakuen.idolmaster-official.jp/idol/sena/"
+      ]
+    },
+    {
+      "name": "天音ゆかり",
+      "ko": "아마네 유카리",
+      "kind": "voice_actor",
+      "franchise": "Gakuen Idolmaster",
+      "aliases": [
+        "天音 ゆかり",
+        "天音　ゆかり",
+        "Yukari Amane",
+        "Amane Yukari"
+      ],
+      "source_urls": [
+        "https://gakuen.idolmaster-official.jp/idol/tsubame/"
+      ]
+    },
+    {
+      "name": "イルミネーションスターズ",
+      "ko": "일루미네이션 스타즈",
+      "kind": "group",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "illumination STARS",
+        "Illumination Stars"
+      ],
+      "source_urls": [
+        "https://shinycolors.lantis.jp/releaseinfo/laca-25115/"
+      ]
+    },
+    {
+      "name": "アンティーカ",
+      "ko": "안티카",
+      "kind": "group",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "L'Antica",
+        "L’Antica",
+        "LAntica"
+      ],
+      "source_urls": [
+        "https://shinycolors.lantis.jp/releaseinfo/laca-25115/"
+      ]
+    },
+    {
+      "name": "放課後クライマックスガールズ",
+      "ko": "방과 후 클라이맥스 걸즈",
+      "kind": "group",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "Houkago Climax Girls",
+        "Hokago Climax Girls"
+      ],
+      "source_urls": [
+        "https://shinycolors.lantis.jp/releaseinfo/laca-25115/"
+      ]
+    },
+    {
+      "name": "アルストロメリア",
+      "ko": "알스트로메리아",
+      "kind": "group",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "ALSTROEMERIA"
+      ],
+      "source_urls": [
+        "https://shinycolors.lantis.jp/releaseinfo/laca-25115/"
+      ]
+    },
+    {
+      "name": "ストレイライト",
+      "ko": "스트레이라이트",
+      "kind": "group",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "Straylight",
+        "Stray Light"
+      ],
+      "source_urls": [
+        "https://shinycolors.lantis.jp/releaseinfo/laca-25115/"
+      ]
+    },
+    {
+      "name": "ノクチル",
+      "ko": "녹칠",
+      "kind": "group",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "noctchill",
+        "Noctchill"
+      ],
+      "source_urls": [
+        "https://shinycolors.lantis.jp/releaseinfo/laca-25115/"
+      ]
+    },
+    {
+      "name": "シーズ",
+      "ko": "시즈",
+      "kind": "group",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "SHHis",
+        "SHHIS"
+      ],
+      "source_urls": [
+        "https://shinycolors.lantis.jp/releaseinfo/laca-25115/"
+      ]
+    },
+    {
+      "name": "コメティック",
+      "ko": "코메틱",
+      "kind": "group",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "CoMETIK",
+        "Cometik"
+      ],
+      "source_urls": [
+        "https://shinycolors.lantis.jp/releaseinfo/laca-25115/"
+      ]
+    },
+    {
+      "name": "シャイニーカラーズ",
+      "ko": "샤이니 컬러즈",
+      "kind": "group",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "Shiny Colors",
+        "THE IDOLM@STER SHINY COLORS",
+        "THE IDOLMASTER SHINY COLORS"
+      ],
+      "source_urls": [
+        "https://shinycolors.lantis.jp/releaseinfo/laca-25115/"
+      ]
+    },
+    {
+      "name": "I'm a Cutie Finder",
+      "ko": "아임 어 큐티 파인더",
+      "kind": "group",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "I’m a Cutie Finder",
+        "アイムアキューティーファインダー"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/REFRAC7IONS_Still_blue/information/"
+      ]
+    },
+    {
+      "name": "Fumage",
+      "ko": "퓨마주",
+      "kind": "group",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "フュマージュ"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/REFRAC7IONS_Still_blue/information/"
+      ]
+    },
+    {
+      "name": "Sonic Heart (and Signal)",
+      "ko": "소닉 하트 (앤드 시그널)",
+      "kind": "group",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "Sonic Heart",
+        "ソニックハートアンドシグナル"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/REFRAC7IONS_Still_blue/information/"
+      ]
+    },
+    {
+      "name": "∑ Desire",
+      "ko": "시그마 디자이어",
+      "kind": "group",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "Sigma Desire",
+        "Σ Desire",
+        "シグマディザイア"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/REFRAC7IONS_Still_blue/information/"
+      ]
+    },
+    {
+      "name": "ザ・ふたりトラベラー",
+      "ko": "더 후타리 트래블러",
+      "kind": "group",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "ザ ふたりトラベラー",
+        "ザ　ふたりトラベラー",
+        "The Futari Traveler"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/REFRAC7IONS_Still_blue/information/"
+      ]
+    },
+    {
+      "name": "彼岸流",
+      "ko": "피안류",
+      "kind": "group",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "Higanryu",
+        "Higanryuu"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/REFRAC7IONS_Still_blue/information/"
+      ]
+    },
+    {
+      "name": "No 1 feel alone",
+      "ko": "노 원 필 얼론",
+      "kind": "group",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "No one feel alone",
+        "ノーワンフィールアローン"
+      ],
+      "source_urls": [
+        "https://idolmaster-official.jp/live_event/REFRAC7IONS_Still_blue/information/"
+      ]
+    },
+    {
+      "name": "Team.Stella",
+      "ko": "팀 스텔라",
+      "kind": "group",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "Team Stella",
+        "チームステラ"
+      ],
+      "source_urls": [
+        "https://shinycolors.lantis.jp/releaseinfo/"
+      ]
+    },
+    {
+      "name": "Team.Luna",
+      "ko": "팀 루나",
+      "kind": "group",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "Team Luna",
+        "チームルナ"
+      ],
+      "source_urls": [
+        "https://shinycolors.lantis.jp/releaseinfo/"
+      ]
+    },
+    {
+      "name": "Team.Sol",
+      "ko": "팀 솔",
+      "kind": "group",
+      "franchise": "Shiny Colors",
+      "aliases": [
+        "Team Sol",
+        "チームソル"
+      ],
+      "source_urls": [
+        "https://shinycolors.lantis.jp/releaseinfo/"
+      ]
+    },
+    {
+      "name": "初星学園",
+      "ko": "하츠보시 학원",
+      "kind": "group",
+      "credit_scope": "project",
+      "franchise": "Gakuen Idolmaster",
+      "aliases": [
+        "Hatsuboshi Gakuen",
+        "Hatsuboshi Academy"
+      ],
+      "source_urls": [
+        "https://gakuen.idolmaster-official.jp/idol/"
+      ]
+    },
+    {
+      "name": "Re;IRIS",
+      "ko": "리리스",
+      "kind": "group",
+      "franchise": "Gakuen Idolmaster",
+      "aliases": [
+        "Re:IRIS",
+        "リーリス",
+        "リイリス"
+      ],
+      "source_urls": [
+        "https://gakuen-label.idolmaster-official.jp/news/unr0zjrrmu"
+      ]
+    },
+    {
+      "name": "Begrazia",
+      "ko": "베그라치아",
+      "kind": "group",
+      "franchise": "Gakuen Idolmaster",
+      "aliases": [
+        "ベグラツィア"
+      ],
+      "source_urls": [
+        "https://gakuen-label.idolmaster-official.jp/news/unr0zjrrmu"
+      ]
+    },
+    {
+      "name": "シンデレラガールズ",
+      "ko": "신데렐라 걸즈",
+      "kind": "group",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "CINDERELLA GIRLS",
+        "THE IDOLM@STER CINDERELLA GIRLS",
+        "THE IDOLMASTER CINDERELLA GIRLS"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/imasnews/241206.html"
+      ]
+    },
+    {
+      "name": "CINDERELLA PROJECT",
+      "ko": "신데렐라 프로젝트",
+      "kind": "group",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "シンデレラプロジェクト"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/imasnews/150417.html"
+      ]
+    },
+    {
+      "name": "new generations",
+      "ko": "뉴 제너레이션즈",
+      "kind": "group",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "ニュージェネレーションズ",
+        "newgenerations"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/imasnews/150417.html"
+      ]
+    },
+    {
+      "name": "LOVE LAIKA",
+      "ko": "러브 라이카",
+      "kind": "group",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "ラブライカ",
+        "LOVELAIKA"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/imasnews/150417.html"
+      ]
+    },
+    {
+      "name": "Rosenburg Engel",
+      "ko": "로젠부르크 엥겔",
+      "kind": "group",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "ローゼンブルクエンゲル"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/imasnews/150417.html"
+      ]
+    },
+    {
+      "name": "CANDY ISLAND",
+      "ko": "캔디 아일랜드",
+      "kind": "group",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "キャンディアイランド"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/imasnews/150417.html"
+      ]
+    },
+    {
+      "name": "凸レーション",
+      "ko": "데코레이션",
+      "kind": "group",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "デコレーション"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/imasnews/150417.html"
+      ]
+    },
+    {
+      "name": "＊(Asterisk)",
+      "ko": "애스터리스크",
+      "kind": "group",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "*(Asterisk)",
+        "Asterisk",
+        "アスタリスク"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/imasnews/150417.html"
+      ]
+    },
+    {
+      "name": "LiPPS",
+      "ko": "립스",
+      "kind": "group",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "リップス"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/imasnews/191115.html"
+      ]
+    },
+    {
+      "name": "ワンステップス",
+      "ko": "원 스텝스",
+      "kind": "group",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "One Steps",
+        "OneSteps"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/imasnews/191115.html"
+      ]
+    },
+    {
+      "name": "セクシーギャルズ",
+      "ko": "섹시 갸루즈",
+      "kind": "group",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "Sexy Gals"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/imasnews/191115.html"
+      ]
+    },
+    {
+      "name": "Triad Primus",
+      "ko": "트라이어드 프리무스",
+      "kind": "group",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "トライアドプリムス"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/imasnews/241206.html"
+      ]
+    },
+    {
+      "name": "ダークイルミネイト",
+      "ko": "다크 일루미네이트",
+      "kind": "group",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "Dark Illuminate"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/imasnews/241206.html"
+      ]
+    },
+    {
+      "name": "VelvetRose",
+      "ko": "벨벳 로즈",
+      "kind": "group",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "Velvet Rose",
+        "ベルベットローズ"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/imasnews/190315.html"
+      ]
+    },
+    {
+      "name": "miroir",
+      "ko": "미로와르",
+      "kind": "group",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "ミロワール"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/imasnews/190412.html"
+      ]
+    },
+    {
+      "name": "デア・アウローラ",
+      "ko": "데어 아우로라",
+      "kind": "group",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "Dea Aurora",
+        "デアアウローラ"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/imasnews/241206.html"
+      ]
+    },
+    {
+      "name": "レイジー・レイジー",
+      "ko": "레이지 레이지",
+      "kind": "group",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "Lazy Lazy",
+        "レイジーレイジー"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/imasnews/241206.html"
+      ]
+    },
+    {
+      "name": "ルビーカウンテス",
+      "ko": "루비 카운테스",
+      "kind": "group",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "Ruby Countess"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/imasnews/241206.html"
+      ]
+    },
+    {
+      "name": "Sola-iris",
+      "ko": "솔라리스",
+      "kind": "group",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "ソラリス"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/imasnews/241206.html"
+      ]
+    },
+    {
+      "name": "フェアリーテイル＊マイテイル",
+      "ko": "페어리 테일 마이 테일",
+      "kind": "group",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "Fairy Tale My Tale",
+        "フェアリーテイル*マイテイル"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/imasnews/241206.html"
+      ]
+    },
+    {
+      "name": "ヒーローヴァーサス",
+      "ko": "히어로 버서스",
+      "kind": "group",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "Hero Versus"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/imasnews/241206.html"
+      ]
+    },
+    {
+      "name": "ビートシューター",
+      "ko": "비트 슈터",
+      "kind": "group",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "Beat Shooter"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/imasnews/200403.html"
+      ]
+    },
+    {
+      "name": "セクシーギルティ",
+      "ko": "섹시 길티",
+      "kind": "group",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "Sexy Guilty"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/imasnews/241206.html"
+      ]
+    },
+    {
+      "name": "ポジティブパッション",
+      "ko": "포지티브 패션",
+      "kind": "group",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "Positive Passion"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/imasnews/241206.html"
+      ]
+    },
+    {
+      "name": "星纏天女",
+      "ko": "별을 두른 선녀",
+      "kind": "group",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "ほしまとうてんにょ"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/imasnews/241206.html"
+      ]
+    },
+    {
+      "name": "#UNICUS",
+      "ko": "유니쿠스",
+      "kind": "group",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "UNICUS",
+        "ユニクス",
+        "#ユニット名募集中"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/imasnews/241206.html"
+      ]
+    },
+    {
+      "name": "羽衣小町",
+      "ko": "하고로모코마치",
+      "kind": "group",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "Hagoromo Komachi"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/imasnews/241206.html"
+      ]
+    },
+    {
+      "name": "かくりよがたり",
+      "ko": "카쿠리요가타리",
+      "kind": "group",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "Kakuriyogatari"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/imasnews/241206.html"
+      ]
+    },
+    {
+      "name": "可惜夜月",
+      "ko": "아타라요즈키",
+      "kind": "group",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "Atarayozuki"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/imasnews/241206.html"
+      ]
+    },
+    {
+      "name": "フォーリンシーサイド",
+      "ko": "폴링 시사이드",
+      "kind": "group",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "Falling Seaside"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/imasnews/200403.html"
+      ]
+    },
+    {
+      "name": "ピンクチェックスクール",
+      "ko": "핑크 체크 스쿨",
+      "kind": "group",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "Pink Check School"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/imasnews/191213.html"
+      ]
+    },
+    {
+      "name": "サイバーグラス",
+      "ko": "사이버 글라스",
+      "kind": "group",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "Cyber Glass"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/imasnews/190301.html"
+      ]
+    },
+    {
+      "name": "エルドリッチ・ロアテラー",
+      "ko": "엘드리치 로어텔러",
+      "kind": "group",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "Eldritch Lore Teller",
+        "エルドリッチロアテラー"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/imasnews/190823.html"
+      ]
+    },
+    {
+      "name": "ブルーナポレオン",
+      "ko": "블루 나폴레옹",
+      "kind": "group",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "Blue Napoleon"
+      ],
+      "source_urls": [
+        "https://cinderella-library.idolmaster-official.jp/history/detail/?p=20220430_1"
+      ]
+    },
+    {
+      "name": "GIRLS BE NEXT STEP",
+      "ko": "걸즈 비 넥스트 스텝",
+      "kind": "group",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "ガールズビーネクストステップ"
+      ],
+      "source_urls": [
+        "https://cinderella-library.idolmaster-official.jp/history/detail/?p=20220430_1"
+      ]
+    },
+    {
+      "name": "フリルドスクエア",
+      "ko": "프릴드 스퀘어",
+      "kind": "group",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "Frilled Square"
+      ],
+      "source_urls": [
+        "https://cinderella-library.idolmaster-official.jp/history/detail/?p=20210419_3"
+      ]
+    },
+    {
+      "name": "ROCK THE BEAT",
+      "ko": "록 더 비트",
+      "kind": "group",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "ロックザビート"
+      ],
+      "source_urls": [
+        "https://cinderella-library.idolmaster-official.jp/history/detail/?p=20170813_1"
+      ]
+    },
+    {
+      "name": "炎陣",
+      "ko": "엔진",
+      "kind": "group",
+      "franchise": "Cinderella Girls",
+      "aliases": [],
+      "source_urls": [
+        "https://cinderella-library.idolmaster-official.jp/history/detail/?p=20170813_1"
+      ]
+    },
+    {
+      "name": "U149",
+      "ko": "유149",
+      "kind": "group",
+      "franchise": "Cinderella Girls",
+      "aliases": [
+        "CINDERELLA GIRLS U149",
+        "THE IDOLM@STER CINDERELLA GIRLS U149"
+      ],
+      "source_urls": [
+        "https://columbia.jp/idolmaster/COCX-42151.html"
+      ]
+    }
+  ],
+  "coverage": {
+    "Cinderella Girls": {
+      "idols": 190,
+      "official_roster_count": 190,
+      "current_voice_actors": 99,
+      "groups": 39,
+      "idol_coverage": "All 190 idols in the official portal roster, including 91 without a credited voice actor. All 190 detail pages were checked; all 99 credited current voice actors are included.",
+      "group_coverage": "39 selected performing groups and ensemble credits from official label/live/archive sources; historical and event-only unit names are not exhaustive."
+    },
+    "Shiny Colors": {
+      "idols": 28,
+      "official_roster_count": 28,
+      "current_voice_actors": 28,
+      "groups": 19,
+      "idol_coverage": "All 28 current idols and credited voice actors on the official Song for Prism roster.",
+      "group_coverage": "All eight original units, all seven PJ: REFRAC7IONS units, Team.Stella/Team.Luna/Team.Sol, and the Shiny Colors ensemble."
+    },
+    "Gakuen Idolmaster": {
+      "idols": 13,
+      "official_roster_count": 13,
+      "current_voice_actors": 13,
+      "groups": 3,
+      "idol_coverage": "All 13 idol-course students on the current official roster, including Amaya Tsubame; faculty are outside this idol/singer scope.",
+      "group_coverage": "Hatsuboshi Gakuen ensemble, Re;IRIS and Begrazia."
+    },
+    "total_entries": 432,
+    "korean_names": "Editorial Korean display transliterations based on Japanese names/readings and established Korean fandom usage; not represented as an official Korean localization.",
+    "aliases": "Full personal names and full unit names only. Romanized spellings are lookup aliases, not identity evidence. English mononyms of Cinderella foreign idols are omitted to avoid converting unrelated artists.",
+    "limitations": [
+      "No claim to exhaustively cover every historical Cinderella Girls event unit or former voice actor.",
+      "Snapshot verified 2026-10-01; newly announced artists require a catalog update."
+    ]
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-10-02T16:12:45+00:00",
+  "recordings": 13532,
+  "performers": 1867,
+  "bytes": 40833977,
+  "load_seconds": 1.78,
+  "load_measurement_note": "Historical snapshot load measurement; not a benchmark of the final reviewed runtime.",
+  "series": {
+    "other": 2199,
+    "sidem": 1248,
+    "million": 2729,
+    "765": 2226,
+    "cinderella": 3172,
+    "shiny": 1377,
+    "gakuen": 581
+  },
+  "kinds": {
+    "spoken": 1301,
+    "song": 9962,
+    "instrumental": 2144,
+    "unknown": 125
+  },
+  "missing_duration": 487,
+  "credited_group_links": 1380,
+  "credited_performer_links": 10034,
+  "credited_links_scope": "Existing credited_* fields count raw recordings with at least one link, not total relationships. Runtime fields additionally include the 12 reviewed unit connections.",
+  "runtime_credited_group_links": 1392,
+  "runtime_credited_performer_links": 10046,
+  "queries": [
+    {
+      "query": "release:\"THE IDOLM@STER\"",
+      "count": 12280,
+      "downloaded": 12280
+    },
+    {
+      "query": "artist:\"初星学園\"",
+      "count": 493,
+      "downloaded": 493
+    },
+    {
+      "query": "artistname:\"倉本千奈\" OR artistname:\"十王星南\" OR artistname:\"姫崎莉波\" OR artistname:\"月村手毬\" OR artistname:\"有村麻央\" OR artistname:\"秦谷美鈴\" OR artistname:\"篠澤広\" OR artistname:\"紫雲清夏\" OR artistname:\"花海佑芽\" OR artistname:\"花海咲季\" OR artistname:\"葛城リーリヤ\" OR artistname:\"藤田ことね\" OR artistname:\"雨夜燕\"",
+      "count": 445,
+      "downloaded": 445
+    },
+    {
+      "query": "(artist:\"THE IDOLM@STER\" OR artist:\"アイドルマスター\") AND NOT release:\"THE IDOLM@STER\"",
+      "count": 63,
+      "downloaded": 63
+    },
+    {
+      "query": "(arid:3e221c36-bc34-41ee-a59d-80546bfe6c09 OR arid:9b1ae2d2-e9b8-4517-912b-23932bcfd2d1 OR arid:e45ab497-e63c-4bf3-8815-1cff2427d818 OR arid:8930a114-2b1f-4636-abe1-8e79fa1c7414 OR arid:4c6d0d72-66d0-43e0-9f4c-beb41e747cc1 OR arid:88cb8a6a-8b99-4e2e-964f-3353f90f71eb) AND NOT release:\"THE IDOLM@STER\"",
+      "count": 137,
+      "downloaded": 137
+    },
+    {
+      "query": "(artistname:\"アスラン=BBⅡ世\" OR artistname:\"アナスタシア\" OR artistname:\"イヴ・サンタクロース\" OR artistname:\"エミリースチュアート\" OR artistname:\"キャシー・グラハム\" OR artistname:\"クラリス\" OR artistname:\"ケイト\" OR artistname:\"サラ・レトラ・オリヴェイラ・ウタガワ\" OR artistname:\"ジュニー\" OR artistname:\"ジュリア\" OR artistname:\"ナターリア\" OR artistname:\"ピエール\" OR artistname:\"ヘレン\" OR artistname:\"メアリー・コクラン\" OR artistname:\"ライラ\" OR artistname:\"リュ・ヘナ\" OR artistname:\"一ノ瀬志希\" OR artistname:\"七尾百合子\" OR artistname:\"七草にちか\" OR artistname:\"三好紗南\" OR artistname:\"三峰結華\" OR artistname:\"三村かな子\" OR artistname:\"三浦あずさ\" OR artistname:\"三船美優\") AND NOT release:\"THE IDOLM@STER\"",
+      "count": 387,
+      "downloaded": 387
+    },
+    {
+      "query": "(artistname:\"上条春菜\" OR artistname:\"上水流宇宙\" OR artistname:\"上田鈴帆\" OR artistname:\"並木芽衣子\" OR artistname:\"中谷育\" OR artistname:\"中野有香\" OR artistname:\"丹羽仁美\" OR artistname:\"久川凪\" OR artistname:\"久川颯\" OR artistname:\"乙倉悠貴\" OR artistname:\"九十九一希\" OR artistname:\"二宮飛鳥\" OR artistname:\"二階堂千鶴\" OR artistname:\"五十嵐響子\" OR artistname:\"井村雪菜\" OR artistname:\"亜夜\" OR artistname:\"今井加奈\" OR artistname:\"仙崎恵磨\" OR artistname:\"伊吹翼\" OR artistname:\"伊瀬谷四季\" OR artistname:\"伊集院北斗\" OR artistname:\"伊集院惠\" OR artistname:\"伴田路子\" OR artistname:\"佐々木千枝\") AND NOT release:\"THE IDOLM@STER\"",
+      "count": 82,
+      "downloaded": 82
+    },
+    {
+      "query": "(artistname:\"佐久間まゆ\" OR artistname:\"佐城雪美\" OR artistname:\"佐竹美奈子\" OR artistname:\"佐藤心\" OR artistname:\"依田芳乃\" OR artistname:\"信玄誠司\" OR artistname:\"兜大吾\" OR artistname:\"八宮めぐる\" OR artistname:\"八神マキノ\" OR artistname:\"兵藤レナ\" OR artistname:\"円城寺道流\" OR artistname:\"冬美旬\" OR artistname:\"冴島清美\" OR artistname:\"前川みく\" OR artistname:\"北上麗花\" OR artistname:\"北川真尋\" OR artistname:\"北村想楽\" OR artistname:\"北条加蓮\" OR artistname:\"北沢志保\" OR artistname:\"十時愛梨\" OR artistname:\"南条光\" OR artistname:\"卯月巻緒\" OR artistname:\"原田美世\" OR artistname:\"及川雫\") AND NOT release:\"THE IDOLM@STER\"",
+      "count": 40,
+      "downloaded": 40
+    },
+    {
+      "query": "(artistname:\"双海亜美\" OR artistname:\"双海真美\" OR artistname:\"双葉杏\" OR artistname:\"古澤頼子\" OR artistname:\"古論クリス\" OR artistname:\"古賀小春\" OR artistname:\"吉岡沙紀\" OR artistname:\"向井拓海\" OR artistname:\"周防桃子\" OR artistname:\"和久井留美\" OR artistname:\"和泉愛依\" OR artistname:\"喜多日菜子\" OR artistname:\"喜多見柚\" OR artistname:\"四条貴音\" OR artistname:\"園田智代子\" OR artistname:\"土屋亜子\" OR artistname:\"城ヶ崎美嘉\" OR artistname:\"城ヶ崎莉嘉\" OR artistname:\"堀裕子\" OR artistname:\"塩見周子\" OR artistname:\"多田李衣菜\" OR artistname:\"夢見りあむ\" OR artistname:\"大原みちる\" OR artistname:\"大和亜季\") AND NOT release:\"THE IDOLM@STER\"",
+      "count": 260,
+      "downloaded": 260
+    },
+    {
+      "query": "(artistname:\"大崎甘奈\" OR artistname:\"大崎甜花\" OR artistname:\"大槻唯\" OR artistname:\"大河タケル\" OR artistname:\"大沼くるみ\" OR artistname:\"大石泉\" OR artistname:\"大神環\" OR artistname:\"大西由里子\" OR artistname:\"天ヶ瀬冬馬\" OR artistname:\"天峰秀\" OR artistname:\"天海春香\" OR artistname:\"天空橋朋花\" OR artistname:\"天道輝\" OR artistname:\"太田優\" OR artistname:\"奥山沙織\" OR artistname:\"如月千早\" OR artistname:\"姫川友紀\" OR artistname:\"姫野かのん\" OR artistname:\"安斎都\" OR artistname:\"安部菜々\" OR artistname:\"宮尾美也\" OR artistname:\"宮本フレデリカ\" OR artistname:\"小室千奈美\" OR artistname:\"小宮果穂\") AND NOT release:\"THE IDOLM@STER\"",
+      "count": 415,
+      "downloaded": 415
+    },
+    {
+      "query": "(artistname:\"小日向美穂\" OR artistname:\"小早川紗枝\" OR artistname:\"小松伊吹\" OR artistname:\"小関麗奈\" OR artistname:\"山下次郎\" OR artistname:\"岡崎泰葉\" OR artistname:\"岡村直央\" OR artistname:\"岸部彩華\" OR artistname:\"島原エレナ\" OR artistname:\"島村卯月\" OR artistname:\"川島瑞樹\" OR artistname:\"工藤忍\" OR artistname:\"市原仁奈\" OR artistname:\"市川雛菜\" OR artistname:\"幽谷霧子\" OR artistname:\"御手洗翔太\" OR artistname:\"徳川まつり\" OR artistname:\"愛野渚\" OR artistname:\"成宮由愛\" OR artistname:\"我那覇響\" OR artistname:\"所恵美\" OR artistname:\"持田亜里沙\" OR artistname:\"握野英雄\" OR artistname:\"斉藤洋子\") AND NOT release:\"THE IDOLM@STER\"",
+      "count": 112,
+      "downloaded": 112
+    },
+    {
+      "query": "(artistname:\"斑鳩ルカ\" OR artistname:\"新田美波\" OR artistname:\"日下部若葉\" OR artistname:\"日野茜\" OR artistname:\"日高愛\" OR artistname:\"早坂美玲\" OR artistname:\"星井美希\" OR artistname:\"星輝子\" OR artistname:\"春日未来\" OR artistname:\"最上静香\" OR artistname:\"月宮雅\" OR artistname:\"月岡恋鐘\" OR artistname:\"有栖川夏葉\" OR artistname:\"有浦柑奈\" OR artistname:\"服部瞳子\" OR artistname:\"望月杏奈\" OR artistname:\"望月聖\" OR artistname:\"木下ひなた\" OR artistname:\"木場真奈美\" OR artistname:\"木村夏樹\" OR artistname:\"木村龍\" OR artistname:\"本田未央\" OR artistname:\"杉坂海\" OR artistname:\"村上巴\") AND NOT release:\"THE IDOLM@STER\"",
+      "count": 230,
+      "downloaded": 230
+    },
+    {
+      "query": "(artistname:\"村松さくら\" OR artistname:\"杜野凛世\" OR artistname:\"東郷あい\" OR artistname:\"東雲荘一郎\" OR artistname:\"松原早耶\" OR artistname:\"松尾千鶴\" OR artistname:\"松山久美子\" OR artistname:\"松本沙理奈\" OR artistname:\"松永涼\" OR artistname:\"松田亜利沙\" OR artistname:\"柊志乃\" OR artistname:\"柏木翼\" OR artistname:\"柳清良\" OR artistname:\"柳瀬美由紀\" OR artistname:\"栗原ネネ\" OR artistname:\"桃井あずき\" OR artistname:\"桐生つかさ\" OR artistname:\"桐野アヤ\" OR artistname:\"桑山千雪\" OR artistname:\"桜井夢子\" OR artistname:\"桜守歌織\" OR artistname:\"桜庭薫\" OR artistname:\"梅木音葉\" OR artistname:\"棟方愛海\") AND NOT release:\"THE IDOLM@STER\"",
+      "count": 12,
+      "downloaded": 12
+    },
+    {
+      "query": "(artistname:\"森久保乃々\" OR artistname:\"椎名法子\" OR artistname:\"楊菲菲\" OR artistname:\"榊原里美\" OR artistname:\"榊夏来\" OR artistname:\"槙原志保\" OR artistname:\"樋口円香\" OR artistname:\"横山千佳\" OR artistname:\"横山奈緒\" OR artistname:\"橘ありす\" OR artistname:\"橘志狼\" OR artistname:\"櫻井桃華\" OR artistname:\"櫻木真乃\" OR artistname:\"氏家むつみ\" OR artistname:\"水嶋咲\" OR artistname:\"水木聖來\" OR artistname:\"水本ゆかり\" OR artistname:\"水瀬伊織\" OR artistname:\"水谷絵理\" OR artistname:\"水野翠\" OR artistname:\"永吉昴\" OR artistname:\"江上椿\" OR artistname:\"池袋晶葉\" OR artistname:\"沢田麻理菜\") AND NOT release:\"THE IDOLM@STER\"",
+      "count": 174,
+      "downloaded": 174
+    },
+    {
+      "query": "(artistname:\"浅倉透\" OR artistname:\"浅利七海\" OR artistname:\"浅野風香\" OR artistname:\"浜口あやめ\" OR artistname:\"浜川愛結奈\" OR artistname:\"海老原菜帆\" OR artistname:\"涼宮星花\" OR artistname:\"清澄九郎\" OR artistname:\"渋谷凛\" OR artistname:\"渡辺みのり\" OR artistname:\"瀬名詩織\" OR artistname:\"灯里愛夏\" OR artistname:\"片桐早苗\" OR artistname:\"牙崎漣\" OR artistname:\"猫柳キリオ\" OR artistname:\"玲音\" OR artistname:\"田中摩美々\" OR artistname:\"田中琴葉\" OR artistname:\"白坂小梅\" OR artistname:\"白瀬咲耶\" OR artistname:\"白石紬\" OR artistname:\"白菊ほたる\" OR artistname:\"白雪千夜\" OR artistname:\"百瀬莉緒\") AND NOT release:\"THE IDOLM@STER\"",
+      "count": 116,
+      "downloaded": 116
+    },
+    {
+      "query": "(artistname:\"的場梨沙\" OR artistname:\"相原雪乃\" OR artistname:\"相川千夏\" OR artistname:\"相葉夕美\" OR artistname:\"相馬夏美\" OR artistname:\"眉見鋭心\" OR artistname:\"真壁瑞希\" OR artistname:\"真鍋いつき\" OR artistname:\"矢口美羽\" OR artistname:\"矢吹可奈\" OR artistname:\"砂塚あきら\" OR artistname:\"硲道夫\" OR artistname:\"神崎蘭子\" OR artistname:\"神楽麗\" OR artistname:\"神谷奈緒\" OR artistname:\"神谷幸広\" OR artistname:\"福丸小糸\" OR artistname:\"福山舞\" OR artistname:\"福田のり子\" OR artistname:\"秋山隼人\" OR artistname:\"秋月律子\" OR artistname:\"秋月涼\" OR artistname:\"箱崎星梨花\" OR artistname:\"篠原礼\") AND NOT release:\"THE IDOLM@STER\"",
+      "count": 175,
+      "downloaded": 175
+    },
+    {
+      "query": "(artistname:\"篠宮可憐\" OR artistname:\"紅井朱雀\" OR artistname:\"結城晴\" OR artistname:\"綾瀬穂乃香\" OR artistname:\"緋田美琴\" OR artistname:\"緒方智絵里\" OR artistname:\"脇山珠美\" OR artistname:\"舞浜歩\" OR artistname:\"舞田類\" OR artistname:\"花園百々人\" OR artistname:\"芹沢あさひ\" OR artistname:\"若林智香\" OR artistname:\"若里春名\" OR artistname:\"荒木比奈\" OR artistname:\"菊地真\" OR artistname:\"華村翔真\" OR artistname:\"萩原雪歩\" OR artistname:\"葛之葉雨彦\" OR artistname:\"蒼井享介\" OR artistname:\"蒼井悠介\" OR artistname:\"藤原肇\" OR artistname:\"藤居朋\" OR artistname:\"藤本里奈\" OR artistname:\"衛藤美紗希\") AND NOT release:\"THE IDOLM@STER\"",
+      "count": 268,
+      "downloaded": 268
+    },
+    {
+      "query": "(artistname:\"西園寺琴歌\" OR artistname:\"西城樹里\" OR artistname:\"西島櫂\" OR artistname:\"西川保奈美\" OR artistname:\"詩花\" OR artistname:\"諸星きらり\" OR artistname:\"豊川風花\" OR artistname:\"財前時子\" OR artistname:\"赤城みりあ\" OR artistname:\"赤西瑛梨華\" OR artistname:\"輿水幸子\" OR artistname:\"辻野あかり\" OR artistname:\"速水奏\" OR artistname:\"遊佐こずえ\" OR artistname:\"道明寺歌鈴\" OR artistname:\"郁田はるき\" OR artistname:\"都築圭\" OR artistname:\"野々原茜\" OR artistname:\"野々村そら\" OR artistname:\"鈴木彩音\" OR artistname:\"鈴木羽那\" OR artistname:\"長富蓮実\" OR artistname:\"間中美里\" OR artistname:\"関裕美\") AND NOT release:\"THE IDOLM@STER\"",
+      "count": 40,
+      "downloaded": 40
+    },
+    {
+      "query": "(artistname:\"難波笑美\" OR artistname:\"風野灯織\" OR artistname:\"首藤葵\" OR artistname:\"馬場このみ\" OR artistname:\"高坂海美\" OR artistname:\"高垣楓\" OR artistname:\"高山紗代子\" OR artistname:\"高峯のあ\" OR artistname:\"高森藍子\" OR artistname:\"高槻やよい\" OR artistname:\"高橋礼子\" OR artistname:\"鷹城恭二\" OR artistname:\"鷹富士茄子\" OR artistname:\"鷺沢文香\" OR artistname:\"黒埼ちとせ\" OR artistname:\"黒川千秋\" OR artistname:\"黒野玄武\" OR artistname:\"黛冬優子\" OR artistname:\"龍崎薫\" OR artistname:\"임유진\") AND NOT release:\"THE IDOLM@STER\"",
+      "count": 249,
+      "downloaded": 249
+    },
+    {
+      "query": "artistname:\"倉本千奈\" OR artistname:\"十王星南\" OR artistname:\"姫崎莉波\" OR artistname:\"月村手毬\" OR artistname:\"有村麻央\" OR artistname:\"秦谷美鈴\" OR artistname:\"篠澤広\" OR artistname:\"紫雲清夏\" OR artistname:\"花海佑芽\" OR artistname:\"花海咲季\" OR artistname:\"葛城リーリヤ\" OR artistname:\"藤田ことね\" OR artistname:\"雨夜燕\"",
+      "count": 445,
+      "downloaded": 445
+    },
+    {
+      "query": "release:\"283 Production\"",
+      "count": 38,
+      "downloaded": 38
+    },
+    {
+      "query": "release:\"ラムネ色 青春\" OR release:\"虹色ミラクル\"",
+      "count": 22,
+      "downloaded": 22
+    }
+  ],
+  "coverage_complete": false,
+  "spotify_checked": false,
+  "visible_after_duplicate_filter": 13454,
+  "hidden_duplicate_recordings": 78,
+  "classification_note": "Runtime classifications include exact reviewed release/recording evidence; the 13,509 previous raw recording payloads remain unchanged in the bundled snapshot."
+}

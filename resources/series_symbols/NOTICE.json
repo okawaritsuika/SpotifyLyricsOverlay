@@ -1,0 +1,45 @@
+{
+  "source_page": "https://idolmaster-official.jp/about",
+  "retrieved": "2026-10-03",
+  "rights": "THE IDOLM@STER™ & ©Bandai Namco Entertainment Inc.",
+  "use": "Official brand marks identifying catalog series; no affiliation implied.",
+  "processing": "Original SVG paths and colors retained. Decorative 20–25% opacity removed for small UI display; rendered with transparent padding, preserving aspect ratio.",
+  "assets": [
+    {
+      "key": "765",
+      "source_url": "https://idolmaster-official.jp/assets/img/about/imas/logo.svg",
+      "original": "765.svg",
+      "display": "765.png"
+    },
+    {
+      "key": "million",
+      "source_url": "https://idolmaster-official.jp/assets/img/about/imasml/logo.svg",
+      "original": "million.svg",
+      "display": "million.png"
+    },
+    {
+      "key": "cinderella",
+      "source_url": "https://idolmaster-official.jp/assets/img/about/imascg/logo.svg",
+      "original": "cinderella.svg",
+      "display": "cinderella.png"
+    },
+    {
+      "key": "sidem",
+      "source_url": "https://idolmaster-official.jp/assets/img/about/sidem/logo.svg",
+      "original": "sidem.svg",
+      "display": "sidem.png"
+    },
+    {
+      "key": "shiny",
+      "source_url": "https://idolmaster-official.jp/assets/img/about/imassc/logo.svg",
+      "original": "shiny.svg",
+      "display": "shiny.png"
+    },
+    {
+      "key": "gakuen",
+      "source_url": "https://idolmaster-official.jp/assets/img/about/gakuen/logo.svg",
+      "original": "gakuen.svg",
+      "display": "gakuen.png"
+    }
+  ]
+}
