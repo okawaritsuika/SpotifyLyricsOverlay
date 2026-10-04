@@ -74,7 +74,7 @@ class UpdateDownloadTests(unittest.TestCase):
         body=b'MZdownloaded';release,checksums=release_for(body);destination=self.base/'app with spaces.exe'
         destination.write_bytes(b'previous');progress=Mock()
         with patch.object(updates,'_open',side_effect=[Response(checksums),Response(body)]):
-            self.assertEqual(updates.download_asset(release,updates.EXE_ASSET_NAME,destination,progress),destination)
+            self.assertEqual(updates.download_asset(release,updates.EXE_ASSET_NAME,destination,progress),destination.resolve())
         self.assertEqual(destination.read_bytes(),body)
         self.assertEqual(progress.call_args.args,(len(body),len(body)))
         self.assertFalse(list(self.base.glob('*.part')))
@@ -168,7 +168,7 @@ class UpdateHandoffTests(unittest.TestCase):
     def test_source_restart_uses_argument_list_with_same_data_directory(self):
         with patch.object(updates,'frozen',return_value=False):command=updates._restart_command(self.data)
         self.assertTrue(command[1].endswith('app.py'))
-        self.assertEqual(command[-2:],['--data-dir',str(self.data)])
+        self.assertEqual(command[-2:],['--data-dir',str(self.data.resolve())])
 
     def test_source_helper_preserves_original_venv_pythonpath(self):
         with patch.object(updates,'frozen',return_value=False),patch.dict(os.environ,{'PYTHONPATH':'original-venv'}), \
