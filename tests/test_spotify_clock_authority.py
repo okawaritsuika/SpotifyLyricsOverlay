@@ -36,8 +36,7 @@ class SpotifyClockAuthorityTests(unittest.TestCase):
         self.assertFalse(self.app.following_audio());self.assertFalse(self.app.holding_audio())
         self.assertEqual(self.app.display_lines,self.lines)
         self.assertEqual(self.app.timing['times'][10],35)
-        self.assertIn('Spotify 싱크 사용',self.app.analysis_badge.cget('text'))
-        self.assertIn('가사 연결 4/16',self.app.analysis_badge.cget('text'))
+        self.assertEqual(sum(stamp is not None for stamp in self.app.direct_times()),4)
         self.assertIsNone(self.app.displayed_index())
 
     def test_stale_realtime_delivery_cannot_take_over_complete_spotify_clock(self):

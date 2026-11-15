@@ -97,6 +97,62 @@ class BatchTranslationTests(unittest.TestCase):
         self.apply(self.reply(batch))
         self.assertEqual([row.original for row in self.store.fill('Song', 'Artist', 'Album', lines)], ['', '  ', '♪', '言葉'])
 
+    def test_latin_only_rows_are_excluded_and_source_translations_are_preserved(self):
+        lines=(Line('“Flyers!!!”', '', ''), Line('Café ＭＵＳＩＣ ♪', '', ''),
+               Line('Let’s fly!', '', '가져온 번역'), Line('空へ', '', ''))
+        song=self.song(lines=lines)
+        batch=self.batch([song])
+        manifest=json.loads((self.store.requests_directory/(batch['batch_id']+'.json')).read_text(encoding='utf-8'))
+        self.assertEqual(manifest['songs'][song['id']]['indices'], [4])
+        self.assertEqual(self.store.fill('Song', 'Artist', 'Album', lines), lines)
+        self.assertEqual(self.store.prepare([self.song('English', lines[:2])]), [])
+
+    def test_mixed_reply_preserves_exact_latin_phrases_and_can_retry_skipped_rows(self):
+        lines=(Line('高みを目指して Flyers!!!', '', ''), Line('未来へ One More Time', '', ''),
+               Line('WANTED! WANTED! にげちゃって!', '', ''), Line('風が吹く', '', ''))
+        batch=self.batch([self.song(lines=lines)])
+        reply=self.reply(batch)
+        rows=reply['songs'][0]['lines']
+        for row, korean in zip(rows, ('더 높은 곳을 향해, 날아오르는 이들!!!', '미래로 One more Time',
+                                     'WANTED! 도망쳐!', '바람이 불어')):
+            row['korean']=korean
+        result=self.apply(reply)
+        self.assertEqual((result['lines'], result['changed_latin_lines'], result['remaining']), (1, 3, 3))
+        for row, korean in zip(rows, ('더 높은 곳을 향해, Flyers!!!', '미래로 One More Time',
+                                     'WANTED! WANTED! 도망쳐!')):
+            row['korean']=korean
+        result=self.apply(reply)
+        self.assertEqual((result['lines'], result['already_lines'], result['remaining']), (3, 1, 0))
+        self.assertEqual([line.korean for line in self.store.fill('Song', 'Artist', 'Album', lines)],
+                         [row['korean'] for row in rows])
+
+    def test_mixed_reply_preserves_symbols_inside_latin_expressions(self):
+        lines=(Line('True & False 失敗？', '', ''), Line('響け M@STERPIECE', '', ''))
+        batch=self.batch([self.song(lines=lines)])
+        reply=self.reply(batch)
+        rows=reply['songs'][0]['lines']
+        rows[0]['korean']='True / False 실패?'
+        rows[1]['korean']='울려라 M/STERPIECE'
+        result=self.apply(reply)
+        self.assertEqual((result['lines'], result.get('changed_latin_lines', 0), result['remaining']), (0, 2, 2))
+
+        rows[0]['korean']='True & False 실패?'
+        rows[1]['korean']='울려라 M@STERPIECE'
+        result=self.apply(reply)
+        self.assertEqual((result['lines'], result['remaining']), (2, 0))
+
+    def test_legacy_ai_english_is_restored_even_in_mirrored_history(self):
+        original='Flyers!!!'
+        old='날아오르는 이들!!!'
+        lines=(Line(original, '', old),)
+        song=self.song(lines=lines)
+        atomic_json(self.store.imports_path, {'version':1, 'documents':{song['id']:{'1':old}}})
+        self.store=BatchTranslationStore(self.directory)
+        self.assertEqual(self.store.fill('Song', 'Artist', 'Album', lines)[0].korean, original)
+        self.assertEqual(self.store.documents()[0]['lines'][0].korean, original)
+        source=(Line(original, '', '별도로 가져온 번역'),)
+        self.assertEqual(self.store.fill('Song', 'Artist', 'Album', source), source)
+
     def test_same_document_merges_missing_annotations_and_latest_source_wins(self):
         first=self.song(lines=(Line('空', '', '기존'), Line('風', '', '')))
         second=self.song(lines=(Line('空', 'そら', ''), Line('風', '', '바람')))

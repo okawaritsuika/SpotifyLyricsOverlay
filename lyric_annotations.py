@@ -2,6 +2,8 @@
 from dataclasses import asdict
 from difflib import SequenceMatcher
 from functools import lru_cache
+import hashlib
+import json
 import re
 import unicodedata
 
@@ -376,3 +378,80 @@ class LyricAnnotations:
                 original.reading if original.reading.strip() or extra is None else extra.reading,
                 original.korean if original.korean.strip() or extra is None else extra.korean))
         return tuple(result)
+
+
+class LyricTextEdits:
+    """Display corrections for one recording and its original row layout."""
+    def __init__(self, store):
+        self.directory = store.directory / 'lyric_text_edits'
+        self.key = None
+        self.path = None
+        self.rows = {}
+        self.error = None
+
+    def select(self, key, *, path_key=None):
+        if key == self.key:
+            return
+        self.key, self.rows, self.error = key, {}, None
+        self.path = self.path_for(path_key or key) if key else None
+        if self.path:
+            try:
+                rows = read_json(self.path, {})
+                if not isinstance(rows, dict) or any(
+                        not index.isascii() or not index.isdecimal() or int(index) >= len(key[1])
+                        or not self.valid_row(text)
+                        for index, text in rows.items()):
+                    raise ValueError('저장한 가사 수정 내용을 읽을 수 없습니다.')
+                self.rows = {int(index): text for index, text in rows.items()}
+            except (OSError, ValueError) as error:
+                self.error = error
+
+    @staticmethod
+    def valid_row(row):
+        if isinstance(row, str):
+            return bool(row.strip()) and not any(c in row for c in '\r\n\0')
+        return (isinstance(row, dict) and bool(row.keys() & {'reading', 'korean'})
+                and row.keys() <= {'original', 'reading', 'korean'}
+                and all(isinstance(value, str) and (field == 'korean' or value.strip())
+                        and not any(c in value for c in '\r\n\0') for field, value in row.items()))
+
+    def path_for(self,key):
+        return self.directory / (hashlib.sha256(json.dumps(key).encode()).hexdigest() + '.json')
+
+    def original(self, index):
+        row = self.rows.get(index)
+        return row.get('original') if isinstance(row, dict) else row
+
+    def translation(self, index):
+        row = self.rows.get(index)
+        return row.get('korean') if isinstance(row, dict) else None
+
+    def reading(self, index):
+        row = self.rows.get(index)
+        return row.get('reading') if isinstance(row, dict) else None
+
+    def save(self, index, text, *, field='original'):
+        if self.error:
+            raise self.error
+        if self.key is None or not 0 <= index < len(self.key[1]):
+            raise ValueError('수정할 가사 줄을 다시 선택하세요.')
+        label = {'original': '가사', 'reading': '후리가나', 'korean': '번역'}[field]
+        text = text.strip()
+        if (not text and field == 'original') or any(c in text for c in '\r\n\0'):
+            raise ValueError(f'한 줄로 입력하세요. ({label})')
+        row = self.rows.get(index)
+        values = row.copy() if isinstance(row, dict) else {'original': row} if row else {}
+        if field == 'reading' and not text or field == 'original' and text == self.key[1][index]:
+            values.pop(field, None)
+        else:
+            values[field] = text
+        rows = self.rows.copy()
+        if 'korean' in values or 'reading' in values:
+            rows[index] = values
+        elif 'original' in values:
+            rows[index] = values['original']
+        else:
+            rows.pop(index, None)
+        if rows != self.rows:
+            atomic_json(self.path, rows)
+            self.rows = rows

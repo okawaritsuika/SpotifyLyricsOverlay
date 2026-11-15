@@ -12,6 +12,13 @@ def normalized(text):
                    if c.isalnum())
 
 
+_CINDERELLA_NO1 = re.compile(r'^シンデレラ\s*no\.?\s*1(?![0-9a-z_])', re.I)
+
+
+def is_cinderella_no1(title):
+    return bool(_CINDERELLA_NO1.match(unicodedata.normalize('NFKC', title).strip()))
+
+
 @dataclass(frozen=True)
 class Line:
     original: str

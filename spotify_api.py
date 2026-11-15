@@ -116,17 +116,23 @@ def lyric_lines(payload,duration=0):
         words=words.strip()
         if not words or words in ('♪','♫','♬'):continue
         stamp=None
-        if synced:
+        if synced and line.get('startTimeMs') not in (None, ''):
             raw=line.get('startTimeMs')
             if isinstance(raw,bool):raise ValueError('timestamp')
             try:stamp=float(raw)/1000
             except (TypeError,ValueError,OverflowError):raise ValueError('timestamp') from None
             if not math.isfinite(stamp) or stamp<previous or stamp<0 or stamp>604800:raise ValueError('timestamp')
             if duration and stamp>duration+2:raise ValueError('duration')
-            previous=stamp
             if result and result[-1]['time']==stamp:
                 result[-1]['text']+=' '+words
                 continue
+            if stamp==previous:
+                # An untimed original can sit between two simultaneous cues.
+                # Keep its neighbors in source order with one valid onset.
+                stamp=None
+            else:
+                previous=stamp
         result.append({'text':words,'time':stamp})
     if not result:raise ValueError('empty lyrics')
+    if synced and not any(line['time'] is not None for line in result):raise ValueError('missing timestamps')
     return result

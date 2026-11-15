@@ -74,14 +74,12 @@ class ExplorerDialogTests(unittest.TestCase):
                         patch('explorer_dialog.DesktopSpotify', return_value=self.spotify),
                         patch('explorer_dialog.performers', return_value=self.people),
                         patch('explorer_dialog.LiveCatalog', return_value=self.live_catalog),
-                        patch('explorer_dialog.refresh_people',return_value={'updated':False,'cancelled':False,
-                                                                            'errors':[],'message':'Fixture data'}),
                         patch('explorer_dialog.work_area', return_value=(0, 0, 1920, 1080)),
                         patch('explorer_dialog.tk.Toplevel', side_effect=invisible_toplevel),
                         patch('explorer_dialog.messagebox.showerror')]
         for item in self.patches:item.start()
         self.app = SimpleNamespace(root=self.root, store=self.store, explorer_dialog=None,
-                                   open_connection=Mock(), connect_spotify=Mock())
+                                   open_connection=Mock(), connect_spotify=Mock(), open_updates=Mock())
         self.dialog = ExplorerDialog(self.app)
         self.app.explorer_dialog = self.dialog
         self.root.update()
@@ -144,12 +142,13 @@ class ExplorerDialogTests(unittest.TestCase):
         self.app.open_connection.assert_not_called()
         self.assertIn('한 번 로그인', self.dialog.status.get())
 
-    def test_connected_login_opens_existing_connection_settings(self):
+    def test_connected_login_displays_status_without_opening_connection_settings(self):
         self.spotify.connected = True
         self.dialog.refresh_settings()
-        self.assertEqual(self.dialog.login_button.cget('text'), '연결 상태 보기')
+        self.assertEqual(self.dialog.login_button.cget('text'), 'Spotify 연결됨')
+        self.assertEqual(str(self.dialog.login_button.cget('state')), 'disabled')
         self.dialog.login_button.invoke()
-        self.app.open_connection.assert_called_once_with()
+        self.app.open_connection.assert_not_called()
         self.app.connect_spotify.assert_not_called()
 
     def test_busy_operation_does_not_start_login(self):
@@ -351,67 +350,6 @@ class ExplorerDialogTests(unittest.TestCase):
         self.poll()
         self.assertIsNone(self.dialog.library.linked_track('a')['is_playable'])
         self.assertEqual(self.dialog.status.get(), '작업을 취소했습니다.')
-
-    def test_catalog_partial_failure_keeps_explicit_source_notice(self):
-        with patch('explorer_dialog.refresh_catalog', return_value={'updated': True, 'errors': ['source']}) as refresh:
-            work, done = self.capture_job(self.dialog.update_catalog)
-            done(work())
-        self.assertEqual(refresh.call_args.args[0], self.directory / 'song_catalog.json')
-        self.assertIs(refresh.call_args.kwargs['cancel'], self.dialog.cancel)
-        self.catalog.reload.assert_called_once_with()
-        self.assertIn('일부 출처 실패', self.dialog.status.get())
-        self.assertIn('이전 내용 유지', self.dialog.status.get())
-        from group_credits import group_member_lines
-        roster = group_member_lines(('Group',),'THE IDOLM@STER',self.directory/'group_credits.json')
-        self.assertIn('아이돌 (CV. 성우 이름)',roster[0])
-
-    def test_music_failure_still_updates_people_and_reports_both_results(self):
-        with (patch('explorer_dialog.refresh_catalog',side_effect=OSError('Music unavailable')) as music,
-              patch('explorer_dialog.refresh_people',return_value={'updated':True,'characters':347,'errors':[]}) as people):
-            work,done=self.capture_job(self.dialog.update_catalog)
-            done(work())
-        music.assert_called_once();people.assert_called_once()
-        self.assertEqual(people.call_args.args[0],self.directory/'imas_db_people.json')
-        self.assertIn('음악 자료 갱신 실패',self.dialog.status.get())
-        self.assertIn('인물 자료 갱신 · 캐릭터 347명',self.dialog.status.get())
-        self.assertFalse(self.dialog.music_update_active)
-
-    def test_people_failure_does_not_discard_successful_music_update(self):
-        with (patch('explorer_dialog.refresh_catalog',return_value={'updated':True,'errors':[]}),
-              patch('explorer_dialog.refresh_people',side_effect=ValueError('Incomplete table'))):
-            work,done=self.capture_job(self.dialog.update_catalog)
-            done(work())
-        self.assertIn('음악 자료를 갱신했습니다',self.dialog.status.get())
-        self.assertIn('인물 자료 갱신 실패',self.dialog.status.get())
-        self.assertIn('Incomplete table',self.dialog.status.get())
-
-    def test_cancel_during_music_update_never_starts_people_collection(self):
-        def cancel_music(*_,**__):
-            self.dialog.cancel.set()
-            return {'updated':False,'cancelled':True,'errors':[]}
-        with (patch('explorer_dialog.refresh_catalog',side_effect=cancel_music),
-              patch('explorer_dialog.refresh_people') as people):
-            work,_=self.capture_job(self.dialog.update_catalog)
-            stats=work()
-        people.assert_not_called()
-        self.assertTrue(stats['cancelled'])
-
-    def test_roster_save_failure_preserves_successful_catalog_status(self):
-        with patch('explorer_dialog.save_group_credits',side_effect=OSError('read only')):
-            work, done = self.capture_job(self.dialog.update_catalog)
-            done({'updated':True})
-        self.assertIn('음악 자료를 갱신했습니다',self.dialog.status.get())
-        self.assertIn('가사창 멤버 자료 저장 실패',self.dialog.status.get())
-
-    def test_closing_during_catalog_update_cancels_and_ignores_completion(self):
-        with patch('explorer_dialog.refresh_catalog', return_value={'cancelled': True}) as refresh:
-            with patch('explorer_dialog.threading.Thread') as thread:
-                self.dialog.update_catalog()
-                run = thread.call_args.kwargs['target']
-            self.dialog.close();run();self.dialog.poll()
-        self.assertTrue(refresh.call_args.kwargs['cancel'].is_set())
-        self.catalog.reload.assert_not_called()
-        self.assertIsNone(self.app.explorer_dialog)
 
     def test_busy_worker_cannot_launch_a_second_request(self):
         with patch('explorer_dialog.threading.Thread') as thread:
@@ -887,37 +825,28 @@ class ExplorerDialogTests(unittest.TestCase):
         for button in (self.dialog.live_source_button,self.dialog.live_date_source_button,
                        self.dialog.live_setlist_source_button):self.assertEqual(button.cget('state'),'disabled')
 
-    def test_live_update_uses_separate_store_and_refreshes_years_matches_and_scope(self):
-        new={**self.live_events[0],'id':'new-concert','date':'2026-09-02','title':'New Concert'}
-        def reload_events():self.live_catalog.events=[new,*self.live_events]
-        self.live_catalog.reload.side_effect=reload_events
-        self.dialog.live_match_cache['outdated']=[]
-        refresh=Mock(return_value={'updated':True,'cancelled':False,'errors':['one event failed']})
-        with patch.dict('sys.modules',{'live_catalog_update':SimpleNamespace(refresh_live_catalog=refresh)}):
-            work,done=self.capture_job(self.dialog.update_live_catalog)
-            done(work())
-        self.assertEqual(refresh.call_args.args[0],self.directory/'live_catalog.json')
-        self.assertIs(refresh.call_args.kwargs['cancel'],self.dialog.cancel)
-        self.live_catalog.reload.assert_called_once_with()
+    def test_live_update_opens_github_release_dialog(self):
+        self.dialog.live_update_button.invoke()
+        self.app.open_updates.assert_called_once_with()
         self.catalog.reload.assert_not_called()
-        self.assertIn('2026',self.dialog.live_year_combo.cget('values'))
-        self.assertNotIn('outdated',self.dialog.live_match_cache)
-        self.assertIn('공연 3회 · 곡목 3개',self.dialog.live_scope.get())
-        self.assertIn('일부 기록 수집 실패 1건',self.dialog.status.get())
-        self.assertFalse(self.dialog.live_update_active)
+        self.live_catalog.reload.assert_not_called()
 
-    def test_cancelled_live_update_reloads_saved_live_records_without_running_late_callback(self):
-        with patch('explorer_dialog.threading.Thread') as thread:
-            self.dialog.update_live_catalog()
-            run=thread.call_args.kwargs['target']
-        self.dialog.cancel_job()
-        refresh=Mock(return_value={'updated':False,'cancelled':True,'errors':[]})
-        with patch.dict('sys.modules',{'live_catalog_update':SimpleNamespace(refresh_live_catalog=refresh)}):run()
-        self.poll()
-        self.live_catalog.reload.assert_called_once_with()
-        self.assertFalse(self.dialog.live_update_active)
-        self.assertEqual(set(self.dialog.live_tree.get_children()),{'concert-2024','concert-2025'})
-        self.assertEqual(self.dialog.status.get(),'작업을 취소했습니다.')
+    def test_personal_song_json_is_previewed_before_save(self):
+        created={**song('personal:example'),'title':'New Song','artists':['Artist, Jr.'],'personal':True}
+        self.catalog.add_personal_song=Mock(return_value={'song':created,'added':True})
+        self.dialog.add_song_dialog()
+        window=next(child for child in self.dialog.window.winfo_children()
+                    if child.winfo_class()=='Toplevel' and child.title()=='내 사전에 곡 추가')
+        buttons={widget.cget('text'):widget for widget in descendants(window)
+                 if widget.winfo_class()=='TButton'}
+        response='{"title":"New Song","artists":["Artist, Jr."],"series":"shiny"}'
+        with patch.object(window,'clipboard_get',return_value=response):
+            buttons['JSON 붙여넣기'].invoke()
+        self.catalog.add_personal_song.assert_not_called()
+        buttons['저장'].invoke()
+        fields=self.catalog.add_personal_song.call_args.args[0]
+        self.assertEqual((fields['title'],fields['artists'],fields['series']),('New Song',['Artist, Jr.'],'shiny'))
+        self.assertIs(self.dialog.selected_song,created)
 
     def test_song_live_history_does_not_claim_same_recording_version(self):
         self.live_catalog.for_song.return_value = [self.live_events[0]]

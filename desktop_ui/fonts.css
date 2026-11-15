@@ -1,0 +1,28 @@
+@font-face {
+  font-family: "Noto Sans KR";
+  src: url("../resources/fonts/NotoSansKR.ttf") format("truetype");
+  font-weight: 100 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Noto Sans JP";
+  src: url("../resources/fonts/NotoSansJP.ttf") format("truetype");
+  font-weight: 100 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Noto Serif JP";
+  src: url("../resources/fonts/NotoSerifJP.ttf") format("truetype");
+  font-weight: 200 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gowun Dodum";
+  src: url("../resources/fonts/GowunDodum.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "NanumMyeongjo";
+  src: url("../resources/fonts/NanumMyeongjo.ttf") format("truetype");
+  font-display: swap;
+}

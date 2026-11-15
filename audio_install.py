@@ -9,8 +9,19 @@ import sysconfig
 import threading
 import tkinter as tk
 from tkinter import ttk
-from audio_job import ready
-from app_paths import frozen, worker_command, worker_environment
+from audio_job import MODEL_FILES, ready
+from app_paths import frozen, runtime_dir, worker_command, worker_environment
+from optional_runtime import nvidia_driver_available
+
+
+def gpu_upgrade_needed(base):
+    if not nvidia_driver_available():return False
+    runtime = runtime_dir() if frozen() else Path(base)
+    model = runtime / 'models' / 'whisper-medium'
+    packages = runtime / 'python/Lib/site-packages' if frozen() else Path(sysconfig.get_path('purelib'))
+    return (not all((model / name).is_file() for name in MODEL_FILES)
+            or not (packages / 'nvidia/cublas/bin/cublas64_12.dll').is_file()
+            or not (packages / 'nvidia/cudnn/bin/cudnn64_9.dll').is_file())
 
 
 class AudioInstaller:
@@ -60,7 +71,7 @@ class AudioInstaller:
                 else:
                     importlib.invalidate_caches()
                     if self.kind=='audio':ready(self.base)
-                    self.status=('설치 완료 · 가사 연결에서 Spotify 연결을 다시 누르세요.' if self.kind=='browser'
+                    self.status=('설치 완료 · Spotify 로그인을 눌러 계속하세요.' if self.kind=='browser'
                                  else '설치 완료 · 자동 분석을 켜거나 분석 대기를 시작하세요.')
         except Exception as error:
             with self.lock:
@@ -99,18 +110,17 @@ class AudioInstallDialog:
         self.window.protocol('WM_DELETE_WINDOW',self.close)
         self.help=tk.Label(self.window,text='AI 없이도 가사·번역·후리가나, 수동 싱크와 저장된 싱크를 사용할 수 있습니다.\n'
             '재생음을 분석할 때만 아래 버튼으로 설치하세요. API 키는 필요 없습니다.\n'
-            'small 모델 약 486MB 포함 · 새 설치 완료 후 전체 약 1.8GB 예상(환경별 차이).\n'
-            '설치 중에는 정리 전 파일과 다운로드 임시 공간이 별도로 필요합니다.\n'
+            'GPU 실시간 분석은 Whisper medium(약 1.53GB), CPU는 small(약 486MB)을 사용합니다.\n'
+            'NVIDIA 환경에는 GPU 런타임을 함께 설치하며, 설치 중 임시 공간이 추가로 필요합니다.\n'
             'Python 공식 사이트·PyTorch·PyPI·Hugging Face에서 받습니다. 설치된 모델은 다시 받지 않습니다.\n'
             '이 창을 닫아도 설치는 계속됩니다. 취소하려면 설치 취소를 누르세요.',
             justify='left',anchor='w',wraplength=570)
         self.help.grid(row=0,column=0,sticky='ew',padx=12,pady=10)
         if kind=='browser':
-            self.window.title('Spotify 연결 브라우저 · 선택 설치')
-            self.help.configure(text='Spotify 로그인과 웹 가사 연결에 필요한 브라우저 모듈을 설치합니다.\n'
-                'Python 공식 사이트와 PyPI에서 선택 기능을 다운로드합니다. AI 모델은 받지 않습니다.\n'
-                'Microsoft Edge WebView2 Runtime이 필요합니다. 설치 후 Spotify 연결을 다시 누르세요.\n'
-                '저장된 가사·번역·싱크는 설치하지 않아도 사용할 수 있습니다.')
+            self.window.title('Spotify 연결')
+            self.help.configure(text='Spotify에 로그인하려면 브라우저 모듈을 한 번 설치하세요.\n'
+                'Python 공식 사이트와 PyPI에서 다운로드하며 Microsoft Edge WebView2 Runtime이 필요합니다.\n'
+                '사전만 사용하려면 이 창을 닫으세요. 나중에 가사 연결에서 로그인할 수 있습니다.')
         self.status=tk.Label(self.window,justify='left',anchor='w',wraplength=570)
         self.status.grid(row=1,column=0,sticky='ew',padx=12,pady=(0,6))
         frame=tk.Frame(self.window);frame.grid(row=2,column=0,sticky='nsew',padx=12)
@@ -136,6 +146,10 @@ class AudioInstallDialog:
     def start(self):
         self.installer.start();self.refresh()
 
+    def login(self):
+        self.close()
+        self.app.connect_spotify()
+
     def cancel_install(self):
         # Cancelling a package install may need a moment; keep the UI responsive.
         threading.Thread(target=self.installer.cancel,daemon=True).start()
@@ -151,10 +165,21 @@ class AudioInstallDialog:
             else:
                 try:ready(self.installer.base);installed=True
                 except ValueError:pass
-            if installed and status=='설치 전':status='이미 설치되어 있습니다. 추가 다운로드 없이 분석할 수 있습니다.'
+                if installed and gpu_upgrade_needed(self.installer.base):
+                    installed=False
+                    if status=='설치 전':status='CPU 분석 가능 · GPU 실시간 분석용 모델과 런타임을 추가할 수 있습니다.'
+            if installed and status=='설치 전':
+                status=('이미 설치되어 있습니다. Spotify 로그인을 눌러 계속하세요.' if self.kind=='browser'
+                        else '이미 설치되어 있습니다. 추가 다운로드 없이 분석할 수 있습니다.')
         self.status.configure(text=status)
         retry='실패' in status or '취소됨' in status
-        self.download.configure(state='disabled' if running or installed and not retry else 'normal')
+        if self.kind=='browser':
+            can_login=installed and not retry
+            self.download.configure(text='Spotify 로그인' if can_login else '브라우저 다운로드·설치',
+                                    state='disabled' if running else 'normal',
+                                    command=lambda:self.app.safe(self.login if can_login else self.start))
+        else:
+            self.download.configure(state='disabled' if running or installed and not retry else 'normal')
         self.cancel.configure(state='normal' if running else 'disabled')
         if lines!=self.last_lines:
             self.log.configure(state='normal');self.log.delete('1.0','end')

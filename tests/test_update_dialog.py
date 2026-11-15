@@ -33,6 +33,7 @@ class UpdateControllerTests(unittest.TestCase):
                                    services_started=True, update_dialog=None, notify=Mock(), close=Mock())
         self.controller = UpdateController(self.app)
         self.app.update_controller = self.controller
+        self.controller.show_notification = Mock()
         self.addCleanup(self.controller.close)
         self.release = SimpleNamespace(version='9.0.0', tag='v9.0.0', body='Changes', html_url='https://github.com/',
             assets={update_dialog.app_updates.EXE_ASSET_NAME: {}, update_dialog.app_updates.DATA_ASSET_NAME: {}})
@@ -58,23 +59,77 @@ class UpdateControllerTests(unittest.TestCase):
         download.assert_not_called()
         self.assertEqual(self.controller.release, self.release)
         self.assertTrue(self.controller.receipt.exists())
-        self.app.notify.assert_called_once()
+        self.controller.show_notification.assert_called_once()
 
-    def test_automatic_check_is_frozen_services_only_and_once_per_day(self):
+    def test_automatic_check_runs_in_source_and_exe_even_with_old_receipt(self):
+        update_dialog.atomic_json(self.controller.receipt, {'checked_at': time.time()})
         with patch.object(update_dialog, 'frozen', return_value=False):
-            self.controller.schedule_automatic()
-        self.assertIsNone(self.controller.auto_after)
-        with patch.object(update_dialog, 'frozen', return_value=True):
             self.app.services_started = False
             self.controller.schedule_automatic()
             self.assertIsNone(self.controller.auto_after)
             self.app.services_started = True
-            update_dialog.atomic_json(self.controller.receipt, {'checked_at': time.time()})
-            self.controller.schedule_automatic()
-            self.assertIsNone(self.controller.auto_after)
-            update_dialog.atomic_json(self.controller.receipt, {'checked_at': time.time() - 86401})
             self.controller.schedule_automatic()
             self.assertIsNotNone(self.controller.auto_after)
+
+    def test_independent_deduplication_and_applied_digest(self):
+        digest = 'ab' * 32
+        self.release.assets[update_dialog.app_updates.DATA_ASSET_NAME] = {'digest': 'sha256:' + digest, 'id': 123}
+        self.controller.notify_discoveries(self.release)
+        self.controller.notify_discoveries(self.release)
+        self.assertEqual(self.controller.show_notification.call_count, 1)
+        self.assertIn('프로그램', self.controller.show_notification.call_args.args[0])
+        self.assertIn('자료', self.controller.show_notification.call_args.args[0])
+        self.release.version = '10.0.0'
+        self.controller.notify_discoveries(self.release)
+        self.assertEqual(self.controller.show_notification.call_count, 2)
+        self.assertNotIn('자료', self.controller.show_notification.call_args.args[0])
+        self.release.assets[update_dialog.app_updates.DATA_ASSET_NAME]['digest'] = 'sha256:' + 'cd' * 32
+        update_dialog.atomic_json(self.app.store.directory / update_dialog.RECEIPTS,
+                                  {'version': 1, 'applied': {'cd' * 32: {}}})
+        self.controller.notify_discoveries(self.release)
+        self.assertEqual(self.controller.show_notification.call_count, 2)
+        self.release.assets[update_dialog.app_updates.DATA_ASSET_NAME]['digest'] = 'sha256:' + 'ef' * 32
+        self.controller.notify_discoveries(self.release)
+        self.assertEqual(self.controller.show_notification.call_count, 3)
+        self.assertIn('자료', self.controller.show_notification.call_args.args[0])
+        self.assertNotIn('프로그램', self.controller.show_notification.call_args.args[0])
+
+    def test_notifications_persist_across_launches_and_old_receipt_is_migrated(self):
+        update_dialog.atomic_json(self.controller.receipt, {'checked_at': 123})
+        self.controller.notify_discoveries(self.release)
+        self.controller.close()
+        another = UpdateController(self.app)
+        self.addCleanup(another.close)
+        another.show_notification = Mock()
+        another.notify_discoveries(self.release)
+        another.show_notification.assert_not_called()
+        receipt = update_dialog.read_json(another.receipt, {})
+        self.assertEqual(receipt['checked_at'], 123)
+
+    def test_data_fallback_identity_and_missing_program_asset(self):
+        self.release.assets.pop(update_dialog.app_updates.EXE_ASSET_NAME)
+        self.release.assets[update_dialog.app_updates.DATA_ASSET_NAME] = {'id': 12}
+        self.controller.notify_discoveries(self.release)
+        self.controller.notify_discoveries(self.release)
+        self.assertEqual(self.controller.show_notification.call_count, 1)
+        self.assertNotIn('프로그램', self.controller.show_notification.call_args.args[0])
+        self.release.assets[update_dialog.app_updates.DATA_ASSET_NAME]['id'] = 13
+        self.controller.notify_discoveries(self.release)
+        self.assertEqual(self.controller.show_notification.call_count, 2)
+
+    def test_automatic_waits_for_manual_check_without_duplicate(self):
+        waiting = threading.Event()
+        self.addCleanup(waiting.set)
+        with patch.object(update_dialog.app_updates, 'check_release',
+                          side_effect=lambda:(waiting.wait(2), self.release)[1]) as check:
+            self.assertTrue(self.controller.check())
+            self.controller.automatic_check()
+            self.assertIsNotNone(self.controller.auto_after)
+            waiting.set()
+            self.finish()
+            self.controller.automatic_check()
+        self.assertEqual(check.call_count, 1)
+        self.controller.show_notification.assert_called_once()
 
     def test_data_stages_without_program_install_or_app_close(self):
         self.controller.release = self.release

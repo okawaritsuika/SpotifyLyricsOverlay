@@ -159,11 +159,15 @@ class BatchTranslationDialogTests(unittest.TestCase):
         self.dialog.apply_reply('REPLY: saved')
         result=self.dialog.result_status.get();saved=self.dialog.saved_status.get()
         self.dialog.move(1)
-        with patch.object(self.dialog.window,'clipboard_clear'),patch.object(self.dialog.window,'clipboard_append'):
+        with patch.object(self.dialog.window,'clipboard_clear'), \
+                patch.object(self.dialog.window,'clipboard_append') as append:
             self.dialog.copy_prompt()
+        self.clipboard.return_value=append.call_args.args[0]
         self.dialog.prepare();self.wait_prepared()
+        self.poll()
         self.assertEqual(self.dialog.result_status.get(),result)
         self.assertEqual(self.dialog.saved_status.get(),saved)
+        self.app.apply_translation_reply.assert_called_once_with('REPLY: saved')
 
     def test_reopened_dialog_shows_persisted_total_before_any_new_answer(self):
         self.dialog.close()

@@ -16,6 +16,7 @@ class SyncReuseTests(unittest.TestCase):
     provider=background.BackgroundOverlayTests.provider
     receive=background.BackgroundOverlayTests.receive
     translations=background.BackgroundOverlayTests.translations
+    finish_merge=background.BackgroundOverlayTests.finish_merge
 
     def enable_fake_audio(self):
         self.app.auto_analyzer.enabled=True
@@ -43,6 +44,7 @@ class SyncReuseTests(unittest.TestCase):
         value=self.provider(source='LyricsPlus',times=[11,21,31])
         with patch.object(self.app.lyricsplus_job,'receive',return_value=(self.playback.key,value)):
             self.app.receive_lyricsplus({'kind':'completed'})
+        self.finish_merge()
         cached=self.app.lyric_cache.load(self.playback)
         self.assertEqual(cached['direct']['source'],'LyricsPlus')
         self.app.set_playback(replace(self.playback,title='Other Song'))
@@ -80,16 +82,20 @@ class SyncReuseTests(unittest.TestCase):
         with patch.object(self.app.alsong_job,'receive',return_value=(self.playback.key,value)) as alsong, \
                 patch.object(self.app.lyricsplus_job,'receive') as community:
             self.app.receive_lyricsplus({'provider':'알송'})
+        self.finish_merge()
         alsong.assert_called_once();community.assert_not_called()
         self.assertEqual(self.app.lyric_cache.load(self.playback)['direct']['source'],'ALSong')
 
     def test_alsong_annotations_fill_raw_spotify_without_wiki_and_keep_spotify_clock(self):
-        self.receive();originals=tuple(line.original for line in self.app.display_lines)
+        self.app.queue_provider_lyrics(self.playback.key,self.provider())
+        self.finish_merge()
+        originals=tuple(line.original for line in self.app.display_lines)
         spotify=self.app.direct_result
         self.assertEqual(self.app.translated_count,0)
         value=self.alsong_annotations()
         with patch.object(self.app.alsong_job,'receive',return_value=(self.playback.key,value)):
             self.app.receive_lyricsplus({'provider':'알송'})
+        self.finish_merge()
         self.assertEqual(self.app.display_lines,value['lines'])
         self.assertEqual(tuple(line.original for line in self.app.song.lines),originals)
         self.assertEqual(self.app.translated_count,3)
@@ -275,6 +281,7 @@ class SyncReuseTests(unittest.TestCase):
         self.app.receive_background_lyrics(job,{'kind':'lyrics','key':key,
             'lines':[{'text':line.original,'time':stamp} for line,stamp in
                      zip(self.provider()['lines'],[10,20,30])]})
+        self.finish_merge()
         self.assertEqual(self.app.direct_result[2]['source'],'Spotify')
         self.assertEqual(self.app.direct_times(),[10,20,30])
         self.app.set_playback(self.playback)

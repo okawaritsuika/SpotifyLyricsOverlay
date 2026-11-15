@@ -1,0 +1,117 @@
+{"groups": [
+  {
+    "name": "ゆめぱしー",
+    "ko": "유메파시",
+    "aliases": [],
+    "category": "duet",
+    "members": ["倉本千奈", "篠澤広"],
+    "source_urls": ["https://gakuen-label.idolmaster-official.jp/discography/25y330hhop1l", "https://gakuen-label.idolmaster-official.jp/news/duetsongcollection"],
+    "recording_ids": ["mb:3e31cac3-a17d-4079-9543-6e7185f6fcaa", "spotify:31sJqtDRiWtZboNN7aStba", "official:gakuen-25y330hhop1l:03", "official:gakuen-25y330hhop1l:04", "official:gakuen-25y330hhop1l:05"]
+  },
+  {
+    "name": "REVERSI",
+    "ko": "리버시",
+    "aliases": [],
+    "category": "duet",
+    "members": ["葛城リーリヤ", "紫雲清夏"],
+    "source_urls": ["https://gakuen-label.idolmaster-official.jp/discography/m3jtcangs", "https://gakuen-label.idolmaster-official.jp/news/duetsongcollection"],
+    "recording_ids": ["mb:dbdb1c43-6ae2-4548-aae2-ca266f3ecb86", "spotify:6g5dIRuMs9bDU6GqJ4NTog", "official:gakuen-m3jtcangs:03", "official:gakuen-m3jtcangs:04", "official:gakuen-m3jtcangs:05"]
+  },
+  {
+    "name": "RippleSign",
+    "ko": "리플 사인",
+    "aliases": ["Ripple Sign", "Ripple_Sign"],
+    "category": "duet",
+    "members": ["有村麻央", "姫崎莉波"],
+    "source_urls": ["https://gakuen-label.idolmaster-official.jp/discography/8czq78i_2m", "https://idolmaster-official.jp/news/01_18708.html"],
+    "recording_ids": ["mb:2c6e938b-a7d8-42f0-adc7-21084a216d3a", "spotify:4t1uEf1r8HXFBmpPPY6dfj", "official:gakuen-8czq78i_2m:03", "official:gakuen-8czq78i_2m:04", "official:gakuen-8czq78i_2m:05"]
+  },
+  {
+    "name": "乖轟",
+    "ko": "카이고",
+    "aliases": ["Kaigou", "かいごう"],
+    "category": "duet",
+    "members": ["雨夜燕", "有村麻央"],
+    "source_urls": ["https://idolmaster-official.jp/news/01_20235.html", "https://x.com/gkmas_official/status/2119021555623796951"],
+    "live_performances": [["imasdb-c561f5d0f1922cdc7337", "アンバランス"], ["imasdb-72006e30af7f25dc9ed3", "アンバランス"]]
+  },
+  {
+    "category": "duet",
+    "members": ["藤田ことね", "十王星南"],
+    "source_urls": ["https://gakuen-label.idolmaster-official.jp/discography/g9um5666d", "https://gakuen-label.idolmaster-official.jp/news/duetsongcollection2"],
+    "recording_ids": ["official:gakuen-g9um5666d:01", "spotify:1SM6CStXRThbirQwj5jmA7"]
+  },
+  {
+    "category": "duet",
+    "members": ["月村手毬", "秦谷美鈴"],
+    "source_urls": ["https://gakuen-label.idolmaster-official.jp/discography/xnko6j7m21", "https://gakuen-label.idolmaster-official.jp/news/duetsongcollection2"],
+    "recording_ids": ["official:gakuen-xnko6j7m21:01", "spotify:3kF8fsAJ7lqtDgfSaV0uCL"]
+  },
+  {
+    "category": "duet",
+    "members": ["花海咲季", "花海佑芽"],
+    "source_urls": ["https://gakuen-label.idolmaster-official.jp/discography/vt_7t1w_7", "https://gakuen-label.idolmaster-official.jp/news/duetsongcollection2"],
+    "recording_ids": ["official:gakuen-vt_7t1w_7:01", "spotify:7r2JOJT2E5VJcGPOJSwJhU"]
+  },
+  {
+    "name": "1年1組",
+    "ko": "1학년 1반",
+    "category": "class",
+    "members": ["花海咲季", "月村手毬", "藤田ことね", "葛城リーリヤ", "紫雲清夏"],
+    "source_urls": ["https://nex-tone.link/xZRiH8PKn", "https://gakuen-label.idolmaster-official.jp/discography/4kxxmpl03w7"],
+    "recording_ids": ["mb:dca16134-ac6d-45e4-843e-8a88281de525", "spotify:5ObqH1i1DMAeceTwCL8ksS"]
+  },
+  {
+    "name": "1年2組",
+    "ko": "1학년 2반",
+    "category": "class",
+    "members": ["倉本千奈", "篠澤広", "秦谷美鈴", "花海佑芽"],
+    "source_urls": ["https://nex-tone.link/2KD5YBBkY", "https://gakuen-label.idolmaster-official.jp/discography/4kxxmpl03w7"],
+    "recording_ids": ["spotify:1dnskxKfpDyg98xUEQfszU"]
+  },
+  {
+    "name": "3年1組",
+    "ko": "3학년 1반",
+    "category": "class",
+    "members": ["雨夜燕", "有村麻央", "十王星南", "姫崎莉波"],
+    "source_urls": ["https://nex-tone.link/yPHnJWRCA", "https://gakuen-label.idolmaster-official.jp/discography/4kxxmpl03w7"],
+    "recording_ids": ["mb:c1203417-705e-4f24-a288-f43398e0ed89", "spotify:1c3ycRtEphamyDYvD0q3wQ"]
+  },
+  {
+    "category": "liveDuet",
+    "members": ["月村手毬", "十王星南"],
+    "source_urls": ["https://www.gamer.ne.jp/news/202505310029/"],
+    "live_performances": [["gakuen-1st-harmony-day1", "アイヴイ"]]
+  },
+  {
+    "category": "liveDuet",
+    "members": ["有村麻央", "秦谷美鈴"],
+    "source_urls": ["https://www.gamer.ne.jp/news/202505310029/"],
+    "live_performances": [["gakuen-1st-harmony-day1", "Feel Jewel Dream"]]
+  },
+  {
+    "category": "liveDuet",
+    "members": ["篠澤広", "葛城リーリヤ"],
+    "source_urls": ["https://www.gamer.ne.jp/news/202505310029/"],
+    "live_performances": [["gakuen-1st-harmony-day1", "コントラスト"]]
+  },
+  {
+    "category": "liveDuet",
+    "members": ["十王星南", "花海咲季"],
+    "source_urls": ["https://www.famitsu.com/article/202506/43540"],
+    "live_performances": [["imasdb-415b2e3a79c8a934cb59", "Our Chant"]]
+  },
+  {
+    "category": "liveDuet",
+    "members": ["篠澤広", "秦谷美鈴"],
+    "source_urls": ["https://www.lisani.jp/0000292416/2/"],
+    "live_performances": [["imasdb-c12a32acd4e943d55d25", "ENDLESS DANCE"]]
+  },
+  {
+    "category": "liveDuet",
+    "members": ["花海咲季", "雨夜燕"],
+    "source_urls": ["https://www.gamer.ne.jp/news/202603010012/", "https://gakuen-label.idolmaster-official.jp/discography/hapfxhb3mtfj"],
+    "live_performances": [["imasdb-eb551e017387d1c2795b", "Howling over the World"]],
+    "recording_ids": ["mb:2f248a08-123e-40ec-9206-2a46bc45203e"]
+  }
+]}

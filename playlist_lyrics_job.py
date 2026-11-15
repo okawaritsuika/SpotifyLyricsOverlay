@@ -70,6 +70,12 @@ def coverage(value):
             'complete': bool(lines and translated == len(lines) and timed == len(lines))}
 
 
+def _clock_signature(direct):
+    if not direct:return None
+    return (direct['source'], direct['provider_id'], tuple(line.original for line in direct['lines']),
+            direct['times'], _clock_signature(direct.get('fallback')))
+
+
 class PlaylistLyricsJob:
     def __init__(self, app):
         self.app = app
@@ -239,7 +245,10 @@ class PlaylistLyricsJob:
         for artist in (track['artists'][0], ', '.join(track['artists'])):
             playback = Playback(title=track['title'], artist=artist, album=track['album'], duration=track['duration'])
             cached = self.app.lyric_cache.load(playback)
-            if cached and self.store.save(track, cached['lines'], cached.get('direct'), sources=['existing_local_cache']):
+            provenance = cached.get('merge') if cached else None
+            merge = {'snapshots': provenance['snapshots'], 'merge_rows': provenance['rows']} if provenance else {}
+            if cached and self.store.save(track, cached['lines'], cached.get('direct'),
+                                          sources=['existing_local_cache'], **merge):
                 return self.store.load(track['id'])
         return None
 
@@ -307,7 +316,7 @@ class PlaylistLyricsJob:
                                       old.korean if old.korean.strip() else new.korean)
                                  for old,new in zip(existing['lines'],rows))
                 if (not saved or tuple(saved['lines']) != expected
-                        or saved['direct'] != existing['direct']):raise ValueError()
+                        or _clock_signature(saved['direct']) != _clock_signature(existing['direct'])):raise ValueError()
                 counted = coverage(saved)
                 if counted['complete']:
                     self.value.setdefault('enrichment_pending', {}).pop(identifier, None)
@@ -330,12 +339,15 @@ class PlaylistLyricsJob:
             if request.get('reviewed_complete') and coverage(self.store.load(request['track']['id']))['complete']:
                 self.enrichment_active = None
                 continue
+            track = request['track']
+            if result and result.get('lines'):
+                merge = {'snapshots': result['snapshots'], 'merge_rows': result['rows']} if result.get('snapshots') else {}
+                if not self.store.save(track, result['lines'], result.get('direct'),
+                                       sources=result.get('sources', ()), **merge):
+                    if not error:
+                        self._error('save_failed', enrichment=True);continue
             if error:
                 self._error(error[0], error[1], enrichment=True);continue
-            track = request['track']
-            if result.get('lines'):
-                if not self.store.save(track, result['lines'], result.get('direct'), sources=result.get('sources', ())):
-                    self._error('save_failed', enrichment=True);continue
             counted = coverage(self.store.load(track['id']))
             outcome = {
                 'status': 'complete' if counted['complete'] else 'incomplete', **counted,
@@ -392,7 +404,7 @@ class PlaylistLyricsJob:
             elif scoped:self.enrichment_status = '우선 가사 보완 · 실행 가능한 대상 없음'
             return
         counted = coverage(existing)
-        if counted['complete']:
+        if counted['complete'] and existing.get('snapshots'):
             pending.pop(track['id'], None)
             done[track['id']] = {'status': 'existing', **counted}
             self.save()
@@ -405,8 +417,8 @@ class PlaylistLyricsJob:
                 result = complete_track(Path(__file__).parent, self.directory, track, existing, self.cancel)
                 self.events.put((request, result, None))
             except Exception as error:
-                self.events.put((request, None, (getattr(error, 'code', type(error).__name__),
-                                                getattr(error, 'retry_after', 0))))
+                self.events.put((request, getattr(error, 'partial', None),
+                                 (getattr(error, 'code', type(error).__name__), getattr(error, 'retry_after', 0))))
         threading.Thread(target=enrich, daemon=True, name='playlist-lyric-sources').start()
         self.enrichment_status = f"번역·싱크 보완 · {track['title']}"
         self.save()
@@ -468,7 +480,10 @@ class PlaylistLyricsJob:
             return
         existing = self._existing(track)
         counted = coverage(existing)
-        if counted['complete'] or counted['lines'] and counted['timed'] == counted['lines']:
+        direct = existing.get('direct') if existing else None
+        spotify_record = (direct and direct['source'] == 'Spotify'
+                          or existing and any(value['source'] == 'Spotify' for value in existing.get('snapshots', ())))
+        if spotify_record and counted['lines'] and counted['timed'] == counted['lines']:
             done[track['id']] = {'status': 'existing', **counted}
             self.save()
             return

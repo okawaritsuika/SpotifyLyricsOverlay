@@ -38,8 +38,8 @@ class UITests(unittest.TestCase):
         self.app.receive_timing(song,result,'',context)
 
     def test_track_change_clears_previous_lyric(self):
+        self.store.save_timing(self.a,{'times':[0,20,40,60],'offset':0,'source':'직접 기록'})
         self.playback(self.a)
-        self.app.move(1)
         self.assertEqual(self.app.displayed_index(),0)
         self.app.set_playback(Playback('Unregistered','other','',5,120,False,time.monotonic()))
         self.assertIsNone(self.app.song)
@@ -50,8 +50,12 @@ class UITests(unittest.TestCase):
             self.app.volume_button.invoke()
             panel=self.app.volume_popup
             self.assertIsNotNone(panel)
+            self.assertTrue(panel.visible)
+            self.app.volume_button.invoke()
+            self.assertFalse(panel.visible)
             self.app.volume_button.invoke()
             self.assertIs(self.app.volume_popup,panel)
+            self.assertTrue(panel.visible)
             self.app.close()
             self.assertTrue(panel.closed)
 
@@ -130,8 +134,7 @@ class UITests(unittest.TestCase):
         self.assertEqual(self.app.displayed_index(),2)
         self.assertEqual(self.store.timing(self.a)['times'],[None,10,20,None])
         self.assertFalse(self.app.follow.get())
-        self.assertIn('수동 진행',self.app.mode_label.cget('text'))
-        self.assertNotIn('미리보기',self.app.mode_label.cget('text'))
+        self.assertEqual(self.app.mode_label.cget('text'),'')
         self.playback(self.a,50)
         self.assertEqual(self.app.displayed_index(),2)
 
@@ -167,11 +170,11 @@ class UITests(unittest.TestCase):
         with self.assertRaises(ValueError):self.app.save_selected_time()
         self.assertEqual(self.store.timing(self.a),before)
 
-    def test_estimates_are_labeled_and_never_saved_as_measured_times(self):
+    def test_estimates_are_never_saved_as_measured_times(self):
         self.app.use_estimate.set(True)
         self.playback(self.a,50)
         self.assertIsNotNone(self.app.displayed_index())
-        self.assertIn('추정',self.app.mode_label.cget('text'))
+        self.assertTrue(self.app.effective_times()[1])
         self.assertEqual(self.store.timing(self.a)['times'],[None]*4)
         self.app.use_estimate.set(False)
         self.app.render()
@@ -206,16 +209,15 @@ class UITests(unittest.TestCase):
         self.assertTrue(self.app.tools.winfo_ismapped())
         self.assertEqual(self.store.timing(self.a),original)
 
-    def test_subtitle_badge_distinguishes_estimates_manual_and_saved_sync(self):
+    def test_subtitle_clock_is_independent_of_sync_source(self):
         self.playback(self.a,32)
         self.app.use_estimate.set(True);self.app.render()
-        self.assertIn('추정 싱크',self.app.playback_badge.cget('text'))
-        self.assertIn('00:32 / 03:00',self.app.playback_badge.cget('text'))
+        self.assertEqual(self.app.playback_badge.cget('text'),'00:32 / 03:00')
         self.app.move(1)
-        self.assertIn('수동 진행',self.app.playback_badge.cget('text'))
+        self.assertEqual(self.app.playback_badge.cget('text'),'00:32 / 03:00')
         self.app.timing={'times':[0,20,40,60],'offset':0,'source':'직접 기록'}
         self.app.resume_follow()
-        self.assertIn('저장 싱크',self.app.playback_badge.cget('text'))
+        self.assertEqual(self.app.playback_badge.cget('text'),'00:32 / 03:00')
         self.app.chrome_available=True
         self.root.deiconify();self.root.update()
         self.app.toggle_chrome();self.root.update()
@@ -262,15 +264,19 @@ class UITests(unittest.TestCase):
         finally:
             self.root.tk.call('tk','scaling',scale)
 
-    def test_header_does_not_hide_when_recovery_shortcut_is_unavailable(self):
+    def test_header_hides_without_recovery_shortcut_and_restores_from_menu(self):
+        self.app.chrome_available=False
         self.app.toggle_chrome()
+        self.assertTrue(self.root.overrideredirect())
+        item=next(item for item in self.app.menu_items() if item and item['label']=='헤더 숨기기 / 복원')
+        item['command']()
         self.assertFalse(self.root.overrideredirect())
 
-    def test_saved_subtitle_mode_waits_for_registered_recovery_key(self):
+    def test_saved_subtitle_mode_restores_without_registered_recovery_key(self):
         self.app.settings['borderless']=True
         self.app.messages.put(('hotkeys',[7]))
         self.app.tick()
-        self.assertFalse(self.root.overrideredirect())
+        self.assertTrue(self.root.overrideredirect())
         self.app.messages.put(('hotkeys',[]))
         self.app.tick()
         self.assertTrue(self.root.overrideredirect())
@@ -342,9 +348,7 @@ class UITests(unittest.TestCase):
                     line_height=int(self.root.tk.call('font','metrics',label.cget('font'),'-linespace'))
                     self.assertLessEqual(box[3]-box[1],line_height*2+8)
             self.assertLessEqual(previous_bottom,self.root.winfo_rooty()+self.root.winfo_height())
-        self.assertEqual(heights[0],heights[3])
-        self.assertEqual(heights[0],heights[5])
-        self.assertEqual(heights[1],heights[4])
+        self.assertEqual(len(set(heights)),1)
 
     def test_late_network_result_does_not_switch_song_or_overwrite_manual_edit(self):
         self.playback(self.b)
@@ -392,18 +396,22 @@ class UITests(unittest.TestCase):
         self.assertEqual(self.app.displayed_index(),1)
         self.app.resume_follow()
         self.assertEqual(self.app.displayed_index(),1)
-        self.playback(self.a,20.9)
+        self.playback(self.a,20.8)
         self.assertEqual(self.app.displayed_index(),0)
+        self.playback(self.a,20.9)
+        self.assertEqual(self.app.displayed_index(),1)
+        self.assertEqual(self.app.displayed_index(advance=False),0)
 
-    def test_conflicting_end_key_keeps_saved_manual_times_and_selection(self):
+    def test_conflicting_end_key_keeps_saved_manual_times_and_advances_selection(self):
         self.store.save_timing(self.a,{'times':[10,20,30,40],'offset':0,'source':'직접 기록'})
         self.playback(self.a,35)
         self.app.manual_index=0;self.app.follow.set(False);self.app.cursor=0
         before=self.store.timing(self.a)
-        with self.assertRaises(ValueError):self.app.stamp()
+        self.app.stamp()
         self.assertEqual(self.store.timing(self.a),before)
-        self.assertEqual(self.app.displayed_index(),0)
-        self.assertEqual(self.app.cursor,0)
+        self.assertEqual(self.app.displayed_index(),1)
+        self.assertEqual(self.app.cursor,1)
+        self.assertIn('충돌',self.app.error_notice[0])
 
     def test_small_overlay_and_editor_keep_controls_inside_window(self):
         self.playback(self.a)
@@ -451,11 +459,13 @@ class UITests(unittest.TestCase):
             self.assertEqual(self.app.play_pause_button.cget('state'),'disabled')
             self.app.messages.put(('media_playback',('play',True,'재생 요청 완료')))
             self.app.tick()
-            self.assertEqual(self.app.play_pause_button.cget('text'),'재생')
+            self.assertEqual(self.app.play_pause_button.cget('image'),str(self.app.transport_images['play']))
             self.assertEqual(self.app.timing,timing)
             self.assertEqual(self.app.displayed_index(),index)
             from dataclasses import replace
             self.app.set_playback(replace(self.app.playback,playing=True,captured=time.monotonic()))
+            self.app.render()
+            self.assertEqual(self.app.play_pause_button.cget('image'),str(self.app.transport_images['pause']))
             self.app.play_pause_button.invoke()
             self.assertEqual(control.call_args.args,('pause',))
             self.app.messages.put(('media_playback',('pause',False,'Spotify 일시정지 실패')))
@@ -492,8 +502,9 @@ class UITests(unittest.TestCase):
         self.assertLessEqual(self.app.transport_notice.winfo_rooty()+self.app.transport_notice.winfo_height(),self.root.winfo_rooty()+self.root.winfo_height())
         self.assertEqual(self.root.winfo_height(),height)
         previous=self.app.previous_track_button;following=self.app.next_track_button
-        self.assertLessEqual(previous.winfo_rootx()+previous.winfo_width(),self.app.lyric_frame.winfo_rootx())
-        self.assertGreaterEqual(following.winfo_rootx(),self.app.lyric_frame.winfo_rootx()+self.app.lyric_frame.winfo_width())
+        self.assertGreaterEqual(previous.winfo_rootx(),self.root.winfo_rootx()+10)
+        self.assertLessEqual(following.winfo_rootx()+following.winfo_width(),
+                             self.root.winfo_rootx()+self.root.winfo_width()-10)
         self.assertLessEqual(previous.winfo_height(),24)
 
     def test_rejected_track_request_keeps_buttons_available(self):
@@ -524,11 +535,15 @@ class UITests(unittest.TestCase):
             self.app.track_start_button.invoke()
             self.assertEqual(seek.call_args.args,('first',self.app.playback.key))
 
-    def test_seek_buttons_require_timeline_and_failures_keep_manual_selection(self):
+    def test_seek_buttons_require_timeline_and_failure_keeps_follow_and_timing(self):
         for button in (self.app.track_start_button,self.app.track_end_button):
             self.assertEqual(button.cget('state'),'disabled')
-        self.playback(self.a);self.app.move(1)
-        selected=self.app.displayed_index()
+        self.playback(self.a)
+        before=self.store.timing(self.a);selected=self.app.displayed_index()
+        self.app.move(1)
+        self.assertTrue(self.app.follow.get())
+        self.assertEqual(self.store.timing(self.a),before)
+        self.assertEqual(self.app.displayed_index(),selected)
         with patch.object(self.app.monitor,'request_seek',return_value=False):
             self.app.track_start_button.invoke()
             self.assertIsNone(self.app.pending_seek)
@@ -538,20 +553,27 @@ class UITests(unittest.TestCase):
             self.app.messages.put(('media_seek',('first',False,'재생 위치 이동 실패')))
             self.app.tick()
         self.assertEqual(self.app.displayed_index(),selected)
-        self.assertFalse(self.app.follow.get())
+        self.assertTrue(self.app.follow.get())
+        self.assertEqual(self.store.timing(self.a),before)
         self.assertIsNone(self.app.pending_seek)
         self.assertIn('실패',self.app.transport_notice.cget('text'))
 
-    def test_old_seek_completion_does_not_change_new_track_selection(self):
+    def test_old_seek_completion_does_not_change_new_track_follow_or_timing(self):
         self.playback(self.a)
         with patch.object(self.app.monitor,'request_seek',return_value=True):
             self.app.track_end_button.invoke()
-        self.playback(self.b);self.app.move(1)
+        self.playback(self.b)
+        selected=self.app.displayed_index();before=self.store.timing(self.b)
+        self.app.move(1)
+        self.assertTrue(self.app.follow.get())
+        self.assertEqual(self.store.timing(self.b),before)
+        self.assertEqual(self.app.displayed_index(),selected)
         self.app.messages.put(('media_seek',('last',True,'이전 곡의 완료 안내')))
         self.app.tick()
         self.assertEqual(self.app.song,self.b)
-        self.assertFalse(self.app.follow.get())
-        self.assertEqual(self.app.displayed_index(),0)
+        self.assertTrue(self.app.follow.get())
+        self.assertEqual(self.app.displayed_index(),selected)
+        self.assertEqual(self.store.timing(self.b),before)
         self.assertEqual(self.app.transport_notice.cget('text'),'')
         self.assertEqual(self.app.track_end_button.cget('state'),'normal')
 
@@ -560,7 +582,8 @@ class UITests(unittest.TestCase):
         self.app.chrome_available=True;self.app.toggle_chrome();self.root.deiconify()
         buttons=(self.app.previous_track_button,self.app.track_start_button,
                  self.app.track_end_button,self.app.next_track_button)
-        self.assertEqual([button.cget('text') for button in buttons],['«','‹','›','»'])
+        self.assertEqual([button.cget('image') for button in buttons],
+                         [str(self.app.transport_images[kind]) for kind in ('previous','first','last','next')])
         for width in (560,1040):
             self.root.geometry(f'{width}x210+10+30');self.root.update();self.root.update()
             frame=self.app.lyric_frame
@@ -666,8 +689,6 @@ class UITests(unittest.TestCase):
             self.assertLessEqual(artist.winfo_rooty()+artist.winfo_height(),lyrics.winfo_rooty())
             self.assertGreater(artist.winfo_rooty(),title.winfo_rooty())
             self.assertEqual(lyrics.winfo_width(),width-44-2*LYRIC_GUTTER)
-            # The always-visible analysis row adds one line below the lyrics.
-            self.assertTrue(self.app.analysis_badge.winfo_ismapped())
             self.assertLessEqual(self.root.winfo_height(),290)
             self.app.update_track_title();self.root.update()
             self.assertEqual(title.grid_info()['row'],0)
@@ -706,7 +727,7 @@ class UITests(unittest.TestCase):
                 items=lyric.find_withtag('lyric')
                 if lyric.cget('text'):
                     self.assertEqual(len(items),9)
-                    self.assertEqual({lyric.itemcget(item,'fill') for item in items[:-1]},{'#090b10'})
+            self.assertEqual({lyric.itemcget(item,'fill') for item in items[:-1]},{'#090b10'})
         self.app.set_playback(Playback('Other','Unknown Artist','Album',12,180,False,time.monotonic()))
         self.root.update();self.root.update()
         self.assertEqual(self.app.track_artist_label.cget('outline_spans'),())

@@ -126,7 +126,7 @@ def check_release():
         if not isinstance(item, dict) or item.get('name') not in ASSET_LIMITS:continue
         name = item['name']
         if name in assets:raise UpdateError('동일한 업데이트 파일이 여러 개 있습니다.')
-        assets[name] = {key: item.get(key) for key in ('name', 'browser_download_url', 'size', 'digest')}
+        assets[name] = {key: item.get(key) for key in ('name', 'browser_download_url', 'size', 'digest', 'id')}
     release = Release(version, tag, value['html_url'], str(value.get('body') or '')[:100000], assets)
     for name in assets:_asset(release, name)
     return release

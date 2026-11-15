@@ -53,6 +53,20 @@ class HotkeyInputScopeTests(unittest.TestCase):
             self.assertEqual(self.hotkeys.messages.get_nowait(),('action','next'))
             self.assertTrue(self.hotkeys.messages.empty())
 
+    def test_developer_arrows_reach_both_overlay_surfaces(self):
+        backdrop=fixtures.Window(11)
+        self.hotkeys.register_window(backdrop)
+        self.hotkeys.developer_input_windows=(self.window,backdrop)
+        for handle in (1010,1011):
+            self.user.GetForegroundWindow.return_value=handle
+            for key in range(0x25,0x29):
+                self.install(key)
+                self.assertEqual([self.key(key),self.key(key,False)],[77,77])
+                self.assertTrue(self.hotkeys.messages.empty())
+        self.hotkeys.developer_input_windows=()
+        self.install()
+        self.assertEqual(self.key(),1)
+
     def test_modified_arrows_keep_actions_and_keyup_after_modifier_release(self):
         self.focus_input()
         for modifier,mask in ((0xA2,2),(0xA1,4),(0xA4,1),(0x5B,8)):

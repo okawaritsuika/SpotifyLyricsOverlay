@@ -136,7 +136,7 @@ class ReviewedMetadataTests(unittest.TestCase):
             sources.enrich_reviewed_releases([item])
             self.assertEqual(item['releases'], releases)
 
-    def test_four_reviewed_missing_memberships_require_exact_artist_identity(self):
+    def test_five_reviewed_missing_memberships_require_exact_artist_identity(self):
         checked = 0
         for entry in self.reviews['entries']:
             for row in entry['recordings']:
@@ -155,7 +155,22 @@ class ReviewedMetadataTests(unittest.TestCase):
                 item = deepcopy(original)
                 sources.enrich_reviewed_releases([item])
                 self.assertTrue(any(release['id'] == entry['release_id'] for release in item['releases']))
-        self.assertEqual(checked, 4)
+        self.assertEqual(checked, 5)
+
+    def test_endless_tour_original_album_restores_full_trio_evidence(self):
+        item = deepcopy(self.raw_by_id['mb:541c4ba8-da57-49f3-a495-c56f9c3b082e'])
+        original = deepcopy(item)
+        sources.enrich_reviewed_releases([item])
+        release = next(row for row in item['releases'] if row['title'] == 'ENDLESS TOUR')
+        self.assertEqual(release['id'], '34bb554e-f765-418e-a320-e488355fed31')
+        self.assertEqual(release['date'], '2020-04-29')
+        self.assertEqual(release['date_source_url'], 'https://www.lantis.jp/imas/release_LACM-14961.html')
+        self.assertEqual(item['artists'], original['artists'])
+        self.assertEqual(item['performer_ids'], ['imas:Kasuga_Mirai', 'imas:Mogami_Shizuka', 'imas:Hakozaki_Serika'])
+        self.assertEqual(item['first_release_date'], original['first_release_date'])
+        once = deepcopy(item)
+        sources.enrich_reviewed_releases([item])
+        self.assertEqual(item, once)
 
 
 class ReviewedLiveWorkTests(unittest.TestCase):

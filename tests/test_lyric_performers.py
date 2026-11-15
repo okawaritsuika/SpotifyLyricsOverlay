@@ -2,7 +2,7 @@
 import tkinter as tk
 import unittest
 
-from lyric_performers import LyricPerformers,PREFIX,MARKER_WIDTH,MARKER_HEIGHT,marker_image,performer_credit,short_performer_name,_chip_rows
+from lyric_performers import LyricPerformers,PREFIX,LYRIC_GUTTER,MARKER_WIDTH,MARKER_HEIGHT,marker_image,performer_credit,short_performer_name,_chip_rows
 from subtitle import SubtitleLine
 
 
@@ -54,9 +54,9 @@ class PerformerCreditTests(unittest.TestCase):
     def test_limited_height_reports_remaining_singers_with_each_color(self):
         names=('후유코','치요코','하나','니치카','텐카')
         colors=('#5ce626','#f93b90','#e0b5d3','#a5cfb6','#e75bec')
-        self.assertEqual(_chip_rows(names,colors,55),
+        self.assertEqual(_chip_rows(names,colors,2*MARKER_HEIGHT+3),
                          (('후유코',('#5ce626',)),('+4명',colors[1:])))
-        self.assertEqual(len(_chip_rows(names,colors,142)),5)
+        self.assertEqual(len(_chip_rows(names,colors,5*MARKER_HEIGHT+12)),5)
         self.assertEqual(_chip_rows(names,colors,26),(('후유코',colors),))
 
 
@@ -68,7 +68,7 @@ class LyricPerformersTests(unittest.TestCase):
         self.root.columnconfigure(0,weight=1)
         self.lyrics=SubtitleLine(self.root,bg='#010203',fg='#f4f7fc',font=('Malgun Gothic',24,'bold'))
         self.lyrics.configure(text='가사 중앙과 높이를 그대로 유지합니다')
-        self.lyrics.grid(row=0,column=0,sticky='ew',padx=74)
+        self.lyrics.grid(row=0,column=0,sticky='ew',padx=LYRIC_GUTTER)
         self.header=LyricPerformers(self.root,bg='#010203',fg='#afbbcf')
         self.header.attach_to(self.lyrics)
         self.root.deiconify();self.root.update()
@@ -119,6 +119,57 @@ class LyricPerformersTests(unittest.TestCase):
         self.assertGreater(max(alpha),240)
         self.assertNotEqual(image.tobytes(),marker_image(('#5ce626',),('',)).tobytes())
         self.assertIsNone(marker_image(()).getbbox())
+
+    def test_eight_singers_use_adjacent_left_columns_and_hide_together(self):
+        names=SINGERS+('櫻木真乃','風野灯織','八宮めぐる')
+        self.lyrics.grid_configure(ipady=15)
+        self.root.update()
+        self.header.set_singers(names,ALBUM)
+        self.root.update()
+        left,right=self.header.columns
+        cell_height=(self.lyrics.winfo_height()+3)//4-3
+        self.assertLess(cell_height,MARKER_HEIGHT)
+        for column,start,end in ((left,0,4),(right,4,8)):
+            expected=marker_image(self.header._marker_colors[start:end],
+                                  self.header._marker_names[start:end],4*(cell_height+3)-3,capacity=4)
+            self.assertEqual(column._artist_image.tobytes(),expected.tobytes())
+            self.assertTrue(column.winfo_ismapped())
+            self.assertEqual(column.hint.text,self.header.cget('text'))
+        self.assertEqual(right.winfo_rootx()-left.winfo_rootx()-left.winfo_width(),3)
+        self.assertLess(right.winfo_rootx()+right.winfo_width(),self.lyrics.winfo_rootx())
+        first_eight=right._artist_image.tobytes()
+        self.header.set_singers(names+('Guest Performer',),ALBUM)
+        self.root.update()
+        self.assertEqual(right._artist_image.tobytes(),first_eight)
+        self.assertIn('Guest Performer',right.hint.text)
+        self.header.set_compact(True)
+        self.root.update()
+        self.assertFalse(left.winfo_ismapped())
+        self.assertFalse(right.winfo_ismapped())
+        self.header.set_compact(False)
+        self.root.update()
+        self.assertTrue(right.winfo_ismapped())
+        self.header.set_singers(SINGERS[:1],ALBUM)
+        self.root.update()
+        self.assertTrue(left.winfo_ismapped())
+        self.assertFalse(right.winfo_ismapped())
+
+    def test_chips_stay_centered_and_keep_their_size_when_five_singers_become_one(self):
+        self.lyrics.grid_configure(ipady=15)
+        self.root.update()
+        self.header.set_singers(SINGERS,ALBUM)
+        self.root.update()
+        marker=self.header
+        height=(marker._artist_image.height+3)//4-3
+        self.assertLess(height,MARKER_HEIGHT)
+        left=marker.winfo_rootx()
+        center=self.lyrics.winfo_rooty()+self.lyrics.winfo_height()/2
+        self.assertAlmostEqual(marker.winfo_rooty()+marker.winfo_height()/2,center,delta=1)
+        self.header.set_singers(SINGERS[:1],ALBUM)
+        self.root.update()
+        self.assertEqual(marker.winfo_rootx(),left)
+        self.assertEqual(marker.winfo_height(),height)
+        self.assertAlmostEqual(marker.winfo_rooty()+marker.winfo_height()/2,center,delta=1)
 
     def test_unknown_long_name_stays_inside_its_chip(self):
         image=marker_image(('#afbbcf',),('An exceptionally long guest performer',))

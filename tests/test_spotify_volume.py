@@ -168,23 +168,23 @@ class ApplyTests(unittest.TestCase):
     def test_refresh_only_reads_native_spotify_volume(self):
         spotify = FakeVolume(.71)
         with self.controls(spotify) as (order, find):
-            state = volume._apply([], threading.Event())
+            state = volume._apply_native([], threading.Event())
             self.assertEqual(order, ['initialize', 'uninitialize'])
         self.assertEqual(state, {'available': True, 'volume': 71, 'step': 1, 'muted': False, 'error': ''})
         self.assertEqual(spotify.writes, [])
         self.assertTrue(find.called)
 
-    def test_spotify_step_is_applied_before_waiting_for_native_confirmation(self):
+    def test_native_fallback_uses_the_spotify_slider_step(self):
         spotify = FakeVolume(.5)
         spotify.range.SmallChange = .10000000149
-        with self.controls(spotify):state = volume._apply([('volume', 69)], threading.Event())
+        with self.controls(spotify):state = volume._apply_native([('volume', 69)], threading.Event())
         self.assertEqual(state['volume'], 70)
         self.assertEqual(state['step'], 10)
         self.assertAlmostEqual(spotify.writes[0][1], .7)
 
     def test_percentage_maps_to_spotify_range(self):
         spotify = FakeVolume(150, minimum=100, maximum=200)
-        with self.controls(spotify):state = volume._apply([('volume', 37)], threading.Event())
+        with self.controls(spotify):state = volume._apply_native([('volume', 37)], threading.Event())
         spotify.range.SetValue.assert_called_once_with(137, waitTime=0)
         spotify.mute.invoke.Invoke.assert_not_called()
         self.assertEqual(state['volume'], 37)
@@ -192,7 +192,7 @@ class ApplyTests(unittest.TestCase):
     def test_command_order_uses_native_mute_and_restore(self):
         spotify = FakeVolume(.7)
         with self.controls(spotify):
-            state = volume._apply([('mute', None), ('mute', None), ('volume', 30), ('mute', None)],
+            state = volume._apply_native([('mute', None), ('mute', None), ('volume', 30), ('mute', None)],
                                   threading.Event())
         self.assertEqual(spotify.writes, [('mute', None), ('mute', None), ('volume', .3), ('mute', None)])
         self.assertEqual(spotify.mute.invoke.Invoke.call_count, 3)
@@ -205,7 +205,7 @@ class ApplyTests(unittest.TestCase):
         spotify.range.SetValue.return_value = True
         with self.controls(spotify), patch.object(volume.time, 'monotonic', side_effect=[0, 0, 3]), \
                 self.assertRaises(ValueError):
-            volume._apply([('volume', 37)], threading.Event())
+            volume._apply_native([('volume', 37)], threading.Event())
 
     def test_native_pattern_failure_is_reported(self):
         for kind in ('volume', 'mute'):
@@ -215,13 +215,13 @@ class ApplyTests(unittest.TestCase):
                 method.side_effect = None
                 method.return_value = False
                 with self.controls(spotify), self.assertRaises((ValueError, OSError)):
-                    volume._apply([(kind, 30 if kind == 'volume' else None)], threading.Event())
+                    volume._apply_native([(kind, 30 if kind == 'volume' else None)], threading.Event())
 
     def test_read_only_slider_cannot_be_changed(self):
         spotify = FakeVolume()
         spotify.range.IsReadOnly = True
         with self.controls(spotify), self.assertRaises((ValueError, OSError)):
-            volume._apply([('volume', 30)], threading.Event())
+            volume._apply_native([('volume', 30)], threading.Event())
         spotify.range.SetValue.assert_not_called()
 
     def test_changed_process_or_label_prevents_writes(self):
@@ -230,7 +230,7 @@ class ApplyTests(unittest.TestCase):
                 spotify = FakeVolume()
                 setattr(spotify.slider, attribute, value)
                 with self.controls(spotify), self.assertRaises(ValueError):
-                    volume._apply([('volume', 30)], threading.Event())
+                    volume._apply_native([('volume', 30)], threading.Event())
                 self.assertEqual(spotify.writes, [])
 
     def test_cancellation_prevents_pending_writes(self):
@@ -238,7 +238,7 @@ class ApplyTests(unittest.TestCase):
         stopped = threading.Event()
         stopped.set()
         with self.controls(spotify):
-            self.assertIsNone(volume._apply([('volume', 30)], stopped))
+            self.assertIsNone(volume._apply_native([('volume', 30)], stopped))
         self.assertEqual(spotify.writes, [])
 
     def test_cancellation_after_first_command_prevents_later_commands(self):
@@ -250,9 +250,35 @@ class ApplyTests(unittest.TestCase):
             return True
         spotify.range.SetValue.side_effect = stop_after_write
         with self.controls(spotify):
-            self.assertIsNone(volume._apply([('volume', 30), ('mute', None)], stopped))
+            self.assertIsNone(volume._apply_native([('volume', 30), ('mute', None)], stopped))
         self.assertEqual(spotify.writes, [('volume', .3)])
         spotify.mute.invoke.Invoke.assert_not_called()
+
+
+class SessionTests(unittest.TestCase):
+    def test_local_volume_uses_exact_percentages_and_mute_preserves_level(self):
+        session = SimpleNamespace(volume=.7, muted=False)
+        def read_volume(session, level):
+            level._obj.value = session.volume
+            return 0
+        def read_mute(session, muted):
+            muted._obj.value = session.muted
+            return 0
+        def set_volume(session, level, _):
+            session.volume = level
+            return 0
+        def set_mute(session, muted, _):
+            session.muted = muted
+            return 0
+        methods = {3: set_volume, 4: read_volume, 5: set_mute, 6: read_mute}
+        with patch.object(volume, '_method', side_effect=lambda _, index, *args: methods[index]):
+            stopped = threading.Event()
+            self.assertEqual(volume._apply_session(session, [('volume', 69)], stopped)['volume'], 69)
+            muted = volume._apply_session(session, [('volume', 0)], stopped)
+            self.assertTrue(muted['muted'])
+            self.assertEqual(muted['volume'], 0)
+            self.assertEqual(volume._apply_session(session, [('mute', None)], stopped)['volume'], 69)
+            self.assertEqual(volume._apply_session(session, [('volume', 1)], stopped)['volume'], 1)
 
 
 READY = {'available': True, 'volume': 75, 'muted': False, 'error': ''}

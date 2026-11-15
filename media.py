@@ -1,5 +1,6 @@
 """Read Spotify's Windows session; control playback only on explicit requests."""
 import asyncio
+from contextlib import ExitStack, suppress
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 import threading
@@ -53,10 +54,31 @@ def _spotify_session(manager, playing_status):
     return fallback
 
 
+def _remove_notification(remove, token):
+    with suppress(OSError, RuntimeError):
+        remove(token)
+
+
+def _subscribe(subscriptions, source, events, callback):
+    for event in events:
+        try:
+            remove = getattr(source, 'remove_' + event)
+            token = getattr(source, 'add_' + event)(callback)
+        except (AttributeError, OSError, RuntimeError):
+            continue
+        subscriptions.callback(_remove_notification, remove, token)
+
+
+async def _wait_for_refresh(changed, delay):
+    with suppress(asyncio.TimeoutError):
+        await asyncio.wait_for(changed.wait(), timeout=delay)
+
+
 class SpotifyMonitor:
     def __init__(self, messages):
         self.messages = messages
         self.stop_event = threading.Event()
+        self._wake = None
         self.thread = threading.Thread(target=self._run, daemon=True, name='spotify-readonly')
         self.control_lock = threading.Lock()
 
@@ -65,6 +87,8 @@ class SpotifyMonitor:
 
     def stop(self):
         self.stop_event.set()
+        wake = self._wake
+        if wake is not None:wake()
 
     def request_skip(self, direction):
         """Accept one explicit previous/next request without waiting on Windows.
@@ -183,7 +207,8 @@ class SpotifyMonitor:
 
         Each accepted request sends exactly one media_seek completion event.
         """
-        if (edge not in ('first', 'last') or self.stop_event.is_set()
+        position = type(edge) in (int,float) and 0 <= edge < 2**63 / 10_000_000
+        if ((edge not in ('first', 'last') and not position) or self.stop_event.is_set()
                 or not isinstance(expected_key, str) or not expected_key.split('\0', 1)[0]):
             return False
         if not self.control_lock.acquire(blocking=False):
@@ -242,13 +267,15 @@ class SpotifyMonitor:
                 or (end // timedelta(microseconds=1)) * 10 > 2**63 - 1):
             return False, 'Spotify에서 현재 곡의 길이를 확인하지 못했습니다.'
         # Keep a paused track at its end instead of triggering the next track.
-        target = start if edge == 'first' else max(start, end - timedelta(seconds=1))
+        if edge == 'first':target = start
+        elif edge == 'last':target = max(start, end - timedelta(seconds=1))
+        else:target = max(start, min(end - timedelta(microseconds=1), timedelta(seconds=edge)))
         # WinRT uses 100 ns ticks; timedelta retains microsecond precision.
         ticks = (target // timedelta(microseconds=1)) * 10
         if self.stop_event.is_set():
             return False, '가사 앱이 종료되어 재생 위치 이동 요청을 취소했습니다.'
         success = bool(await session.try_change_playback_position_async(ticks))
-        label = '처음' if edge == 'first' else '끝부분'
+        label = '처음' if edge == 'first' else '끝부분' if edge == 'last' else '구절 시작 위치'
         message = (f'Spotify에 곡 {label} 이동 요청을 보냈습니다.' if success else
                    f'Spotify가 곡 {label} 이동 요청을 처리하지 못했습니다.')
         return success, message
@@ -266,34 +293,64 @@ class SpotifyMonitor:
             GlobalSystemMediaTransportControlsSessionManager as Manager,
             GlobalSystemMediaTransportControlsSessionPlaybackStatus as Status,
         )
-        manager = None
-        while not self.stop_event.is_set():
-            try:
-                if manager is None:
-                    manager = await asyncio.wait_for(Manager.request_async(), timeout=4)
-                if self.stop_event.is_set():break
-                # Prefer a playing Spotify session, if more than one exists.
-                session = _spotify_session(manager, Status.PLAYING)
-                if session is None:
-                    snapshot = Playback(error='Spotify 데스크톱 앱에서 곡을 재생하세요.')
-                else:
-                    props = await asyncio.wait_for(session.try_get_media_properties_async(), timeout=4)
-                    if self.stop_event.is_set():break
-                    timeline = session.get_timeline_properties()
-                    info = session.get_playback_info()
-                    playing = info.playback_status == Status.PLAYING
-                    duration = timeline.end_time.total_seconds()
-                    age = (datetime.now(timezone.utc) - timeline.last_updated_time).total_seconds()
-                    rate = info.playback_rate or 1.0
-                    base = timeline_position(timeline.position.total_seconds(), age,
-                                             playing, duration, rate)
-                    snapshot = Playback(props.title, props.artist, props.album_title, base,
-                                        duration, playing, time.monotonic(), rate)
-                if not self.stop_event.is_set():self.messages.put(('media', snapshot))
-            except Exception as error:
-                # Recreate a failed Windows connection instead of terminating
-                # the monitor or retrying a permanently disconnected manager.
-                manager = None
-                if not self.stop_event.is_set():
-                    self.messages.put(('media', Playback(error=f'Spotify 연결 재시도 중 ({type(error).__name__})')))
-            if not self.stop_event.is_set():await asyncio.sleep(.5)
+        loop = asyncio.get_running_loop()
+        changed = asyncio.Event()
+
+        def wake(*_):
+            # WinRT may notify on a different thread or during shutdown.
+            with suppress(RuntimeError):
+                loop.call_soon_threadsafe(changed.set)
+
+        self._wake = wake
+        manager = watched_session = None
+        try:
+            with ExitStack() as manager_events, ExitStack() as session_events:
+                while not self.stop_event.is_set():
+                    changed.clear()
+                    delay = .5
+                    try:
+                        if manager is None:
+                            manager = await asyncio.wait_for(Manager.request_async(), timeout=4)
+                            if self.stop_event.is_set():break
+                            _subscribe(manager_events, manager, ('sessions_changed',), wake)
+                        # Prefer a playing Spotify session, if more than one exists.
+                        session = _spotify_session(manager, Status.PLAYING)
+                        if session != watched_session:
+                            session_events.close()
+                            watched_session = session
+                            if session is not None:
+                                _subscribe(session_events, session,
+                                           ('media_properties_changed', 'playback_info_changed'), wake)
+                        snapshot = (Playback(error='Spotify 데스크톱 앱에서 곡을 재생하세요.')
+                                    if session is None else await self._read_snapshot(session, Status.PLAYING))
+                        if snapshot is None:delay = .1
+                        elif not self.stop_event.is_set():self.messages.put(('media', snapshot))
+                    except Exception as error:
+                        # Replace a disconnected manager and all of its handlers.
+                        session_events.close()
+                        manager_events.close()
+                        manager = watched_session = None
+                        if not self.stop_event.is_set():
+                            self.messages.put(('media', Playback(error=f'Spotify 연결 재시도 중 ({type(error).__name__})')))
+                    if not self.stop_event.is_set():await _wait_for_refresh(changed, delay)
+        finally:
+            self._wake = None
+
+    async def _read_snapshot(self, session, playing_status):
+        props = await asyncio.wait_for(session.try_get_media_properties_async(), timeout=4)
+        if self.stop_event.is_set():return None
+        identity = (props.title, props.artist, props.album_title)
+        timeline = session.get_timeline_properties()
+        info = session.get_playback_info()
+        confirmed = await asyncio.wait_for(session.try_get_media_properties_async(), timeout=4)
+        if self.stop_event.is_set():return None
+        if identity != (confirmed.title, confirmed.artist, confirmed.album_title):
+            # Windows reads are separate. A skip can pair the old title with
+            # the new track's timeline, so retry before publishing that pair.
+            return None
+        playing = info.playback_status == playing_status
+        duration = timeline.end_time.total_seconds()
+        age = (datetime.now(timezone.utc) - timeline.last_updated_time).total_seconds()
+        rate = info.playback_rate or 1.0
+        base = timeline_position(timeline.position.total_seconds(), age, playing, duration, rate)
+        return Playback(*identity, base, duration, playing, time.monotonic(), rate)

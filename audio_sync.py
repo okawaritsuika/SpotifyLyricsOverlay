@@ -3,7 +3,7 @@ import math
 
 from lyrics import normalized
 from storage import validate_times
-from timing_quality import timing_origins,automatic_times
+from timing_quality import timing_origins,automatic_times,cleared_rows
 
 
 def align_characters(original,transcript):
@@ -224,7 +224,7 @@ def _partial_fits_anchors(candidate,index,anchors):
     return True
 
 
-def match_partial_words(lines,words,start_position=0.0,duration=900.0):
+def match_partial_words(lines,words,start_position=0.0,duration=900.0,*,minimum_coverage=None,minimum_quality=0):
     """Find heard lyric rows locally in text and Japanese reading channels.
 
     Character locations always point back to an observed ASR word. Reading
@@ -256,6 +256,11 @@ def match_partial_words(lines,words,start_position=0.0,duration=900.0):
                 for variant in variants:
                     for candidate in _partial_row_candidates(variant,source,locations,run):
                         if variant!=target[channel] and not candidate['prefix']:continue
+                        if candidate['quality']<minimum_quality:continue
+                        if minimum_coverage is not None:
+                            minimum=minimum_coverage[index]
+                            if candidate['coverage']<minimum:continue
+                            if minimum==1 and candidate['observed']!=candidate['evidence']:continue
                         coverage[index]=max(coverage[index],candidate['coverage'])
                         # A short phrase can be contained in another longer row,
                         # even though the complete row strings are all distinct.
@@ -312,8 +317,9 @@ def merge_candidates(current, candidates, replace_audio=False):
             after=next((x for x in baseline[index+1:] if x is not None),math.inf)
             if before<value<after:baseline[index]=value
     added = 0
+    cleared = cleared_rows(current)
     for index, candidate in enumerate(candidates):
-        if times[index] is not None or candidate is None:
+        if times[index] is not None or candidate is None or index in cleared:
             continue
         candidate = round(candidate-offset, 3)
         before = next((x for x in reversed(times[:index]) if x is not None), -1)

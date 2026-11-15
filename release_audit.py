@@ -17,7 +17,7 @@ TOKEN_PATTERNS = (
     re.compile(r'\bsk-proj-[A-Za-z0-9_-]{35,}\b'),
     re.compile(r'-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----'),
 )
-TEXT_SUFFIXES = {'.py', '.json', '.js', '.md', '.txt', '.yml', '.yaml',
+TEXT_SUFFIXES = {'.py', '.json', '.js', '.cjs', '.md', '.txt', '.yml', '.yaml',
                  '.ps1', '.bat', '.html', '.css', '.toml'}
 
 

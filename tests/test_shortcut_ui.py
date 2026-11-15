@@ -17,15 +17,16 @@ class ShortcutUITests(unittest.TestCase):
     def tearDown(self):
         self.app.close();self.temp.cleanup()
     def test_press_capture_save_and_reload(self):
+        self.assertEqual(self.dialog.tree.selection(), ('previous',))
         self.dialog.begin();self.assertTrue(self.app.hotkeys.suspended)
         self.dialog.key_down(SimpleNamespace(keysym='Shift_R',keycode=16,state=0))
         self.dialog.key_down(SimpleNamespace(keysym='F8',keycode=0x77,state=1))
         self.assertFalse(self.app.hotkeys.suspended)
         self.dialog.save()
-        binding=self.store.settings()['hotkeys']['stamp']
+        binding=self.store.settings()['hotkeys']['previous']
         self.assertEqual(binding,{'key':0x77,'modifiers':4,'shift':'right'})
-        self.assertEqual(self.app.hotkeys.bindings['stamp'],binding)
-        self.assertEqual(validate_bindings(self.store.settings()['hotkeys'])['stamp'],binding)
+        self.assertEqual(self.app.hotkeys.bindings['previous'],binding)
+        self.assertEqual(validate_bindings(self.store.settings()['hotkeys'])['previous'],binding)
     def test_cancel_and_parent_destroy_restore_shortcuts(self):
         self.dialog.begin();self.dialog.key_down(SimpleNamespace(keysym='Escape',keycode=27,state=0))
         self.assertFalse(self.app.hotkeys.suspended);self.assertNotIn('hotkeys',self.store.settings())
@@ -39,11 +40,11 @@ class ShortcutUITests(unittest.TestCase):
             self.assertGreaterEqual(x,0);self.assertGreaterEqual(y,0)
             self.assertLessEqual(x+button.winfo_width(),width);self.assertLessEqual(y+button.winfo_height(),height)
             self.assertTrue(button.winfo_viewable())
-        self.assertEqual(len(self.dialog.tree.get_children()),11)
+        self.assertEqual(self.dialog.tree.get_children(), ('previous', 'next', 'lock', 'chrome', 'transparent'))
     def test_duplicate_key_is_not_applied(self):
         self.dialog.begin();self.dialog.key_down(SimpleNamespace(keysym='Control_L',keycode=17,state=0))
         self.dialog.key_down(SimpleNamespace(keysym='Alt_L',keycode=18,state=4))
-        self.dialog.key_down(SimpleNamespace(keysym='space',keycode=32,state=12))
+        self.dialog.key_down(SimpleNamespace(keysym='Down',keycode=0x28,state=12))
         self.assertIn('같은 단축키',self.dialog.status.get());self.assertIsNotNone(self.dialog.capturing)
         self.assertNotIn('hotkeys',self.store.settings())
 
@@ -67,8 +68,8 @@ class ShortcutUITests(unittest.TestCase):
         self.assertIsNone(self.dialog.capturing)
         self.dialog.save()
         bindings=validate_bindings(self.store.settings()['hotkeys'])
-        self.assertEqual(bindings['stamp'],{'key':0x28,'modifiers':0,'shift':'any'})
+        self.assertEqual(bindings['previous'],{'key':0x28,'modifiers':0,'shift':'any'})
         matcher=ShortcutMatcher(bindings)
-        self.assertEqual(matcher.event(0x28,True),(True,'stamp'))
+        self.assertEqual(matcher.event(0x28,True),(True,'previous'))
         self.assertEqual(matcher.event(0x28,True),(True,None))
         self.assertEqual(matcher.event(0x28,False),(True,None))

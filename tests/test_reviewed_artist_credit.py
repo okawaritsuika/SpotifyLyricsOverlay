@@ -10,6 +10,7 @@ from tests.test_song_catalog import write_catalog
 
 ROOT=Path(__file__).resolve().parents[1]
 ID='mb:63dbb5f8-a6a1-4055-9493-82f67b8719b8'
+MIGRATORY_ECHOES='mb:f549dfd1-e05f-4f1a-8b34-5fa617e63123'
 RELEASE='0ec05fad-f3fa-4e08-924a-b157e0ca332e'
 URLS=['https://columbia.jp/prod-info/COZX-1151-4/','https://columbia.jp/idolmaster/COZX-1151.html']
 
@@ -72,7 +73,7 @@ class ReviewedArtistCreditTests(unittest.TestCase):
             before={song['id']:song for song in SongCatalog().songs}
         after={song['id']:song for song in SongCatalog().songs}
         changed=[identifier for identifier in after if before[identifier]!=after[identifier]]
-        self.assertEqual(changed,[ID])
+        self.assertCountEqual(changed,[ID,MIGRATORY_ECHOES])
         self.assertIn('뉴 제너레이션즈',after[ID]['performer_aliases'])
         self.assertNotIn('田中秀和',after[ID]['performer_aliases'])
         self.assertEqual(path.read_bytes(),raw)

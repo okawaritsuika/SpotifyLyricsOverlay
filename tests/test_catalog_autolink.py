@@ -67,8 +67,8 @@ class AutoLinkTests(unittest.TestCase):
         self.assertIsNotNone(automatic_candidate(recording, [track(album='Digital Album')]))
         self.assertIsNone(automatic_candidate(recording, [track(album='Unlisted Album')]))
         self.assertIsNone(automatic_candidate(recording, [track(album='Digital Album', duration=244)]))
-        self.assertIsNone(automatic_candidate(recording,
-            [track(album='Original Album'), track(id='b'*22, album='Digital Album')]))
+        self.assertEqual(automatic_candidate(recording,
+            [track(album='Original Album'), track(id='b'*22, album='Digital Album')])['id'], 'a'*22)
 
     def test_documented_release_can_supply_album_evidence_when_primary_is_missing(self):
         recording = song(album='', duration=None, releases=[{'title': 'Digital Album'}])
@@ -132,9 +132,37 @@ class AutoLinkTests(unittest.TestCase):
         self.assertIsNotNone(automatic_candidate(song(album='', duration=240), [track()]))
         self.assertIsNone(automatic_candidate(song(artists=[]), [track()]))
 
-    def test_two_ids_are_ambiguous_but_duplicate_same_id_is_not(self):
-        self.assertIsNone(automatic_candidate(song(), [track(), track(id='b'*22)]))
+    def test_equivalent_recording_ids_have_stable_preference(self):
+        self.assertEqual(automatic_candidate(song(), [track(id='b'*22), track()])['id'], 'a'*22)
         self.assertIsNotNone(automatic_candidate(song(), [track(), track()]))
+
+    def test_equivalent_release_prefers_primary_album_then_playability(self):
+        recording = song(releases=[{'title': 'Digital Album'}])
+        candidates = [track(id='b'*22, is_playable=True), track(is_playable=None),
+                      track(id='c'*22, album='Digital Album', is_playable=True)]
+        self.assertEqual(automatic_candidate(recording, candidates)['id'], 'b'*22)
+        candidates[0]['is_playable'] = False
+        self.assertEqual(automatic_candidate(recording, candidates)['id'], 'a'*22)
+        self.assertEqual(automatic_candidate(recording, list(reversed(candidates)))['id'], 'a'*22)
+
+    def test_duplicate_ids_need_matching_full_title_credits_and_close_lengths(self):
+        self.assertIsNone(automatic_candidate(song(duration=None), [track(), track(id='b'*22)]))
+        self.assertIsNone(automatic_candidate(song(), [track(duration=238), track(id='b'*22, duration=242)]))
+        recording = song(artists=['Idol'])
+        self.assertIsNone(automatic_candidate(recording,
+            [track(artists=['Idol (CV. Voice)']), track(id='b'*22, artists=['Idol (CV. Old Voice)'])], PEOPLE))
+
+    def test_known_solo_performer_suffix_is_grounded_in_recording_credits(self):
+        for title in ('Song! (Idol Ver.)', 'Song! - 아이돌 Version'):
+            candidate = track(title=title, artists=['Idol (CV. Voice)'])
+            self.assertIsNotNone(automatic_candidate(song(artists=['Idol', 'Voice']), [candidate], PEOPLE))
+            self.assertIn('song:one', local_matches([song(artists=['Idol', 'Voice'])], [candidate], PEOPLE))
+        for artists in (['Unit'], ['Other Idol']):
+            self.assertIsNone(automatic_candidate(song(artists=artists),
+                [track(title='Song! (Idol Ver.)')], PEOPLE))
+        for title in ('Song! (Unknown Ver.)', 'Song! (Live Ver.)', 'Song! (Idol Remix)'):
+            self.assertIsNone(automatic_candidate(song(), [track(title=title)], PEOPLE))
+        self.assertIsNone(automatic_candidate(song(), [track(title='Song! (Idol Ver.)')]))
 
     def test_cv_and_explicit_aliases_do_not_create_extra_singers(self):
         result = automatic_candidate(song(artists=['Idol', 'Voice']),
@@ -197,6 +225,60 @@ class AutoLinkTests(unittest.TestCase):
         result = local_matches(songs, [track()])
         self.assertEqual(set(result), {'song:one'})
         self.assertEqual(songs, before)
+
+    def test_unique_title_and_album_correct_incomplete_or_wrong_spotify_credits(self):
+        recording = song(artists=['Unit'])
+        for artists in (['Idol'], ['Wrong Artist']):
+            with self.subTest(artists=artists):
+                candidate = track(artists=artists)
+                self.assertIsNone(automatic_candidate(recording, [candidate], PEOPLE))
+                result = local_matches([recording], [candidate], PEOPLE)
+                self.assertEqual(result[recording['id']]['id'], candidate['id'])
+                self.assertEqual(result[recording['id']]['artists'], artists)
+
+    def test_different_singers_can_link_their_distinct_album_recordings(self):
+        songs = [song(id='unit', artists=['Unit']),
+                 song(id='solo', artists=['Idol'], album='Solo Album')]
+        candidates = [track(artists=['Wrong Artist']),
+                      track(id='b'*22, artists=['Wrong Artist'], album='Solo Album')]
+        result = local_matches(songs, candidates, PEOPLE)
+        self.assertEqual(result['unit']['id'], 'a'*22)
+        self.assertEqual(result['solo']['id'], 'b'*22)
+
+    def test_shared_album_solo_variants_cannot_use_wrong_credits(self):
+        songs = [song(id='one', artists=['Idol']), song(id='two', artists=['Other Idol'])]
+        self.assertEqual(local_matches(songs, [track(artists=['Wrong Artist'])], PEOPLE), {})
+        result = local_matches(songs, [track()], PEOPLE)
+        self.assertEqual(set(result), {'one'})
+
+    def test_unique_album_override_preserves_version_duration_and_explicit_cv_boundaries(self):
+        recording = song(artists=['Idol (CV. Voice)'])
+        for candidate in (track(title='Song! (Live)', artists=['Wrong Artist']),
+                          track(album='Other', artists=['Wrong Artist']),
+                          track(album='', artists=['Wrong Artist']),
+                          track(duration=243, artists=['Wrong Artist']),
+                          track(duration=None, artists=['Wrong Artist']),
+                          track(artists=['Idol (CV. Old Voice)'])):
+            with self.subTest(candidate=candidate):
+                self.assertEqual(local_matches([recording], [candidate], PEOPLE), {})
+
+    def test_unique_album_override_requires_one_spotify_recording_id(self):
+        self.assertEqual(local_matches([song(artists=['Unit'])],
+            [track(), track(id='b'*22, artists=['Wrong Artist'])], PEOPLE), {})
+
+    def test_documented_release_can_correct_credits_and_keeps_shared_release_ambiguity(self):
+        recording = song(artists=['Unit'], releases=[{'title': 'Digital Album'}])
+        candidate = track(album='Digital Album', artists=['Idol'])
+        self.assertIn(recording['id'], local_matches([recording], [candidate], PEOPLE))
+        other = song(id='solo', artists=['Other Idol'], album='Digital Album')
+        self.assertEqual(local_matches([recording, other], [candidate], PEOPLE), {})
+
+    def test_unique_album_override_does_not_expand_reviewed_title_alias(self):
+        entry = next(iter(_recording_aliases().values()))
+        recording = song(id=entry['catalog_id'], title=entry['catalog_title'], album='VOY@GER')
+        candidate = track(id=entry['spotify_id'], title=entry['spotify_title'],
+                          album='VOY@GER', artists=['Wrong Artist'])
+        self.assertEqual(local_matches([recording], [candidate]), {})
 
     def test_bulk_matching_reuses_person_indexes_and_full_version_keys(self):
         songs = [song(id=f'song:{index}', title='Song! (Live)', artists=['Unit']) for index in range(20)]

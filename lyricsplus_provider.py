@@ -15,6 +15,7 @@ from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 from lyrics import Line, normalized
 from lyric_match import match_lyrics
+from lyric_merge import has_ordered_overlap
 
 
 ENDPOINT = 'https://lyricsplus.prjktla.my.id/v2/lyrics/get'
@@ -179,7 +180,7 @@ def _line_text(row):
     return ''.join(pieces).strip()
 
 
-def parse_payload(payload, playback, reference=()):
+def parse_payload(payload, playback, reference=(), *, merge_partial=False):
     """Return checked line timings, or None; references must be trusted originals.
 
     Reference strings (or Line objects) are compared in full, allowing bounded
@@ -244,14 +245,22 @@ def parse_payload(payload, playback, reference=()):
     originals = [' '.join(group) for group in groups]
     unmerged = [text for group in groups for text in group]
     reference_texts = [row.original if isinstance(row, Line) else row for row in reference]
-    if (not originals or any(len(text) > MAX_LINE_CHARACTERS for text in originals)
-            or match_lyrics(unmerged, [text for text in reference_texts if normalized(text)]) is None):
+    if not originals or any(len(text) > MAX_LINE_CHARACTERS for text in originals):
         return None
+    reference_texts = [text for text in reference_texts if normalized(text)]
+    # A whole document at 0 ms can match the words while providing no line sync.
+    if times == [0.0] and len(reference_texts) > 1:
+        return None
+    if (match_lyrics(unmerged, reference_texts) is None and
+            not (merge_partial and has_ordered_overlap(reference_texts, originals))):
+        return None
+    metadata = payload.get('metadata', {})
+    identity = {field: _text(metadata.get(field)) for field in ('title', 'artist', 'album')} if merge_partial else {}
     return {'source': 'LyricsPlus', 'provider_id': None,
-            'lines': tuple(Line(text, '', '') for text in originals), 'times': times}
+            'lines': tuple(Line(text, '', '') for text in originals), 'times': times, **identity}
 
 
-def fetch_lyricsplus(playback, reference=(), fetch=None, report=None):
+def fetch_lyricsplus(playback, reference=(), fetch=None, report=None, *, merge_partial=False):
     """Fetch checked timings; 404 is a miss and other final errors propagate.
 
     The injectable fetch receives only the metadata parameter dictionary and
@@ -295,6 +304,6 @@ def fetch_lyricsplus(playback, reference=(), fetch=None, report=None):
         return finish('LyricsPlus 응답 형식 확인 실패 · 싱크 미검증')
     if not _metadata_matches(payload.get('metadata', {}), playback, duration):
         return finish('LyricsPlus 후보 곡 정보 불일치 · 적용 보류')
-    result = parse_payload(payload, playback, reference)
+    result = parse_payload(payload, playback, reference, merge_partial=merge_partial)
     return finish('LyricsPlus 싱크 연결됨' if result else
                   'LyricsPlus 후보 원문·시각 검증 불일치 · 적용 보류', result)

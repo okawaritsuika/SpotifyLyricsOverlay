@@ -40,7 +40,8 @@ def _restore(path, body):
     finally:temporary.unlink(missing_ok=True)
 
 
-def save_lyric_edit(store, songs, settings, target, incoming=None, source=None, playback_key=None):
+def save_lyric_edit(store, songs, settings, target, incoming=None, source=None, playback_key=None,
+                    *, row_timing=None, row_annotations=None):
     """Save a user-confirmed replacement/removal; callers publish state on success.
 
     A replacement keeps the saved song's identity and metadata. Only an exact,
@@ -65,6 +66,7 @@ def save_lyric_edit(store, songs, settings, target, incoming=None, source=None, 
                       store.directory / 'live_audio_backups' / live_path.name]
     paths = [store.directory / 'library.json', store.directory / 'settings.json', *files,
              store.directory / 'audio_backups' / (identity.id + '.before-public.json'), *live_files]
+    paths.extend(row_annotations or {})
     before = {path: _contents(path) for path in paths}
     timing = None
     if saved is not None and target is not None:
@@ -102,16 +104,20 @@ def save_lyric_edit(store, songs, settings, target, incoming=None, source=None, 
                                   for path, body in before.items()}})
     touched = []
     try:
-        if target is not None:
+        if target is not None or row_timing is not None:
             touched.append(timing_path)
             if saved is None:timing_path.unlink(missing_ok=True)
-            else:store.save_timing(saved, timing)
+            else:store.save_timing(saved, row_timing if row_timing is not None else timing)
+        if target is not None:
             touched.append(annotation_path)
             annotation_path.unlink(missing_ok=True)
             if saved is None:
                 for path in live_files[:2]:
                     touched.append(path)
                     path.unlink(missing_ok=True)
+        for path, rows in (row_annotations or {}).items():
+            touched.append(path)
+            atomic_json(path, rows)
         touched.append(store.directory / 'library.json')
         store.save_library(updated)
         touched.append(store.directory / 'settings.json')

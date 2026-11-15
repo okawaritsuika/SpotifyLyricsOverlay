@@ -54,13 +54,14 @@ class ConnectionDialogTests(unittest.TestCase):
                        self.dialog.spotify_button,self.dialog.public_button,self.dialog.public_disclosure,
                        self.dialog.lyricsplus_button,self.dialog.lyricsplus_disclosure,self.dialog.lyricsplus_status,
                        self.dialog.alsong_button,self.dialog.alsong_disclosure,self.dialog.alsong_status,
-                       self.dialog.advanced_button,self.dialog.close_button):
+                       self.dialog.close_button):
             self.assertTrue(widget.winfo_ismapped())
             self.assertGreater(widget.winfo_height(),10)
             self.assertGreaterEqual(widget.winfo_rootx(),window.winfo_rootx())
             self.assertGreaterEqual(widget.winfo_rooty(),window.winfo_rooty())
             self.assertLessEqual(widget.winfo_rootx()+widget.winfo_width(),window.winfo_rootx()+window.winfo_width())
             self.assertLessEqual(widget.winfo_rooty()+widget.winfo_height(),window.winfo_rooty()+window.winfo_height())
+        self.assertFalse(hasattr(self.dialog, 'advanced_button'))
         self.assertGreaterEqual(self.dialog.public_disclosure.winfo_height(),self.dialog.public_disclosure.winfo_reqheight())
         self.assertGreaterEqual(self.dialog.lyricsplus_disclosure.winfo_height(),self.dialog.lyricsplus_disclosure.winfo_reqheight())
 

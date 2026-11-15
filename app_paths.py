@@ -1,9 +1,34 @@
 """Separate bundled resources from writable user data in the Windows release."""
+from datetime import datetime, timezone
 import os
 from pathlib import Path
 import shutil
 import sys
 import sysconfig
+
+
+CATALOG_RELEASE_STAMP = 'release_snapshot_at'
+
+
+def catalog_snapshot_time(value, fields=('generated_at', 'verified_at')):
+    for field in fields:
+        stamp = value.get(field) if isinstance(value, dict) else None
+        if isinstance(stamp, str):
+            try:
+                parsed = datetime.fromisoformat(stamp.replace('Z', '+00:00'))
+                return parsed if parsed.tzinfo is not None else parsed.replace(tzinfo=timezone.utc)
+            except ValueError:
+                continue
+    return None
+
+
+def prefer_catalog_update(base, update):
+    """Preserve existing local snapshots and avoid overriding a newer app bundle."""
+    if update is None:
+        return False
+    bundled = catalog_snapshot_time(base)
+    downloaded = catalog_snapshot_time(update, (CATALOG_RELEASE_STAMP,))
+    return bundled is None or downloaded is None or downloaded >= bundled
 
 
 def frozen():
@@ -59,7 +84,7 @@ def worker_command(base, module, optional=False):
     return [str(executable), '-X', 'utf8', str(Path(base) / (module + '.py'))]
 
 
-def worker_environment(base, browser=False):
+def worker_environment(base, browser=False, *, prefer_inherited=False):
     environment = dict(os.environ)
     if frozen():
         environment.pop('PYTHONPATH', None)
@@ -69,6 +94,8 @@ def worker_environment(base, browser=False):
                                               if not value.casefold().startswith(bundle))
     else:
         paths = [sysconfig.get_path('purelib'), environment.get('PYTHONPATH', '')]
+        if prefer_inherited:
+            paths.reverse()
         if browser:paths.insert(0, str(Path(base) / '.browser_deps'))
         environment['PYTHONPATH'] = os.pathsep.join(filter(None, paths))
     environment.update(PYTHONIOENCODING='utf-8', PYTHONUNBUFFERED='1')

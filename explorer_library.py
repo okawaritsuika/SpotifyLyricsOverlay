@@ -8,8 +8,9 @@ import random
 import re
 import unicodedata
 
+from app_paths import CATALOG_RELEASE_STAMP, prefer_catalog_update
 from artist_names import artist_label, name_key
-from artist_colors import _artist_ranges, catalog as artist_color_catalog
+from artist_colors import SIDEM_SERIES_COLOR, _artist_ranges, catalog as artist_color_catalog
 from song_aliases import search_aliases
 from storage import atomic_json, read_json
 
@@ -18,7 +19,7 @@ SERIES = {'': '전체 시리즈', '765': '765 ALLSTARS', 'million': '밀리언 �
           'cinderella': '신데렐라 걸즈', 'sidem': 'SideM', 'shiny': '샤이니 컬러즈',
           'gakuen': '학원 아이돌마스터', 'other': '기타 · 합동'}
 SERIES_COLORS = {'': '#99e3c8', '765': '#ff8598', 'million': '#f5c76d',
-                 'cinderella': '#85baff', 'sidem': '#85dbb5', 'shiny': '#acd7ef',
+                 'cinderella': '#85baff', 'sidem': SIDEM_SERIES_COLOR, 'shiny': '#acd7ef',
                  'gakuen': '#ffb478', 'other': '#cbb5f5'}
 SONG_SORTS = {'default': '기본순', 'title_asc': '이름 오름차순', 'title_desc': '이름 내림차순',
               'release_desc': '발매일 최신순', 'release_asc': '발매일 오래된순',
@@ -184,20 +185,40 @@ def _hex_color(value):
     return '#' + value.lstrip('#').lower() if isinstance(value, str) and re.fullmatch(r'#?[0-9a-fA-F]{6}', value) else ''
 
 
-def _enrich_people_from_database(people, base, voices, database_path=None):
-    """Add optional fan-source evidence only to unambiguous existing identities."""
-    paths = [Path(database_path)] if database_path is not None else []
-    paths.append(base / 'imas_db_people.json')
-    for path in paths:
+def valid_people_snapshot(snapshot):
+    if (not isinstance(snapshot, dict) or type(snapshot.get('schema_version')) is not int
+            or snapshot['schema_version'] != 1):
+        return False
+    try:
+        date.fromisoformat(snapshot['verified_at'])
+    except (KeyError, TypeError, ValueError):
+        return False
+    entries = snapshot.get('characters')
+    return isinstance(entries, list) and bool(entries)
+
+
+def people_database_snapshot(base, database_path=None):
+    update = Path(database_path) if database_path is not None else None
+    released = None
+    for path in (update, base / 'imas_db_people.json'):
+        if path is None:continue
         try:
             snapshot = json.loads(path.read_text(encoding='utf-8'))
-            if not isinstance(snapshot, dict) or snapshot.get('schema_version') != 1:continue
-            verified = date.fromisoformat(snapshot['verified_at'])
-            entries = snapshot['characters']
-            if not isinstance(entries, list) or not entries:continue
-            break
+            if not valid_people_snapshot(snapshot):continue
+            if path == update and CATALOG_RELEASE_STAMP in snapshot:
+                released = snapshot
+                continue
+            return released if prefer_catalog_update(snapshot, released) else snapshot
         except (OSError, ValueError, KeyError, TypeError):continue
-    else:return
+    return released or {}
+
+
+def _enrich_people_from_database(people, base, voices, database_path=None):
+    """Add optional fan-source evidence only to unambiguous existing identities."""
+    snapshot = people_database_snapshot(base, database_path)
+    if not snapshot:return
+    entries = snapshot['characters']
+    verified = date.fromisoformat(snapshot['verified_at'])
     lookup = build_performer_lookup(people, 'idol')
     # These pages contain other adaptations and NPCs too. Exact name resolution
     # must identify an existing idol; the source never creates new identities.
@@ -333,7 +354,10 @@ def group_duplicate_songs(songs):
     groups, buckets = [], {}
     for song in songs:
         title = song.get('title')
-        if not isinstance(title, str) or not title.strip():
+        duration = song.get('duration')
+        invalid_duration = (type(duration) in (int, float) and duration > 604800 and
+                            (type(duration) is int or math.isfinite(duration)))
+        if not isinstance(title, str) or not title.strip() or invalid_duration:
             groups.append([song]);continue
         key = search_key(title)
         if key not in buckets:
@@ -362,12 +386,16 @@ def related_songs(songs, performer, *, known_names=None):
             or external_ids.intersection(song.get('performer_ids', []))]
 
 
-def matches_query(song, query):
-    if not query.strip():return True
+def song_search_text(song):
     fields = [song.get('title', ''), song.get('album', ''), artists_label(song), series_label(song)]
     fields += song.get('artists', []) + song.get('aliases', []) + song.get('performer_aliases', [])
     fields += list(search_aliases(song))
-    haystack = search_key(' '.join(fields))
+    return search_key(' '.join(fields))
+
+
+def matches_query(song, query):
+    if not query.strip():return True
+    haystack = song_search_text(song)
     return all(search_key(word) in haystack for word in query.split())
 
 
@@ -426,6 +454,13 @@ class ExplorerLibrary:
         updated = copy.deepcopy(self.value)
         updated['song_sort'] = value
         self._commit(updated)
+
+    def set_song_view(self, order, hide_duplicates):
+        if not isinstance(order, str) or order not in SONG_SORTS:
+            raise ValueError('지원하지 않는 곡 정렬 방식입니다.')
+        if not isinstance(hide_duplicates, bool):
+            raise ValueError('중복 곡 표시 설정은 켜기 또는 끄기여야 합니다.')
+        self._commit({**self.value, 'song_sort':order, 'hide_duplicates':hide_duplicates})
 
     def toggle_favorite(self, song_id):
         value = copy.deepcopy(self.value)

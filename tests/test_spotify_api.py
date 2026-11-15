@@ -140,6 +140,13 @@ class SpotifyApiTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             lyric_lines({'lyrics':{'syncType':'LINE_SYNCED','lines':[{'words':'a','startTimeMs':5000},{'words':'b','startTimeMs':3000}]}})
 
+    def test_missing_line_synced_timestamp_preserves_other_onsets_and_original(self):
+        payload={'lyrics':{'syncType':'LINE_SYNCED','lines':[{'words':'first','startTimeMs':'1000'},
+                    {'words':'untimed'}, {'words':'also untimed','startTimeMs':''},
+                    {'words':'last','startTimeMs':'3500'}]}}
+        self.assertEqual(lyric_lines(payload,8),[{'text':'first','time':1}, {'text':'untimed','time':None},
+                    {'text':'also untimed','time':None}, {'text':'last','time':3.5}])
+
     def test_same_onset_lines_merge_to_a_strictly_increasing_timeline(self):
         payload={'lyrics':{'syncType':'LINE_SYNCED','lines':[{'words':'a','startTimeMs':1000},
                   {'words':'b','startTimeMs':1000},{'words':'c','startTimeMs':3000}]}}

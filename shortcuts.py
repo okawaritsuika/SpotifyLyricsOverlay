@@ -2,13 +2,11 @@
 from copy import deepcopy
 
 ACTIONS={
-    'earlier':(1,'가사 0.25초 앞당기기'), 'later':(2,'가사 0.25초 늦추기'),
-    'previous':(3,'이전 구절'), 'next':(4,'다음 구절'), 'stamp':(5,'현재 구절 끝 / 다음으로 전환 기록'),
+    'previous':(3,'이전 구절'), 'next':(4,'다음 구절'),
     'lock':(6,'클릭 통과 켜기 / 끄기'), 'chrome':(7,'헤더 숨기기 / 복원'),
-    'transparent':(8,'배경 투명 켜기 / 끄기'), 'editor':(9,'곡 / 싱크 편집'),
-    'follow':(10,'자동 따라가기'), 'align':(11,'현재 구절을 지금에 맞추기')}
-DEFAULTS={action:{'key':key,'modifiers':3,'shift':'any'} for action,key in zip(ACTIONS,[0x25,0x27,0x26,0x28,0x0D,0x4C,0x48,0x54,0x45,0x41,0x20])}
-DEFAULTS['stamp']={'key':0x0D,'modifiers':4,'shift':'right'}
+    'transparent':(8,'배경 투명 켜기 / 끄기')}
+DEFAULTS={action:{'key':key,'modifiers':3,'shift':'any'}
+          for action,key in zip(ACTIONS,[0x26,0x28,0x4C,0x48,0x54])}
 KEY_NAMES={0x0D:'Enter',0x20:'Space',0x09:'Tab',0x1B:'Esc',0x08:'Backspace',0x2E:'Delete',0x2D:'Insert',0x24:'Home',0x23:'End',0x21:'PageUp',0x22:'PageDown',0x25:'←',0x26:'↑',0x27:'→',0x28:'↓'}
 KEY_NAMES.update({key:chr(key) for key in range(0x30,0x5B) if key<=0x39 or key>=0x41})
 KEY_NAMES.update({0x70+i:f'F{i+1}' for i in range(24)})

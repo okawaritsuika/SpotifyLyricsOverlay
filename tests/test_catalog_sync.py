@@ -12,6 +12,13 @@ from tests.test_catalog_autolink import track
 
 
 class CatalogSyncTests(unittest.TestCase):
+    def test_search_keeps_singer_version_for_guarded_catalog_matching(self):
+        self.sync.catalog=SimpleNamespace()
+        self.sync.title_keys={'union!!'}
+        self.sync.store_tracks([track(title='UNION!! (百瀬莉緒 Ver.)')], '', search=True)
+        public=json.loads((self.directory/'spotify_public_tracks.json').read_text())['tracks']
+        self.assertEqual([item['title'] for item in public],['UNION!! (百瀬莉緒 Ver.)'])
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)

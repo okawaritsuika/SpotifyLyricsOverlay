@@ -3,7 +3,7 @@ import re
 import unicodedata
 import hashlib
 
-from lyrics import Song, normalized
+from lyrics import Song, is_cinderella_no1, normalized
 from recording_context import known_duration
 
 
@@ -34,6 +34,27 @@ def title_identity(title):
     return normalized(title), kind or ('vocal:' + ':'.join(voice) if voice else '')
 
 
+def linked_edit(title, artist):
+    """Recognize credited solo remixes separately from the full recording."""
+    if is_cinderella_no1(title):return None
+    from reader_bridge import _trailing_group
+    from saved_annotations import _artist_identity
+
+    title = unicodedata.normalize('NFKC', title).strip()
+    solo = re.search(r'\s+[-–—]\s+(.+)$', title)
+    group = _trailing_group(title)
+    credit = group[1] if group else solo[1] if solo else ''
+    singer = re.fullmatch(r'(.+?)\s*ソロ[・･]?\s*リミックス', credit)
+    if singer:
+        performer = _artist_identity(artist)
+        if not performer or _artist_identity(singer[1]) != performer:return None
+        base = group[0] if group else title[:solo.start()]
+        return normalized(base), 'solo-remix'
+    if _arrangement(title):return None
+    base, edit = title_identity(title)
+    return base, edit if edit in ('game', 'tv', 'short') else 'full'
+
+
 def _work_evidence(source, playback):
     from work_reuse import same_work
     return same_work(source, playback)
@@ -47,12 +68,22 @@ def _arrangement(title):
 
 def compatibility(source, playback):
     """Text permits a 30 s length difference; a borrowed clock permits 2 s."""
+    if is_cinderella_no1(playback.title) or is_cinderella_no1(source['title']):return None
     saved_duration = known_duration(source.get('duration'))
     duration = known_duration(playback.duration)
     if saved_duration is None or duration is None:return None
     title, edit = title_identity(source['title'])
     requested, target_edit = title_identity(playback.title)
-    if not title or title != requested:return None
+    if not title:return None
+    if title != requested:
+        from work_reuse import arrangement_text_matches
+        if not arrangement_text_matches(source, playback):return None
+        # Concert arrangements can have a much longer intro or a different
+        # tempo. Only the verified work's words are reusable, never its clock
+        # (including a tracking hint), even when the lengths happen to agree.
+        return {'duration_difference': abs(saved_duration-duration),
+                'timing_compatible': False, 'tracking_compatible': False,
+                'same_artist': False, 'work_evidence': True}
     artist = normalized(source['artist'])
     requested_artist = normalized(playback.artist)
     if artist and artist != requested_artist:
@@ -156,10 +187,103 @@ def related_reference(lines, candidates):
     return max(clocks, key=lambda value: sum(stamp is not None for stamp in value), default=None)
 
 
+def _anniversary_clocks(candidates, playback):
+    from types import SimpleNamespace
+    from work_reuse import anniversary_work
+
+    work = anniversary_work(playback) if candidates else ''
+    if not work:return []
+    clocks = []
+    for candidate in candidates:
+        compatible = candidate['compatibility']
+        if (not compatible.get('work_evidence') or compatible['duration_difference'] > 2
+                or candidate.get('borrowed') or anniversary_work(SimpleNamespace(**candidate)) != work):
+            continue
+        direct = candidate.get('direct')
+        saved = _saved_timing(candidate)
+        if direct and direct['source'] == 'Spotify':
+            lines, times, priority = direct['lines'], direct['times'], 2
+        elif saved:
+            lines, priority = candidate['lines'], 1
+            times = [None if stamp is None else stamp + saved.get('offset', 0) for stamp in saved['times']]
+        elif direct and direct['source'] != '저장 캐시':
+            lines, times, priority = direct['lines'], direct['times'], 0
+        else:
+            continue
+        if (sum(stamp is not None for stamp in times) < .8 * len(lines)
+                or any(stamp is not None and not 0 <= stamp < playback.duration for stamp in times)):
+            continue
+        rank = (priority, -compatible['duration_difference'], candidate['key'])
+        clocks.append((rank, lines, times, candidate))
+    return clocks
+
+
+def anniversary_reference(lines, clocks):
+    """Use one nearby recording whose lyric onsets can be mapped in order."""
+    from lyric_match import align_phrases, match_lyrics, phrase_key
+
+    target = [line.original for line in lines]
+    best, coverage = None, 0
+    for _, source, times, _ in sorted(clocks, key=lambda clock: clock[0], reverse=True):
+        original = [line.original for line in source]
+        match = match_lyrics(original, target)
+        if match:
+            onsets = {}
+            for start, stamp in zip(match.source_offsets, times):
+                if stamp is not None:onsets.setdefault(match.source_to_target[start], stamp)
+            mapped = [onsets.get(start) for start in match.target_offsets]
+        else:
+            blocks = align_phrases(original, target)
+            shared = sum(len(phrase_key(row)) for block in blocks for row in target[block.right:block.right_end])
+            size = max(sum(len(phrase_key(row)) for row in original), sum(len(phrase_key(row)) for row in target))
+            if not size or shared < .85 * size:
+                continue
+            mapped = [None] * len(lines)
+            for block in blocks:mapped[block.right] = times[block.left]
+        matched = sum(stamp is not None for stamp in mapped)
+        if matched == len(lines):return mapped
+        minimum = .6 if match else .85
+        if matched > coverage and matched >= max(min(2, len(lines)), minimum * len(lines)):
+            best, coverage = mapped, matched
+    return best
+
+
 def select_related(candidates, playback):
+    clocks = _anniversary_clocks(candidates, playback)
+    selected = _select_related(candidates, playback)
+    if clocks and selected is None:
+        # When provider documents differ, a verified anniversary recording
+        # can supply a starting document for a version with no local text.
+        for clock in sorted(clocks, key=lambda clock: clock[0], reverse=True):
+            candidate = clock[3]
+            if anniversary_reference(candidate['lines'], [clock]) is not None:
+                selected = _select_related([candidate], playback)
+                break
+    if selected and clocks:selected['anniversary_clocks'] = clocks
+    return selected
+
+
+def _select_related(candidates, playback):
     """Fail closed on text or timing conflicts; never scale saved timestamps."""
     if not candidates:return None
-    if len({''.join(_originals(candidate['lines'])) for candidate in candidates}) != 1:return None
+    originals={''.join(_originals(candidate['lines'])) for candidate in candidates}
+    text_variant=len(originals)>1
+    if text_variant:
+        # Known performances can spell the same work differently. A uniquely
+        # closest recording length can choose its document, but cannot identify
+        # a borrowed clock or break a tie between divergent lyric documents.
+        if not all(candidate['compatibility'].get('work_evidence')
+                   and not candidate['compatibility'].get('same_artist',True)
+                   for candidate in candidates):return None
+        def cut(title):
+            edit=title_identity(title)[1]
+            return edit if edit in ('game','tv','short') else 'full'
+        if any(cut(candidate['title'])!=cut(playback.title) for candidate in candidates):return None
+        nearest=min(candidate['compatibility']['duration_difference'] for candidate in candidates)
+        if nearest>2:return None
+        candidates=[candidate for candidate in candidates
+                    if abs(candidate['compatibility']['duration_difference']-nearest)<.01]
+        if len({''.join(_originals(candidate['lines'])) for candidate in candidates})!=1:return None
     def score(candidate):
         timing = _saved_timing(candidate)
         provider = candidate.get('direct')
@@ -168,7 +292,8 @@ def select_related(candidates, playback):
         return (candidate['compatibility']['timing_compatible'], bool(timing), count,
                 sum(bool(line.reading) + bool(line.korean) for line in candidate['lines']),
                 candidate.get('saved_at', 0))
-    selected = max(candidates, key=score)
+    selected = max(candidates, key=lambda candidate:(
+        sum(bool(line.korean) for line in candidate['lines'])/len(candidate['lines']),score(candidate))) if text_variant else max(candidates,key=score)
     lines = selected['lines']
     from background_lyrics import mapped_times
     from lyric_annotations import merge_verified_annotations
@@ -205,14 +330,14 @@ def select_related(candidates, playback):
         return False
     conflict = conflicting(clocks)
     tracking_conflict = conflicting(tracking_clocks)
-    if conflict:direct = timing = None
+    if conflict or text_variant:direct = timing = None
     tracking_times = (max(tracking_clocks, key=lambda values: sum(stamp is not None for stamp in values))
-                      if tracking_clocks and not tracking_conflict else None)
+                      if tracking_clocks and not tracking_conflict and not text_variant else None)
     return {'lines': lines, 'direct': direct, 'timing': timing, 'tracking_times': tracking_times,
             'saved_at': selected.get('saved_at', 0),
             'reuse': {'source_key': selected['key'], 'source_duration': selected['duration'],
                       'duration_difference': selected['compatibility']['duration_difference'],
-                      'timing_compatible': selected['compatibility']['timing_compatible'] and not conflict,
-                      'timing_conflict': conflict, 'tracking_conflict': tracking_conflict,
+                      'timing_compatible': selected['compatibility']['timing_compatible'] and not conflict and not text_variant,
+                      'timing_conflict': conflict, 'tracking_conflict': tracking_conflict or text_variant,
                       'same_artist': selected['compatibility'].get('same_artist', True),
                       'work_evidence': selected['compatibility'].get('work_evidence')}}

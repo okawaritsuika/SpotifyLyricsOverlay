@@ -1,7 +1,7 @@
 """Fill omitted rows only when the complete saved sequence is present, in order."""
 from lyrics import Line,normalized
 from lyric_annotations import match_annotations
-from timing_quality import timing_origins,automatic_times
+from timing_quality import timing_origins,automatic_times,cleared_rows
 
 
 def complete_lines(saved,supplied,minimum=2):
@@ -39,6 +39,9 @@ def expand_timing(timing,indices):
     for key,values in (('times',timing['times']),('origins',timing_origins(timing)),
                        ('automatic_times',automatic_times(timing))):
         result[key]=[values[i] if i is not None else None for i in indices]
+    cleared=cleared_rows(timing)
+    if cleared:
+        result['cleared_rows']=[i for i,old in enumerate(indices) if old in cleared]
     result.pop('fingerprint',None)
     result.pop('audio_finalized',None)
     result.pop('analyzed_ranges',None)

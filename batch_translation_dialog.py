@@ -296,15 +296,21 @@ class BatchTranslationDialog:
             self.progress[batch_id] = result['remaining']
             self.update_choices(self.batch_choice.current())
         mode = '자동 적용' if automatic else '직접 적용'
+        changed_latin = result.get('changed_latin_lines', 0)
         if result['lines']:
             outcome = f'새 번역 저장 완료 · {result["songs"]}곡 · {result["lines"]}구절'
+        elif changed_latin:
+            outcome = '영어 원문 확인 필요'
         elif result['preserved_lines']:
             outcome = f'기존 번역 유지 · {result["received_songs"]}곡 · {result["received_lines"]}구절 확인'
         else:
             outcome = f'이미 반영된 답변 · {result["received_songs"]}곡 · {result["received_lines"]}구절 확인'
         self.result_status.set(f'{mode} · {outcome}\n이미 반영 {result["already_lines"]}구절 · 기존 번역 유지 {result["preserved_lines"]}구절 · 이 묶음 남음 {result["remaining"]}구절')
         self.update_saved_summary(result)
-        self.status.set('다음 묶음의 지시문을 복사하거나 새로고침해 남은 번역을 모으세요.')
+        if changed_latin:
+            self.status.set(f'영어 표현이 바뀐 {changed_latin}구절은 보류했습니다. 새로고침해 남은 구절을 다시 요청하세요.')
+        else:
+            self.status.set('다음 묶음의 지시문을 복사하거나 새로고침해 남은 번역을 모으세요.')
 
     def cleanup(self):
         if self.closed:

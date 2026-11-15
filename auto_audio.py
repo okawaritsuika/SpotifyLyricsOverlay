@@ -7,12 +7,14 @@ import time
 from audio_job import AudioJob, ready
 from audio_progress import AudioProgress
 from audio_diagnostics import record_failure
-from audio_alignment import ALIGNMENT_METHOD,INCREMENTAL_METHOD,normalize_ranges,uncovered_ranges
+from audio_alignment import INCREMENTAL_METHOD,bounded_gaps,normalize_ranges,uncovered_ranges
 from audio_sync import merge_candidates
 from storage import atomic_json,read_json,validate_times
 from timing_quality import timing_origins,automatic_times
 from live_timing import LiveTimingStore
 from sync import estimate_times,active_line
+from japanese_alignment import DEFAULT_PROFILE,PROFILES,merge_review_results,review_ranges
+from recording_context import recording_key
 
 
 class AutoMailbox:
@@ -21,12 +23,15 @@ class AutoMailbox:
 
 
 class AutoAnalyzer:
-    def __init__(self,base,store,messages,job_factory=AudioJob,realtime_device='cpu'):
+    def __init__(self,base,store,messages,job_factory=AudioJob,realtime_device='cpu',alignment=None,realtime_enabled=True):
         self.base,self.store=Path(base),store
         self.live_timing=LiveTimingStore(store.directory)
         self.mailbox=AutoMailbox(messages)
         self.job_factory=job_factory
+        self.capture_cache=store.directory/'audio_captures'
         self.realtime_device=realtime_device
+        self.realtime_enabled=realtime_enabled
+        self.alignment=alignment
         self.jobs={}
         self.progress={}
         self.last_progress=None
@@ -48,10 +53,8 @@ class AutoAnalyzer:
         self.prefetch_generation=-1
         if not enabled:
             for job in tuple(self.jobs):
-                if not job.cancelled.is_set():
-                    job.cancelled.set()
-                    threading.Thread(target=job.cancel,daemon=True,name='audio-disabled-cancel').start()
-                self.progress[job].update({'kind':'progress'},cancelled=True)
+                if getattr(job,'playlist_analysis',False) is True:continue
+                self._cancel_job(job,'disabled','audio-disabled-cancel')
                 self.seen.discard(job.analysis_key)
                 self.attempts.pop(job.analysis_key,None)
                 self.retryable.discard(job.analysis_key)
@@ -106,9 +109,7 @@ class AutoAnalyzer:
         for key in keys:self.attempts.pop(key,None)
         for job in tuple(self.jobs):
             if job.analysis_key[0]!=playback.key or job.cancelled.is_set():continue
-            job.cancelled.set()
-            self.progress[job].update({'kind':'progress'},cancelled=True)
-            threading.Thread(target=job.cancel,daemon=True,name='audio-external-sync-cancel').start()
+            self._cancel_job(job,'external_sync','audio-external-sync-cancel')
         if self.enabled:self.status='확인된 싱크 사용 · 자동 분석 생략 · '+playback.title
 
     def _observe_duration(self,playback):
@@ -126,9 +127,7 @@ class AutoAnalyzer:
             if job.analysis_key[0]!=playback.key or job.cancelled.is_set():continue
             if abs(job.recording_duration-duration)<=2:continue
             changed=True
-            job.cancelled.set()
-            self.progress[job].update({'kind':'progress'},cancelled=True)
-            threading.Thread(target=job.cancel,daemon=True,name='audio-duration-cancel').start()
+            self._cancel_job(job,'duration_changed','audio-duration-cancel')
         if changed:
             keys={key for key in self.seen|self.retryable|set(self.attempts) if key[0]==playback.key}
             self.seen.difference_update(keys);self.retryable.difference_update(keys)
@@ -140,11 +139,14 @@ class AutoAnalyzer:
                      and getattr(job,'waiting_for_lyrics',False) and not job.cancelled.is_set()
                      and self.jobs[job] not in ('error','discarded')),None)
 
-    def _cancel_pending_capture(self,job):
+    def _cancel_job(self,job,reason,thread_name):
         if job.cancelled.is_set():return
         job.cancelled.set()
-        self.progress[job].update({'kind':'progress'},cancelled=True)
-        threading.Thread(target=job.cancel,daemon=True,name='audio-prefetch-cancel').start()
+        self.progress[job].update({'kind':'progress','cancellation_reason':reason},cancelled=True)
+        threading.Thread(target=job.cancel,daemon=True,name=thread_name).start()
+
+    def _cancel_pending_capture(self,job,reason):
+        self._cancel_job(job,reason,'audio-prefetch-cancel')
 
     def _prefetch(self,playback,position):
         if (self._pending_capture(playback) or self.prefetch_generation==self.transport_generation
@@ -154,9 +156,11 @@ class AutoAnalyzer:
             self.status='분석 대기가 가득 차 이번 곡은 건너뜁니다.'
             return
         self.prefetch_generation=self.transport_generation
-        options={'defer_lyrics':True,'max_start_position':10,'incremental':True}
+        options={'defer_lyrics':True,'max_start_position':10,'incremental':True,'capture_cache':self.capture_cache,
+                 'realtime_enabled':self.realtime_enabled}
         if position>10:options['start_index']=0
         if self.realtime_device in ('auto','cuda'):options['realtime_device']=self.realtime_device
+        if self.alignment:options['alignment']=self.alignment
         try:job=self.job_factory(self.base,None,playback,self.mailbox,**options)
         except Exception as error:
             self.status=f'미리 수집 시작 실패 ({type(error).__name__}) · 가사를 찾으면 다시 시도합니다.'
@@ -171,7 +175,63 @@ class AutoAnalyzer:
         progress.text='가사 검색 중 · 재생음을 먼저 수집하고 있습니다.'
         self.status=progress.text+' · '+playback.title
 
-    def observe(self,song,playback,memory_only=False,external_sync=False,awaiting_sync=False,tracking_times=None):
+    def _observe_bounded(self,song,playback,memory_only,timing,new_start):
+        times=list(timing['times'])
+        validate_times(times,len(song.lines))
+        # Manual global offsets can move an onset outside this recording.
+        times=[stamp if stamp is None or stamp<playback.duration else None for stamp in times]
+        gaps=bounded_gaps(times,playback.duration)
+        signature=self.live_signatures[song.id] if memory_only else song.fingerprint
+        capturing=False
+        for job in tuple(self.jobs):
+            if job.analysis_key[0]!=playback.key or job.cancelled.is_set():continue
+            bounds=gaps.get(getattr(job,'bounded_window',None))
+            if job.analysis_key[1]!=signature or bounds is None or bounds!=job.bounded_rows:
+                self._cancel_job(job,'bounded_sync_changed','audio-bounded-sync-cancel')
+                self.seen.discard(job.analysis_key);self.retryable.discard(job.analysis_key)
+                self.attempts.pop(job.analysis_key,None)
+            elif not getattr(job,'capture_complete',False):
+                capturing=True
+        if not gaps:
+            if timing.get('reference'):status='같은 곡 참고 싱크 사용'
+            else:status=('확인된 싱크 사용' if all(stamp is not None for stamp in times) else
+                         '자동 분석에 필요한 양쪽 기준 시각 없음')
+            self.status=status+' · '+playback.title
+            return
+        if capturing or not playback.playing or not playback.has_timeline or len(self.jobs)>=3:return
+        if new_start:
+            retry={key for key in self.retryable if len(key)==3 and key[:2]==(playback.key,signature)
+                   and self.attempts.get(key,0)<2}
+            self.seen.difference_update(retry);self.retryable.difference_update(retry)
+        position=playback.position()
+        for window,rows in gaps.items():
+            key=(playback.key,signature,window)
+            if not window[0]-3<=position<=window[0]+.5:continue
+            if any(job.analysis_key==key and not job.cancelled.is_set() for job in self.jobs):continue
+            if key in self.seen:continue
+            self.seen.add(key);self.attempts[key]=self.attempts.get(key,0)+1
+            options={'incremental':True,'memory_only':memory_only,'confirmed_times':times,
+                     'capture_window':window,'row_kinds':list(timing['row_kinds'])}
+            if self.alignment:options['alignment']=self.alignment
+            if self.realtime_device in ('auto','cuda'):options['realtime_device']=self.realtime_device
+            try:job=self.job_factory(self.base,song,playback,self.mailbox,**options)
+            except Exception as error:
+                self.retryable.add(key)
+                self.status=f'미확정 구간 수집 실패 ({type(error).__name__}) · '+song.title
+                return
+            job.analysis_key=key
+            job.recording_duration=playback.duration
+            job.transport_generation=self.transport_generation
+            job.bounded_window=window
+            job.bounded_rows=rows
+            self.jobs[job]='waiting'
+            self.progress[job]=AudioProgress(song.title,bounded=True)
+            self.progress[job].text='두 기준 시각 사이의 Spotify 재생음을 수집합니다.'
+            self.status='미확정 구간만 수집 · '+song.title
+            return
+
+    def observe(self,song,playback,memory_only=False,external_sync=False,awaiting_sync=False,tracking_times=None,
+                merged_timing=None):
         if self.finishing:return
         if song and memory_only:self.live_signatures[song.id]=self.signature(song,True)
         position=playback.position()
@@ -184,8 +244,15 @@ class AutoAnalyzer:
         seeked=bool(previous and not changed and abs(position-previous[1]-(now-previous[3] if previous[2] else 0))>2)
         new_start=changed or duration_changed or resumed or seeked
         if new_start:self.transport_generation+=1
+        bounded_clock=(self.enabled and song and merged_timing and playback.has_timeline and 10<=playback.duration<=900
+                       and any(stamp is not None for stamp in merged_timing['times']))
         for job in tuple(self.jobs):
-            if (job.analysis_key[0]!=playback.key and self.jobs[job]=='waiting' and not job.cancelled.is_set()
+            if (getattr(job,'bounded_window',None) and job.analysis_key[0]==playback.key
+                    and not bounded_clock and not job.cancelled.is_set()):
+                self._cancel_job(job,'bounded_sync_changed','audio-bounded-sync-cancel')
+                self.seen.discard(job.analysis_key);self.retryable.discard(job.analysis_key)
+                self.attempts.pop(job.analysis_key,None)
+            elif (job.analysis_key[0]!=playback.key and self.jobs[job]=='waiting' and not job.cancelled.is_set()
                     and not getattr(job,'capture_started',False) and not getattr(job,'capture_complete',False)):
                 # A skipped automatic request must not keep waiting three
                 # minutes for that old song. Retain ownership until finished
@@ -194,11 +261,17 @@ class AutoAnalyzer:
                 self.seen.discard(job.analysis_key)
                 self.retryable.discard(job.analysis_key)
                 self.attempts.pop(job.analysis_key,None)
-                self._cancel_pending_capture(job)
+                self._cancel_pending_capture(job,'obsolete_waiting')
             elif (getattr(job,'waiting_for_lyrics',False) and
                     (job.analysis_key[0]!=playback.key or not playback.playing or seeked or duration_changed)):
-                self._cancel_pending_capture(job)
+                reason=('track_changed' if job.analysis_key[0]!=playback.key else
+                        'duration_changed' if duration_changed else
+                        'playback_paused' if not playback.playing else 'playback_seeked')
+                self._cancel_pending_capture(job,reason)
         if changed and self.enabled:self.status='현재 곡 가사·분석 준비 확인 중 · '+playback.title
+        if bounded_clock:
+            self._observe_bounded(song,playback,memory_only,merged_timing,new_start)
+            return
         if external_sync:
             self._use_external_sync(playback)
             return
@@ -234,6 +307,12 @@ class AutoAnalyzer:
             else:draft={}
         partial=bool(draft.get('partial') and count<len(song.lines) and not timing.get('completion_pending'))
         ranges=self.retained_ranges(timing,playback.duration)
+        if draft.get('review_only') and isinstance(self.alignment,dict):
+            profile=self.alignment.get('profile')
+            review=review_ranges(draft,signature,recording_key(playback.title,playback.artist,playback.album),
+                                self.alignment.get('engine'),playback.duration,
+                                profile=profile if profile in PROFILES else DEFAULT_PROFILE)
+            ranges=normalize_ranges(ranges+review,playback.duration)
         # Older partial captures saved no explicit interval. Retain only the
         # span bracketed by their confirmed audio onsets, never guess its tail.
         if not ranges and partial and draft.get('captured_seconds',0)>=10:
@@ -249,7 +328,7 @@ class AutoAnalyzer:
             if continuing:
                 next_range=next(((start,end) for start,end in remaining if end-max(start,position)>=10),None)
                 if next_range is None:
-                    if pending:self._cancel_pending_capture(pending)
+                    if pending:self._cancel_pending_capture(pending,'saved_intervals')
                     self.status=f'확인 {count}/{len(song.lines)}구절 · 저장 구간 유지 · 다음 재생에서 미분석 구간 이어 분석'
                     return
                 if pending is None and position<next_range[0]-2:
@@ -263,7 +342,7 @@ class AutoAnalyzer:
             exhausted=self.attempts[key]>=2
             capture_start=getattr(pending,'capture_start_position',position) if pending else position
             if capture_start>3 or exhausted:
-                if pending:self._cancel_pending_capture(pending)
+                if pending:self._cancel_pending_capture(pending,'saved_partial')
                 self.seen.add(key)
                 if not exhausted:self.retryable.add(key)
                 self.status=f'확인 {count}/{len(song.lines)}구절 · 부분 분석 · '+(
@@ -271,7 +350,7 @@ class AutoAnalyzer:
                 return
             analyzed=False
         if analyzed or all(origin=='manual' for origin in origins):
-            if pending:self._cancel_pending_capture(pending)
+            if pending:self._cancel_pending_capture(pending,'saved_candidate' if candidate_only else 'saved_sync')
             self.seen.add(key)
             if candidate_only:
                 detail='저장된 분석 후보 · '+('기존 시간표 유지' if memory_only else '분석창에서 확인')
@@ -287,10 +366,12 @@ class AutoAnalyzer:
         confirmed=[round(t+timing.get('offset',0),3) if t is not None and 0<=t+timing.get('offset',0)<playback.duration else None
                    for t in timing['times']]
         options={'incremental':True,'confirmed_times':confirmed,'analyzed_ranges':ranges,
-                 'memory_only':memory_only,'max_start_position':10}
+                 'memory_only':memory_only,'max_start_position':10,'capture_cache':self.capture_cache,
+                 'realtime_enabled':self.realtime_enabled}
         if continuing:options['capture_from']=max(0,next_range[0]-2)
         if self.realtime_device in ('auto','cuda'):options['realtime_device']=self.realtime_device
-        if (memory_only or pending) and position>10:
+        if self.alignment:options['alignment']=self.alignment
+        if (memory_only or pending or isinstance(self.alignment,dict) and self.alignment.get('realtime')) and position>10:
             try:
                 validate_times(tracking_times,len(song.lines))
                 if any(stamp is None or stamp>=playback.duration for stamp in tracking_times):raise ValueError
@@ -335,8 +416,8 @@ class AutoAnalyzer:
             if (getattr(job,'incremental',False) and getattr(job,'song',None)
                     and not getattr(job,'waiting_for_lyrics',False)):
                 try:job.finish_capture()
-                except OSError:self._cancel_pending_capture(job)
-            else:self._cancel_pending_capture(job)
+                except OSError:self._cancel_pending_capture(job,'shutdown_failed')
+            else:self._cancel_pending_capture(job,'shutdown')
         return bool(self.jobs)
 
     def receive(self,job,event,songs):
@@ -362,7 +443,8 @@ class AutoAnalyzer:
                     and job.transport_generation<self.transport_generation and self.attempts.get(job.analysis_key,0)<2):
                 self.seen.discard(job.analysis_key)
             return None
-        if job.cancelled.is_set() or not self.enabled: return None
+        playlist = getattr(job,'playlist_analysis',False) is True
+        if job.cancelled.is_set() or not (self.enabled or playlist): return None
         if kind=='progress':
             self.jobs[job]=event.get('state','analyzing')
             if self.jobs[job]=='unmatched':self.retryable.add(job.analysis_key)
@@ -403,11 +485,49 @@ class AutoAnalyzer:
             result={**event['result'],'fingerprint':signature,
                     'model':event['result'].get('model','faster-whisper-small')}
             current=self.timing(song,memory_only)
+            bounded=getattr(job,'bounded_window',None)
+            if bounded:
+                if not memory_only and self.last_playback and job.analysis_key[0]!=self.last_playback[0]:
+                    progress.update({'kind':'progress','state':'discarded','text':'다른 음원의 구절과 섞이지 않도록 결과를 제외했습니다.'})
+                    return None
+                validate_times(result['times'],len(song.lines))
+                left,right=job.bounded_rows
+                if any(stamp is not None and not (left<index<right and bounded[0]<stamp<bounded[1])
+                       for index,stamp in enumerate(result['times'])):
+                    progress.update({'kind':'progress','state':'discarded','text':'기준 시각을 벗어난 분석 결과를 제외했습니다.'})
+                    return None
+            if result.get('review_only'):
+                validate_times(result['times'],len(song.lines))
+                recording=recording_key(*job.analysis_key[0].split('\0'))
+                result['recording_key']=recording
+                if result.get('line_alignment') and result.get('incremental'):
+                    previous=read_json(self.draft_path(song,memory_only),{})
+                    ranges=review_ranges(previous,signature,recording,result.get('engine'),result['duration'],
+                                         profile=result.get('romaji_profile',DEFAULT_PROFILE))
+                    if ranges and previous.get('line_alignment'):
+                        result=merge_review_results(previous,result,ranges)
+                if memory_only:
+                    result={key:value for key,value in result.items() if key != 'fallback_reason'}
+                persist(lambda:atomic_json(self.draft_path(song,memory_only),result))
+                if playlist:job.analysis_committed='review'
+                progress.update(event)
+                count=sum(stamp is not None for stamp in result['times'])
+                if result.get('partial'):
+                    self.retryable.add(job.analysis_key)
+                    if result.get('analyzed_ranges'):
+                        self.attempts[job.analysis_key]=0
+                progress.text=f'검토용 싱크 {count}/{len(song.lines)}구절 · 기존 시간표 사용'
+                if result.get('fallback_reason'):
+                    progress.text+=' · stable-ts 폴백'
+                if result.get('refinement_warning'):
+                    progress.text+=' · pyshiro 오류, RomajiASR 단독 후보'
+                self.job_status(job,song.title+' · '+progress.text)
+                return None
             incremental=result.get('incremental') is True
             new_ranges=normalize_ranges(result.get('analyzed_ranges',[]),job.recording_duration) if incremental else []
             old_ranges=self.retained_ranges(current,job.recording_duration)
             combined=normalize_ranges(old_ranges+new_ranges,job.recording_duration) if incremental else []
-            updated,added=merge_candidates(current,result['times'],replace_audio=not incremental and result.get('method') in ('bounded-gap-alignment-v1',ALIGNMENT_METHOD))
+            updated,added=merge_candidates(current,result['times'])
             if memory_only:
                 result={key:result[key] for key in ('times','coverage','confidence','matched','duration','method',
                     'recovered_indices','captured_seconds','partial','fingerprint','model','incremental','analyzed_ranges') if key in result}
@@ -419,6 +539,7 @@ class AutoAnalyzer:
             acceptable=(bool(matched and new_ranges) if incremental and result.get('method')==INCREMENTAL_METHOD
                         else matched>=min(3,len(song.lines)) and matched/len(song.lines)>=.6)
             if not acceptable:
+                if playlist:job.analysis_committed='review'
                 progress.update(event)
                 progress.text='일치 구절이 적어 후보만 보관했습니다. 자동 시간표는 적용하지 않았습니다.'
                 count=sum(stamp is not None for stamp in current['times'])
@@ -429,7 +550,7 @@ class AutoAnalyzer:
                 self.job_status(job,f'{song.title} · 확인 {count}/{len(song.lines)}구절 · 일치 구절이 적어 후보만 보관했습니다.'+
                     (' 자동 시간표는 적용하지 않았습니다.' if memory_only else ' 음원 분석 창에서 확인하세요.')+detail)
                 return None
-            if added or incremental and combined!=old_ranges:
+            if added or incremental and not bounded and combined!=old_ranges:
                 backup=self.store.directory/('live_audio_backups' if memory_only else 'audio_backups')/(
                     self.live_timing.path(song).name if memory_only else song.id+'.before-gap-v1.json')
                 if not backup.exists():persist(lambda:atomic_json(backup,{
@@ -445,8 +566,12 @@ class AutoAnalyzer:
                 if memory_only:persist(lambda:self.live_timing.save(song,updated),True)
                 else:persist(lambda:self.store.save_timing(song,updated),True)
             count=sum(stamp is not None for stamp in updated['times'])
+            complete = count == len(song.lines)
+            if playlist:job.analysis_committed='complete' if complete else 'review'
             detail=''
-            if incremental and not updated.get('audio_finalized'):
+            if bounded:
+                detail=' · 미확정 구간만 분석'
+            elif incremental and not updated.get('audio_finalized'):
                 self.retryable.add(job.analysis_key)
                 if combined!=old_ranges:self.attempts[job.analysis_key]=0
                 detail=' · 들은 구간 저장 · 다음 재생에서 미분석 구간만 이어 분석'
@@ -454,6 +579,8 @@ class AutoAnalyzer:
                 detail=' · 부분 분석 · '+('자동 보완 1회 종료 · 직접 보정 가능'
                     if self.attempts.get(job.analysis_key,0)>=2 else '처음부터 재생 시 한 번 보완')
             elif count<len(song.lines):detail=' · 부분 싱크 · 빈 구절은 추정 또는 직접 보정'
+            if complete and 'capture_retry_needed' in event['result'] and not job.release_retry_capture():
+                detail+=' · 재분석용 데이터 정리 실패'
             progress.update(event)
             progress.text=f'확인 {count}/{len(song.lines)}구절 · 자동 분석 {added}구절 저장 · 수동 기록 보존'+detail
             self.job_status(job,song.title+' · '+progress.text)

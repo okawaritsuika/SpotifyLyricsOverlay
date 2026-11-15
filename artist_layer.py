@@ -306,7 +306,12 @@ class ArtistLayer:
         above=api.GetWindow(self._owner,3)  # GW_HWNDPREV
         flags=0x0001|0x0002|0x0010|0x0040|0x0200  # no size/move/activate/owner-z; show
         if above==self._hwnd:flags|=0x0004  # already correctly ordered
-        _checked(api.SetWindowPos(self._hwnd,above,0,0,0,0,flags))
+        if not api.SetWindowPos(self._hwnd,above,0,0,0,0,flags):
+            error=ctypes.get_last_error()
+            if error!=5:raise ctypes.WinError(error)
+            # Another process can own the adjacent window. Windows keeps this
+            # owned layer above its owner even when we retain the current order.
+            _checked(api.SetWindowPos(self._hwnd,None,0,0,0,0,flags|0x0004))
         self._visible=True
         if self._poll_task is None:self._poll_task=self._scheduler.after(16,self._flush_events)
 

@@ -6,11 +6,26 @@ import tkinter as tk
 import unittest
 from unittest.mock import patch
 
-from app import LyricsApp
+from app import LyricsApp, display_translation
 from batch_translation import BatchTranslationStore
 from lyrics import Line, Song
 from media import Playback
 from storage import Store
+
+
+class EnglishDisplayTests(unittest.TestCase):
+    def test_english_only_prefers_exact_original_without_duplication(self):
+        line = Line('True & False!', '트루 앤 폴스', '참과 거짓!')
+        self.assertEqual(display_translation(line), line.original)
+        self.assertEqual(display_translation(line, original_visible=True), '')
+
+    def test_mixed_line_uses_original_until_english_is_preserved(self):
+        original = '駆けあがれWonder Scale'
+        invalid = Line(original, '', '달려 올라가, 경이로운 음계를')
+        corrected = Line(original, '', '달려 올라가, Wonder Scale을')
+        self.assertEqual(display_translation(invalid), original)
+        self.assertEqual(display_translation(invalid, original_visible=True), '')
+        self.assertEqual(display_translation(corrected, original_visible=True), corrected.korean)
 
 
 class BatchTranslationOverlayTests(unittest.TestCase):
@@ -86,6 +101,29 @@ class BatchTranslationOverlayTests(unittest.TestCase):
         self.assertEqual(self.app.display_lines[1].korean,'새 번역 2')
         self.assertEqual(self.app.song.fingerprint,self.song.fingerprint)
 
+    def test_reviewed_translations_show_localized_calls_with_corrected_originals(self):
+        self.app.settings.setdefault('lyric_sources', {})[self.song.id] = {'user_override': True}
+        song = Song(self.song.id, self.song.title, self.song.artist, self.song.album, (
+            Line('やるじゃない！ Yeah！', '', '제법이잖아! 예!'),
+            Line('あたしもだよ！', '', '나도 좋아해! 예~!'),
+            Line('Oh Yeah', '', '오 예!'),
+        ))
+        self.app.songs = [song]
+        self.store.save_timing(song, {'times': [10, 20, 30], 'offset': 0})
+        self.app.select_song(song)
+        self.app.lyric_text_edits.save(1, 'あたしもだよ！ Yeah~!')
+        self.app.open_manual_sync(search=False)
+        dialog = self.app.manual_sync_dialog
+        dialog.load()
+        self.app.open_editor()
+        self.assertEqual(self.app.korean_label.cget('text'), '제법이잖아! 예!')
+        self.assertEqual(dialog.rows.set('1', 'lyric'), 'あたしもだよ！ Yeah~!')
+        self.assertEqual(dialog.rows.set('1', 'translation'), '나도 좋아해! 예~!')
+        self.assertEqual(dialog.rows.set('2', 'translation'), '오 예!')
+        self.assertEqual(self.app.tree.set('1', 'original'), 'あたしもだよ！ Yeah~!')
+        self.assertEqual(self.app.tree.set('1', 'korean'), '나도 좋아해! 예~!')
+        self.assertEqual(self.app.timing['times'], [10, 20, 30])
+
     def test_all_sources_and_duplicate_recordings_are_collected_without_source_writes(self):
         self.app.lyric_cache.save(self.playback,self.lines)
         other=Playback('Cache only','Other singer','Other album',duration=120)
@@ -136,6 +174,31 @@ class BatchTranslationOverlayTests(unittest.TestCase):
         for path in (self.store.directory/'lyrics_cache').glob('*.json'):path.unlink()
         documents=BatchTranslationStore(self.store.directory).documents()
         self.assertIn('Cached replay',[doc['title'] for doc in documents])
+
+    def test_playlist_translation_matches_full_lyrics_with_other_artist_credits(self):
+        title='なんどでも笑おう - ミリオンライブ！Ver.'
+        playback=Playback(title,'MILLIONSTARS','なんどでも笑おう【ミリオンライブ！盤】',
+                          12,335.68,False,time.monotonic())
+        track={'id':'A'*22,'title':title,'artists':['春日未来','最上静香','伊吹翼'],
+               'album':'なんどでも笑おう (ミリオンライブ！盤)','duration':335.68}
+        originals=tuple(Line(line.original,'','') for line in self.lines)
+        translated=(Line(originals[0].original,'','하늘을 봐'),Line(originals[1].original,'','바람 소리를 들어'))
+        playlist=self.app.playlist_lyrics.store
+        self.assertTrue(playlist.save(track,translated,{'source':'Spotify','lines':translated,
+                                                       'times':[1,2],'provider_id':track['id']}))
+        self.assertEqual(playlist.find_annotations('なんどでも笑おう - Another Ver.',playback.album,
+                                                   tuple(row.original for row in originals)),
+                         tuple(row.korean for row in translated))
+        other={**track,'id':'B'*22,'album':'Other release'}
+        self.assertTrue(playlist.save(other,tuple(Line(row.original,'','다른 번역') for row in translated),None))
+        self.assertIsNone(playlist.find(playback))
+        self.assertEqual(playlist.find_annotations(title,playback.album,('Unrelated lyrics',)),())
+        own={'source':'Spotify','lines':originals,'times':[10,20],'provider_id':'C'*22}
+        self.assertTrue(self.app.lyric_cache.save(playback,originals,own))
+        self.app.set_playback(playback)
+        self.assertEqual(self.app.display_lines,translated)
+        self.assertEqual(self.app.direct_times(),own['times'])
+        self.assertEqual(self.app.direct_result[2]['provider_id'],own['provider_id'])
 
     def test_broken_optional_history_does_not_stop_render_or_cache(self):
         before=self.app.display_lines

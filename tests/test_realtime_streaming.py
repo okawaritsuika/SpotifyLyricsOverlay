@@ -3,11 +3,11 @@ import tempfile
 from types import SimpleNamespace
 import unittest
 from unittest.mock import Mock,patch
-import wave
 
 import numpy as np
 
-from realtime_audio import LiveWindowWriter,StreamingAligner
+from audio_capture_cache import capture_frames
+from realtime_audio import LIVE_AUDIO_FILES,LiveWindowWriter,StreamingAligner
 from realtime_lyrics import RealtimeLyricMatcher
 from storage import read_json
 
@@ -87,12 +87,11 @@ class StreamingTests(unittest.TestCase):
             for second in range(1,13):
                 writer.feed(b'\0'*32000,8000,second*8000,17,100)
             meta=read_json(Path(folder)/'live-window.json',{})
-            with wave.open(str(Path(folder)/meta['file'])) as audio:
-                self.assertEqual(audio.getnframes(),64000)
+            self.assertEqual(capture_frames(Path(folder)/meta['file']), (64000,8000,2))
             self.assertEqual(meta['start_position'],21)
             self.assertEqual(meta['end_position'],29)
             self.assertEqual(meta['observed_at'],112)
-            self.assertEqual(len(list(Path(folder).glob('*.wav'))),2)
+            self.assertEqual({path.name for path in Path(folder).glob('*.sloa')},set(LIVE_AUDIO_FILES))
 
 
 if __name__=='__main__':unittest.main()

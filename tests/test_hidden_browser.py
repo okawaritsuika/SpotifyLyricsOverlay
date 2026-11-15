@@ -30,7 +30,7 @@ def window(hidden=True):
     form.Shown=Event(form.on_shown)
     return SimpleNamespace(hidden=hidden,native=form,
                            events=SimpleNamespace(before_show=Event(),initialized=Event(),
-                                                  shown=Event(),closed=Event()))
+                                                  shown=Event(),closing=Event(),closed=Event()))
 
 
 class HiddenBrowserTests(unittest.TestCase):
@@ -99,6 +99,20 @@ class HiddenBrowserTests(unittest.TestCase):
                     options=webview.create_window.call_args.kwargs
                     self.assertEqual((options['hidden'],options['focus']),(not visible,visible))
                     self.assertEqual(target.events.initialized.handlers,[] if visible else [prepare_background_window])
+
+    def test_closing_visible_spotify_window_before_login_reports_cancellation(self):
+        with tempfile.TemporaryDirectory() as directory:
+            target=window(False);webview=ModuleType('webview')
+            webview.settings={};webview.create_window=Mock(return_value=target)
+            webview.start=Mock(side_effect=lambda *args,**kwargs:target.events.closing.fire())
+            request={'visible':True,'profile':directory}
+            with patch.dict(sys.modules,{'webview':webview}),patch('sys.stdin',io.StringIO(json.dumps(request)+'\n')),\
+                    patch('spotify_worker.emit') as emit:
+                spotify_main()
+            self.assertEqual(emit.call_args.args,('status',))
+            self.assertEqual(emit.call_args.kwargs['state'],'login_required')
+            self.assertTrue(emit.call_args.kwargs['login_cancelled'])
+            self.assertFalse(emit.call_args.kwargs['authenticated'])
 
     def test_explicit_show_restores_taskbar_focus_and_original_handler_once(self):
         target=window();module,_=self.backend();user=Mock()

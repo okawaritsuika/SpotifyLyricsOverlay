@@ -7,7 +7,8 @@ from PIL import Image, ImageDraw, ImageFont
 from pathlib import Path
 import os
 
-from artist_header import ArtistHeader, _credit_font, _credit_mask, _has_glyph
+from artist_header import ArtistHeader
+from overlay_fonts import _credit_font, _credit_mask, _has_glyph
 
 
 class ArtistHeaderTests(unittest.TestCase):
@@ -57,10 +58,24 @@ class ArtistHeaderTests(unittest.TestCase):
         primary=_credit_font(32,True)
         expected=Image.new('L',(round(primary.getlength(text))+8,48))
         ImageDraw.Draw(expected).text((4,40),text,font=primary,fill=255,anchor='ls')
-        with patch('artist_header._credit_fonts') as fallback:
+        with patch('overlay_fonts._credit_fonts') as fallback:
             actual=_credit_mask(text,32,True,40,48)
         fallback.assert_not_called()
         self.assertEqual(actual.tobytes(),expected.tobytes())
+
+    def test_japanese_font_uses_korean_fallback_for_hangul_readings(self):
+        kana,hangul='かな ','한글'
+        for bold in (False,True):
+            with self.subTest(bold=bold):
+                japanese=_credit_font(32,bold,'Yu Gothic UI')
+                korean=_credit_font(32,bold,'Malgun Gothic')
+                kana_width=japanese.getlength(kana)
+                expected=Image.new('L',(round(kana_width+korean.getlength(hangul))+8,48))
+                draw=ImageDraw.Draw(expected)
+                draw.text((4,40),kana,font=japanese,fill=255,anchor='ls')
+                draw.text((4+kana_width,40),hangul,font=korean,fill=255,anchor='ls')
+                actual=_credit_mask(kana+hangul,32,bold,40,48,'Yu Gothic UI')
+                self.assertEqual(actual.tobytes(),expected.tobytes())
 
     def test_character_voice_pair_has_no_black_matte_but_unknown_credit_keeps_outline(self):
         pair='하루카 (CV. 성우)'

@@ -1,7 +1,37 @@
 {
   "schema_version": 1,
-  "verified_at": "2026-10-02",
+  "verified_at": "2026-11-15",
   "entries": [
+    {
+      "release_id": "71807b5d-8f81-4b4c-a852-baafb5ee1035",
+      "release_title": "THE IDOLM@STER SHINY COLORS ECHOES 09",
+      "series": "shiny",
+      "source_urls": [
+        "https://shinycolors.lantis.jp/releaseinfo/laca-25115/",
+        "https://shinycolors.lantis.jp/extra/240727_1/"
+      ],
+      "recordings": [
+        {
+          "id": "f549dfd1-e05f-4f1a-8b34-5fa617e63123",
+          "title": "Migratory Echoes",
+          "artist_correction": {
+            "original_artists": ["シャイニーカラーズ"],
+            "original_artist_credit": "シャイニーカラーズ",
+            "artists": [
+              "シャイニーカラーズ", "櫻木真乃", "風野灯織", "八宮めぐる", "月岡恋鐘", "田中摩美々",
+              "白瀬咲耶", "三峰結華", "幽谷霧子", "小宮果穂", "園田智代子", "西城樹里", "杜野凛世",
+              "有栖川夏葉", "大崎甘奈", "大崎甜花", "桑山千雪", "芹沢あさひ", "黛冬優子", "和泉愛依",
+              "浅倉透", "樋口円香", "福丸小糸", "市川雛菜", "七草にちか", "緋田美琴", "斑鳩ルカ", "鈴木羽那", "郁田はるき"
+            ],
+            "artist_credit": "シャイニーカラーズ（櫻木真乃、風野灯織、八宮めぐる、月岡恋鐘、田中摩美々、白瀬咲耶、三峰結華、幽谷霧子、小宮果穂、園田智代子、西城樹里、杜野凛世、有栖川夏葉、大崎甘奈、大崎甜花、桑山千雪、芹沢あさひ、黛冬優子、和泉愛依、浅倉透、樋口円香、福丸小糸、市川雛菜、七草にちか、緋田美琴、斑鳩ルカ、鈴木羽那、郁田はるき）",
+            "source_urls": [
+              "https://shinycolors.lantis.jp/releaseinfo/laca-25115/",
+              "https://shinycolors.lantis.jp/extra/240727_1/"
+            ]
+          }
+        }
+      ]
+    },
     {
       "release_id": "b3435596-15e9-4bef-90c6-d88f06919628",
       "release_title": "283 Production MUSICAL Performance 騎士団のヴェール – Veil of Order – Music Collection",
@@ -696,6 +726,2548 @@
             ]
           }
         }
+      ]
+    },
+    {
+      "release_id": "34bb554e-f765-418e-a320-e488355fed31",
+      "release_title": "ENDLESS TOUR",
+      "series": "million",
+      "source_urls": [
+        "https://www.lantis.jp/imas/release_LACM-14961.html"
+      ],
+      "recordings": [
+        {
+          "id": "541c4ba8-da57-49f3-a495-c56f9c3b082e",
+          "title": "ENDLESS TOUR",
+          "release_when_missing_artists": [
+            "春日未来",
+            "山崎はるか",
+            "最上静香",
+            "田所あずさ",
+            "箱崎星梨花",
+            "麻倉もも"
+          ]
+        }
+      ],
+      "date": "2020-04-29",
+      "date_source_url": "https://www.lantis.jp/imas/release_LACM-14961.html",
+      "date_source_kind": "official_label"
+    },
+    {
+      "release_id": "e7c4ddb0-91d1-4b3e-b43d-650d190335b0",
+      "release_title": "346Pro IDOL selection vol.1",
+      "series": "cinderella",
+      "source_urls": ["https://imas-cinderella.com/sp/movie/"],
+      "recordings": [
+        {"id": "4c80b6bb-e5da-4550-9553-660d19c57348", "title": "Nocturne"},
+        {"id": "0df7664f-17c5-4c60-86c0-9edd4d07e9eb", "title": "Romantic Now ～For Uzuki rearrange MIX～"},
+        {"id": "994673dd-9fc3-4f01-8e7e-cbb6fbc63df7", "title": "S(mile)ING! ～For Rin rearrange MIX～"}
+      ]
+    },
+    {
+      "release_id": "28f6cd53-786c-49ca-9ad8-0a721676cba2",
+      "release_title": "346Pro IDOL selection vol.2",
+      "series": "cinderella",
+      "source_urls": ["https://imas-cinderella.com/sp/movie/"],
+      "recordings": [
+        {"id": "d80197aa-bc3f-4f28-b424-a8bc3167ae81", "title": "Never say never 〜For Anastasia rearrange MIX〜"},
+        {"id": "c077b6b3-609f-4718-95a1-527e4df052c3", "title": "shabon song"},
+        {"id": "e7a13fc3-c058-44cf-b1eb-7622dc83de8c", "title": "ミツボシ☆☆★ 〜For Minami rearrange MIX〜"},
+        {"id": "6cd456ca-63dd-4f6f-bcb4-69a54e731ad6", "title": "風色メロディ 〜For Mio rearrange MIX〜"}
+      ]
+    },
+    {
+      "release_id": "e2a248e0-370b-4502-b5e5-a23c2453bb55",
+      "release_title": "346Pro IDOL selection vol.3",
+      "series": "cinderella",
+      "source_urls": ["https://imas-cinderella.com/sp/movie/"],
+      "recordings": [
+        {"id": "b58837de-73c9-4bb1-bfd6-a1ed4463c6a4", "title": "DOKIDOKIリズム 〜For Chieri rearrange MIX〜"},
+        {"id": "ee47ba28-4a2f-404c-b140-ef5978ba79f5", "title": "あいくるしい"},
+        {"id": "e8cb3952-6f69-44a9-b0ae-15769b55e1c8", "title": "ショコラ・ティアラ 〜For Miria rearrange MIX〜"},
+        {"id": "fb56c9a9-8c3c-4d7c-b6f4-7c96a2f1be0b", "title": "ヴィーナスシンドローム 〜For Ranko rearrange MIX〜"}
+      ]
+    },
+    {
+      "release_id": "2b93ca0a-52be-4a7f-b0b2-3cef1b29b7c5",
+      "release_title": "346Pro IDOL selection vol.4",
+      "series": "cinderella",
+      "source_urls": ["https://imas-cinderella.com/sp/movie/"],
+      "recordings": [
+        {"id": "9929b8dd-5f8e-4a58-8ccc-918912f010df", "title": "Lunatic Show"},
+        {"id": "440cd8be-97b0-423a-ba9c-42340497d290", "title": "おねだり Shall We 〜? 〜For Kanako rearrange MIX〜"},
+        {"id": "45d7c1c4-01dc-4584-89c4-fe20c02c483a", "title": "ましゅまろ☆キッス 〜For Riina rearrange MIX〜"},
+        {"id": "af44c3ee-9749-40ee-8f8e-7b60a4017abd", "title": "華蕾夢ミル狂詩曲〜魂ノ導〜 〜For Anzu rearrange MIX〜"}
+      ]
+    },
+    {
+      "release_id": "747ac662-4983-4371-9d30-59bcb8581635",
+      "release_title": "346Pro IDOL selection vol.5",
+      "series": "cinderella",
+      "source_urls": ["https://imas-cinderella.com/sp/movie/"],
+      "recordings": [
+        {"id": "b8600f24-d51e-48e1-8ee4-cf06fd706041", "title": "Flip Flop"},
+        {"id": "3a980f48-50a9-4dc0-980a-daf88841ecd1", "title": "Twilight Sky 〜For Rika rearrange MIX〜"},
+        {"id": "649393e6-96a8-4762-a89c-28b4f49ecaf7", "title": "You're stars shine on me 〜For Miku rearrange MIX〜"},
+        {"id": "b925cf66-624d-4687-9a4c-8d4787be2620", "title": "あんずのうた 〜For Kirari rearrange MIX〜"}
+      ]
+    },
+    {
+      "release_id": "4442a0df-a936-41f4-9383-aee38202f62d",
+      "release_title": "Blooming Days",
+      "series": "cinderella",
+      "source_urls": ["https://columbia.jp/idolmaster/imasnews/kanshasai2019.html"],
+      "recordings": [
+        {"id": "ef54744f-2ada-4fbf-b774-8e505908286b", "title": "Blooming Days (オリジナル・カラオケ)"},
+        {"id": "4a20942b-47ec-4a59-8aef-40edb3855403", "title": "Blooming Days (五十嵐響子ソロ・リミックス)"},
+        {"id": "d4961bf0-9cea-462f-a928-ee296a8d1116", "title": "Blooming Days (早坂美玲ソロ・リミックス)"},
+        {"id": "a0fe39f5-9f09-45d6-96c0-28174007e960", "title": "Blooming Days (緒方智絵里ソロ・リミックス)"},
+        {"id": "8dfcb6a0-ad8a-4d9d-b588-63a81781d693", "title": "Blooming Days (道明寺歌鈴ソロ・リミックス)"},
+        {"id": "96d3356d-3030-4128-988c-f925e211ad30", "title": "お願い！シンデレラ - しんげきRemix -"},
+        {"id": "bd4307c7-940b-45d3-8140-3b3ee83f1045", "title": "メッセージ - しんげきRemix -"}
+      ]
+    },
+    {
+      "release_id": "0484ac39-eb4a-43c8-ad95-151d70554562",
+      "release_title": "DJCD SP ラジオdeアイマSHOW! 2007年夏の感謝祭特別編!と言っておけばいいんじゃない?",
+      "series": "765",
+      "source_urls": ["https://www.idolmaster.jp/imas/items/prod_disc.html"],
+      "recordings": [
+        {"id": "777a7411-3221-42af-89eb-c232ceae3472", "title": "Xアイマスファイル"},
+        {"id": "36032805-4d98-4466-af56-08a213205553", "title": "エンディング"},
+        {"id": "f68bbd78-f13d-416c-a9cc-8869dfda8c6a", "title": "エンディング"},
+        {"id": "876c49ee-a2d9-40c2-b392-245bb9431e12", "title": "オープニング"},
+        {"id": "e676db6e-28ab-437a-a1fc-378bf36ca7c1", "title": "オープニング"},
+        {"id": "64755410-4715-42ff-968b-a8f9c94ee412", "title": "ゲストさん呼び込み"},
+        {"id": "a76ec5b0-8246-41ab-8df3-1bd4083d15f3", "title": "ゲストさん呼び込み"},
+        {"id": "2d775d6d-0e49-44e1-8454-3554710e7dfc", "title": "ユニット名発表"},
+        {"id": "c4ece498-e8dd-48ef-97b8-0f50ec0a1bd3", "title": "ユニット名発表"},
+        {"id": "99cbda70-ee9c-4b57-a7e6-8ed089f3cdc2", "title": "公開オーディション"},
+        {"id": "c6e4704c-8b77-4e92-b10d-2be0586fcb26", "title": "公開オーディション"},
+        {"id": "8911552f-3e76-4c2c-a511-87a5953564c7", "title": "公開レッスン"},
+        {"id": "eb877684-9a55-4663-889d-41b224bbd9e1", "title": "公開レッスン"},
+        {"id": "e5e5f0e7-6ddc-4ef0-87cb-3a4512c721b8", "title": "誰がうまいこと言えと言った_"}
+      ]
+    },
+    {
+      "release_id": "2f8c12c5-a702-4055-8c5b-20de781dc984",
+      "release_title": "DJCD ラジオdeアイマSHOW! Vol.1",
+      "series": "765",
+      "source_urls": ["https://www.idolmaster.jp/imas/items/prod_disc.html"],
+      "recordings": [
+        {"id": "bff06d2d-4b36-4795-b5e4-aa38295172d6", "title": "1日目のスケジュール お昼のロッカールーム"},
+        {"id": "0bfe430c-bd9f-4ae1-bce3-02125bffc663", "title": "1日目のスケジュール ふつおた～流行情報"},
+        {"id": "5bf4e035-fac3-43f8-a315-69aca4aed798", "title": "1日目のスケジュール エンディング"},
+        {"id": "76c9b6ae-2f00-4905-a5a1-9285d054836f", "title": "1日目のスケジュール オープニング"},
+        {"id": "a8c9a376-d79d-42ae-9eee-58cc58b7b8cb", "title": "1日目のスケジュール レッスン"},
+        {"id": "65269a11-46c8-4c84-a993-4322fda4d7ea", "title": "2日目のスケジュール お昼のロッカールーム"},
+        {"id": "cd24f801-e6ff-468a-9f26-b626d00e2a6d", "title": "2日目のスケジュール ふつおた～流行情報"},
+        {"id": "7b9b5c1b-b5a7-4fa4-b9b7-53ebd1c31745", "title": "2日目のスケジュール エンディング"},
+        {"id": "0b9b1b23-aa85-4576-89ff-12c101c8e9a5", "title": "2日目のスケジュール オープニング"},
+        {"id": "aa840305-5a19-4f9d-b974-66925ae092a2", "title": "2日目のスケジュール レッスン"},
+        {"id": "05819b8e-7de8-4ea0-a654-bca1fd912081", "title": "ラマCD Scene.04 幻の特別編"}
+      ]
+    },
+    {
+      "release_id": "e45834dd-13f1-4900-9099-7ec6b971facd",
+      "release_title": "DJCD ラジオdeアイマSHOW! Vol.2",
+      "series": "765",
+      "source_urls": ["https://www.idolmaster.jp/imas/items/prod_disc.html"],
+      "recordings": [
+        {"id": "eefb0a2c-3573-4771-b752-39db7c88e319", "title": "1日目のスケジュール お昼のロッカールーム"},
+        {"id": "29f8bdd3-d50a-47df-b5d2-94144fb0278b", "title": "1日目のスケジュール ふつおた～流行情報"},
+        {"id": "d87cbec3-0513-48f8-9f11-85dfb7dd84fb", "title": "1日目のスケジュール エンディング"},
+        {"id": "6a35c1fe-ab16-483c-9702-a9dbfe686087", "title": "1日目のスケジュール オープニング"},
+        {"id": "69d65a4a-0fff-4b2e-8402-4f77dbbe3b0f", "title": "1日目のスケジュール レッスン"},
+        {"id": "262c3656-63e5-42af-b033-9a294c7299fd", "title": "2日目のスケジュール お昼の事務所"},
+        {"id": "98f1c67a-7bd8-406f-b61c-09c85e507d7e", "title": "2日目のスケジュール ふつおた～流行情報"},
+        {"id": "d061d8fa-e14b-4f0f-9252-0120809cc627", "title": "2日目のスケジュール エンディング"},
+        {"id": "280d8e92-ac7c-4653-ba4d-5a41290c324e", "title": "2日目のスケジュール オープニング"},
+        {"id": "3b9c4578-be5b-45e7-8c60-a45503306668", "title": "2日目のスケジュール レッスン"}
+      ]
+    },
+    {
+      "release_id": "9c5e1f0f-262c-48cc-ba9b-f02326566314",
+      "release_title": "DJCD ラジオdeアイマSHOW! Vol.3",
+      "series": "765",
+      "source_urls": ["https://www.idolmaster.jp/imas/items/prod_disc.html"],
+      "recordings": [
+        {"id": "168827c4-5738-4dea-9361-212a2c4fd1c5", "title": "1日目 Xアイマスファイル"},
+        {"id": "d7c14465-8084-4c9e-9ca9-66f547dd1a66", "title": "1日目 ふつおた"},
+        {"id": "95d202ef-4503-428c-888a-852f6872195b", "title": "1日目 アイマスクール 課外授業 ホワイトデー編"},
+        {"id": "f4e0f299-8a1f-4e14-bff1-8a4215a842b8", "title": "1日目 エンディング"},
+        {"id": "82383920-825c-4223-90ae-c46f77f0f611", "title": "1日目 オープニング"},
+        {"id": "5f023ab5-6ba0-4a4a-bc3b-61e69aa3e8a7", "title": "1日目 レッスン"},
+        {"id": "07bed3f7-82e6-412d-839d-f4082245cff4", "title": "2日目 765戦隊 アイドレンジャー!"},
+        {"id": "5dbfaa95-748f-43e3-83f0-c4b3a002be9d", "title": "2日目 ○○すればいいんじゃない、でいいんじゃない?"},
+        {"id": "c16ec070-46bd-4dbb-8c86-73fbcca9f1f0", "title": "2日目 エンディング"},
+        {"id": "b3a1750a-a4c0-4037-a946-9b5591205c61", "title": "2日目 オープニング"},
+        {"id": "7ec11898-459b-4042-968c-563573a039b3", "title": "2日目 ボーナスレッスン"},
+        {"id": "a0d302d4-1983-47ff-a9fb-936cd1e2fd91", "title": "2日目 ミンゴスの特訓!ツッコミンゴス"},
+        {"id": "166880c4-acca-4f51-9410-8d1650f49587", "title": "2日目 幸せのやよい鳥"},
+        {"id": "de284a20-42ce-45ee-84d3-bae06f056bf2", "title": "○○って呼ばれたくて... (ドラマCD NEW STAGE 02 EXTRA)"}
+      ]
+    },
+    {
+      "release_id": "95d1e577-fe54-4407-ada1-e1e843d94e67",
+      "release_title": "DJCD ラジオdeアイマSHOW! Vol.4",
+      "series": "765",
+      "source_urls": ["https://www.idolmaster.jp/imas/items/prod_disc.html"],
+      "recordings": [
+        {"id": "3330d5e6-5524-4994-99dc-685238646386", "title": "1日目 ふつおた"},
+        {"id": "28c4db09-d06b-4f99-a890-dc64df6951e4", "title": "1日目 アイマスクール 課外授業 部活編"},
+        {"id": "7d97f3f7-9518-4b74-b6c7-f9a709a8aab2", "title": "1日目 エンディング"},
+        {"id": "d6e476c9-ac4b-4112-8d7f-9efae7c52a75", "title": "1日目 オープニング"},
+        {"id": "85af1aa7-ed4f-4778-99b7-8608c8c86d2d", "title": "1日目 レッスン"},
+        {"id": "1f619a4e-66c2-4785-8de7-6d0f411c2372", "title": "2日目 ふつおた"},
+        {"id": "4af6928e-66b5-4b75-853b-2931a72733bb", "title": "2日目 アイマスクール 課外授業 放課後編"},
+        {"id": "3a62f164-e904-49fd-938c-3cf413313540", "title": "2日目 エンディング"},
+        {"id": "87551aa6-cb1d-497a-a047-9c0f46b43d91", "title": "2日目 オープニング"},
+        {"id": "1d564e20-1b66-42b3-ab6d-314775aa314e", "title": "2日目 レッスン"}
+      ]
+    },
+    {
+      "release_id": "f3a9f471-6edb-47b4-804f-fcc5453ae78a",
+      "release_title": "DJCD ラジオdeアイマSHOW! Vol.4.5",
+      "series": "765",
+      "source_urls": ["https://www.idolmaster.jp/imas/items/prod_disc.html"],
+      "recordings": [
+        {"id": "80c00dda-d97c-4708-8f13-9833fb898fab", "title": "『技』リアルプロデュース Scene.1"},
+        {"id": "aab6e045-0c86-4309-859e-bee4c855455a", "title": "『技』リアルプロデュース Scene.2"},
+        {"id": "f081fdfc-a138-426f-9217-5eaac4a3a3b0", "title": "『技』リアルプロデュース Scene.3"},
+        {"id": "e6c2e852-813c-4ca3-964a-99e7a66defe9", "title": "『技』リアルプロデュース Scene.4"},
+        {"id": "2606f356-1962-4e15-86cd-104be0f80368", "title": "『技』リアルプロデュース Scene.5"},
+        {"id": "58c012d5-1bec-4016-86c1-6a46a029e42c", "title": "エリンピック!第一競技『I love 金勘定!～聴覚測定』"},
+        {"id": "4b6770f3-264b-4dd2-bb29-dc9168b0fb04", "title": "エリンピック!第三競技『I am ソムリエリリン～嗅覚＆味覚測定』"},
+        {"id": "8cf03cdd-71e7-4f12-bb0b-ab4d6e4f67c4", "title": "エリンピック!第二競技『アイ・ドール作り～視覚＆触覚測定』"},
+        {"id": "6c984289-5a91-4f67-8dc3-677786ee630b", "title": "エンディング"},
+        {"id": "10bf0604-c36d-4f87-b53a-3ab8abef684d", "title": "オープニング"},
+        {"id": "5935c13f-31b0-4086-b4ec-fa6dd4ee63a4", "title": "プロデューサーさんへ...私の心を受け取ってください!(前編)"},
+        {"id": "6bab9ced-2308-4353-826f-b6ae4b98b175", "title": "プロデューサーさんへ...私の心を受け取ってください!(後編)"},
+        {"id": "da1a6d59-23ee-445a-83dd-49c03944bad8", "title": "高木社長ボイスコレクション(一言編)"},
+        {"id": "fc3a287f-0e9b-43bd-ae27-9b6bcb5ade21", "title": "高木社長ボイスコレクション(挨拶編)"},
+        {"id": "7ad88fd7-10b9-4e14-9fcb-3a836f3ad01f", "title": "高木社長ボイスコレクション(結末編)"}
+      ]
+    },
+    {
+      "release_id": "6d32595e-f1ff-4aab-b68c-bfc12ecda8e5",
+      "release_title": "DJCD ラジオdeアイマSHOW! Vol.5",
+      "series": "765",
+      "source_urls": ["https://www.idolmaster.jp/imas/items/prod_disc.html"],
+      "recordings": [
+        {"id": "19d71db0-b46c-4550-a41c-198a7b17bb76", "title": "TOO BAD COLLECTION 中村繪里子編"},
+        {"id": "deb8e033-635a-4d99-9d02-0a9879079879", "title": "TOO BAD COLLECTION 仁後真耶子編"},
+        {"id": "c999735d-47a8-44ff-b597-585f1c8234ea", "title": "TOO BAD COLLECTION 今井麻美編"},
+        {"id": "5777d65c-bbf2-495a-8db8-336c920b0187", "title": "お仕事 『元Engage!に聞きまSHOW！ by 小鳥』 中村繪里子編"},
+        {"id": "95507305-9126-4d14-b88d-46dab6c9c162", "title": "お仕事 『元Engage!に聞きまSHOW！ by 小鳥』 仁後真耶子編"},
+        {"id": "9c0e2c63-1264-461b-9a34-4c0c503c4356", "title": "お仕事 『元Engage!に聞きまSHOW！ by 小鳥』 今井麻美編"},
+        {"id": "79a6496f-4c57-441b-b413-867c5c9f7c61", "title": "ふつおた"},
+        {"id": "5389fd00-dc07-4e23-8542-b1f4d5d0170b", "title": "エンディング"},
+        {"id": "6578a500-7648-446d-89e1-f27288625cd7", "title": "オープニング"},
+        {"id": "e86cbd44-6b88-43bd-9745-4d37f37f64eb", "title": "ラジオdeアイマSHOW！ 番組CM"},
+        {"id": "f6eb0e98-f772-45e7-806c-08670c4bf550", "title": "ラジオdeラジオdeアイマSHOW！最終回 『ラジオdeアイマ笑！点』"}
+      ]
+    },
+    {
+      "release_id": "1e7419cb-921c-4bae-a578-d631ad5c2ddb",
+      "release_title": "DYNAMITE FEVER MEGAMIX (GAME VERSION)",
+      "series": "cinderella",
+      "source_urls": ["https://columbia.jp/idolmaster/COCC-18176.html"],
+      "recordings": [
+        {"id": "aae531c0-a236-40eb-a95a-8be4c6d44bbf", "title": "DYNAMITE FEVER MEGAMIX (GAME VERSION)"}
+      ]
+    },
+    {
+      "release_id": "26d8f23c-7978-48f8-8ebb-e1b75a4a5c12",
+      "release_title": "Happy Surprise Trick!",
+      "series": "shiny",
+      "source_urls": ["https://shinycolors.lantis.jp/releaseinfo/laca-25127/"],
+      "recordings": [
+        {"id": "a53d68bc-7f75-4a73-87e6-9d336c7150ae", "title": "CANDY UNIVERSE"},
+        {"id": "8bd92a52-dadb-431a-b64c-0ef30d0fcc72", "title": "CANDY UNIVERSE (Off Vocal)"},
+        {"id": "88e135a1-f653-4ea4-9851-b4860d0f285a", "title": "Midnight parade!"},
+        {"id": "6fd2aa47-8d29-449a-b9bb-c3f14bdac361", "title": "Midnight parade! (Off Vocal)"},
+        {"id": "614cd9da-13b3-4cb3-a11f-fd737d22503f", "title": "OPEN the New world"},
+        {"id": "35a84dff-a44f-441a-8db3-41556320a2db", "title": "OPEN the New world (Off Vocal)"},
+        {"id": "8e08c4d8-4dd1-4763-a4e8-3141a5f53222", "title": "Poison Berry Daughters"},
+        {"id": "76e791eb-a752-4ca3-8b4e-59c017b30c3c", "title": "Poison Berry Daughters (Off Vocal)"},
+        {"id": "d701e92c-eb58-4de0-b7a4-26a268af41a7", "title": "ねぇ、ねぇ、ねぇ"},
+        {"id": "c6c5724b-e4bf-4f13-9917-dc98fb818bd9", "title": "ねぇ、ねぇ、ねぇ (Off Vocal)"}
+      ]
+    },
+    {
+      "release_id": "434091e9-18f0-4915-8143-f0ccb8919025",
+      "release_title": "Happy Surprise Trick!",
+      "series": "shiny",
+      "source_urls": ["https://shinycolors.lantis.jp/releaseinfo/laca-25127/"],
+      "recordings": [
+        {"id": "a53d68bc-7f75-4a73-87e6-9d336c7150ae", "title": "CANDY UNIVERSE"},
+        {"id": "8bd92a52-dadb-431a-b64c-0ef30d0fcc72", "title": "CANDY UNIVERSE (Off Vocal)"},
+        {"id": "88e135a1-f653-4ea4-9851-b4860d0f285a", "title": "Midnight parade!"},
+        {"id": "6fd2aa47-8d29-449a-b9bb-c3f14bdac361", "title": "Midnight parade! (Off Vocal)"},
+        {"id": "614cd9da-13b3-4cb3-a11f-fd737d22503f", "title": "OPEN the New world"},
+        {"id": "35a84dff-a44f-441a-8db3-41556320a2db", "title": "OPEN the New world (Off Vocal)"},
+        {"id": "8e08c4d8-4dd1-4763-a4e8-3141a5f53222", "title": "Poison Berry Daughters"},
+        {"id": "76e791eb-a752-4ca3-8b4e-59c017b30c3c", "title": "Poison Berry Daughters (Off Vocal)"},
+        {"id": "d701e92c-eb58-4de0-b7a4-26a268af41a7", "title": "ねぇ、ねぇ、ねぇ"},
+        {"id": "c6c5724b-e4bf-4f13-9917-dc98fb818bd9", "title": "ねぇ、ねぇ、ねぇ (Off Vocal)"}
+      ]
+    },
+    {
+      "release_id": "f804cec4-2ce4-48fe-acd4-e5f84c9e74da",
+      "release_title": "PERFECT IDOL 01",
+      "series": "765",
+      "source_urls": ["https://www.aniplex.co.jp/lineup/idolmaster/products/detail/?id=803"],
+      "recordings": [
+        {"id": "4d21502d-ac98-4551-aab1-16ea7cb0189f", "title": "relations -JAZZ Rearrange Mix-"},
+        {"id": "cec1ae61-299c-4494-92a1-7867b5595b37", "title": "キミはメロディ -JAZZ Rearrange Mix-"},
+        {"id": "baf4624d-38f2-44c8-81bf-8f70a90eaec0", "title": "隣に... -JAZZ Rearrange Mix-"}
+      ]
+    },
+    {
+      "release_id": "cb72faa7-e07a-4eef-9ef3-e6e4fc8026ed",
+      "release_title": "PERFECT IDOL 02",
+      "series": "765",
+      "source_urls": ["https://www.aniplex.co.jp/lineup/idolmaster/products/detail/?id=803"],
+      "recordings": [
+        {"id": "919b5680-377f-419e-8373-905c34270ff5", "title": "GO MY WAY!! -HOUSE Rearrange Mix-"},
+        {"id": "08d6b753-1d96-4f28-9acc-4f7846d1e96b", "title": "コーヒー1杯のイマージュ"},
+        {"id": "8eeb1038-1cd9-4d54-b34d-81bb48791268", "title": "ポジティブ！ -TRANCE Rearrange Mix-"},
+        {"id": "e50d3509-4b67-4b7d-a033-be25e6c33140", "title": "自転車 -HOUSE Rearrange Mix-"}
+      ]
+    },
+    {
+      "release_id": "a61e70bf-2522-4f3e-bafd-1bc514e16bcc",
+      "release_title": "PERFECT IDOL 03",
+      "series": "765",
+      "source_urls": ["https://www.aniplex.co.jp/lineup/idolmaster/products/detail/?id=803"],
+      "recordings": [
+        {"id": "7de5f729-ebf0-4a98-b09f-0b71ea1aca90", "title": "Kosmos, Cosmos -NEO ACOUSTIC Rearrange Mix-"},
+        {"id": "1f55cfbd-466c-4e0c-b391-7074ecc549ae", "title": "まっすぐ -NEO ACOUSTIC Rearrange Mix-"},
+        {"id": "63da9867-2eae-42b5-addf-12783e373923", "title": "乙女よ大志を抱け!! -NEO ACOUSTIC Rearrange Mix-"},
+        {"id": "17e33071-0322-4ce6-a0dc-1920b5f1dc7a", "title": "君のままで"}
+      ]
+    },
+    {
+      "release_id": "961eecb6-43c9-4fb7-9217-99c061a607cc",
+      "release_title": "PERFECT IDOL 04",
+      "series": "765",
+      "source_urls": ["https://www.aniplex.co.jp/lineup/idolmaster/products/detail/?id=803"],
+      "recordings": [
+        {"id": "19d4aa27-b072-4d3a-bea4-afb6cf1a338f", "title": "arcadia -BOSSA NOVA Rearrange Mix-"},
+        {"id": "68685d69-49ae-4447-8079-57f2e35ed363", "title": "READY!! -BOSSA NOVA Rearrange Mix-"},
+        {"id": "a96134bb-7bff-4041-abd6-e051fb342a44", "title": "Slapp Happy!!!"},
+        {"id": "6ffdffe0-07ee-4903-a8aa-9631026cc5d3", "title": "キラメキラリ -BOSSA NOVA Rearrange Mix-"}
+      ]
+    },
+    {
+      "release_id": "9f4ab63c-12ec-4859-8017-6e429ac32c37",
+      "release_title": "PETIT IDOLM@STER Twelve Campaigns! Vol.1 水瀬伊織&いお",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "dd499e24-cc9b-4688-b984-c1a30074ed0b", "title": "エピソードラブ"},
+        {"id": "612da741-6f19-423d-8a05-5bddfc6deef7", "title": "エピソードラブ (off vocal)"},
+        {"id": "0208773e-d83c-4db5-ac2e-3a59458b5381", "title": "オハヨ○サンシャイン"}
+      ]
+    },
+    {
+      "release_id": "a8fb3ff8-4f64-476c-b85e-3b1110249304",
+      "release_title": "PETIT IDOLM@STER Twelve Campaigns! Vol.1 高槻やよい&やよ",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "e6273ce8-b9be-4d8e-94a0-c88479e1fbf8", "title": "オハヨ○サンシャイン"},
+        {"id": "d3a3d9d9-bfca-4ff4-ad1c-ce1932211b24", "title": "カンゲキハッピーエコロジー"},
+        {"id": "f0694756-58c8-44df-ac1d-f6ed56a56429", "title": "カンゲキハッピーエコロジー (off vocal)"}
+      ]
+    },
+    {
+      "release_id": "10dad793-e272-4f25-85cd-2b4d62b14905",
+      "release_title": "PETIT IDOLM@STER Twelve Campaigns! Vol.1 高槻やよい&やよ+水瀬伊織&いお",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "dd499e24-cc9b-4688-b984-c1a30074ed0b", "title": "エピソードラブ"},
+        {"id": "612da741-6f19-423d-8a05-5bddfc6deef7", "title": "エピソードラブ (off vocal)"},
+        {"id": "0208773e-d83c-4db5-ac2e-3a59458b5381", "title": "オハヨ○サンシャイン"},
+        {"id": "e6273ce8-b9be-4d8e-94a0-c88479e1fbf8", "title": "オハヨ○サンシャイン"},
+        {"id": "d3a3d9d9-bfca-4ff4-ad1c-ce1932211b24", "title": "カンゲキハッピーエコロジー"},
+        {"id": "f0694756-58c8-44df-ac1d-f6ed56a56429", "title": "カンゲキハッピーエコロジー (off vocal)"},
+        {"id": "149f1eb1-cb0c-4371-aacc-21f84d1df8f7", "title": "朝の連続ぷちドラマ みんなできゃんぺーん -やよいとやよへん-"},
+        {"id": "5f3f4c00-dceb-4a6f-b0d3-b748aadf03ef", "title": "朝の連続ぷちドラマ みんなできゃんぺーん -伊織といおへん-"}
+      ]
+    },
+    {
+      "release_id": "f7b73187-b635-47e9-b02a-14eb42f6b90b",
+      "release_title": "PETIT IDOLM@STER Twelve Campaigns! Vol.2 四条貴音&たかにゃ",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "bccee645-8aa8-4a29-ac8a-1359eb20642a", "title": "グッナイ☆スターズ"},
+        {"id": "403293e2-105b-4148-a3fe-19ec61056261", "title": "月ノ桜"},
+        {"id": "b0c01268-81c5-4838-b733-3b067e90254a", "title": "月ノ桜 (off vocal)"}
+      ]
+    },
+    {
+      "release_id": "d81f0359-4720-4a50-8969-61dda596f88e",
+      "release_title": "PETIT IDOLM@STER Twelve Campaigns! Vol.2 四条貴音&たかにゃ + 我那覇響&ちびき",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "373a5bb8-a822-451e-996e-772b2591f787", "title": "オハヨ○サンシャイン"},
+        {"id": "bccee645-8aa8-4a29-ac8a-1359eb20642a", "title": "グッナイ☆スターズ"},
+        {"id": "04fcbb74-4eea-4f17-8f3c-2be435faae4b", "title": "天と海の島"},
+        {"id": "75a7339a-c3d3-41b3-a40e-66587c9cb799", "title": "天と海の島 (off vocal)"},
+        {"id": "403293e2-105b-4148-a3fe-19ec61056261", "title": "月ノ桜"},
+        {"id": "b0c01268-81c5-4838-b733-3b067e90254a", "title": "月ノ桜 (off vocal)"},
+        {"id": "5102f302-c7c6-4863-9bc3-764cc98ea7dc", "title": "朝の連続ぷちドラマ みんなできゃんぺーん -貴音とたかにゃへん-"},
+        {"id": "cde95af9-7545-4a50-895f-1c43fe6601d9", "title": "朝の連続ぷちドラマ みんなできゃんぺーん -響とちびきへん-"}
+      ]
+    },
+    {
+      "release_id": "6a435b37-7f25-489f-b7e2-2959e3bca511",
+      "release_title": "PETIT IDOLM@STER Twelve Campaigns! Vol.2 我那覇響&ちびき",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "373a5bb8-a822-451e-996e-772b2591f787", "title": "オハヨ○サンシャイン"},
+        {"id": "04fcbb74-4eea-4f17-8f3c-2be435faae4b", "title": "天と海の島"},
+        {"id": "75a7339a-c3d3-41b3-a40e-66587c9cb799", "title": "天と海の島 (off vocal)"}
+      ]
+    },
+    {
+      "release_id": "5eca57de-6b76-4acb-8629-6022458c6886",
+      "release_title": "PETIT IDOLM@STER Twelve Campaigns! Vol.3 天海春香&はるかさん",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "e14729e5-9323-4254-9676-aecf9099dd5f", "title": "ハロー*ランチタイム"},
+        {"id": "d8de51ad-eafc-4959-b932-6ae5dedf541e", "title": "前向きで行こう♪"},
+        {"id": "8bdc6928-e13a-4b4d-9b3d-82d0086ca9c0", "title": "前向きで行こう♪ (off vocal)"}
+      ]
+    },
+    {
+      "release_id": "07ba3d17-1d72-4995-9172-464a54fc014a",
+      "release_title": "PETIT IDOLM@STER Twelve Campaigns! Vol.3 秋月律子&ちっちゃん",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "4638cd97-5133-4cba-b454-5a496f2aefc6", "title": "Q&A"},
+        {"id": "993f4793-c7e9-4c2c-a169-4419666d11f9", "title": "Q&A (off vocal)"},
+        {"id": "7ba5fd9d-518e-424f-8696-3a0133d2a23a", "title": "ハロー*ランチタイム"}
+      ]
+    },
+    {
+      "release_id": "25b3121a-0422-463a-92b6-fdb618a79639",
+      "release_title": "PETIT IDOLM@STER Twelve Campaigns! Vol.3 秋月律子&ちっちゃん + 天海春香&はるかさん",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "4638cd97-5133-4cba-b454-5a496f2aefc6", "title": "Q&A"},
+        {"id": "993f4793-c7e9-4c2c-a169-4419666d11f9", "title": "Q&A (off vocal)"},
+        {"id": "7ba5fd9d-518e-424f-8696-3a0133d2a23a", "title": "ハロー*ランチタイム"},
+        {"id": "e14729e5-9323-4254-9676-aecf9099dd5f", "title": "ハロー*ランチタイム"},
+        {"id": "d8de51ad-eafc-4959-b932-6ae5dedf541e", "title": "前向きで行こう♪"},
+        {"id": "8bdc6928-e13a-4b4d-9b3d-82d0086ca9c0", "title": "前向きで行こう♪ (off vocal)"},
+        {"id": "060e5386-ba4d-479b-953d-180a4e2924ce", "title": "朝の連続ぷちドラマ みんなできゃんぺーん -律子とちっちゃんへん-"},
+        {"id": "90fa517f-ad29-4a28-a20b-177eede48acb", "title": "朝の連続ぷちドラマ みんなできゃんぺーん -春香とはるかさんへん-"}
+      ]
+    },
+    {
+      "release_id": "ea767a9e-b4ab-4016-8803-58c5d906f5ef",
+      "release_title": "PETIT IDOLM@STER Twelve Campaigns! Vol.4 如月千早&ちひゃー",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "d87f3cab-e063-48f9-a43f-a2e374b79f10", "title": "しっくりとゆっくりと"},
+        {"id": "dde861f6-12df-4e1d-9fdd-e336517e0122", "title": "しっくりとゆっくりと (off vocal)"},
+        {"id": "654e76f0-8ec8-49f5-8d52-821aff810457", "title": "ハロー*ランチタイム"}
+      ]
+    },
+    {
+      "release_id": "ab4988fd-9822-4d52-8187-49e1b65aaafb",
+      "release_title": "PETIT IDOLM@STER Twelve Campaigns! Vol.4 如月千早&ちひゃー + 菊地真&まこちー",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "d87f3cab-e063-48f9-a43f-a2e374b79f10", "title": "しっくりとゆっくりと"},
+        {"id": "dde861f6-12df-4e1d-9fdd-e336517e0122", "title": "しっくりとゆっくりと (off vocal)"},
+        {"id": "53e6c7f6-21b5-43c3-a0ef-d9956580b8e5", "title": "たいせつなひと"},
+        {"id": "5dbfee2b-1f74-47c2-9f71-9d30510ea167", "title": "たいせつなひと (off vocal)"},
+        {"id": "654e76f0-8ec8-49f5-8d52-821aff810457", "title": "ハロー*ランチタイム"},
+        {"id": "f01b1040-a4b8-4b72-93ee-0694d7aec265", "title": "ハロー*ランチタイム"},
+        {"id": "80fdf827-dee9-43d6-877e-6dea90ecfabf", "title": "朝の連続ぷちドラマ みんなできゃんぺーん -千早とちひゃーへん-"},
+        {"id": "0fddf165-a3b5-4102-acd3-738209e5b4fb", "title": "朝の連続ぷちドラマ みんなできゃんぺーん -真とまこちーへん-"}
+      ]
+    },
+    {
+      "release_id": "bb53b68d-8f66-451f-b47d-54c004330a8a",
+      "release_title": "PETIT IDOLM@STER Twelve Campaigns! Vol.4 菊地真&まこちー",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "53e6c7f6-21b5-43c3-a0ef-d9956580b8e5", "title": "たいせつなひと"},
+        {"id": "5dbfee2b-1f74-47c2-9f71-9d30510ea167", "title": "たいせつなひと (off vocal)"},
+        {"id": "f01b1040-a4b8-4b72-93ee-0694d7aec265", "title": "ハロー*ランチタイム"}
+      ]
+    },
+    {
+      "release_id": "551ca757-10ff-463d-916f-3ab141a5c14e",
+      "release_title": "PETIT IDOLM@STER Twelve Campaigns! Vol.5 星井美希&あふぅ",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "19a71fb5-f351-470d-be02-cae2a635e06a", "title": "グッナイ☆スターズ"},
+        {"id": "1af1b2ed-06c5-43b6-af83-8f26ff7b0cf1", "title": "チャンピオン"},
+        {"id": "fe0ca48e-ec1b-4bad-b552-1cdd9dcc5e97", "title": "チャンピオン (off vocal)"}
+      ]
+    },
+    {
+      "release_id": "fd53c2e0-7016-48d8-aa95-0c5bf2832f09",
+      "release_title": "PETIT IDOLM@STER Twelve Campaigns! Vol.5 萩原雪歩&ゆきぽ",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "57c26d86-a4fe-450e-86ce-ee0c6aa89046", "title": "Pu-Ru-Ru"},
+        {"id": "af4bfbaf-de68-4bf2-8a3c-30cd795a3e11", "title": "Pu-Ru-Ru (off vocal)"},
+        {"id": "9c1d3933-70c4-4de3-ac68-c04d19c548e1", "title": "グッナイ☆スターズ"}
+      ]
+    },
+    {
+      "release_id": "a9d5349d-3e8e-4dc6-a42e-dabb41a1bfee",
+      "release_title": "PETIT IDOLM@STER Twelve Campaigns! Vol.5 萩原雪歩&ゆきぽ + 星井美希&あふぅ",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "57c26d86-a4fe-450e-86ce-ee0c6aa89046", "title": "Pu-Ru-Ru"},
+        {"id": "af4bfbaf-de68-4bf2-8a3c-30cd795a3e11", "title": "Pu-Ru-Ru (off vocal)"},
+        {"id": "19a71fb5-f351-470d-be02-cae2a635e06a", "title": "グッナイ☆スターズ"},
+        {"id": "9c1d3933-70c4-4de3-ac68-c04d19c548e1", "title": "グッナイ☆スターズ"},
+        {"id": "1af1b2ed-06c5-43b6-af83-8f26ff7b0cf1", "title": "チャンピオン"},
+        {"id": "fe0ca48e-ec1b-4bad-b552-1cdd9dcc5e97", "title": "チャンピオン (off vocal)"},
+        {"id": "57b877b0-5e47-4d5f-aefb-f6c1c367ef44", "title": "朝の連続ぷちドラマ みんなできゃんぺーん -美希とあふぅへん-"},
+        {"id": "3e4ba0d8-5e15-4ce4-bb6a-b6c5ca663b99", "title": "朝の連続ぷちドラマ みんなできゃんぺーん -雪歩とゆきぽへん-"}
+      ]
+    },
+    {
+      "release_id": "36b3ba8f-5a0d-4c90-8089-03ab80f2949f",
+      "release_title": "PETIT IDOLM@STER Twelve Campaigns! Vol.6 三浦あずさ & みうらさん",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "252f0484-69e3-4212-bab5-67b45b7788f5", "title": "LOOK THE SKY"},
+        {"id": "5068a709-4542-42f3-87f1-6f9dfeccd1cc", "title": "LOOK THE SKY (off vocal)"},
+        {"id": "1c4f8a72-238a-4ed8-9e6c-cfb1b90bdddd", "title": "グッナイ☆スターズ"}
+      ]
+    },
+    {
+      "release_id": "42de3090-ab59-4685-a993-01dab9b9b8d6",
+      "release_title": "PETIT IDOLM@STER Twelve Campaigns! Vol.6 双海亜美・真美 & こあみ・こまみ",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "4bb5ae07-72a8-4924-85b2-2463db85014f", "title": "どっきり☆ハピバ"},
+        {"id": "8eb27409-685c-47d0-9112-cb2468a5b87f", "title": "どっきり☆ハピバ (off vocal)"},
+        {"id": "05fd461e-c9c6-4a55-af94-42316aeaec3b", "title": "オハヨ○サンシャイン"}
+      ]
+    },
+    {
+      "release_id": "04818cef-47e5-49e9-bc62-f76b868adefa",
+      "release_title": "PETIT IDOLM@STER Twelve Campaigns! Vol.6 双海亜美・真美 & こあみ・こまみ + 三浦あずさ & みうらさん",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "252f0484-69e3-4212-bab5-67b45b7788f5", "title": "LOOK THE SKY"},
+        {"id": "5068a709-4542-42f3-87f1-6f9dfeccd1cc", "title": "LOOK THE SKY (off vocal)"},
+        {"id": "4bb5ae07-72a8-4924-85b2-2463db85014f", "title": "どっきり☆ハピバ"},
+        {"id": "8eb27409-685c-47d0-9112-cb2468a5b87f", "title": "どっきり☆ハピバ (off vocal)"},
+        {"id": "05fd461e-c9c6-4a55-af94-42316aeaec3b", "title": "オハヨ○サンシャイン"},
+        {"id": "1c4f8a72-238a-4ed8-9e6c-cfb1b90bdddd", "title": "グッナイ☆スターズ"},
+        {"id": "51b4f301-eedb-4cf6-8962-1acc08be818a", "title": "朝の連続ぷちドラマ みんなできゃんぺーん -あずさとみうらさんへん-"},
+        {"id": "81d87bb2-9308-4ad2-8b96-48e4df68caf3", "title": "朝の連続ぷちドラマ みんなできゃんぺーん -亜美・真美とこあみ・こまみへん-"}
+      ]
+    },
+    {
+      "release_id": "9a98d2f9-7d82-4754-87c7-f4bad5e8c7cd",
+      "release_title": "PETIT IDOLM@STER Twelve Seasons! Vol.10 我那覇響&ちびき",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "c4039301-55a1-4b69-b1c8-9cddf0b20c47", "title": "TODAY with ME"},
+        {"id": "1df4e0c4-6263-4755-8478-b89988e5cb5c", "title": "しあわせのレシピ"},
+        {"id": "e6d86de1-7793-4459-855a-ff06c7d67b58", "title": "しあわせのレシピ (off vocal)"},
+        {"id": "88608abc-6900-47a8-a57d-fd254ffc22bb", "title": "ら♪ら♪ら♪わんだぁらんど"}
+      ]
+    },
+    {
+      "release_id": "bd8c129a-99c5-4e14-a61c-96346f11970a",
+      "release_title": "PETIT IDOLM@STER Twelve Seasons! Vol.10 我那覇響&ちびき",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "c4039301-55a1-4b69-b1c8-9cddf0b20c47", "title": "TODAY with ME"},
+        {"id": "1df4e0c4-6263-4755-8478-b89988e5cb5c", "title": "しあわせのレシピ"},
+        {"id": "e6d86de1-7793-4459-855a-ff06c7d67b58", "title": "しあわせのレシピ (off vocal)"},
+        {"id": "88608abc-6900-47a8-a57d-fd254ffc22bb", "title": "ら♪ら♪ら♪わんだぁらんど"}
+      ]
+    },
+    {
+      "release_id": "cd5e54eb-a902-4452-b794-871fd48080fe",
+      "release_title": "PETIT IDOLM@STER Twelve Seasons! Vol.10 我那覇響&ちびき",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "c4039301-55a1-4b69-b1c8-9cddf0b20c47", "title": "TODAY with ME"},
+        {"id": "1df4e0c4-6263-4755-8478-b89988e5cb5c", "title": "しあわせのレシピ"},
+        {"id": "e6d86de1-7793-4459-855a-ff06c7d67b58", "title": "しあわせのレシピ (off vocal)"},
+        {"id": "88608abc-6900-47a8-a57d-fd254ffc22bb", "title": "ら♪ら♪ら♪わんだぁらんど"},
+        {"id": "6babf9d2-69c6-4948-b4d1-57e74c428c86", "title": "朝の連続ぷちドラマ みんなでこまーしゃる -響とちびきへん-"}
+      ]
+    },
+    {
+      "release_id": "441e012c-5271-4a38-92a1-f41a6b09b4bf",
+      "release_title": "PETIT IDOLM@STER Twelve Seasons! Vol.11 星井美希&あふぅ",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "43e48499-4dc7-417c-85e6-9ecad7e4b685", "title": "Closet Fashion Lover"},
+        {"id": "f8e9b9a8-8c58-4009-a8c5-4d79f36983cc", "title": "Closet Fashion Lover (off vocal)"},
+        {"id": "0a2057d4-56af-4b11-8bcd-d883e2b6e898", "title": "あ・り・が・と・YESTERDAYS"},
+        {"id": "358bf262-ff81-4e9d-a5d1-a49fd12276d5", "title": "ら♪ら♪ら♪わんだぁらんど"},
+        {"id": "b5b066ad-7e53-4cac-9474-8a49ce17e9c1", "title": "朝の連続ぷちドラマ みんなでこまーしゃる -美希とあふぅへん-"}
+      ]
+    },
+    {
+      "release_id": "c428f633-18c5-4031-b66b-b74c73c29eff",
+      "release_title": "PETIT IDOLM@STER Twelve Seasons! Vol.11 星井美希&あふぅ",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "43e48499-4dc7-417c-85e6-9ecad7e4b685", "title": "Closet Fashion Lover"},
+        {"id": "f8e9b9a8-8c58-4009-a8c5-4d79f36983cc", "title": "Closet Fashion Lover (off vocal)"},
+        {"id": "0a2057d4-56af-4b11-8bcd-d883e2b6e898", "title": "あ・り・が・と・YESTERDAYS"},
+        {"id": "358bf262-ff81-4e9d-a5d1-a49fd12276d5", "title": "ら♪ら♪ら♪わんだぁらんど"}
+      ]
+    },
+    {
+      "release_id": "65684ffb-73c4-48e3-99c7-018e59e1353f",
+      "release_title": "PETIT IDOLM@STER Twelve Seasons! Vol.12 萩原雪歩&ゆきぽ",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "16012738-7119-48c8-a6d9-c00d013030a9", "title": "TODAY with ME"},
+        {"id": "10178993-0dbf-4b3f-aab4-a0d993d386fb", "title": "ねがいひとつ"},
+        {"id": "5f3cfe21-aa12-4917-bb3d-0aa67f8ece6d", "title": "ねがいひとつ (off vocal)"},
+        {"id": "6a850831-79eb-4c7b-a7c4-6bd667998ad5", "title": "ら♪ら♪ら♪わんだぁらんど"}
+      ]
+    },
+    {
+      "release_id": "c85637bf-4a97-4005-8a6e-ef0d3f766cfa",
+      "release_title": "PETIT IDOLM@STER Twelve Seasons! Vol.12 萩原雪歩&ゆきぽ",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "16012738-7119-48c8-a6d9-c00d013030a9", "title": "TODAY with ME"},
+        {"id": "10178993-0dbf-4b3f-aab4-a0d993d386fb", "title": "ねがいひとつ"},
+        {"id": "5f3cfe21-aa12-4917-bb3d-0aa67f8ece6d", "title": "ねがいひとつ (off vocal)"},
+        {"id": "6a850831-79eb-4c7b-a7c4-6bd667998ad5", "title": "ら♪ら♪ら♪わんだぁらんど"},
+        {"id": "02755b0a-0841-4290-bdf9-d599d731de30", "title": "朝の連続ぷちドラマ みんなでこまーしゃる -雪歩とゆきぽへん-"}
+      ]
+    },
+    {
+      "release_id": "74682d90-a394-4e63-a83f-b5d69ae89a68",
+      "release_title": "PETIT IDOLM@STER Twelve Seasons! Vol.1 四条貴音&たかにゃ",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "5b0a6930-e4bd-4872-8374-4191944c0dbb", "title": "Maybe TOMORROW"},
+        {"id": "d22f84d1-754a-4269-ad45-d4fdbccbf3ba", "title": "Princess Snow White"},
+        {"id": "2e63e90f-044c-4bca-a6aa-e2423a186cc4", "title": "Princess Snow White (off vocal)"},
+        {"id": "e82c44bf-f283-4abc-856f-249ef651fc88", "title": "ら♪ら♪ら♪わんだぁらんど"}
+      ]
+    },
+    {
+      "release_id": "f03faefd-19cf-4d29-a4ff-3577fcabf1a1",
+      "release_title": "PETIT IDOLM@STER Twelve Seasons! Vol.1 四条貴音&たかにゃ",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "5b0a6930-e4bd-4872-8374-4191944c0dbb", "title": "Maybe TOMORROW"},
+        {"id": "d22f84d1-754a-4269-ad45-d4fdbccbf3ba", "title": "Princess Snow White"},
+        {"id": "2e63e90f-044c-4bca-a6aa-e2423a186cc4", "title": "Princess Snow White (off vocal)"},
+        {"id": "e82c44bf-f283-4abc-856f-249ef651fc88", "title": "ら♪ら♪ら♪わんだぁらんど"},
+        {"id": "78fc1061-8319-4572-9b50-d347d8265e17", "title": "朝の連続ぷちドラマ みんなでこまーしゃる -貴音とたかにゃへん-"}
+      ]
+    },
+    {
+      "release_id": "05af4f47-8977-42c2-bd14-98b2b7a3e59f",
+      "release_title": "PETIT IDOLM@STER Twelve Seasons! Vol.2 如月千早&ちひゃー",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "85072704-70dd-430c-8dff-6b74a1d930bc", "title": "choco fondue"},
+        {"id": "a4510257-b770-4c5c-9916-e0954edcac32", "title": "choco fondue (off vocal)"},
+        {"id": "588c7548-a988-45a9-8e9a-499e43e62f0a", "title": "TODAY with ME"},
+        {"id": "764ae616-4abe-4ab9-a467-bf19d9e0c526", "title": "ら♪ら♪ら♪わんだぁらんど"},
+        {"id": "5108293c-08aa-4319-96a3-d47ae1b0b3f3", "title": "朝の連続ぷちドラマ みんなでこまーしゃる -千早とちひゃーへん-"}
+      ]
+    },
+    {
+      "release_id": "a9bf9baa-d33d-4291-b36a-cac12468c6a3",
+      "release_title": "PETIT IDOLM@STER Twelve Seasons! Vol.2 如月千早&ちひゃー",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "85072704-70dd-430c-8dff-6b74a1d930bc", "title": "choco fondue"},
+        {"id": "a4510257-b770-4c5c-9916-e0954edcac32", "title": "choco fondue (off vocal)"},
+        {"id": "588c7548-a988-45a9-8e9a-499e43e62f0a", "title": "TODAY with ME"},
+        {"id": "764ae616-4abe-4ab9-a467-bf19d9e0c526", "title": "ら♪ら♪ら♪わんだぁらんど"}
+      ]
+    },
+    {
+      "release_id": "18d279c3-c766-4f19-88c9-e5ffdb7f9441",
+      "release_title": "PETIT IDOLM@STER Twelve Seasons! Vol.3 高槻やよい&やよ",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "b6730a17-9241-4189-a4a0-295b4427ba29", "title": "Maybe TOMORROW"},
+        {"id": "00af2f5f-a97b-4449-b913-aff01c408153", "title": "まほろば"},
+        {"id": "64f23922-a6db-4213-991a-0a4b61b6838d", "title": "まほろば (off vocal)"},
+        {"id": "cc0696ce-41ca-49ce-90ef-60908b2fa753", "title": "ら♪ら♪ら♪わんだぁらんど"},
+        {"id": "f63c282d-149e-482b-9084-baa4fe1669bd", "title": "朝の連続ぷちドラマ みんなでこまーしゃる -やよいとやよへん-"}
+      ]
+    },
+    {
+      "release_id": "b3af6215-79ee-4d53-9831-dc53fc90b3d9",
+      "release_title": "PETIT IDOLM@STER Twelve Seasons! Vol.3 高槻やよい&やよ",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "b6730a17-9241-4189-a4a0-295b4427ba29", "title": "Maybe TOMORROW"},
+        {"id": "00af2f5f-a97b-4449-b913-aff01c408153", "title": "まほろば"},
+        {"id": "64f23922-a6db-4213-991a-0a4b61b6838d", "title": "まほろば (off vocal)"},
+        {"id": "cc0696ce-41ca-49ce-90ef-60908b2fa753", "title": "ら♪ら♪ら♪わんだぁらんど"}
+      ]
+    },
+    {
+      "release_id": "485a84de-cd3c-4ef9-a973-1c8671153d4c",
+      "release_title": "PETIT IDOLM@STER Twelve Seasons! Vol.4 天海春香&はるかさん",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "7ea28822-715f-4bbe-a949-4a891b743d16", "title": "SWITCH ON"},
+        {"id": "e016dc21-fc70-42aa-ada6-a81389594390", "title": "SWITCH ON (off vocal)"},
+        {"id": "68403cc7-ecc8-47f6-97e8-97c52760cb71", "title": "あ・り・が・と・YESTERDAYS"},
+        {"id": "6d051990-0aa4-43dd-8426-f7c6ca6f3d2e", "title": "ら♪ら♪ら♪わんだぁらんど"},
+        {"id": "7cf05ddd-a190-496e-93ec-7c9e01419cde", "title": "朝の連続ぷちドラマ みんなでこまーしゃる -春香とはるかさんへん-"}
+      ]
+    },
+    {
+      "release_id": "a44d222b-2d0f-4ad3-a81d-4af8e7baac56",
+      "release_title": "PETIT IDOLM@STER Twelve Seasons! Vol.4 天海春香&はるかさん",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "7ea28822-715f-4bbe-a949-4a891b743d16", "title": "SWITCH ON"},
+        {"id": "e016dc21-fc70-42aa-ada6-a81389594390", "title": "SWITCH ON (off vocal)"},
+        {"id": "68403cc7-ecc8-47f6-97e8-97c52760cb71", "title": "あ・り・が・と・YESTERDAYS"},
+        {"id": "6d051990-0aa4-43dd-8426-f7c6ca6f3d2e", "title": "ら♪ら♪ら♪わんだぁらんど"}
+      ]
+    },
+    {
+      "release_id": "4da1a9ba-bc77-45af-8b78-fcc40fc675af",
+      "release_title": "PETIT IDOLM@STER Twelve Seasons! Vol.5 双海亜美・真美 & こあみ・こまみ",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "36bd3886-5d40-49d0-b102-8ce552df8434", "title": "TODAY with ME"},
+        {"id": "8f431726-8e02-4519-a3b4-abab0887b34c", "title": "ら♪ら♪ら♪わんだぁらんど"},
+        {"id": "9d6ed6ee-3104-4340-8834-f17116a79b07", "title": "ドキッ♥ラブアトラクション"},
+        {"id": "c94cb9fb-36b2-4a64-ac79-84d2002755a9", "title": "ドキッ♥ラブアトラクション (off vocal)"}
+      ]
+    },
+    {
+      "release_id": "7b2cf72b-db63-4795-b69a-da3d596de92f",
+      "release_title": "PETIT IDOLM@STER Twelve Seasons! Vol.5 双海亜美・真美 & こあみ・こまみ",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "36bd3886-5d40-49d0-b102-8ce552df8434", "title": "TODAY with ME"},
+        {"id": "8f431726-8e02-4519-a3b4-abab0887b34c", "title": "ら♪ら♪ら♪わんだぁらんど"},
+        {"id": "9d6ed6ee-3104-4340-8834-f17116a79b07", "title": "ドキッ♥ラブアトラクション"},
+        {"id": "c94cb9fb-36b2-4a64-ac79-84d2002755a9", "title": "ドキッ♥ラブアトラクション (off vocal)"},
+        {"id": "bd4dfe17-e607-4089-a6b7-dd4a936bfde6", "title": "朝の連続ぷちドラマ みんなでこまーしゃる -亜美・真美とこあみ・こまみへん-"}
+      ]
+    },
+    {
+      "release_id": "88e5348c-e9ed-47df-98b5-d9cc1812c129",
+      "release_title": "PETIT IDOLM@STER Twelve Seasons! Vol.6 秋月律子&ちっちゃん",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "f5cf7750-2748-435a-a2bf-3da6931e20dd", "title": "WEDDING BELL"},
+        {"id": "ad03ce98-a020-4100-9d71-31d3e5c7c9f3", "title": "WEDDING BELL (off vocal)"},
+        {"id": "93e6bfcb-a02d-4382-b128-547a22bc3c13", "title": "あ・り・が・と・YESTERDAYS"},
+        {"id": "bf2c7573-6f3b-46ea-839d-21cc1776c6c3", "title": "ら♪ら♪ら♪わんだぁらんど"}
+      ]
+    },
+    {
+      "release_id": "f1d61914-238f-48a2-989f-5a1a4f08e134",
+      "release_title": "PETIT IDOLM@STER Twelve Seasons! Vol.6 秋月律子&ちっちゃん",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "f5cf7750-2748-435a-a2bf-3da6931e20dd", "title": "WEDDING BELL"},
+        {"id": "ad03ce98-a020-4100-9d71-31d3e5c7c9f3", "title": "WEDDING BELL (off vocal)"},
+        {"id": "93e6bfcb-a02d-4382-b128-547a22bc3c13", "title": "あ・り・が・と・YESTERDAYS"},
+        {"id": "bf2c7573-6f3b-46ea-839d-21cc1776c6c3", "title": "ら♪ら♪ら♪わんだぁらんど"},
+        {"id": "2d262df6-acb9-42ef-9704-1c0f1fa473e7", "title": "朝の連続ぷちドラマ みんなでこまーしゃる -律子とちっちゃんへん-"}
+      ]
+    },
+    {
+      "release_id": "bce79380-0876-4fa8-a06b-4bf3021d1057",
+      "release_title": "PETIT IDOLM@STER Twelve Seasons! Vol.7 三浦あずさ & みうらさん",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "89a71854-bcfd-4ea7-9fb4-9cb8d8463549", "title": "Maybe TOMORROW"},
+        {"id": "984849d3-aab5-44d4-a9c8-261142f83525", "title": "zone of fortune"},
+        {"id": "6d0c783d-dd80-407e-94b1-8bb50e26152a", "title": "zone of fortune (off vocal)"},
+        {"id": "f0abb21c-2373-46cc-a543-793234759042", "title": "ら♪ら♪ら♪わんだぁらんど"},
+        {"id": "a568d7ab-3591-4226-a69f-3b3ba0a74c3c", "title": "朝の連続ぷちドラマ みんなでこまーしゃる -あずさとみうらさんへん-"}
+      ]
+    },
+    {
+      "release_id": "d7f2ff13-d2ad-44b1-8167-f1e366a4ff39",
+      "release_title": "PETIT IDOLM@STER Twelve Seasons! Vol.7 三浦あずさ & みうらさん",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "89a71854-bcfd-4ea7-9fb4-9cb8d8463549", "title": "Maybe TOMORROW"},
+        {"id": "984849d3-aab5-44d4-a9c8-261142f83525", "title": "zone of fortune"},
+        {"id": "6d0c783d-dd80-407e-94b1-8bb50e26152a", "title": "zone of fortune (off vocal)"},
+        {"id": "f0abb21c-2373-46cc-a543-793234759042", "title": "ら♪ら♪ら♪わんだぁらんど"}
+      ]
+    },
+    {
+      "release_id": "54299b30-c773-4acb-b25b-0f84203bb8f5",
+      "release_title": "PETIT IDOLM@STER Twelve Seasons! Vol.8 菊地真&まこちー",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "66e14917-0eae-48b1-8360-3bb35f11a2a3", "title": "あ・り・が・と・YESTERDAYS"},
+        {"id": "f8f53425-20d2-4627-9cab-73c0a19479d6", "title": "ら♪ら♪ら♪わんだぁらんど"},
+        {"id": "53be8427-7f8b-402a-a319-e53eeff38b96", "title": "ヨーイドン!!"},
+        {"id": "f189f49d-262a-4e5a-a4f0-4689bbfe1d6f", "title": "ヨーイドン!! (off vocal)"}
+      ]
+    },
+    {
+      "release_id": "f726faf8-4564-4d33-9b4a-67c1c53c01b1",
+      "release_title": "PETIT IDOLM@STER Twelve Seasons! Vol.8 菊地真&まこちー",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "66e14917-0eae-48b1-8360-3bb35f11a2a3", "title": "あ・り・が・と・YESTERDAYS"},
+        {"id": "f8f53425-20d2-4627-9cab-73c0a19479d6", "title": "ら♪ら♪ら♪わんだぁらんど"},
+        {"id": "53be8427-7f8b-402a-a319-e53eeff38b96", "title": "ヨーイドン!!"},
+        {"id": "f189f49d-262a-4e5a-a4f0-4689bbfe1d6f", "title": "ヨーイドン!! (off vocal)"},
+        {"id": "f16622a5-c64a-4365-aa57-ec3de125eecb", "title": "朝の連続ぷちドラマ みんなでこまーしゃる -真とまこちーへん-"}
+      ]
+    },
+    {
+      "release_id": "0f3a2ed6-6e0d-415f-9afb-b0b4376f27b3",
+      "release_title": "PETIT IDOLM@STER Twelve Seasons! Vol.9 水瀬伊織&いお",
+      "series": "765",
+      "source_urls": ["https://www.fwinc.co.jp/news/79341/"],
+      "recordings": [
+        {"id": "a807ea74-e763-4ac3-8dbe-2ed32f4615d3", "title": "Maybe TOMORROW"},
+        {"id": "c13f1d08-ad66-45b9-9464-72294cc0e271", "title": "ら♪ら♪ら♪わんだぁらんど"},
+        {"id": "39bf8dea-7d11-4fc7-9a07-766a9fd25636", "title": "ロイヤルストレートフラッシュ"},
+        {"id": "c1a2bbe6-ec03-45c6-a366-a8299969576b", "title": "ロイヤルストレートフラッシュ (off vocal)"},
+        {"id": "dd7937b8-6a9b-4856-ba01-ac35b2e14c6e", "title": "朝の連続ぷちドラマ みんなでこまーしゃる -伊織といおへん-"}
+      ]
+    },
+    {
+      "release_id": "01a81921-b0fc-4856-a7d3-92027549fcb0",
+      "release_title": "READY!!",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_765.pdf"],
+      "recordings": [
+        {"id": "7c3df730-86d1-4b11-b695-bfd22fe23c7d", "title": "READY!! (M@STER VERSION) Instrumental"},
+        {"id": "3189abe4-fa9c-4b80-b0f6-5cc4674fcc93", "title": "おもいでのはじまり"}
+      ]
+    },
+    {
+      "release_id": "4682004f-79f9-4524-9098-f9287d228500",
+      "release_title": "READY!!",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_765.pdf"],
+      "recordings": [
+        {"id": "20e976f8-90bd-4482-b5b2-5debfc767f8a", "title": "GO MY WAY!! (M@STER VERSION) (live, 「THE IDOLM@STER 6th ANNIVERSARY SMILE SUMMER FESTIV@L !」, 2011-06-25: TOKYO DOME CITY HALL)"},
+        {"id": "7c3df730-86d1-4b11-b695-bfd22fe23c7d", "title": "READY!! (M@STER VERSION) Instrumental"},
+        {"id": "d714dbb1-6b00-4de2-8607-0d0178df38ef", "title": "READY!! (TV size) (live, 「THE IDOLM@STER 6th ANNIVERSARY SMILE SUMMER FESTIV@L !」, 2011-06-25: TOKYO DOME CITY HALL)"},
+        {"id": "6da63994-dbb0-4c82-bf7a-82ae1712a546", "title": "READY!! (ノンクレジット・オープニング映像)"},
+        {"id": "3189abe4-fa9c-4b80-b0f6-5cc4674fcc93", "title": "おもいでのはじまり"}
+      ]
+    },
+    {
+      "release_id": "5e5f87b5-20ef-49a7-9d23-26416f85bb6e",
+      "release_title": "READY!!",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_765.pdf"],
+      "recordings": [
+        {"id": "7c3df730-86d1-4b11-b695-bfd22fe23c7d", "title": "READY!! (M@STER VERSION) Instrumental"},
+        {"id": "3189abe4-fa9c-4b80-b0f6-5cc4674fcc93", "title": "おもいでのはじまり"}
+      ]
+    },
+    {
+      "release_id": "7b677e9c-a25a-44d2-9767-086b55ce45c8",
+      "release_title": "SPARKERS",
+      "series": "million",
+      "source_urls": ["https://www.lantis.jp/imas/extra.html"],
+      "recordings": [
+        {"id": "ca96d79a-d2e5-4c89-b16e-989da00fb2fe", "title": "SPARKERS"}
+      ]
+    },
+    {
+      "release_id": "127b8dfb-f259-4d28-a2df-e6dfdf339a39",
+      "release_title": "Starry Night (GAME VERSION)",
+      "series": "cinderella",
+      "source_urls": ["https://columbia.jp/idolmaster/COCX-41892.html"],
+      "recordings": [
+        {"id": "82e65f4c-fa78-451c-9087-a86708c4509e", "title": "Starry Night (GAME VERSION)"}
+      ]
+    },
+    {
+      "release_id": "81ca9b16-a814-44ab-92dd-4fcbcb169c20",
+      "release_title": "THE IDOLM@STER 2 765pro H@PPINESS NEW YE@R P@RTY !! 2011",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/idolmaster/news/110107.html"],
+      "recordings": [
+        {"id": "6180ce67-a1c4-4bcb-85c6-12c3c2040de9", "title": "Large Size Party"},
+        {"id": "6ea0b81d-2096-4a44-b70d-98459f54eaa4", "title": "Large Size Party"},
+        {"id": "6fc469b0-1434-410c-a484-1ba7bfeadfd8", "title": "Large Size Party"},
+        {"id": "46591999-f248-4f11-aef5-8ca83ac323f1", "title": "Large Size Party オリジナル・カラオケ"},
+        {"id": "0780e9af-d2af-47cd-8f6d-1c4e1ab2b988", "title": "あったかな雪"},
+        {"id": "36bed9a2-c1c0-4a02-8458-87a5ac01fa77", "title": "あったかな雪"},
+        {"id": "8d2f3f86-b10b-4eb2-b744-06e692c2489b", "title": "あったかな雪"},
+        {"id": "24eb2980-9071-47f7-a0b7-e6e44b03f572", "title": "あったかな雪 オリジナル・カラオケ"},
+        {"id": "1d415080-1cfc-4289-92e3-84cc21bf30bb", "title": "サニー"},
+        {"id": "6ea279d0-addc-4923-8863-bf3fa6547ff5", "title": "サニー"},
+        {"id": "b2840544-4ed4-4779-9f0c-bdc0dafb43e9", "title": "サニー"},
+        {"id": "dab19b65-b471-4543-8dfc-e99be668876c", "title": "サニー"},
+        {"id": "dd10bc94-91ed-4ec6-90df-be51e28e430a", "title": "サニー"},
+        {"id": "cc8d5b15-d66f-4528-b8f2-5562cd027dd5", "title": "サニー オリジナル・カラオケ"},
+        {"id": "294d22cf-7f52-422c-ba43-0b8dcc395390", "title": "チェリー"},
+        {"id": "53871a0f-4164-4836-8857-6b180ab7a0ac", "title": "チェリー"},
+        {"id": "5562603b-2e4b-4b53-a818-d44ed2325a26", "title": "チェリー"},
+        {"id": "6418807e-208a-4584-8992-7c760bd5ca36", "title": "チェリー"},
+        {"id": "6ac0e7d2-cede-4376-8288-57ea88b9aeff", "title": "チェリー"},
+        {"id": "9bb4d476-6e94-49c8-b18c-04184cbecbd9", "title": "チェリー"},
+        {"id": "1ae2ef77-8950-4fd5-994f-191e29a4102e", "title": "チェリー オリジナル・カラオケ"},
+        {"id": "17c390df-1434-4e0f-a1a3-3d89f85c4f60", "title": "メリー"},
+        {"id": "4dd6cb84-ad49-4951-b5cb-fe92d16bb679", "title": "メリー"},
+        {"id": "6546368c-e111-414c-bd57-f5669a12cdf2", "title": "メリー"},
+        {"id": "8f7eb402-d63e-4adc-bd87-5fa4f953f70a", "title": "メリー"},
+        {"id": "d10c61e6-8395-4dc8-817d-d8d673b6701e", "title": "メリー"},
+        {"id": "a6ad92e4-f5f7-4f6a-8e3d-c1f70960416a", "title": "メリー オリジナル・カラオケ"}
+      ]
+    },
+    {
+      "release_id": "f59447fe-6e42-4727-8180-a01846203daf",
+      "release_title": "THE IDOLM@STER 2 GAME SOUND TRACK",
+      "series": "765",
+      "source_urls": ["https://www.aniplex.co.jp/lineup/idolmaster/products/detail/?id=803"],
+      "recordings": [
+        {"id": "19387f7b-6cfe-4099-a4e2-12963de80f9e", "title": "961DARK"},
+        {"id": "bc06069f-0975-429a-a017-b411cf18af1c", "title": "961HARD"},
+        {"id": "f29ea5f7-6440-4f81-aa74-e9951b8ca089", "title": "961POP"},
+        {"id": "02e12e40-e1a4-4b10-860e-f196c880f4df", "title": "A-PARK"},
+        {"id": "64c0a5d6-9497-404c-a871-409239b4822d", "title": "APPEAL_RMX"},
+        {"id": "87bd6738-fc54-4e28-8eea-1902b5451fa5", "title": "BRIGHT_RMX"},
+        {"id": "cddd3ada-842f-46f9-b6aa-8ce246687088", "title": "CHARACTER_SELECT"},
+        {"id": "f3d4de4a-abfe-4b21-97dc-9c5513d3d588", "title": "COMICAL_A"},
+        {"id": "65714be4-a667-408f-ae46-3f8536633d74", "title": "COMICAL_B"},
+        {"id": "c575887f-96c0-4518-b73a-c9a22ef437b8", "title": "COUNTRY_RMX"},
+        {"id": "d8663d4a-0fe0-4e22-a704-e424b49904c2", "title": "DARK_RMX"},
+        {"id": "88f60617-2bcc-4927-aef1-9bc803eef4e1", "title": "E_MORNING_RMX"},
+        {"id": "497b4766-ce9d-4997-8672-8d5c58247fe5", "title": "ED_BAD_RMX"},
+        {"id": "0840f434-c19e-473d-b697-2dbb8db4e4bc", "title": "ED_GOOD_RMX"},
+        {"id": "898ae439-70c7-42b1-b331-a1be6bf89b60", "title": "ED_NORMAL"},
+        {"id": "629cdf47-f685-4988-9701-a43ab86df50d", "title": "ED_PERFECT_RMX"},
+        {"id": "f3615739-ee07-4a97-866c-682899a7d037", "title": "ENERGY_RMX"},
+        {"id": "d9909834-5e79-4047-a21d-c163992e6159", "title": "GENTLE"},
+        {"id": "fb3762a8-a4d9-4f96-bf30-a25b23303249", "title": "HELL"},
+        {"id": "904f15af-a169-47a6-aa0d-cdd2396f1edb", "title": "KINDNESS"},
+        {"id": "9eb52511-c541-47b9-a1bb-291007fa8b29", "title": "LESSON_VISUAL"},
+        {"id": "469e8e21-e53d-4c21-8ee8-f72fac85b1b2", "title": "LESSON_VOCAL"},
+        {"id": "f97df021-a21b-4143-a3b3-7a4abd90c4fd", "title": "MAINBGM_RMX"},
+        {"id": "09f0d697-5d3c-4919-893a-f618d025cd12", "title": "MATCHING_RMX"},
+        {"id": "a1b15c5d-8c6b-42c1-aa7d-198a82440d80", "title": "MILD"},
+        {"id": "3d6d08ba-157c-4a22-b02d-6079e74a7664", "title": "MORNING_RMX"},
+        {"id": "f8091c07-bb51-4cf0-9bf3-76313ba5cb54", "title": "MORNINGO_RMX"},
+        {"id": "01ed1d0a-6b9e-425d-87ee-9ba92444798a", "title": "NIGHT_RMX"},
+        {"id": "79788689-371a-41d8-80e9-c21ef7b40486", "title": "ORDINARY_A"},
+        {"id": "08c8678f-cf83-404a-9936-53ff953ee0fe", "title": "ORDINARY_B"},
+        {"id": "1bc0991d-1a79-4700-b12e-a11e6f1f29fe", "title": "PAIN_RMX"},
+        {"id": "e3599776-da27-4153-b41d-35e662d6a4dd", "title": "RANKING"},
+        {"id": "1c19fe61-6476-4807-9811-7a6325f7c3d4", "title": "REFRESH_RMX"},
+        {"id": "0ac450ea-2b48-4204-af9d-8f6f1facce36", "title": "RYUGU"},
+        {"id": "341b09f3-0a54-4727-9ab8-cb5af6fee2d4", "title": "SCHEDULE"},
+        {"id": "52e51b82-8263-4de4-85c3-2d399e71685f", "title": "SE_COMMUNICATION"},
+        {"id": "a3e70d6d-3c52-4a7f-9f7a-1adcb729ccd5", "title": "SE_IA"},
+        {"id": "a907fed8-eddb-4cea-b3d2-97f24ecc9d43", "title": "SE_LESSON"},
+        {"id": "6a9ecfb7-a6d7-4fbc-941c-b3e0be9dc1d4", "title": "SE_STAGE"},
+        {"id": "c07a124f-350b-4699-848a-76dbd1ebb6be", "title": "SE_SYSTEM"},
+        {"id": "ab399e7c-0d4c-43d6-b069-2b6fc00124fd", "title": "SENTAKKU2_RMX"},
+        {"id": "f526b4e3-fa04-409e-848b-f2f81b0d21b3", "title": "SHOP"},
+        {"id": "5e936902-e04e-4028-a6d5-ec64e125165a", "title": "SORROW"},
+        {"id": "f46d2442-0143-4f5c-b328-3111fad0e2d2", "title": "SPEED_RMX"},
+        {"id": "fd8683b8-0dab-4a22-9166-e29632f10900", "title": "STARDUST_RMX"},
+        {"id": "5bffa832-d056-457d-ae69-0a1bf6da21e9", "title": "TENDER_RMX"},
+        {"id": "332e8320-8003-41f4-9a92-4078a5ae9011", "title": "THINKING_RMX"},
+        {"id": "3083f3c2-38f8-47c0-9b3c-2d4f2f28fc24", "title": "THINKING_SERIOUS"},
+        {"id": "d32a03f1-e7b0-4bb4-ae02-e4455b2df1c1", "title": "TOWN_RMX"},
+        {"id": "5787e224-484a-4b67-864d-bda0c1f98fd7", "title": "TUTORIAL"},
+        {"id": "26f085d9-3ab7-4102-a4c6-b57c24de2db1", "title": "TV_RMX"}
+      ]
+    },
+    {
+      "release_id": "0aa328b4-7172-4817-849f-e4b889400304",
+      "release_title": "THE iDOLM@STER 2 「SMOKY THRILL」",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_765.pdf"],
+      "recordings": [
+        {"id": "e62f92d5-5c1a-40be-beca-33b84968507b", "title": "SMOKY THRILL (M@STER VERSION) (オリジナル・カラオケ)"},
+        {"id": "e59da3ff-43c8-4e0b-8551-1f962937e957", "title": "トーク01"},
+        {"id": "f465007f-3e1c-4ae1-bfcd-bf1aff326350", "title": "トーク02"},
+        {"id": "84cff74b-a7e9-430b-9f3d-be44f697604d", "title": "恋するミカタ"},
+        {"id": "daaa374b-580c-4be8-95b1-a94406fa3b8c", "title": "恋するミカタ (オリジナル・カラオケ)"}
+      ]
+    },
+    {
+      "release_id": "6b777956-63e6-4d6f-a1b3-fdaf564af375",
+      "release_title": "THE iDOLM@STER 2 「The world is all one !!」",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_765.pdf"],
+      "recordings": [
+        {"id": "1a830026-3f46-4a2c-879e-039c2937bd3f", "title": "The world is all one !! (M@STER VERSION)"},
+        {"id": "35e69096-2802-4ed6-a90e-1ee9df04bbd0", "title": "The world is all one !! (M@STER VERSION)"},
+        {"id": "36c8cf35-29e8-4b55-90cf-b33cb929c948", "title": "The world is all one !! (M@STER VERSION)"},
+        {"id": "f3961c42-f5b7-4998-91f3-e0267be10de9", "title": "The world is all one !! (M@STER VERSION)"},
+        {"id": "b6090ce0-e558-4e37-9382-87e0c0985c1c", "title": "The world is all one !! (M@STER VERSION) (765プロみんなで合唱VERSION)"},
+        {"id": "10714904-b0ac-43ae-ab44-e9f3fee62f98", "title": "The world is all one !! (M@STER VERSION) (オリジナル・カラオケ)"}
+      ]
+    },
+    {
+      "release_id": "034a281b-c715-440d-82df-1b4469f1e800",
+      "release_title": "THE IDOLM@STER 9th Anniversary WE ARE M@STERPIECE!! Jibun REST@RT & SMOKY THRILL",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/idolmaster/imasnews/140718.html"],
+      "recordings": [
+        {"id": "c9aca6e8-1519-433d-829d-99316b96d513", "title": "SMOKY THRILL (M@STER VERSION) あずさソロ・リミックス"},
+        {"id": "94158dbf-d69b-41d7-804d-f5e3b563457a", "title": "SMOKY THRILL (M@STER VERSION) 亜美ソロ・リミックス"},
+        {"id": "1abae0f2-e43f-4282-97c1-95b1a28a49a4", "title": "SMOKY THRILL (M@STER VERSION) 伊織ソロ・リミックス"},
+        {"id": "a57cfadb-dfef-41a4-99ca-5ee6f79c80fd", "title": "自分REST@RT (M@STER VERSION) やよいソロ・リミックス"},
+        {"id": "85f1e6a1-793b-4cdc-bf46-953dafff8b02", "title": "自分REST@RT (M@STER VERSION) 千早ソロ・リミックス"},
+        {"id": "c6fd9d35-3812-4d62-86f3-04fd6e081c53", "title": "自分REST@RT (M@STER VERSION) 春香ソロ・リミックス"},
+        {"id": "18d4415d-4d41-4601-acb0-ffe882021d34", "title": "自分REST@RT (M@STER VERSION) 真ソロ・リミックス"},
+        {"id": "f3a3779b-e42c-4d2e-8b4e-cc58ae04cc6b", "title": "自分REST@RT (M@STER VERSION) 真美ソロ・リミックス"},
+        {"id": "f0b23862-94dd-4a1f-bc8b-2c4dc1f8b1cf", "title": "自分REST@RT (M@STER VERSION) 美希ソロ・リミックス"},
+        {"id": "7a7bfdef-3b5b-41ca-9656-e4ff64d376ad", "title": "自分REST@RT (M@STER VERSION) 貴音ソロ・リミックス"},
+        {"id": "f7b6d1b0-650c-425b-9baa-cd6748f6fa47", "title": "自分REST@RT (M@STER VERSION) 雪歩ソロ・リミックス"},
+        {"id": "f431991b-7b41-4e64-9253-8113e26aae53", "title": "自分REST@RT (M@STER VERSION) 響ソロ・リミックス"}
+      ]
+    },
+    {
+      "release_id": "bf5eee19-6f6f-4c94-844f-62242bd8a85e",
+      "release_title": "THE IDOLM@STER 9th Anniversary WE ARE M@STERPIECE!! We Have A Dream & Curtain Call",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/idolmaster/imasnews/140912.html"],
+      "recordings": [
+        {"id": "727ea0e6-5519-47ba-9d9d-7cd115cd5c24", "title": "We Have A Dream (M@STER VERSION) やよいソロ・リミックス"},
+        {"id": "e89dab51-4ccd-4a58-81b2-bc7e2a14bf77", "title": "We Have A Dream (M@STER VERSION) オリジナル・カラオケ -"},
+        {"id": "ec962ae6-7fd0-4bcf-a40e-ff77c89ff2ce", "title": "We Have A Dream (M@STER VERSION) 千早ソロ・リミックス"},
+        {"id": "cda8444f-fd6a-46e4-a776-bee93f05ef80", "title": "We Have A Dream (M@STER VERSION) 春香ソロ・リミックス"},
+        {"id": "43a144b2-0010-4309-a618-5746f04d6cbf", "title": "We Have A Dream (M@STER VERSION) 美希ソロ・リミックス"},
+        {"id": "c208acfb-91db-48b1-9694-a69cceaa4a2b", "title": "We Have A Dream (M@STER VERSION) 雪歩ソロ・リミックス"},
+        {"id": "38041c3f-7fab-4de2-8857-40a26b6fc763", "title": "We Have A Dream (M@STER VERSION) 響ソロ・リミックス"},
+        {"id": "291b9674-992c-4f7b-b7e1-2258543aaab0", "title": "カーテンコール あずさソロ・リミックス"},
+        {"id": "e486f4c2-01f0-4724-87b5-63f04ef54791", "title": "カーテンコール オリジナル・カラオケ -"},
+        {"id": "24f1184a-01ec-44de-8b66-825f4b4dc399", "title": "カーテンコール 亜美／真美ソロ・リミックス"},
+        {"id": "b84d1975-4b45-47c8-af43-e4504f502df9", "title": "カーテンコール 伊織ソロ・リミックス"},
+        {"id": "8e41ff33-ab48-48b0-91ac-8d4d140dbbdc", "title": "カーテンコール 律子ソロ・リミックス"},
+        {"id": "73ed6d00-bc1c-40f4-8975-c6a20c26b4f5", "title": "カーテンコール 真ソロ・リミックス"},
+        {"id": "4656b73e-44e3-41f6-a630-dd9ef8ebcf93", "title": "カーテンコール 貴音ソロ・リミックス"},
+        {"id": "bcac92a4-7808-4062-af9b-925adc127bd2", "title": "自分REST@RT (M@STER VERSION) オリジナル・カラオケ -"}
+      ]
+    },
+    {
+      "release_id": "1ebc8f90-a125-4947-84d8-8596c790efac",
+      "release_title": "THE iDOLM@STER Christmas for you!",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/idolmaster/imasnews/180202.html"],
+      "recordings": [
+        {"id": "e981ea8d-7379-4666-bfe9-605a8bf1a055", "title": "DING DONG"},
+        {"id": "4337474f-0599-4e35-b800-5e7621f8219c", "title": "PEARL-WHITE EVE"},
+        {"id": "b7213619-dc7a-4e36-bd6e-ebdddd270cc5", "title": "SCENE01"},
+        {"id": "ade9215b-1f36-435d-930c-f8f0880e0c25", "title": "SCENE02"},
+        {"id": "6c2a609d-151e-48ea-8f76-9dba877402e5", "title": "SCENE03"},
+        {"id": "1006ee46-cedb-43d9-9fe4-dd18c588209c", "title": "SCENE04"},
+        {"id": "fd5dbd5b-5975-4f5f-8211-99df707c8eec", "title": "SCENE05"},
+        {"id": "c360d687-ca12-4b2e-92df-487c2c1abd67", "title": "SCENE06"},
+        {"id": "42f99bb2-4792-4304-89e2-4e13a25d52c5", "title": "サンタが町にやってくる"},
+        {"id": "af9a1410-89ff-421c-887c-fda7f9ec4513", "title": "サンタクロースはどこのひと"},
+        {"id": "e4a2cabc-0ca3-4d85-a71d-eadd4ee6f56e", "title": "メリー"},
+        {"id": "52e2edb3-423e-484b-a99d-158f60bac08c", "title": "星の降る街"},
+        {"id": "544be0cd-345d-4e3c-8bbe-b5308d9e392d", "title": "雪に願いを"}
+      ]
+    },
+    {
+      "release_id": "f1d9f3d1-fdf5-4d2f-9927-65f6749ad56b",
+      "release_title": "THE IDOLM@STER M@STERS OF IDOL WORLD!!!!! 2023 なんどでも笑おう",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/idolmaster/imasnews/230127.html"],
+      "recordings": [
+        {"id": "ef391271-7300-49d3-8d02-4c05eb52174a", "title": "なんどでも笑おう (天海春香ソロ・リミックス)"},
+        {"id": "89d60422-851e-4bfb-8eef-59142631dc0a", "title": "なんどでも笑おう (如月千早ソロ・リミックス)"},
+        {"id": "be152d85-2ba8-4cb4-84c9-cf829da74db8", "title": "なんどでも笑おう (星井美希ソロ・リミックス)"},
+        {"id": "8e262245-171b-4dcf-ba15-5353abebc75a", "title": "なんどでも笑おう 765PRO ALLSTARSバージョン"},
+        {"id": "907e1496-0174-457b-a06e-6b977cd7815f", "title": "なんどでも笑おう 三浦あずさソロ・リミックス"},
+        {"id": "bec2ae2b-acc3-4bd1-a8cc-4b26e14fc426", "title": "なんどでも笑おう 双海亜美/真美ソロ・リミックス"},
+        {"id": "8f3763c1-916a-4405-a05a-3ef63145c8c2", "title": "なんどでも笑おう 四条貴音ソロ・リミックス"},
+        {"id": "e2cbb374-63c6-418b-963b-be4b1165866d", "title": "なんどでも笑おう 我那覇響ソロ・リミックス"},
+        {"id": "dd750bed-04a7-4299-bcca-48fb3d9dcf92", "title": "なんどでも笑おう 水瀬伊織ソロ・リミックス"},
+        {"id": "725e5afc-9384-47df-acd1-eb37148f4d9d", "title": "なんどでも笑おう 秋月律子ソロ・リミックス"},
+        {"id": "bb8d04f7-8702-4f01-9538-68eb3cc621d9", "title": "なんどでも笑おう 菊地真ソロ・リミックス"},
+        {"id": "380b5ec4-11bb-4360-a766-d0f2db8fde31", "title": "なんどでも笑おう 萩原雪歩ソロ・リミックス"},
+        {"id": "b3e5b5a4-498d-4a85-af09-31886080a799", "title": "なんどでも笑おう 高槻やよいソロ・リミックス"}
+      ]
+    },
+    {
+      "release_id": "1f84eb01-1c8b-4290-8167-99e3314e1074",
+      "release_title": "THE IDOLM@STER M@STERS OF IDOL WORLD!!!!! 2023 明日きみにJewel",
+      "series": "cinderella",
+      "source_urls": ["https://columbia.jp/idolmaster/imasnews/230127.html"],
+      "recordings": [
+        {"id": "a3ff6fb7-ea6b-4b8a-a9c4-764984fc3de0", "title": "きみにいっぱい☆ 大槻唯ソロ・リミックス"},
+        {"id": "260872c5-747b-431c-986d-ccae6ddb35e4", "title": "きみにいっぱい☆ 姫川友紀ソロ・リミックス"},
+        {"id": "88894e78-b02a-4df4-90f1-00e9d2f43c6e", "title": "きみにいっぱい☆ 市原仁奈ソロ・リミックス"},
+        {"id": "96ea525e-29d6-44cc-bb10-9ee7e78a96ab", "title": "きみにいっぱい☆ 片桐早苗ソロ・リミックス"},
+        {"id": "38b87497-d4ef-4172-9d57-ea18e7778348", "title": "きみにいっぱい☆ 相葉夕美ソロ・リミックス"},
+        {"id": "dfc3b6d0-1d63-4626-866a-db91621f1bc7", "title": "咲いてJewel 二宮飛鳥ソロ・リミックス"},
+        {"id": "90b91213-689a-474b-ad43-5284f429d33e", "title": "咲いてJewel 塩見周子ソロ・リミックス"},
+        {"id": "eac5a472-eb2d-4322-b1c0-d2bce480d70f", "title": "咲いてJewel 橘ありすソロ・リミックス"},
+        {"id": "502becd8-e88a-4549-8daf-a50ddca9baef", "title": "咲いてJewel 速水奏ソロ・リミックス"},
+        {"id": "381616f9-4554-4005-953e-55bab0d7046e", "title": "咲いてJewel 鷺沢文香ソロ・リミックス"},
+        {"id": "1daf1136-365f-4c27-ab90-40586176614a", "title": "明日また会えるよね 一ノ瀬志希ソロ・リミックス"},
+        {"id": "d708a1e9-5d46-4a56-8c45-568bdc814345", "title": "明日また会えるよね 中野有香ソロ・リミックス"},
+        {"id": "127a1057-821e-41d9-afab-6e7cd998622e", "title": "明日また会えるよね 五十嵐響子ソロ・リミックス"},
+        {"id": "02ec7a19-de37-49d8-a5cc-9b8acbad6118", "title": "明日また会えるよね 宮本フレデリカ ソロ・リミックス"},
+        {"id": "80464453-d50a-4b43-8cca-7a3b8ba22567", "title": "明日また会えるよね 櫻井桃華ソロ・リミックス"}
+      ]
+    },
+    {
+      "release_id": "de568641-2aa3-44e8-b8c3-de420456f87a",
+      "release_title": "THE IDOLM@STER M@STERS OF IDOL WORLD!!2014",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/idolmaster/imasnews/140214.html"],
+      "recordings": [
+        {"id": "b74f8844-3f92-4a4f-9afe-c565e5d1a819", "title": "edeN (M@STER VERSION) オリジナル・カラオケ"},
+        {"id": "802beb92-4e96-4387-b074-01aa44038bc3", "title": "edeN (M@STER VERSION) 真ソロ・リミックス"},
+        {"id": "32f239c5-31ee-42c2-9469-535db94fb66c", "title": "edeN (M@STER VERSION) 美希ソロ・リミックス"},
+        {"id": "489c99b9-a08f-40bb-a544-7ffbc04eb6c5", "title": "edeN (M@STER VERSION) 貴音ソロ・リミックス"},
+        {"id": "c852fc2e-016c-4b9f-952e-d2cbf796103e", "title": "edeN (M@STER VERSION) 雪歩ソロ・リミックス"},
+        {"id": "ce385873-9cd1-44b3-b077-03c6c61d2935", "title": "MUSIC♪ (M@STER VERSION) あずさソロ・リミックス"},
+        {"id": "b380b044-6f96-4e3c-aa62-6014109e6d4c", "title": "MUSIC♪ (M@STER VERSION) やよいソロ・リミックス"},
+        {"id": "79598965-bb73-49ba-93c8-82d68a55befc", "title": "MUSIC♪ (M@STER VERSION) オリジナル・カラオケ"},
+        {"id": "a385dbb2-a581-40ce-b04d-262bab431a15", "title": "MUSIC♪ (M@STER VERSION) 亜美/真美ソロ・リミックス"},
+        {"id": "50113de6-0288-4cc8-a3f5-9fc71c7e5b1c", "title": "MUSIC♪ (M@STER VERSION) 伊織ソロ・リミックス"},
+        {"id": "42772a42-4ccf-457f-92ea-3db711fc3da8", "title": "MUSIC♪ (M@STER VERSION) 千早ソロ・リミックス"},
+        {"id": "6cfb611c-ef64-42d4-a9bd-02fd8034c918", "title": "MUSIC♪ (M@STER VERSION) 律子ソロ・リミックス"},
+        {"id": "7f265fcd-ac89-45a3-bbd1-060b07aa1b10", "title": "MUSIC♪ (M@STER VERSION) 春香ソロ・リミックス"},
+        {"id": "8ca05e26-5f4b-41d0-83c3-f1b07d3e9e47", "title": "MUSIC♪ (M@STER VERSION) 真ソロ・リミックス"},
+        {"id": "47132b8e-f63d-4c87-9d08-3a77c4c3d858", "title": "MUSIC♪ (M@STER VERSION) 美希ソロ・リミックス"},
+        {"id": "e94c7b50-83e0-4636-ae32-051e5086a232", "title": "MUSIC♪ (M@STER VERSION) 貴音ソロ・リミックス"},
+        {"id": "1205362c-79dd-45b8-8c7f-b76b43783acc", "title": "MUSIC♪ (M@STER VERSION) 雪歩ソロ・リミックス"},
+        {"id": "0a8665a2-1b0e-46b9-8429-90b897b92193", "title": "MUSIC♪ (M@STER VERSION) 響ソロ・リミックス"},
+        {"id": "817e40cb-2692-4ef9-8c8b-1c8b44433bb5", "title": "Vault That Borderline! (M@STER VERSION) あずさソロ・リミックス"},
+        {"id": "ba809577-a27e-4a5c-ba71-55600f9d1a53", "title": "Vault That Borderline! (M@STER VERSION) オリジナル・カラオケ"},
+        {"id": "109830b8-2785-4525-94d9-94fcebacbea8", "title": "Vault That Borderline! (M@STER VERSION) 千早ソロ・リミックス"},
+        {"id": "d1cfab78-6c98-43d4-9d43-9be00d804a35", "title": "Vault That Borderline! (M@STER VERSION) 律子ソロ・リミックス"},
+        {"id": "7eca8fc6-fa5a-4270-a59f-86075036e8bb", "title": "Vault That Borderline! (M@STER VERSION) 春香ソロ・リミックス"},
+        {"id": "e3d72598-5497-4683-a0ea-b1682ef575fd", "title": "ビジョナリー (M@STER VERSION) やよいソロ・リミックス"},
+        {"id": "07e562a9-d74a-4c16-8eae-e53555ed0ede", "title": "ビジョナリー (M@STER VERSION) オリジナル・カラオケ"},
+        {"id": "649f99b5-c92a-4182-8d99-3f51c22f552a", "title": "ビジョナリー (M@STER VERSION) 亜美/真美ソロ・リミックス"},
+        {"id": "97d7cb85-a6aa-4556-b40c-6da390e48aa1", "title": "ビジョナリー (M@STER VERSION) 伊織ソロ・リミックス"},
+        {"id": "1140e8a6-434d-4674-9e54-860f7f9ac658", "title": "ビジョナリー (M@STER VERSION) 響ソロ・リミックス"}
+      ]
+    },
+    {
+      "release_id": "73a6aa4c-00ca-40b6-9632-afc84414b1cb",
+      "release_title": "THE IDOLM@STER M@STERS OF IDOL WORLD!!2015 Nation Sapphire アンドロイド",
+      "series": "cinderella",
+      "source_urls": ["https://columbia.jp/idolmaster/imasnews/150703.html"],
+      "recordings": [
+        {"id": "a056e784-5b84-4e94-a293-825bf60a88d0", "title": "Nation Blue (多田李衣菜ソロ・リミックス)"},
+        {"id": "003a0857-eedd-4db5-bae1-293fc9e5fd73", "title": "Nation Blue (新田美波ソロ・リミックス)"},
+        {"id": "48de5d9a-35a4-4076-8fdf-9c674392eed3", "title": "Nation Blue (渋谷凛ソロ・リミックス)"},
+        {"id": "9442f8e9-3165-4438-9592-e9194e01045b", "title": "Nation Blue (神崎蘭子ソロ・リミックス)"},
+        {"id": "8e1643a6-d586-47ec-ac0a-ad4a96734d34", "title": "Nation Blue (高垣楓ソロ・リミックス)"},
+        {"id": "49da7725-3107-430a-93f5-1f88088e0d5a", "title": "Orange Sapphire (城ヶ崎美嘉ソロ・リミックス)"},
+        {"id": "e275787e-649f-480c-b84d-0f65456ae7e7", "title": "Orange Sapphire (城ヶ崎莉嘉ソロ・リミックス)"},
+        {"id": "ed094216-c4db-4170-b5e7-202a50bf73b4", "title": "Orange Sapphire (本田未央ソロ・リミックス)"},
+        {"id": "932b6f95-75b3-4fee-a4f2-d10877892df2", "title": "Orange Sapphire (諸星きらりソロ・リミックス)"},
+        {"id": "43c4f9df-4959-4a3e-8f24-0b0960cc4737", "title": "Orange Sapphire (赤城みりあソロ・リミックス)"},
+        {"id": "4769cdf0-6b36-4819-b0b9-e5289cf2d0c7", "title": "アタシポンコツアンドロイド (前川みくソロ・リミックス)"},
+        {"id": "c786cf80-2c12-4708-b3e8-749c872bce8a", "title": "アタシポンコツアンドロイド (双葉杏ソロ・リミックス)"},
+        {"id": "dfb906cf-76dd-4aee-b47b-8f11d63b5c15", "title": "アタシポンコツアンドロイド (安部菜々ソロ・リミックス)"},
+        {"id": "5bb88fdd-c96b-4096-bfc8-2f18a79b1592", "title": "アタシポンコツアンドロイド (小日向美穂ソロ・リミックス)"},
+        {"id": "da7b2ddd-20a6-4e74-88c8-2070588a2eab", "title": "アタシポンコツアンドロイド (島村卯月ソロ・リミックス)"}
+      ]
+    },
+    {
+      "release_id": "c5d7bf23-df0a-4615-b8d5-7920adb405f5",
+      "release_title": "THE IDOLM@STER MASTERWORK 00 私はアイドル♡",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_765.pdf"],
+      "recordings": [
+        {"id": "70595a69-88f5-4395-85ae-027ccc733d47", "title": "THE IDOLM@STER"},
+        {"id": "f4ea8c3a-3d5d-4ef6-ae56-aabc6886389c", "title": "「THE IDOLM@STER」 Xbox 360 先行ゲーム映像"},
+        {"id": "8f7f399d-d61a-45af-8e7d-7eb9478e7cdb", "title": "「THE IDOLM@STER」 プロモーション映像"},
+        {"id": "9bfc3c4c-849b-480a-a1b2-67c6b9fb6957", "title": "「私はアイドル♡」 プロモーション映像"},
+        {"id": "1b26709a-a9c2-47cd-bbfe-de1e2a71b5cd", "title": "東京ゲームショウ プロモーション映像 (収録曲: GO MY WAY!!)"},
+        {"id": "6e8319a5-b966-473e-9111-3d60a4b5aa40", "title": "神さまのBirthday"},
+        {"id": "d4f03fe3-11c6-4ab2-bad4-2a74300c66f5", "title": "神さまのBirthday (オリジナル・カラオケ)"},
+        {"id": "d8e06de6-67c0-4d45-9c7c-6f4c12cef3aa", "title": "私はアイドル♡"},
+        {"id": "e647d496-aeac-451d-9dd4-3ad121b5ed29", "title": "私はアイドル♡ (オリジナル・カラオケ)"}
+      ]
+    },
+    {
+      "release_id": "0acf50fc-48d6-44b8-9772-6908fca28d44",
+      "release_title": "THE IDOLM@STER MASTERWORK 01 GO MY WAY!!",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_765.pdf"],
+      "recordings": [
+        {"id": "f87fbdb7-7d69-46a3-b8b5-22f31a126c8d", "title": "GO MY WAY!! (M@STER VERSION) (オリジナル･カラオケ)"},
+        {"id": "c3ca346f-c62e-4cec-89d9-c633b69f53de", "title": "Here we go!! (M@STER VERSION)"},
+        {"id": "4c981092-fe03-42a5-8415-7bae24f80191", "title": "おはよう！！朝ご飯 (M@STER VERSION)"},
+        {"id": "de547417-ba04-4d4c-bf74-6fc6eacbf8cd", "title": "ボーナス・トラック・トーク"},
+        {"id": "c7a55ef6-13c7-4176-b3cc-887bf0057368", "title": "太陽のジェラシー (M@STER VERSION)"},
+        {"id": "3d13cdc0-e7c5-4102-841d-059ba49775be", "title": "思い出をありがとう (M@STER VERSION)"},
+        {"id": "cf2f3acb-df8c-4e39-97a6-bcaf3de98d23", "title": "思い出をありがとう (M@STER VERSION) (オリジナル･カラオケ)"}
+      ]
+    },
+    {
+      "release_id": "63d18ea6-24b9-4607-8e42-f78f246a3367",
+      "release_title": "THE iDOLM@STER MASTERWORK 02「relations」",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_765.pdf"],
+      "recordings": [
+        {"id": "4bf3a4eb-67b1-4d80-9cd6-8d35a0a2fd73", "title": "My Best Friend (M@STER VERSION) ＜オリジナル･カラオケ＞"},
+        {"id": "ea3999dc-69fc-4272-9318-d4f1572c5f1d", "title": "relations (M@STER VERSION) ＜オリジナル･カラオケ＞"},
+        {"id": "470a9f10-8646-4abe-810c-12c1f5277251", "title": "ボーナス・トラック・トーク"},
+        {"id": "fc33458e-348f-473b-80bd-de87eb62336f", "title": "魔法をかけて！(M@STER VERSION)"}
+      ]
+    },
+    {
+      "release_id": "99b5a7f8-3f10-4251-b4a2-917eb7124244",
+      "release_title": "THE iDOLM@STER MASTERWORK 03 まっすぐ",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/idolmaster/idolworld2023cd/ordersheet_765.pdf"],
+      "recordings": [
+        {"id": "27a86f16-a22f-4584-94f7-a4723b94077e", "title": "First Stage (M@STER VERSION)"},
+        {"id": "a44f6b3c-c912-49a8-907e-5b803023809a", "title": "まっすぐ (M@STER VERSION)＜オリジナル・カラオケ＞"},
+        {"id": "c651fda1-bfb1-4b45-bd0f-6f56ebb234bb", "title": "エージェント夜を往く (M@STER VERSION)"},
+        {"id": "49c09ac2-dcd5-438d-9b5c-fc41c004659e", "title": "ボーナス・トラック・トーク"},
+        {"id": "c4ed43b6-bc47-45f1-b01a-b7e4eb7e2602", "title": "私はアイドル (M@STER VERSION)＜オリジナル・カラオケ＞"}
+      ]
+    },
+    {
+      "release_id": "52509973-0d20-4742-a521-bf692914b22a",
+      "release_title": "THE IDOLM@STER No Make!",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/idolmaster/imasnews/120615.html"],
+      "recordings": [
+        {"id": "4a6ae7c8-aa1e-423d-b28f-01c033e2876e", "title": "Episode10 みんなで、少しでも前へ Scene1 真と雪歩のRoad to 運動会!"},
+        {"id": "92036d8e-66b2-413a-ae81-76cb0b2c9333", "title": "Episode10 みんなで、少しでも前へ Scene2 真とあずさのRoad to 運動会!"},
+        {"id": "8a939c37-1c1e-4c10-b2aa-a50b514c26b8", "title": "Episode10 みんなで、少しでも前へ Scene3 真と美希のRoad to 運動会!"},
+        {"id": "89c9cc00-94c1-4bd4-9aa3-ac23b74d4545", "title": "Episode11 期待、不安、そして予兆 Scene1 美希、全力でレッスン中!"},
+        {"id": "66fd5b8f-b97e-467a-9f3f-6a90b7967fdf", "title": "Episode11 期待、不安、そして予兆 Scene2 影の功労者"},
+        {"id": "c9f147ef-fdfc-4a47-a0ab-e9aab4933d3c", "title": "Episode11 期待、不安、そして予兆 Scene3 響と真美の帰り道"},
+        {"id": "5d10987a-08dd-454e-bc58-ed1c2040203e", "title": "Episode12 一方通行の終着点 Scene1 新しい衣装、新しい目標"},
+        {"id": "2bc47e9a-8d71-40d4-bdc8-35229c95cb4a", "title": "Episode12 一方通行の終着点 Scene2 ハム蔵のお悩み相談室"},
+        {"id": "4a30c777-5831-4865-b07d-6f74238992b1", "title": "Episode12 一方通行の終着点 Scene3 千早の想い"},
+        {"id": "56fe3ce3-aeec-4851-bdd8-91ab61a2568c", "title": "Episode13 そして、彼女たちはきらめくステージへ Scene1 Are You Ready !? (1)"},
+        {"id": "901c38ad-4bf2-4b8e-b29c-d32ccb119283", "title": "Episode13 そして、彼女たちはきらめくステージへ Scene2 Are You Ready !? (2)"},
+        {"id": "ce896da9-ce6e-403f-9590-fd2665b5064e", "title": "Episode13 そして、彼女たちはきらめくステージへ Scene3 Are You Ready !? (3)"},
+        {"id": "0b3d17af-f6b2-41b9-8475-6f2e6b9c74e4", "title": "Episode14 変わりはじめた世界! Scene1 CHANGE!!!! (1)"},
+        {"id": "9f06c0d4-06c9-4db9-a6eb-bd46fb7e7566", "title": "Episode14 変わりはじめた世界! Scene2 CHANGE!!!! (2)"},
+        {"id": "28e04e7c-af53-490e-ae4f-87454cdc1980", "title": "Episode14 変わりはじめた世界! Scene3 CHANGE!!!! (3)"},
+        {"id": "99d3157a-2ea2-43c3-885e-d2ceccb78d51", "title": "Episode15 みんな揃って、生放送ですよ生放送! Scene1 あずさのヒラメキ"},
+        {"id": "9b819a49-5609-4dc1-9ea0-55563939e633", "title": "Episode15 みんな揃って、生放送ですよ生放送! Scene2 響に迫る黒い影"},
+        {"id": "f2eff3ff-eb01-46c2-b5fd-3c86a2e7d0df", "title": "Episode15 みんな揃って、生放送ですよ生放送! Scene3 続・菊地真改造計画"},
+        {"id": "7a929504-d392-4c4b-aacd-3a5b7a2fa8cb", "title": "Episode16 ひとりぼっちの気持ち Scene1 雪歩といぬ美"},
+        {"id": "d6d8cbc9-d9ac-4000-8be6-de1c4fb185a6", "title": "Episode16 ひとりぼっちの気持ち Scene2 亜美と真美"},
+        {"id": "f267370b-5076-4499-bee4-6670435f9d60", "title": "Episode16 ひとりぼっちの気持ち Scene3 踏切にて"},
+        {"id": "c6c7a6fe-8fa2-469c-9bef-9e82c19fba08", "title": "Episode17 真、まことの王子様 Scene1 ニアミス"},
+        {"id": "dc2e552f-a1c2-432b-9c13-d4ee452d5a74", "title": "Episode17 真、まことの王子様 Scene2 恐怖のメール"},
+        {"id": "45282d3f-b74c-4162-a6e8-1d13723f2406", "title": "Episode17 真、まことの王子様 Scene3 大人の魅力"},
+        {"id": "d155a022-2232-43ab-acfc-a7eb167766d3", "title": "Episode18 たくさんの、いっぱい Scene1 お見舞い"},
+        {"id": "e393f993-afc5-4719-8b1b-9c21b1b9793a", "title": "Episode18 たくさんの、いっぱい Scene2 立場逆転"},
+        {"id": "96b26a79-4177-43e1-a8b4-801b8311af5b", "title": "Episode18 たくさんの、いっぱい Scene3 サプライズ大作戦"},
+        {"id": "db171b03-d519-4e84-a955-3fcb276f6b2c", "title": "Episode19 雲間に隠れる月の如く Scene1 1日署長、その後"},
+        {"id": "623369e8-095f-475a-9f39-3836224a2bb3", "title": "Episode19 雲間に隠れる月の如く Scene2 ダブルリボンと唐揚"},
+        {"id": "783c8ee2-96f9-4ebd-89a2-c04d21ad8902", "title": "Episode19 雲間に隠れる月の如く Scene3 響の秘密?"},
+        {"id": "76f8ee13-83ac-4802-973c-f1eca740c527", "title": "Episode1 これからが彼女たちのはじまり Scene1 取材終了後の天海春香"},
+        {"id": "eb5a53ef-135d-4f29-976c-5f3fc4c9d123", "title": "Episode1 これからが彼女たちのはじまり Scene2 響とハム蔵の反省会"},
+        {"id": "95f4c327-be20-4545-8674-c8df97674953", "title": "Episode1 これからが彼女たちのはじまり Scene3 律子と美希の日常"},
+        {"id": "8c2d8c04-eb3a-427c-a641-48dfae92cbf0", "title": "Episode20 約束 Scene1 千早のために(1)"},
+        {"id": "aa88e238-9454-4729-a29c-034f613712f2", "title": "Episode20 約束 Scene2 千早のために(2)"},
+        {"id": "07a97685-260d-47a0-8d0c-f0baf88c29db", "title": "Episode20 約束 Scene3 千早のために(3)"},
+        {"id": "e49257a2-c660-4cf8-903a-fe7e0708adc1", "title": "Episode21 まるで花が咲くように Scene1 大人になるということ"},
+        {"id": "d41d7ebb-90bd-4df5-9958-a6bbaf726874", "title": "Episode21 まるで花が咲くように Scene2 あまとう?"},
+        {"id": "2014b72f-75d5-4565-970b-8c3719dc37a3", "title": "Episode21 まるで花が咲くように Scene3 たどり着きたい未来"},
+        {"id": "c4d1bdc9-b48f-4dfd-a4ee-93e3bbbb47f4", "title": "Episode22 聖夜の夜に Scene1 クリスマスは家族と一緒に"},
+        {"id": "289a1f83-65b9-435c-9832-cd52d84bb1ee", "title": "Episode22 聖夜の夜に Scene2 竜宮小町のプレゼント選び"},
+        {"id": "54bd228a-a35d-47a8-9293-31270137c029", "title": "Episode22 聖夜の夜に Scene3 クリスマスバースデイ"},
+        {"id": "5fed00cd-b6c9-4054-9ced-5ce935864437", "title": "Episode23 私 Scene1 電話(1)"},
+        {"id": "7c820ea9-eea8-4aba-aff1-fd845e6b6eb1", "title": "Episode23 私 Scene2 電話(2)"},
+        {"id": "61ee004c-bb3d-49e8-9f0d-66648f513b6b", "title": "Episode23 私 Scene3 電話(3)"},
+        {"id": "3dcf8a1f-2317-49e9-aa4b-59689fbdf9c2", "title": "Episode24 夢 Scene1 あなたの代わりに(1)"},
+        {"id": "4d12be47-ac92-4483-8bc0-890b6c13c3cf", "title": "Episode24 夢 Scene2 あなたの代わりに(2)"},
+        {"id": "49358d80-e95f-42a6-9fe3-12e63edddaf2", "title": "Episode24 夢 Scene3 あなたの代わりに(3)"},
+        {"id": "faab538b-1582-4b1f-b92b-475c70bc7f43", "title": "Episode25 みんなと、いっしょに! Scene1 私たちのプロデューサーさんへ(1)"},
+        {"id": "dcc23dbb-2760-45d6-ae53-a14171c10395", "title": "Episode25 みんなと、いっしょに! Scene2 私たちのプロデューサーさんへ(2)"},
+        {"id": "54381cc0-011d-4639-b4d5-dab0a72b857d", "title": "Episode25 みんなと、いっしょに! Scene3 私たちのプロデューサーさんへ(3)"},
+        {"id": "2a782bb7-7d5c-4eb6-9ed8-90eea12ab43e", "title": "Episode2 “準備”をはじめた少女たち Scene1 クマやよい"},
+        {"id": "43131ed3-2c3c-4b14-9692-3ca02f82ce6d", "title": "Episode2 “準備”をはじめた少女たち Scene2 宣材撮影後の控え室"},
+        {"id": "2a2b9fa0-20a8-42d0-a37c-7b034e332c58", "title": "Episode2 “準備”をはじめた少女たち Scene3 春香たちのその後"},
+        {"id": "1b82c8d0-f8c1-4d08-b21b-68a485be973d", "title": "Episode3 すべては一歩の勇気から Scene1 夏祭りのワンシーン"},
+        {"id": "11f53fb0-ea01-4b3e-a8c1-58eff6c55e4f", "title": "Episode3 すべては一歩の勇気から Scene2 雪歩はいったいどこ?"},
+        {"id": "57918a0d-ad66-4080-a049-5567b09c6cd8", "title": "Episode3 すべては一歩の勇気から Scene3 雪歩、着替え中"},
+        {"id": "19102544-36ed-4e54-be3b-041269051733", "title": "Episode4 自分を変えるということ Scene1 ゲロゲロキッチン、収録前夜"},
+        {"id": "ab94b985-598a-4f55-8e38-32a01910d67c", "title": "Episode4 自分を変えるということ Scene2 真&亜美真美、ゲロゲロキッチン視聴中"},
+        {"id": "8b1bfc4f-07a4-4004-a7ac-e89157f90f84", "title": "Episode4 自分を変えるということ Scene3 打ち上げはスイーツで?"},
+        {"id": "6160d828-f379-41b7-9acc-3a1e1d6d0f04", "title": "Episode5 みんなとすごす夏休み Scene1 海辺の2人"},
+        {"id": "b1f7b576-47dc-4af3-a7ea-4003036d59f3", "title": "Episode5 みんなとすごす夏休み Scene2 BBQでの決意"},
+        {"id": "2b682cb0-bca2-4fd5-899f-8427e361a2f1", "title": "Episode5 みんなとすごす夏休み Scene3 月夜の真実"},
+        {"id": "9447dfa0-9959-45b8-a2bd-09a119dff055", "title": "Episode6 先に進むという選択 Scene1 竜宮小町・忙しい日々(1)"},
+        {"id": "52ca022d-b8d6-4648-924d-613d119a04a4", "title": "Episode6 先に進むという選択 Scene2 竜宮小町・忙しい日々(2)"},
+        {"id": "fcb6749d-1acc-444b-9790-6f14ee9ab4e1", "title": "Episode6 先に進むという選択 Scene3 雪歩、奮闘中"},
+        {"id": "6eb5e0db-7aab-4319-a444-780992623259", "title": "Episode7 大好きなもの、大切なもの Scene1 やよいのお財布"},
+        {"id": "f12e5486-ccab-47b4-997f-7eda1f46205b", "title": "Episode7 大好きなもの、大切なもの Scene2 TVを見ている春香と雪歩"},
+        {"id": "01074e16-0639-46dc-a420-e9192a619ccf", "title": "Episode7 大好きなもの、大切なもの Scene3 TV放送後の反響"},
+        {"id": "99814d67-38a4-46d9-8e4a-791eb18632e8", "title": "Episode8 しあわせへの回り道 Scene1 撮影前日"},
+        {"id": "de2db9af-fa54-4db7-ae76-1604e0259006", "title": "Episode8 しあわせへの回り道 Scene2 真の心配事"},
+        {"id": "10674dd2-747e-433f-ac01-0ab2d6dfa97a", "title": "Episode8 しあわせへの回り道 Scene3 雑誌発売後、事務所でのひととき"},
+        {"id": "bcfd910f-93a5-4b75-9c1f-278b962f8e1b", "title": "Episode9 ふたりだから出来ること Scene1 事件の前に～亜美と真美の欲しいモノ"},
+        {"id": "5ced11ed-3a86-4da0-bee9-eec30413b5b5", "title": "Episode9 ふたりだから出来ること Scene2 事件の中心～伊織がプリンを買ったワケ"},
+        {"id": "523b264b-a3e2-46df-9625-1f75ad42d916", "title": "Episode9 ふたりだから出来ること Scene3 事件を余所に～仕事中の千早と美希"}
+      ]
+    },
+    {
+      "release_id": "bb479767-1baa-4980-bb7c-e2ff8dc5ab61",
+      "release_title": "THE IDOLM@STER PRODUCER MEETING 2018 What is TOP!!!!!!!!!!!!!?",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/idolmaster/imasnews/180727.html"],
+      "recordings": [
+        {"id": "8f47818b-285d-438c-9d4c-b7eebb6f43fb", "title": "Vertex Meister (M@STER VERSION) 千早ソロ・リミックス"},
+        {"id": "9ec5b775-2f17-424f-bbb3-094239504b52", "title": "Vertex Meister (M@STER VERSION) 律子ソロ・リミックス"},
+        {"id": "ac601f03-146a-454a-a135-9abd3592444a", "title": "Vertex Meister (M@STER VERSION) 真ソロ・リミックス"},
+        {"id": "d03fbb4b-3ca0-4a46-a859-b17380e502b0", "title": "Vertex Meister (M@STER VERSION) 貴音ソロ・リミックス"},
+        {"id": "14ea9b8b-462f-47ef-99f7-5abd63d4875c", "title": "Vertex Meister (M@STER VERSION) 響ソロ・リミックス"},
+        {"id": "76996bfa-abcc-436d-b1f8-939eb0896eff", "title": "そしてぼくらは旅にでる (M@STER VERSION) あずさソロ・リミックス"},
+        {"id": "727d0ba4-a679-494f-a79c-06f8b46d3d05", "title": "そしてぼくらは旅にでる (M@STER VERSION) やよいソロ・リミックス"},
+        {"id": "b06724c3-8645-459d-8d81-826b5227d487", "title": "そしてぼくらは旅にでる (M@STER VERSION) 春香ソロ・リミックス"},
+        {"id": "a0205700-4ee2-44d3-9be1-ff91776244d1", "title": "そしてぼくらは旅にでる (M@STER VERSION) 雪歩ソロ・リミックス"},
+        {"id": "03508a19-c716-4e26-9651-ce8d9b7e8521", "title": "星彩ステッパー (M@STER VERSION) 亜美/真美ソロ・リミックス"},
+        {"id": "c74d8c3d-1018-4a15-a567-d966738d6e52", "title": "星彩ステッパー (M@STER VERSION) 伊織ソロ・リミックス"},
+        {"id": "8d6f61da-a2a6-4cf7-8a7e-60e451850a78", "title": "星彩ステッパー (M@STER VERSION) 美希ソロ・リミックス"}
+      ]
+    },
+    {
+      "release_id": "eca6a03e-b7a6-4bd5-b2a7-2185913a2efa",
+      "release_title": "THE IDOLM@STER RADIO COLORFUL MEMORIES",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/idolmaster/news/110107.html"],
+      "recordings": [
+        {"id": "a8ae2888-4572-40f6-b8ab-607ab8d1c9f3", "title": "エンディング・トーク"},
+        {"id": "2a051c4d-9f82-4918-aa35-68f827a0ad6e", "title": "オープニング・トーク"},
+        {"id": "0e896673-cd1e-4fa8-b0a4-313959543956", "title": "ジングル パターンA"},
+        {"id": "c5ec643e-0edf-4c83-bb1a-ec5a0466835e", "title": "ジングル パターンB"},
+        {"id": "2c9a3b38-2537-48e3-a445-261c2d2a2803", "title": "ジングル パターンC"},
+        {"id": "71f728f5-ee00-4091-b1a0-98da35fb1b30", "title": "ジングル パターンD"},
+        {"id": "d7f2ee09-b818-4c13-a2ef-41e2fa3ac1d1", "title": "トーク・ダイジェスト ちあkingより その1"},
+        {"id": "d7231ae0-e75c-4f38-8cb5-4213487ae28a", "title": "トーク・ダイジェスト ちあkingより その2"},
+        {"id": "e339f11a-a21a-4279-8194-5f47df07acfb", "title": "トーク・ダイジェスト ちあkingより その3"},
+        {"id": "09d55436-5b8d-4746-93f7-530295a9b806", "title": "トーク・ダイジェスト ちあkingより その4"},
+        {"id": "5136d831-d807-4e6d-b978-ac8c8bb17e70", "title": "トーク・ダイジェスト ちあkingより その5"},
+        {"id": "bda29c2e-2b24-49ac-95e7-9991713025e2", "title": "トーク・ダイジェスト ちあkingより その6"},
+        {"id": "d08292cb-05f7-4a4d-b42e-c334ceac882f", "title": "トーク・ダイジェスト ちあkingより その7"},
+        {"id": "c0c686ec-8a41-4384-bf3c-347f1114e925", "title": "トーク・ダイジェスト ちあkingより その8"},
+        {"id": "d93cdeda-983e-480f-8ca8-70bcebb8b5c1", "title": "トーク・ダイジェスト ちあkingより その9"},
+        {"id": "6eeb937f-a54d-4b48-8007-2822a48235a1", "title": "トーク・ダイジェスト ミンゴスより その1"},
+        {"id": "2afb6984-b9ca-4185-9537-ca98fc8ad0cf", "title": "トーク・ダイジェスト ミンゴスより その2"},
+        {"id": "a15e4509-bdf9-4315-8bcc-b83878e4137c", "title": "トーク・ダイジェスト ミンゴスより その3"},
+        {"id": "124f036d-9530-4593-93f6-dbc8c88f093b", "title": "トーク・ダイジェスト ミンゴスより その4"},
+        {"id": "ca03e8f7-aa5a-4670-8d84-34dcb03a03c3", "title": "トーク・ダイジェスト ミンゴスより その5"},
+        {"id": "7379b266-a5cf-4042-b243-664defba9281", "title": "トーク・ダイジェスト ミンゴスより その6"},
+        {"id": "828e8f95-7601-4a68-ab0f-0acd2b399af2", "title": "トーク・ダイジェスト ミンゴスより その7"},
+        {"id": "fa049493-5649-412c-8963-9794b6610355", "title": "トーク・ダイジェスト ミンゴスより その8"},
+        {"id": "6adbd619-29c6-4cd0-b945-7cea98d496ac", "title": "トーク・ダイジェスト ミンゴスより その9"},
+        {"id": "fd925ff5-286f-410a-a7ac-ee5d5e2092ad", "title": "新録！たかはし智秋の 「好きになった人」"},
+        {"id": "6f03f6cd-7e80-4bfe-a4d0-0b6a4c97b762", "title": "新録！今井麻美の 「地上の星」"},
+        {"id": "bb2d13fb-3423-49fe-992c-e9bc532ba3b1", "title": "歌姫楽園selection 「HOT LIMIT」"},
+        {"id": "6e84a5b1-235b-4f82-a624-e9cabef7c8b2", "title": "歌姫楽園selection 「KISSして」"},
+        {"id": "5b0d3436-b0fd-4bfb-8f46-595660a6e7d7", "title": "歌姫楽園selection 「Let Me Be With You」"},
+        {"id": "41a2b66f-b067-4e7b-8ec4-0d2eb9661e5f", "title": "歌姫楽園selection 「START」"},
+        {"id": "a4b3f1f2-d1dc-4fb1-99bd-b643fc1fed38", "title": "歌姫楽園selection 「Tune the rainbow」"},
+        {"id": "097a0956-f2de-414e-b981-7b4bf7e1a2f2", "title": "歌姫楽園selection 「White Love」"},
+        {"id": "26fb7590-1f28-4901-81f3-56e5ccd39101", "title": "歌姫楽園selection 「あずさ2号」"},
+        {"id": "87f70952-df4b-4007-beb5-769f263a33ac", "title": "歌姫楽園selection 「おしりかじり虫」"},
+        {"id": "e2a04e55-91ca-44ce-830a-f1b5e479b909", "title": "歌姫楽園selection 「おジャ魔女カーニバル」"},
+        {"id": "2ca88e79-c37a-49fe-943c-ac96bf7373fe", "title": "歌姫楽園selection 「これが私の生きる道」"},
+        {"id": "3580c303-111e-45c8-a7e0-3877489f97d6", "title": "歌姫楽園selection 「アゲ♂アゲ♂EVERY☆騎士(ナイト)」"},
+        {"id": "e44ad8ea-51a2-41de-b50d-34551385ca2a", "title": "歌姫楽園selection 「レッツゴー！！ライダーキック」"},
+        {"id": "8755d583-0a05-4ba4-83ae-f32971c64226", "title": "歌姫楽園selection 「仰げば尊し」"},
+        {"id": "cb80126b-9aa4-424d-a93b-e2cb3195b930", "title": "歌姫楽園selection 「君にありがとう」"},
+        {"id": "14f2e6f3-333d-4fa5-947a-2aef623cc3fb", "title": "歌姫楽園selection 「大きな古時計」"},
+        {"id": "1d09c875-7bfc-4cba-89a3-c58d25cde3aa", "title": "歌姫楽園selection 「愛のために」"},
+        {"id": "68987053-9427-4652-a3ea-1d548e974e08", "title": "歌姫楽園selection 「王蟲との交流」"},
+        {"id": "0a4ae11c-b6b3-41d9-b1db-ab7fc18930af", "title": "歌姫楽園selection 「甘えんぼ」"},
+        {"id": "24285fd7-5d14-4b51-85cd-8099e571004f", "title": "歌姫楽園selection 「自動車ショー歌」"},
+        {"id": "84e4f17f-a958-4f85-96e0-7ed43c90368d", "title": "歌姫楽園selection 「雪の華」"}
+      ]
+    },
+    {
+      "release_id": "6c9bf358-bb40-4951-83ff-23ff73a323ea",
+      "release_title": "THE iDOLM@STER Radio For You! Vol.2",
+      "series": "765",
+      "source_urls": ["https://www.idolmaster.jp/imas/items/prod_disc.html"],
+      "recordings": [
+        {"id": "b5114e7b-2003-4fb7-9a3d-a973364ee416", "title": "FO(U)R (中村繪里子ソロ Ver.)"},
+        {"id": "14034e61-2f62-4a6e-b8b1-e4288221197f", "title": "FO(U)R (仁後真耶子ソロ Ver.)"},
+        {"id": "14824c42-f78c-4753-a9ed-ce940b78a1aa", "title": "FO(U)R (今井麻美ソロ Ver.)"},
+        {"id": "d0a4f1ea-a8b4-4bec-bed0-641c0b00d397", "title": "MCM(マスコット・コマーシャル) Vol. 1"},
+        {"id": "72b515c4-2cf2-43a8-bf5d-9d709b2f94de", "title": "MCM(マスコット・コマーシャル) Vol. 2"},
+        {"id": "dddbb4ca-0c05-448e-b883-8421d81ea740", "title": "MCM(マスコット・コマーシャル) Vol. 3"},
+        {"id": "7a46c69b-74f6-4227-9f99-f141fe71625b", "title": "アナタのヒトコト (中村繪里子ソロ Ver.)"},
+        {"id": "5b9e089c-4c61-4a5a-ab8a-f93d1641933e", "title": "アナタのヒトコト (仁後真耶子ソロ Ver.)"},
+        {"id": "f3b22a45-5b8b-499f-8493-95d547760f5f", "title": "アナタのヒトコト (今井麻美ソロ Ver.)"},
+        {"id": "727408e8-788b-4ab9-9449-2ee2447f94e0", "title": "エンディング"},
+        {"id": "786af875-3193-4d3d-9692-57803d49c497", "title": "クエスチョン of you-i"},
+        {"id": "217a2deb-9af9-4437-b6c0-01edde1370e2", "title": "ファンレター For アイドル"},
+        {"id": "920c815b-a17d-4a25-a3f5-cfcf7135c13f", "title": "癒して For Me リベンジ"}
+      ]
+    },
+    {
+      "release_id": "afe27f5f-2d4c-4d58-a752-a0a00f25a83f",
+      "release_title": "THE iDOLM@STER RADIO LONG TIME",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/idolmaster/news/110107.html"],
+      "recordings": [
+        {"id": "b64d24b9-957d-468a-9543-886f6d220079", "title": "7 colors"},
+        {"id": "e1e70785-ec6e-41bc-9497-7bd16eff6e84", "title": "JM-Justify Myself-"},
+        {"id": "962fe50b-bdd1-459e-9e58-290c723a0ac8", "title": "Lady☆Cake"},
+        {"id": "213ff65d-badc-49c0-9be6-5f3df05be7db", "title": "Melting season"},
+        {"id": "c5bbf58c-5538-4748-8a14-842b6ef4cf41", "title": "pink の february"},
+        {"id": "77e54683-13ff-47a8-a5e2-654287246761", "title": "Smile Smile Smile"},
+        {"id": "23561103-124a-4093-8ad4-21e9a72db658", "title": "sunsine"},
+        {"id": "6f09d7ad-8e82-491d-991e-bdcb04f2ba64", "title": "てがみうた"},
+        {"id": "df10dbce-1d37-44e5-a2ad-2fc66fd1ac0a", "title": "また、はじめよう。"},
+        {"id": "4ea8d19d-dbeb-424f-aa4b-7dca37394b24", "title": "エール"},
+        {"id": "73df23c8-0623-4236-a671-9f5dda22692a", "title": "ギフト"},
+        {"id": "b83a521c-4c63-44d1-91f2-5000e6d0e699", "title": "赤い花咲いた"}
+      ]
+    },
+    {
+      "release_id": "b7a23022-bb51-4806-9ca3-8ad826d5ce81",
+      "release_title": "THE iDOLM@STER RADIO TOP×TOP!",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/idolmaster/news/110107.html"],
+      "recordings": [
+        {"id": "28ea101f-2354-4f1d-b79b-73d0cee1cec5", "title": "BEST ROAD"},
+        {"id": "bbc4b0c3-c6eb-44c5-be2b-05bd1e4bed61", "title": "GO MY WAY!!"},
+        {"id": "f8a07621-54a5-447f-acec-264193803b32", "title": "Okey-dokey"},
+        {"id": "421e30e4-f4ba-4ece-a173-0e9adce3b26e", "title": "THE iDOLM@STER RADIO トーク・ダイジェストPart.1"},
+        {"id": "a27d72bf-71f4-4753-a17c-4d0cf85a41e6", "title": "THE iDOLM@STER RADIO トーク・ダイジェストPart.2"},
+        {"id": "7f5b1d80-dc77-48f1-9c86-8336a73072a6", "title": "THE iDOLM@STER RADIO トーク・ダイジェストPart.3"},
+        {"id": "90f24d16-fa3d-4378-9293-0928c8f0f326", "title": "THE iDOLM@STER RADIO トーク・ダイジェストPart.4"},
+        {"id": "9ec75cba-63d0-451a-93ef-3639cb61c9ca", "title": "THE iDOLM@STER RADIO トーク・ダイジェストPart.5"},
+        {"id": "37c2fcf9-fac6-4e95-b122-78db5b1d42ee", "title": "THE iDOLM@STER RADIO トーク・ダイジェストPart.6"},
+        {"id": "a1bd63a6-d8a4-4ab3-9940-c694f2e3469d", "title": "THE iDOLM@STER RADIO 番外篇1 ～吉祥寺でバカ騒ぎ!?～"},
+        {"id": "507159fb-1f44-4322-bd3b-45b82734c5b6", "title": "THE iDOLM@STER RADIO 番外篇2 ～ワンダーフェスティバル公録～"},
+        {"id": "1c8546f5-643f-4451-be96-34822052fd32", "title": "お風呂で、う・ふ・ふ♪ 傑作選1"},
+        {"id": "9da43ff9-6aab-4465-9a76-aa7ef240be1c", "title": "お風呂で、う・ふ・ふ♪ 傑作選2"},
+        {"id": "e1a252e6-90a4-4b89-b83c-80a7b4d25022", "title": "お風呂で、う・ふ・ふ♪ 傑作選3"},
+        {"id": "cac4cf0b-19fb-4578-9c36-251e544f49fe", "title": "たかはし智秋トーク・ダイジェスト"},
+        {"id": "be1f9602-b49b-4517-be87-c3cf1860b4c6", "title": "エンディング ～URGENT!!!"},
+        {"id": "761bc8de-5b0c-4041-a63b-1ede10795c20", "title": "ジングル1"},
+        {"id": "5015358a-db93-452e-abe5-ed3c6e582d77", "title": "ジングル2"},
+        {"id": "7e84ef07-bdce-473e-b642-29827b1e7022", "title": "ジングル3"},
+        {"id": "f7322627-7d8a-4316-944f-3173065f458d", "title": "ジングル4"},
+        {"id": "71089255-9444-46f4-a5fc-ed2d175d58fa", "title": "ボーナス・トラック"},
+        {"id": "8640d0a7-15c3-48f4-9ef1-88034dfacd84", "title": "今井麻美トーク・ダイジェスト"},
+        {"id": "ab6d515a-7557-4cf0-a00f-30c372ed7d6a", "title": "声が聴こえる"},
+        {"id": "9b61602a-7718-46d1-867f-5662cd94f0f1", "title": "歌姫楽園より 「CAT’S EYE」"},
+        {"id": "bfdfc70e-d469-4817-9081-d63725fed109", "title": "歌姫楽園より 「secret base ～君がくれたもの～」"},
+        {"id": "be326138-e97d-4408-b7ed-0f0d26431428", "title": "歌姫楽園より 「あばれ太鼓」"},
+        {"id": "39e04a65-a617-44eb-93a7-3c2446a667ae", "title": "歌姫楽園より 「ちょこっとLOVE」"},
+        {"id": "83ba88ca-1f1f-4b69-9fe5-af72403ce1d0", "title": "歌姫楽園より 「にんげんっていいな」"},
+        {"id": "feaf5ee8-07a1-42cf-b480-1a9844d98563", "title": "歌姫楽園より 「もらい泣き」"},
+        {"id": "159027f6-409c-4fb7-b2eb-f8adeb06cb1b", "title": "歌姫楽園より 「ウェディング・ベル」"},
+        {"id": "12abe46a-5006-4efa-b1c9-04d3e6deedcd", "title": "歌姫楽園より 「キャンディキャンディ」"},
+        {"id": "0f189795-cd78-4d5f-af53-739bd58cf5f9", "title": "歌姫楽園より 「ロコロコのうた」"},
+        {"id": "5ade070a-6324-435d-b588-be7aa55fb83d", "title": "歌姫楽園より 「乙女のポリシー」"},
+        {"id": "6d678865-5b43-4d7b-b901-d4e9b9f0a0b5", "title": "歌姫楽園より 「夢をあきらめないで」"},
+        {"id": "f782c4af-14a2-4bc9-8320-301bd5db8671", "title": "歌姫楽園より 「少年時代」"},
+        {"id": "cc9b7267-0825-40a6-a7aa-a7df6d6b388f", "title": "歌姫楽園より 「愛・おぼえていますか」"},
+        {"id": "7af95ac3-4fe8-43be-adb3-d11ce747bbbb", "title": "歌姫楽園より 「月のしずく」"},
+        {"id": "97526b09-22c5-4eb0-a25a-c9d5782753a9", "title": "歌姫楽園より 「魂のルフラン」"}
+      ]
+    },
+    {
+      "release_id": "bd42e56c-1f31-4b7d-892e-384f59d9c022",
+      "release_title": "THE iDOLM@STER RADIO VOCAL MASTER",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/idolmaster/news/110107.html"],
+      "recordings": [
+        {"id": "5cecaca0-9973-47dc-8144-e5d5eb4aa9d4", "title": "Contradiction"},
+        {"id": "188216c5-822f-49da-ac6c-f1d3bf8956a3", "title": "destiny"},
+        {"id": "fc9bb698-435e-4e08-a116-f695a7d8e4dc", "title": "Inspire"},
+        {"id": "a4cc251b-4c29-461d-b01d-62f70822c7c7", "title": "Okey-dokey（ニュー・アレンジ）"},
+        {"id": "91d2919c-1ebc-46f9-8e13-cf92852a8e43", "title": "Still Love"},
+        {"id": "224716f3-9797-4069-8031-2c856ef8c4bc", "title": "URGENT!!!（ニュー・アレンジ）"},
+        {"id": "06cf7079-b4b1-4d64-b264-3765f9ee8896", "title": "あしたアイシテル"},
+        {"id": "0eb8d25f-2bfa-406b-a008-25060879ddfa", "title": "アイレデッスカ!?"},
+        {"id": "2af36052-9d9c-4ec3-aafc-24246fa59779", "title": "モノローグ"},
+        {"id": "70283b9c-4c52-4a56-876f-7e7d01dca5d1", "title": "モノローグ"},
+        {"id": "7001f0ec-570d-4779-9d38-a2f3b89c8da8", "title": "春の日差し"}
+      ]
+    },
+    {
+      "release_id": "847c1a5a-f2bb-4e58-9af0-29233ae9b7f9",
+      "release_title": "THE iDOLM@STER RADIO 歌姫楽園",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/idolmaster/news/110107.html"],
+      "recordings": [
+        {"id": "aecee9fd-a0cc-4772-8de1-b204f4c69d5c", "title": "STYLISH QUEEN★"},
+        {"id": "f2d0aafd-99ae-45b8-81fe-8b4246d55a4c", "title": "THE IDOLM@STER RADIO 必聴トークPart.1"},
+        {"id": "2a9f85a4-746e-430a-bdd3-85183b2da97c", "title": "THE IDOLM@STER RADIO 必聴トークPart.2"},
+        {"id": "82076c81-d69c-4d8a-9dbe-06e9ed321b3d", "title": "THE IDOLM@STER RADIO 必聴トークPart.3"},
+        {"id": "c5b1db72-c1ba-4efc-844e-8f70f0ef93e0", "title": "URGENT!!!"},
+        {"id": "3b944423-a160-47d5-a2b3-bc7853ad7fff", "title": "オープニング"},
+        {"id": "c53bf2a5-ea06-49f2-b14e-8a50f919b0a5", "title": "ボーナストラック ～お風呂で、う・ふ・ふ♪（番外編）～"},
+        {"id": "8f69ac7b-b961-435d-a407-504576787b1a", "title": "夢見る頃"},
+        {"id": "e73fba4c-76bd-4fb7-8cfe-76a708542f0f", "title": "太陽と月"},
+        {"id": "4f5a5605-ad2b-4142-8600-cdb160c021a2", "title": "月下祭 ～la festa sotto la luna～"},
+        {"id": "21594f9d-4528-4849-b533-2f0f477a76dd", "title": "番組ジングル パターンA"},
+        {"id": "880ae709-8fbb-47a2-9270-36efa3f9d262", "title": "番組ジングル パターンB"},
+        {"id": "334d6687-b43d-4d00-b2eb-ace7f5f37879", "title": "番組ジングル パターンC"}
+      ]
+    },
+    {
+      "release_id": "6f8a165f-3094-4b74-97d1-f74b4e115188",
+      "release_title": "THE iDOLM@STER RADIO 歌道場",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/idolmaster/news/110107.html"],
+      "recordings": [
+        {"id": "69be7108-53fc-4f8f-9a47-528190098271", "title": "Believe"},
+        {"id": "badeb8cc-6c57-41e4-8bd4-af8a3b2b7441", "title": "DESTINY"},
+        {"id": "40c29f46-24c5-40e1-b753-233f3b238052", "title": "ETERNAL WIND ～ほほえみは光る風の中～"},
+        {"id": "42406d34-6979-41eb-9844-89a8573117ad", "title": "KI-ZU-NA ～遥かなる者へ～"},
+        {"id": "67a9343c-df5a-4b3b-a51c-b11e87dba176", "title": "Over Drive"},
+        {"id": "610d6037-55bb-416d-bbfe-f82274ae829d", "title": "UFO"},
+        {"id": "18ddc4d2-d556-40ae-8149-68bcb8444b6a", "title": "『お喋り其の参』"},
+        {"id": "412280b8-5032-4ef7-a3d2-afec18259113", "title": "『お喋り其の四』"},
+        {"id": "b39a9774-4f9e-449d-8419-97e93501986e", "title": "『お喋り其の壱』"},
+        {"id": "ccd8271b-a104-4352-9033-7655e4379617", "title": "『お喋り其の弐』"},
+        {"id": "a0abefc0-0703-4341-b672-c81ee0aa6114", "title": "そばにいるね"},
+        {"id": "aeac6c2b-2af2-46c6-a9df-ac133f954618", "title": "ねえ! ムーミン"},
+        {"id": "436aba78-bbeb-4504-929c-dcf0bac5d620", "title": "もらい泣き"},
+        {"id": "749ccc55-9612-4a12-8408-c9f072242e13", "title": "デリケートに好きして"},
+        {"id": "d0f661ff-10d7-4fc3-824b-50d3c613a043", "title": "ドリルでルンルン クルルンルン"},
+        {"id": "3fef5f3f-fe98-41ea-b8f7-1eabbc81ea08", "title": "ブルーウォーター"},
+        {"id": "4736e639-85a1-48cf-a44d-62ac07fc4516", "title": "ベルサイユのばら ～薔薇は美しく散る～"},
+        {"id": "6291896c-32a1-485e-9de4-10543403f9b1", "title": "ミラクル・ガール"},
+        {"id": "baa864be-54cd-4888-b6b7-5eef9c1a2788", "title": "丸の内サディスティック"},
+        {"id": "be0c4f49-e61f-4809-ad0f-7309801b36c2", "title": "僕はあなたに恋する"},
+        {"id": "23fce3e8-da30-47d2-8853-c4aa101fdd88", "title": "夢芝居"},
+        {"id": "31d78da1-58c2-4c79-bab1-97fce806c7fa", "title": "夢見る少女じゃいられない"},
+        {"id": "9144e586-f1fa-4609-a54f-53befdfd3188", "title": "天城越え"},
+        {"id": "68f07b92-b501-47f8-ba58-a4cb01c92a19", "title": "守ってあげたい"},
+        {"id": "a833abe9-e120-4b54-990b-d595308d44b9", "title": "崖の上のポニョ"},
+        {"id": "a73d4faa-3a08-4351-8d7e-40c4b81b1e29", "title": "恋花火"},
+        {"id": "3e971c5f-0258-4346-86b5-9493b72021b6", "title": "手紙 ～拝啓 十五の君へ～"},
+        {"id": "2a4080d8-67b5-4d31-a424-a9a6f7263d53", "title": "春一番"},
+        {"id": "535ea5a5-36a3-4ae7-b575-0d257c1df09e", "title": "暁の車"},
+        {"id": "3943c318-6f21-431d-a9bc-2ba259c89494", "title": "果てなく続くストーリー"},
+        {"id": "5e480a6e-4b1b-44fc-bdd0-f096d530db18", "title": "淋しい熱帯魚"},
+        {"id": "3ab54616-fb1e-40e3-9055-8a23e2741b64", "title": "異邦人"},
+        {"id": "92cbd03d-47ce-42cd-982d-57e75f0ec17c", "title": "真実の詩"},
+        {"id": "8db17a85-21d5-4b48-9a3c-d59ea6f13534", "title": "空の欠片"},
+        {"id": "ffa3ecb3-9cbb-41ea-a57e-9cf35af531e2", "title": "翼をください"}
+      ]
+    },
+    {
+      "release_id": "6ad52daf-689c-4d5d-ae98-6437f29f8ecf",
+      "release_title": "THE iDOLM@STER STATION!!! Amazing grace",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/idolmaster/index130220.html"],
+      "recordings": [
+        {"id": "818c28bc-37b2-40b8-b4e1-4fd231271b22", "title": "Amazing grace (Instrumental)"},
+        {"id": "74b40d79-35d1-426c-b36c-8baddff7bc02", "title": "continue"},
+        {"id": "ec308d4f-9af5-404b-87a0-d652170fb0d1", "title": "Strawberry pain"},
+        {"id": "a4146923-b698-4bf0-8dce-ca681b1cb264", "title": "「○○式妄想恋愛相談室」の巻"},
+        {"id": "2def6bfa-99ae-42c1-a361-826b0f789a4c", "title": "「○○式空手道場」の巻"},
+        {"id": "211b74f4-eae2-4fa7-adb4-05d867a2174b", "title": "「お互いの苦労はわかりましたか?」の巻"},
+        {"id": "1682bf53-22d4-4846-92f0-ab71d49c0003", "title": "「コーナーシャッフル!!」の巻"},
+        {"id": "d518afe8-e0a4-428c-9de8-72476c69ec62", "title": "「千日前の姉○○のフォーチューンカード」の巻"},
+        {"id": "87835887-e41c-4182-a760-5403a0c98b3f", "title": "きっと"},
+        {"id": "6688a4dc-2012-4062-bd4f-32df2feaddb4", "title": "ぜんぜんあいたい"},
+        {"id": "75ce4d42-e6e1-4b3c-bead-e66153444211", "title": "ボーナス・トラック"}
+      ]
+    },
+    {
+      "release_id": "d146577f-1326-482c-a72c-cbc7792072ef",
+      "release_title": "THE IDOLM@STER STATION!!! FAVORITE TALKS",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/idolmaster/index130220.html"],
+      "recordings": [
+        {"id": "8cd55d62-430a-4863-81d0-2d58da5da447", "title": "1/3の純情な感情"},
+        {"id": "c435d2ce-7cfa-4cbd-87a6-31b0e712350e", "title": "Get Wild"},
+        {"id": "17b46e0b-5162-4ae5-a5a5-4d9383c97562", "title": "my graduation"},
+        {"id": "734e12a7-e4f1-4401-ad0e-a0833067c727", "title": "TRAIN-TRAIN"},
+        {"id": "30b0e843-6d96-48ed-8bdc-cbb4fdc3a2ea", "title": "ぬ一級空手道場 FINAL"},
+        {"id": "9d77fdef-372e-43eb-9d9b-bf5f5cbf1b5e", "title": "ひなげしの花"},
+        {"id": "16a3e39c-dbea-4507-9efa-f3ac82d2b4f7", "title": "アイステ!!! FAVORITE TALKS Part.1"},
+        {"id": "4e2ca848-98e7-4017-80a0-6ef7ace00481", "title": "アイステ!!! FAVORITE TALKS Part.2"},
+        {"id": "24aa013b-6fb4-45a1-8dbc-a78468e7e16a", "title": "アイステ!!! FAVORITE TALKS Part.3"},
+        {"id": "194b877e-af22-44f4-bbe1-0755135c0b38", "title": "アイステ!!! FAVORITE TALKS Part.4"},
+        {"id": "801e9b2d-017a-45f9-a1ac-b758010e82ea", "title": "アイステ!!! FAVORITE TALKS Part.5"},
+        {"id": "91747ca5-b665-46ba-a94b-ecc9d1e05dfa", "title": "アイステ!!! FAVORITE TALKS Part.6"},
+        {"id": "2d06e1b0-2980-4763-9fe9-e17f085f7ac8", "title": "アサクラ式妄想恋愛相談室 FINAL"},
+        {"id": "67790a58-4ff2-413f-a8b1-e226b934568e", "title": "エンディング・トーク"},
+        {"id": "ad39b86f-f14f-4074-a8ac-9b9f9350ee96", "title": "オープンニング・トーク"},
+        {"id": "f4ade761-e6a4-4555-887d-f0747c590de4", "title": "ショートコント"},
+        {"id": "e4df8a12-ddd0-4043-8e3e-4f3c059e13e5", "title": "ラヴ・イズ・オーヴァー"},
+        {"id": "5c516a2f-63dc-4b35-9c09-ba21bf3b4655", "title": "ロマンスの神様"},
+        {"id": "59036cbd-1c30-4a91-834d-2f8936ee212b", "title": "一年生になったら"},
+        {"id": "43542e30-9e70-4622-bb4e-477fd7ef41aa", "title": "出逢った頃のように"},
+        {"id": "64a1d3cf-fb68-470e-b35b-aae45b103be5", "title": "千日前の姉YUMIのフォーチュンカード FINAL"},
+        {"id": "f5a89fa0-4053-47cf-9219-0fd2978acaea", "title": "狙いうち"}
+      ]
+    },
+    {
+      "release_id": "2070e0f8-c060-4495-9b83-642085bc8e21",
+      "release_title": "THE iDOLM@STER STATION!!! FIRST TRAVEL",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/idolmaster/index130220.html"],
+      "recordings": [
+        {"id": "e36173e6-1947-4f90-b6d2-e21e558fda6f", "title": "!!!ASAMI’S TRAVEL!!!"},
+        {"id": "c577513b-d9f7-4dbb-b876-832c455807bf", "title": "!!!MANAMI’S TRAVEL!!!"},
+        {"id": "cfd1028b-32ef-4910-9bf9-8957f28cba0b", "title": "!!!We’re going!!!"},
+        {"id": "b2474504-a413-4aeb-85c2-3ba22c2f31df", "title": "!!!YUMI’S TRAVEL!!!"},
+        {"id": "a67e2238-801c-48d1-8b68-de574c52b622", "title": "AVALON"},
+        {"id": "ab08d498-1787-4d87-9064-6c856cf3b64d", "title": "DEAD or ALIVE"},
+        {"id": "7b8df70b-ac1c-4963-a367-e51935955561", "title": "One Step"},
+        {"id": "ef47c891-778f-43fa-8206-d0832b7522f7", "title": "SHADOWLESS"},
+        {"id": "4aff88e1-1f50-4653-ab27-73ffb8731146", "title": "Souvenir"},
+        {"id": "00bd28ee-4986-4925-a88e-79b4dca636eb", "title": "THE iDOLM@STER STATION!!! FIRST TRAVEL とっておきの映像集!!!"},
+        {"id": "0f1ab727-7139-48b5-b669-ee0f7c9199d9", "title": "We’re Home"},
+        {"id": "63bb13ca-e843-48ac-a13a-aab142f264fa", "title": "はっぴぃ☆ほりっく"}
+      ]
+    },
+    {
+      "release_id": "49b5d802-dd90-4250-a642-4b790dbf8508",
+      "release_title": "THE iDOLM@STER STATION!!! HEART AND SOUL",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/idolmaster/index130220.html"],
+      "recordings": [
+        {"id": "318cf549-0dc7-4e11-969e-601a947675ab", "title": "1, 2, 3"},
+        {"id": "f025af47-2fb4-474b-a036-04c3f8a71f39", "title": "Crescent Maze"},
+        {"id": "ea814c0c-77a8-4b9f-bfbb-6339cb8375bd", "title": "HEART AND SOUL (Instrumental)"},
+        {"id": "2e846b66-6f1c-4104-85a8-0a66dfac9eb6", "title": "It’s ALRIGHT!"},
+        {"id": "33e2bd31-85e7-4883-a4bb-8376bb0bb411", "title": "SUPERSTAR"},
+        {"id": "69fc7384-6dfd-4087-b734-b03985822123", "title": "「Aメロ作りまーす!」の巻"},
+        {"id": "0d0b26f1-e588-478c-801a-6274766960e5", "title": "「Bメロ作りまーす!」の巻"},
+        {"id": "5356d441-b326-4fff-960c-3083e76f2fe9", "title": "「サビ作りまーす!」の巻"},
+        {"id": "ea3bc133-22a2-4e79-9043-6a0024563515", "title": "「ライブが終わって」の巻"},
+        {"id": "f0e70453-36df-4e11-813c-556c73a78d8b", "title": "「ライブコーナー」の巻"},
+        {"id": "3effd60f-162f-47a1-bc48-a109909d994e", "title": "「曲作りまーす!」の巻"}
+      ]
+    },
+    {
+      "release_id": "a72c55aa-15c0-4cac-a808-bb5dad6d35dc",
+      "release_title": "THE IDOLM@STER STATION!!! in WonderRadio",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/idolmaster/index130220.html"],
+      "recordings": [
+        {"id": "629b36c8-6e65-4672-8a2c-f74df6422e45", "title": "AVALON"},
+        {"id": "f6f7e86d-2f37-4514-9e69-1e4e388ce872", "title": "continue"},
+        {"id": "55d19981-eb68-4839-9c22-46348cda3c32", "title": "in WonderRadio"},
+        {"id": "5a4cf843-a47a-43d7-b18a-be88a8565537", "title": "in WonderRadio"},
+        {"id": "378c31c1-dd2e-4d26-ac27-9b7e12ae6092", "title": "in WonderRadio (オリジナル カラオケ)"},
+        {"id": "26e46cd5-7d81-431d-8efb-81d9c802b644", "title": "ITポリスぬーのBang☆Bang ♡トラブルシューティング!!"},
+        {"id": "9dbe3146-b509-4940-ab01-e4786ec2c64d", "title": "ITポリスはらみーのBang☆Bang♡トラブルシューティング!!"},
+        {"id": "974a5327-9c7d-4857-b2ec-f0d907295eb7", "title": "MC"},
+        {"id": "c3a3b935-2b1b-4d34-8e68-4e71747a80f5", "title": "MC"},
+        {"id": "af4e2eee-9891-4170-8f7a-cf8282126791", "title": "Monday Night Fever☆"},
+        {"id": "da43d044-d823-4358-b2a6-6b8f4f8949e2", "title": "One Step"},
+        {"id": "0e66539e-9329-47dc-b150-727f03e0dfc0", "title": "Strawberry pain"},
+        {"id": "28888942-33b3-4825-a1fa-494e65145a9a", "title": "SUPERSTAR"},
+        {"id": "14710e03-9a96-4544-a5d2-d3eb492e6655", "title": "お料理行進曲"},
+        {"id": "fe5d116d-ac61-4d50-9ee9-8f23ad114dba", "title": "きっと"},
+        {"id": "b8a87fdf-12d5-4871-86ad-c7664818483a", "title": "ぜんぜんあいたい"},
+        {"id": "57cc89aa-c29d-4c7f-b8cd-404d02507b7e", "title": "らぶりぃエプロンあずみんのダーリン応援レシピ!!!"},
+        {"id": "069a9aaa-f874-46d4-ba87-0eedf7be7e8e", "title": "らぶりぃエプロンはらみーのダーリン応援レシピ!!!"},
+        {"id": "ed6de40f-ff08-4088-b01d-eaa9907d64ba", "title": "アイステ展覧会 その1"},
+        {"id": "f22f847e-bc71-4b96-9a38-b3831cdd3c65", "title": "アイステ展覧会 その2"},
+        {"id": "03e9dd93-6efe-4f8a-899c-4198b363eee7", "title": "アイステ展覧会 その3"},
+        {"id": "e54dfa0b-72dc-4eec-963a-fe61093b023c", "title": "アズゴロ杏美の恋愛格言!!!"},
+        {"id": "673ef757-5e27-46a0-82f7-c9ecf9eaea35", "title": "エンディング"},
+        {"id": "67731a3e-53ca-4561-b4e7-b295738a5f04", "title": "エンディング"},
+        {"id": "e9c083b9-76b1-4c59-b555-deba0b150789", "title": "エンディング"},
+        {"id": "3b5e4ef8-927d-4111-86eb-3cc40bf6ed43", "title": "オープニング"},
+        {"id": "601aace5-e963-4506-9eaf-038428884987", "title": "オープニング"},
+        {"id": "895bd0c0-7db4-477d-a943-2b0fa1046d3b", "title": "カサブランカ・ダンディ"},
+        {"id": "0313363e-065c-47e6-a4fa-46ac9c443295", "title": "クリスマスなんて大嫌い!!なんちゃって♥"},
+        {"id": "3a10bbdc-12db-4be8-8a4f-fe5e8587ff1c", "title": "スペシャルトーク1"},
+        {"id": "de2501d9-2183-4292-9ea7-f49872ba8e5f", "title": "スペシャルトーク2"},
+        {"id": "167a4eb0-0a08-4f54-9114-e96b7d347040", "title": "スペシャルトーク3"},
+        {"id": "45fc7279-08fe-4dd2-b58b-4ada2d7ab066", "title": "ヌゴロ愛美の恋愛格言!!!"},
+        {"id": "1e4ec255-68e5-42c5-8959-d4b10f250a97", "title": "フツオタ!!!コーナー"},
+        {"id": "83f06f14-dfb8-4b31-b379-a5a032d10628", "title": "ペッパー警部"},
+        {"id": "354c62e9-06d9-4c7d-b195-9cb891c4ca7e", "title": "雨"}
+      ]
+    },
+    {
+      "release_id": "a4e2996e-51e6-460e-baa2-3471f791f52a",
+      "release_title": "THE IDOLM@STER STATION!!! Long Travel",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/idolmaster/index130220.html"],
+      "recordings": [
+        {"id": "721aae5e-354f-4963-8c87-def39b79b020", "title": "1, 2, 3"},
+        {"id": "0694eb77-e60d-49f5-ae64-a351b6356f94", "title": "AVALON"},
+        {"id": "9887ff69-4f43-4916-bde1-ae5c648bbfc8", "title": "continue"},
+        {"id": "1935bc66-7625-4185-b5af-6fd795d2797b", "title": "Crescent Maze"},
+        {"id": "463eaaf4-1c0c-44b2-9a39-e2638aaa7daa", "title": "DEAD or ALIVE"},
+        {"id": "b59ceb3c-9d12-42de-b2db-5cf6a9c28a4d", "title": "HEART AND SOUL"},
+        {"id": "1289e067-862c-4897-a33c-05a73ba812f5", "title": "in WonderRadio"},
+        {"id": "e2cc4eda-1498-417d-a524-d98f5b64d390", "title": "It's ALRIGHT!"},
+        {"id": "e19263d4-ad1f-4180-9308-cdc1ac267919", "title": "One Step"},
+        {"id": "986f42e5-fffb-4c38-8152-de1f20cd4cf8", "title": "Strawberry pain"},
+        {"id": "850ae168-fccb-4437-991b-f739fc544b97", "title": "SUPERSTAR"},
+        {"id": "9c51647d-33cf-4772-b838-2915c1fd7745", "title": "Traveler"},
+        {"id": "21d6975f-c5b0-4001-8bb5-a983decceda6", "title": "きっと"},
+        {"id": "b3618a1e-d28c-4272-8bb8-7b95d76c9e1d", "title": "ぜんぜんあいたい"},
+        {"id": "61c1b3cb-34f2-424e-ac76-1e4af1e9de60", "title": "だから今夜きみと"},
+        {"id": "6d728201-44ee-44f3-b2cf-b67ece2d32bf", "title": "光跡"}
+      ]
+    },
+    {
+      "release_id": "e19f95eb-7093-4b5f-9480-4777876f99b0",
+      "release_title": "THE IDOLM@STER STATION!!! LONG TRAVEL ~BEST OF THE IDOLM@STER STATION!!!~",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/idolmaster/index130220.html"],
+      "recordings": [
+        {"id": "721aae5e-354f-4963-8c87-def39b79b020", "title": "1, 2, 3"},
+        {"id": "0694eb77-e60d-49f5-ae64-a351b6356f94", "title": "AVALON"},
+        {"id": "9887ff69-4f43-4916-bde1-ae5c648bbfc8", "title": "continue"},
+        {"id": "1935bc66-7625-4185-b5af-6fd795d2797b", "title": "Crescent Maze"},
+        {"id": "463eaaf4-1c0c-44b2-9a39-e2638aaa7daa", "title": "DEAD or ALIVE"},
+        {"id": "b59ceb3c-9d12-42de-b2db-5cf6a9c28a4d", "title": "HEART AND SOUL"},
+        {"id": "1289e067-862c-4897-a33c-05a73ba812f5", "title": "in WonderRadio"},
+        {"id": "e2cc4eda-1498-417d-a524-d98f5b64d390", "title": "It's ALRIGHT!"},
+        {"id": "a6b7c86a-79e7-48f7-8eea-694d85325fad", "title": "Monday Night Fever ☆"},
+        {"id": "a89c0bb3-a5ba-4604-95fe-09db0ed46181", "title": "My Gift to You"},
+        {"id": "e19263d4-ad1f-4180-9308-cdc1ac267919", "title": "One Step"},
+        {"id": "f5c07d4d-6ca7-4b30-b32e-5550625a8b12", "title": "ORION"},
+        {"id": "689aa548-df2d-4f37-8c50-6d4609114dd9", "title": "SHADOWLESS"},
+        {"id": "986f42e5-fffb-4c38-8152-de1f20cd4cf8", "title": "Strawberry pain"},
+        {"id": "850ae168-fccb-4437-991b-f739fc544b97", "title": "SUPERSTAR"},
+        {"id": "9c51647d-33cf-4772-b838-2915c1fd7745", "title": "Traveler"},
+        {"id": "21d6975f-c5b0-4001-8bb5-a983decceda6", "title": "きっと"},
+        {"id": "b3618a1e-d28c-4272-8bb8-7b95d76c9e1d", "title": "ぜんぜんあいたい"},
+        {"id": "61c1b3cb-34f2-424e-ac76-1e4af1e9de60", "title": "だから今夜きみと"},
+        {"id": "7e78800f-2664-4268-8b49-77d76e65c061", "title": "はっぴぃ☆ほりっく"},
+        {"id": "6d728201-44ee-44f3-b2cf-b67ece2d32bf", "title": "光跡"},
+        {"id": "bb7dbf7e-e892-4578-bdb7-aabe28a0cd0f", "title": "新しいドア ～冬のひまわり～"},
+        {"id": "e4b1f99a-8928-4443-b17f-8e5d0f2fb260", "title": "雪やまぬ夜二人"}
+      ]
+    },
+    {
+      "release_id": "cd585e68-b9e5-4b49-9101-6822c4dda347",
+      "release_title": "THE iDOLM@STER STATION!!! Nouvelle Vague",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/idolmaster/index130220.html"],
+      "recordings": [
+        {"id": "0b83fc3a-fe23-4b95-9ec4-227e1cb9fc6e", "title": "111217 アイステ!!! 公開録音未公開音源"},
+        {"id": "68e653cf-08ac-4827-a552-a453951100a5", "title": "1秒のリフレイン"},
+        {"id": "ed7597c3-e21a-4112-90c4-6ab117f32f7c", "title": "GLAMOROUS SKY"},
+        {"id": "ad9ce1ca-08b8-45d9-81f3-ba7ade070d33", "title": "HEART AND SOUL"},
+        {"id": "605d51e0-aa53-4198-9c4b-36c854ab9e3f", "title": "Love Song 探して"},
+        {"id": "951f8080-cd49-46a3-9f4e-1ce5b4f68009", "title": "TRUE LOVE"},
+        {"id": "00c2e275-8bd4-4ac2-aa46-55939e76cf05", "title": "あわてん坊のサンタクロース"},
+        {"id": "ad261b93-0edf-4478-88a8-655bab58d278", "title": "それが大事"},
+        {"id": "d53026cf-4900-4bf8-8c80-6a888974ba30", "title": "にっぽん昔ばなし"},
+        {"id": "288e1f80-07a5-4570-af4e-91bbe66b7733", "title": "ねこふんじゃった"},
+        {"id": "ae74c1ec-865d-4ce5-bd81-9c8d8ba2670d", "title": "もう逢えないかもしれない"},
+        {"id": "588908c9-8dbc-4e9e-8756-d8ecad1b2134", "title": "ガッツだぜ!!"},
+        {"id": "5f1b1c10-e992-45ed-81c5-b74d7e94c155", "title": "ジュリアに傷心"},
+        {"id": "b73520c5-5fd3-47a2-9939-c640140c295f", "title": "マル・マル・モリ・モリ!"},
+        {"id": "df9f81fd-a2c4-44ab-b015-7ba205d77aa6", "title": "元気を出して"},
+        {"id": "07ccb1f0-3e4a-4961-8ec5-788024354706", "title": "夏のお嬢さん"},
+        {"id": "9bf501cd-385d-4622-97aa-c4d84b21244f", "title": "夏の思い出"},
+        {"id": "3ee7a6c4-6d73-4bad-a599-77026c2cebf7", "title": "夏祭り"},
+        {"id": "efee45ce-079f-41d4-9f19-c46a3524a6b5", "title": "大阪LOVER"},
+        {"id": "833ae6ca-8379-4004-a2d7-8673435ce82d", "title": "恋におちて -Fall in love-"},
+        {"id": "96a5a614-8e86-4e9e-958b-fa799f4846af", "title": "恋人がサンタクロース"},
+        {"id": "c46d6718-9790-47b8-8b43-90dc8319839c", "title": "月光花"},
+        {"id": "6fe926cf-4ccf-429f-ba73-a4eb605c3b66", "title": "舟唄"},
+        {"id": "d841315b-2741-412b-b809-1ce22b09d3bc", "title": "花火"},
+        {"id": "4bbe3b12-6b6f-438a-ab1d-7456994f2e0d", "title": "見上げてごらん夜の星を"},
+        {"id": "f0475427-171f-492b-8399-aea343e30d7c", "title": "陽のあたる坂道"},
+        {"id": "39fa3c26-fdc2-4969-9fee-6ca3fb779fcb", "title": "風になる"},
+        {"id": "c93ffbbd-9c55-46b1-b031-19f1ad9ca3ff", "title": "高速道路"}
+      ]
+    },
+    {
+      "release_id": "d882b1b6-b4fd-429d-aec0-aa6579a8f535",
+      "release_title": "THE iDOLM@STER STATION!!! SECOND TRAVEL ～Seaside Date～",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/idolmaster/index130220.html"],
+      "recordings": [
+        {"id": "1aa93879-c222-4e8c-971b-dbd0cfed8745", "title": "Alright!!"},
+        {"id": "13d7ed24-1d96-47f0-9063-61c411bfb23b", "title": "Angel Night ～天使のいる場所～"},
+        {"id": "43e48a09-a7b8-4eb2-90c5-6f76c7b56685", "title": "Okey-dokey (ニュー・アレンジ)"},
+        {"id": "05cc6c81-8c64-4792-bb6f-70f2e5078878", "title": "SWEET SOUL REVUE"},
+        {"id": "8642e323-8596-4d90-98ad-fa37cffe796b", "title": "THE iDOLM@STER STATION!!!「やってしまった! 映像集」"},
+        {"id": "cfcd0fb1-0a0a-423c-ac9f-ed7ede35f558", "title": "あしたのジョー"},
+        {"id": "58051f55-ee51-4061-9395-a1d1cd948f1b", "title": "ときめきの導火線"},
+        {"id": "1c60caec-3de1-496a-ae73-ee998a30bc8c", "title": "アイステ!!! いいとこ録り名迷場面集 その1"},
+        {"id": "303d9b37-18d8-4ea6-8ed8-a55c50c0a60f", "title": "アイステ!!! いいとこ録り名迷場面集 その2"},
+        {"id": "562ec7b4-d28f-4220-9d8e-2b45f3571d9d", "title": "アイステ!!! いいとこ録り名迷場面集 その3"},
+        {"id": "9dec91a3-5dcd-40f8-b95f-f727640c3283", "title": "アイステ!!! いいとこ録り名迷場面集 その4"},
+        {"id": "5d733320-d9b4-4a84-be0e-639f7c535d98", "title": "アイステ!!! いいとこ録り名迷場面集 その5"},
+        {"id": "82936799-b13a-4c77-a8fe-bbb75c0c9d79", "title": "アンパンマンのマーチ"},
+        {"id": "391f4148-250e-4e37-a735-2aa4ea8b545c", "title": "エンディング・トーク"},
+        {"id": "fe79ffa9-1c76-410e-b5a4-4ff5ddd3de9a", "title": "オープニング・トーク"},
+        {"id": "a69ef8c2-cc9d-451c-b24a-3722604fcee9", "title": "ガラガラヘビがやってくる"},
+        {"id": "51bf9b6e-84db-474f-90c8-8c19901e1e17", "title": "プラチナ"},
+        {"id": "4a78d3ff-0f4b-4202-9375-b5de0cc0227f", "title": "ボーナス・トラック"},
+        {"id": "51811578-4ba5-4873-9a0c-1d236af4b8cb", "title": "ルージュの伝言"},
+        {"id": "59462283-4188-4d5d-8162-b69dab8971ed", "title": "一期一会"},
+        {"id": "41226075-5901-49fb-ae16-c62786c47fd3", "title": "三年目の浮気"},
+        {"id": "bc8868c3-7c35-4217-be69-a482ad302d72", "title": "偶然の確率"},
+        {"id": "1a76a084-1862-4e85-8ba7-cdd89a936d4c", "title": "勇気りんりん"},
+        {"id": "8974078d-93d3-4155-8cd3-12592433d665", "title": "卒業"},
+        {"id": "803494e0-a1a5-4c02-969c-324c2e42406a", "title": "塊オンザウィングス"},
+        {"id": "81dc8a72-4947-41fc-ba4e-6395dbf7fb7d", "title": "夏の月"},
+        {"id": "3c5abd62-131b-4df2-a70f-c0e965e5dc43", "title": "夢色チェイサー"},
+        {"id": "aab274e4-d419-4926-b985-ad3e1a374d9c", "title": "天使のゆびきり"},
+        {"id": "70550ef3-1171-408a-af7c-495c887f25d5", "title": "桜坂"},
+        {"id": "5f0981cb-e41b-476a-9415-7463f3ebe118", "title": "水の証"},
+        {"id": "aab9a0da-ad13-46e3-8378-26d90f896e7f", "title": "私はマチコ"}
+      ]
+    },
+    {
+      "release_id": "930be67e-f65b-459f-9139-a5fc7e804a44",
+      "release_title": "THE IDOLM@STER STATION!!! Summer Night Party!!!",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/idolmaster/index130220.html"],
+      "recordings": [
+        {"id": "ba102290-743e-4818-bdad-66d99ccd7e4d", "title": "だから今夜きみと"},
+        {"id": "45e69976-2d4a-43f1-8d2a-76ce0f8b2afb", "title": "だから今夜きみと (Azumi solo Remix)"},
+        {"id": "83e88fc3-d4d4-4e9f-811e-ab82bb14dc02", "title": "だから今夜きみと (Manami solo Remix)"},
+        {"id": "5ee1d5a9-e894-4178-bcbc-57f5091548fa", "title": "だから今夜きみと (Original Karaoke)"},
+        {"id": "6f3b0f1f-1727-417d-8e83-3d7d59bdc90c", "title": "だから今夜きみと (Yumi solo Remix)"},
+        {"id": "3c7da084-8198-4cf3-aaf5-fc0dba40b374", "title": "ドラマスペシャル 『白雪姫と七人の妖精』 (完全版)"}
+      ]
+    },
+    {
+      "release_id": "4ae5e890-c5d2-463f-9f65-b7d1b84784d1",
+      "release_title": "THE IDOLM@STER STATION!!! THIRD TRAVEL WANTED!!!",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/idolmaster/index130220.html"],
+      "recordings": [
+        {"id": "20130415-0e4b-4228-a928-c9cfd0c721b9", "title": "Mr.Moonlight～愛のビッグバンド～"},
+        {"id": "d72fa134-fa74-4f7b-b0ef-10224088d213", "title": "Traveler"},
+        {"id": "7e0cfb66-30f3-4185-aa55-d89df8509e45", "title": "Yeah! めっちゃホリディ"},
+        {"id": "480108db-1ad8-4043-a91a-6cb37aa4bdc1", "title": "ZOO～愛をください～"},
+        {"id": "6d336fc4-3f9a-49ee-9679-4c2db14c5f6b", "title": "おばけなんてないさ"},
+        {"id": "a7c6bcb3-f794-4da7-b3ee-b6ae12355f75", "title": "ひとつだけ"},
+        {"id": "c06d06fe-1619-4a7a-a29e-41b7d4977eee", "title": "もう恋なんてしない"},
+        {"id": "7c849bdb-fb73-4b4a-8242-1567c22c3cae", "title": "アイステ!!! もう1回聴いてみたいトーク集1"},
+        {"id": "cf3d07e7-35df-4971-b1d2-cd662711a6b1", "title": "アイステ!!! もう1回聴いてみたいトーク集2"},
+        {"id": "ce5f550c-888c-4e3f-ae66-77064e00b01d", "title": "アイステ!!! もう1回聴いてみたいトーク集3"},
+        {"id": "7da83226-0fe8-4e72-be58-db01b2e24a1b", "title": "アイステ!!! もう1回聴いてみたいトーク集4"},
+        {"id": "a85984e3-b94b-45b7-8934-b6c22dbaaf47", "title": "イミテイション・ゴールド"},
+        {"id": "c46e50e9-07cd-4ae4-84de-a1a738a9abda", "title": "エンディング・トーク"},
+        {"id": "c1a3cdc7-0329-46ea-9085-815c4d41355d", "title": "オープニング・トーク"},
+        {"id": "71615943-e34f-4e6d-a4de-163f1ecbef0d", "title": "ココロのちず"},
+        {"id": "73b6b7b6-e824-4926-a8bf-4ffbb7919127", "title": "ジューンブライド～あなたしか見えない～"},
+        {"id": "b4172b74-e2ce-4c59-9bf3-649c4f1e4514", "title": "夢にエール! パティシエール♪"},
+        {"id": "a0149fce-4662-40cf-a230-06bc4ffea301", "title": "夢のヒヨコ"},
+        {"id": "854de237-676a-42a7-ba43-5055c7f99095", "title": "嵐の中で輝いて"},
+        {"id": "ff7d35fd-0400-478d-8c80-33349e96e235", "title": "恋愛レボリューション21"},
+        {"id": "026c2f3b-3483-41c8-8e12-249a1fbebfa8", "title": "新録フリートーク"},
+        {"id": "74df5774-75bd-42ed-99b0-bc9102b0074d", "title": "星空のディスタンス"},
+        {"id": "c975e38b-0a3b-43a3-ac53-92cc48dfd0c1", "title": "絶体絶命"},
+        {"id": "f8953fc9-5780-4fbc-a666-7b3f2488376b", "title": "語り継ぐこと"},
+        {"id": "55ef0165-71e1-481c-aab8-22c9581e5332", "title": "青い珊瑚礁"},
+        {"id": "2a70ae61-dd2d-4e69-8d43-bd9dd090eda5", "title": "風と丘のバラード"}
+      ]
+    },
+    {
+      "release_id": "58244d5d-2a0e-4a47-a792-e06367b29aea",
+      "release_title": "THE IDOLM@STER STATION!!+ Monday Night Fever☆",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/prod-info/COCX-38168-9/"],
+      "recordings": [
+        {"id": "a5ca0406-cb90-4ce3-afff-4f5860f89801", "title": "Catch You Catch Me"},
+        {"id": "71b75e50-78c2-40bf-9630-1a8eb8d2d23a", "title": "Monday Night Fever☆"},
+        {"id": "a21bba0b-4485-4cee-a520-2faf0e95d8bd", "title": "MONKEY MAGIC"},
+        {"id": "c97d7bd9-85fc-444d-a3a4-5ab1936437c7", "title": "One Night Carnival"},
+        {"id": "bf2151ca-73e5-409a-a347-beecb135837d", "title": "POWER"},
+        {"id": "23fbb32e-986c-4e00-9bc1-9add221dc14d", "title": "TIMING"},
+        {"id": "cc06f65e-34c1-4e42-989a-78fdef959ee9", "title": "いい日旅立ち"},
+        {"id": "448712a2-b906-4485-b823-0478e2bc8160", "title": "いんとろあうとろ (原ばーじょん)"},
+        {"id": "ee857b4e-d475-490e-b3e9-d0d33285d7ad", "title": "いんとろあうとろ (沼倉ばーじょん)"},
+        {"id": "97ba97f4-a277-4943-aa4e-4bde377e4eeb", "title": "きよしこのよる"},
+        {"id": "6e44f5ec-9bdd-4a24-ac22-fb4931e63c06", "title": "さくら"},
+        {"id": "b05a8b92-f7a1-48d6-b75f-80aa11cd9fe3", "title": "さそり座の女"},
+        {"id": "2337bdd2-c9b6-4436-892d-fd553ca6fe56", "title": "じゃじゃ馬にさせないで"},
+        {"id": "45f7c315-42ad-442a-86b6-7ae1456fe68b", "title": "また君に恋してる"},
+        {"id": "15cac749-40c2-42ae-ba5c-8de83f5f680c", "title": "もう1度聴きたい迷トーク1"},
+        {"id": "ef9247d4-50d9-470f-893e-e0ade7bdb863", "title": "もう1度聴きたい迷トーク2"},
+        {"id": "7a4f42d8-0aa3-4581-ab9e-826489daefc0", "title": "もう1度聴きたい迷トーク3"},
+        {"id": "0adefda3-13f3-403f-8fff-c61da5941673", "title": "もう1度聴きたい迷トーク4"},
+        {"id": "9c9a45ef-803f-4a97-be6e-5f7ee6066b89", "title": "もう1度聴きたい迷トーク5"},
+        {"id": "d112db7d-7b55-427d-a90f-75c12ae24f7d", "title": "もう1度聴きたい迷トーク6"},
+        {"id": "378f3bfd-9851-4c3a-b05e-509402b0cabf", "title": "もりのくまさん"},
+        {"id": "89521a15-2352-4e30-a0b2-bd7e393e5120", "title": "やさしさに包まれたなら"},
+        {"id": "e5042122-5a62-4074-b484-37bbaddd84ea", "title": "ゆめいっぱい"},
+        {"id": "ad50cc5d-2709-4178-8e9f-c20f15f95100", "title": "エンディング・トーク"},
+        {"id": "5faa5ecf-eb66-4630-96f6-e0c5ed19aff2", "title": "オープニング・トーク"},
+        {"id": "923e3754-885f-4a29-93b8-2e208487c281", "title": "トーク・Monday Night Fever☆"},
+        {"id": "3da68967-ce9b-4b70-9696-1d9af6bf9a88", "title": "ブルーライト・ヨコハマ"},
+        {"id": "bc2e87de-a040-4cbc-9fd5-c1163cf08e9d", "title": "メロスのように"},
+        {"id": "2669b475-fcf9-4ca2-b965-c2fe26a0c067", "title": "六甲おろし"},
+        {"id": "48c8797b-d554-45b6-beec-f7286961e483", "title": "冬がはじまるよ"},
+        {"id": "8193dc35-4659-4b8a-877b-54a5dcc1193a", "title": "情熱の嵐"},
+        {"id": "1ceae403-36c6-41cf-a1b4-a66212af8962", "title": "荒城の月"},
+        {"id": "4e465e72-00e7-47b2-8df4-c3efa9cbd7ad", "title": "鐘を鳴らして ～Ring A Bell～"}
+      ]
+    },
+    {
+      "release_id": "da55070a-2466-4810-a0d5-13a897d477b1",
+      "release_title": "THE IDOLM@STER STATION!!+ WINTER MEMORIES",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/prod-info/COCX-38168-9/"],
+      "recordings": [
+        {"id": "082fd721-430f-441d-ad5a-e11fd5486c56", "title": "1st Memory Opening Talk"},
+        {"id": "497ef93f-ad3e-4777-abc6-6afe453a949e", "title": "2nd Memory ｢WINTER DATE!!｣"},
+        {"id": "7ec795ae-4a88-4d86-bf7d-bd564e96bfda", "title": "3rd Memory ｢Endless Love｣"},
+        {"id": "658a8728-3d09-4ebf-8bb9-09b4a1c86abc", "title": "4th Memory 『Luxury White』"},
+        {"id": "334830f9-0b74-497d-abf4-1977f1dddaf3", "title": "5th Memory Interlude"},
+        {"id": "2394fe49-2328-499d-b456-239e9c9e15cb", "title": "6th Memory Ending Talk"},
+        {"id": "4e15d823-3d1e-4fb8-ac72-726d9ef468d4", "title": "My Gift to You"},
+        {"id": "06bd8b97-b5a7-4dc4-822d-de7e2ce30121", "title": "ORION"},
+        {"id": "95aae847-1951-459e-bb4e-8f9566921214", "title": "ドラマ『原由実Presents\"Endless Love\"』"},
+        {"id": "9f380029-ee11-4966-af30-d0d0bf231a02", "title": "ドラマ『沼倉愛美Presents\"Luxury White\"』"},
+        {"id": "81fed5f5-7019-49a5-b4f5-3f664c258ea6", "title": "新しいドア 〜冬のひまわり〜"},
+        {"id": "ae17e06a-0a02-494c-b68e-9a9e5b037c38", "title": "雪やまぬ夜二人"}
+      ]
+    },
+    {
+      "release_id": "592c14a4-fec0-439a-8683-fddc6d9cb819",
+      "release_title": "THE iDOLM@STER Vacation for you!",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/idolmaster/imasnews/180202.html"],
+      "recordings": [
+        {"id": "271d1825-5786-4b49-89ac-6895868cad9a", "title": "SCENE 01"},
+        {"id": "46ab3a3a-2a1f-4c79-9fee-5c56dd6e393e", "title": "SCENE 02"},
+        {"id": "03aa205d-2e88-43c3-93a2-70e695f4885c", "title": "SCENE 03"},
+        {"id": "e4699d4f-ce79-4279-b1df-ce1c4ac0dce1", "title": "SCENE 04"},
+        {"id": "1022e568-c4d9-43d8-bcc1-c18197138e45", "title": "SCENE 05"},
+        {"id": "e8b8c574-e542-4698-899f-5f45bf1aa5c6", "title": "SCENE 06"},
+        {"id": "9ba77613-4cc2-410e-b100-579cc722a071", "title": "Sunny Day Sunday"},
+        {"id": "d79bba46-d9ec-48eb-9d9c-c66291029cf2", "title": "VACATION"},
+        {"id": "67087274-36ea-4870-9a63-6a2c786ccc61", "title": "カナリア諸島にて"},
+        {"id": "b8efc951-f98a-454c-a87e-e41802ec5a0d", "title": "サニー"},
+        {"id": "31ea537a-3424-468b-93e9-a2eafd3ffb4a", "title": "夏影"},
+        {"id": "cff110ee-b21f-43bd-819f-37c134d2fdd0", "title": "夏空グラフィティ"},
+        {"id": "8647713d-20a6-4fb0-89a8-bb8110406ea8", "title": "愛より青い海"}
+      ]
+    },
+    {
+      "release_id": "9cf815c3-3da9-4688-a9e1-4546a192124c",
+      "release_title": "THE IDOLM@STER ニューイヤーライブ!! 初星宴舞",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/idolmaster/imasnews/171215.html"],
+      "recordings": [
+        {"id": "f168de8e-38ad-4087-b971-0fb0a1f185b5", "title": "99 Nights (M@STER VERSION) 伊織・美希・貴音リミックス"},
+        {"id": "8523d7f6-81a2-45a9-a7fd-7b4efbf9b478", "title": "Good-Byes (M@STER VERSION) やよい・律子・あずさ・亜美リミックス"},
+        {"id": "c61d5150-fbf6-4c9d-abc8-56cd7cc7dc67", "title": "SMOKY FRUITS あずさソロ・リミックス"},
+        {"id": "c3bb59a3-80ed-471b-bcbe-5d745c8745fd", "title": "SMOKY FRUITS 亜美ソロ・リミックス"},
+        {"id": "9cd67468-6871-4fa2-ae32-8664e8b8fd28", "title": "SMOKY FRUITS 伊織ソロ・リミックス"},
+        {"id": "674825b4-92fa-4ae5-b056-a85ae19fb8bb", "title": "インセインゲーム 美希ソロ・リミックス"},
+        {"id": "0d17da72-d582-4daf-b627-ffeead3eacbf", "title": "インセインゲーム 貴音ソロ・リミックス"},
+        {"id": "343124b8-3b62-44ac-a2a3-52745c562095", "title": "インセインゲーム 響ソロ・リミックス"},
+        {"id": "da2e59a5-8b2e-4b14-ac88-7ea45c531e81", "title": "キミ*チャンネル (M@STER VERSION) 春香・真・響リミックス"},
+        {"id": "78a6d5a9-2370-4ce3-ab00-f1c3e7b8e0f1", "title": "静かな夜に願いを… (M@STER VERSION) (千早・真美・雪歩リミックス)"}
+      ]
+    },
+    {
+      "release_id": "16fbf61a-fbcd-4f52-90ec-8722ed3b1ef2",
+      "release_title": "Treasure☆",
+      "series": "cinderella",
+      "source_urls": ["https://columbia.jp/idolmaster/imasnews/kanshasai2019.html"],
+      "recordings": [
+        {"id": "c54c1549-67c2-4555-bae6-0983f317e335", "title": "Treasure☆ (M@STER VERSION) (オリジナル・カラオケ)"},
+        {"id": "4b328abd-a884-43ae-93d2-dbcbe44d1819", "title": "Treasure☆ (M@STER VERSION) for CINDERELLA PARTY! MIX"},
+        {"id": "163f3fbc-a7b4-471f-9f1c-c60b96088b00", "title": "Treasure☆ (M@STER VERSION) for デレラジ☆MIX"},
+        {"id": "dee9e17d-fa89-4c41-9ac5-e237e6bac89d", "title": "エンジェル ドリーム (城ヶ崎莉嘉ソロ・リミックス)"},
+        {"id": "e9c1b2f5-6655-4ea1-9ae1-295081113df5", "title": "エンジェル ドリーム (多田李衣菜ソロ・リミックス)"},
+        {"id": "091181c0-273a-484a-9839-fa3509f03f1c", "title": "エンジェル ドリーム (緒方智絵里ソロ・リミックス)"}
+      ]
+    },
+    {
+      "release_id": "2cce5630-a842-4a7c-983a-deca4e8a38fb",
+      "release_title": "twin live はんげつであえたら",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/idolmaster/imasnews/260130.html"],
+      "recordings": [
+        {"id": "e1210926-cbf8-438b-a4d7-67d635f96e47", "title": "9:02pm（M@STER VERSION）"},
+        {"id": "40d5d58b-65c8-40ba-b576-aede787ca924", "title": "Halftone"},
+        {"id": "b5ffa95d-30cf-4c1f-8eb2-65ff0678ceb8", "title": "Halftone オリジナル・カラオケ"},
+        {"id": "7fe7f2b2-7813-465d-a9fb-7d6cd90452cd", "title": "Halftone 菊地 真ソロ・リミックス"},
+        {"id": "819dd46a-99f2-4cab-9473-82ee253f91ba", "title": "Halftone 萩原 雪歩ソロ・リミックス"},
+        {"id": "18635aea-9b55-49f2-9e90-c0ab2dd6e065", "title": "Kosmos, Cosmos"},
+        {"id": "61a08673-51ea-4d93-a3e7-f08d7b5612a3", "title": "アマテラス（M@STER VERSION）"},
+        {"id": "e5e77934-ef5d-4436-b246-017b19d57007", "title": "自転車"}
+      ]
+    },
+    {
+      "release_id": "2c1f13fc-4945-4eac-98ff-720c7db4cac3",
+      "release_title": "『高槻やよい ・ 水瀬伊織 twin live いつまでもなかよし！ 』会場オリジナルCD",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/idolmaster/imasnews/260130.html"],
+      "recordings": [
+        {"id": "60784e39-4696-484c-892d-dc8cf1211a97", "title": "99 Nights (M@STER VERSION)"},
+        {"id": "91731782-5c0a-4d4a-9d90-3702d293df81", "title": "DIAMOND"},
+        {"id": "36eac4c1-b29b-4adb-a0a6-6f6dfc4b20e5", "title": "Flower Knows"},
+        {"id": "026066cb-c575-4ccf-8d9d-d1ef219f0455", "title": "Flower Knows オリジナル・カラオケ"},
+        {"id": "1d675281-7bfb-4143-997e-8f01803b5acf", "title": "Flower Knows 水瀬 伊織 ソロ・リミックス"},
+        {"id": "f503a4a0-b1f6-4718-b101-5049f03cf1da", "title": "Flower Knows 高槻 やよい ソロ・リミックス"},
+        {"id": "78c65671-f18f-468b-b337-0bd906ed2ac3", "title": "shiny smile (M@STER VERSION)"},
+        {"id": "21c1c847-1a01-44c4-a893-488deefe2bc2", "title": "VOY@GER"},
+        {"id": "c8d20056-1095-46c3-a0ae-b9a0738ef673", "title": "おはよう！！朝ご飯 (M@STER VERSION)"},
+        {"id": "ff8512d3-c56a-4044-b9ed-7aba1b1db40d", "title": "きゅんっ！ヴァンパイアガール (M@STER VERSION)"}
+      ]
+    },
+    {
+      "release_id": "de59bf4e-1155-4019-95ef-31d542b59eaf",
+      "release_title": "アイドルマスター ドラマCD Scene.01 〜萩原雪歩＆菊地真編〜",
+      "series": "765",
+      "source_urls": ["https://www.idolmaster.jp/imas/items/prod_disc.html"],
+      "recordings": [
+        {"id": "22631840-cdf1-4600-91dd-d8642f88e937", "title": "BONUS TRACK 01 もしも雪歩がエレベーターガールだったら"},
+        {"id": "7325539b-5a28-41de-9724-b62ad2d1b195", "title": "BONUS TRACK 02 もしも真が絵の先生だったら"},
+        {"id": "ce65c13f-b0ad-46f1-819e-ea3f737abc6a", "title": "Chapter.1 対称的な2人"},
+        {"id": "b7de156f-236b-4f91-8aaa-09b6095ce377", "title": "Chapter.2 はじめてのレッスン"},
+        {"id": "88482eb3-361f-4808-b867-262f1dfecece", "title": "Chapter.3 出会いと発見"},
+        {"id": "677d99c4-1efd-49f7-b505-57de89c0c98f", "title": "Chapter.4 緊張のオーディション"},
+        {"id": "fddc8d03-1989-4c08-9f02-aed6146eb8f1", "title": "Chapter.5 生まれ変わるために"}
+      ]
+    },
+    {
+      "release_id": "6ee03d5d-7ecc-47c1-9188-d1ab995be575",
+      "release_title": "アイドルマスター ドラマCD Scene.02 〜如月千早 ＆ 高槻やよい編〜",
+      "series": "765",
+      "source_urls": ["https://www.idolmaster.jp/imas/items/prod_disc.html"],
+      "recordings": [
+        {"id": "839a8ab3-959c-4271-95fd-3e43c2ca34d9", "title": "BONUS TRACK 01 もしも千早が寿司職人だったら"},
+        {"id": "b4e9fc1b-f604-4e17-906e-fea20f1a8e71", "title": "BONUS TRACK 02 もしもやよいが大会社の社長だったら"},
+        {"id": "2ff565f2-3fb7-4c6b-9443-d69fb091bfd6", "title": "Chapter.1 はじめの第一歩"},
+        {"id": "f9434f19-c100-49c2-9814-d05a86d7cad2", "title": "Chapter.2 元気にがんばるぅ♪"},
+        {"id": "f6751532-878d-4b27-9207-030634b279ba", "title": "Chapter.3 それぞれの歩む道"},
+        {"id": "0710ff0b-a0ce-4383-9020-5d23ab8af9d5", "title": "Chapter.4 憧れ、そして不安"},
+        {"id": "8bb615d8-39b0-4e41-aa04-ad08f1ce24e8", "title": "Chapter.5 歌が…分からない"},
+        {"id": "8d1a1433-4235-4dd4-b039-041a6724d810", "title": "Chapter.6 明日へのハイタッチ"}
+      ]
+    },
+    {
+      "release_id": "440ff529-c905-4443-a4d2-5240e57ec982",
+      "release_title": "アイドルマスター ドラマCD Scene.03 〜天海春香 ＆ 秋月律子 ＆ 水瀬伊織編〜",
+      "series": "765",
+      "source_urls": ["https://www.idolmaster.jp/imas/items/prod_disc.html"],
+      "recordings": [
+        {"id": "fbecc3a0-829d-45c1-9a3c-2c5249d576e7", "title": "BONUS TRACK もしも伊織がマッチ売りの少女だったら"},
+        {"id": "48804a2a-16d6-4595-b606-51ede457c347", "title": "BONUS TRACK もしも律子がタクシー運転手だったら"},
+        {"id": "6dcdae29-d451-4bda-bf19-693a89f15132", "title": "BONUS TRACK もしも春香が刑事だったら"},
+        {"id": "76e537ee-0dba-4cf9-ad9a-f8cbd0709f0a", "title": "Chapter.1 アイスタ ON AIR!!"},
+        {"id": "dc2db3f7-8e66-4e12-9cd2-fda1d6df5ece", "title": "Chapter.2 お悩み相談室でのできごと"},
+        {"id": "8c49a206-17e7-4bb4-b0b9-e9bff31fcb80", "title": "Chapter.3 Searching for Aya!!"},
+        {"id": "ec977b20-9436-4ea8-b8f7-dd32ec7e7e3d", "title": "Chapter.4 私のこと、覚えてて…"},
+        {"id": "3d8e955a-b64a-47a6-8ce1-3ff87e6255be", "title": "Chapter.5 重なり合う歌声"}
+      ]
+    },
+    {
+      "release_id": "d3a8ad9b-c6ab-4ade-a194-7ff148af0f4f",
+      "release_title": "アイドルマスター ドラマCD Scene.04 〜三浦あずさ＆双海亜美・真美編〜",
+      "series": "765",
+      "source_urls": ["https://www.idolmaster.jp/imas/items/prod_disc.html"],
+      "recordings": [
+        {"id": "b2e6ba63-1824-488d-a3d5-116052b5179a", "title": "BONUS TRACK もしもあずさがお医者さんだったら"},
+        {"id": "74d372ff-b395-4eae-b1c5-d66c0564452a", "title": "BONUS TRACK もしも亜美と真美がお殿様だったら"},
+        {"id": "3d4bd64a-1e47-47d5-9148-3d298dde0630", "title": "Chapter.1 凸凹ユニット誕生！？"},
+        {"id": "738cac49-e163-4cd0-9165-8970609c198d", "title": "Chapter.2 パジャマパーティーへようこそ"},
+        {"id": "676c00b4-ddc2-46ea-8cf6-9d3ac9077d63", "title": "Chapter.3 お見舞いに行こう"},
+        {"id": "35e14446-7bb4-4f44-9b95-ad515540ff13", "title": "Chapter.4 ツインズ・ハプニング！"},
+        {"id": "81969edc-0807-4070-9e73-ce10c44c6489", "title": "Chapter.5 運命のマジックショー"}
+      ]
+    },
+    {
+      "release_id": "e7b29070-aa43-4f77-b115-6fafd41b79d4",
+      "release_title": "アイドルマスター ドラマCD Scene.05 EXTRA STAGE 1",
+      "series": "765",
+      "source_urls": ["https://www.idolmaster.jp/imas/items/prod_disc.html"],
+      "recordings": [
+        {"id": "33f8b513-de37-4f72-a324-4820e2ff3e3b", "title": "BONUS TRACK"},
+        {"id": "1a8d4d00-3946-4cb3-945f-b228c8daaa7c", "title": "Chapter.1 事件は現場で起きてます！"},
+        {"id": "61d8fb12-78c8-4403-96bc-b185a37b36fa", "title": "Chapter.2 交渉には気をつけろ"},
+        {"id": "dc647f43-106e-4b16-931e-cb1a37f27b88", "title": "Chapter.3 容疑者・浜野健次郎"},
+        {"id": "b6048656-df66-4405-a3e9-8dbcc3591e70", "title": "Chapter.4 どうして監督が逮捕なんだ!?"},
+        {"id": "3105b50e-c5bb-4c65-9a09-b28f9848cb8b", "title": "Chapter.5 温泉街だよ、全員集合！"},
+        {"id": "c185d42e-e3cc-41ff-bc2e-60a7aaf1de81", "title": "Chapter.6 露天風呂でちょっとだけよ?"},
+        {"id": "d2d45874-056f-4929-b64a-ede75a0fa555", "title": "Chapter.7 無礼講、いってみよー！"},
+        {"id": "2e71514a-5d42-4d2c-bc5f-33b5fc56a653", "title": "Chapter.8 最後までだめだこりゃ！"}
+      ]
+    },
+    {
+      "release_id": "eca7cb74-ad38-4611-9371-9b1a880bd2d9",
+      "release_title": "アイドルマスター ドラマCD Scene.06 EXTRA STAGE 2",
+      "series": "765",
+      "source_urls": ["https://www.idolmaster.jp/imas/items/prod_disc.html"],
+      "recordings": [
+        {"id": "81c45562-bf89-44d6-9642-a6e2faaf2086", "title": "BONUS TRACK"},
+        {"id": "5a6c9df4-211a-4413-a2f6-3e6f0ffcf879", "title": "～メイドカフェ編～Chapter.4 お帰りなさいませ、ご主人様"},
+        {"id": "9d4d36b6-be25-48d0-9115-60ca0c0396dc", "title": "～メイドカフェ編～Chapter.5 カフェ・ド・アイドル開店"},
+        {"id": "0644e5c1-385b-44b7-8d2f-123b3725ab9a", "title": "～メイドカフェ編～Chapter.6 カフェ・ド・アイドル閉店・・・"},
+        {"id": "7e5a74d9-e6d7-4519-b6ed-f78d6fc9226d", "title": "～無人島編～Chapter.1 アイドル・サバイバル大作戦！"},
+        {"id": "b600eaab-f2de-42de-be7a-e4e469f85029", "title": "～無人島編～Chapter.2 繰り返される悲劇"},
+        {"id": "1e797e03-f452-4593-9bdf-d14e4d675bb1", "title": "～無人島編～Chapter.3 そして、誰もいなくなった・・・"}
+      ]
+    },
+    {
+      "release_id": "d8b5f9bd-054a-483a-a90e-cf3957b4de35",
+      "release_title": "アイドルマスター バースデーシリーズVol.4 天海春香 アン・ハッピーバースデー?",
+      "series": "765",
+      "source_urls": ["https://www.idolmaster.jp/imas/items/prod_disc.html"],
+      "recordings": [
+        {"id": "2d4f1328-316a-4f33-aa08-b4f2f9c1d5a9", "title": "あの子から電話です！"},
+        {"id": "8e7cf366-16c7-4d12-88e7-734ca8d08d90", "title": "うっうー！やよいでーっす！"},
+        {"id": "71e0df05-2aa6-4721-93af-a0162f757af6", "title": "ごめんなさい、春香さん…"},
+        {"id": "1614beaf-f41c-4a5e-afa1-16623d592a82", "title": "やよいのプレゼントも最高だよ！"},
+        {"id": "4915a990-a38e-436c-b126-180e686048e4", "title": "やよい化計画"},
+        {"id": "d92963ee-6e70-40e0-8e01-a91b74de8bd3", "title": "売り込みにレッツゴー♪"},
+        {"id": "a2f3b06c-3b9c-4b25-b51c-49a55e9df5cf", "title": "新作ケーキ、完成目前ですよ！"},
+        {"id": "c19a04f7-0b8a-4b28-808a-60db4a2b45ff", "title": "春香さんのプレゼント、最高ですー！"},
+        {"id": "a42b6cda-a154-446c-ba15-88661da5fde9", "title": "物資が投下されました！"},
+        {"id": "71b3b4df-68fa-4fd6-a0f3-85f0ff53af5a", "title": "私って、どうしてこうドジなの…"}
+      ]
+    },
+    {
+      "release_id": "35d6a6e7-9f30-4f5d-991a-0b890f58e57f",
+      "release_title": "アイドルマスター バースデーシリーズVol.6 双海亜美・真美 スーパーバースデー!",
+      "series": "765",
+      "source_urls": ["https://www.idolmaster.jp/imas/items/prod_disc.html"],
+      "recordings": [
+        {"id": "bae1aa18-39a0-4dab-b350-498cbadf6490", "title": "おやつ、おいしーね！ 〜移動中の道・文房具店にて〜"},
+        {"id": "e136e594-e304-4991-9ee4-0da723c79473", "title": "めでたし・めでたしだね♪ 〜765プロダクション事務所〜"},
+        {"id": "fbc456e4-e068-4147-98f9-6b2b174fdfbb", "title": "めでたし・めでたしだね♪ 〜765プロダクション事務所〜"},
+        {"id": "3416bcc2-b31f-4f9b-aaf0-15e0a64d8b6a", "title": "ゆきぴょんに相談しよ〜☆ 〜765プロダクション事務所〜"},
+        {"id": "10cd6681-d405-4289-89b5-1746ae50ac3a", "title": "アクセショップでプレゼント探し！ 〜アクセサリーショップにて〜"},
+        {"id": "a354f8a1-8935-4b6c-a94f-994cf301bbf5", "title": "アクセショップに、しゅっぱーつ！ 〜アクセサリーショップにて〜"},
+        {"id": "2a732b60-6aa6-4d78-820e-3c72378f530c", "title": "スーパーバースデー前夜！ 〜亜美真美・自宅マンション〜"},
+        {"id": "ffda796d-411d-4174-aa97-e7e7ad082009", "title": "スーパーバースデー前夜！ 〜亜美真美・自宅マンション〜"},
+        {"id": "6f46278f-e021-4cb6-a8fe-3ab5ab95eae7", "title": "ボーナストラック ： ゆきぴょんからのプレゼント"},
+        {"id": "1de667f4-fca2-4e21-a3f2-67d80dd60053", "title": "ボーナストラック ： デザインを考えちゃおー！"},
+        {"id": "987d394c-261f-4567-9bb8-593b33e358a3", "title": "亜美は早起きだよ！ 〜亜美真美・自宅マンション〜"},
+        {"id": "44e28517-06d4-4459-97cb-e6122d259444", "title": "兄ちゃんに相談しよ〜☆ 〜765プロダクション事務所〜"},
+        {"id": "affe93b7-510d-4ea6-b4ec-28e9378cadcb", "title": "文房具屋さんなら、きっと…！ 〜文房具店にて〜"},
+        {"id": "246d7186-1c65-42c5-9245-bc4637d993cc", "title": "真美は計画的なんだよ！ 〜亜美真美・自宅マンション〜"},
+        {"id": "8beae534-6c7b-4761-a322-0cd96ac2e4cc", "title": "雑貨屋さんが最後の頼りだよ…。 〜小野田雑貨店にて〜"},
+        {"id": "d2bcdfd6-37b6-45b2-97cb-c35a691858e0", "title": "雑貨屋さんが最後の頼りだよ…。 〜石原雑貨店にて〜"}
+      ]
+    },
+    {
+      "release_id": "138ed4c3-da7f-480e-a8f9-b53d9d6450d4",
+      "release_title": "アイドルマスター バースデーシリーズVol.7 秋月律子 サウンド・オブ・レインドロップス",
+      "series": "765",
+      "source_urls": ["https://www.idolmaster.jp/imas/items/prod_disc.html"],
+      "recordings": [
+        {"id": "6cba73fa-4100-4ee5-8521-9f5347d5640e", "title": "SCENE 1 「夢」"},
+        {"id": "53739d19-10de-4651-9bfe-97c3f87df180", "title": "SCENE 2 「変」"},
+        {"id": "e8c899e8-3c24-4ec8-89b6-16df71e6c49a", "title": "SCENE 3 「倒」"},
+        {"id": "7da81568-9d36-4779-9a28-457bf90395af", "title": "SCENE 4 「嘘」"},
+        {"id": "011ca74a-9dfb-4b84-bd5f-3de85412fb9d", "title": "SCENE 5 「揺」"},
+        {"id": "818ff597-080d-4d25-884a-24e2106af347", "title": "SCENE 6 「外」"},
+        {"id": "6e6e6a65-7cfa-4e08-af18-534f464423e7", "title": "SCENE 7 「急」"},
+        {"id": "1e0430ce-1a7c-4150-bb1c-681f26cf6bf7", "title": "SCENE 8 「幻」"},
+        {"id": "d033c30f-3f1a-4453-9b0a-034adb857f14", "title": "SCENE 9 「晴」"}
+      ]
+    },
+    {
+      "release_id": "82c194ae-9eed-4172-8993-b128ee8903fd",
+      "release_title": "アイドルマスター バースデーシリーズVol.9 菊地真 晴れ時々曇り後台風、後晴れ",
+      "series": "765",
+      "source_urls": ["https://www.idolmaster.jp/imas/items/prod_disc.html"],
+      "recordings": [
+        {"id": "0435aee4-5763-4169-909b-53a11f1ea39a", "title": "SCENE 01 いつもな日曜日"},
+        {"id": "6c521573-a234-422e-96a6-c99752917016", "title": "SCENE 02 はじまりな月曜日"},
+        {"id": "97e5bc28-4add-463a-9b06-a93a65aba457", "title": "SCENE 03 つづきな火曜日"},
+        {"id": "2125a8cb-c50f-4567-bb5f-6ba29ef92614", "title": "SCENE 04 停滞の水曜日"},
+        {"id": "1519664f-1df6-403c-895f-8b26985b41b5", "title": "SCENE 05 嵐の金曜日"},
+        {"id": "3841cb09-f668-4892-99dc-05a93792e83e", "title": "SCENE 06 決戦の土曜日"},
+        {"id": "5aa42546-c6d1-4412-b063-2efe75ac4a2b", "title": "SCENE 07 真な日曜日"},
+        {"id": "a1478b32-4f49-492d-b1df-ad4ed1eaaf5a", "title": "SCENE 08 おまけな木曜日"}
+      ]
+    },
+    {
+      "release_id": "14b21809-053f-48d3-89a5-ca8d4594ffc3",
+      "release_title": "アッパレ♪Mahara★Japaaan! (GAME VERSION)",
+      "series": "cinderella",
+      "source_urls": ["https://columbia.jp/idolmaster/COCC-18178.html"],
+      "recordings": [
+        {"id": "a43e5666-ec1b-4273-8f90-4eb08e10fd51", "title": "アッパレ♪Mahara★Japaaan! (GAME VERSION)"}
+      ]
+    },
+    {
+      "release_id": "92e42df3-fabf-4f8f-9df7-11381bdff73b",
+      "release_title": "チョコレート?レモネード?どっち?? (GAME VERSION)",
+      "series": "cinderella",
+      "source_urls": ["https://columbia.jp/idolmaster/COCX-41891.html"],
+      "recordings": [
+        {"id": "a33cbb32-b322-4d85-b953-3b18fcffbb98", "title": "チョコレート?レモネード?どっち?? (GAME VERSION)"}
+      ]
+    },
+    {
+      "release_id": "4bbe5d39-a2ae-41da-aa02-ab515438beba",
+      "release_title": "ツバサグラビティ",
+      "series": "shiny",
+      "source_urls": ["https://shinycolors.lantis.jp/releaseinfo/lacm-24508/"],
+      "recordings": [
+        {"id": "3815faab-e6d6-450b-b66f-461d7c8c7fea", "title": "ツバサグラビティ"},
+        {"id": "ecb32611-7ba4-4422-8abe-4a48b9ac20d0", "title": "ツバサグラビティ（Off Vocal）"}
+      ]
+    },
+    {
+      "release_id": "4088ad0c-4d36-48cb-a75d-dffa232db790",
+      "release_title": "ファミソン8BIT☆iDOLM@STER 02 天海春香／星井美希",
+      "series": "765",
+      "source_urls": ["https://www.idolmaster.jp/imas/items/prod_disc.html"],
+      "recordings": [
+        {"id": "e7bec36f-8788-43b4-818f-136f059603fe", "title": "765ワールドへようこそ（ver.02）【ドラマ】"},
+        {"id": "d8a1c570-28d7-4821-b02c-66e1739842f1", "title": "relations（『ギャプラス』ファミソン8BIT MIX）"},
+        {"id": "fe251793-33ae-4943-9ec1-3d0559c2c241", "title": "Shooting!!!（『F/A』NEW SONG）"},
+        {"id": "e3687321-85bf-4d6e-9e39-9cc4fa8aa33a", "title": "Sweets for you!【ドラマ】"},
+        {"id": "3e03c22a-cd60-44db-a662-9af994aa38ce", "title": "THE IDOLM@STER（たろすけバスターNW MIX）"},
+        {"id": "63ff55ec-04ea-40e1-a75b-b3a88b2e6504", "title": "またのご来園を！（ver.02）【ドラマ】"},
+        {"id": "0d74805f-f9e6-4116-a2e6-d6d0b2e986e5", "title": "アトラクション『F/A』【ドラマ】"},
+        {"id": "0d19c00f-1381-43aa-9575-b4384f75b3ca", "title": "アトラクション『メトロクロス』【ドラマ】"},
+        {"id": "445b541e-ab7f-4b35-8d1b-a958e51239db", "title": "太陽のジェラシー（『オーダイン』ファミソン8BIT MIX）"},
+        {"id": "3e411bc5-dfb4-40a7-b2fb-9ec06badbef8", "title": "強い女（『メトロクロス』NEW SONG）"},
+        {"id": "d6a58b6c-d56a-4b19-a2fa-5bb5ea9f5494", "title": "私はアイドル♥（『ワルキューレの伝説』ファミソン8BIT MIX）"}
+      ]
+    },
+    {
+      "release_id": "a2878e33-a252-469b-8895-7cf76cee2986",
+      "release_title": "ファミソン8BIT☆アイドルマスター 01",
+      "series": "765",
+      "source_urls": ["https://www.idolmaster.jp/imas/items/prod_disc.html"],
+      "recordings": [
+        {"id": "33277c76-508d-43a9-9863-bff5bd1e84c0", "title": "GO MY WAY!! （『ワンダーモモ』ファミソン8BIT MIX）"},
+        {"id": "57ab1090-14e4-46aa-98f7-d6c293039309", "title": "L＜＞R （『リブルラブル』NEW SONG）"},
+        {"id": "2c4f1fd5-a074-4a9c-89cd-428bf87c2d1a", "title": "Labyrinth （『パックマン』NEW SONG）"},
+        {"id": "7dae8dbb-c10d-45ff-896f-cfda319885be", "title": "おはよう!!朝ご飯 （『ドルアーガの塔』ファミソン8BIT MIX）"},
+        {"id": "24fbf044-fd70-47b3-8977-e9b94de263d6", "title": "エージェント夜を往く （Hoover & Acid MIX）"},
+        {"id": "0106338d-ff03-4953-b68b-7fe4af5d2c2d", "title": "ポジティブ！ （『マッピー』ファミソン8BIT MIX）"}
+      ]
+    },
+    {
+      "release_id": "b5c16ce7-6cb6-4f17-b89d-c8a4cd9609a0",
+      "release_title": "ファミソン8BIT☆アイドルマスター 01 高槻やよい／双海亜美・真美",
+      "series": "765",
+      "source_urls": ["https://www.idolmaster.jp/imas/items/prod_disc.html"],
+      "recordings": [
+        {"id": "c3cf3f16-bbc4-409c-b7c7-9529ae4537fb", "title": "765ロボット…？ （ドラマ）"},
+        {"id": "9d98065e-6363-4a1f-982a-8f00b16d4bd7", "title": "765ワールドへようこそ （ドラマ）"},
+        {"id": "33277c76-508d-43a9-9863-bff5bd1e84c0", "title": "GO MY WAY!! （『ワンダーモモ』ファミソン8BIT MIX）"},
+        {"id": "57ab1090-14e4-46aa-98f7-d6c293039309", "title": "L＜＞R （『リブルラブル』NEW SONG）"},
+        {"id": "2c4f1fd5-a074-4a9c-89cd-428bf87c2d1a", "title": "Labyrinth （『パックマン』NEW SONG）"},
+        {"id": "7dae8dbb-c10d-45ff-896f-cfda319885be", "title": "おはよう!!朝ご飯 （『ドルアーガの塔』ファミソン8BIT MIX）"},
+        {"id": "62b83ac2-18f2-42fb-a1f1-f3efc0869749", "title": "またのご来園を！ （ドラマ）"},
+        {"id": "10f5175f-436e-4765-afc9-5c7b1cac43b1", "title": "アトラクション『パックマン』 （ドラマ）"},
+        {"id": "ffb00a06-defb-4cfd-b2f6-ccabcea7ea4c", "title": "アトラクション『リブルラブル』 （ドラマ）"},
+        {"id": "24fbf044-fd70-47b3-8977-e9b94de263d6", "title": "エージェント夜を往く （Hoover & Acid MIX）"},
+        {"id": "0106338d-ff03-4953-b68b-7fe4af5d2c2d", "title": "ポジティブ！ （『マッピー』ファミソン8BIT MIX）"}
+      ]
+    },
+    {
+      "release_id": "fa903c26-73b8-4f2b-ad25-1093ba541c70",
+      "release_title": "ファミソン8BIT☆アイドルマスター 02 天海春香／星井美希",
+      "series": "765",
+      "source_urls": ["https://www.idolmaster.jp/imas/items/prod_disc.html"],
+      "recordings": [
+        {"id": "e2497142-950b-4b8e-8a40-567e07595987", "title": "765ワールドへようこそ（ver.02）【ドラマ】"},
+        {"id": "b79c3af2-3141-4380-a13a-b5e4ae3c16f8", "title": "relations（『ギャプラス』ファミソン8BIT MIX）"},
+        {"id": "4e3208da-a03c-4c32-90df-7c8703d840ab", "title": "Shooting!!!（『F/A』NEW SONG）"},
+        {"id": "7e158373-cbd5-4716-aa14-52dc3f92ca3d", "title": "Sweets for you!【ドラマ】"},
+        {"id": "c0edfaae-aa74-4987-ab4e-ca634b7e92c2", "title": "THE IDOLM@STER（たろすけバスターNW MIX）"},
+        {"id": "51b91bd0-8e40-41b4-8ec3-868f4f99fa5e", "title": "またのご来園を！（ver.02）【ドラマ】"},
+        {"id": "efc0be1a-54cc-4f32-b10b-1ecf55978d7c", "title": "アトラクション『F/A』【ドラマ】"},
+        {"id": "0fc8e451-4e06-42bc-add2-5e1151210228", "title": "アトラクション『メトロクロス』【ドラマ】"},
+        {"id": "c4872e87-0da3-42f3-8cbb-a2e9d69c2b2c", "title": "太陽のジェラシー（『オーダイン』ファミソン8BIT MIX）"},
+        {"id": "cf8afdb7-d4dc-4488-81a1-c3b7c235685b", "title": "強い女（『メトロクロス』NEW SONG）"},
+        {"id": "f8d1bbf3-fb7d-4ebc-a623-9b324591d8af", "title": "私はアイドル♥（『ワルキューレの伝説』ファミソン8BIT MIX）"}
+      ]
+    },
+    {
+      "release_id": "de3135cc-45a5-46f0-8bc7-6fc15c49942a",
+      "release_title": "ファミソン8BIT☆アイドルマスター 03 三浦あずさ／秋月律子",
+      "series": "765",
+      "source_urls": ["https://www.idolmaster.jp/imas/items/prod_disc.html"],
+      "recordings": [
+        {"id": "8e0838e5-08c5-457b-b078-48d171def876", "title": "765ワールドへようこそ（ver.03）【ドラマ】～『まっすぐ』より～"},
+        {"id": "a5a8c6ad-a301-4881-81fd-99e2de538ae6", "title": "9:02pm（『ドラゴンバスター』ファミソン8BIT MIX）"},
+        {"id": "0c03384a-ac33-411f-8d36-c2319b14d5c8", "title": "Tower of Adventure（『バベルの塔』NEW SONG）"},
+        {"id": "c383b58c-cca3-4a09-b476-6861223d693f", "title": "またのご来園を！（ver.03）【ドラマ】"},
+        {"id": "9da320c1-c3d0-43ab-ac1c-cb8bf63d1c35", "title": "まっすぐ（『フェリオス』ファミソン8BIT MIX）"},
+        {"id": "ee08ce49-37ef-48f6-82b9-f986797f294f", "title": "アトラクション『バベルの塔』【ドラマ】"},
+        {"id": "55790fa6-dccb-4fed-9cac-99a2750efc31", "title": "アトラクション『源平討魔伝』【ドラマ】"},
+        {"id": "03e69e8c-d4e8-4a7d-94a6-d338214d73d4", "title": "ポジティブ！（『スカイキッド』MIX）"},
+        {"id": "20c93006-a2f7-4a6c-ae99-e1a33f13a2d7", "title": "禁恋歌（『源平討魔伝』NEW SONG）"},
+        {"id": "2b7ce3d3-966a-4447-99ab-b51ef5ef7239", "title": "秘密兵器【ドラマ】"},
+        {"id": "72a685d2-29fe-49ca-9f1d-947c99c163fd", "title": "魔法をかけて！（『妖怪道中記』ファミソン8BIT MIX）"}
+      ]
+    },
+    {
+      "release_id": "7ee39852-cf2e-4d66-9ca0-3db1287a7c6c",
+      "release_title": "ファミソン8BIT☆アイドルマスター 04 菊地真／萩原雪歩",
+      "series": "765",
+      "source_urls": ["https://www.idolmaster.jp/imas/items/prod_disc.html"],
+      "recordings": [
+        {"id": "410e37d8-0399-4454-8465-4873655b843e", "title": "765ワールドへようこそ（ver.04）【ドラマ】～『My Best Friend』より～"},
+        {"id": "39ffb374-081b-43b0-9b2b-866d619e4d5a", "title": "EXCAVATE（『ディグダグ』NEW SONG）"},
+        {"id": "325196e2-3b91-4560-bb0b-a12cafff014a", "title": "First Stage（『ゼビウス』ファミソン8BIT MIX）"},
+        {"id": "eb7c410d-bcea-42e0-b273-a15903c63b71", "title": "My Best Friend（『イシターの復活』ファミソン8BIT MIX）"},
+        {"id": "33966aa0-278c-46da-b2ff-dff7cd8096a8", "title": "relations（digno-pop MIX）"},
+        {"id": "ddf83e0e-a784-4417-a86e-f97cde4bf5c8", "title": "またのご来園を！（ver.04）【ドラマ】"},
+        {"id": "3e6f8df1-86aa-43e3-8d0d-183187381f61", "title": "アトラクション『ディグダグ』【ドラマ】"},
+        {"id": "6f7a4266-4c16-4f6d-b787-6f260c594bd1", "title": "アトラクション『ニューラリーＸ』【ドラマ】"},
+        {"id": "137298e5-756e-414a-b440-cae2c91a4361", "title": "エージェント夜を往く（『ローリングサンダー』ファミソン8BIT MIX）"},
+        {"id": "5fdf859d-a7d2-4a20-ac68-2277a3e55f3a", "title": "ハリキリ★ラリー（『ニューラリーＸ』NEW SONG）"},
+        {"id": "67748f85-7c06-464e-afe8-9ae95531de7d", "title": "本日のお芝居【ドラマ】"}
+      ]
+    },
+    {
+      "release_id": "7966a01e-012f-42c6-be48-93147eedc1c0",
+      "release_title": "ファミソン8BIT☆アイドルマスター 05 如月千早／水瀬伊織",
+      "series": "765",
+      "source_urls": ["https://www.idolmaster.jp/imas/items/prod_disc.html"],
+      "recordings": [
+        {"id": "8678a164-2967-4abe-8795-60a5ddb023e7", "title": "765ワールドへようこそ（ver.05）【ドラマ】"},
+        {"id": "a775d3cb-2b85-4f68-ba40-f06ffa382f95", "title": "Fly High !（『ドラゴンスピリット』NEW SONG）"},
+        {"id": "eb83dd0c-9fc2-4dc6-8909-c4657dd7856e", "title": "GO MY WAY!!（Dream Match MIX）"},
+        {"id": "9f479913-dd9c-4781-bbfc-8993c4e2d8b1", "title": "Here we go!!（『ディグダグII』ファミソン8BIT MIX）"},
+        {"id": "96d13bb4-f88c-451a-aba8-690d2bf9a140", "title": "またのご来園を！（ver.05）【ドラマ】"},
+        {"id": "ad6bfc6f-2b98-4569-b956-9a3ad5a0b591", "title": "アトラクション『ドラゴンスピリット』【ドラマ】"},
+        {"id": "b6f03542-3334-49ba-87e3-f09512e987d3", "title": "アトラクション『マッピー』【ドラマ】"},
+        {"id": "44e2e142-6736-44a6-a7b9-5255b3de7692", "title": "サービスタイム【ドラマ】"},
+        {"id": "31303a65-5553-4dc5-bd82-907dfb6cc217", "title": "乙女心盗んで！（『マッピー』NEW SONG）"},
+        {"id": "73026635-6450-4b89-90a7-b78ff43bb8ad", "title": "思い出をありがとう（『トイポップ』ファミソン8BIT MIX）"},
+        {"id": "7262a587-47b5-4aea-8152-0130b5e28008", "title": "蒼い鳥（『ドラゴンスピリット』ファミソン8BIT MIX）"}
+      ]
+    },
+    {
+      "release_id": "c2f5fd06-f1c1-483e-8b33-6d88b7334c91",
+      "release_title": "ファミソン8BIT☆アイドルマスター 05 如月千早／水瀬伊織",
+      "series": "765",
+      "source_urls": ["https://www.idolmaster.jp/imas/items/prod_disc.html"],
+      "recordings": [
+        {"id": "f2c4fa51-fb9a-487b-97db-de24cc6ac9c5", "title": "765ワールドへようこそ（ver.05）【ドラマ】～『思い出をありがとう』より～"},
+        {"id": "0a9575d8-78d0-499b-8143-2aefbe3a4e56", "title": "Fly High !（『ドラゴンスピリット』NEW SONG）"},
+        {"id": "8612d3aa-574c-4a87-811f-1d2ba2a52767", "title": "GO MY WAY!!（Dream Match MIX）"},
+        {"id": "5ad4d5c6-c75a-43e3-a35c-d30424492487", "title": "Here we go!!（『ディグダグII』ファミソン8BIT MIX）"},
+        {"id": "a7e4109a-4b2d-4c60-96a6-b51f3491bd3e", "title": "またのご来園を！（ver.05）【ドラマ】"},
+        {"id": "27cab0aa-ef9a-4f78-b280-904316f9f58e", "title": "アトラクション『ドラゴンスピリット』【ドラマ】"},
+        {"id": "3599cbd9-5b1c-4b48-8543-dbf21b92586c", "title": "アトラクション『マッピー』【ドラマ】"},
+        {"id": "767c2591-dd60-4ede-8a2b-8bbbdae1f5f9", "title": "サービスタイム【ドラマ】"},
+        {"id": "f26541e5-95ea-43b8-b83f-653af7b3a9d3", "title": "乙女心盗んで！（『マッピー』NEW SONG）"},
+        {"id": "deacff36-e20d-46c2-9a67-285ec88510ef", "title": "思い出をありがとう（『トイポップ』ファミソン8BIT MIX）"},
+        {"id": "5206e290-21ac-43a2-b5eb-e0f9d91d11c5", "title": "蒼い鳥（『ドラゴンスピリット』ファミソン8BIT MIX）"}
+      ]
+    },
+    {
+      "release_id": "7b81787a-3521-4fdc-b9c6-51ffb5d3f9b3",
+      "release_title": "ファミソン8BIT☆アイドルマスター BEST ALBUM",
+      "series": "765",
+      "source_urls": ["https://www.idolmaster.jp/imas/items/prod_disc.html"],
+      "recordings": [
+        {"id": "bf47749d-2d4a-465e-ad42-cf7ecd2b6579", "title": "765ワールドへようこそ (BEST ALBUM ver.)【ドラマ】"},
+        {"id": "39ffb374-081b-43b0-9b2b-866d619e4d5a", "title": "EXCAVATE（『ディグダグ』NEW SONG）"},
+        {"id": "9ed385ee-9551-4fd3-aed3-d9bfb49c565f", "title": "First Stage (『ゼビウス』ファミソン8BIT MIX)"},
+        {"id": "f2c52ed7-bebc-49e1-bcd5-82ceccf1f9c1", "title": "First Stage (『ゼビウス』ファミソン8BIT MIX)"},
+        {"id": "0a9575d8-78d0-499b-8143-2aefbe3a4e56", "title": "Fly High !（『ドラゴンスピリット』NEW SONG）"},
+        {"id": "43feecca-072e-464a-9bff-d1139e8a0968", "title": "Fly High ! (『ドラゴンスピリット』NEW SONG)"},
+        {"id": "d9d9e2e6-87db-44b2-8183-53170009cb3f", "title": "Fly High ! (『ドラゴンスピリット』NEW SONG)"},
+        {"id": "d8f4b58a-afe5-4ee6-916c-0063ea0fd7e0", "title": "GO MY WAY!! (Dream Match MIX)"},
+        {"id": "fccf9e81-83cc-40cb-9022-408529dcc3ea", "title": "GO MY WAY!! (Dream Match MIX)"},
+        {"id": "57ab1090-14e4-46aa-98f7-d6c293039309", "title": "L＜＞R （『リブルラブル』NEW SONG）"},
+        {"id": "2c4f1fd5-a074-4a9c-89cd-428bf87c2d1a", "title": "Labyrinth （『パックマン』NEW SONG）"},
+        {"id": "57f27e19-f700-4d01-b24e-cca22a30a27d", "title": "Labyrinth (『パックマン』NEW SONG)"},
+        {"id": "74f7c25b-0161-4006-98f3-46785d97410b", "title": "Labyrinth (『パックマン』NEW SONG)"},
+        {"id": "4171f2c6-5cd0-484d-af4c-ad9b5d78258b", "title": "Shooting!!! (『F/A』NEW SONG)"},
+        {"id": "4e3208da-a03c-4c32-90df-7c8703d840ab", "title": "Shooting!!!（『F/A』NEW SONG）"},
+        {"id": "4e528f5b-3313-455d-8f3f-70b98263343e", "title": "Shooting!!! (『F/A』NEW SONG)"},
+        {"id": "e50f8c42-3226-4684-a2b8-26c16fb487cd", "title": "THE IDOLM@STER (カラオケ)"},
+        {"id": "f023d07f-5f0a-4127-a77b-8c149f1da3eb", "title": "THE IDOLM@STER (カラオケ)"},
+        {"id": "0c03384a-ac33-411f-8d36-c2319b14d5c8", "title": "Tower of Adventure（『バベルの塔』NEW SONG）"},
+        {"id": "c1f48c68-3dbe-44f5-83ee-13fbd10da9dc", "title": "うれし・あやかし道中記 (『妖怪道中記』NEW SONG)"},
+        {"id": "8880791b-2543-4cb0-bea4-ac5b907faf15", "title": "またのご来園を！ (BEST ALBUM ver.)【ドラマ】"},
+        {"id": "252c6a82-6bae-44dc-9cd9-a0dbad536d6a", "title": "エージェント夜を往く (Hoover & Acid MIX)"},
+        {"id": "f7892146-e142-4183-ba45-a2259ed9f087", "title": "エージェント夜を往く (Hoover & Acid MIX)"},
+        {"id": "5f2a05ed-691d-426b-b123-604991cfbb43", "title": "トーク1"},
+        {"id": "ac9d5797-f242-4529-a615-30cff342ce48", "title": "トーク1"},
+        {"id": "7cd412b5-77a6-49f3-8390-f8d07b8bdad2", "title": "トーク2"},
+        {"id": "c68e5a1a-63cd-45cf-a564-d403f1be73c1", "title": "トーク2"},
+        {"id": "5fdf859d-a7d2-4a20-ac68-2277a3e55f3a", "title": "ハリキリ★ラリー（『ニューラリーＸ』NEW SONG）"},
+        {"id": "7c193182-91a3-4496-aa6a-e25f428e7b42", "title": "ハリキリ★ラリー (『ニューラリーＸ』NEW SONG)"},
+        {"id": "efc3539b-6952-441e-bc5b-9f67f401262f", "title": "ハリキリ★ラリー (『ニューラリーＸ』NEW SONG)"},
+        {"id": "7dd121ce-748a-4d08-b2ab-fc6919ea53d3", "title": "ポジティブ！ (『スカイキッド』MIX)"},
+        {"id": "d01dd1a6-aa24-4ac1-9872-f685b7c9829d", "title": "ポジティブ！ (『スカイキッド』MIX)"},
+        {"id": "f26541e5-95ea-43b8-b83f-653af7b3a9d3", "title": "乙女心盗んで！（『マッピー』NEW SONG）"},
+        {"id": "cf8afdb7-d4dc-4488-81a1-c3b7c235685b", "title": "強い女（『メトロクロス』NEW SONG）"},
+        {"id": "80a9654d-29c8-4739-90cd-093969bad331", "title": "旅の途中で (『ワルキューレの伝説』NEW SONG)"},
+        {"id": "20c93006-a2f7-4a6c-ae99-e1a33f13a2d7", "title": "禁恋歌（『源平討魔伝』NEW SONG）"}
+      ]
+    },
+    {
+      "release_id": "b424c203-a409-4b6f-aa25-69e4d88e4bc8",
+      "release_title": "プリズムフレア -25 colors-",
+      "series": "shiny",
+      "source_urls": ["https://shinycolors-anime2nd.idolmaster-official.jp/bd/"],
+      "recordings": [
+        {"id": "566f2b71-bbe0-44d5-bc9b-8f1be2b61f75", "title": "プリズムフレア -25 colors-"}
+      ]
+    },
+    {
+      "release_id": "0e4e4dbb-0900-4dc6-91f8-f118a3948a94",
+      "release_title": "君との明日を願うから",
+      "series": "million",
+      "source_urls": ["https://idolmaster.jp/blog/?p=28384"],
+      "recordings": [
+        {"id": "fae634df-b3e3-48ad-9cee-05aeaa807f8e", "title": "Flooding"},
+        {"id": "1af899ab-c030-4548-ac42-02df36ad23d8", "title": "アイル (Harmonized ver.)"},
+        {"id": "3cabcd6b-1a55-445a-8496-eb9c714731f7", "title": "君との明日を願うから"}
+      ]
+    },
+    {
+      "release_id": "280aec9d-7f2f-4877-86cd-29fdf80f2e6b",
+      "release_title": "君との明日を願うから",
+      "series": "million",
+      "source_urls": ["https://idolmaster.jp/blog/?p=28384"],
+      "recordings": [
+        {"id": "fae634df-b3e3-48ad-9cee-05aeaa807f8e", "title": "Flooding"},
+        {"id": "1af899ab-c030-4548-ac42-02df36ad23d8", "title": "アイル (Harmonized ver.)"},
+        {"id": "3cabcd6b-1a55-445a-8496-eb9c714731f7", "title": "君との明日を願うから"}
+      ]
+    },
+    {
+      "release_id": "b09b8780-3107-45e9-8a42-b9c236ce98d7",
+      "release_title": "君との明日を願うから",
+      "series": "million",
+      "source_urls": ["https://idolmaster.jp/blog/?p=28384"],
+      "recordings": [
+        {"id": "fae634df-b3e3-48ad-9cee-05aeaa807f8e", "title": "Flooding"},
+        {"id": "1af899ab-c030-4548-ac42-02df36ad23d8", "title": "アイル (Harmonized ver.)"},
+        {"id": "3cabcd6b-1a55-445a-8496-eb9c714731f7", "title": "君との明日を願うから"}
+      ]
+    },
+    {
+      "release_id": "d5b349e0-9677-429d-8013-a9f0984ac379",
+      "release_title": "君との明日を願うから",
+      "series": "million",
+      "source_urls": ["https://idolmaster.jp/blog/?p=28384"],
+      "recordings": [
+        {"id": "fae634df-b3e3-48ad-9cee-05aeaa807f8e", "title": "Flooding"},
+        {"id": "1af899ab-c030-4548-ac42-02df36ad23d8", "title": "アイル (Harmonized ver.)"},
+        {"id": "3cabcd6b-1a55-445a-8496-eb9c714731f7", "title": "君との明日を願うから"}
+      ]
+    },
+    {
+      "release_id": "eb4b139e-3731-4776-8360-c6b95445bc7a",
+      "release_title": "君との明日を願うから",
+      "series": "million",
+      "source_urls": ["https://idolmaster.jp/blog/?p=28384"],
+      "recordings": [
+        {"id": "fae634df-b3e3-48ad-9cee-05aeaa807f8e", "title": "Flooding"},
+        {"id": "1af899ab-c030-4548-ac42-02df36ad23d8", "title": "アイル (Harmonized ver.)"},
+        {"id": "3cabcd6b-1a55-445a-8496-eb9c714731f7", "title": "君との明日を願うから"}
+      ]
+    },
+    {
+      "release_id": "c7b9c460-16d6-40d7-90ad-ce15a499faf1",
+      "release_title": "夢をのぞいたら",
+      "series": "cinderella",
+      "source_urls": ["https://columbia.jp/idolmaster/imasnews/2204animateanexfair.html"],
+      "recordings": [
+        {"id": "6952c594-53b6-4b57-b80d-5fd99a600b8b", "title": "Sun!High!Gold! (オリジナル・カラオケ)"},
+        {"id": "dc071871-1fb2-4dee-9eae-dbdd50cb1105", "title": "Trust me"},
+        {"id": "3f14f1f7-0b7c-438c-8cf4-4a5cde0d5b73", "title": "夢をのぞいたら"},
+        {"id": "8a3bc07d-24d7-476b-bea6-81ea5f3d1f83", "title": "夢をのぞいたら (オリジナル・カラオケ)"}
+      ]
+    },
+    {
+      "release_id": "fc5b6814-322c-4cc2-96cc-8c426d3056a4",
+      "release_title": "如月千早武道館単独公演「OathONE」会場オリジナルCD",
+      "series": "765",
+      "source_urls": ["https://columbia.jp/idolmaster/imasnews/260130.html"],
+      "recordings": [
+        {"id": "6f818295-5a26-41f7-abd0-21e20d011d26", "title": "Kosmos, Cosmos"},
+        {"id": "e908df77-da51-430d-abad-84fadff26586", "title": "Light Year Song"},
+        {"id": "7d7e7b11-4c4d-4d6d-a26c-8c95fa00084c", "title": "M@STERPIECE (OathONE Recording)"},
+        {"id": "5c48a250-919f-4dbc-abe7-dea3c7895d5f", "title": "M@STERPIECE (OathONE Recording) (オリジナル・カラオケ)"},
+        {"id": "3fce501f-bded-4ea5-ba73-dea97fe7a64c", "title": "眠り姫 (OathONE Recording)"},
+        {"id": "49e960dc-e98f-4d17-a182-95856d25b436", "title": "空"},
+        {"id": "cc2cc548-a998-470a-bae5-1e29b78027ae", "title": "約束 (OathONE Recording)"},
+        {"id": "0ae1beb8-9875-4f01-a182-83823afca638", "title": "蒼い鳥 (M@STER VERSION) (OathONE Recording)"},
+        {"id": "b768b457-1c33-4dac-bd05-62bf49f58ca9", "title": "輝夜"},
+        {"id": "b1b259d2-69d4-4ec7-9166-628723bdf019", "title": "輝夜 (オリジナル・カラオケ)"},
+        {"id": "e6475e28-f346-4b10-b6bc-63157bff44f9", "title": "隣に…"}
+      ]
+    },
+    {
+      "release_id": "75578611-8063-4de2-b059-4fb64da5f3c8",
+      "release_title": "泡沫に染まる",
+      "series": "shiny",
+      "source_urls": ["https://pylonport.bandainamcomusiclive.co.jp/more/833"],
+      "recordings": [
+        {"id": "cf29778a-ec46-45bb-8dd9-7cf5c2218fbe", "title": "泡沫に染まる"}
+      ]
+    },
+    {
+      "release_id": "0b76c085-f0ee-477a-9008-06d7583bc3d7",
+      "release_title": "読んで!甘辛Script (GAME VERSION)",
+      "series": "cinderella",
+      "source_urls": ["https://columbia.jp/idolmaster/COCC-18091.html"],
+      "recordings": [
+        {"id": "2ed1813d-5239-47b7-ac57-59025f18cf2a", "title": "読んで!甘辛Script (GAME VERSION)"}
       ]
     }
   ]

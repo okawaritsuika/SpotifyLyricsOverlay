@@ -1,4 +1,4 @@
-"""Read and control Spotify's own volume slider without changing the OS mixer."""
+"""Control Spotify's local session, falling back to its native slider."""
 import math
 import ctypes
 from ctypes import wintypes
@@ -6,7 +6,9 @@ import threading
 import time
 from contextlib import contextmanager
 
+from process_audio import PTR, _method
 from screen_lyrics import process_is_spotify
+from spotify_audio_route import AudioRouting, _check
 from spotify_controls import page_controls
 
 
@@ -81,14 +83,10 @@ def _read_controls(slider, mute):
     if name not in MUTE_LABELS | UNMUTE_LABELS:
         raise ValueError('Spotify 음소거 상태가 변경되었습니다. 다시 연결합니다.')
     percent = max(0, min(100, round((value-minimum) * 100 / (maximum-minimum))))
-    return {'available': True, 'volume': percent, 'step': _step_percent(pattern, minimum, maximum),
-            'muted': name in UNMUTE_LABELS, 'error': ''}
-
-
-def _step_percent(pattern, minimum, maximum):
     step = getattr(pattern, 'SmallChange', 0)
-    if not math.isfinite(step) or step <= 0:return 1
-    return max(1, min(100, round(step*100/(maximum-minimum))))
+    step = max(1, min(100, round(step * 100 / (maximum - minimum)))) if math.isfinite(step) else 1
+    return {'available': True, 'volume': percent, 'step': step,
+            'muted': name in UNMUTE_LABELS, 'error': ''}
 
 
 @contextmanager
@@ -110,6 +108,39 @@ def _refresh_controls(auto, slider):
 
 
 def _apply(commands, stopped):
+    if stopped.is_set():
+        return None
+    with AudioRouting() as audio, audio.spotify_volume() as session:
+        if session is not None:
+            return _apply_session(session, commands, stopped)
+    return _apply_native(commands, stopped)
+
+
+def _session_state(session):
+    level, muted = ctypes.c_float(), wintypes.BOOL()
+    _check(_method(session, 4, ctypes.POINTER(ctypes.c_float))(session, ctypes.byref(level)), '앱 음량 확인')
+    _check(_method(session, 6, ctypes.POINTER(wintypes.BOOL))(session, ctypes.byref(muted)), '앱 음소거 확인')
+    return {'available': True, 'volume': 0 if muted.value else round(level.value * 100),
+            'step': 1, 'muted': bool(muted.value), 'error': ''}
+
+
+def _apply_session(session, commands, stopped):
+    state = _session_state(session)
+    for kind, value in commands:
+        if stopped.is_set():
+            return None
+        if kind == 'volume' and value > 0:
+            _check(_method(session, 3, ctypes.c_float, PTR)(session, value / 100, None), '앱 음량 변경')
+        muted = value == 0 if kind == 'volume' else not state['muted']
+        if muted != state['muted']:
+            _check(_method(session, 5, wintypes.BOOL, PTR)(session, muted, None), '앱 음소거 변경')
+        state = _session_state(session)
+        if state['muted'] != muted or (kind == 'volume' and state['volume'] != value):
+            raise ValueError('Spotify 앱 음량 변경이 반영되지 않았습니다.')
+    return state
+
+
+def _apply_native(commands, stopped):
     if stopped.is_set():return None
     import uiautomation as auto
     # UIA objects are created, used and released in this worker's COM context.
@@ -125,8 +156,9 @@ def _apply(commands, stopped):
                 raise ValueError('Spotify 음량 컨트롤이 변경되었습니다. 다시 연결합니다.')
             if kind == 'volume':
                 pattern, minimum, maximum, _ = _volume_range(slider)
-                step = _step_percent(pattern, minimum, maximum)
-                value = max(0, min(100, round(value/step)*step))
+                step = state['step']
+                if value not in (0, 100):
+                    value = max(0, min(100, round(value / step) * step))
                 if stopped.is_set():return None
                 if not pattern.SetValue(minimum+(maximum-minimum)*value/100, waitTime=0):
                     raise ValueError('Spotify가 음량 변경 요청을 처리하지 못했습니다.')

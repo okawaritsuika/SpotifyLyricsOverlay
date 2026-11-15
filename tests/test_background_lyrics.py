@@ -98,7 +98,7 @@ class BackgroundLyricsTests(unittest.TestCase):
         self.service.observe(self.playback)
         self.assertEqual(self.finish_public(),(self.playback.key,result()))
 
-    def test_partial_spotify_result_suppresses_public_even_when_observer_hint_is_false(self):
+    def test_partial_spotify_result_keeps_public_lookup_enabled(self):
         self.service.connect()
         self.service.observe(self.playback)
         event=self.spotify_event(lines=[{'text':'first','time':10},{'text':'second','time':None}])
@@ -107,38 +107,37 @@ class BackgroundLyricsTests(unittest.TestCase):
             self.service.observe(self.playback,spotify_sync_present=False)
         self.assertTrue(self.service.spotify_sync_present)
         self.assertTrue(self.service.public_enabled)
-        self.assertEqual(DeferredThread.pending, [])
-        self.fetch.assert_not_called()
-        self.assertIn('LRCLIB 조회 생략',self.service.status)
+        self.assertEqual(len(DeferredThread.pending),1)
+        self.assertEqual(self.finish_public(),(self.playback.key,result()))
 
-    def test_cached_spotify_hint_suppresses_public_without_changing_preference(self):
+    def test_spotify_hint_does_not_suppress_public_without_a_complete_cache(self):
         self.service.observe(self.playback,spotify_sync_present=True)
         self.assertTrue(self.service.public_enabled)
         self.assertTrue(self.service.spotify_sync_present)
-        self.assertEqual(DeferredThread.pending, [])
+        self.assertEqual(len(DeferredThread.pending),1)
         self.service.observe(self.playback,spotify_sync_present=False)
         self.assertFalse(self.service.spotify_sync_present)
         self.assertEqual(self.finish_public(),(self.playback.key,result()))
 
-    def test_spotify_partial_result_discards_public_already_in_flight(self):
+    def test_spotify_partial_result_preserves_public_already_in_flight(self):
         self.service.observe(self.playback)
         self.service.connect()
         self.service.receive(self.service.job,self.spotify_event(
             lines=[{'text':'first','time':10},{'text':'second','time':None}]))
-        self.assertIsNone(self.finish_public())
+        self.assertEqual(self.finish_public(),(self.playback.key,result()))
         self.service.observe(self.playback)
         self.assertEqual(DeferredThread.pending, [])
-        self.assertFalse(self.service.public_done)
+        self.assertTrue(self.service.public_done)
 
-    def test_public_result_is_discarded_if_spotify_lookup_started_after_it(self):
+    def test_public_result_can_arrive_while_spotify_lookup_is_pending(self):
         self.service.observe(self.playback)
         self.service.connect()
         self.assertTrue(self.service.spotify_pending)
-        self.assertIsNone(self.finish_public())
+        self.assertEqual(self.finish_public(),(self.playback.key,result()))
         self.service.receive(self.service.job,{'kind':'status','key':self.service.request_key,
                             'state':'error','text':'failed'})
         self.service.observe(self.playback)
-        self.assertEqual(self.finish_public(),(self.playback.key,result()))
+        self.assertEqual(DeferredThread.pending,[])
 
     def test_valid_unsynced_response_releases_received_sync_but_keeps_current_cache_hint(self):
         self.service.connect()

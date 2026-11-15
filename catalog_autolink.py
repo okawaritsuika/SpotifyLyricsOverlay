@@ -31,11 +31,23 @@ def recording_title_key(value):
     return title
 
 
+def _solo_title_parts(value):
+    match = re.fullmatch(r'(.+?)\s+-\s+(.+?)\s+(?:ver\.?|version)', recording_title_key(value), re.I)
+    return (match[1], match[2]) if match else None
+
+
 def _album_key(value):
     # Keep edition names, years, numbers and punctuation; only equivalent
     # typesetting changes across the catalog's documented releases are ignored.
     value = text_key(value).translate(_QUOTES).replace('【', '(').replace('】', ')')
     return re.sub(r'\s+', '', value)
+
+
+def _song_albums(song):
+    albums = {_album_key(song.get('album'))}
+    albums.update(_album_key(release.get('title')) for release in song.get('releases', [])
+                  if isinstance(release, dict))
+    return albums - {''}
 
 
 @lru_cache(maxsize=1)
@@ -136,7 +148,7 @@ def _expanded(credits, people, lookup, idol_lookup=None):
 
 
 class _MatchContext:
-    def __init__(self, people):
+    def __init__(self, people, songs=()):
         self.people = list(people)
         self.lookup = build_performer_lookup(self.people)
         self.groups = build_performer_lookup(self.people, 'group')
@@ -144,6 +156,12 @@ class _MatchContext:
         self.voices = _voice_aliases()
         self.credit_cache = {}
         self.expanded_cache = {}
+        self.recordings = {}
+        for song in songs:
+            if not isinstance(song, dict):continue
+            title = recording_title_key(song.get('title'))
+            for album in _song_albums(song):
+                self.recordings.setdefault((title, album), []).append(song)
 
     def details(self, names):
         key = tuple(name for name in names if isinstance(name, str)) if isinstance(names, (list, tuple)) else ()
@@ -166,13 +184,43 @@ class _MatchContext:
         right = right - {voice for person, voices in left_cv.items() if person in right for voice in voices}
         return bool(left and right) and (left == right or self.expanded(left) == self.expanded(right))
 
+    def title_matches(self, song, track):
+        title = recording_title_key(song.get('title'))
+        if title == recording_title_key(track.get('title')):return True
+        solo = _solo_title_parts(track.get('title'))
+        if not solo or solo[0] != title:return False
+        performer = self.idols.get(name_key(solo[1]))
+        if not performer:return False
+        return self.details(song.get('artists'))[0] == frozenset({name_key(performer['name'])})
+
+    def unique_album_recording(self, song, track, wanted, actual):
+        # Spotify sometimes credits only one member of a full recording. The
+        # catalog can correct this only when title and album identify one cast.
+        if not self.title_matches(song, track):return False
+        album = _album_key(track.get('album'))
+        if not album or album not in _song_albums(song):return False
+        left_cv, right_cv = wanted[1], actual[1]
+        if any(left_cv[person] != right_cv[person] for person in left_cv.keys() & right_cv.keys()):return False
+        duration = _duration(track.get('duration'))
+        signatures = set()
+        for recording in self.recordings.get((recording_title_key(song.get('title')), album), []):
+            length = _duration(recording.get('duration'))
+            if length and duration and abs(length - duration) > 2:continue
+            credits, voices = self.details(recording.get('artists'))
+            if not credits:return False
+            signatures.add((self.expanded(credits),
+                            tuple(sorted((person, tuple(sorted(values))) for person, values in voices.items()))))
+        return len(signatures) == 1
+
 
 def automatic_candidate(song, tracks, people=()):
-    """Return one unambiguous recording; never infer country availability.
+    """Choose one identified recording; never infer country availability.
 
     Search aliases are deliberately excluded: translations and stripped version
     labels are useful for discovery, but cannot prove recording identity. Only
-    reviewed title differences bound to both recording IDs are exceptions.
+    reviewed title differences bound to both recording IDs and solo qualifiers
+    naming the catalog's single known performer are exceptions. Equivalent
+    documented releases prefer the primary album, playability, then stable ID.
     """
     return _candidate(song, tracks, _MatchContext(people))
 
@@ -182,21 +230,19 @@ def _candidate(song, tracks, context):
     title = recording_title_key(song.get('title'))
     wanted = context.details(song.get('artists'))
     if not title or not wanted[0]:return None
-    albums = {_album_key(song.get('album'))}
-    albums.update(_album_key(release.get('title')) for release in song.get('releases', [])
-                  if isinstance(release, dict))
-    albums.discard('')
+    albums = _song_albums(song)
     duration = _duration(song.get('duration'))
     matches = {}
     for track in tracks:
         if not isinstance(track, dict) or not parse_track_id(track.get('id')):continue
-        if title != recording_title_key(track.get('title')) and not _reviewed_title_matches(song, track):continue
+        if not context.title_matches(song, track) and not _reviewed_title_matches(song, track):continue
         candidate_album = _album_key(track.get('album'))
         candidate_duration = _duration(track.get('duration'))
         # Missing evidence cannot satisfy an explicit album or length boundary.
         if albums and candidate_album not in albums:continue
         if duration and (not candidate_duration or abs(duration - candidate_duration) > 2):continue
-        if not context.same_artists(wanted, context.details(track.get('artists'))):continue
+        actual = context.details(track.get('artists'))
+        if not context.same_artists(wanted, actual) and not context.unique_album_recording(song, track, wanted, actual):continue
         # Titles/credits alone can conflate a rerecording released under the same
         # title. At least album or length evidence is required for auto linking.
         if not albums and not duration:continue
@@ -205,7 +251,22 @@ def _candidate(song, tracks, context):
         candidate['verification'] = 'automatic_metadata'
         candidate['is_playable'] = track.get('is_playable') if isinstance(track.get('is_playable'), bool) else None
         matches[track['id']] = candidate
-    return next(iter(matches.values())) if len(matches) == 1 else None
+    if len(matches) == 1:return next(iter(matches.values()))
+    if not matches or not duration:return None
+    candidates = list(matches.values())
+    # Equivalent Spotify issues of the same documented recording are useful
+    # links, even when Spotify assigns a separate ID to each release.
+    if len({recording_title_key(item.get('title')) for item in candidates}) != 1:return None
+    first = context.details(candidates[0].get('artists'))
+    if any(not context.same_artists(first, context.details(item.get('artists'))) for item in candidates[1:]):return None
+    lengths = [_duration(item.get('duration')) for item in candidates]
+    if not all(lengths) or max(lengths) - min(lengths) > 2:return None
+    primary_album = _album_key(song.get('album'))
+    def preference(item):
+        playable = item.get('is_playable')
+        return (_album_key(item.get('album')) != primary_album,
+                0 if playable is True else 2 if playable is False else 1, item['id'])
+    return min(candidates, key=preference)
 
 
 def cached_pool(directory):
@@ -241,13 +302,16 @@ def cached_pool(directory):
 
 def local_matches(songs, tracks, people=()):
     """Propose links; the UI commits them against current personal choices."""
+    songs = list(songs)
     by_title = {};by_id = {}
     for track in tracks:
         if isinstance(track, dict):
             by_title.setdefault(recording_title_key(track.get('title')), []).append(track)
+            solo = _solo_title_parts(track.get('title'))
+            if solo:by_title.setdefault(solo[0], []).append(track)
             if isinstance(track.get('id'), str):by_id.setdefault(track['id'], []).append(track)
     result = {}
-    context = _MatchContext(people)
+    context = _MatchContext(people, songs)
     for song in songs:
         candidates = by_title.get(recording_title_key(song.get('title')), [])
         reviewed = _recording_aliases().get(song.get('id'))

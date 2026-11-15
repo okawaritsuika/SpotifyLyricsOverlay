@@ -58,30 +58,61 @@ class AppearanceWebTests(unittest.TestCase):
         d=self.app.appearance_dialog
         d.window.geometry('560x510+20+20')
         self.root.update();self.root.update()
-        for family,size,bold in d.values.values():size.set(28)
-        d.values['reading'][1].set(12)
-        self.app.text_styles['korean']['color']='#ffaa00'
+        for _,_,size,_ in d.values.values():size.set(28)
+        d.values['reading'][2].set(12)
+        d.styles['korean']['color']='#ffaa00'
         d.update()
+        self.assert_controls_fit(d.window)
+        d.apply()
         self.assertEqual(self.app.text_styles['original']['size'],28)
         self.assertEqual(self.app.text_styles['reading']['size'],12)
         self.assertEqual(self.app.korean_label.cget('fg'),'#ffaa00')
-        self.assert_controls_fit(d.window)
-        d.close()
         self.assertEqual(self.store.settings()['text_styles']['reading']['size'],12)
 
     def test_appearance_feedback_tracks_opacity_colors_and_hidden_background(self):
         self.app.open_appearance();dialog=self.app.appearance_dialog
-        self.app.opacity.set(.72);self.app.background_opacity.set(.31)
-        self.app.text_styles['reading']['color']='#abcdef'
-        dialog.change_background()
+        dialog.opacity.set(.72);dialog.background_opacity.set(.31)
+        dialog.styles['reading']['color']='#abcdef'
+        dialog.change_background_opacity(None)
         self.assertEqual(dialog.text_percent.cget('text'),'72%')
-        self.assertEqual(dialog.background_percent.cget('text'),'31%')
-        self.assertEqual(dialog.color_buttons['reading'].cget('fg'),'#abcdef')
-        self.app.transparent.set(True);dialog.update()
-        self.assertEqual(dialog.background_percent.cget('text'),'숨김')
+        self.assertEqual(dialog.bg_percent.cget('text'),'31%')
+        self.assertEqual(dialog.color_buttons['reading'].cget('text'),'#ABCDEF')
+        dialog.transparent.set(True);dialog.update()
+        self.assertEqual(dialog.preview_backdrop.opacity,0)
         dialog.reset()
         self.assertEqual(dialog.text_percent.cget('text'),'94%')
-        self.assertEqual(dialog.background_percent.cget('text'),'55%')
+        self.assertEqual(dialog.bg_percent.cget('text'),'55%')
+
+    def test_workspace_outline_preset_applies_to_the_runtime_overlay(self):
+        sample='輝く未来へ'
+        song=Song('outline-test','Outline Test','','',(Line(sample,'かがやく みらいへ','빛나는 미래로'),))
+        self.app.select_song(song)
+        self.app.follow.set(False)
+        self.app.manual_index=0
+        self.app.render()
+        self.root.geometry('1000x410+50+50')
+        self.root.update()
+        workspace=self.app.workspace
+        state=workspace.appearance('get',{})
+        self.assertEqual(state['outline_step'],.1)
+        draft=state['draft']
+        draft['text_styles']['original'].update(outline_width=4.1,outline_blur=2.3,outline_color='#e520bb')
+        self.assertEqual(workspace.appearance('presetSave',{'name':'Outline Test','draft':draft}),['Outline Test'])
+        saved=workspace.appearance('presetLoad',{'name':'Outline Test'})
+        self.assertEqual(saved,draft)
+        self.assertTrue(workspace.appearance('apply',saved))
+        self.root.update()
+        label=self.app.original_label
+        self.assertEqual(label.cget('outline'),(4.1,2.3,'#e520bb'))
+        self.assertTrue(label._artist_layer._visible)
+        self.assertEqual(self.store.settings()['text_styles'],draft['text_styles'])
+        self.app.manual_window_size=True
+        self.root.minsize(240,100)
+        self.root.geometry('400x240+50+50')
+        self.root.update()
+        self.app.fit_compact_layout()
+        self.root.update()
+        self.assertLess(label.cget('outline')[0],4.1)
 
     def assert_controls_fit(self,window):
         def visit(widget):

@@ -1,4 +1,4 @@
-"""Visible status distinguishes uncertain live tracking and prior-track work."""
+"""Playback stays clear of analysis messages while the analysis window reports progress."""
 import tempfile
 import threading
 import time
@@ -48,41 +48,46 @@ class AnalysisStatusUITests(unittest.TestCase):
         return {'kind':'realtime','observed_at':now,'position':self.playback.position(now),
                 'runtime':{'device':'cuda'},'match':{'index':index,**match} if index is not None else None}
 
-    def test_running_without_match_and_lost_match_have_explicit_visible_status(self):
+    def assert_playback_has_no_analysis_messages(self):
+        self.assertFalse(self.app.lyric_frame.grid_slaves(row=2))
+        self.assertEqual(self.app.mode_label.cget('text'),'')
+        self.assertEqual(self.app.status.cget('text'),'')
+        self.assertRegex(self.app.playback_badge.cget('text'),r'^\d{2}:\d{2} / \d{2}:\d{2}$')
+
+    def test_model_preparation_capture_and_tracking_leave_playback_clear(self):
         self.attach()
+        for state in ('loading','buffering','failed'):
+            with self.subTest(state=state):
+                self.app.receive_realtime(self.job,{'kind':'realtime_status','state':state,'text':'분석 상태'})
+                self.assert_playback_has_no_analysis_messages()
         self.app.receive_realtime(self.job,self.event(None))
-        self.assertIn('GPU 분석 중 · 구절 미확인',self.app.analysis_badge.cget('text'))
-        self.assertIn('수집 50%',self.app.analysis_badge.cget('text'))
+        self.assert_playback_has_no_analysis_messages()
         self.app.receive_realtime(self.job,self.event(5))
-        self.assertIn('6행 확인',self.app.analysis_badge.cget('text'))
         self.app.realtime_matched_at-=40;self.app.render()
-        self.assertIn('GPU 재탐색',self.app.analysis_badge.cget('text'))
+        self.assert_playback_has_no_analysis_messages()
         self.assertEqual(self.app.displayed_index(),5)
 
-    def test_compact_overlay_keeps_status_separate_from_hidden_mode_label(self):
-        self.attach();self.app.receive_realtime(self.job,self.event(None))
+    def test_compact_overlay_has_no_analysis_row_for_saved_results(self):
+        self.app.timing={'times':list(range(0,150,5)),'offset':0,'source':'음원 분석'}
+        self.app.render()
         self.app.manual_window_size=True;self.root.geometry('610x207+50+50')
         self.root.deiconify();self.root.update();self.root.update()
-        badge=self.app.analysis_badge
-        self.assertTrue(badge.winfo_ismapped())
+        self.assert_playback_has_no_analysis_messages()
         self.assertFalse(self.app.mode_label.winfo_ismapped())
-        self.assertGreater(badge.winfo_height(),10)
-        self.assertGreaterEqual(badge.winfo_rooty(),self.root.winfo_rooty())
-        self.assertLessEqual(badge.winfo_rooty()+badge.winfo_height(),self.root.winfo_rooty()+207)
-        self.assertLessEqual(self.app.lyric_content.winfo_rooty()+self.app.lyric_content.winfo_height(),badge.winfo_rooty())
+        self.assertTrue(self.app.playback_badge.winfo_ismapped())
 
-    def test_previous_analysis_and_terminal_result_remain_after_next_track(self):
+    def test_previous_analysis_result_is_available_in_analysis_window(self):
         self.attach('analyzing')
         self.app.playback=Playback('Next','Other','Album',30,180,True,time.monotonic())
         self.app.render()
-        self.assertIn('Kira Kira: 음원 분석 50%',self.app.analysis_badge.cget('text'))
+        self.assert_playback_has_no_analysis_messages()
         self.app.auto_analyzer.receive(self.job,{'kind':'error','text':'구절을 찾지 못함'},[self.song])
         self.app.auto_analyzer.receive(self.job,{'kind':'finished'},[self.song])
         self.app.render()
-        self.assertIn('Kira Kira: 분석 오류',self.app.analysis_badge.cget('text'))
-        self.assertIn('구절을 찾지 못함',self.app.analysis_hint.text)
+        self.assert_playback_has_no_analysis_messages()
         self.app.open_audio();self.root.update()
         self.assertIn('오류',self.app.audio_queue_tree.item('auto-last','values')[1])
+        self.assertIn('구절을 찾지 못함',self.app.audio_progress_detail.get('1.0','end-1c'))
 
     def test_long_recovery_requires_two_distinct_strong_lines(self):
         self.app.receive_realtime(self.job,self.event(5))
@@ -101,18 +106,21 @@ class AnalysisStatusUITests(unittest.TestCase):
         self.assertEqual(self.app.realtime_index,22)
         self.assertEqual(self.store.timing(self.song)['times'],[None]*30)
 
-    def test_manual_analysis_is_visible_even_with_auto_disabled_then_survives_completion(self):
-        self.app.audio_job=self.job;self.app.audio_manual_key=self.playback.key
+    def test_manual_analysis_progress_and_result_are_available_in_analysis_window(self):
+        self.app.audio_job=self.job
         progress=self.app.audio_manual_progress=AudioProgress(self.song.title,mode='직접')
         progress.update({'kind':'progress','state':'analyzing','completed':50,'total':100,
                          'runtime':{'device':'cuda'}})
         self.app.render()
-        self.assertIn('직접 GPU 음원 분석 50%',self.app.analysis_badge.cget('text'))
-        self.assertNotIn('분석 꺼짐',self.app.analysis_badge.cget('text'))
+        self.assert_playback_has_no_analysis_messages()
+        self.app.open_audio();self.root.update()
+        self.assertIn('50%',self.app.audio_queue_tree.item('manual','values')[2])
         progress.update({'kind':'error','text':'구절을 찾지 못함'})
         progress.update({'kind':'finished'});self.app.audio_job=None
         self.app.render()
-        self.assertIn('오류',self.app.analysis_badge.cget('text'))
+        self.assert_playback_has_no_analysis_messages()
+        self.app.refresh_audio_progress()
+        self.assertIn('오류',self.app.audio_queue_tree.item('manual','values')[1])
 
 
 if __name__=='__main__':unittest.main()

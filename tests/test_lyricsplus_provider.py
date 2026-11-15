@@ -190,6 +190,12 @@ class LyricsPlusProviderTests(unittest.TestCase):
         self.assertEqual([line.original for line in result['lines']],
                          ['朝の光 花が咲く', 'また朝の光'])
 
+    def test_whole_document_at_zero_does_not_replace_multiline_reference(self):
+        payload = {**self.payload, 'lyrics': [{'time': 0, 'text': ' '.join(self.reference)}]}
+        self.assertIsNone(self.parse(payload))
+        self.assertIsNone(parse_payload(payload, self.playback, self.reference, merge_partial=True))
+        self.assertIsNotNone(self.parse(payload, reference=(' '.join(self.reference),)))
+
     def test_exact_duplicate_at_same_onset_collapses_but_later_repetition_stays(self):
         payload = deepcopy(self.payload)
         payload['lyrics'].insert(1, dict(payload['lyrics'][0]))

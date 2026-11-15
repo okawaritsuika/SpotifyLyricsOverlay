@@ -1,8 +1,8 @@
 from pathlib import Path
 import tempfile
 import unittest
-import wave
-from realtime_audio import LiveWindowWriter,PartialFollower
+from audio_capture_cache import capture_frames
+from realtime_audio import LIVE_AUDIO_FILES,LiveWindowWriter,PartialFollower
 from storage import read_json
 
 
@@ -24,14 +24,14 @@ class RealtimeAudioTests(unittest.TestCase):
         def window(*args):
             nonlocal calls
             sequence=calls//2+1;calls+=1
-            return {'sequence':sequence,'file':'live-0.wav','observed_at':0,'start_position':0,'end_position':3}
+            return {'sequence':sequence,'file':LIVE_AUDIO_FILES[0],'observed_at':0,'start_position':0,'end_position':3}
         def emit(kind,**value):
             events.append({'kind':kind,**value})
             if kind=='realtime' and aligner.analyze.call_count==len(outcomes):raise Done()
-        modules={'numpy':SimpleNamespace(sqrt=lambda x:x,mean=lambda x:1),
-            'faster_whisper':SimpleNamespace(WhisperModel=lambda *a,**k:None),
-            'faster_whisper.audio':SimpleNamespace(decode_audio=lambda *a,**k:samples)}
+        modules={'numpy':SimpleNamespace(sqrt=lambda x:x,mean=lambda x:1)}
         with patch.dict('sys.modules',modules),patch('analysis_limits.apply_analysis_limits'), \
+             patch('audio_runtime.load_realtime_model',return_value=(object(),{'device':'cpu'})), \
+             patch('realtime_audio.load_capture_samples',return_value=samples), \
              patch('realtime_audio.PartialAligner',return_value=aligner),patch('realtime_audio.read_json',side_effect=window), \
              patch('realtime_audio.time.monotonic',return_value=0),patch.object(Path,'read_bytes',return_value=b'synthetic'):
             try:run({'model':'unused','lines':['synthetic'],'duration':10,'key':'track'},'.',emit)
@@ -140,10 +140,29 @@ class RealtimeAudioTests(unittest.TestCase):
             for second in range(1,11):
                 writer.feed(b'\0'*32000,8000,second*8000,.5,100)
                 meta=read_json(Path(folder)/'live-window.json',{})
-                with wave.open(str(Path(folder)/meta['file']),'rb') as audio:
-                    self.assertLessEqual(audio.getnframes(),24000)
-                    self.assertEqual(audio.getnchannels(),2)
+                frames,rate,channels=capture_frames(Path(folder)/meta['file'])
+                self.assertLessEqual(frames,24000)
+                self.assertEqual((rate,channels),(8000,2))
                 self.assertEqual(meta['end_position'],second+.5)
                 self.assertEqual(meta['observed_at'],100+second)
                 self.assertEqual(meta['start_position'],max(0,second-3)+.5)
-            self.assertEqual(len(list(Path(folder).glob('*.wav'))),2)
+            self.assertEqual({path.name for path in Path(folder).glob('*.sloa')},set(LIVE_AUDIO_FILES))
+            self.assertEqual(list(Path(folder).glob('*.wav')),[])
+
+    def test_paused_preview_skips_new_windows_and_resumes_with_fresh_frames(self):
+        from audio_capture_cache import REALTIME_PAUSE_NAME
+        with tempfile.TemporaryDirectory() as folder:
+            directory=Path(folder)
+            writer=LiveWindowWriter(directory,8000,1)
+            metadata=directory/'live-window.json'
+            marker=directory/REALTIME_PAUSE_NAME
+            writer.feed(b'\0'*16000,8000,8000,0,100)
+            first=read_json(metadata,{})
+            marker.touch()
+            writer.feed(b'\0'*16000,8000,16000,0,100)
+            self.assertEqual(read_json(metadata,{}),first)
+            marker.unlink()
+            writer.feed(b'\0'*16000,8000,24000,0,100)
+            resumed=read_json(metadata,{})
+            self.assertEqual(resumed['sequence'],first['sequence']+1)
+            self.assertEqual(resumed['start_position'],2)

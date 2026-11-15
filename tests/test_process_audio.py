@@ -4,9 +4,9 @@ import tempfile
 from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
-import wave
 
 import process_audio as native
+from audio_capture_cache import CAPTURE_NAME, capture_frames
 from audio_worker import capture
 from media import Playback
 from realtime_audio import LiveWindowWriter
@@ -89,7 +89,7 @@ class CapturePipelineTests(unittest.TestCase):
         with patch('audio_worker.SpotifyMonitor',Monitor),patch('audio_worker.ProcessLoopback',Stream),\
                 patch('audio_worker.time.monotonic',side_effect=lambda:clock[0]),patch('audio_worker.emit'),\
                 patch.object(LiveWindowWriter,'feed',feed):
-            try:return capture(request,Path(folder)/'capture.wav')
+            try:return capture(request,Path(folder)/CAPTURE_NAME)
             finally:
                 self.assertTrue(holder['stream'].closed)
                 self.assertTrue(holder['monitor'].stopped)
@@ -98,8 +98,7 @@ class CapturePipelineTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder:
             result=self.run_capture(folder)
             self.assertEqual(result,{'start_position':0,'clip_tail':0,'capture_source':'spotify-process'})
-            with wave.open(str(Path(folder)/'capture.wav')) as audio:
-                self.assertEqual(audio.getnframes(),80000)
+            self.assertEqual(capture_frames(Path(folder)/CAPTURE_NAME), (80000,8000,1))
             live=read_json(Path(folder)/'live-window.json',{})
             self.assertEqual(live['end_position'],10)
             self.assertEqual(live['observed_at'],110)
@@ -113,8 +112,7 @@ class CapturePipelineTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder:
             result=self.run_capture(folder,writer_delay=4,packet_seconds=.25)
             self.assertEqual(result['start_position'],0)
-            with wave.open(str(Path(folder)/'capture.wav')) as audio:
-                self.assertEqual(audio.getnframes(),80000)
+            self.assertEqual(capture_frames(Path(folder)/CAPTURE_NAME), (80000,8000,1))
             live=read_json(Path(folder)/'live-window.json',{})
             self.assertEqual(live['observed_at'],110)
             self.assertEqual(live['end_position'],10)
@@ -124,19 +122,23 @@ class CapturePipelineTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,'재생 시간이 어긋나'):
                 self.run_capture(folder,packet_seconds=.25,timestamp_jump=4)
 
+    def test_subsecond_sample_clock_jump_is_rejected_before_writing_a_preview(self):
+        with tempfile.TemporaryDirectory() as folder:
+            with self.assertRaisesRegex(ValueError,'오디오와 재생 시간이 어긋나'):
+                self.run_capture(folder,packet_seconds=.25,timestamp_jump=.75)
+
     def test_missing_device_clock_does_not_confuse_delayed_delivery_with_packet_loss(self):
         with tempfile.TemporaryDirectory() as folder:
             result=self.run_capture(folder,writer_delay=4,packet_seconds=.25,timestamps=False)
             self.assertEqual(result['start_position'],0)
-            with wave.open(str(Path(folder)/'capture.wav')) as audio:
-                self.assertEqual(audio.getnframes(),80000)
+            self.assertEqual(capture_frames(Path(folder)/CAPTURE_NAME), (80000,8000,1))
 
     def test_first_reliable_device_timestamp_rebases_already_recorded_prefix(self):
         with tempfile.TemporaryDirectory() as folder:
             result=self.run_capture(folder,packet_seconds=.25,startup_delay=.6,missing_timestamp_packets=(0,1,2))
             self.assertAlmostEqual(result['start_position'],.6)
-            with wave.open(str(Path(folder)/'capture.wav')) as audio:
-                self.assertAlmostEqual(audio.getnframes()/audio.getframerate(),9.4,places=3)
+            frames,rate,_=capture_frames(Path(folder)/CAPTURE_NAME)
+            self.assertAlmostEqual(frames/rate,9.4,places=3)
             live=read_json(Path(folder)/'live-window.json',{})
             self.assertAlmostEqual(live['observed_at']-live['end_position'],100,places=3)
             self.assertGreater(live['end_position'],9)
@@ -146,5 +148,4 @@ class CapturePipelineTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder:
             result=self.run_capture(folder,writer_delay=4,packet_seconds=.25,missing_timestamp_packets=range(12,28))
             self.assertEqual(result['start_position'],0)
-            with wave.open(str(Path(folder)/'capture.wav')) as audio:
-                self.assertEqual(audio.getnframes(),80000)
+            self.assertEqual(capture_frames(Path(folder)/CAPTURE_NAME), (80000,8000,1))

@@ -1,12 +1,13 @@
 from dataclasses import replace
 import json
 import tkinter as tk
+from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
 
 from app import LyricsApp
 from lyrics import Line, Song
-from user_annotations import UserAnnotations
+from user_annotations import SingerEdits, UserAnnotations
 import test_background_overlay as background
 
 
@@ -16,6 +17,18 @@ class UserAnnotationOverlayTests(unittest.TestCase):
     provider=background.BackgroundOverlayTests.provider
     receive=background.BackgroundOverlayTests.receive
     position=background.BackgroundOverlayTests.position
+
+    def test_qwer_seeks_without_changing_the_selected_singer_line(self):
+        self.receive()
+        self.app.open_developer_mode()
+        dialog = self.app.manual_sync_dialog
+        dialog.singer_input_button.invoke()
+        with patch.object(self.app.monitor,'request_seek',return_value=True) as seek:
+            event = SimpleNamespace(keysym='q', state=0, widget=dialog.rows)
+            self.assertEqual(dialog.key_release(event), 'break')
+            seek.assert_called_once_with(7.,self.playback.key)
+        self.assertEqual(dialog.selected_index(), 0)
+        self.assertEqual(self.app.singer_input_index,0)
 
     def load_annotations(self):
         path=self.store.directory/'user_lyrics'/'song.json'
@@ -90,6 +103,138 @@ class UserAnnotationOverlayTests(unittest.TestCase):
         self.assertEqual(self.app.current_line_singers(),('如月千早',))
         self.assertEqual(self.app.direct_times(),[10,20,30])
 
+    def test_developer_input_assigns_the_tenth_singer_and_arrows_seek_selected_rows(self):
+        artists=('Z singer',*(f'Singer {index}' for index in range(2,11)))
+        lyrics=(background.TEXTS[0],background.TEXTS[0],background.TEXTS[2])
+        with patch.object(self.app,'displayed_artists',return_value=artists):
+            self.receive(texts=lyrics)
+            self.root.attributes('-alpha',0);self.root.deiconify();self.root.update()
+            label=self.app.original_label
+            label.event_generate('<ButtonPress-1>',x=15,y=10)
+            label.event_generate('<ButtonRelease-1>',x=15,y=10)
+            self.root.update()
+            self.assertIsNone(self.app.singer_input_index)
+            self.assertIsNone(self.app.manual_sync_dialog)
+            self.root.event_generate('<KeyRelease-0>')
+            self.assertEqual(self.app.line_singers, ((), (), ()))
+
+            self.app.open_developer_mode()
+            dialog = self.app.manual_sync_dialog
+            dialog.window.attributes('-alpha', 0)
+            dialog.singer_input_button.invoke()
+            self.root.update()
+            dialog.rows.focus_force()
+            self.assertEqual(self.app.singer_input_index,0)
+            self.assertIn('1 Z singer',self.app.mode_label.cget('text'))
+            self.assertIn('0 Singer 10',self.app.mode_label.cget('text'))
+            dialog.rows.event_generate('<KeyRelease-0>')
+            dialog.rows.event_generate('<KeyRelease-2>')
+            self.assertEqual(self.app.current_line_singers(),('Singer 2','Singer 10'))
+            self.assertEqual(self.app.line_singers,(('Singer 2','Singer 10'),)*3)
+            timing=self.app.timing
+            with patch.object(self.app.monitor,'request_seek',return_value=True) as seek:
+                dialog.rows.event_generate('<Right>')
+                self.assertEqual(dialog.selected_index(), 1)
+                self.assertEqual(self.app.displayed_index(), 0)
+                dialog.rows.event_generate('<KeyRelease-1>')
+                self.assertEqual(self.app.current_line_singers(1), ('Z singer',))
+                self.assertEqual(self.app.current_line_singers(), ('Singer 2', 'Singer 10'))
+                dialog.rows.event_generate('<Right>')
+                self.assertEqual(dialog.selected_index(), 2)
+                self.assertEqual(self.app.displayed_index(), 0)
+                seek.assert_called_once_with(20.,self.playback.key)
+                self.app.finish_seek(20.,True,'')
+                self.assertEqual(seek.call_args.args,(30.,self.playback.key))
+                self.app.finish_seek(30.,True,'')
+                self.position(35)
+                self.assertEqual(self.app.displayed_index(), 2)
+                self.assertEqual(self.app.current_line_singers(), ('Z singer',))
+                dialog.rows.event_generate('<Left>')
+                self.assertEqual(dialog.selected_index(), 1)
+                self.assertEqual(self.app.displayed_index(), 2)
+                self.assertEqual(seek.call_args.args,(20.,self.playback.key))
+            self.assertIs(self.app.timing,timing)
+            dialog.rows.event_generate('<Escape>')
+            self.assertIsNone(self.app.singer_input_index)
+            self.assertTrue(self.app.follow.get())
+            self.app.cache_current_lyrics()
+        self.app.close();self.root=tk.Tk();self.root.withdraw()
+        self.app=LyricsApp(self.root,self.store,start_services=False)
+        self.app.set_playback(self.playback)
+        self.assertEqual(self.app.line_singers,(('Singer 2','Singer 10'),('Z singer',),('Z singer',)))
+
+    def test_space_clears_only_the_selected_row_while_display_follows_playback(self):
+        artists=('First singer','Second singer')
+        with patch.object(self.app,'displayed_artists',return_value=artists):
+            self.receive()
+            self.app.open_developer_mode()
+            dialog = self.app.manual_sync_dialog
+            dialog.window.attributes('-alpha', 0)
+            dialog.singer_input_button.invoke()
+            self.root.update()
+            dialog.rows.focus_force()
+            dialog.rows.event_generate('<KeyRelease-1>')
+            dialog.rows.event_generate('<KeyRelease-space>')
+            self.assertEqual(self.app.line_singers,((),('First singer',),('First singer',)))
+            path=self.app.singer_edits.path
+            before=path.read_bytes()
+            self.assertEqual(set(json.loads(before)),{'0'})
+            restored=SingerEdits(self.store.directory)
+            restored.select(self.app.singer_edits.key)
+            self.assertEqual(restored.overrides,self.app.line_singers)
+
+            self.position(25)
+            self.assertEqual(self.app.displayed_index(),1)
+            self.assertEqual(dialog.selected_index(), 0)
+            self.assertEqual(self.app.current_line_singers(),('First singer',))
+            self.assertEqual(path.read_bytes(),before)
+            dialog.rows.selection_set('1')
+            self.root.update()
+            self.assertEqual(dialog.selected_index(), 1)
+            dialog.rows.event_generate('<KeyRelease-2>')
+            self.assertEqual(self.app.line_singers,((),('Second singer',),('Second singer',)))
+            self.position(35)
+            self.assertEqual(self.app.displayed_index(),2)
+            self.assertEqual(self.app.current_line_singers(),('Second singer',))
+            self.assertEqual(dialog.selected_index(), 1)
+            self.position(15)
+            self.assertEqual(self.app.displayed_index(),0)
+            self.assertEqual(self.app.current_line_singers(), ())
+            self.assertEqual(dialog.selected_index(), 1)
+            self.assertTrue(self.app.follow.get())
+            self.app.cache_current_lyrics()
+        self.app.close();self.root=tk.Tk();self.root.withdraw()
+        self.app=LyricsApp(self.root,self.store,start_services=False)
+        self.app.set_playback(self.playback)
+        self.assertEqual(self.app.line_singers,((),('Second singer',),('Second singer',)))
+
+    def test_confirmed_solo_fills_every_line(self):
+        self.playback=replace(self.playback,artist='如月千早, BNSI')
+        self.app.set_playback(self.playback)
+        self.receive()
+        self.assertEqual(self.app.line_singers,(('如月千早',),)*len(background.TEXTS))
+        self.assertIn('키사라기 치하야',self.app.current_singers.cget('text'))
+        self.assertEqual(self.app.singer_options,('如月千早','BNSI'))
+        self.app.singer_edits.save(1,(),keep_carry=True)
+        self.app.render()
+        self.assertEqual(self.app.line_singers,(('如月千早',),(),('如月千早',)))
+
+    def test_carry_changes_only_unassigned_or_inherited_lines(self):
+        self.load_annotations()
+        lyrics=(*background.TEXTS,'風が吹き始める','星が消えるまで','明日の歌を歌う')
+        self.receive(texts=lyrics,times=[10,20,30,40,50,60])
+        edits=self.app.singer_edits
+        edits.save(0,('First singer',))
+        edits.save(4,(),keep_carry=True)
+        edits.save(5,('Later singer',))
+        self.app.render()
+        self.assertEqual(self.app.line_singers,(
+            ('First singer',),('First singer',),('天海春香',),('First singer',),(),('Later singer',)))
+        edits.save(0,('New singer',))
+        self.app.render()
+        self.assertEqual(self.app.line_singers,(
+            ('New singer',),('New singer',),('天海春香',),('New singer',),(),('Later singer',)))
+
     def test_saved_library_annotations_do_not_change_fingerprint_or_library(self):
         song=Song('saved','Test Song','Singer','Album',tuple(Line(text,'','') for text in background.TEXTS))
         self.store.save_library([song]);self.store.save_timing(song,{'times':[10,20,30],'offset':0})
@@ -107,16 +252,17 @@ class UserAnnotationOverlayTests(unittest.TestCase):
         self.app.transparent.set(True);self.app.apply_appearance()
         self.root.attributes('-alpha',0);self.root.deiconify()
         self.root.geometry('560x320+50+50');self.root.update();self.root.update()
-        baseline=(self.app.lyric_content.winfo_reqheight(),self.app.lyric_content.winfo_width(),
-                  self.app.lyric_content.winfo_rootx(),self.root.winfo_height())
+        content=self.app.lyric_content
+        baseline=(content.winfo_reqheight(),content.winfo_rootx()+content.winfo_width()/2,
+                  self.root.winfo_height())
         foreground=self.app.original_label.cget('fg')
         self.assertIn(self.app.current_singers.hint,self.app.control_hints)
         for names in (('如月千早',),('天海春香','如月千早'),()):
             with self.subTest(names=names):
                 self.app.current_singers.set_singers(names,self.playback.album)
                 self.root.update();self.root.update()
-                self.assertEqual(baseline,(self.app.lyric_content.winfo_reqheight(),self.app.lyric_content.winfo_width(),
-                                            self.app.lyric_content.winfo_rootx(),self.root.winfo_height()))
+                self.assertEqual(baseline,(content.winfo_reqheight(),content.winfo_rootx()+content.winfo_width()/2,
+                                           self.root.winfo_height()))
                 self.assertEqual(self.app.original_label.cget('fg'),foreground)
                 self.assertFalse(self.app.current_singers.grid_info())
                 self.assertEqual(bool(self.app.current_singers.place_info()),bool(names))

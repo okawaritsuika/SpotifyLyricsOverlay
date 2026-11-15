@@ -42,6 +42,8 @@ if __name__ == '__main__':
         import tkinter as tk
         from app_paths import seed_data, resource_dir
         from app import LyricsApp
+        from lyrics import Line, Song
+        from media import Playback
         from storage import Store
         from web_lyrics import reading
         directory=Path(sys.argv[2]).resolve()
@@ -54,10 +56,22 @@ if __name__ == '__main__':
         app.update_controller.checked=True
         app.open_updates()
         root.update()
+        sample = Song('local-analysis-smoke', 'Local audio smoke', 'Fixture', 'Fixture',
+                      (Line('テスト', '', ''),))
+        app.songs.append(sample)
+        app.song, app.timing, app.display_lines = sample, app.store.timing(sample), sample.lines
+        app.playback = Playback(sample.title, sample.artist, sample.album, duration=3)
+        app.open_local_analysis()
+        app.open_sync_reanalysis()
+        root.update()
         result={'ok':True,'songs':len(app.songs),'reading':reading('日本語'),
                 'catalog_present':(resource_dir()/'resources/song_catalog.json').is_file(),
                 'gui':bool(root.winfo_exists()),'dictionary':bool(app.explorer_dialog),
-                'update_dialog':bool(app.update_dialog)}
+                'update_dialog':bool(app.update_dialog),
+                'local_analysis_dialog':bool(app.local_analysis_dialog.window.winfo_exists()),
+                'sync_reanalysis_dialog':bool(app.sync_reanalysis_dialog.window.winfo_exists()),
+                'lyric_advance_ms':app.lyric_advance_ms,
+                'local_analysis_worker':(resource_dir()/'local_analysis_worker.py').is_file()}
         from winrt.windows.media.control import GlobalSystemMediaTransportControlsSessionManager
         from winrt.windows.media.ocr import OcrEngine
         import uiautomation

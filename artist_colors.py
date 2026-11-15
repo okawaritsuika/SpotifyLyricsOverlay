@@ -6,9 +6,12 @@ import re
 import unicodedata
 
 from artist_names import name_key, split_artist_affiliation
+from artist_credit_overrides import YUKI_AIRA
+from work_reuse import is_brilliant_stars_album
 
 
 RESOURCE_DIRECTORY = Path(__file__).resolve().parent / 'resources'
+SIDEM_SERIES_COLOR = '#85dbb5'
 _SEPARATOR = re.compile(r'\s*[,，、;；×]\s*|\s+[xXｘＸ&＆/／+＋]\s+|[\r\n]+')
 _CV = re.compile(r'^CV\s*[.:：]?\s*\S', re.I)
 _CONTEXT = ('idolm@ster', 'idolmaster', 'アイドルマスター', '初星学園',
@@ -103,10 +106,11 @@ class ArtistColors:
         if kind is not None and self.kinds.get(owner) != kind:return None
         return self.colors.get(owner)
 
-    def _resolve(self, text, offset, idolmaster):
+    def _resolve(self, text, offset, idolmaster, brilliant_stars):
         offset += len(text) - len(text.lstrip())
         text = text.strip()
-        color = self._color(text, idolmaster)
+        color = (SIDEM_SERIES_COLOR if brilliant_stars and name_key(text) == name_key(YUKI_AIRA)
+                 else self._color(text, idolmaster))
         if color:return ((offset, offset + len(text), color),)
         # Uncolored groups, voice actors and ambiguous aliases stay neutral even if
         # their names contain punctuation that resembles a performer separator.
@@ -114,7 +118,7 @@ class ArtistColors:
         parts = _artist_ranges(text, self.known_names)
         if len(parts) > 1 or parts[0] != (0, len(text)):
             return tuple(span for start, end in parts
-                         for span in self._resolve(text[start:end], offset + start, idolmaster))
+                         for span in self._resolve(text[start:end], offset + start, idolmaster, brilliant_stars))
         bracketed = re.fullmatch(r'(.*?)\s*[（(]([^()（）]*)[)）]', text)
         if bracketed and _CV.match(unicodedata.normalize('NFKC', bracketed[2])):
             color = self._color(bracketed[1], idolmaster, kind='idol')
@@ -129,7 +133,7 @@ class ArtistColors:
     def _spans(self, display_text, album):
         context = unicodedata.normalize('NFKC', album).casefold()
         idolmaster = any(word in context for word in _CONTEXT)
-        return self._resolve(display_text, 0, idolmaster)
+        return self._resolve(display_text, 0, idolmaster, is_brilliant_stars_album(album))
 
 
 def _read_entries(directory):

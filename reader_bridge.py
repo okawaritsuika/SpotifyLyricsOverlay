@@ -7,7 +7,7 @@ import secrets
 import threading
 import time
 
-from lyrics import normalized
+from lyrics import is_cinderella_no1, normalized
 from lyric_annotations import merge_verified_annotations
 import unicodedata
 from screen_lyrics import matching_lines
@@ -65,8 +65,14 @@ def _recording_titles(value):
     return titles
 
 
-def recording_base(value):
-    return _recording_titles(value)[-1]
+def recording_base(value, *, preserve_spelling=False):
+    base=_recording_titles(value)[-1]
+    if preserve_spelling:
+        original=value.strip()
+        for end in range(len(original),0,-1):
+            prefix=original[:end].rstrip()
+            if unicodedata.normalize('NFKC',prefix)==base:return prefix
+    return base
 
 
 def same_document_title(name,title):
@@ -106,7 +112,7 @@ def same_document_url(left,right):
 
 
 class ReaderBridge:
-    def __init__(self,port=PORT,messages=None,document_urls=None):
+    def __init__(self,port=PORT,messages=None,document_urls=None,preserve_sources=False):
         self.document_urls=document_urls or {}
         self.references=()
         self.full_references=()
@@ -122,7 +128,10 @@ class ReaderBridge:
         self.state={'title':'','artist':'','track':'','playing':False}
         self.updated=0
         self.messages=messages
+        self.preserve_sources=preserve_sources
+        self.duration=0.
         self.token=secrets.token_urlsafe(32)
+        self.previous_track_token=''
         self.server=None
         self.thread=None
 
@@ -130,17 +139,22 @@ class ReaderBridge:
         with self.lock:
             if backend==self.backend:return
             self.backend=backend;self.token=secrets.token_urlsafe(32)
+            self.previous_track_token=''
             self.receipt={'status':'waiting','line_count':0}
             self.pending_documents.clear();self.pending_translation_sources.clear()
 
     def observe(self,playback):
         with self.lock:
             track=hashlib.sha256(playback.key.encode()).hexdigest()
-            if track!=self.state['track']:
+            duration=playback.duration
+            if track!=self.state['track'] or abs(duration-self.duration)>.5:
+                self.previous_track_token=self.token
+                self.token=secrets.token_urlsafe(32)
                 self.part_artists=()
                 self.references=();self.full_references=();self.receipt={'status':'waiting','line_count':0};self.tracking={'status':'waiting','index':None}
                 self.pending_documents.clear()
                 self.pending_translation_sources.clear()
+            self.duration=duration
             self.state={'title':playback.title[:300],
                         'artist':playback.artist[:300],
                         'track':hashlib.sha256(playback.key.encode()).hexdigest(),
@@ -199,8 +213,11 @@ class ReaderBridge:
             if sources:self.receipt['translation_sources']=sources
 
     def receive(self,value):
-        if (not isinstance(value,dict) or not isinstance(value.get('token'),str)
-                or not value['token'].isascii() or not secrets.compare_digest(value['token'],self.token)):
+        token=value.get('token') if isinstance(value,dict) else None
+        if not isinstance(token,str) or not token.isascii():
+            raise ValueError('앱 연결이 바뀌었습니다. 현재 곡을 다시 확인하세요.')
+        if not secrets.compare_digest(token,self.token):
+            if self.previous_track_token and secrets.compare_digest(token,self.previous_track_token):return 'stale'
             raise ValueError('앱 연결이 바뀌었습니다. 현재 곡을 다시 확인하세요.')
         if self.messages is None:raise ValueError('가사 수신이 준비되지 않았습니다.')
         state=self.snapshot()
@@ -221,6 +238,12 @@ class ReaderBridge:
         selected=value.get('user_selected') is True
         without_reference=len(state['reference_lines'])<2
         title_matches=same_document_title(title,state['title'])
+        if is_cinderella_no1(state['title']):
+            from public_lyrics import reviewed_original_conflict
+            if (reviewed_original_conflict(state['title'],state['artist'],'',self.duration,lines)
+                    or not (selected or explicitly_linked or normalized(title)==normalized(state['title']))):
+                self.set_receipt(state['track'],'wrong_document',token=state['token'])
+                raise ValueError('현재 버전의 가사 문서를 확인하세요.')
         metadata_match=without_reference and title_matches and value.get('match_mode') in ('title','metadata','unique_title')
         recording_match=(without_reference and value.get('match_mode') in ('metadata','unique_title')
                          and same_lyric_title(title,state['title']))
@@ -248,6 +271,7 @@ class ReaderBridge:
             if profile:part_sources.append({'url':document['url'],'lines':rows,'profile':profile})
         collect_parts(value,lines)
         supplied=[];source_urls=[];size=len(text)
+        documents=[(url,title,lines)]
         for extra in extras:
             if not isinstance(extra,dict):continue
             body=extra.get('text');address=extra.get('url')
@@ -262,6 +286,7 @@ class ReaderBridge:
                 rows=parse_table_text(body,strict=False,source=source_id(address))
             except ValueError:continue
             supplied.append(rows);source_urls.append(address)
+            documents.append((address,name,rows))
             collect_parts(extra,rows)
         translation_sources=[url] if any(line.korean.strip() for line in lines) else []
         if supplied:
@@ -280,7 +305,8 @@ class ReaderBridge:
             self.pending_documents.append((state['track'],document))
             self.pending_translation_sources.append(tuple(dict.fromkeys(translation_sources)))
             payload=(state['track'],lines,bool(supplied),state['token'])
-            if part_sources:payload+= (part_sources,)
+            if self.preserve_sources:payload+=(part_sources,tuple(documents))
+            elif part_sources:payload+=(part_sources,)
             self.messages.put(('reader_lyrics',payload))
         return 'queued'
 

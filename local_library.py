@@ -96,6 +96,7 @@ def _values(tags, *keys):
 
 def _metadata(path):
     title = album = ''
+    isrc = ''
     artists = []
     duration = None
     if mutagen is not None:
@@ -105,6 +106,7 @@ def _metadata(path):
         title = next(iter(_values(tags, 'title', 'TIT2', '\xa9nam', 'Title')), '')
         artists = _values(tags, 'artist', 'TPE1', '\xa9ART', 'Author')
         album = next(iter(_values(tags, 'album', 'TALB', '\xa9alb', 'WM/AlbumTitle')), '')
+        isrc = next(iter(_values(tags, 'isrc', 'TSRC', 'WM/ISRC')), '')
         duration = _duration(getattr(audio.info, 'length', None))
     elif path.suffix.lower() in ('.wav', '.wave'):
         with wave.open(str(path), 'rb') as audio:
@@ -112,12 +114,43 @@ def _metadata(path):
     quality = 'tags' if title and artists else 'partial' if title or artists or album else 'filename'
     if not title:
         title = _text(re.sub(r'^\d{1,3}[\s._-]+', '', path.stem)) or _text(path.stem)
-    return {'id': _file_id(path), 'path': str(path), 'title': title, 'artists': artists,
-            'album': album, 'duration': duration, 'metadata_quality': quality}
+    record = {'id': _file_id(path), 'path': str(path), 'title': title, 'artists': artists,
+              'album': album, 'duration': duration, 'metadata_quality': quality}
+    isrc = isrc.replace('-', '').upper()
+    if re.fullmatch(r'[A-Z]{2}[A-Z0-9]{3}[0-9]{7}', isrc):
+        record['isrc'] = isrc
+    return record
 
 
 def _song_value(song, name, default=None):
     return song.get(name, default) if isinstance(song, dict) else getattr(song, name, default)
+
+
+def _recording_tags(song):
+    artists = _song_value(song, 'artists') or [_song_value(song, 'artist', '')]
+    return (_key(_text(_song_value(song, 'title', ''))), _key(_text(_song_value(song, 'album', ''))),
+            {_key(_text(name)) for name in artists if _text(name)},
+            _text(_song_value(song, 'isrc', '')).replace('-', '').upper())
+
+
+def _matches_recording_tags(record, tags):
+    title, album, artists, isrc = tags
+    if isrc and record.get('isrc'):
+        return record['isrc'] == isrc
+    return (record['metadata_quality'] == 'tags' and bool(title and album and artists)
+            and _key(record['title']) == title and _key(record['album']) == album
+            and {_key(name) for name in record['artists']} == artists)
+
+
+def recording_tags_match(path, track):
+    """Check whether the local file's tags establish the playlist recording."""
+    if mutagen is None:
+        return False
+    try:
+        record = _metadata(path)
+    except (OSError, ValueError, mutagen.MutagenError):
+        return False
+    return _matches_recording_tags(record, _recording_tags(track))
 
 
 class LocalLibrary:
@@ -157,6 +190,8 @@ class LocalLibrary:
                 if not isinstance(record.get('artists'), list) or any(not isinstance(item, str) for item in record['artists']):raise ValueError()
                 if record.get('metadata_quality') not in ('tags', 'partial', 'filename'):raise ValueError()
                 if record.get('duration') is not None and _duration(record['duration']) is None:raise ValueError()
+                if 'isrc' in record and (not isinstance(record['isrc'], str)
+                        or not re.fullmatch(r'[A-Z]{2}[A-Z0-9]{3}[0-9]{7}', record['isrc'])):raise ValueError()
                 if not any(_within(file_path, Path(folder)) for folder in folders):raise ValueError()
                 ids.add(record['id'])
             if any(not isinstance(song_id, str) or not song_id or not isinstance(ids_, list)
@@ -173,7 +208,7 @@ class LocalLibrary:
         atomic_json(self.path, value)
         self.files, self.links, self.folders = files, links, folders
 
-    def scan(self, folder, progress=None, cancel=None):
+    def scan(self, folder, progress=None, cancel=None, *, persist=True):
         """progress receives a stats copy; cancellation leaves memory and disk unchanged.
 
         A completed bounded scan adds/refreshes records. Missing files stay in the
@@ -181,10 +216,10 @@ class LocalLibrary:
         """
         if not self._scan_lock.acquire(blocking=False):
             raise ValueError('이미 로컬 음원 폴더를 확인하고 있습니다.')
-        try:return self._scan(folder, progress, cancel)
+        try:return self._scan(folder, progress, cancel, persist)
         finally:self._scan_lock.release()
 
-    def _scan(self, folder, progress, cancel):
+    def _scan(self, folder, progress, cancel, persist):
         folder = Path(os.path.abspath(folder))
         try:info = _plain_path(folder)
         except OSError as error:raise ValueError('선택한 음원 폴더를 열지 못했습니다.') from error
@@ -248,7 +283,8 @@ class LocalLibrary:
                     records[file_id] = record
                 files = sorted(records.values(), key=lambda record: (_key(record['title']), record['path']))
                 folders = list(dict.fromkeys([*self.folders, str(folder)]))
-                self._save(files, self.links.copy(), folders)
+                if persist:self._save(files, self.links.copy(), folders)
+                else:self.files, self.folders = files, folders
         emit()
         return stats
 
@@ -307,6 +343,20 @@ class LocalLibrary:
                 score -= 20;reasons.append('파일명 기준 · 음원 태그 미확인')
             result.append({**candidate, 'score': score, 'reasons': reasons})
         return sorted(result, key=lambda record: (-record['score'], record['path']))
+
+    def exact_recordings(self, song):
+        """Select full versions by a verified tag match, never by a bare filename."""
+        tags = _recording_tags(song)
+        duration = _duration(_song_value(song, 'expected_duration'))
+        if not duration:
+            return []
+        result = []
+        for record in self.files:
+            if not record['duration'] or abs(record['duration'] - duration) > 2:
+                continue
+            if _matches_recording_tags(record, tags) and self._with_exists(record)['exists']:
+                result.append(record)
+        return result
 
     def open_file(self, file_id):
         """Open one explicitly chosen indexed audio file in the Windows default player."""

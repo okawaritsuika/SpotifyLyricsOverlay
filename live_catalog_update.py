@@ -6,22 +6,13 @@ import os
 from pathlib import Path
 import tempfile
 
-from live_catalog import RESOURCE_PATH, read_catalog, title_key
+from live_catalog import (RESOURCE_PATH, coalesce_reviewed_events, live_page_checks, merge_event_rows,
+                          merge_live_snapshots, read_catalog, reviewed_event_links)
 from imas_live_sources import collect
-
-LINKS_PATH = RESOURCE_PATH.with_name('live_event_links.json')
 
 
 def _cancelled(cancel):
     return bool(cancel and (cancel() if callable(cancel) else cancel.is_set()))
-
-
-def _links():
-    try:
-        value = json.loads(LINKS_PATH.read_text(encoding='utf-8'))
-        return value.get('links', []) if value.get('schema_version') == 1 else []
-    except (OSError, ValueError, TypeError):
-        return []
 
 
 def merge_collected(base, previous, collected, links=None):
@@ -30,59 +21,25 @@ def merge_collected(base, previous, collected, links=None):
     Only reviewed same-performance links coalesce independent sources. Dates
     alone cannot distinguish a matinee, evening show or concurrent concert.
     """
-    events = {event['id']: deepcopy(event) for event in (base or {}).get('events', [])}
-    events.update({event['id']: deepcopy(event) for event in (previous or {}).get('events', [])})
-    reviewed_links = _links() if links is None else links
+    reviewed_links = reviewed_event_links() if links is None else links
     curated_ids = {link.get('official_id') for link in reviewed_links}
-    successful = set(collected.get('successful_urls', []))
+    inherited = merge_live_snapshots(base, previous, reviewed_links) or {}
+    now = datetime.now(timezone.utc).replace(microsecond=0)
+    checked = {url: now for url in collected.get('successful_urls', [])}
     # A fully parsed page replaces its earlier raw tables. Table insertion or
     # removal can change source IDs; retaining those stale rows creates ghosts.
-    events = {identifier: event for identifier, event in events.items()
-              if identifier in curated_ids or event.get('source_kind') != 'fan_database'
-              or event.get('source_url') not in successful}
-    events.update({event['id']: deepcopy(event) for event in collected.get('events', [])})
+    events = deepcopy(merge_event_rows(inherited.get('events', []), collected.get('events', []),
+                                      checked, curated_ids))
     for event in events.values():
         event.setdefault('source_kind', 'official')
-    for link in reviewed_links:
-        official = events.get(link.get('official_id'))
-        candidates = [event for event in events.values()
-                      if event.get('source_kind') == 'fan_database'
-                      and event['id'] != link.get('official_id')
-                      and event.get('source_url') == link.get('database_url')
-                      and event.get('date') == link.get('date')
-                      and (not link.get('database_section')
-                           or event.get('source_table_label') == link['database_section'])]
-        if official is None or official['date'] != link.get('date') or len(candidates) != 1:
-            continue
-        database = candidates[0]
-        if database['id'] == official['id']:
-            continue
-        # Preserve the curated event identity and source evidence while using
-        # the database's complete, independently attributed performance rows.
-        merged = deepcopy(database)
-        merged['id'] = official['id']
-        sources = list(official.get('official_sources', []))
-        if official.get('source_kind') == 'official':
-            for field in ('source_url', 'date_source_url', 'setlist_source_url'):
-                url = official.get(field)
-                if url and not any(item['url'] == url for item in sources):
-                    sources.append({'name': official.get('source_name') or '공식 자료', 'url': url})
-        merged['official_sources'] = sources
-        merged['title'] = official['title']
-        for row in merged['songs']:
-            matches = [old for old in official['songs']
-                       if title_key(row['title']) in {title_key(old.get(field))
-                          for field in ('title', 'song_title', 'performance_title') if old.get(field)}]
-            if len(matches) == 1:
-                for field in ('song_title', 'performance_title'):
-                    if matches[0].get(field):row.setdefault(field, matches[0][field])
-        events.pop(database['id'])
-        events[official['id']] = merged
-    now = datetime.now(timezone.utc).isoformat(timespec='seconds')
+    coalesce_reviewed_events(events, reviewed_links)
+    page_checks = {**live_page_checks(inherited), **checked}
+    now = now.isoformat()
     failures = deepcopy(collected.get('failures', []))
     report = deepcopy(collected.get('stats', {}))
     report.update(index_urls=collected.get('index_urls', []), failures=failures,
                   successful_urls=collected.get('successful_urls', []),
+                  successful_url_checks={url: stamp.isoformat() for url, stamp in page_checks.items()},
                   skipped_urls=collected.get('skipped_urls', []),
                   index_url='https://imas-db.jp/song/event/', checked_at=now,
                   source_kind='fan_database')
@@ -144,3 +101,24 @@ def refresh_live_catalog(destination, progress=None, cancel=None, *, collector=c
             'setlist_entries': sum(len(event['songs']) for event in value['events']),
             'errors': collected.get('failures', []),
             'message': '라이브 자료를 갱신했습니다.' if updated else '업데이트를 취소하여 기존 자료를 유지합니다.'}
+
+
+def main():
+    import argparse
+
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output', type=Path, required=True,
+                        help='Path to the candidate JSON for review before publishing')
+    args = parser.parse_args()
+
+    def report(value):
+        if value['completed'] % 25 == 0 or value['completed'] == value['total']:
+            print(value['message'], flush=True)
+
+    result = refresh_live_catalog(args.output, progress=report)
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+    return 0 if result['updated'] else 1
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())

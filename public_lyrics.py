@@ -11,7 +11,9 @@ import unicodedata
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
-from lyrics import Line, normalized
+from lyrics import Line, is_cinderella_no1, normalized
+from lyric_match import align_phrases
+from lyric_merge import has_ordered_overlap
 from sync import parse_lrc
 
 
@@ -61,43 +63,55 @@ def _same_artist(left,right):
 
 
 def reviewed_original_conflict(title, artist, album, duration, lines):
-    """Exclude one independently reviewed wrong-song upload, by full content.
-
-    Review evidence: playlist-review-20261004-0907/wrong-original-evidence.json.
-    LRCLIB labeled Kimi to no Asu wo Negau Kara as this Thank You! recording.
-    Other titles, recordings and corrected originals remain eligible.
-    """
-    if (normalized(title) != normalized('Thank You!')
-            or normalized(album) != normalized('THE IDOLM@STER LIVE THE@TER PERFORMANCE 13')
-            or not _same_artist(artist, '春日未来 (CV.山崎はるか)')
-            or _duration(duration) is None or abs(float(duration)-285.706) > DURATION_TOLERANCE):
+    """Exclude known wrong originals by recording and full lyric content."""
+    title_key = normalized(title)
+    if is_cinderella_no1(title) and title_key != normalized('シンデレラNo.1'):
+        # The 25 legacy solo entries copied the 105-line group document.
+        rejected = '869dffe3a845b527deca416f7cd8a43658e141aaa8cdc0809263136451079ac0'
+    elif (title_key == normalized('Thank You!')
+          and normalized(album) == normalized('THE IDOLM@STER LIVE THE@TER PERFORMANCE 13')
+          and _same_artist(artist, '春日未来 (CV.山崎はるか)')
+          and _duration(duration) is not None and abs(float(duration)-285.706) <= DURATION_TOLERANCE):
+        # Evidence: playlist-review-20261004-0907/wrong-original-evidence.json.
+        rejected = '93d6f03d428652c8296d7e52568446fc7f95ea2c3063c2841b9e17ade2df1cd2'
+    else:
         return False
     digest = hashlib.sha256(normalized(''.join(row.original for row in lines)).encode('utf-8')).hexdigest()
-    return digest == '93d6f03d428652c8296d7e52568446fc7f95ea2c3063c2841b9e17ade2df1cd2'
+    return digest == rejected
 
 
-def _lyrics(item, duration):
+def _lyrics(item, duration, merge_partial=False):
     synced = _text(item.get('syncedLyrics'))
     plain = _text(item.get('plainLyrics'))
     if len(synced) > MAX_LYRIC_CHARACTERS or len(plain) > MAX_LYRIC_CHARACTERS:
         return None
+    rows = tuple(Line(row.strip(), '', '') for row in plain.splitlines() if row.strip())
     if synced:
         cues = [cue for cue in parse_lrc(synced) if cue.text.strip()]
         # Simultaneous lyrics cannot form the strictly increasing timeline
         # expected by the overlay. Keep plain text if the provider has it.
         times = [cue.time for cue in cues]
         if (cues and len(cues) <= MAX_LYRIC_LINES
-                and (not plain or normalized(plain) == normalized(''.join(cue.text for cue in cues)))
                 and all(math.isfinite(stamp) and 0 <= stamp <= duration for stamp in times)
                 and all(left < right for left, right in zip(times, times[1:]))):
-            return tuple(Line(cue.text.strip(), '', '') for cue in cues), times
-    rows = tuple(Line(row.strip(), '', '') for row in plain.splitlines() if row.strip())
+            if not plain or normalized(plain) == normalized(''.join(cue.text for cue in cues)):
+                return tuple(Line(cue.text.strip(), '', '') for cue in cues), times
+            if merge_partial and 0 < len(rows) <= MAX_LYRIC_LINES and len(cues) >= 2:
+                left = tuple(row.original for row in rows)
+                right = tuple(cue.text for cue in cues)
+                if has_ordered_overlap(left, right):
+                    blocks = align_phrases(left, right)
+                    if sum(block.right_end - block.right for block in blocks) == len(cues):
+                        mapped = [None] * len(rows)
+                        for block in blocks:
+                            mapped[block.left] = times[block.right]
+                        return rows, mapped
     if not rows or len(rows) > MAX_LYRIC_LINES:
         return None
     return rows, [None] * len(rows)
 
 
-def _candidates(results,title,artist,album,duration):
+def _candidates(results,title,artist,album,duration,merge_partial=False):
     candidates = []
     for item in results:
         if not isinstance(item, dict) or item.get('instrumental') is True:
@@ -111,17 +125,17 @@ def _candidates(results,title,artist,album,duration):
         remote_duration = _duration(item.get('duration'))
         if remote_duration is None or abs(remote_duration - duration) > DURATION_TOLERANCE:
             continue
-        lyrics = _lyrics(item, duration)
+        lyrics = _lyrics(item, duration, merge_partial)
         if lyrics is not None:
             lines, times = lyrics
             if reviewed_original_conflict(title,artist,album,duration,lines):continue
             candidates.append({'source': 'LRCLIB', 'lines': lines, 'times': times,
                                'provider_id': item.get('id'),
-                               '_album': remote_album})
+                               '_album': remote_album, '_duration': remote_duration})
     return candidates
 
 
-def fetch_public_lyrics(playback, fetch=None, report=None):
+def fetch_public_lyrics(playback, fetch=None, report=None, *, merge_metadata=False):
     """Return an unambiguous metadata match, or None; transport errors propagate.
 
     Full title matching retains every recording/version marker. Duration is
@@ -143,14 +157,14 @@ def fetch_public_lyrics(playback, fetch=None, report=None):
     if not isinstance(results,list):
         return finish('LRCLIB 응답 형식 확인 실패')
     album=normalized(_text(playback.album))
-    candidates=_candidates(results,title,artist,album,duration)
+    candidates=_candidates(results,title,artist,album,duration,merge_metadata)
     preferred=[candidate for candidate in candidates if album and candidate['_album']==album] or candidates
     if not any(any(stamp is not None for stamp in candidate['times']) for candidate in preferred):
         fallback=request({'track_name':title})
         if not isinstance(fallback,list):
             return finish('LRCLIB 응답 형식 확인 실패')
         results=results+fallback
-        candidates.extend(_candidates(fallback,title,artist,album,duration))
+        candidates.extend(_candidates(fallback,title,artist,album,duration,merge_metadata))
     same_album = [candidate for candidate in candidates if album and candidate['_album'] == album]
     if same_album:
         candidates = same_album
@@ -165,5 +179,9 @@ def fetch_public_lyrics(playback, fetch=None, report=None):
     if len({tuple(candidate['times']) for candidate in synced}) > 1:
         return finish('LRCLIB 후보 시각 충돌')
     selected = (synced or candidates)[0]
-    return finish('LRCLIB 싱크 연결됨' if synced else 'LRCLIB 원문만 연결됨',
-                  {key: value for key, value in selected.items() if key != '_album'})
+    result = {key: value for key, value in selected.items() if not key.startswith('_')}
+    if merge_metadata:
+        # Title and the complete artist credit passed the provider-specific
+        # checks above. Album and duration come from the actual result.
+        result.update(title=title, artist=artist, album=selected['_album'], duration=selected['_duration'])
+    return finish('LRCLIB 싱크 연결됨' if synced else 'LRCLIB 원문만 연결됨', result)

@@ -34,6 +34,57 @@ class IncrementalAutoTests(unittest.TestCase):
         self.auto.receive(job,{'kind':'result','result':result},[self.song])
         self.auto.receive(job,{'kind':'finished'},[self.song])
 
+    def test_provider_anchors_capture_only_the_missing_window_and_keep_manual_timing(self):
+        times=[8,None,16,24,32,40,48,56,64,72]
+        merged={'times':times,'row_kinds':['singing','dialogue']+['singing']*8}
+        self.auto.live_timing.save(self.song,{'times':[8]+[None]*9,'offset':0,'origins':['manual']+[None]*9})
+        self.observe(0,external_sync=True,merged_timing=merged)
+        self.assertFalse(self.auto.jobs)
+        self.observe(6,external_sync=True,merged_timing=merged)
+        job=next(iter(self.auto.jobs))
+        self.assertEqual(job.options['capture_window'],(8,16))
+        self.assertEqual(job.options['confirmed_times'],times)
+        self.deliver(job,[None,12]+[None]*8,8,16)
+        saved=self.auto.live_timing.load(self.song)
+        self.assertEqual(saved['times'],[8,12]+[None]*8)
+        self.assertEqual(saved['origins'][:2],['manual','audio'])
+
+    def test_unmatched_or_new_provider_clock_leaves_existing_timing(self):
+        merged={'times':[8,None,16]+[None]*7,'row_kinds':['singing','dialogue']+['unknown']*8}
+        self.auto.live_timing.save(self.song,{'times':[8]+[None]*9,'offset':0,'origins':['manual']+[None]*9})
+        self.observe(6,external_sync=True,merged_timing=merged)
+        job=next(iter(self.auto.jobs))
+        self.auto.receive(job,{'kind':'progress','state':'unmatched','text':'no match'},[self.song])
+        self.auto.receive(job,{'kind':'finished'},[self.song])
+        self.assertEqual(self.auto.live_timing.load(self.song)['times'],[8]+[None]*9)
+        self.observe(6,playing=False,external_sync=True,merged_timing=merged)
+        self.observe(6,external_sync=True,merged_timing=merged)
+        retry=next(iter(self.auto.jobs))
+        filled={**merged,'times':[8,13,16]+[None]*7}
+        self.observe(7,external_sync=True,merged_timing=filled)
+        self.assertTrue(retry.cancelled.is_set())
+        self.deliver(retry,[None,12]+[None]*8,8,16)
+        self.assertEqual(self.auto.live_timing.load(self.song)['times'],[8]+[None]*9)
+
+    def test_merged_partial_never_starts_capture_when_disabled(self):
+        self.auto.enabled=False
+        merged={'times':[8,None,16]+[None]*7,'row_kinds':['unknown']*10}
+        self.observe(6,external_sync=True,merged_timing=merged)
+        self.assertFalse(self.auto.jobs)
+
+    def test_late_bounded_result_cannot_change_shared_local_lyrics_for_another_recording(self):
+        self.store.save_timing(self.song,{'times':[8]+[None]*9,'offset':0,'origins':['manual']+[None]*9})
+        merged={'times':[8,None,16]+[None]*7,'row_kinds':['unknown']*10}
+        first=Playback(self.song.title,self.song.artist,self.song.album,6,120,True,time.monotonic())
+        self.auto.observe(self.song,first,external_sync=True,merged_timing=merged)
+        job=next(iter(self.auto.jobs));job.capture_started=True
+        second=replace(first,album='Other recording')
+        self.auto.observe(self.song,second,external_sync=True,merged_timing=merged)
+        self.assertFalse(job.cancelled.is_set())
+        self.deliver(job,[None,12]+[None]*8,8,16)
+        self.assertEqual(self.store.timing(self.song)['times'],[8]+[None]*9)
+
+
     def test_small_verified_prefix_saves_below_old_whole_song_threshold(self):
         self.observe(0);job=next(iter(self.auto.jobs))
         self.deliver(job,[10,22]+[None]*8,0,35)

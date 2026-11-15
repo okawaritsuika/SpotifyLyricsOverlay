@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta, timezone
 from email.utils import format_datetime
 from pathlib import Path
+from queue import Queue
 import copy
 import tempfile
 import threading
@@ -9,7 +10,7 @@ import unittest
 from unittest.mock import Mock, patch
 from urllib.error import HTTPError
 
-from background_lyrics import mapped_times
+from background_lyrics import PlaybackLyricMerge, mapped_times
 from lyrics import Line, Song
 import playlist_lyrics_sources as sources
 from storage import Store
@@ -53,12 +54,29 @@ class PlaylistSourcesTests(unittest.TestCase):
         self.assertEqual(self.spotify['lines'], self.lines)
         for mock in self.patches.values():mock.assert_not_called()
 
+    def test_complete_legacy_document_checks_alternate_originals_once(self):
+        existing = {'lines': self.translated, 'direct': self.spotify}
+        result = self.run_track(existing)
+        self.assertTrue(result['complete'])
+        self.assertEqual(result['times'], [1, 20, 40])
+        self.patches['alsong_provider.fetch_alsong'].assert_called_once()
+        self.patches['web_lyrics.fetch_lyrics'].assert_called_once()
+        for mock in self.patches.values():mock.reset_mock()
+        self.assertTrue(self.run_track(result)['complete'])
+        for mock in self.patches.values():mock.assert_not_called()
+
     def test_same_title_partial_original_cannot_borrow_translation(self):
         Store(self.directory).save_library([Song('saved', self.track['title'], 'Test Singer', 'Test Album', self.translated[:-1])])
         result = self.run_track(self.spotify)
         self.assertFalse(result['complete'])
         self.assertEqual(result['counts']['translated'], 0)
         self.assertEqual(result['missing'], ['korean_translation'])
+
+    def test_wiki_lookup_keeps_fullwidth_spelling_after_removing_version(self):
+        title = 'ハロー＊ランチタイム'
+        self.run_track(track={**self.track, 'title': title+' (Live Ver.)'})
+        call = self.patches['web_lyrics.fetch_lyrics'].call_args
+        self.assertEqual(call.args[:2], (title, sources.web_lyrics.namu_url(title)))
 
     def test_annotation_only_alsong_never_supplies_clock(self):
         self.patches['alsong_provider.fetch_alsong'].return_value = {
@@ -82,11 +100,80 @@ class PlaylistSourcesTests(unittest.TestCase):
     def test_verified_fallback_only_fills_missing_spotify_boundary(self):
         spotify = {**self.spotify, 'times': [1, None, 40]}
         self.patches['alsong_provider.fetch_alsong'].return_value = {
+            'source': 'ALSong', 'provider_id': '123', 'lines': self.translated, 'times': [1, 30, 40]}
+        result = self.run_track(spotify)
+        self.assertEqual(spotify['times'], [1, None, 40])
+        self.assertEqual(mapped_times(result['direct'], result['lines']), [1, 30, 40])
+        self.assertEqual([row['selected_source'] for row in result['rows']], ['Spotify', 'ALSong', 'Spotify'])
+        self.assertTrue(result['complete'])
+
+    def test_auxiliary_clock_conflicting_with_spotify_leaves_gap_unresolved(self):
+        spotify = {**self.spotify, 'times': [1, None, 40]}
+        self.patches['alsong_provider.fetch_alsong'].return_value = {
             'source': 'ALSong', 'provider_id': '123', 'lines': self.translated, 'times': [10, 30, 50]}
         result = self.run_track(spotify)
-        self.assertEqual(result['direct']['times'], [1, None, 40])
-        self.assertEqual(mapped_times(result['direct'], result['lines']), [1, 30, 40])
-        self.assertTrue(result['complete'])
+        self.assertEqual(result['times'], [1, None, 40])
+        self.assertEqual(result['rows'][1]['status'], 'unresolved')
+        self.assertEqual(result['rows'][1]['timings'][0]['status'], 'rejected')
+
+    def test_merged_dialogue_and_provider_snapshots_survive_playlist_store_reload(self):
+        from playlist_lyrics_store import PlaylistLyricsStore
+
+        self.track['album'] = 'THE IDOLM@STER SideM Test Album'
+        original = '【春香】「準備はいいですか？」'
+        speech = '準備はいいですか？'
+        self.patches['alsong_provider.fetch_alsong'].return_value = {
+            'source': 'ALSong', 'provider_id': '123',
+            'lines': (self.lines[0], Line(speech, '', ''), *self.lines[1:]),
+            'times': [1, 10, 20, 40]}
+
+        def wiki(title, url, *args, **kwargs):
+            lines = (self.translated[0], Line(speech, '', '준비됐나요?'), *self.translated[1:])
+            if sources.web_lyrics.source_id(url) == 'namu':
+                lines = (self.lines[0], Line(original, '', ''), *self.lines[1:])
+            return lines, {'url': url, 'title': title}
+
+        self.patches['web_lyrics.fetch_lyrics'].side_effect = wiki
+        result = self.run_track(self.spotify)
+        self.assertEqual(result['lines'][1].original, original)
+        self.assertEqual(result['lines'][1].korean, '준비됐나요?')
+        self.assertEqual(result['times'], [1, 10, 20, 40])
+        self.assertEqual(result['rows'][1]['translation_source'], 'sidem')
+        self.assertEqual(result['rows'][1]['selected_source'], 'ALSong')
+        store = PlaylistLyricsStore(self.directory)
+        self.assertTrue(store.save(self.track, self.lines, self.spotify))
+        self.assertTrue(store.save(self.track, result['lines'], result['direct'], result['sources'],
+                                   snapshots=result['snapshots'], merge_rows=result['rows']))
+        saved = PlaylistLyricsStore(self.directory).load(self.track['id'])
+        self.assertEqual(saved['snapshots'], result['snapshots'])
+        self.assertEqual(saved['merge_rows'], result['rows'])
+        self.assertEqual(saved['direct'], result['direct'])
+        self.assertEqual(self.run_track(saved)['rows'], result['rows'])
+
+        messages = Queue()
+        playback = sources.Playback(title=self.track['title'], artist=self.track['artists'][0],
+                                    album=self.track['album'], duration=self.track['duration'])
+        live = PlaybackLyricMerge(messages)
+        for snapshot in reversed(result['snapshots']):
+            live.remember(snapshot)
+        live.submit(playback, (None, None, (), False, ()), ())
+        kind, (_, _, _, live_result, error) = messages.get(timeout=5)
+        self.assertEqual(kind, 'merged_lyrics')
+        self.assertIsNone(error)
+        self.assertEqual({field: live_result[field] for field in ('lines', 'rows', 'times')},
+                         {field: result[field] for field in ('lines', 'rows', 'times')})
+
+        self.patches['web_lyrics.fetch_lyrics'].side_effect = None
+        initial = self.run_track(self.spotify)
+        other_store = PlaylistLyricsStore(self.directory / 'late_wiki')
+        self.assertTrue(other_store.save(self.track, initial['lines'], initial['direct'],
+                                         snapshots=initial['snapshots'], merge_rows=initial['rows']))
+        self.patches['web_lyrics.fetch_lyrics'].side_effect = wiki
+        updated = self.run_track(other_store.load(self.track['id']))
+        self.assertEqual(updated['lines'][1].original, original)
+        self.assertTrue(other_store.save(self.track, updated['lines'], updated['direct'],
+                                         snapshots=updated['snapshots'], merge_rows=updated['rows']))
+        self.assertEqual(other_store.load(self.track['id'])['direct']['times'], [1, 10, 20, 40])
 
     def test_split_translation_keeps_spotify_source_rows(self):
         stored = (Line('朝の光を', '', '아침의 빛을 올려다봐'), Line('見上げて', '', '아침의 빛을 올려다봐'), *self.translated[1:])
@@ -170,7 +257,7 @@ class PlaylistSourcesTests(unittest.TestCase):
         self.assertEqual(result['counts']['translated'], 0)
 
     def test_429_chained_inside_wiki_error_propagates_retry_after(self):
-        def blocked(*args):
+        def blocked(*args, **kwargs):
             try:raise HTTPError('https://namu.wiki/w/Test', 429, 'slow', {'Retry-After': '123'}, None)
             except HTTPError as error:raise ValueError('blocked') from error
         self.patches['web_lyrics.fetch_lyrics'].side_effect = blocked
@@ -178,6 +265,23 @@ class PlaylistSourcesTests(unittest.TestCase):
         self.assertEqual(context.exception.retry_after, 123)
         self.assertEqual(context.exception.source, 'namu')
         self.assertEqual(context.exception.code, 'rate_limited')
+
+    def test_throttle_preserves_snapshots_obtained_before_retry(self):
+        spotify = {**self.spotify, 'times': [1, None, 40]}
+        lrclib = self.patches['public_lyrics.fetch_public_lyrics']
+        lrclib.return_value = {**self.spotify, 'source': 'LRCLIB', 'provider_id': 42}
+        wiki = self.patches['web_lyrics.fetch_lyrics']
+        wiki.side_effect = HTTPError('https://namu.wiki/w/Test', 429, 'slow', {'Retry-After': '90'}, None)
+        with self.assertRaises(sources.SourceRateLimited) as context:
+            self.run_track(spotify)
+        partial = context.exception.partial
+        self.assertEqual(partial['times'], [1, 20, 40])
+        self.assertEqual({snapshot['source'] for snapshot in partial['snapshots']}, {'Spotify', 'LRCLIB'})
+        sources._cooldowns.clear()
+        wiki.side_effect = None
+        wiki.return_value = self.translated, {'url': 'https://namu.wiki/w/Test%20Song'}
+        self.assertTrue(self.run_track(partial)['complete'])
+        lrclib.assert_called_once()
 
     def test_http_date_retry_after_and_blocked_cooldown_are_honest(self):
         future = format_datetime(datetime.now(timezone.utc)+timedelta(seconds=180))

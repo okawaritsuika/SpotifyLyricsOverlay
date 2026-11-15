@@ -6,7 +6,7 @@ import unittest
 from unittest.mock import patch
 
 import group_credits
-from group_credits import group_member_lines, save_group_credits, with_character_voices
+from group_credits import group_member_lines, performer_options, save_group_credits, with_character_voices
 
 
 def idol(identity='idol:first', name='First', display='첫 캐릭터', voice='첫 성우'):
@@ -44,6 +44,24 @@ class GroupCreditsTests(unittest.TestCase):
         original = artists[:]
         group_member_lines(artists)
         self.assertEqual(artists, original)
+
+    def test_performer_numbers_follow_explicit_credits_then_displayed_rosters(self):
+        self.assertEqual(performer_options(['Example Group']),(('First','Second'),()))
+        self.assertEqual(performer_options(['Second, First']),(('Second','First'),()))
+        self.assertEqual(performer_options(['Example Group','Second']),(('Second',),()))
+
+    def test_automatic_solo_uses_only_voice_credits(self):
+        self.assertEqual(performer_options(['Second']),(('Second',),()))
+        self.assertEqual(performer_options(['Composer']),(('Composer',),()))
+        self.assertEqual(performer_options(['Composer','첫 성우']),(('Composer','첫 성우'),('첫 성우',)))
+        self.assertEqual(performer_options(['First','첫 성우','Composer']),
+                         (('First','첫 성우','Composer'),('First',)))
+        explicit = 'Second（CV： Guest Actor）'
+        self.assertEqual(performer_options([explicit,'Composer']),((explicit,'Composer'),(explicit,)))
+        self.assertEqual(performer_options(['Second (CV.)','Composer'])[1],())
+        self.assertEqual(performer_options(['Second (CV. Guest A / Guest B)','Composer'])[1],())
+        self.assertEqual(performer_options(['First','Second','Composer'])[1],())
+        self.assertEqual(performer_options(['Example Group','첫 성우','Composer'])[1],())
 
     def test_explicit_member_does_not_expand_subset_to_whole_group(self):
         for artists in (['Example Group', 'First'], ['Example Group, 첫 캐릭터 (CV. 첫 성우)'],

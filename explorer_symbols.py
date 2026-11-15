@@ -11,10 +11,12 @@ BRAND_KEYS = frozenset(('765', 'million', 'cinderella', 'sidem', 'shiny', 'gakue
 
 
 def _render_symbol(key, size):
-    if key in BRAND_KEYS:
+    if key == 'other':
+        key = 'dictionary'
+    if key in BRAND_KEYS or key == 'dictionary':
         with Image.open(ASSET_DIR / (key + '.png')) as original:
             return original.convert('RGBA').resize((size, size), Image.Resampling.LANCZOS)
-    # All / other are navigation categories, not brands.
+    # The all-series category uses a neutral navigation symbol.
     canvas = Image.new('RGBA', (128, 128))
     draw = ImageDraw.Draw(canvas)
     color = SERIES_COLORS.get(key, SERIES_COLORS['other'])
@@ -27,7 +29,7 @@ def _render_symbol(key, size):
     else:
         draw.ellipse((10, 32, 82, 96), outline=color, width=14)
         draw.ellipse((46, 32, 118, 96), outline=color, width=14)
-        draw.line([(48, 64), (80, 64)], fill='#f2f8ff', width=10)
+        draw.line([(48, 64), (80, 64)], fill='#ffffff', width=10)
     return canvas.resize((size, size), Image.Resampling.LANCZOS)
 
 
@@ -41,3 +43,7 @@ def series_symbol(master, key, size=28):
     if identity not in cache:
         cache[identity] = ImageTk.PhotoImage(_render_symbol(key, size), master=root)
     return cache[identity]
+
+
+def dictionary_symbol(master, size=20):
+    return series_symbol(master, 'dictionary', size)

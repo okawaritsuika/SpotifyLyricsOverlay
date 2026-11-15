@@ -48,8 +48,7 @@ class ProcessEntry(C.Structure):
               ('flags',DWORD),('name',C.c_wchar*260)]
 
 
-def spotify_process_id():
-    ensure_supported()
+def _spotify_process_roots():
     kernel=C.WinDLL('kernel32',use_last_error=True)
     kernel.CreateToolhelp32Snapshot.argtypes=[DWORD,DWORD];kernel.CreateToolhelp32Snapshot.restype=PTR
     kernel.Process32FirstW.argtypes=[PTR,C.POINTER(ProcessEntry)]
@@ -64,10 +63,25 @@ def spotify_process_id():
             if entry.name.casefold()=='spotify.exe':processes[entry.pid]=entry.parent
             more=kernel.Process32NextW(snapshot,C.byref(entry))
     finally:kernel.CloseHandle(snapshot)
-    roots=[pid for pid,parent in processes.items() if parent not in processes]
+    return [pid for pid,parent in processes.items() if parent not in processes]
+
+
+def spotify_process_id():
+    ensure_supported()
+    roots=_spotify_process_roots()
     if len(roots)!=1:
         raise ValueError('Spotify 데스크톱 앱의 소리 연결을 확인할 수 없습니다. Spotify 앱을 실행한 뒤 다시 시도하세요.')
     return roots[0]
+
+
+def _wait_for_spotify_process():
+    """Spotify's process tree can be briefly missing or ambiguous during a track launch."""
+    deadline=time.monotonic()+4
+    while True:
+        try:return spotify_process_id()
+        except ValueError:
+            if time.monotonic()>=deadline:raise
+            time.sleep(.2)
 
 
 class ActivationParams(C.Structure):
@@ -238,7 +252,8 @@ class BufferedProcessLoopback:
         try:
             # COM initialization, interface calls and release stay on one
             # thread. Creating the wrapper does not start audio collection.
-            with ProcessLoopback(self.pid) as stream:
+            pid=self.pid if self.pid is not None else _wait_for_spotify_process()
+            with ProcessLoopback(pid) as stream:
                 self.rate,self.channels=stream.rate,stream.channels
                 self.ready.set()
                 self.start_requested.wait()

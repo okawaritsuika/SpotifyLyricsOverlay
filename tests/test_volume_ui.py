@@ -35,6 +35,7 @@ class FakeController:
 class VolumeUITests(unittest.TestCase):
     def setUp(self):
         self.root = tk.Tk()
+        self.root.geometry('240x140+220+180')
         self.anchor = tk.Button(self.root, text='음량')
         self.anchor.pack()
         self.root.update()
@@ -82,15 +83,33 @@ class VolumeUITests(unittest.TestCase):
         self.panel.mute_button.invoke()
         self.assertEqual(self.backend.calls, [('volume', 23), 'mute'])
 
-    def test_native_step_is_used_for_drag_and_keyboard(self):
-        self.panel.events.put(dict(available=True,volume=70,step=10,muted=False,error='',revision=0))
-        self.drain()
-        self.panel.change_volume('69')
-        self.assertEqual(self.panel.volume.get(),70)
+    def test_mouse_and_keyboard_use_integer_percent(self):
+        self.panel.change_volume('69.2')
+        self.assertEqual(self.panel.volume.get(),69)
         self.panel.step_volume(-1)
-        self.assertEqual(self.panel.volume.get(),60)
+        self.assertEqual(self.panel.volume.get(),68)
         self.panel.flush_volume()
-        self.assertEqual(self.backend.calls,[('volume',60)])
+        self.assertEqual(self.backend.calls,[('volume',68)])
+
+    def test_compact_popup_is_centered_above_anchor(self):
+        window = self.panel.window
+        self.assertTrue(window.overrideredirect())
+        self.assertLess(window.winfo_height(), 50)
+        self.assertLess(window.winfo_width(), 220)
+        self.assertEqual(window.winfo_rooty() + window.winfo_height() + 6, self.anchor.winfo_rooty())
+        self.assertAlmostEqual(window.winfo_rootx() + window.winfo_width() / 2,
+                               self.anchor.winfo_rootx() + self.anchor.winfo_width() / 2, delta=1)
+        self.assertFalse(self.panel.status.winfo_ismapped())
+
+    def test_hiding_sends_pending_value_and_reopening_refreshes(self):
+        self.panel.step_volume(1)
+        self.panel.hide()
+        self.assertEqual(self.backend.calls, [('volume', 43)])
+        self.assertFalse(self.panel.visible)
+        self.assertIsNone(self.panel.refresh_timer)
+        self.panel.show()
+        self.assertTrue(self.panel.visible)
+        self.assertEqual(self.backend.calls[-1], 'refresh')
 
     def test_queued_old_read_cannot_undo_a_new_slider_request(self):
         self.backend.emit(42)

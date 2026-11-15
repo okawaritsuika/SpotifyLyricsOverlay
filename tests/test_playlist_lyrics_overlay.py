@@ -4,6 +4,7 @@ import unittest
 from unittest.mock import patch
 
 from app import LyricsApp
+from lyric_merge import merge_lyrics, snapshot_from_direct
 from lyrics import Line
 from media import Playback
 from storage import Store
@@ -45,3 +46,20 @@ class PlaylistOverlayTests(unittest.TestCase):
         self.app.set_playback(playback)
         self.assertEqual(self.app.translated_count,2)
         self.assertEqual(self.app.direct_times(),[10.,20.])
+
+    def test_saved_playlist_restores_lines_from_collapsed_lyricsplus_cache(self):
+        playback=Playback(title='Fixture song',artist='Fixture artist',album='Album',duration=100.)
+        track={'id':'a'*22,'title':playback.title,'artists':[playback.artist],'album':playback.album,'duration':100.}
+        lines=(Line('青い空を見上げて','','푸른 하늘을 올려다보며'),Line('花が咲く季節に','','꽃이 피는 계절에'))
+        collapsed=(Line(' '.join(line.original for line in lines),'',''),)
+        direct={'source':'LyricsPlus','provider_id':None,'lines':collapsed,'times':[0.]}
+        merged=merge_lyrics(playback,[snapshot_from_direct(direct)])
+        self.assertTrue(self.app.lyric_cache.save(playback,collapsed,direct,merge=merged))
+        self.assertTrue(self.app.playlist_lyrics.store.save(track,lines,None))
+
+        self.app.set_playback(playback)
+
+        self.assertEqual(self.app.display_lines,lines)
+        self.assertEqual(self.app.original_label.cget('text'),lines[0].original)
+        self.assertFalse(self.app.has_direct_sync())
+        self.assertFalse(any(source=='lyricsplus' for source,_ in self.app.lyric_merge_job.sources))

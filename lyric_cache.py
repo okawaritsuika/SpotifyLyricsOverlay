@@ -10,7 +10,8 @@ import tempfile
 import threading
 import time
 
-from lyrics import Line
+from lyrics import Line, is_cinderella_no1
+from lyric_merge import decode_merge, encode_merge
 from storage import validate_times
 
 
@@ -96,6 +97,12 @@ def _encode_rows(lines):
     return [{'original': line.original, 'reading': line.reading, 'korean': line.korean} for line in lines]
 
 
+def _rejected_original(playback, lines):
+    if not is_cinderella_no1(playback.title):return False
+    from public_lyrics import reviewed_original_conflict
+    return reviewed_original_conflict(playback.title, playback.artist, playback.album, playback.duration, lines)
+
+
 def _reuse(value):
     if value is None:return None
     if not isinstance(value, dict):raise ValueError('Invalid cache reuse provenance')
@@ -151,8 +158,19 @@ class LyricCache:
                 if abs(saved_duration - duration) > 2:return None
                 saved_at = _number(value['saved_at'])
                 lines = _rows(value['lines'], decoded=True)
+                if _rejected_original(playback, lines):return None
                 direct = _provider(value.get('direct'), saved_duration, decoded=True)
                 result = {'lines': lines, 'direct': direct, 'saved_at': saved_at}
+                if 'merge' in value:
+                    try:
+                        merge = decode_merge(value['merge'], len(lines))
+                    except _FAILURES:
+                        # The old display data is still usable if optional
+                        # provenance is damaged. Recollect it on playback.
+                        if direct and direct['source'] == 'Merged':
+                            result['direct'] = None
+                    else:
+                        result['merge'] = merge
                 reuse = _reuse(value.get('reuse'))
                 if reuse is not None:
                     from recording_reuse import compatibility
@@ -233,6 +251,7 @@ class LyricCache:
                         lines = _rows(value['lines'], decoded=True)
                         candidate = {**source, 'key': source_key, 'lines': lines,
                                      'saved_at': _number(value['saved_at']), 'compatibility': compatible,
+                                     'borrowed': bool(reuse),
                                      'direct': _provider(value.get('direct'), duration, decoded=True)}
                         if timing_store and (compatible['timing_compatible'] or compatible.get('tracking_compatible')):
                             candidate['timing'] = load_saved_timing(timing_store, key, lines)
@@ -259,12 +278,13 @@ class LyricCache:
             total -= size
         return count <= self.max_entries and total <= self.max_bytes
 
-    def save(self, playback, lines, direct=None, reuse=None):
+    def save(self, playback, lines, direct=None, reuse=None, merge=None):
         temporary = None
         try:
             if not self.max_entries or not self.max_bytes:return False
             key, duration = _identity(playback)
             lines = _rows(lines)
+            if _rejected_original(playback, lines):return False
             direct = _provider(direct, duration)
             value = {'version': 1, 'key': key, 'duration': duration,
                      'saved_at': _number(time.time()), 'lines': _encode_rows(lines), 'direct': None}
@@ -275,6 +295,10 @@ class LyricCache:
                 if 'fallback' in direct:
                     fallback=direct['fallback']
                     value['direct']['fallback']={**fallback,'lines':_encode_rows(fallback['lines'])}
+            if merge is not None:
+                encoded = encode_merge(merge)
+                decode_merge(encoded, len(lines))
+                value['merge'] = encoded
             body = json.dumps(value, ensure_ascii=False, allow_nan=False, separators=(',', ':')).encode('utf-8')
             if len(body) > min(MAX_ENTRY_BYTES, self.max_bytes):return False
             with self.lock:

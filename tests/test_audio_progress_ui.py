@@ -3,7 +3,7 @@ import threading
 import time
 import tkinter as tk
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 from app import LyricsApp
 from audio_progress import AudioProgress
@@ -131,6 +131,51 @@ class ProgressUITests(unittest.TestCase):
                 self.assertGreaterEqual(widget.winfo_rooty(),window.winfo_rooty())
                 self.assertLessEqual(widget.winfo_rootx()+widget.winfo_width(),window.winfo_rootx()+window.winfo_width())
                 self.assertLessEqual(widget.winfo_rooty()+widget.winfo_height(),window.winfo_rooty()+window.winfo_height())
+
+    def test_playlist_analysis_reuses_audio_window_and_its_own_controls(self):
+        track_id = 'a' * 22
+        item = {'track': {'id': track_id, 'title': 'Example', 'artists': ['Artist']},
+                'position': 1, 'reason': '싱크 없음'}
+        self.app.open_audio()
+        window = self.app.audio_window
+        self.assertIsNone(self.app.audio_playlist_panel)
+        with patch('playlist_analysis_panel.MissingAudioCollector.inventory', return_value=[item]):
+            self.app.open_audio(playlist=True)
+            panel = self.app.audio_playlist_panel
+            deadline = time.monotonic() + 2
+            while panel.loading and time.monotonic() < deadline:
+                self.root.update()
+                time.sleep(.01)
+        self.assertIs(self.app.audio_window, window)
+        self.assertEqual(self.app.audio_tabs.select(), str(self.app.audio_playlist_tab))
+        window.geometry('560x460+20+20')
+        self.root.update()
+        self.assertGreater(panel.table.winfo_height(), 60)
+        self.assertEqual(panel.table.get_children(), (track_id,))
+        self.assertTrue(panel.start_button.instate(('!disabled',)))
+        self.assertFalse(self.app.audio_start_button.winfo_ismapped())
+        panel.collector.review_needed.add(track_id)
+        panel.refresh()
+        self.assertEqual(panel.table.set(track_id, 'state'), '싱크 검토 필요')
+        self.assertTrue(panel.start_button.instate(('disabled',)))
+        self.app.audio_tabs.select(0)
+        self.root.update()
+        self.assertTrue(self.app.audio_start_button.winfo_ismapped())
+        self.app.open_audio(playlist=True)
+        self.assertIs(self.app.audio_playlist_panel, panel)
+        self.app.close_audio()
+        self.assertIsNone(self.app.audio_playlist_panel)
+
+    def test_playlist_result_validation_precedes_writing_sync(self):
+        job = FakeJob('.', self.songs[0], None, None)
+        job.playlist_analysis = True
+        collector = Mock(accepts_result=Mock(return_value=False))
+        with (patch.object(self.app, 'missing_audio_collector', collector),
+              patch.object(self.app.auto_analyzer, 'receive') as receive):
+            self.app._receive_analysis_job(job, {'kind': 'result'}, self.songs)
+        collector.accepts_result.assert_called_once_with(job)
+        self.assertEqual(receive.call_args.args[1]['kind'], 'error')
+        self.assertEqual(collector.receive.call_args.args[1], receive.call_args.args[1])
 
 
 if __name__=='__main__':unittest.main()

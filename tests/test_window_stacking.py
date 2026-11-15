@@ -54,11 +54,12 @@ class WindowStackingTests(unittest.TestCase):
         if sys.platform == 'win32':self.assertFalse(self.native_topmost(window))
 
     def test_settings_editing_and_connection_windows_remain_normal_after_reopening(self):
+        self.app.update_controller.checked = True
         actions = [('connection', self.app.open_connection, 'connection_dialog'),
                    ('appearance', self.app.open_appearance, 'appearance_dialog'),
                    ('manual lyrics', self.app.open_manual_lyrics, 'manual_dialog'),
                    ('wiki lyrics', self.app.open_web_lyrics, 'web_dialog'),
-                   ('reader settings', self.app.open_reader_settings, 'reader_dialog'),
+                   ('updates', self.app.open_updates, 'update_dialog'),
                    ('AI install', self.app.open_audio_install, 'audio_install_dialog'),
                    ('sync editor', self.app.open_editor, 'editor'),
                    ('audio analysis', self.app.open_audio, 'audio_window'),

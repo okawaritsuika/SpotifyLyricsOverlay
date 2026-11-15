@@ -7,6 +7,7 @@ import unittest
 from unittest.mock import patch
 
 from audio_alignment import AlignmentUnmatched
+from audio_capture_cache import CAPTURE_NAME
 from audio_job import AudioJob
 from audio_progress import AudioProgress
 from audio_worker import main
@@ -22,13 +23,13 @@ class UnmatchedAudioTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             path=Path(directory)/'request.json';path.write_text('{}',encoding='utf-8')
             path.with_name('capture-info.json').write_text('{"start_position":0}',encoding='utf-8')
-            path.with_name('capture.wav').write_bytes(b'temporary')
+            path.with_name(CAPTURE_NAME).write_bytes(b'temporary')
             with patch('audio_worker.sys.argv',['audio_worker.py','--analyze',str(path)]), \
                  patch('audio_worker.analyze',side_effect=AlignmentUnmatched('일치 구절 부족')), \
                  patch('audio_worker.emit') as emit:
                 main()
             emit.assert_called_once_with('progress',state='unmatched',text='일치 구절 부족')
-            self.assertFalse(path.with_name('capture.wav').exists())
+            self.assertFalse(path.with_name(CAPTURE_NAME).exists())
 
     def test_worker_completion_does_not_replace_unmatched_with_process_error(self):
         song=Song('test','Example','Artist','Album',(Line('例文です','',''),))

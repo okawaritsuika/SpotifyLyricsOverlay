@@ -9,7 +9,7 @@ import threading
 import time
 
 from artist_metadata import validated_track
-from catalog_autolink import cached_pool, local_matches, recording_title_key, MAX_PUBLIC_TRACKS, MAX_PUBLIC_BYTES
+from catalog_autolink import cached_pool, local_matches, recording_title_key, _solo_title_parts, MAX_PUBLIC_TRACKS, MAX_PUBLIC_BYTES
 from catalog_link_queue import CatalogLinkQueue
 from explorer_library import ExplorerLibrary, performers, search_key
 from song_catalog import SongCatalog
@@ -53,7 +53,9 @@ class CatalogSync:
                 if isinstance(item, dict) and isinstance(item.get('id'), str)}
         for item in tracks:
             if not isinstance(item, dict) or not item.get('artists'):continue
-            if search and self.catalog and recording_title_key(item.get('title')) not in self.title_keys:continue
+            if search and self.catalog and recording_title_key(item.get('title')) not in self.title_keys:
+                solo=_solo_title_parts(item.get('title'))
+                if not solo or solo[0] not in self.title_keys:continue
             request = {key: item.get(key) for key in ('title', 'album', 'duration')}
             request['artist'] = item['artists'][0]
             track = validated_track(request, item)

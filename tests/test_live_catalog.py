@@ -102,6 +102,29 @@ class LiveCatalogTests(unittest.TestCase):
         for series in (['sidem'], ['other'], []):
             self.assertEqual(catalog.for_song({'title': 'ESPADA', 'series': series}), [])
 
+    def test_indexed_live_cover_matches_independently_of_cast_and_filters(self):
+        value=snapshot()
+        event=value['events'][0]
+        event['songs']=[
+            {'title':'風花','song_title':'風花','series':['million'],'series_basis':'event_section_brand',
+             'song_source_url':'https://imas-db.jp/song/detail/142.html','artists':['Another singer']},
+            {'title':'Short','series_basis':'event_section_brand'},
+            {'title':'長い名前が付いた舞台曲','series_basis':'event_section_brand','performance_kind':'dance_without_vocals'},
+            {'title':'長い名前を持つ異作品','series_basis':'event_section_brand'}]
+        self.save(value)
+        catalog=LiveCatalog(self.path)
+        vocal={'id':'cover','title':'風花','series':['765'],'kind':'song','artists':['四条貴音']}
+        recordings=[vocal,{'id':'short','title':'Short','series':['shiny'],'kind':'song'},
+                    {'id':'dance','title':'長い名前が付いた舞台曲','series':['shiny'],'kind':'song'},
+                    {'id':'alternate1','title':'長い名前を持つ異作品','series':['shiny'],'kind':'song'},
+                    {'id':'alternate2','title':'長い名前を持つ異作品','series':['sidem'],'kind':'song'}]
+        catalog.index_recordings(recordings)
+        self.assertEqual([row['matches'] for row in catalog.songs_for_event(event,recordings)],[[vocal],[],[],[]])
+        self.assertEqual(catalog.songs_for_event(event,recordings[:1])[0]['performance']['artists'],['Another singer'])
+        self.assertEqual(catalog.songs_for_event(event,recordings[-1:])[-1]['matches'],[])
+        self.assertEqual(catalog.count_for_song(vocal),1)
+        self.assertEqual(catalog.for_song(vocal)[0]['id'],event['id'])
+
     def test_no_substring_or_fuzzy_title_match(self):
         catalog = LiveCatalog(self.path)
         for title in ('ESPA', 'My ESPADA', 'ESPADA!', ''):

@@ -1,12 +1,15 @@
 # Windows 배포
 
-Windows x64용 배포본은 Python을 따로 설치하지 않고 실행할 수 있습니다.
-GitHub Releases에서 Windows ZIP을 내려받고 압축을 모두 푼 뒤
-`SpotifyLyricsOverlay.exe`를 실행합니다. 함께 제공되는 안내와 의존성 고지 파일도 보관하세요.
+Windows x64용 배포본은 Python과 Node.js를 따로 설치하지 않고 실행할 수 있습니다.
+0.1.1은 기존 사용자도 GitHub Releases에서 **Windows x64 ZIP**을 새로 내려받으세요.
+실행 중인 앱을 닫고 새 폴더에 압축을 모두 푼 뒤 `SpotifyLyricsOverlay.exe`를 실행합니다.
+현재 화면을 여는 데 필요한 `electron-runtime/` 폴더는 EXE 옆에 두고, 함께 제공되는 안내와 의존성 고지 파일도 보관하세요.
+별도 EXE는 앱 내 프로그램 업데이트용 파일입니다.
 
 ## 기본 포함 범위
 
 - 가사 오버레이와 음악 사전, 일본어 읽기 사전
+- Windows ZIP에 동봉한 Electron 런타임
 - 공개용으로 정리한 저장 가사·한국어 번역·발음·곡별 싱크·파트 자료
 - 공개 곡·아티스트·앨범 정보와 확인한 곡 연결
 
@@ -17,12 +20,13 @@ AI 모델, Torch/Whisper 등 음원 분석 엔진, 추가 브라우저 연결 �
 
 ## 앱 안에서 업데이트
 
-**더 보기 → 프로그램·자료 업데이트**에서 이 프로젝트의 GitHub 릴리스를 확인합니다.
-프로그램과 가사·번역·싱크 자료는 각각 선택하여 내려받습니다.
+Windows ZIP에 든 0.1.1 EXE를 실행한 뒤 **더 보기 → 프로그램·자료 업데이트** 또는
+음악 사전의 **자료 갱신…**에서 사전·가사 자료를 받으세요. 앱 안에서 프로그램과 자료는 각각 내려받습니다.
 파일은 릴리스의 SHA-256 체크섬과 대조한 뒤 적용하며, 프로그램 교체와 자료 적용은
 기존 앱을 정상 종료한 뒤 진행합니다. 기존 사용자 데이터 위치를 그대로 사용합니다.
 
-자료 업데이트는 새 곡과 비어 있는 번역·싱크를 보충합니다. 이미 있는 시각·보정값·
+자료 업데이트는 검토한 공개 곡·공연·인물·그룹 사전을 갱신하고 새 가사와 비어 있는 번역·싱크를 보충합니다.
+직접 추가한 곡과 개인 연결은 별도 파일에 보관합니다. 이미 있는 시각·보정값·
 직접 수정한 가사·번역·개인 설정은 덮어쓰지 않습니다. 원문이나 시간표가 서로 맞지 않는
 자료는 보류합니다. 같은 자료를 다시 적용해도 기존 내용을 중복 추가하지 않습니다.
 프로그램 버전이 같아도 자료 패키지는 따로 내려받을 수 있습니다.
@@ -30,14 +34,33 @@ AI 모델, Torch/Whisper 등 음원 분석 엔진, 추가 브라우저 연결 �
 ## 이후 버전과 자료 게시
 
 프로그램을 고칠 때는 `app_version.py`의 `VERSION`과 배포 태그를 같은 버전으로 올립니다.
-빌드는 버전이 다르면 중단합니다. 자료를 갱신할 때는 새 공개 스냅샷을 검토한 뒤
-`resources/seed_data/`를 교체하고 다시 빌드합니다.
-릴리스에는 `SpotifyLyricsOverlay.exe`, Windows ZIP, 소스 ZIP,
-`SpotifyLyricsOverlay-data.zip`, `SHA256SUMS.txt`를 함께 올립니다.
+빌드는 버전이 다르면 중단합니다. 공개 사전이 든 ZIP을 처음 배포할 때는 이 형식을 지원하는
+프로그램도 함께 게시합니다. 이전 프로그램을 쓰는 사용자는 프로그램을 먼저 업데이트해야 합니다.
+릴리스에는 앱 내 업데이트용 `SpotifyLyricsOverlay.exe`, Electron 런타임이 동봉된 Windows ZIP,
+소스 ZIP, `SpotifyLyricsOverlay-data.zip`, `SHA256SUMS.txt`를 함께 올립니다.
 체크섬 파일은 해당 릴리스의 모든 EXE·ZIP에서 새로 생성해야 합니다.
 기본 GitHub Actions 배포 과정이 이 파일들을 생성하고 게시합니다.
 자료 패키지만 생성하려면 `python package_release.py --data`를 실행합니다.
 프로그램 버전이 같은 릴리스에서 자료만 갱신할 때도 자료 ZIP과 체크섬 파일을 함께 갱신하세요.
+`SHA256SUMS.txt`에는 기존 프로그램과 다른 배포 파일의 체크섬도 포함하세요.
+
+### 공개 사전 갱신
+
+배포 담당자가 새 경로에 후보 파일을 수집하고 출처와 변경분을 검토합니다. 곡만 갱신할 때는 첫 명령만 사용합니다.
+
+```powershell
+python tools/build_song_catalog.py --output output/song_catalog.json
+python -m live_catalog_update --output output/live_catalog.json
+python imas_people_sources.py --output output/imas_db_people.json
+```
+
+검토한 파일을 `resources/`에 반영한 뒤, 인물이나 그룹 편성이 달라졌으면
+`python tools/build_group_credits.py`로 그룹 자료를 다시 만듭니다.
+직접 수정한 공개 스냅샷의 `generated_at`에는 새 검토 시각을 ISO 8601 형식으로 적습니다.
+`python package_release.py --data`로 새 ZIP을 만든 뒤 GitHub 릴리스의 ZIP과 체크섬을 함께 갱신합니다.
+가사·번역·싱크도 갱신하려면 아래 절차로 검토한 `resources/seed_data/`를 교체합니다.
+
+앱의 **곡 추가…**로 저장한 비공개 곡은 각 사용자의 `data/personal_song_catalog.json`에 저장합니다.
 
 ## 사용자 데이터
 
@@ -81,12 +104,17 @@ python package_release.py --stage release/github-source
 ## EXE 빌드
 
 Windows x64와 Python 3.12 환경에서 별도 빌드 가상환경을 만듭니다.
-음원 분석 의존성을 설치하지 않은 환경을 사용합니다.
+음원 분석 의존성을 설치하지 않은 환경을 사용합니다. ZIP에 넣을 Electron 런타임은 Node.js 22.12 이상과 npm으로 준비합니다.
 
 ```powershell
+Push-Location desktop_ui
+npm ci --ignore-scripts
+npm exec --no -- install-electron
+Pop-Location
+
 py -3.12 -m venv .exe-venv
 .\.exe-venv\Scripts\python.exe -m pip install -r requirements.txt -r requirements-build.txt
-.\.exe-venv\Scripts\python.exe build_exe.py
+.\.exe-venv\Scripts\python.exe build_exe.py --electron-runtime desktop_ui/node_modules/electron/dist
 ```
 
 빌드 스크립트와 GitHub Actions 워크플로가 같은 파일 목록을 사용합니다.

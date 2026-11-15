@@ -4,6 +4,7 @@ These facts describe group membership, never the recording's singer credits.
 The playback path reads this compact snapshot rather than the song dictionary.
 """
 from functools import lru_cache
+from datetime import datetime, timezone
 import hashlib
 import json
 from pathlib import Path
@@ -11,15 +12,18 @@ import re
 import unicodedata
 from urllib.parse import urlsplit
 
+from app_paths import CATALOG_RELEASE_STAMP, catalog_snapshot_time
 from artist_colors import _artist_ranges
+from artist_credit_overrides import YUKI_AIRA
 from artist_names import character_name_only, name_key
+from work_reuse import is_brilliant_stars_album
 
 
 RESOURCE_PATH = Path(__file__).resolve().parent / 'resources' / 'group_credits.json'
 MAX_BYTES = 4 * 1024 * 1024
 _CONTEXT = ('idolm@ster', 'idolmaster', 'アイドルマスター', '初星学園',
             'shiny colors', 'million live', 'cinderella girls', 'sidem')
-_CV = re.compile(r'\s*[（(]CV\s*[.:：]?\s*[^()（）]+[)）]\s*$', re.I)
+_CV = re.compile(r'\s*[（(]CV\s*[.:：]?\s*([^\s.:：()（）][^()（）]*)[)）]\s*$', re.I)
 _PROJECT_NAMES = frozenset(name_key(name) for name in
                           ('初星学園', '하츠보시 학원', 'Hatsuboshi Gakuen', 'Hatsuboshi Academy'))
 
@@ -65,8 +69,9 @@ def _valid_strings(value, limit=10000):
     return isinstance(value, list) and len(value) <= limit and all(_valid_text(item) for item in value)
 
 
-def _valid(snapshot):
-    if not isinstance(snapshot, dict) or snapshot.get('schema_version') != 2:return False
+def valid_snapshot(snapshot):
+    if not isinstance(snapshot, dict) or type(snapshot.get('schema_version')) is not int or snapshot['schema_version'] != 2:
+        return False
     groups, members = snapshot.get('groups'), snapshot.get('members')
     if not isinstance(groups, list) or len(groups) > 5000:return False
     if not isinstance(members, list) or len(members) > 10000:return False
@@ -97,6 +102,8 @@ def _valid(snapshot):
 
 class GroupCredits:
     def __init__(self, snapshot):
+        self.generated_at = catalog_snapshot_time(snapshot)
+        self.release_at = catalog_snapshot_time(snapshot, (CATALOG_RELEASE_STAMP,))
         self.groups = {group['id']: group for group in snapshot['groups']}
         self.members = {member['id']: member for member in snapshot['members']}
         choices = {}
@@ -115,6 +122,15 @@ class GroupCredits:
         ambiguous_idols = set(snapshot.get('ambiguous_idol_aliases', []))
         self.idol_names = {key: next(iter(owners)) for key, owners in idol_choices.items()
                            if len(owners) == 1 and key not in ambiguous_idols}
+        voice_choices = {}
+        for person in self.members.values():
+            if person['member_status'] != 'confirmed':continue
+            for voice in person['voice_actors']:
+                identity = name_key(voice['name'])
+                for name in (voice['name'], voice['display']):
+                    voice_choices.setdefault(name_key(name), set()).add(identity)
+        self.voice_names = {key: next(iter(owners)) for key, owners in voice_choices.items()
+                            if len(owners) == 1}
 
     @lru_cache(maxsize=256)
     def with_voices(self, artists, album):
@@ -153,7 +169,7 @@ class GroupCredits:
         return tuple(result)
 
     @lru_cache(maxsize=256)
-    def lines(self, artists, album):
+    def rosters(self, artists, album):
         context = unicodedata.normalize('NFKC', album).casefold()
         idolmaster = any(word in context for word in _CONTEXT)
         found_groups, explicit_members = [], set()
@@ -180,12 +196,15 @@ class GroupCredits:
                 if kind == 'group' and short and not idolmaster:continue
                 if kind == 'idol':explicit_members.add(identity)
                 elif identity not in found_groups:found_groups.append(identity)
+        # A subset of named singers must not be expanded to the whole unit.
+        return tuple(self.groups[identity] for identity in found_groups
+                     if not is_project_credit(self.groups[identity])
+                     and not explicit_members.intersection(self.groups[identity]['members']))
+
+    @lru_cache(maxsize=256)
+    def lines(self, artists, album):
         result = []
-        for identity in found_groups:
-            group = self.groups[identity]
-            if is_project_credit(group):continue
-            # A subset of named singers must not be expanded to the whole unit.
-            if explicit_members.intersection(group['members']):continue
+        for group in self.rosters(artists, album):
             labels = []
             for member_id in dict.fromkeys(group['members']):
                 member = self.members[member_id]
@@ -207,7 +226,7 @@ def _read_snapshot(path, modified, changed, size):
         with Path(path).open('rb') as stream:raw = stream.read(MAX_BYTES + 1)
         if len(raw) > MAX_BYTES:return None
         snapshot = json.loads(raw)
-        return GroupCredits(snapshot) if _valid(snapshot) else None
+        return GroupCredits(snapshot) if valid_snapshot(snapshot) else None
     except (OSError, ValueError, TypeError, RecursionError):return None
 
 
@@ -220,15 +239,86 @@ def _catalog(path):
     except (OSError, ValueError, TypeError):return None
 
 
+def _preferred_catalog(update_path):
+    update = _catalog(update_path) if update_path is not None else None
+    if update is not None and update.release_at is None:
+        return update
+    base = _catalog(RESOURCE_PATH)
+    if update is None or (base is not None and base.generated_at is not None and base.generated_at > update.release_at):
+        return base
+    return update
+
+
 def group_member_lines(artists, album='', update_path=None):
     """Return display-only roster sections; original artist values stay intact."""
     if isinstance(artists, str):artists = (artists,)
     if not isinstance(artists, (list, tuple)):return ()
     names = tuple(value for value in artists if isinstance(value, str) and value.strip())
     if not names:return ()
-    catalog = _catalog(update_path) if update_path is not None else None
-    catalog = catalog or _catalog(RESOURCE_PATH)
+    catalog = _preferred_catalog(update_path)
     return catalog.lines(names, album if isinstance(album, str) else '') if catalog else ()
+
+
+@lru_cache(maxsize=256)
+def _performer_options(catalog, artists, album):
+    names = {}
+    character_voices, voices = {}, {}
+    has_group = False
+    known = catalog.known_names if catalog else ()
+    voice_names = catalog.voice_names if catalog else {}
+    for artist in artists:
+        for start, end in _artist_ranges(artist, known):
+            name = artist[start:end].strip()
+            if not name:continue
+            plain = unicodedata.normalize('NFKC', name)
+            cv = _CV.search(plain)
+            key = name_key(plain[:cv.start()] if cv else plain)
+            owner = catalog.names.get(key) if catalog else None
+            if key in _PROJECT_NAMES:continue
+            if owner and owner[0] == 'group':
+                if is_project_credit(catalog.groups[owner[1]]):continue
+                has_group = True
+                # Some unit aliases are themselves lists of named characters.
+                parts = [name[left:right].strip() for left, right in
+                         _artist_ranges(name, catalog.idol_names)] if catalog else []
+                for part in parts:
+                    member = catalog.idol_names.get(name_key(_CV.sub('', unicodedata.normalize('NFKC', part))))
+                    if member:names.setdefault(member, part)
+                continue
+            individual = catalog.idol_names.get(key) if catalog else None
+            identity = individual or key
+            names.setdefault(identity, name)
+            if individual or cv:
+                credited_voices = character_voices.setdefault(identity, set())
+                if cv:
+                    credit = cv[1].strip()
+                    for left, right in _artist_ranges(credit, voice_names):
+                        actor = name_key(credit[left:right])
+                        if actor:credited_voices.add(voice_names.get(actor, actor))
+                elif individual:
+                    credited_voices.update(name_key(voice['name'])
+                                           for voice in catalog.members[individual]['voice_actors'])
+            elif key in voice_names or (key == name_key(YUKI_AIRA) and is_brilliant_stars_album(album)):
+                voices.setdefault(voice_names.get(key, key), name)
+    if catalog:
+        for group in catalog.rosters(artists, album):
+            has_group = True
+            for member in group['members']:
+                names.setdefault(member, catalog.members[member]['name'])
+    solo = ()
+    if not has_group and len(character_voices) == 1:
+        identity, credited_voices = next(iter(character_voices.items()))
+        if len(credited_voices) == 1 and voices.keys() <= credited_voices:
+            solo = (names[identity],)
+    elif not has_group and not character_voices and len(voices) == 1:
+        solo = tuple(voices.values())
+    return tuple(names.values()), solo
+
+
+def performer_options(artists, album='', update_path=None):
+    """Return manual choices in header order and the voice-backed solo fallback."""
+    catalog = _preferred_catalog(update_path)
+    return _performer_options(catalog, tuple(artists), album)
 
 
 def with_character_voices(artists, album='', update_path=None):
@@ -241,8 +331,7 @@ def with_character_voices(artists, album='', update_path=None):
     if not isinstance(artists, (list, tuple)):return ()
     names = tuple(value for value in artists if isinstance(value, str))
     if not any(value.strip() for value in names):return names
-    catalog = _catalog(update_path) if update_path is not None else None
-    catalog = catalog or _catalog(RESOURCE_PATH)
+    catalog = _preferred_catalog(update_path)
     return catalog.with_voices(names, album if isinstance(album, str) else '') if catalog else names
 
 
@@ -288,11 +377,11 @@ def save_group_credits(people, path):
             'members': list(dict.fromkeys(member_ids)),
             'source_urls': _sources(group, ('source_urls', 'membership_sources'))})
         if is_project_credit(group):groups[-1]['credit_scope'] = 'project'
-    snapshot = {'schema_version': 2,
+    snapshot = {'schema_version': 2, 'generated_at': datetime.now(timezone.utc).isoformat(timespec='seconds'),
         'note': 'Display-only group rosters and individual character voices, not recording-specific singing credits. Sources are public membership and voice-actor facts.',
         'groups': groups, 'members': list(members.values()),
         'ambiguous_aliases': sorted(key for key, owners in choices.items() if len(owners) > 1),
         'ambiguous_idol_aliases': sorted(key for key, owners in idol_choices.items() if len(owners) > 1)}
-    if not _valid(snapshot):raise ValueError('그룹 구성원 표시 자료가 올바르지 않습니다.')
+    if not valid_snapshot(snapshot):raise ValueError('그룹 구성원 표시 자료가 올바르지 않습니다.')
     atomic_json(path, snapshot)
     return len(groups)

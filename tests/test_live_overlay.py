@@ -67,14 +67,14 @@ class LiveOverlayTests(unittest.TestCase):
         before=[path.read_bytes() for path in paths]
         self.playing();self.app.cursor=1;self.app.manual_index=1;self.app.follow.set(False)
         supplied=(Line('青い空','',''),Line('を見る','',''),Line('新しい言葉','あたらしい',''),Line('最後の言葉','',''))
-        self.app.messages.put(('spotify_lyrics',(self.app.playback.key,supplied)));self.app.tick()
+        self.app.messages.put(('spotify_lyrics',(self.app.playback.key,supplied)));self.tick()
         self.assertEqual([line.original for line in self.app.display_lines],['青い空を見る','新しい言葉','最後の言葉'])
         self.assertEqual(self.app.timing['times'],[10,None,50]);self.assertEqual(self.app.timing['offset'],.5)
         persisted=self.app.auto_analyzer.timing(self.app.song,True)
         self.assertEqual(persisted['times'],[10,None,50]);self.assertTrue(persisted['completion_pending'])
         self.assertEqual((self.app.cursor,self.app.manual_index,self.app.follow.get()),(2,2,False))
         self.assertTrue(self.app.live_lyrics.is_temporary(self.app.song));self.assertTrue(self.app.is_bound())
-        self.app.messages.put(('spotify_lyrics',(self.app.playback.key,supplied)));self.app.tick()
+        self.app.messages.put(('spotify_lyrics',(self.app.playback.key,supplied)));self.tick()
         self.assertEqual(len(self.app.song.lines),3)
         self.app.receive_reader_lyrics(self.app.reader_bridge.snapshot()['track'],(Line('新しい言葉','','새 말'),))
         self.assertEqual(self.app.display_lines[1].korean,'새 말')
@@ -82,7 +82,7 @@ class LiveOverlayTests(unittest.TestCase):
         self.app.follow.set(False);self.app.manual_index=0;self.app.cursor=0;self.app.stamp()
         corrected=list(self.app.timing['times'])
         self.playing('Other');self.playing()
-        self.app.messages.put(('spotify_lyrics',(self.app.playback.key,supplied)));self.app.tick()
+        self.app.messages.put(('spotify_lyrics',(self.app.playback.key,supplied)));self.tick()
         self.assertEqual(self.app.timing['times'],corrected)
         self.assertEqual(before,[path.read_bytes() for path in paths])
         for path in (self.store.directory/'live_timings').glob('*.json'):
@@ -93,8 +93,10 @@ class LiveOverlayTests(unittest.TestCase):
         # before a request worker can trigger Python's cyclic garbage collector.
         gc.collect()
         self.temp=tempfile.TemporaryDirectory();self.store=Store(self.temp.name)
-        self.store.save_settings({'online':False,'auto_audio':False,'web_auto':False,'borderless':False,'reader_mode':'chrome'})
+        self.store.save_settings({'online':False,'auto_audio':False,'web_auto':False,'borderless':False})
         self.root=tk.Tk();self.app=LyricsApp(self.root,self.store,start_services=False)
+        # The HTTP cases exercise the bridge's compatibility backend directly.
+        self.app.reader_bridge.set_backend('chrome')
         self.app.reader_bridge.port=0;self.app.reader_bridge.start()
     def tearDown(self):
         self.root.update_idletasks()
@@ -103,6 +105,13 @@ class LiveOverlayTests(unittest.TestCase):
         gc.collect()
     def playing(self,title='Test Song'):
         self.app.set_playback(Playback(title=title,base=20,duration=90,playing=True,captured=time.monotonic()))
+
+    def tick(self):
+        self.app.tick()
+        deadline=time.monotonic()+3
+        while self.app.merge_reader_receipts and time.monotonic()<deadline:
+            time.sleep(.005)
+            self.app.tick()
 
     def link_saved_song(self,song):
         # These legacy document fixtures omit artist/album metadata. Their
@@ -116,7 +125,9 @@ class LiveOverlayTests(unittest.TestCase):
         self.playing()
         self.app.receive_reader_lyrics(self.app.reader_bridge.snapshot()['track'],(Line('窓を開ける','','창문을 열다'),))
         job=next(iter(self.app.auto_analyzer.jobs))
-        self.assertTrue(job.memory_only);self.assertTrue(job.skip_final)
+        self.assertTrue(job.memory_only)
+        self.assertTrue(job.incremental)
+        self.assertFalse(job.skip_final)
         self.assertEqual(self.store.library(),[])
         self.playing()
         self.assertEqual(len(self.app.auto_analyzer.jobs),1)
@@ -134,6 +145,8 @@ class LiveOverlayTests(unittest.TestCase):
         self.assertTrue(self.app.screen_lyrics.needed)
         self.assertTrue(self.app.screen_lyrics.allow_ocr)
     def payload(self,**updates):
+        # This fixture has no media polling service to refresh the track.
+        self.app.reader_bridge.observe(self.app.playback)
         state=self.app.reader_bridge.snapshot()
         return {'track':state['track'],'token':state['token'],'text':TEXT,'url':'https://namu.wiki/w/Test%20Song',**updates}
     def post(self,payload,headers=None):
@@ -151,7 +164,7 @@ class LiveOverlayTests(unittest.TestCase):
         before=[path.read_bytes() for path in paths]
         self.playing()
         self.assertEqual(self.post(self.payload())[0],200)
-        self.app.tick();self.root.update()
+        self.tick();self.root.update()
         self.assertEqual(self.app.korean_label.cget('text'),'창문을 열다')
         self.assertEqual(self.app.reader_bridge.snapshot()['receipt']['status'],'displayed')
         self.assertIn('あける',self.app.reading_label.cget('text'))
@@ -163,7 +176,7 @@ class LiveOverlayTests(unittest.TestCase):
         self.assertNotEqual(self.app.korean_label.cget('text'),'창문을 열다')
     def test_unknown_song_text_stays_in_memory_and_only_timing_is_saved(self):
         self.playing();self.assertEqual(self.post(self.payload())[0],200)
-        self.app.tick();self.root.update()
+        self.tick();self.root.update()
         self.assertTrue(self.app.live_lyrics.is_temporary(self.app.song))
         self.assertEqual(self.app.korean_label.cget('text'),'창문을 열다')
         self.assertEqual(self.app.reader_bridge.snapshot()['receipt']['status'],'displayed')
@@ -187,7 +200,7 @@ class LiveOverlayTests(unittest.TestCase):
         from urllib.parse import quote
         title='蒼い鳥 (OathOne Recording)';self.playing(title)
         self.assertEqual(self.post(self.payload(url='https://namu.wiki/w/'+quote(title),match_mode='title'))[0],200)
-        self.app.tick();self.root.update()
+        self.tick();self.root.update()
         self.assertEqual(self.app.reader_bridge.snapshot()['receipt']['status'],'displayed')
         self.assertEqual(self.app.korean_label.cget('text'),'창문을 열다')
         self.assertEqual(self.store.library(),[])
@@ -199,7 +212,7 @@ class LiveOverlayTests(unittest.TestCase):
         self.assertEqual(self.post(self.payload(url=url,match_mode='unique_title'))[0],200)
         path=self.store.directory/'wiki_documents.json'
         self.assertFalse(path.exists())
-        self.app.tick();self.root.update()
+        self.tick();self.root.update()
         self.assertEqual(self.app.reader_bridge.snapshot()['receipt']['status'],'displayed')
         self.assertEqual(self.app.korean_label.cget('text'),'창문을 열다')
         saved=json.loads(path.read_text(encoding='utf-8'))
@@ -217,7 +230,7 @@ class LiveOverlayTests(unittest.TestCase):
         chosen='https://namu.wiki/w/Chosen'
         self.app.messages.put(('reader_document',(track,chosen)))
         self.app.messages.put(('reader_document',(track,{'url':'https://namu.wiki/w/Test%20Song','learned':True})))
-        self.app.tick()
+        self.tick()
         saved=json.loads((self.store.directory/'wiki_documents.json').read_text(encoding='utf-8'))
         self.assertEqual(saved,{track:chosen})
 
@@ -228,7 +241,7 @@ class LiveOverlayTests(unittest.TestCase):
                 source='https://namu.wiki/w/'+quote(name)
                 self.playing(name)
                 self.assertEqual(self.post(self.payload(url=source,match_mode='title'))[0],200)
-                self.app.tick();self.root.update()
+                self.tick();self.root.update()
                 original=self.app.song
                 self.app.live_lyrics.timing_store.save(original,{'times':[12.5],'offset':.3})
                 self.playing(name+' (OathOne Recording)')
@@ -237,7 +250,7 @@ class LiveOverlayTests(unittest.TestCase):
                 self.assertEqual(self.post(self.payload(url='https://namu.wiki/w/Unrelated',match_mode='metadata'))[0],400)
                 for mode in ('metadata','unique_title'):
                     self.assertEqual(self.post(self.payload(url=source,match_mode=mode))[0],200)
-                self.app.tick();self.root.update()
+                self.tick();self.root.update()
                 recording=self.app.song
                 self.assertNotEqual(recording.id,original.id)
                 self.assertEqual(recording.title,name+' (OathOne Recording)')
@@ -251,9 +264,9 @@ class LiveOverlayTests(unittest.TestCase):
     def test_failed_display_reports_failure_after_http_queue_accepts(self):
         self.playing();self.assertEqual(self.post(self.payload())[0],200)
         self.assertEqual(self.app.reader_bridge.snapshot()['receipt']['status'],'queued')
-        with patch.object(self.app.live_lyrics,'receive',side_effect=ValueError('synthetic display failure')), \
+        with patch.object(self.app.live_lyrics,'receive_merged',side_effect=ValueError('synthetic display failure')), \
              patch('app.messagebox.showerror') as modal:
-            self.app.tick()
+            self.tick()
         modal.assert_not_called()
         self.assertEqual(self.app.reader_bridge.snapshot()['receipt']['status'],'display_failed')
         self.assertIn('synthetic display failure',self.app.mode_label.cget('text'))
@@ -261,13 +274,13 @@ class LiveOverlayTests(unittest.TestCase):
         self.assertEqual(self.store.library(),[])
         self.assertFalse((self.store.directory/'wiki_documents.json').exists())
         self.app.messages.put(('media',Playback(title='Next song',base=10,duration=90,playing=True,captured=time.monotonic())))
-        self.app.tick()
+        self.tick()
         self.assertEqual(self.app.playback.title,'Next song')
 
     def test_english_refrain_does_not_block_http_translation_display(self):
         self.playing();text='Open the window\n'+TEXT+'\n花を描く\n하나오 카쿠\n꽃을 그리다'
         self.assertEqual(self.post(self.payload(text=text))[0],200)
-        self.app.tick();self.root.update()
+        self.tick();self.root.update()
         self.assertEqual([line.korean for line in self.app.live_lyrics.lines],['','창문을 열다','꽃을 그리다'])
         self.app.follow.set(False);self.app.manual_index=1;self.app.render()
         self.assertEqual(self.app.korean_label.cget('text'),'창문을 열다')
@@ -282,30 +295,34 @@ class LiveOverlayTests(unittest.TestCase):
 
     def test_spotify_originals_display_in_memory_and_translation_keeps_manual_sync(self):
         self.playing();lines=(Line('窓を開ける','まどをあける',''),)
-        self.app.messages.put(('spotify_lyrics',(self.app.playback.key,lines)));self.app.tick()
+        self.app.messages.put(('spotify_lyrics',(self.app.playback.key,lines)));self.tick()
         self.assertEqual(self.app.original_label.cget('text'),'窓を開ける')
         self.app.offset(.75);self.app.align_now();times=list(self.app.timing['times'])
-        self.assertEqual(self.post(self.payload())[0],200);self.app.tick()
+        self.assertEqual(self.post(self.payload())[0],200);self.tick()
         self.assertEqual(self.app.timing['offset'],.75);self.assertEqual(self.app.timing['times'],times)
         self.assertEqual(self.app.korean_label.cget('text'),'창문을 열다')
         self.assertEqual(self.app.reader_bridge.snapshot()['receipt']['status'],'displayed')
         self.assertEqual(self.store.library(),[])
 
-    def test_partial_refresh_keeps_same_lines_translation_and_manual_cursor(self):
+    def test_partial_refresh_keeps_translation_timing_and_developer_selection(self):
         self.playing()
         full=TEXT+'\n花を描く\n하나오 카쿠\n꽃을 그리다'
-        self.assertEqual(self.post(self.payload(text=full))[0],200);self.app.tick()
-        self.app.move(1);self.app.move(-1);self.app.offset(.25)
-        timing=self.app.timing;cursor=self.app.cursor
+        self.assertEqual(self.post(self.payload(text=full))[0],200);self.tick()
+        self.app.open_developer_mode()
+        dialog = self.app.manual_sync_dialog
+        dialog.select_for_edit(1)
+        self.app.offset(.25)
+        timing=self.app.timing
         # A temporarily missing meaning must not erase the same phrase's translation.
         partial='窓を開ける\n마도오 아케루\n花を描く\n하나오 카쿠\n새 번역'
-        self.assertEqual(self.post(self.payload(text=partial))[0],200);self.app.tick();self.root.update()
+        self.assertEqual(self.post(self.payload(text=partial))[0],200);self.tick();self.root.update()
         self.assertEqual([line.korean for line in self.app.display_lines],['창문을 열다','새 번역'])
         self.assertEqual(self.app.korean_label.cget('text'),'창문을 열다')
-        self.assertEqual(self.app.cursor,cursor);self.assertIs(self.app.timing,timing)
-        self.assertFalse(self.app.follow.get())
+        self.assertEqual(dialog.selected_index(), 1)
+        self.assertIs(self.app.timing, timing)
+        self.assertTrue(self.app.follow.get())
         self.playing('Next Song')
-        self.assertEqual(self.post(self.payload(text=partial,url='https://namu.wiki/w/Next%20Song'))[0],200);self.app.tick()
+        self.assertEqual(self.post(self.payload(text=partial,url='https://namu.wiki/w/Next%20Song'))[0],200);self.tick()
         self.assertEqual(self.app.display_lines[0].korean,'')
 
     def test_saved_song_partial_refresh_retains_current_translations(self):
@@ -321,21 +338,21 @@ class LiveOverlayTests(unittest.TestCase):
         self.assertEqual(self.store.library()[0],song)
 
     def test_same_row_status_updates_keep_existing_canvas_items(self):
-        self.playing();self.assertEqual(self.post(self.payload())[0],200);self.app.tick();self.root.update()
+        self.playing();self.assertEqual(self.post(self.payload())[0],200);self.tick();self.root.update()
         labels=(self.app.reading_label,self.app.original_label,self.app.korean_label)
         before=[label.find_withtag('lyric') for label in labels]
         for i in range(4):
-            self.app.messages.put(('screen_status','상태 변경 '+str(i)));self.app.tick();self.root.update()
+            self.app.messages.put(('screen_status','상태 변경 '+str(i)));self.tick();self.root.update()
             self.assertEqual([label.find_withtag('lyric') for label in labels],before)
             self.assertEqual(self.app.korean_label.cget('text'),'창문을 열다')
 
     def test_spotify_highlight_overrides_estimate_and_clears_on_track_change(self):
         self.playing();lines=(Line('静かな空を見上げる','',''),Line('新しい道を歩いている','',''))
-        self.app.messages.put(('spotify_lyrics',(self.app.playback.key,lines)));self.app.tick()
+        self.app.messages.put(('spotify_lyrics',(self.app.playback.key,lines)));self.tick()
         self.app.receive_spotify_active(self.app.playback.key,tuple(x.original for x in lines),1)
         self.app.render();self.assertEqual(self.app.displayed_index(),1)
-        self.assertIn('Spotify 현재 구절',self.app.mode_label.cget('text'))
-        self.assertNotIn('추정 싱크',self.app.mode_label.cget('text'))
+        self.assertTrue(self.app.following_spotify())
+        self.assertEqual(self.app.mode_label.cget('text'),'')
         self.app.spotify_observed_at-=3;self.assertFalse(self.app.following_spotify())
         self.playing('Next Song');self.assertIsNone(self.app.spotify_current)
 
@@ -348,7 +365,8 @@ class LiveOverlayTests(unittest.TestCase):
         before=(self.store.directory/'timings'/'saved.json').read_bytes()
         self.playing();self.app.receive_spotify_active(self.app.playback.key,tuple(x.original for x in lines),1)
         self.app.render();self.assertEqual(self.app.displayed_index(),0)
-        self.assertFalse(self.app.following_spotify());self.assertIn('저장한 곡별 싱크 우선',self.app.mode_label.cget('text'))
+        self.assertFalse(self.app.following_spotify())
+        self.assertTrue(self.app.has_saved_sync())
         self.app.live_lyrics.receive(self.app.playback,song,tuple(Line(x.original,'','테스트 번역') for x in lines))
         self.app.select_song(song);self.app.receive_spotify_active(self.app.playback.key,tuple(x.original for x in lines),1)
         self.assertEqual(self.app.displayed_index(),0)
@@ -413,21 +431,45 @@ class LiveOverlayTests(unittest.TestCase):
 
     def test_delayed_record_key_uses_press_time_even_after_new_media_snapshot(self):
         self.native_sample_song()
+        self.app.open_developer_mode()
+        dialog = self.app.manual_sync_dialog
         with patch('app.time.monotonic',return_value=101):
             self.app.set_playback(Playback(title='Test Song',base=21,duration=90,playing=True,captured=101))
         with patch('app.time.monotonic',return_value=101.4):
-            self.app.messages.put(('stamp_at',100.7));self.app.tick()
+            self.app.messages.put(('stamp_at',100.7));self.tick()
         self.assertIsNone(self.app.timing['times'][0])
         self.assertEqual(self.app.timing['times'][1],20.7)
-        self.assertEqual(self.app.cursor,1)
+        self.assertEqual(dialog.selected_index(), 1)
+        self.assertTrue(self.app.follow.get())
 
     def test_stale_record_key_does_not_write_into_the_new_playback_position(self):
         self.native_sample_song()
+        self.app.open_developer_mode()
+        dialog = self.app.manual_sync_dialog
         with patch('app.time.monotonic',return_value=101):
             self.app.set_playback(Playback(title='Test Song',base=60,duration=90,playing=True,captured=101))
-            self.app.stamp(100.7)
+            self.app.messages.put(('stamp_at',100.7));self.tick()
         self.assertEqual(self.app.timing['times'],[None]*3)
-        self.assertEqual(self.app.cursor,0)
+        self.assertEqual(dialog.selected_index(), 0)
+        self.assertIn('저장하지 못했습니다', dialog.status.cget('text'))
+
+    def test_record_key_preserves_conflicting_manual_time_and_edit_selection(self):
+        self.native_sample_song()
+        timing={'times':[17.447,18.056,18.144],'origins':['manual']*3,'offset':0}
+        self.app.save_current_timing(timing);self.app.timing=timing
+        path=self.store.directory/'timings/sampled.json'
+        before=path.read_bytes()
+        self.app.playback=Playback(title='Test Song',base=18.3,duration=90,captured=100)
+        with patch('app.time.monotonic',return_value=100.1):
+            self.app.open_developer_mode()
+            dialog = self.app.manual_sync_dialog
+            self.app.messages.put(('stamp_at',100));self.tick()
+        self.assertEqual(dialog.selected_index(), 0)
+        self.assertEqual(self.app.displayed_index(), 2)
+        self.assertTrue(self.app.follow.get())
+        self.assertIn('저장 시각과 겹칩니다', dialog.status.cget('text'))
+        self.assertEqual(self.app.timing,timing)
+        self.assertEqual(path.read_bytes(),before)
 
     def test_remembered_native_time_does_not_shift_when_first_seen_mid_line(self):
         originals=self.native_sample_song()
@@ -444,7 +486,7 @@ class LiveOverlayTests(unittest.TestCase):
 
     def test_native_mapping_is_cached_and_invalidated_when_song_changes(self):
         self.playing();lines=(Line('静かな空を見上げる','',''),Line('新しい道を歩いている','',''))
-        self.app.messages.put(('spotify_lyrics',(self.app.playback.key,lines)));self.app.tick()
+        self.app.messages.put(('spotify_lyrics',(self.app.playback.key,lines)));self.tick()
         originals=tuple(x.original for x in lines)
         self.app.receive_spotify_active(self.app.playback.key,originals,0)
         with patch('app.native_line_mapping',side_effect=AssertionError('mapping must be reused')):
@@ -486,26 +528,26 @@ class LiveOverlayTests(unittest.TestCase):
     def test_no_spotify_lyrics_can_be_timed_and_reloaded_without_saving_text(self):
         self.playing('Example-2022ver')
         self.assertEqual(self.post(self.payload(url='https://namu.wiki/w/Example(Series)',match_mode='title'))[0],200)
-        self.app.tick();self.app.align_now();self.app.offset(.5)
+        self.tick();self.app.align_now();self.app.offset(.5)
         expected=dict(self.app.timing);self.playing('Other');self.playing('Example-2022ver')
         self.assertEqual(self.post(self.payload(url='https://namu.wiki/w/Example(Series)',match_mode='title'))[0],200)
-        self.app.tick()
+        self.tick()
         self.assertEqual(self.app.timing['times'],expected['times']);self.assertEqual(self.app.timing['offset'],.5)
         self.assertTrue(self.app.has_saved_sync());self.assertEqual(self.store.library(),[])
 
     def test_minimized_spotify_discards_frozen_highlight_and_uses_media_clock(self):
         self.playing();lines=(Line('静かな空を見上げる','',''),Line('新しい道を歩いている','',''))
-        self.app.messages.put(('spotify_lyrics',(self.app.playback.key,lines)));self.app.tick()
+        self.app.messages.put(('spotify_lyrics',(self.app.playback.key,lines)));self.tick()
         self.app.receive_spotify_active(self.app.playback.key,tuple(x.original for x in lines),1)
         self.assertTrue(self.app.following_spotify())
-        self.app.messages.put(('spotify_tracking',(self.app.playback.key,'background_clock')));self.app.tick()
+        self.app.messages.put(('spotify_tracking',(self.app.playback.key,'background_clock')));self.tick()
         self.assertFalse(self.app.following_spotify());self.assertEqual(self.app.displayed_index(),1)
         self.app.set_playback(Playback(title='Test Song',base=80,duration=90,playing=False,captured=time.monotonic()))
         self.assertEqual(self.app.displayed_index(),1)
 
     def test_native_matching_moves_to_nearby_line_without_warping_to_repeated_phrase(self):
         self.playing();lines=tuple(Line(text,'','') for text in ['静かな空を見上げる','新しい道を歩いている','ここから先へ進もう','静かな空を見上げる'])
-        self.app.messages.put(('spotify_lyrics',(self.app.playback.key,lines)));self.app.tick()
+        self.app.messages.put(('spotify_lyrics',(self.app.playback.key,lines)));self.tick()
         source=tuple(line.original for line in lines)
         self.app.receive_spotify_active(self.app.playback.key,source,0)
         # A later exact repeat must not take precedence over ordinary forward order.
@@ -519,7 +561,7 @@ class LiveOverlayTests(unittest.TestCase):
 
     def test_manual_seek_resets_order_guard(self):
         self.playing();lines=(Line('静かな空を見上げる','',''),Line('新しい道を歩いている','',''))
-        self.app.messages.put(('spotify_lyrics',(self.app.playback.key,lines)));self.app.tick()
+        self.app.messages.put(('spotify_lyrics',(self.app.playback.key,lines)));self.tick()
         source=tuple(line.original for line in lines)
         self.app.receive_spotify_active(self.app.playback.key,source,1)
         self.app.set_playback(Playback(title='Test Song',base=0,duration=90,playing=False,captured=time.monotonic()))
@@ -528,7 +570,7 @@ class LiveOverlayTests(unittest.TestCase):
 
     def test_missed_highlight_samples_catch_up_to_actual_source_index(self):
         self.playing();lines=tuple(Line(text,'','') for text in ['静かな空を見上げる','新しい道を歩いている','ここから先へ進もう','遠い街へ向かう','星を数えて眠る'])
-        self.app.messages.put(('spotify_lyrics',(self.app.playback.key,lines)));self.app.tick()
+        self.app.messages.put(('spotify_lyrics',(self.app.playback.key,lines)));self.tick()
         source=tuple(line.original for line in lines)
         self.app.receive_spotify_active(self.app.playback.key,source,0)
         self.app.receive_spotify_active(self.app.playback.key,source,3)
@@ -536,7 +578,7 @@ class LiveOverlayTests(unittest.TestCase):
 
     def test_fresh_highlight_corrects_an_estimate_that_has_run_ahead(self):
         self.playing();lines=tuple(Line(text,'','') for text in ['静かな空を見上げる','新しい道を歩いている','ここから先へ進もう','遠い街へ向かう'])
-        self.app.messages.put(('spotify_lyrics',(self.app.playback.key,lines)));self.app.tick()
+        self.app.messages.put(('spotify_lyrics',(self.app.playback.key,lines)));self.tick()
         source=tuple(line.original for line in lines)
         self.app.receive_spotify_active(self.app.playback.key,source,1)
         self.app.spotify_observed_at-=3
@@ -548,7 +590,7 @@ class LiveOverlayTests(unittest.TestCase):
 
     def test_different_line_breaks_do_not_limit_native_progress_to_one_row(self):
         self.playing();lines=tuple(Line(text,'','') for text in ['静かな空を見上げる','新しい道を歩いている','ここから先へ進もう','遠い街へ向かう'])
-        self.app.messages.put(('spotify_lyrics',(self.app.playback.key,lines)));self.app.tick()
+        self.app.messages.put(('spotify_lyrics',(self.app.playback.key,lines)));self.tick()
         source=(lines[0].original,lines[1].original+' '+lines[2].original,lines[3].original)
         self.app.receive_spotify_active(self.app.playback.key,source,0)
         self.app.receive_spotify_active(self.app.playback.key,source,1)
@@ -608,29 +650,38 @@ class LiveOverlayTests(unittest.TestCase):
         self.app.receive_spotify_active(self.app.playback.key,source,1)
         self.assertEqual(self.app.spotify_current,1)
 
-    def test_click_lyrics_and_plain_arrows_select_the_row_to_stamp(self):
+    def test_click_lyrics_and_plain_arrows_keep_the_overlay_following(self):
         self.playing();lines=tuple(Line(text,'','번역') for text in ['静かな空を見上げる','新しい道を歩いている','ここから先へ進もう'])
-        self.app.messages.put(('spotify_lyrics',(self.app.playback.key,lines)));self.app.tick()
+        self.app.messages.put(('spotify_lyrics',(self.app.playback.key,lines)));self.tick()
         source=tuple(line.original for line in lines)
         self.app.receive_spotify_active(self.app.playback.key,source,1)
         self.app.transparent.set(False);self.app.apply_appearance()
         self.app.chrome_available=True;self.app.toggle_chrome();self.root.update()
-        for widget in (self.app.original_label,self.app.korean_label,self.app.reading_label,self.app.lyric_frame,self.app.backdrop.window):
-            widget.event_generate('<ButtonPress-1>',x=5,y=5);self.root.update()
-            self.assertIs(self.root.focus_get(),self.root)
-            self.root.event_generate('<Right>');self.root.update()
-            self.assertEqual(self.app.displayed_index(),2)
-            self.assertFalse(self.app.follow.get())
-            self.root.event_generate('<Left>');self.root.update()
-            self.assertEqual(self.app.displayed_index(),1)
-            self.assertEqual(self.app.cursor,1)
+        timing = self.app.timing
+        cursor = self.app.cursor
+        with patch.object(self.app.monitor, 'request_seek', return_value=False):
+            for widget in (self.app.original_label, self.app.korean_label, self.app.reading_label,
+                           self.app.lyric_frame, self.app.backdrop.window):
+                widget.event_generate('<ButtonPress-1>', x=5, y=5)
+                widget.event_generate('<ButtonRelease-1>', x=5, y=5)
+                self.root.update()
+                self.assertIs(self.root.focus_get(), self.root)
+                self.root.event_generate('<Right>')
+                self.root.event_generate('<Left>')
+                self.root.update()
+                self.assertEqual(self.app.displayed_index(), 1)
+                self.assertTrue(self.app.follow.get())
+                self.assertIsNone(self.app.singer_input_index)
+                self.assertIsNone(self.app.manual_sync_dialog)
+                self.assertEqual(self.app.cursor, cursor)
+                self.assertIs(self.app.timing, timing)
+        self.app.messages.put(('stamp_at', time.monotonic()))
+        self.tick()
+        self.assertIs(self.app.timing, timing)
         self.app.receive_spotify_active(self.app.playback.key,source,2)
-        self.assertEqual(self.app.displayed_index(),1)
-        self.app.stamp();self.assertIsNotNone(self.app.timing['times'][2])
-        self.assertIsNone(self.app.timing['times'][1])
-        self.assertIsNone(self.app.timing['times'][0])
-        self.assertEqual(self.app.displayed_index(),2)
-        self.assertFalse(self.app.follow.get())
+        self.assertEqual(self.app.displayed_index(), 2)
+        self.assertTrue(self.app.follow.get())
+        self.assertEqual(self.app.timing['times'], [None, None, None])
 
     def test_modified_arrows_and_editor_inputs_do_not_select_lyric_rows(self):
         from types import SimpleNamespace

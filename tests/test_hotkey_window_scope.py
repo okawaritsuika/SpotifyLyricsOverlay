@@ -31,6 +31,7 @@ class HotkeyWindowScopeTests(unittest.TestCase):
         self.pid=os.getpid()
         def process_id(handle,pointer):
             ctypes.cast(pointer,ctypes.POINTER(wintypes.DWORD)).contents.value=self.pid
+            return 1
         self.user.GetWindowThreadProcessId.side_effect=process_id
         self.native=patch('windows.ctypes.windll',SimpleNamespace(user32=self.user))
         self.native.start();self.addCleanup(self.native.stop)
@@ -83,6 +84,22 @@ class HotkeyWindowScopeTests(unittest.TestCase):
                          {'<Map>':1,'<Destroy>':1,'<FocusIn>':1,'<FocusOut>':1})
 
     def test_no_registered_window_never_reserves_input(self):
+        self.assertFalse(self.hotkeys.focused())
+
+    def test_verified_electron_overlay_accepts_shortcuts_and_releases_scope(self):
+        self.user.GetForegroundWindow.return_value=3010
+        self.pid+=1
+        self.hotkeys.set_external_overlay(3010,self.pid+1)
+        self.assertFalse(self.hotkeys.focused())
+        self.hotkeys.set_external_overlay(3010,self.pid)
+        self.assertTrue(self.hotkeys.focused(plain_arrow=0x25))
+        self.hotkeys.developer_input_windows=(Window(10),)
+        self.assertTrue(self.hotkeys.focused())
+        self.assertFalse(self.hotkeys.focused(plain_arrow=0x25))
+        self.user.GetForegroundWindow.return_value=3011
+        self.assertFalse(self.hotkeys.focused())
+        self.user.GetForegroundWindow.return_value=3010
+        self.hotkeys.set_external_overlay(None,None)
         self.assertFalse(self.hotkeys.focused())
 
 

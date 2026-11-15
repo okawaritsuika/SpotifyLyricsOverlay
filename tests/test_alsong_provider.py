@@ -5,7 +5,8 @@ from unittest.mock import Mock, patch
 import xml.etree.ElementTree as ET
 
 from alsong_provider import (DETAIL_ACTION, ENDPOINT, MAX_RESPONSE_BYTES, REQUEST_TIMEOUT,
-                             SEARCH_ACTION, _NoRedirect, _artist_matches, fetch_alsong)
+                             SEARCH_ACTION, _NoRedirect, _artist_matches, fetch_alsong,
+                             load_alsong_registration, search_alsong)
 from lyrics import Line
 from media import Playback
 
@@ -79,6 +80,40 @@ class AlsongProviderTests(unittest.TestCase):
         return fetch_alsong(playback or self.playback,
                             reference=self.reference if reference is None else reference,
                             fetch=fixture_fetch(*records),report=report)
+
+    def test_manual_results_use_edited_query_and_load_only_selected_id(self):
+        preferred = {**self.item, 'strInfoID': '456', 'strAlbumName': 'Edited Album'}
+        fetch = Mock(side_effect=fixture_fetch(self.item, preferred, preferred))
+        records = search_alsong(' Edited title ', ' Edited artist ', 'Edited Album', fetch=fetch)
+        self.assertEqual([row['lyricID'] for row in records], ['456', '123'])
+        fetch.assert_called_once_with(SEARCH_ACTION, {'title':'Edited title', 'artist':'Edited artist', 'pageNo':'1'})
+        result = load_alsong_registration('456', 207, fetch=fetch)
+        self.assertEqual(result['lines'][0].original, '朝を探して')
+        self.assertEqual(result['times'], [5.1, 10.25, 20, 30.75])
+        fetch.assert_called_with(DETAIL_ACTION, {'lyricID': '456'})
+
+    def test_manual_registration_keeps_timing_when_onsets_exceed_track_length(self):
+        result = load_alsong_registration('123', 20, fetch=fixture_fetch(self.item))
+        self.assertEqual(len(result['lines']), 4)
+        self.assertTrue(result['clock_mismatch'])
+        self.assertEqual(result['times'], [5.1, 10.25, 20, 30.75])
+        self.assertEqual(result['last_onset'], 30.75)
+        self.assertIsNone(result['duration'])
+
+    def test_manual_registration_keeps_timing_for_shorter_and_longer_versions(self):
+        for length in (150, 207, 250):
+            with self.subTest(length=length):
+                registration = {**self.item, 'playtime':str(length)}
+                result = load_alsong_registration('123', 207, fetch=fixture_fetch(registration))
+                self.assertEqual(result['duration'], length)
+                self.assertEqual(result['clock_mismatch'], length != 207)
+                self.assertEqual(result['times'], [5.1, 10.25, 20, 30.75])
+
+    def test_manual_registration_retains_lyrics_with_backwards_timing(self):
+        registration = {**self.item, 'strLyric': '[00:20]First<br>[00:10]Second'}
+        result = load_alsong_registration('123', 207, fetch=fixture_fetch(registration))
+        self.assertEqual([line.original for line in result['lines']], ['First', 'Second'])
+        self.assertEqual(result['times'], [None, None])
 
     def long_document(self):
         reference = tuple(f'The {ordinal} synthetic verse describes a different scene '

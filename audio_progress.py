@@ -8,6 +8,22 @@ PHASES = {'waiting':'재생 대기', 'recording':'소리 수집', 'queued':'분�
           'error':'오류', 'cancelling':'취소 중', 'cancelled':'취소됨', 'discarded':'결과 제외',
           'unmatched':'분석 완료 · 일치 구절 부족'}
 TERMINAL = {'partial','completed','error','cancelled','discarded','unmatched'}
+CANCELLATION_DETAILS = {
+    'external_sync':'확인된 싱크를 사용하므로 중복 분석을 종료했습니다.',
+    'bounded_sync_changed':'가사나 기준 시각이 바뀌어 이전 구간의 분석을 종료했습니다.',
+    'duration_changed':'곡 길이가 달라져 이전 녹음의 분석을 취소했습니다. 기존 시간표는 유지합니다.',
+    'track_changed':'가사 연결 전에 다른 곡으로 전환되어 수집 대기를 종료했습니다. 새 싱크는 저장하지 않았습니다.',
+    'playback_paused':'가사 연결 전에 재생이 정지되어 수집을 취소했습니다. 새 싱크는 저장하지 않았습니다.',
+    'playback_seeked':'가사 연결 전에 재생 위치가 이동하여 수집을 취소했습니다. 새 싱크는 저장하지 않았습니다.',
+    'obsolete_waiting':'수집 시작 전에 다른 곡으로 전환되어 이전 곡의 대기를 정리했습니다. 새 싱크는 저장하지 않았습니다.',
+    'saved_intervals':'저장 구간 이후 남은 시간이 짧아 이번 수집을 종료했습니다. 다음 재생에서 미분석 구간을 이어 분석합니다.',
+    'saved_partial':'저장된 부분 분석을 유지하고 이번 수집을 종료했습니다.',
+    'saved_candidate':'저장된 분석 후보를 유지하고 중복 수집을 종료했습니다. 새 싱크를 저장한 것은 아닙니다.',
+    'saved_sync':'이미 저장된 싱크를 사용하므로 중복 수집을 종료했습니다.',
+    'disabled':'자동 분석이 꺼져 진행 중인 분석을 취소했습니다. 기존 시간표는 유지합니다.',
+    'shutdown':'앱 종료 또는 수집 중지로 가사 연결 전 대기를 종료했습니다. 새 싱크는 저장하지 않았습니다.',
+    'shutdown_failed':'수집 종료 요청을 전달하지 못해 분석을 취소했습니다. 기존 시간표는 유지합니다.',
+}
 
 
 def duration_text(seconds):
@@ -19,9 +35,10 @@ def duration_text(seconds):
 
 
 class AudioProgress:
-    def __init__(self, title, mode='자동', clock=time.monotonic, *, final_analysis=True):
+    def __init__(self, title, mode='자동', clock=time.monotonic, *, final_analysis=True, bounded=False):
         self.title, self.mode, self.clock = title, mode, clock
         self.final_analysis = bool(final_analysis)
+        self.bounded = bounded
         self.phase = 'waiting'
         self.text = 'Spotify에서 이 곡을 처음부터 재생하면 수집을 시작합니다.'
         self.phase_started = self.updated_at = clock()
@@ -33,10 +50,14 @@ class AudioProgress:
         self.cleanup_errors = []
         self.temporary_directory = ''
         self.runtime = {}
+        self.cancellation_reason = ''
 
     def update(self, event, cancelled=False):
         now = self.clock()
         kind = event.get('kind')
+        reason = event.get('cancellation_reason')
+        if cancelled and not self.cancellation_reason and isinstance(reason,str) and reason in CANCELLATION_DETAILS:
+            self.cancellation_reason = reason
         if isinstance(event.get('runtime'),dict):
             self.runtime={key:value for key,value in event['runtime'].items()
                           if key in ('device','model','compute_type','fallback','fallback_reason')
@@ -67,9 +88,10 @@ class AudioProgress:
         if event.get('text'):
             self.text = event['text']
         if phase == 'cancelling':
-            self.text = '임시 음원을 정리하고 있습니다.'
+            reason = CANCELLATION_DETAILS.get(self.cancellation_reason)
+            self.text = (reason+'\n' if reason else '')+'임시 음원을 정리하고 있습니다.'
         elif phase == 'cancelled':
-            self.text = '분석 취소됨 · 기존 시간표는 그대로입니다.'
+            self.text = CANCELLATION_DETAILS.get(self.cancellation_reason,'분석 취소됨 · 기존 시간표는 그대로입니다.')
         self.ended_at = now if phase in TERMINAL else None
         completed, total = event.get('completed'), event.get('total')
         if (kind == 'progress' and phase in ('recording','analyzing') and
@@ -110,7 +132,8 @@ class AudioProgress:
         if eta is not None:remaining = '약 '+duration_text(eta)
         detail = self.text
         if self.phase in ('waiting','recording'):
-            detail += ('\n곡 전환·재생 중단·앱 종료 시 10초 이상 수집한 구간을 분석해 저장합니다.' if self.final_analysis else
+            detail += ('\n확인된 두 구절 사이에서 미확정 구절의 시작 시각을 찾습니다.' if self.bounded else
+                       '\n곡 전환·재생 중단·앱 종료 시 10초 이상 수집한 구간을 분석해 저장합니다.' if self.final_analysis else
                        '\n중간부터 임시 추적 중 · 전체 싱크 저장은 다음 처음 재생에서 진행합니다.')
         if self.phase in ('recording','analyzing'):
             detail += '\n현재 단계 경과 '+duration_text(elapsed)
@@ -129,4 +152,5 @@ class AudioProgress:
         return {'state':self.phase, 'phase':PHASES.get(self.phase,self.phase), 'percent':percent,
                 'progress':f'{percent:.0f}%' if percent is not None else '—',
                 'remaining':remaining, 'elapsed':elapsed, 'detail':detail,
-                'ended_at':self.ended_at,'final_analysis':self.final_analysis,'runtime':dict(self.runtime)}
+                'ended_at':self.ended_at,'final_analysis':self.final_analysis,'runtime':dict(self.runtime),
+                'cancellation_reason':self.cancellation_reason}

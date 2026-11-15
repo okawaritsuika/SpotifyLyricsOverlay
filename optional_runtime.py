@@ -3,6 +3,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+from shutil import which
 import subprocess
 import sys
 import tempfile
@@ -14,6 +15,10 @@ from app_paths import resource_dir, runtime_dir, worker_command, worker_environm
 
 PYTHON_URL = 'https://www.python.org/ftp/python/3.12.10/python-3.12.10-embed-amd64.zip'
 PYTHON_SHA256 = '4acbed6dd1c744b0376e3b1cf57ce906f9dc9e95e68824584c8099a63025a3c3'
+
+
+def nvidia_driver_available():
+    return bool(which('nvidia-smi.exe'))
 
 
 def installed(kind):
@@ -70,6 +75,9 @@ def ensure_python():
 
 
 def install(kind):
+    torch_build = 'cu126' if kind == 'audio-cuda' else 'cpu'
+    if kind == 'audio-cuda':
+        kind = 'audio'
     if kind not in ('audio', 'browser'):raise ValueError('알 수 없는 선택 기능입니다.')
     python = ensure_python()
     base = resource_dir()
@@ -81,15 +89,27 @@ def install(kind):
                       'beautifulsoup4==4.15.0', 'pykakasi==2.3.0'])
         command([python, '-c', 'import webview;import clr'])
     else:
-        command(pip + ['--only-binary=:all:', 'torch==2.8.0+cpu', 'torchaudio==2.8.0+cpu',
-                      '--index-url', 'https://download.pytorch.org/whl/cpu'])
+        command(pip + ['--only-binary=:all:', f'torch==2.8.0+{torch_build}', f'torchaudio==2.8.0+{torch_build}',
+                      f'torchvision==0.23.0+{torch_build}',
+                      '--index-url', f'https://download.pytorch.org/whl/{torch_build}'])
         command(pip + ['--no-build-isolation', '-r', base / 'requirements-audio.txt',
                       'winrt-runtime==3.2.1', 'winrt-Windows.Foundation==3.2.1',
                       'winrt-Windows.Foundation.Collections==3.2.1', 'winrt-Windows.Media.Control==3.2.1'])
-        print('3/4 small 모델 다운로드 중 (약 486MB)', flush=True)
-        command(worker_command(base, 'audio_worker', optional=True) + ['--install-model', str(runtime_dir() / 'models/whisper-small')])
-        command([python, '-c', 'import torch,torchaudio,stable_whisper,faster_whisper;print(torch.ones(1).sum())'])
-        command(worker_command(base, 'compact_audio_runtime', optional=True) + [str(runtime_dir())])
+        whisper_gpu = torch_build == 'cu126' or nvidia_driver_available()
+        if whisper_gpu:
+            print('2/4 NVIDIA 실시간 분석 런타임 다운로드·설치 중', flush=True)
+            command(pip + ['--only-binary=:all:', '-r', base / 'requirements-audio-gpu.txt'])
+        worker = worker_command(base, 'audio_worker', optional=True)
+        print('3/4 Whisper small CPU 모델 다운로드 중 (약 486MB)', flush=True)
+        command(worker + ['--install-model', str(runtime_dir() / 'models/whisper-small')])
+        if whisper_gpu:
+            print('3/4 Whisper medium GPU 실시간 모델 다운로드 중 (약 1.53GB)', flush=True)
+            command(worker + ['--install-model', str(runtime_dir() / 'models/whisper-medium'), 'medium'])
+        command([python, '-c',
+                 'import torch,torchaudio,torchvision,stable_whisper,faster_whisper,speechbrain,nnAudio,scipy,yaml;'
+                 'print("Voice analysis device:", "CUDA" if torch.cuda.is_available() else "CPU")'])
+        if torch_build == 'cpu':
+            command(worker_command(base, 'compact_audio_runtime', optional=True) + [str(runtime_dir())])
     print('4/4 설치 확인 완료', flush=True)
     (runtime_dir() / (kind + '-installed.json')).write_text(json.dumps({'version': 1}), encoding='utf-8')
 

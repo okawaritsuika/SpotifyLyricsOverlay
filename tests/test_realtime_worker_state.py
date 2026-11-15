@@ -4,7 +4,7 @@ from types import SimpleNamespace
 import unittest
 from unittest.mock import Mock,patch
 
-from realtime_audio import run
+from realtime_audio import LIVE_AUDIO_FILES, run
 
 
 class RealtimeWorkerStateTests(unittest.TestCase):
@@ -62,17 +62,16 @@ class RealtimeWorkerStateTests(unittest.TestCase):
 
         aligner=Aligner()
         next_observed=101 if first_error else 104
-        windows=[{'sequence':1,'file':'live-1.wav','observed_at':100,
+        windows=[{'sequence':1,'file':LIVE_AUDIO_FILES[1],'observed_at':100,
                   'start_position':0,'end_position':8},
-                 {'sequence':2,'file':'live-0.wav','observed_at':next_observed,
+                 {'sequence':2,'file':LIVE_AUDIO_FILES[0],'observed_at':next_observed,
                   'start_position':next_observed-100,'end_position':next_observed-92}]
         # Deadline, first-loop/pre-inference, then either the late result or
         # the next loop after an exception, followed by the fresh result.
         moments=([100,100,100,101,101,101.1] if first_error else
                  [100,100,100,104,104,104,104.1])
         samples=Samples()
-        modules={'numpy':SimpleNamespace(sqrt=lambda value:value,mean=lambda value:1.),
-                 'faster_whisper.audio':SimpleNamespace(decode_audio=lambda *args,**kwargs:samples)}
+        modules={'numpy':SimpleNamespace(sqrt=lambda value:value,mean=lambda value:1.)}
         runtime={'device':'cuda','model':'local-model','fallback':False}
 
         def emit(kind,**value):
@@ -81,6 +80,7 @@ class RealtimeWorkerStateTests(unittest.TestCase):
 
         with patch.dict('sys.modules',modules),patch('analysis_limits.apply_analysis_limits'), \
              patch('audio_runtime.load_realtime_model',return_value=(object(),runtime)), \
+             patch('realtime_audio.load_capture_samples',return_value=samples), \
              patch('realtime_audio.StreamingAligner',return_value=aligner), \
              patch('realtime_audio.ContextAligner',return_value=aligner), \
              patch('realtime_audio.read_json',side_effect=[windows[0],windows[0],windows[1],windows[1]]), \
@@ -155,16 +155,14 @@ class RealtimeWorkerStateTests(unittest.TestCase):
             def __len__(self):return 128000
             def __mul__(self,other):return self
 
-        windows=[{'sequence':index+1,'file':f'live-{index}.wav','observed_at':100,
+        windows=[{'sequence':index+1,'file':LIVE_AUDIO_FILES[index],'observed_at':100,
                   'start_position':index,'end_position':index+8} for index in range(2)]
         reads=([windows[0],PermissionError('file being replaced'),windows[1],windows[1]]
                if second_read else [PermissionError('file being replaced'),windows[0],windows[0]])
         analyze=Mock(return_value={'index':0,'confidence':.9})
         aligner=SimpleNamespace(follower=SimpleNamespace(index=None,pending=None,last_window=-1,
                                                          confirmed_end=-1),analyze=analyze)
-        decode=Mock(return_value=Samples())
-        modules={'numpy':SimpleNamespace(sqrt=lambda value:value,mean=lambda value:1.),
-                 'faster_whisper.audio':SimpleNamespace(decode_audio=decode)}
+        modules={'numpy':SimpleNamespace(sqrt=lambda value:value,mean=lambda value:1.)}
         events=[]
 
         def emit(kind,**value):
@@ -173,6 +171,7 @@ class RealtimeWorkerStateTests(unittest.TestCase):
 
         with patch.dict('sys.modules',modules),patch('analysis_limits.apply_analysis_limits'), \
              patch('audio_runtime.load_realtime_model',return_value=(object(),{'device':'cuda'})), \
+             patch('realtime_audio.load_capture_samples',return_value=Samples()) as decode, \
              patch('realtime_audio.ContextAligner',return_value=aligner), \
              patch('realtime_audio.read_json',side_effect=reads) as metadata, \
              patch('realtime_audio.time.monotonic',return_value=100), \

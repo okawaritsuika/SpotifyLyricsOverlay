@@ -19,6 +19,7 @@ from lyric_match import match_lyrics
 from lyric_annotations import (match_parenthetical_annotations, match_vocalise_annotations,
                                match_sequence_annotations)
 from lyric_asides import aside_onsets
+from lyric_merge import has_ordered_overlap
 from web_lyrics import has_korean_translation_pairs
 
 
@@ -160,6 +161,68 @@ def _identifier(value):
     return value if value.isascii() and value.isdigit() and len(value) <= 32 else None
 
 
+def validate_alsong_query(title, artist, album):
+    title, artist, album = title.strip(), artist.strip(), album.strip()
+    if not normalized(title):
+        raise ValueError('곡 제목을 입력하세요.')
+    if any(len(value) > 512 for value in (title, artist, album)):
+        raise ValueError('검색어를 512자 이하로 입력하세요.')
+    return title, artist, album
+
+
+def search_alsong(title, artist='', album='', *, fetch=None):
+    """List registrations for an explicit, editable search."""
+    title, artist, album = validate_alsong_query(title, artist, album)
+    records = _records((fetch or _request)(SEARCH_ACTION, {'title': title, 'artist': artist, 'pageNo': '1'}))
+    items = {}
+    for record in records:
+        identifier = _identifier(record.get('lyricID'))
+        if identifier and _text(record.get('title')):
+            items.setdefault(identifier, {field: _text(record.get(field)) for field in _SEARCH_FIELDS})
+    # Album is a local preference. ALSong commonly leaves it empty.
+    wanted = normalized(album)
+    return sorted(items.values(), key=lambda item: bool(wanted and normalized(item['album']) != wanted))
+
+
+def load_alsong_registration(identifier, duration, *, fetch=None):
+    """Decode only the selected registration for a manual preview."""
+    if not _identifier(identifier):
+        raise ValueError('알송 등록 번호를 확인할 수 없습니다.')
+    detail = _detail((fetch or _request)(DETAIL_ACTION, {'lyricID': identifier}))
+    if not detail or _identifier(detail.get('lyricID')) != identifier:
+        raise ValueError('선택한 알송 등록본을 받지 못했습니다.')
+    rows = _document_rows(_text(detail.get('lyric')))
+    if rows is None:
+        raise ValueError('알송 가사 길이가 지원 범위를 벗어납니다.')
+    annotations = _parallel_annotations(rows)
+    groups = _parallel_groups(row for row in rows if not re.fullmatch(
+        r'\[(?:ar|ti|al|by|re|ve|offset):[^\]]*\]', row.strip(), re.I))
+    lines, times = [], []
+    for stamp, texts in groups:
+        text = texts[0]
+        extra = annotations.get((normalized(text), stamp))
+        if extra is None:
+            text = ' '.join(texts)
+        if len(text) > MAX_LINE_CHARACTERS:
+            raise ValueError('알송 가사 한 줄이 너무 깁니다.')
+        lines.append(Line(text, *(extra or ('', ''))))
+        times.append(stamp)
+    if not lines:
+        raise ValueError('선택한 등록본의 가사가 비어 있습니다.')
+    playtime = _text(detail.get('playtime'))
+    seconds = float(playtime) if re.fullmatch(r'\d+(?:\.\d+)?', playtime) else 0
+    seconds = seconds if seconds and math.isfinite(seconds) else None
+    known = [stamp for stamp in times if stamp is not None]
+    clock_mismatch = (seconds is not None and abs(seconds-duration) > 2
+                      or any(stamp >= duration for stamp in known))
+    ordered = all(before < after for before, after in zip(known, known[1:]))
+    return {'provider_id': identifier, 'title': _text(detail.get('title')), 'artist': _text(detail.get('artist')),
+            'album': _text(detail.get('album')), 'lines': tuple(lines),
+            'duration': seconds,
+            'last_onset': known[-1] if known else None,
+            'times': times if ordered else [None]*len(lines), 'clock_mismatch': clock_mismatch}
+
+
 def _artist_matches(local, remote):
     def artists(value):
         # Trim each list item before splitting collaborations so the leading X
@@ -184,6 +247,15 @@ def _stamped_row(row):
     fraction = stamp[3] or ''
     timestamp = int(stamp[1]) * 60 + int(stamp[2]) + (int(fraction) / 10 ** len(fraction) if fraction else 0)
     return timestamp, row[stamp.end():].strip()
+
+
+def _document_rows(lyric):
+    if len(lyric) > MAX_LYRIC_CHARACTERS:
+        return None
+    lyric = re.sub(r'<br\s*/?>', '\n', html.unescape(lyric), flags=re.I)
+    lyric = re.sub(r'</?(?:font|b|i|u)(?:\s[^<>]*)?>', '', lyric, flags=re.I)
+    rows = lyric.splitlines()
+    return rows if len(rows) <= MAX_LYRIC_LINES else None
 
 
 def _parallel_groups(rows):
@@ -284,20 +356,15 @@ def _formatted_rows(rows, item, reference_key):
     return cleaned if normalized(''.join(originals)) == reference_key else rows
 
 
-def _candidate(item, playback, reference, duration):
+def _candidate(item, playback, reference, duration, merge_partial=False):
     # Retain the entire recording title. A matching chorus cannot distinguish a
     # live version, another singer's recording, or a shorter edit on its own.
     if (normalized(_text(item.get('strTitle'))) != normalized(playback.title)
             or not _artist_matches(playback.artist, item.get('strArtistName'))
             or _text(item.get('strOnlyLyricWord')) not in ('', '0')):
         return None
-    lyric = item.get('strLyric', '')
-    if len(lyric) > MAX_LYRIC_CHARACTERS:
-        return None
-    lyric = re.sub(r'<br\s*/?>', '\n', html.unescape(lyric), flags=re.I)
-    lyric = re.sub(r'</?(?:font|b|i|u)(?:\s[^<>]*)?>', '', lyric, flags=re.I)
-    rows = lyric.splitlines()
-    if len(rows) > MAX_LYRIC_LINES:
+    rows = _document_rows(item.get('strLyric', ''))
+    if rows is None:
         return None
     reference_key = normalized(''.join(reference))
     japanese_reference = bool(_JAPANESE.search(reference_key)) and not _HANGUL.search(reference_key)
@@ -355,8 +422,19 @@ def _candidate(item, playback, reference, duration):
     # cannot be mistaken for a few allowed character edits inside a longer row.
     match = match_lyrics(source_originals, reference)
     annotations = _parallel_annotations(rows) if japanese_reference else {}
+    remote_album = _text(item.get('strAlbumName'))
+    album = normalized(_text(getattr(playback, 'album', '')))
+    merge_metadata = {'title': _text(item.get('strTitle')),
+                      'artist': _text(playback.artist),  # _artist_matches checked the complete credit.
+                      'album': remote_album, 'duration': item.get('duration')}
     if match is None:
-        album = normalized(_text(getattr(playback, 'album', '')))
+        if (merge_partial and album and normalized(remote_album) == album and
+                has_ordered_overlap(reference, originals)):
+            return {'source': 'ALSong', 'provider_id': _identifier(item.get('strInfoID')),
+                    'lines': tuple(Line(text, *(annotations.get((normalized(text), stamp)) or ('', '')))
+                                   for text, stamp in zip(originals, times)), 'times': times,
+                    **merge_metadata, '_album': album, '_edits': MAX_LYRIC_CHARACTERS,
+                    '_positions': tuple(normalized(text) for text in originals)}
         asides = (aside_onsets(source_originals, reference)
                   if album and normalized(_text(item.get('strAlbumName'))) == album else None)
         if asides:
@@ -396,6 +474,7 @@ def _candidate(item, playback, reference, duration):
             'lines': tuple(Line(text, *(annotations.get((normalized(text), timestamp)) or ('', '')))
                            for text, timestamp in zip(originals, times)), 'times': times,
             '_album': normalized(_text(item.get('strAlbumName'))), '_edits': match.edits,
+            **(merge_metadata if merge_partial else {}),
             '_positions': tuple(match.source_to_target[start] for start in source_starts)}
 
 
@@ -481,7 +560,7 @@ def _version_annotations(playback,reference,request,records=None,diagnostics=Non
             'annotation_only':True,'lines':tuple(lines),'times':[None]*len(lines)}
 
 
-def fetch_alsong(playback, reference=(), fetch=None, report=None):
+def fetch_alsong(playback, reference=(), fetch=None, report=None, *, merge_partial=False):
     """Return reference-verified timings, or None; network/XML errors propagate.
 
     ``fetch(action, params)`` receives search metadata or a selected lyric ID
@@ -563,6 +642,7 @@ def fetch_alsong(playback, reference=(), fetch=None, report=None):
         if _text(detail.get('lyric')):
             hangul_by_id[identifier] = bool(_HANGUL.search(html.unescape(detail['lyric'])))
         playtime = _text(detail.get('playtime'))
+        seconds = None
         if playtime:
             if not re.fullmatch(r'\d+(?:\.\d+)?', playtime):
                 continue
@@ -571,8 +651,8 @@ def fetch_alsong(playback, reference=(), fetch=None, report=None):
                 continue
         item = {'strInfoID': identifier, 'strTitle': detail.get('title', ''),
                 'strArtistName': detail.get('artist', ''), 'strAlbumName': detail.get('album', ''),
-                'strLyric': detail.get('lyric', '')}
-        candidate = _candidate(item, playback, reference, duration)
+                'strLyric': detail.get('lyric', ''), 'duration': seconds or None}
+        candidate = _candidate(item, playback, reference, duration, merge_partial)
         if candidate is not None:
             candidates.append(candidate)
     same_album = [candidate for candidate in candidates if album and candidate['_album'] == album]

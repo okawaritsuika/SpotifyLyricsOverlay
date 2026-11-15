@@ -49,14 +49,14 @@ class RecordingKindEvidenceTests(unittest.TestCase):
             self.assertEqual(song[field], before[field])
         self.assertEqual(sources.reclassify_reviewed_kinds([song]), 0)
 
-    def test_reviewed_resource_covers_only_819_previously_misclassified_records(self):
+    def test_reviewed_resource_covers_only_825_previously_misclassified_records(self):
         path = Path(__file__).resolve().parents[1] / 'resources' / 'song_catalog.json'
         songs = json.loads(path.read_text(encoding='utf-8'))['songs']
         before = deepcopy(songs)
-        self.assertEqual(sources.reclassify_reviewed_kinds(songs), 819)
+        self.assertEqual(sources.reclassify_reviewed_kinds(songs), 825)
         changed = [(old, new) for old, new in zip(before, songs) if old != new]
         self.assertEqual(sum(new['kind'] == 'instrumental' for _, new in changed), 744)
-        self.assertEqual(sum(new['kind'] == 'spoken' for _, new in changed), 75)
+        self.assertEqual(sum(new['kind'] == 'spoken' for _, new in changed), 81)
         for old, new in changed:
             self.assertEqual({k: v for k, v in old.items() if k not in ('kind', 'type')},
                              {k: v for k, v in new.items() if k not in

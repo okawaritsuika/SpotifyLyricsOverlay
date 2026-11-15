@@ -25,6 +25,24 @@ class LiveLyrics:
         self.completion_count=sum(i is None for i in indices)
         return song
 
+    def receive_merged(self,playback,base,lines,timing,prefer_saved=False):
+        """Publish an already verified layout with the caller's remapped clock."""
+        import hashlib
+        if base and tuple(line.original for line in lines)==tuple(line.original for line in base.lines):
+            self.track,self.song,self.lines,self.timing=playback.key,base,lines,None
+            self.completion_base='';self.completion_indices=();self.completion_count=0
+            return base
+        prefix='completed-' if base else 'memory-'
+        song=Song(prefix+hashlib.sha256(playback.key.encode()).hexdigest()[:24],
+                  playback.title,playback.artist,playback.album,lines)
+        restored=self.timing_store.load(song) if self.timing_store and (timing is None or prefer_saved) else None
+        self.track,self.song,self.lines=playback.key,song,lines
+        self.timing=restored or timing or {'times':[None]*len(lines),'offset':0.,'source':'가사 통합'}
+        self.completion_base=base.id if base else ''
+        self.completion_indices=()
+        self.completion_count=max(0,len(lines)-len(base.lines)) if base else 0
+        return song
+
     def receive(self,playback,base,lines):
         if base and self.track==playback.key and self.completion_base==base.id:
             matches=match_annotations(self.lines,lines)

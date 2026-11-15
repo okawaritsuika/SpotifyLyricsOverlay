@@ -4,6 +4,12 @@
   "rights": "THE IDOLM@STER™ & ©Bandai Namco Entertainment Inc.",
   "use": "Official brand marks identifying catalog series; no affiliation implied.",
   "processing": "Original SVG paths and colors retained. Decorative 20–25% opacity removed for small UI display; rendered with transparent padding, preserving aspect ratio.",
+  "menu_icon": {
+    "source_url": "https://i.namu.wiki/i/MhyA92vAFUYDNF-TGh7qekzR-fnNSAaWs7b7fLCak13VUScSDs4akhqYCwdHVW4DUCU5kLF6Qe1ZJ-xJsg7HAA.svg",
+    "retrieved": "2026-11-14",
+    "original": "dictionary.svg",
+    "display": "dictionary.png"
+  },
   "assets": [
     {
       "key": "765",
@@ -40,6 +46,12 @@
       "source_url": "https://idolmaster-official.jp/assets/img/about/gakuen/logo.svg",
       "original": "gakuen.svg",
       "display": "gakuen.png"
+    },
+    {
+      "key": "valiv",
+      "source_url": "https://idolmaster-official.jp/va-liv",
+      "original": "valiv.svg",
+      "display": "valiv.svg"
     }
   ]
 }

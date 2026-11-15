@@ -22,9 +22,28 @@ class LiveTimingStore:
         if not isinstance(value,dict):raise ValueError('저장할 가사 시간표 형식을 확인하세요.')
         validate_times(value.get('times'),len(song.lines))
         result={'times':list(value['times']),'source':'직접 저장한 싱크'}
-        from timing_quality import timing_origins,automatic_times
+        from timing_quality import timing_origins,automatic_times,cleared_rows
         result['origins']=timing_origins(value)
         if value.get('automatic_times') is not None:result['automatic_times']=automatic_times(value)
+        cleared=cleared_rows(value)
+        if cleared:result['cleared_rows']=sorted(cleared)
+        removed=value.get('removed_alsong_rows')
+        added=[]
+        for entry in value.get('added_alsong_rows',[]) if isinstance(value.get('added_alsong_rows'),list) else []:
+            if not isinstance(entry,dict):
+                break
+            before,text=entry.get('before'),entry.get('text')
+            if (type(before) is not int or not 0<=before<len(song.lines)+len(added)
+                    or not isinstance(text,str) or not text.strip() or any(c in text for c in '\r\n\0')):
+                break
+            stamp=entry.get('time')
+            validate_times([stamp],1)
+            added.append({'before':before,'text':text,'time':stamp,'cleared':entry.get('cleared') is True})
+        if added:result['added_alsong_rows']=added
+        if isinstance(removed,list):
+            count=len(song.lines)+len(added)
+            rows={i for i in removed if type(i) is int and 0<=i<count}
+            if 0<len(rows)<count:result['removed_alsong_rows']=sorted(rows)
         if value.get('manual_priority') is True:result['manual_priority']=True
         if value.get('audio_finalized') is True:result['audio_finalized']=True
         if value.get('completion_pending') is True:result['completion_pending']=True

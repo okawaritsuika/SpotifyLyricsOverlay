@@ -57,7 +57,8 @@ class AutoAudioDurationUITests(unittest.TestCase):
 
     def test_changed_duration_rejects_old_realtime_event_and_return_does_not_revive_it(self):
         old=self.start_live()
-        event={'kind':'realtime','position':0,'observed_at':time.monotonic(),
+        observed_at=time.monotonic()
+        event={'kind':'realtime','position':self.app.playback.position(observed_at),'observed_at':observed_at,
                'match':{'index':1,'confidence':1,'onset':0}}
         self.app.receive_auto_audio(old,event)
         self.assertIs(self.app.realtime_job,old)

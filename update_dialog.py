@@ -1,6 +1,7 @@
 """Optional release downloads; worker threads never call Tk."""
 from pathlib import Path
 import queue
+import re
 import threading
 import time
 import tkinter as tk
@@ -10,7 +11,7 @@ import webbrowser
 import app_updates
 from app_paths import frozen
 from app_version import VERSION
-from data_updates import stage_package
+from data_updates import RECEIPTS, stage_package
 from storage import atomic_json, read_json
 
 
@@ -33,19 +34,91 @@ class UpdateController:
         self.auto_after = None
 
     def schedule_automatic(self):
-        if not frozen() or not self.app.services_started:
-            return
-        try:receipt = read_json(self.receipt, {})
-        except (OSError, ValueError):receipt = {}
-        stamp = receipt.get('checked_at', 0) if isinstance(receipt, dict) else 0
-        if isinstance(stamp, (int, float)) and 0 <= time.time() - stamp < 86400:
-            return
-        self.auto_after = self.app.root.after(5000, self.automatic_check)
+        if self.app.services_started and not self.closed and self.auto_after is None:
+            self.auto_after = self.app.root.after(5000, self.automatic_check)
 
     def automatic_check(self):
         self.auto_after = None
-        if not self.closed and not self.checked:
+        if self.closed or self.checked:
+            return
+        if self.busy:
+            self.auto_after = self.app.root.after(1000, self.automatic_check)
+        else:
             self.check(quiet=True)
+
+    def notify_discoveries(self, release):
+        if not release:
+            return
+        try:
+            receipt = read_json(self.receipt, {})
+        except (OSError, ValueError):
+            receipt = {}
+        if not isinstance(receipt, dict):
+            receipt = {}
+        programs = receipt.get('program_notified', [])
+        data_versions = receipt.get('data_notified', [])
+        programs = programs if isinstance(programs, list) else []
+        data_versions = data_versions if isinstance(data_versions, list) else []
+        program = (release.version if app_updates.is_newer(release.version)
+                   and app_updates.EXE_ASSET_NAME in release.assets else None)
+        asset = release.assets.get(app_updates.DATA_ASSET_NAME)
+        data_key = None
+        if isinstance(asset, dict):
+            digest = asset.get('digest')
+            if isinstance(digest, str) and re.fullmatch(r'sha256:[0-9a-fA-F]{64}', digest):
+                data_key = digest.lower()
+                try:
+                    applied = read_json(self.directory / RECEIPTS, {})
+                    if (isinstance(applied, dict) and isinstance(applied.get('applied'), dict)
+                            and data_key[7:] in applied['applied']):
+                        data_key = None
+                except (OSError, ValueError):
+                    pass
+            else:
+                asset_id = asset.get('id')
+                data_key = 'asset:' + release.tag + ':' + (str(asset_id) if type(asset_id) is int else app_updates.DATA_ASSET_NAME)
+        fresh_program = program and program not in programs
+        fresh_data = data_key and data_key not in data_versions
+        if not fresh_program and not fresh_data:
+            return
+        lines = []
+        if fresh_program:
+            lines.append('새 프로그램 버전 ' + program + '을 받을 수 있습니다.')
+        if fresh_data:
+            lines.append('새 사전·가사 자료를 받을 수 있습니다.')
+        self.show_notification('\n'.join(lines))
+        if fresh_program:
+            programs.append(program)
+        if fresh_data:
+            data_versions.append(data_key)
+        receipt['program_notified'] = programs
+        receipt['data_notified'] = data_versions
+        try:
+            atomic_json(self.receipt, receipt)
+        except OSError:
+            pass
+
+    def show_notification(self, text):
+        window = tk.Toplevel(self.app.root)
+        window.title('업데이트 알림')
+        window.resizable(False, False)
+        frame = ttk.Frame(window, padding=18)
+        frame.pack(fill='both', expand=True)
+        ttk.Label(frame, text=text + '\n업데이트 화면에서 원하는 항목을 선택할 수 있습니다.',
+                  justify='left', wraplength=400).pack(anchor='w')
+        buttons = ttk.Frame(frame)
+        buttons.pack(anchor='e', pady=(14, 0))
+        def open_updates():
+            window.destroy()
+            self.app.open_updates()
+        ttk.Button(buttons, text='업데이트 확인', command=open_updates).pack(side='left', padx=(0, 8))
+        ttk.Button(buttons, text='닫기', command=window.destroy).pack(side='left')
+        window.update_idletasks()
+        x = max(0, (window.winfo_screenwidth() - window.winfo_reqwidth()) // 2)
+        y = max(0, (window.winfo_screenheight() - window.winfo_reqheight()) // 2)
+        window.geometry(f'+{x}+{y}')
+        window.attributes('-topmost', True)
+        window.after(1000, lambda: window.attributes('-topmost', False) if window.winfo_exists() else None)
 
     def refresh(self):
         dialog = getattr(self.app, 'update_dialog', None)
@@ -73,13 +146,7 @@ class UpdateController:
 
     def check(self, quiet=False):
         def worker():
-            try:
-                release = app_updates.check_release()
-            finally:
-                # A failed online check should not be repeated on every launch.
-                try:atomic_json(self.receipt, {'checked_at': time.time()})
-                except OSError:pass
-            return 'checked', release
+            return 'checked', app_updates.check_release()
 
         return self.start('GitHub의 최신 배포를 확인하는 중…', worker, quiet)
 
@@ -111,7 +178,7 @@ class UpdateController:
                 return 'data', stage_package(path, self.directory)
             return 'program', (path, release)
 
-        return self.start(('프로그램' if kind == 'program' else '가사·싱크 자료') + ' 다운로드·검증 중…', worker)
+        return self.start(('프로그램' if kind == 'program' else '사전·가사 자료') + ' 다운로드·검증 중…', worker)
 
     def restart(self):
         if self.busy or self.closed or not (self.program_path or self.data_staged):
@@ -156,18 +223,17 @@ class UpdateController:
                 self.release = result
                 if not result:
                     self.status = '아직 공개된 배포가 없습니다.'
-                elif app_updates.is_newer(result.version):
+                elif app_updates.is_newer(result.version) and app_updates.EXE_ASSET_NAME in result.assets:
                     self.status = '새 프로그램 버전이 있습니다. 필요한 항목을 선택해 다운로드하세요.'
-                    if quiet:
-                        self.app.notify('새 버전 ' + result.version + ' · 더보기 → 프로그램·자료 업데이트에서 확인하세요.', 15)
                 else:
-                    self.status = '현재 프로그램이 최신입니다. 가사·싱크 자료는 별도로 받을 수 있습니다.'
+                    self.status = '현재 프로그램이 최신입니다. 사전·가사 자료는 별도로 받을 수 있습니다.'
+                self.notify_discoveries(result)
             elif kind == 'program':
                 self.program_path, self.program_release = result
                 self.status = '프로그램 검증 완료. 아래 재시작 버튼을 누르면 적용합니다.'
             elif kind == 'data':
                 self.data_staged = result['status'] == 'staged'
-                self.status = ('자료 검증 완료. 재시작하면 비어 있는 가사·번역·싱크를 보완합니다.'
+                self.status = ('자료 검증 완료. 아래 재시작 버튼을 누르면 새 자료를 적용합니다.'
                                if self.data_staged else '이 자료는 이미 적용되어 있습니다.')
             elif kind == 'restart':
                 self.app.close()
@@ -202,15 +268,15 @@ class UpdateDialog:
         self.version.grid(row=0, column=0, sticky='w')
         self.check_button = ttk.Button(frame, text='최신 배포 확인', command=self.controller.check)
         self.check_button.grid(row=0, column=1, padx=(10, 0))
-        ttk.Label(frame, text='기존 싱크·직접 입력한 가사와 번역·설정은 보존합니다.\n'
-                  '새 자료는 비어 있는 부분을 보완합니다. AI와 무거운 분석 모델은 포함하지 않습니다.',
+        ttk.Label(frame, text='공개 사전 자료를 갱신하고 비어 있는 가사·번역·싱크를 보완합니다.\n'
+                  '직접 추가한 곡, 개인 연결, 기존 가사·싱크와 설정은 보존합니다.',
                   wraplength=625, justify='left').grid(row=1, column=0, columnspan=2, sticky='w', pady=(14, 12))
         actions = ttk.Frame(frame)
         actions.grid(row=2, column=0, columnspan=2, sticky='ew')
         self.program_button = ttk.Button(actions, text='프로그램 다운로드',
                                         command=lambda:self.controller.download('program'))
         self.program_button.pack(side='left')
-        self.data_button = ttk.Button(actions, text='가사·싱크·번역 자료 다운로드',
+        self.data_button = ttk.Button(actions, text='사전·가사 자료 다운로드',
                                      command=lambda:self.controller.download('data'))
         self.data_button.pack(side='left', padx=8)
         self.link_button = ttk.Button(actions, text='배포 페이지', command=self.open_release)

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src data:; base-uri 'none'; form-action 'none'">
+  <title>아이마스 가사 · Spotify 오버레이</title>
+  <link rel="stylesheet" href="fonts.css">
+  <link rel="stylesheet" href="overlay.css">
+  <script type="module" src="overlay.js"></script>
+</head>
+<body>
+  <div class="overlay-backdrop" aria-hidden="true"></div>
+  <main class="overlay-surface" aria-label="가사창">
+    <div class="overlay-tool-background" aria-hidden="true" hidden></div>
+    <div class="overlay-label" data-label="title" role="heading" aria-level="1"></div>
+    <div class="overlay-label" data-label="artists"></div>
+    <div class="overlay-label" data-label="previous"></div>
+    <div class="overlay-label" data-label="next"></div>
+    <div class="overlay-label" data-label="reading" lang="ja"></div>
+    <div class="overlay-label" data-label="original" lang="ja"></div>
+    <div class="overlay-label" data-label="korean"></div>
+    <div class="overlay-label" data-label="mode"></div>
+    <div class="overlay-singers"></div>
+    <div class="overlay-label" data-label="clock"></div>
+    <div class="overlay-label" data-label="status" role="status"></div>
+    <div class="overlay-label" data-label="notice" role="status"></div>
+    <div class="overlay-tools" role="group" aria-label="가사창 설정">
+      <button type="button" data-action="appearance" hidden></button>
+      <button type="button" data-action="lock" hidden></button>
+      <button type="button" data-action="chrome" hidden></button>
+      <button type="button" data-action="menu" hidden></button>
+    </div>
+    <div class="overlay-transport" role="group" aria-label="재생 조작">
+      <button type="button" data-action="previous" hidden></button>
+      <button type="button" data-action="first" hidden></button>
+      <button type="button" data-action="play" hidden></button>
+      <button type="button" data-action="volume" hidden></button>
+      <button type="button" data-action="last" hidden></button>
+      <button type="button" data-action="next" hidden></button>
+    </div>
+  </main>
+</body>
+</html>

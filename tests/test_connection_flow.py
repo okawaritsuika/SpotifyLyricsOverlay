@@ -39,25 +39,56 @@ class ConnectionFlowTests(unittest.TestCase):
         self.service.fetch.assert_not_called()
         self.app.close();self.temp.cleanup()
 
-    def test_first_startup_opens_only_simple_connection_screen_without_connecting(self):
-        with patch.object(self.app,'connect_spotify') as connect,patch.object(self.app,'open_editor') as editor:
-            self.app.show_startup();self.root.update()
-        self.assertIsInstance(self.app.connection_dialog,ConnectionDialog)
+    def test_first_startup_opens_spotify_login_and_remembers_closing_it(self):
+        self.app.settings.pop('spotify_authenticated')
+        self.app.show_startup()
+        job=self.service.job
+        self.assertIsInstance(job,FakeSpotifyJob)
+        self.assertTrue(job.visible)
+        self.assertIsNone(self.app.connection_dialog)
         self.assertIsNone(self.app.editor)
-        connect.assert_not_called();editor.assert_not_called()
-        self.assertIsNone(self.service.job)
         self.assertFalse(self.app.public_background.get())
-        self.assertFalse(self.app.online.get())
-        self.assertTrue(self.store.settings()['connection_setup_seen'])
+        self.assertFalse(self.store.settings()['spotify_authenticated'])
+        self.app.receive_background_lyrics(job,{'kind':'status','state':'login_required',
+                                                'authenticated':False,'login_cancelled':True})
+        self.app.receive_background_lyrics(job,{'kind':'finished','exit_code':0})
+        self.assertIsNone(self.service.job)
+        self.assertFalse(self.service.spotify_retry_at)
+        self.assertFalse(self.service.spotify_requested)
+        self.app.settings=self.store.settings()
+        self.assertTrue(self.app.settings['connection_setup_seen'])
+        self.assertFalse(self.app.settings['spotify_connected'])
+        self.app.show_startup()
+        self.assertIsNone(self.service.job)
 
-    def test_startup_is_remembered_and_opening_again_reuses_existing_dialog(self):
-        self.app.show_startup();first=self.app.connection_dialog
-        self.app.open_connection()
+    def test_installer_can_be_dismissed_or_continue_directly_to_login(self):
+        with patch('app.frozen',return_value=True),patch('optional_runtime.installed',return_value=False) as installed:
+            self.app.show_startup()
+            dialog=self.app.browser_install_dialog
+            self.assertIsNone(self.service.job)
+            dialog.done.invoke()
+            self.app.settings=self.store.settings()
+            self.app.show_startup()
+            self.assertIsNone(self.app.browser_install_dialog)
+            self.app.show_startup(connect=True)
+            dialog=self.app.browser_install_dialog
+            installed.return_value=True
+            dialog.refresh()
+            self.assertEqual(dialog.download.cget('text'),'Spotify 로그인')
+            dialog.download.invoke()
+            self.assertIsNone(self.app.browser_install_dialog)
+            self.assertTrue(self.service.job.visible)
+
+    def test_developer_connection_button_reuses_existing_dialog(self):
+        self.app.open_developer_mode()
+        button=self.app.manual_sync_dialog.connection_button
+        button.invoke()
+        first=self.app.connection_dialog
+        self.assertIsInstance(first,ConnectionDialog)
+        button.invoke()
         self.assertIs(self.app.connection_dialog,first)
         first.close()
-        self.app.show_startup()
         self.assertIsNone(self.app.connection_dialog)
-        self.assertTrue(self.store.settings()['connection_setup_seen'])
 
     def test_spotify_choice_waits_for_authenticated_status_and_never_opts_into_public_lookup(self):
         self.app.open_connection();self.app.connection_dialog.spotify_button.invoke()
@@ -203,6 +234,9 @@ class ConnectionFlowTests(unittest.TestCase):
         self.app.receive_background_lyrics(job,{'kind':'lyrics','key':self.service.request_key,
             'lines':[{'text':'青い空を見る','time':None},{'text':'遠い星を探す','time':None}]})
         self.app.receive_background_lyrics(job,{'kind':'finished','exit_code':1})
+        kind,result=self.app.messages.get(timeout=3)
+        self.assertEqual(kind,'merged_lyrics')
+        self.app.receive_merged_lyrics(*result)
         self.app.render()
         headline,detail=self.app.connection_status()
         self.assertIn('원문 가사',headline)

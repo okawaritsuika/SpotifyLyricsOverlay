@@ -358,6 +358,15 @@ class MediaControlTests(unittest.TestCase):
             self.assertTrue(self.completion('media_seek')[1])
         self.assertEqual(session.calls, [('seek', 20000000), ('seek', 20000000)])
 
+    def test_seek_to_lyric_timestamp_keeps_paused_state(self):
+        session=FakeSession(playing=False)
+        session.timeline.start_time=timedelta(seconds=2)
+        self.sessions=[session]
+        self.assertTrue(self.monitor.request_seek(21.125,self.track_key))
+        self.assertEqual(self.completion('media_seek')[:2],(21.125,True))
+        self.assertEqual(session.calls,[('seek',211250000)])
+        self.assertFalse(session.playing)
+
     def test_seek_prefers_playing_spotify_and_does_not_control_other_sessions(self):
         other = FakeSession('OtherPlayer.exe')
         paused = FakeSession(playing=False)

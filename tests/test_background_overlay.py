@@ -69,6 +69,101 @@ class BackgroundOverlayTests(unittest.TestCase):
     def receive(self, **kwargs):
         self.app.receive_direct_lyrics(self.playback.key, self.provider(**kwargs))
 
+    def test_track_change_paints_before_restoring_cached_lyrics(self):
+        self.receive()
+        self.assertIn(self.app.original_label.cget('text'), TEXTS)
+        next_track = replace(self.playback, title='Next Song')
+
+        def restore():
+            flush.assert_called_once_with()
+            self.assertEqual(self.app.track_title_label.cget('text'), next_track.title)
+            self.assertEqual(self.app.original_label.cget('text'), next_track.title)
+            self.assertFalse(self.app.display_lines)
+
+        with patch.object(self.root, 'update_idletasks', wraps=self.root.update_idletasks) as flush, \
+                patch.object(self.app, 'restore_cached_lyrics', side_effect=restore) as restore_lyrics:
+            self.app.set_playback(next_track)
+            restore_lyrics.assert_called_once_with()
+
+    def finish_merge(self):
+        deadline=time.monotonic()+3
+        while time.monotonic()<deadline:
+            kind,value=self.app.messages.get(timeout=max(.01,deadline-time.monotonic()))
+            if kind=='merged_lyrics' and value[0]==self.app.lyric_merge_job.serial:
+                self.app.receive_merged_lyrics(*value)
+                return
+        self.fail('No current merged lyrics response')
+
+    def test_live_providers_merge_the_same_dialogue_and_translation_in_both_orders(self):
+        dialogue='司「ここから出発しよう！」'
+        texts=(TEXTS[0],dialogue,*TEXTS[1:])
+        originals=tuple(Line(text,'','') for text in texts)
+        translations=tuple(Line(line.original,'','지금부터 출발하자!' if i==1 else '')
+                           for i,line in enumerate(originals))
+        results=[]
+        for reverse in (False,True):
+            self.playback=replace(self.playback,title=f'Synthetic song {reverse}')
+            self.app.set_playback(self.playback)
+            spotify=self.provider(times=[10,None,30])
+            alsong={**self.provider('ALSong',times=[10,15,20,30],texts=texts),
+                    'kinds':('unknown','dialogue','unknown','unknown')}
+            for supplied in ((alsong,spotify) if reverse else (spotify,alsong)):
+                with patch.object(self.app.background_lyrics,'receive',return_value=(self.playback.key,supplied)):
+                    self.app.receive_background_lyrics('synthetic',{})
+                self.finish_merge()
+            bridge=self.app.reader_bridge.snapshot()
+            documents=(('https://namu.wiki/w/Test',self.playback.title,originals),
+                       ('https://sidem-ko.fandom.com/ko/wiki/Test',self.playback.title,translations))
+            self.app.receive_reader_lyrics(bridge['track'],originals,True,bridge['token'],(),documents)
+            self.finish_merge()
+            self.assertEqual([line.original for line in self.app.display_lines],list(texts))
+            self.assertEqual(self.app.display_lines[1].korean,'지금부터 출발하자!')
+            self.assertEqual(self.app.direct_times(),[10,15,20,30])
+            self.assertFalse(self.app.auto_analyzer.enabled)
+            self.position(16)
+            self.assertEqual(self.app.displayed_index(),1)
+            self.position(21)
+            self.assertEqual(self.app.displayed_index(),2)
+            cached=self.app.lyric_cache.load(self.playback)
+            self.assertEqual(cached['merge']['rows'][1]['selected_source'],'ALSong')
+            results.append((cached['lines'],cached['direct']['times']))
+        self.assertEqual(results[0],results[1])
+        self.app.close();self.root=tk.Tk();self.root.withdraw()
+        self.app=LyricsApp(self.root,self.store,start_services=False)
+        self.app.set_playback(self.playback)
+        self.assertEqual((self.app.display_lines,self.app.direct_times()),results[1])
+
+    def test_stale_merge_result_cannot_apply_after_a_b_a(self):
+        self.app.queue_provider_lyrics(self.playback.key,self.provider())
+        kind,response=self.app.messages.get(timeout=3)
+        self.assertEqual(kind,'merged_lyrics')
+        self.app.set_playback(replace(self.playback,title='Other'))
+        self.app.set_playback(self.playback)
+        self.app.receive_merged_lyrics(*response)
+        self.assertIsNone(self.app.song)
+        self.assertEqual(self.app.display_lines,())
+
+    def test_inserted_dialogue_preserves_manual_row_offset_and_persistence(self):
+        self.app.queue_provider_lyrics(self.playback.key,self.provider())
+        self.finish_merge()
+        timing={**self.app.timing,'times':[None,18,None],
+                'origins':[None,'manual',None],'offset':.5}
+        self.app.save_current_timing(timing);self.app.timing=timing
+        self.app.cursor=self.app.manual_index=1
+        self.app.follow.set(False)
+        texts=(TEXTS[0],'司：「ここから出発しよう！」',*TEXTS[1:])
+        self.app.queue_provider_lyrics(self.playback.key,self.provider('ALSong',times=[10,15,20,30],texts=texts))
+        self.finish_merge()
+        self.assertEqual(self.app.effective_times(),([10,15,18,30],False))
+        self.assertEqual(self.app.timing['times'],[None,None,18,None])
+        self.assertEqual(self.app.timing['offset'],.5)
+        self.assertEqual((self.app.cursor,self.app.manual_index,self.app.follow.get()),(2,2,False))
+        self.app.close();self.root=tk.Tk();self.root.withdraw()
+        self.app=LyricsApp(self.root,self.store,start_services=False)
+        self.app.set_playback(self.playback)
+        self.assertEqual(self.app.effective_times(),([10,15,18,30],False))
+        self.assertEqual(self.app.timing['offset'],.5)
+
     def position(self, position, playing=False, captured=None):
         self.playback = replace(self.playback, base=position, playing=playing,
                                 captured=time.monotonic() if captured is None else captured)
@@ -86,7 +181,7 @@ class BackgroundOverlayTests(unittest.TestCase):
         self.assertEqual(self.app.original_label.cget('text'), TEXTS[0])
         self.assertEqual(self.app.direct_times(), [10, 20, 30])
         self.assertEqual(self.app.effective_times(), ([10, 20, 30], False))
-        self.assertIn('Spotify 싱크', self.app.mode_label.cget('text'))
+        self.assertEqual(self.app.mode_label.cget('text'), '')
         self.position(25)
         self.assertEqual(self.app.displayed_index(), 1)
         self.assertEqual(self.app.original_label.cget('text'), TEXTS[1])
@@ -303,7 +398,7 @@ class BackgroundOverlayTests(unittest.TestCase):
         self.assertEqual(self.app.displayed_index(),1)
         self.assertFalse(self.app.follow.get())
         self.assertEqual(self.app.korean_label.cget('text'),'검증된 번역')
-        self.assertIn('번역 1/3줄',self.app.playback_badge.cget('text'))
+        self.assertEqual(self.app.translated_count,1)
         cached=self.app.lyric_cache.load(self.playback)
         self.assertEqual(cached['direct']['source'],'Spotify')
         self.assertEqual(cached['direct']['times'],[10,20,30])

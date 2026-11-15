@@ -100,17 +100,26 @@ class SpotifyCatalogError(Exception):
 
 def parse_track_id(value):
     """Accept an exact track ID, URI or HTTPS Spotify track URL, else None."""
+    return _parse_spotify_id(value, 'track')
+
+
+def parse_playlist_id(value):
+    """Accept an exact playlist ID, URI or HTTPS Spotify playlist URL, else None."""
+    return _parse_spotify_id(value, 'playlist')
+
+
+def _parse_spotify_id(value, kind):
     if not isinstance(value, str) or len(value) > 2048:return None
     value = value.strip()
     if re.fullmatch(r'[A-Za-z0-9]{22}', value):return value
-    match = re.fullmatch(r'spotify:track:([A-Za-z0-9]{22})', value)
+    match = re.fullmatch(rf'spotify:{kind}:([A-Za-z0-9]{{22}})', value)
     if match:return match[1]
     try:
         parsed = urlparse(value)
         if (parsed.scheme != 'https' or parsed.hostname != 'open.spotify.com'
                 or parsed.username or parsed.password or parsed.port not in (None, 443)):
             return None
-        match = re.fullmatch(r'/(?:intl-[a-z]{2}/)?track/([A-Za-z0-9]{22})/?', parsed.path)
+        match = re.fullmatch(rf'/(?:intl-[a-z]{{2}}/)?{kind}/([A-Za-z0-9]{{22}})/?', parsed.path)
         return match[1] if match else None
     except ValueError:return None
 

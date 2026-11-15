@@ -64,6 +64,27 @@ class PlaylistLyricsStoreTests(unittest.TestCase):
         self.assertEqual(saved['lines'], (self.lines[0], update[1]))
         self.assertEqual(saved['direct']['times'], [0, 10])
 
+    def test_late_spotify_keeps_other_source_onsets_and_reviewed_annotations(self):
+        middle = Line('A missing middle line', '', '')
+        lines = (self.lines[0], middle, self.lines[1])
+        alsong = {'source': 'ALSong', 'provider_id': '123', 'lines': lines, 'times': [0, 5, 10]}
+        self.assertTrue(self.store.save(self.track, lines, alsong))
+        self.assertTrue(self.save())
+        merged = self.store.load(self.track['id'])
+        self.assertEqual(merged['lines'], lines)
+        self.assertEqual(merged['direct']['times'], [0, 5, 10])
+        self.assertEqual([row['selected_source'] for row in merged['merge_rows']], ['Spotify', 'ALSong', 'Spotify'])
+        self.assertEqual({item['source'] for item in merged['snapshots']}, {'Spotify', 'ALSong', 'local'})
+
+        reviewed = (lines[0], Line(middle.original, '', '검토한 번역'), lines[2])
+        self.assertTrue(self.store.save(self.track, reviewed, merged['direct'], sources=('reviewed_translation',)))
+        self.assertTrue(self.store.save(self.track, merged['lines'], merged['direct'],
+                                       snapshots=merged['snapshots'], merge_rows=merged['merge_rows']))
+        restored = PlaylistLyricsStore(self.root).load(self.track['id'])
+        self.assertEqual(restored['lines'], reviewed)
+        self.assertEqual(restored['direct']['times'], [0, 5, 10])
+        self.assertEqual(restored['merge_rows'][1]['translation_source'], 'manual')
+
     def test_partial_old_text_can_be_completed_without_erasing_annotations(self):
         self.assertTrue(self.save())
         complete = (self.lines[0], Line('A missing middle line', '', 'middle translation'), self.lines[1])

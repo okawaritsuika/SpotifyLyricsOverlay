@@ -1,5 +1,51 @@
 {
   "schema_version": 1,
+  "live_works": [
+    {
+      "title": "Monochromatic",
+      "recording_albums": ["THE IDOLM@STER SHINY COLORS ECHOES 07"],
+      "source_urls": ["https://shinycolors.lantis.jp/releaseinfo/lacm-24547/", "https://idolmaster-official.jp/news/01_20323"],
+      "event_ids": ["valiv-letora-birthday-2026"]
+    },
+    {
+      "title": "理論武装して",
+      "recording_albums": ["理論武装して"],
+      "source_urls": ["https://gakuen-label.idolmaster-official.jp/discography/ufncogar2m", "https://gakuen-label.idolmaster-official.jp/discography/0mm8rxabi", "https://idolmaster-official.jp/news/01_20323"],
+      "event_ids": ["valiv-letora-birthday-2026"]
+    },
+    {
+      "title": "Poison Berry Daughters",
+      "recording_albums": ["Happy Surprise Trick!"],
+      "source_urls": ["https://shinycolors.lantis.jp/releaseinfo/laca-25127/"],
+      "event_ids": ["shiny-7th-spiral-day1", "shiny-7th-spiral-day2"]
+    },
+    {
+      "title": "OPEN the New world",
+      "recording_albums": ["Happy Surprise Trick!"],
+      "source_urls": ["https://shinycolors.lantis.jp/releaseinfo/laca-25127/"],
+      "event_ids": ["shiny-7th-spiral-day1", "shiny-7th-spiral-day2"]
+    },
+    {
+      "title": "VOY@GER",
+      "recording_albums": ["VOY@GER", "いつまでもなかよし！"],
+      "source_urls": ["https://lantis.jp/sidem/releaseinfo/release_LACM-24164.html", "https://pylonport.bandainamcomusiclive.co.jp/report/843"]
+    },
+    {
+      "title": "CRYST@LOUD",
+      "recording_albums": ["CRYST@LOUD", "WANNABE EP COLLECTION (3)"],
+      "source_urls": ["https://idolmaster-official.jp/news/01_5472.html"]
+    },
+    {
+      "title": "なんどでも笑おう",
+      "recording_albums": ["なんどでも笑おう", "STARLIT SEASON 04"],
+      "source_urls": ["https://columbia.jp/idolmaster/15th/"]
+    },
+    {
+      "title": "アイ NEED YOU (FOR WONDERFUL STORY)",
+      "recording_albums": ["アイ NEED YOU (FOR WONDERFUL STORY)", "SYMPHONY OF BRILLIANT STARS"],
+      "source_urls": ["https://idolmaster-official.jp/20th_anniversary/song", "https://idolmaster-official.jp/news/01_16103.html"]
+    }
+  ],
   "entries": [
     {
       "recording_id": "12863ee5-473c-4595-a2b3-c37fdde6d403",

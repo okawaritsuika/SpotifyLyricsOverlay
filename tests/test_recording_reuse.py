@@ -118,6 +118,38 @@ class RecordingReuseTests(unittest.TestCase):
                   {**self.direct, 'lines': different})
         self.assertIsNone(self.cache.load_related(self.target))
 
+    def test_known_singers_with_spelling_variants_choose_complete_translation_without_clock(self):
+        lines=tuple(Line(f'青い空を見る花を描く今日の物語その{i}番', '', '번역') for i in range(12))
+        variant=tuple(Line(row.original.replace('空','そら'), '', '') for row in lines)
+        self.save(lines=lines,direct={**self.direct,'lines':lines,'times':list(range(12))})
+        self.save(replace(self.playback,artist='Third Singer',album='Other release',duration=201),variant,
+                  {**self.direct,'lines':variant,'times':list(range(12))})
+        with patch('recording_reuse._work_evidence',return_value=True):
+            result=self.cache.load_related(replace(self.target,artist='別の歌手'))
+        self.assertEqual(result['lines'],lines)
+        self.assertIsNone(result['direct'])
+        self.assertIsNone(result['timing'])
+        self.assertIsNone(result['tracking_times'])
+        self.assertTrue(result['reuse']['tracking_conflict'])
+
+    def test_known_work_still_rejects_divergent_lyric_documents(self):
+        lines=tuple(Line(f'青い空を見る花を描く今日の物語その{i}番','','') for i in range(12))
+        different=tuple(Line(f'全然違う歌詞の内容を歌っているその{i}番','','') for i in range(12))
+        self.save(lines=lines,direct={**self.direct,'lines':lines,'times':list(range(12))})
+        self.save(replace(self.playback,artist='Third Singer'),different,
+                  {**self.direct,'lines':different,'times':list(range(12))})
+        with patch('recording_reuse._work_evidence',return_value=True):
+            self.assertIsNone(self.cache.load_related(replace(self.target,artist='別の歌手')))
+
+    def test_divergent_other_singer_documents_cannot_choose_different_length_or_cut(self):
+        self.save()
+        variant=(Line('青いそらを見る','','번역'),self.lines[1])
+        self.save(replace(self.playback,artist='Third Singer',duration=201),variant,
+                  {**self.direct,'lines':variant})
+        with patch('recording_reuse._work_evidence',return_value=True):
+            self.assertIsNone(self.cache.load_related(replace(self.target,artist='別の歌手',duration=210)))
+            self.assertIsNone(self.cache.load_related(replace(self.target,artist='別の歌手',title='キラキラ')))
+
     def test_conflicting_provider_clocks_keep_text_and_discard_clocks(self):
         self.save()
         self.save(replace(self.playback, album='Conflicting'), direct={**self.direct, 'times': [3, 18]})

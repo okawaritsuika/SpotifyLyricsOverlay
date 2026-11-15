@@ -3,6 +3,8 @@
 .exe-venv/
 .build-venv/
 .browser_deps/
+desktop_ui/node_modules/
+electron-runtime/
 models/
 data/
 __pycache__/

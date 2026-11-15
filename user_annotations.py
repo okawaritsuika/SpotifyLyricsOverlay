@@ -4,6 +4,7 @@ Short recording edits may reuse exact complete phrases from the same named
 song and recording artist. Conflicting repetitions never select a singer.
 """
 from dataclasses import dataclass, field
+import hashlib
 import itertools
 import json
 from pathlib import Path
@@ -12,9 +13,12 @@ import unicodedata
 
 from lyrics import normalized
 from lyric_parts import LyricParts
+from storage import atomic_json, read_json
 
 
 MAX_BYTES = 2 * 1024 * 1024
+MAX_SINGERS_PER_LINE = 10
+SINGER_KEYS = '1234567890'
 MAX_ROWS = 1500
 MAX_BLOCK_ROWS = 4
 MAX_BLOCK_CHARACTERS = 160
@@ -41,6 +45,118 @@ class UserAnnotation:
 
 
 EMPTY = UserAnnotation()
+
+
+class SingerRoster:
+    """Store the ordered number-key choices for a recording."""
+    def __init__(self, directory):
+        self.directory = Path(directory) / 'singer_rosters'
+        self.key = self.path = self.names = self.error = None
+
+    def select(self, key):
+        if key == self.key:
+            return
+        self.key = key
+        self.path = self.directory / (hashlib.sha256(key.encode()).hexdigest() + '.json')
+        self.names = self.error = None
+        try:
+            missing = object()
+            value = read_json(self.path, missing)
+            if value is not missing:
+                if not isinstance(value, list) or not self.valid_names(value):
+                    raise ValueError('저장된 곡 참여 가창자 명단의 형식을 확인하세요.')
+                self.names = tuple(value)
+        except (OSError, ValueError) as error:
+            self.error = error
+
+    def save(self, names):
+        if self.error:
+            raise self.error
+        if not self.valid_names(names):
+            raise ValueError('곡 참여 가창자는 서로 다른 이름으로 10명까지 지정할 수 있습니다.')
+        if names != self.names:
+            atomic_json(self.path, names)
+            self.names = names
+
+    @staticmethod
+    def valid_names(names):
+        return (len(names) <= len(SINGER_KEYS) and all(_text(name, True) for name in names)
+                and len(set(names)) == len(names))
+
+
+class SingerEdits:
+    """Store singer changes and single-line resets for an exact lyric layout."""
+    def __init__(self, directory):
+        self.directory = Path(directory) / 'singer_edits'
+        self.key = None
+        self.path = None
+        self.rows = {}
+        self.cleared = set()
+        self.overrides = ()
+        self.assigned_names = ()
+        self.error = None
+
+    def select(self, key, *, path_key=None):
+        if key == self.key:return False
+        self.key = key
+        self.path = self.path_for(path_key or key) if key else None
+        self.error = None
+        rows, cleared = {}, set()
+        if self.path:
+            try:
+                document = read_json(self.path, {})
+                if not isinstance(document, dict):raise ValueError('singer rows')
+                for index, entry in document.items():
+                    carries = isinstance(entry, dict) and entry.keys() == {'carry'}
+                    names = entry['carry'] if carries else entry
+                    if (not index.isascii() or not index.isdecimal() or int(index) >= len(key[1])
+                            or not isinstance(names, list) or len(names) > MAX_SINGERS_PER_LINE
+                            or any(not _text(name, True, 4000) for name in names)):
+                        raise ValueError('singer row')
+                    row = int(index)
+                    if names:rows[row] = tuple(names)
+                    if carries or not names:cleared.add(row)
+            except (OSError, ValueError) as error:
+                rows, cleared = {}, set()
+                self.error = error if isinstance(error, OSError) else ValueError(
+                    '저장된 가창자 입력 파일의 형식을 확인하세요.')
+        self._set_rows(rows, cleared)
+        return True
+
+    def path_for(self,key):
+        return self.directory / (hashlib.sha256(json.dumps(key).encode()).hexdigest() + '.json')
+
+    def document(self, rows, cleared):
+        result = {row: {'carry': names} if row in cleared else names for row,names in rows.items()}
+        result.update({row: () for row in cleared - rows.keys()})
+        return result
+
+    def _set_rows(self, rows, cleared):
+        self.rows, self.cleared = rows, cleared
+        self.assigned_names = tuple(dict.fromkeys(name for row in sorted(rows) for name in rows[row]))
+        overrides = []
+        carry = None
+        for index in range(len(self.key[1]) if self.key else 0):
+            carry = rows.get(index, carry)
+            overrides.append(() if index in cleared else carry)
+        self.overrides = tuple(overrides)
+
+    def has_explicit(self, index):
+        return index in self.rows or index in self.cleared
+
+    def save(self, index, names, *, keep_carry=False):
+        if self.error:raise self.error
+        if names and len(names) > MAX_SINGERS_PER_LINE:
+            raise ValueError(f'한 줄에 가창자를 {MAX_SINGERS_PER_LINE}명까지 지정할 수 있습니다.')
+        rows, cleared = self.rows.copy(), self.cleared.copy()
+        if names:rows[index] = names
+        elif not keep_carry:rows.pop(index, None)
+        if names == ():cleared.add(index)
+        else:cleared.discard(index)
+        if rows != self.rows or cleared != self.cleared:
+            # A reset may hide an assignment on this line while keeping it for later lines.
+            atomic_json(self.path, self.document(rows,cleared))
+            self._set_rows(rows, cleared)
 
 
 def _same(values, default=''):

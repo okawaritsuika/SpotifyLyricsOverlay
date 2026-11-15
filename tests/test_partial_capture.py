@@ -1,18 +1,17 @@
 from pathlib import Path
-import sys
 import json
 import tempfile
-from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
-import wave
 
+from audio_capture_cache import CAPTURE_NAME, capture_frames, write_capture_audio
 from audio_worker import CaptureDiscarded, analyze, capture, main, _error_diagnostic
 from media import Playback
 
 
 class PartialCaptureTests(unittest.TestCase):
-    def run_capture(self, boundary=None, boundary_at=12.5, start=0, capture_from=0, duration=40):
+    def run_capture(self, boundary=None, boundary_at=12.5, start=0, capture_from=0, duration=40, initial_mismatch=None,
+                    capture_window=None, playlist_analysis=False):
         clock=[float(start)]
         initial=Playback('Test','Artist','Album',0,duration,True,0)
         reads=[]
@@ -27,23 +26,25 @@ class PartialCaptureTests(unittest.TestCase):
                 return b'\0'*4000,2000,at
             def close(self):pass
         with tempfile.TemporaryDirectory() as directory:
-            path=Path(directory)/'capture.wav'
+            path=Path(directory)/CAPTURE_NAME
             def snapshot(*args):
                 now=clock[0];changed=now>=boundary_at
                 if changed and boundary=='app_closed':path.with_name('finish-capture').touch()
-                return Playback('Other' if changed and boundary=='track_changed' else 'Test',
+                initial_other=initial_mismatch=='track' and now<.5
+                initial_paused=initial_mismatch=='paused' and now<.5
+                return Playback('Other' if initial_other or changed and boundary=='track_changed' else 'Test',
                     'Artist','Album',now+(7 if changed and boundary=='seeked' else 0),duration,
-                    not (changed and boundary=='paused'),now-(4 if changed and boundary=='stale' else 0),
+                    not (initial_paused or changed and boundary=='paused'),now-(4 if changed and boundary=='stale' else 0),
                     1.2 if changed and boundary=='rate' else 1)
             with patch('audio_worker.ProcessLoopback',Stream),patch('audio_worker.SpotifyMonitor'), \
                  patch('audio_worker.time.monotonic',side_effect=lambda:clock[0]), \
                  patch('audio_worker.time.sleep',side_effect=lambda delay:clock.__setitem__(0,clock[0]+delay)), \
                  patch('audio_worker.latest',side_effect=snapshot),patch('audio_worker.emit'):
                 result=capture({'duration':duration,'key':initial.key,'incremental':True,
-                                'capture_from':capture_from},path)
-            with wave.open(str(path),'rb') as saved:
-                seconds=saved.getnframes()/saved.getframerate()
-            return result,seconds,reads
+                                'capture_from':capture_from,'capture_window':capture_window,
+                                'playlist_analysis':playlist_analysis},path)
+            frames,rate,_=capture_frames(path)
+            return result,frames/rate,reads
 
     def test_playback_interruptions_keep_only_stable_prefix(self):
         for boundary in ('track_changed','paused','seeked','app_closed'):
@@ -55,6 +56,13 @@ class PartialCaptureTests(unittest.TestCase):
                 self.assertEqual(result['captured_seconds'],11.5)
                 self.assertEqual(result['capture_end'],11.5)
                 self.assertLess(max(reads),12.5)
+
+    def test_playlist_rejects_an_early_boundary_and_accepts_a_normal_track_end(self):
+        with self.assertRaisesRegex(CaptureDiscarded,'곡 끝까지'):
+            self.run_capture('track_changed',playlist_analysis=True)
+        result, seconds, _ = self.run_capture('track_changed',boundary_at=39,playlist_analysis=True)
+        self.assertEqual(seconds,39)
+        self.assertEqual(result['capture_end'],38)
 
     def test_short_listens_are_discarded_without_failure(self):
         for boundary in ('track_changed','paused','seeked','app_closed'):
@@ -86,11 +94,43 @@ class PartialCaptureTests(unittest.TestCase):
         self.assertEqual(result['capture_end_reason'],'complete')
         self.assertAlmostEqual(result['capture_end'],24,places=3)
 
+    def test_bounded_capture_stops_at_right_anchor_even_for_short_gaps(self):
+        result,seconds,reads=self.run_capture(capture_window=[12,16])
+        self.assertAlmostEqual(result['capture_end'],16,places=3)
+        self.assertGreaterEqual(min(reads),12)
+        self.assertLess(max(reads),16)
+        self.assertAlmostEqual(seconds,4,delta=.06)
+        with self.assertRaisesRegex(CaptureDiscarded,'시작 지점을 지나'):
+            self.run_capture(start=14,capture_window=[12,16])
+
     def test_resume_wait_is_discarded_immediately_when_playback_changes(self):
         for boundary in ('track_changed','paused','app_closed'):
             with self.subTest(boundary=boundary):
                 with self.assertRaisesRegex(CaptureDiscarded,'수집 전에'):
                     self.run_capture(boundary,boundary_at=3,capture_from=20)
+
+    def test_new_monitor_allows_initial_transition_snapshot_to_settle(self):
+        for mismatch in ('track','paused'):
+            with self.subTest(mismatch=mismatch):
+                result,_,reads=self.run_capture(initial_mismatch=mismatch)
+                self.assertGreaterEqual(min(reads),.5)
+                self.assertLess(min(reads),.6)
+                self.assertEqual(result['capture_end_reason'],'complete')
+
+    def test_new_monitor_does_not_wait_forever_for_an_already_skipped_track(self):
+        with self.assertRaisesRegex(CaptureDiscarded,'수집 전에') as raised:
+            self.run_capture('track_changed',boundary_at=0)
+        self.assertIn('초기 연결 중',str(raised.exception))
+        self.assertIn('대기 2.0초',str(raised.exception))
+
+    def test_capture_wait_failure_explains_resume_boundary_without_track_text(self):
+        with self.assertRaises(CaptureDiscarded) as raised:
+            self.run_capture('paused',boundary_at=3,capture_from=20)
+        detail=str(raised.exception)
+        self.assertIn('목표 곡 확인 후',detail)
+        self.assertIn('일시정지',detail)
+        self.assertIn('수집 예정 20.0초',detail)
+        self.assertNotIn('Test',detail)
 
     def test_resuming_far_into_long_track_does_not_hit_three_minute_wait(self):
         result,_,reads=self.run_capture(capture_from=200,duration=212)
@@ -106,10 +146,9 @@ class PartialCaptureTests(unittest.TestCase):
 
     def test_short_capture_is_rejected_before_importing_model(self):
         with tempfile.TemporaryDirectory() as directory:
-            path=Path(directory)/'capture.wav'
-            with wave.open(str(path),'wb') as output:
-                output.setnchannels(1);output.setsampwidth(2);output.setframerate(8000)
-                output.writeframes(b'\0'*(8000*2*10))
+            path=Path(directory)/CAPTURE_NAME
+            with write_capture_audio(path, rate=8000) as output:
+                output.write(b'\0'*(8000*2*10))
             with patch('audio_worker.align_lyrics') as alignment, \
                  patch('analysis_limits.apply_analysis_limits') as limits:
                 with self.assertRaises(CaptureDiscarded):
@@ -120,7 +159,7 @@ class PartialCaptureTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             request=Path(directory)/'request.json'
             request.write_text('{"incremental":true}',encoding='utf-8')
-            audio=request.with_name('capture.wav');audio.write_bytes(b'temporary audio')
+            audio=request.with_name(CAPTURE_NAME);audio.write_bytes(b'temporary audio')
             with patch('audio_worker.sys.argv',['audio_worker.py',str(request)]), \
                  patch('audio_worker.capture',side_effect=CaptureDiscarded('short')), \
                  patch('audio_worker.emit') as emit:
@@ -157,16 +196,12 @@ class PartialCaptureTests(unittest.TestCase):
         self.assertNotIn('private',json.dumps(diagnostic))
 
     def test_analysis_keeps_interval_metadata_and_trims_transition_tail(self):
-        import numpy as np
-        decoder=SimpleNamespace(decode_audio=lambda *args,**kwargs:np.ones(12*16000,dtype=np.float32))
         expected={'matched':1,'times':[2],'incremental':True,'analyzed_ranges':[[0,11]]}
         with tempfile.TemporaryDirectory() as directory:
-            path=Path(directory)/'capture.wav'
-            with wave.open(str(path),'wb') as output:
-                output.setnchannels(1);output.setsampwidth(2);output.setframerate(8000)
-                output.writeframes(b'\0'*(8000*2*12))
-            with patch.dict(sys.modules,{'faster_whisper.audio':decoder}), \
-                 patch('analysis_limits.apply_analysis_limits'),patch('audio_worker.emit'), \
+            path=Path(directory)/CAPTURE_NAME
+            with write_capture_audio(path, rate=8000) as output:
+                output.write(b'\0\x20'*(8000*12))
+            with patch('analysis_limits.apply_analysis_limits'),patch('audio_worker.emit'), \
                  patch('audio_worker.align_lyrics',return_value=expected.copy()) as alignment:
                 result=analyze({'incremental':True,'duration':40},path,0,1)
             self.assertEqual(len(alignment.call_args.args[1]),11*16000)

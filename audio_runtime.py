@@ -16,7 +16,7 @@ def prepare_cuda_dlls():
     purelib=sysconfig.get_path('purelib')
     if purelib:roots.append(Path(purelib))
     candidates=[root/'nvidia'/package/'bin' for root in roots
-                for package in ('cublas','cudnn','cuda_runtime')]
+                for package in ('cublas','cudnn','cuda_runtime','cufft')]
     candidates.extend(Path(value)/'bin' for name,value in os.environ.items()
                       if value and (name=='CUDA_PATH' or name.startswith('CUDA_PATH_V')))
     directories=[]
@@ -91,15 +91,23 @@ def load_realtime_model(request,emit=None,*,_model_factory=None):
 def load_final_model(request,emit=None):
     """Use the selected local GPU model, retaining small as the CPU fallback."""
     import stable_whisper
+    scope='미확정 구간' if request.get('capture_window') else '전체'
     def fallback(kind,**event):
         if emit:emit('progress',state='analyzing',
-                     text='전체 분석 GPU를 사용할 수 없어 CPU 소형 모델로 전환합니다.')
+                     text=f'{scope} 분석 GPU를 사용할 수 없어 CPU 소형 모델로 전환합니다.')
     runtime_request={'model':request['model'],
         'realtime_device':request.get('final_device',request.get('realtime_device','cpu'))}
     if request.get('final_model'):runtime_request['realtime_model']=request['final_model']
-    model,runtime=load_realtime_model(runtime_request,
-        fallback,_model_factory=stable_whisper.load_faster_whisper)
+    cache=request.get('final_model_cache')
+    key=(runtime_request['model'],runtime_request['realtime_device'],runtime_request.get('realtime_model'))
+    cached=cache.get(key) if cache is not None else None
+    if cached is None:
+        model,runtime=load_realtime_model(runtime_request,
+            fallback,_model_factory=stable_whisper.load_faster_whisper)
+        if cache is not None:cache[key]=model,runtime
+    else:
+        model,runtime=cached
     if emit:
         emit('progress',state='analyzing',runtime=runtime,
-             text=f"전체 음원 정밀 분석 · {'GPU' if runtime['device']=='cuda' else 'CPU'} · {runtime['model']}")
+             text=f"{scope} 음원 정밀 분석 · {'GPU' if runtime['device']=='cuda' else 'CPU'} · {runtime['model']}")
     return model,runtime

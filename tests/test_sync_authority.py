@@ -1,5 +1,6 @@
 """Provider anchors win over inferred clocks; only bounded missing cues progress."""
 from dataclasses import replace
+from pathlib import Path
 import threading
 import time
 from types import SimpleNamespace
@@ -7,6 +8,7 @@ import unittest
 
 import test_background_overlay as background
 from lyrics import Line
+from local_analysis import AnalysisStore
 
 
 class SyncAuthorityTests(unittest.TestCase):
@@ -23,8 +25,7 @@ class SyncAuthorityTests(unittest.TestCase):
         self.assertEqual(self.app.effective_times()[0],[10,20,30])
         self.position(19)
         self.assertEqual(self.app.displayed_index(),0)
-        self.assertIn('Spotify 싱크',self.app.mode_label.cget('text'))
-        self.assertNotIn('저장한 곡별 싱크 우선',self.app.mode_label.cget('text'))
+        self.assertEqual(self.app.mode_label.cget('text'),'')
         self.assertEqual(self.app.timing['times'],[8,18,28])
 
     def test_finalized_audio_keeps_only_explicit_manual_correction_and_offset(self):
@@ -43,7 +44,44 @@ class SyncAuthorityTests(unittest.TestCase):
                              'origins':['audio']*3,'audio_finalized':True,'source':'음원 분석'}
             self.assertEqual(self.app.effective_times()[0],[10,expected,30])
 
+    def test_playlist_mp3_candidate_fills_overlay_gap_and_leaves_saved_timing(self):
+        track_id='A'*22
+        track={'id':track_id,'title':self.playback.title,'artists':[self.playback.artist],
+               'album':self.playback.album,'duration':self.playback.duration}
+        direct={**self.provider(times=[10,None,30]),'provider_id':track_id}
+        self.assertTrue(self.app.playlist_lyrics.store.save(track,direct['lines'],direct))
+        source=Path(self.temp.name)/'0001 Test Song.mp3'
+        source.write_bytes(b'fixture audio')
+        database=AnalysisStore(self.temp.name)
+        spec={'kind':'lyrics','track_id':track_id,'expected_duration':90,
+              'lines':[row.original for row in direct['lines']]}
+        job=database.get(database.register(source,spec))
+        database.update(job,'done','aligned',{'duration':90,'alignment':{'times':[9,21,31],'matched':3}})
+        self.app.restore_cached_lyrics()
+        self.assertEqual(self.app.effective_times()[0],[10,21,30])
+        self.position(22)
+        self.assertEqual(self.app.displayed_index(),1)
+        self.assertEqual(self.app.time_sources[1],'MP3 음원 싱크')
+        self.assertEqual(self.app.timing['times'],[None,None,None])
+        self.assertEqual(self.app.direct_times(),[10,None,30])
+
+        other=Path(self.temp.name)/'newer review.mp3'
+        other.write_bytes(b'unverified recording')
+        unverified=database.get(database.register(other,spec))
+        database.update(unverified,'done','aligned',{'duration':90,'alignment':{'times':[9,23,31],'matched':3},
+                        'playlist_clock':{'usable':False,'reason':'recording_tags_unverified'}})
+        self.app.local_analysis_cache=(None,0,None)
+        self.app.local_playlist_sync_cache=(None,0,None)
+        self.assertEqual(self.app.current_local_analysis()['id'],unverified['id'])
+        self.assertEqual(self.app.effective_times()[0],[10,21,30])
+        self.assertEqual(self.app.direct_times(),[10,None,30])
+
+        database.update(job,'done','aligned',{'duration':90,'alignment':{'times':[None,21,None],'matched':1}})
+        self.app.local_playlist_sync_cache=(None,0,None)
+        self.assertEqual(self.app.effective_times()[0],[10,None,30])
+
     def test_missing_spotify_cue_is_estimated_only_inside_confirmed_neighbors(self):
+        self.app.lyric_advance_ms=0
         texts=tuple(f'固有の歌詞{i}番' for i in range(5))
         self.receive(texts=texts,times=[10,None,30,40,50])
         self.app.use_estimate.set(True)
@@ -54,7 +92,7 @@ class SyncAuthorityTests(unittest.TestCase):
             self.position(seconds)
             self.assertEqual(self.app.displayed_index(),index)
         self.position(22)
-        self.assertIn('빈 구절 추정',self.app.mode_label.cget('text'))
+        self.assertEqual(self.app.time_sources[1],'추정')
         self.assertEqual(self.app.direct_result[2]['times'],[10,None,30,40,50])
 
     def test_single_anchor_does_not_invent_before_and_after_cues(self):
@@ -104,6 +142,19 @@ class SyncAuthorityTests(unittest.TestCase):
         self.app.restore_cached_lyrics()
         self.assertTrue(self.app.cache_hit)
         self.assertNotIn('fallback',self.app.direct_result[2])
+        self.assertEqual(self.app.direct_times(),[10,None,30])
+
+    def test_playlist_cache_does_not_replace_partial_spotify_with_complete_auxiliary(self):
+        track_id='A'*22
+        track={'id':track_id,'title':self.playback.title,'artists':[self.playback.artist],
+               'album':self.playback.album,'duration':self.playback.duration}
+        spotify={**self.provider(times=[10,None,30]),'provider_id':track_id}
+        auxiliary=self.provider(source='LRCLIB',times=[11,21,31])
+        self.assertTrue(self.app.lyric_cache.save(self.playback,spotify['lines'],spotify))
+        self.assertTrue(self.app.playlist_lyrics.store.save(track,auxiliary['lines'],auxiliary))
+        self.app.restore_cached_lyrics()
+        self.assertTrue(self.app.cache_hit)
+        self.assertEqual(self.app.direct_result[2]['source'],'Spotify')
         self.assertEqual(self.app.direct_times(),[10,None,30])
 
     def test_open_editor_refreshes_when_provider_clock_arrives(self):

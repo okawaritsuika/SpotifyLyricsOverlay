@@ -1,9 +1,11 @@
 from copy import deepcopy
+from datetime import datetime, timezone
 import json
 from pathlib import Path
 import tempfile
 import threading
 import unittest
+from unittest.mock import patch
 
 from live_catalog import LiveCatalog, read_catalog
 from live_catalog_update import merge_collected, refresh_live_catalog, write_catalog
@@ -56,6 +58,79 @@ class LiveCatalogUpdateTests(unittest.TestCase):
     def test_invalid_update_falls_back_to_bundle(self):
         self.update.write_text('{bad', encoding='utf-8')
         self.assertEqual(LiveCatalog(self.base, self.update).events[0]['id'], 'million-day2')
+
+    def test_new_bundle_additions_and_reviewed_local_performances_are_both_visible(self):
+        previous, bundled = snapshot(), snapshot()
+        previous['verified_at'] = '2026-10-02T16:00:00+09:00'
+        bundled['verified_at'] = '2026-11-14T14:22:35Z'
+        original = previous['events'][0]
+        previous['events'].append({**original, 'id': 'local-reviewed', 'date': '2026-10-30'})
+        bundled['events'][0].update(source_kind='fan_database', songs=[{'title': 'Unreviewed setlist'}])
+        bundled['events'].append({**original, 'id': 'official-birthday', 'date': '2026-11-11'})
+        write_catalog(self.base, bundled)
+        write_catalog(self.update, previous)
+        before = self.update.read_bytes()
+        catalog = LiveCatalog(self.base, self.update)
+        self.assertEqual([e['id'] for e in catalog.events], ['official-birthday', 'local-reviewed', 'million-day2'])
+        self.assertEqual(catalog.events[-1]['songs'], original['songs'])
+        self.assertEqual(catalog.collection_report['events'], 3)
+        self.assertEqual(self.update.read_bytes(), before)
+
+    def test_latest_successful_fan_import_replaces_the_whole_page(self):
+        older, newer = snapshot(), snapshot()
+        older['verified_at'] = '2026-10-02'
+        newer['verified_at'] = '2026-11-14'
+        fresh = self.collected()['events'][0]
+        url = fresh['source_url']
+        stale = {**fresh, 'id': 'stale-table-id'}
+        older['events'].extend([stale, {**stale, 'id': 'older-independent', 'source_url': 'https://example.org/old'}])
+        newer['events'].extend([fresh, {**fresh, 'id': 'newer-independent', 'source_url': 'https://example.org/new'}])
+        older['collection_report'] = {'successful_urls': [url]}
+        newer['collection_report'] = {'successful_urls': [url]}
+        expected = {'million-day2', 'db-evening', 'older-independent', 'newer-independent'}
+        for bundle, update in ((older, newer), (newer, older)):
+            with self.subTest(bundle=bundle['verified_at']):
+                write_catalog(self.base, bundle)
+                write_catalog(self.update, update)
+                self.assertEqual({e['id'] for e in LiveCatalog(self.base, self.update).events}, expected)
+        newer['collection_report']['successful_urls'] = []
+        write_catalog(self.base, older)
+        write_catalog(self.update, newer)
+        self.assertEqual({e['id'] for e in LiveCatalog(self.base, self.update).events},
+                         (expected - {'db-evening'}) | {'stale-table-id'})
+
+    def test_refresh_and_reload_retain_official_date_links_for_shared_id(self):
+        original = self.collected()['events'][0]
+        official_url = 'https://idolmaster-official.jp/live_event/example'
+        reviewed = {**original, 'date_source_url': official_url, 'venue': 'Kアリーナ横浜',
+                    'date_basis': 'official_schedule_and_source_table',
+                    'official_sources': [{'name': '공연 공식 일정', 'url': official_url}]}
+        base = snapshot();base['events'].append(reviewed)
+        write_catalog(self.base, base)
+        refresh_live_catalog(self.update, resource_path=self.base, collector=lambda *args, **kwargs: self.collected())
+        for events in (read_catalog(self.update)['events'], LiveCatalog(self.base, self.update).events):
+            event = next(item for item in events if item['id'] == original['id'])
+            self.assertEqual(event['date_source_url'], official_url)
+            self.assertEqual(event['official_sources'], reviewed['official_sources'])
+            self.assertEqual(event['venue'], reviewed['venue'])
+
+    def test_partial_refresh_keeps_newer_successful_page_over_bundled_tables_on_reload(self):
+        base, collected = snapshot(), self.collected()
+        fresh = collected['events'][0]
+        url = fresh['source_url']
+        base['events'].append({**fresh, 'id': 'stale-table-id'})
+        base['collection_report'] = {'successful_urls': [url]}
+        write_catalog(self.base, base)
+        with patch('live_catalog_update.datetime') as clock:
+            clock.now.return_value = datetime(2026, 11, 12, tzinfo=timezone.utc)
+            refresh_live_catalog(self.update, resource_path=self.base, collector=lambda *args, **kwargs: collected)
+            next_result = {'events': [{**fresh, 'id': 'other-fan-show', 'source_url': 'https://example.org/other'}],
+                           'successful_urls': ['https://example.org/other'], 'failures': [{'url': url}]}
+            clock.now.return_value = datetime(2026, 11, 14, tzinfo=timezone.utc)
+            refresh_live_catalog(self.update, resource_path=self.base, collector=lambda *args, **kwargs: next_result)
+        catalog = LiveCatalog(self.base, self.update)
+        self.assertEqual({event['id'] for event in catalog.events}, {'db-evening', 'million-day2', 'other-fan-show'})
+        self.assertEqual(catalog.collection_report['successful_url_checks'][url], '2026-11-12T00:00:00+00:00')
 
     def test_successful_page_replaces_old_table_ids_without_ghost_duplicates(self):
         collected=self.collected()

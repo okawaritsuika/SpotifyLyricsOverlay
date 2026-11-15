@@ -1,9 +1,4 @@
-"""Serial public-source enrichment for an ID-bound, non-playing playlist track.
-
-This worker never saves lyrics, reads a Spotify profile, or starts playback.
-Only real provider onsets can complete timing; annotations require the whole
-original document to agree. The caller owns durable writes and retry policy.
-"""
+"""Collect independent lyric documents for an ID-bound playlist track."""
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
 from http.client import HTTPException
@@ -17,18 +12,20 @@ from urllib.error import HTTPError
 from urllib.parse import urlsplit, urlunsplit
 
 import alsong_provider
+import imas_lyrics
+import imas_timetag
 import lyricsplus_provider
 import public_lyrics
 import web_lyrics
-from background_lyrics import mapped_times
-from lyric_annotations import LyricAnnotations, merge_verified_annotations
+from lyric_annotations import LyricAnnotations
 from lyric_cache import _provider, _rows
 from lyric_match import match_lyrics
-from lyrics import Line, normalized
+from lyric_merge import has_ordered_overlap, make_snapshot, merge_lyrics, snapshot_from_direct
+from lyrics import is_cinderella_no1, normalized
 from media import Playback
 from reader_bridge import ReaderBridge, recording_base
 from saved_annotations import _artist_identity, match_saved_annotations
-from storage import Store, validate_times
+from storage import Store
 
 
 REQUEST_INTERVAL = 1.0
@@ -92,7 +89,8 @@ def restore_cooldowns(state):
                 if source == 'wiki_browser':
                     if status in ('deferred_cooldown', 'blocked', 'browser_timeout', 'browser_error'):
                         _browser_cooldown = max(_browser_cooldown, deadline)
-                elif (source in ('LRCLIB', 'ALSong', 'LyricsPlus', 'namu', 'sidem')
+                elif (source in ('LRCLIB', 'ALSong', 'LyricsPlus', 'namu', 'sidem', 'imas_sidem',
+                                 'imas_gakumas', 'imas_shiny', 'imas_timetag')
                         and status in ('deferred_cooldown', 'blocked', 'request_failed')):
                     _cooldowns[source] = max(_cooldowns.get(source, 0), deadline)
 
@@ -124,7 +122,7 @@ def _retry_after(error):
     except (ValueError, TypeError, OverflowError):return 300
 
 
-def _request(source, call, cancel, deadline, *args):
+def _request(source, call, cancel, deadline, *args, **kwargs):
     """Pace every provider transport, including bounded search/detail retries."""
     global _next_request
     _check(cancel, deadline)
@@ -136,7 +134,7 @@ def _request(source, call, cancel, deadline, *args):
         if cancel.wait(delay):raise _Cancelled()
         _check(cancel, deadline)
         try:
-            return call(*args)
+            return call(*args, **kwargs)
         except Exception as error:
             http = _http_error(error)
             if http and http.code == 429:
@@ -176,26 +174,22 @@ def _direct(value, track):
     if result['source'] == 'Spotify' and result.get('provider_id') != track['id']:return None
     if result.get('fallback') and result['fallback']['source'] not in _PROVIDERS:
         result.pop('fallback')
-    return result if any(stamp is not None for stamp in result['times']) else None
-
-
-def _timed(direct, lines):
-    if not direct or not lines or not _whole(direct['lines'], lines):return [None]*len(lines)
-    times = mapped_times(direct, lines)
-    validate_times(times, len(lines))
-    return times
+    return result
 
 
 def _safe_source(value):
     if not isinstance(value, str):return ''
     if value in _PROVIDERS or value in ('existing_local_cache', 'saved_library', 'playlist_lyrics'):
         return value
+    try:return imas_timetag.validate_url(value)
+    except ValueError:pass
     try:
         parts = urlsplit(value)
         if parts.username or parts.password:return ''
         if parts.hostname == 'open.spotify.com' and re.fullmatch(r'/track/[A-Za-z0-9]{22}', parts.path):
             return 'https://open.spotify.com'+parts.path
-        web_lyrics.validate_url(value)
+        try:web_lyrics.validate_url(value)
+        except ValueError:imas_lyrics.validate_url(value)
         return urlunsplit((parts.scheme, parts.netloc, parts.path, '', ''))
     except ValueError:return ''
 
@@ -221,12 +215,11 @@ def _library(directory):
 
 def _saved_annotations(directory, playback, lines):
     songs, displayed = _library(directory)
-    extras = match_saved_annotations(playback, lines, songs, lambda song: displayed[song.id])
-    return tuple(Line(row.original, extra.reading, extra.korean) if extra else row
-                 for row, extra in zip(lines, extras))
+    return [(song.id, displayed[song.id]) for song in songs
+            if any(match_saved_annotations(playback, lines, (song,), lambda song: displayed[song.id]))]
 
 
-def _playlist_annotations(directory, title, lines):
+def _playlist_annotations(directory, title, lines, track_id):
     from playlist_lyrics_store import PlaylistLyricsStore
     key = str(Path(directory).absolute())
     store = _store_cache.setdefault(key, PlaylistLyricsStore(directory))
@@ -241,11 +234,12 @@ def _playlist_annotations(directory, title, lines):
         _annotation_indexes[key] = cached
     # Only metadata is cached; a completed translation can replace a file
     # without changing the metadata index. Read those few title candidates.
-    candidates = (store.load(identifier) for identifier in cached[1].get(normalized(recording_base(title)), ()))
-    return [tuple(value['lines']) for value in candidates if value and _whole(lines, value['lines'])]
+    candidates = (store.load(identifier) for identifier in cached[1].get(normalized(recording_base(title)), ())
+                  if identifier != track_id)
+    return [(value['track']['id'], value['lines']) for value in candidates if value and _whole(lines, value['lines'])]
 
 
-def _browser(base, directory, playback, lines, cancel, deadline):
+def _browser(base, directory, playback, lines, cancel, deadline, preserve_sources=False):
     """One isolated hidden reader, validated by the unchanged ReaderBridge."""
     from internal_reader import BrowserJob, available
     global _browser_cooldown
@@ -254,7 +248,7 @@ def _browser(base, directory, playback, lines, cancel, deadline):
     if remaining > 0:raise _Deferred('deferred_cooldown', math.ceil(remaining))
     _check(cancel, deadline)
     received, events = queue.Queue(), queue.Queue()
-    bridge = ReaderBridge(messages=received)
+    bridge = ReaderBridge(messages=received, preserve_sources=preserve_sources)
     bridge.set_backend('internal')
     bridge.observe(playback)
     bridge.set_reference(playback.key, [row.original for row in lines], complete=True)
@@ -278,9 +272,15 @@ def _browser(base, directory, playback, lines, cancel, deadline):
                     name, result = received.get_nowait()
                     if name == 'reader_lyrics':
                         rows = _decode_rows(result[1])
-                        if lines and not _whole(lines, rows):raise ValueError('Different whole lyric')
+                        if not preserve_sources and lines and not _whole(lines, rows):
+                            raise ValueError('Different whole lyric')
                         addresses = (value.get('url', ''), *bridge.receipt.get('translation_sources', ()))
-                        return rows, list(dict.fromkeys(safe for address in addresses if (safe := _safe_source(address))))
+                        provenance = list(dict.fromkeys(safe for address in addresses if (safe := _safe_source(address))))
+                        if preserve_sources:
+                            documents = [(document_rows, safe, title) for url, title, document_rows in result[5]
+                                         if (safe := _safe_source(url))]
+                            return rows, provenance, documents
+                        return rows, provenance
                 raise ValueError('Missing reader delivery')
             if event.get('kind') in ('blocked', 'error', 'choices', 'finished'):
                 state = {'blocked': 'blocked', 'choices': 'needs_document_selection'}.get(event['kind'], 'browser_error')
@@ -327,12 +327,23 @@ def complete_track(base, directory, track, existing=None, cancel=None):
         raise ValueError('Invalid playlist recording metadata')
     playback = Playback(title=track['title'], artist=', '.join(artists),
                         album=track.get('album', ''), duration=track['duration'])
-    lines, direct, sources, attempts = (), None, [], []
+    lines, sources, attempts, snapshots = (), [], [], []
+    merged = merge_lyrics(playback, (), track_id=track['id'])
+    initial_snapshots = ()
 
     def add_sources(values):
         for value in values:
             safe = _safe_source(value)
             if safe and safe not in sources and len(sources) < 24:sources.append(safe)
+
+    def result():
+        timed = sum(stamp is not None for stamp in merged['times'])
+        translated = sum(bool(row.korean.strip()) for row in lines)
+        missing = [] if lines else ['originals']
+        if not lines or timed != len(lines):missing.append('timing')
+        if not lines or translated != len(lines):missing.append('korean_translation')
+        return {**merged, 'sources': sources, 'attempts': attempts, 'complete': not missing, 'missing': missing,
+                'counts': {'lines': len(lines), 'timed': timed, 'translated': translated}}
 
     def attempt(source, call):
         entry = {'source': source}
@@ -342,7 +353,10 @@ def complete_track(base, directory, track, existing=None, cancel=None):
             value = call()
             entry['state'] = 'received' if value is not None else 'no_verified_result'
             return value, entry
-        except (SourceRateLimited, _Cancelled):raise
+        except SourceRateLimited as error:
+            if lines and tuple(snapshots) != initial_snapshots:error.partial = result()
+            raise
+        except _Cancelled:raise
         except _Deferred as error:
             entry.update(state=error.state, **error.details)
             if error.retry_after:entry['retry_after'] = error.retry_after
@@ -352,69 +366,95 @@ def complete_track(base, directory, track, existing=None, cancel=None):
             if http:entry['http_status'] = http.code
         return None, entry
 
+    def recompute():
+        nonlocal lines, merged
+        merged = merge_lyrics(playback, snapshots, track_id=track['id'])
+        lines = merged['lines']
+
+    def register(snapshot):
+        if snapshot not in snapshots:
+            snapshots.append(snapshot)
+            recompute()
+
+    def supplement(source, supplied, provenance, **metadata):
+        if not supplied:return False
+        try:
+            supplied = _decode_rows(supplied)
+            snapshot = make_snapshot(source, supplied, **metadata)
+        except (ValueError, TypeError, KeyError):
+            return False
+        previous = lines
+        register(snapshot)
+        if previous == lines and not _whole(lines, supplied):return False
+        if previous != lines:add_sources(provenance)
+        return True
+
     if existing:
         try:
             value = existing.get('direct') if 'direct' in existing else existing if 'source' in existing else None
-            direct = _direct(value, track)
-            lines = _decode_rows(existing['lines'])
             if value and value.get('source') == 'Spotify' and value.get('provider_id') != track['id']:
-                lines, direct = (), None
-            elif direct:
-                # Keep Spotify's source segmentation and every onset intact.
-                if direct['source'] == 'Spotify':
-                    prior = lines
-                    lines = direct['lines']
-                    if _whole(lines, prior):lines, _ = merge_verified_annotations(lines, [prior])
-                elif not _whole(lines, direct['lines']):direct = None
+                raise ValueError('Wrong Spotify recording')
+            saved = _decode_rows(existing['lines'])
+            snapshots.extend(existing.get('snapshots', ()))
+            if not snapshots:
+                direct = _direct(value, track)
+                if direct:
+                    snapshots.append(snapshot_from_direct(direct))
+                    if direct.get('fallback'):snapshots.append(snapshot_from_direct(direct['fallback']))
+                    add_sources((direct['source'],))
+                if not direct or saved != direct['lines']:
+                    source = 'manual' if 'reviewed_translation' in existing.get('sources', ()) else 'local'
+                    snapshots.append(make_snapshot(source, saved, track_id=track['id'], recording_verified=True,
+                                                   annotation_only=bool(direct)))
+            recompute()
             if lines:add_sources(existing.get('sources', ('existing_local_cache',)))
-            if direct:add_sources((direct['source'],))
         except (ValueError, TypeError, KeyError):
-            lines, direct = (), None
+            snapshots.clear()
+            recompute()
             attempts.append({'source': 'existing', 'state': 'invalid_or_unmatched'})
+    initial_snapshots = tuple(snapshots)
+    # A complete legacy clock describes only the rows it already has. Check
+    # alternate originals once during an active collection, then keep the
+    # independent documents so later collections can skip the same check.
+    review_legacy = bool(existing and not existing.get('snapshots') and lines and
+                         all(row.korean.strip() for row in lines) and
+                         all(stamp is not None for stamp in merged['times']))
 
-    def supplement(supplied, provenance):
-        nonlocal lines
-        if not supplied:return False
-        supplied = _decode_rows(supplied)
-        if not lines:
-            lines = supplied
-            add_sources(provenance)
-            return True
-        if not _whole(lines, supplied):return False
-        lines, contributors = merge_verified_annotations(lines, [supplied])
-        if contributors:add_sources(provenance)
-        return True
-
-    def accept(value, entry, timing=True):
-        nonlocal direct
+    def accept(value, entry):
         if not value:return
-        supplied = _decode_rows(value['lines'])
-        if not supplement(supplied, (value['source'],)):
-            entry['state'] = 'whole_lyrics_mismatch'
+        try:
+            supplied = _decode_rows(value['lines'])
+            candidate = _direct(value, track)
+            snapshot = snapshot_from_direct({**value, **candidate}) if candidate else None
+        except (ValueError, TypeError, KeyError):
+            entry['state'] = 'invalid_or_unmatched'
             return
-        candidate = _direct(value, track) if timing else None
-        if candidate and (direct is None or direct['source'] != 'Spotify'):
-            before = sum(stamp is not None for stamp in _timed(direct, lines))
-            after = sum(stamp is not None for stamp in _timed(candidate, lines))
-            if after > before:direct = candidate
-        elif candidate and direct['source'] == 'Spotify' and candidate['source'] != 'Spotify':
-            # Preserve the exact Spotify object and onsets. A verified fallback
-            # may supply only missing shared boundaries in mapped_times.
-            enriched = {**direct, 'fallback': candidate}
-            if sum(t is not None for t in _timed(enriched, lines)) > sum(t is not None for t in _timed(direct, lines)):
-                direct = enriched
-        if direct:add_sources((direct['source'],))
-        entry.update(state='verified', lines=len(supplied), translated=sum(bool(row.korean.strip()) for row in supplied))
+        before_times = merged['times']
+        if snapshot:
+            previous = lines
+            register(snapshot)
+            accepted = previous != lines or _whole(lines, supplied) or before_times != merged['times']
+        elif value.get('annotation_only') and value.get('source') in _PROVIDERS:
+            accepted = supplement(value['source'], supplied, (value['source'],), provider_id=value.get('provider_id'),
+                                  annotation_only=True)
+        else:
+            accepted = False
+        if accepted:
+            add_sources((value['source'],))
+            entry.update(state='verified', lines=len(supplied), translated=sum(bool(row.korean.strip()) for row in supplied))
+        else:
+            entry['state'] = 'whole_lyrics_mismatch'
 
     def local_annotations():
         if not lines:return
-        value, entry = attempt('saved_library', lambda: _saved_annotations(directory, playback, lines))
-        if value and supplement(value, ('saved_library',)):entry['state'] = 'verified'
-        values, entry = attempt('playlist_lyrics', lambda: _playlist_annotations(directory, playback.title, lines))
-        if values:
-            approved = [rows for rows in values if _whole(lines, rows)]
-            merged, contributors = merge_verified_annotations(lines, approved)
-            if contributors:supplement(merged, ('playlist_lyrics',));entry['state'] = 'verified'
+        values, entry = attempt('saved_library', lambda: _saved_annotations(directory, playback, lines))
+        for identifier, rows in values or ():
+            if supplement('saved_library', rows, ('saved_library',), provider_id=identifier, annotation_only=True):
+                entry['state'] = 'verified'
+        values, entry = attempt('playlist_lyrics', lambda: _playlist_annotations(directory, playback.title, lines, track['id']))
+        for identifier, rows in values or ():
+            if supplement('playlist_lyrics', rows, ('playlist_lyrics',), provider_id=identifier, annotation_only=True):
+                entry['state'] = 'verified'
 
     # A local recording can bootstrap a reference only on complete metadata.
     if not lines:
@@ -426,62 +466,116 @@ def complete_track(base, directory, track, existing=None, cancel=None):
             if len(matches) == 1:return displayed[matches[0].id]
             return None
         value, entry = attempt('saved_library_originals', local_originals)
-        if value:supplement(value, ('saved_library',))
+        if value:supplement('local', value, ('saved_library',), recording_verified=True, track_id=track['id'])
     local_annotations()
 
-    if len(_timed(direct, lines)) == 0 or any(stamp is None for stamp in _timed(direct, lines)):
+    def need_translation():return not lines or any(not row.korean.strip() for row in lines)
+    def need_timing():return not lines or any(stamp is None for stamp in merged['times'])
+
+    def have_document(source):
+        return any(snapshot['source'] == source and not snapshot['annotation_only'] for snapshot in snapshots)
+
+    def try_lrclib():
         value, entry = attempt('LRCLIB', lambda: public_lyrics.fetch_public_lyrics(playback,
-            fetch=lambda params: _request('LRCLIB', public_lyrics._request, cancel, deadline, params)))
+            fetch=lambda params: _request('LRCLIB', public_lyrics._request, cancel, deadline, params),
+            merge_metadata=True))
         accept(value, entry)
+
+    if need_timing() and not have_document('LRCLIB'):
+        try_lrclib()
         local_annotations()
 
-    def need_translation():return not lines or any(not row.korean.strip() for row in lines)
-    def need_timing():return not lines or any(stamp is None for stamp in _timed(direct, lines))
+    if need_timing() and not have_document('imas_timetag') and imas_timetag.supports(
+            playback.title, playback.artist, playback.album, playback.duration, track['id']):
+        value, entry = attempt('imas_timetag', lambda: imas_timetag.find_candidate(
+            playback.title, playback.artist, playback.album, playback.duration, track_id=track['id'],
+            fetch=lambda url: _request('imas_timetag', imas_timetag.fetch_text, cancel, deadline, url)))
+        if value:
+            if (not lines or _whole(lines, value['lines'])) and supplement(
+                    value['source'], value['lines'], (value['url'], value['lyrics_url']), times=value['times'],
+                    track_id=track['id'], title=playback.title, artist=playback.artist, album=playback.album,
+                    duration=playback.duration, recording_verified=True, provider_id=value['url']):
+                add_sources((value['url'], value['lyrics_url']))
+                entry['state'] = 'verified'
+            else:
+                entry['state'] = 'whole_lyrics_mismatch'
+
+    # A timed provider can supply rows that a wiki later annotates. Keep the
+    # discovery decision from before the timed provider arrives.
+    find_wiki = review_legacy or need_translation() or need_timing()
 
     # ALSong serves both native timing and whole-document translated annotations.
-    if lines and (need_translation() or need_timing()):
+    if lines and not have_document('ALSong') and (review_legacy or need_translation() or need_timing()):
         value, entry = attempt('ALSong', lambda: alsong_provider.fetch_alsong(playback, reference=lines,
-            fetch=lambda *args: _request('ALSong', alsong_provider._request, cancel, deadline, *args)))
+            fetch=lambda *args: _request('ALSong', alsong_provider._request, cancel, deadline, *args),
+            merge_partial=True))
         accept(value, entry)
 
     blocked_http = False
-    if need_translation():
-        title = recording_base(playback.title)
+    if find_wiki:
+        title = (playback.title if is_cinderella_no1(playback.title)
+                 else recording_base(playback.title, preserve_spelling=True))
         urls = [web_lyrics.namu_url(title)]
         if re.search('sidem', playback.album, re.I):urls.insert(0, web_lyrics.sidem_url(title))
         for url in urls:
-            if not need_translation():break
             source = web_lyrics.source_id(url)
-            value, entry = attempt(source, lambda: _request(source, web_lyrics.fetch_lyrics, cancel, deadline, title, url, None, lines))
+            if have_document(source):continue
+            value, entry = attempt(source, lambda: _request(source, web_lyrics.fetch_lyrics, cancel, deadline,
+                                                           title, url, None, lines, merge_partial=True))
             # An HTTP transport's cooldown does not establish that the normal
             # browser path is blocked. _browser enforces its own cooldown.
             blocked_http |= entry.get('state') in ('blocked', 'deferred_cooldown')
             if value:
-                if supplement(value[0], (value[1].get('url', ''),)):entry['state'] = 'verified'
+                address = _safe_source(value[1].get('url', ''))
+                if supplement(source, value[0], (address,), provider_id=address[:256],
+                              title=value[1].get('title', title)):entry['state'] = 'verified'
                 else:entry['state'] = 'whole_lyrics_mismatch'
-        if need_translation() and blocked_http:
-            value, entry = attempt('wiki_browser', lambda: _browser(base, directory, playback, lines, cancel, deadline))
+        series = imas_lyrics.series_for(playback.album, playback.artist)
+        source = imas_lyrics.source_for(series)
+        if not lines and source:
+            value, entry = attempt(source, lambda: imas_lyrics.find_candidate(playback.title, series,
+                fetch=lambda url: _request(source, imas_lyrics.fetch_html, cancel, deadline, url)))
             if value:
-                if supplement(value[0], value[1]):entry['state'] = 'verified'
-                else:entry['state'] = 'whole_lyrics_mismatch'
+                address = _safe_source(value['url'])
+                if address and supplement(source, value['lines'], (address,), provider_id=address[:256],
+                                          title=playback.title):entry['state'] = 'verified'
+                else:entry['state'] = 'invalid_or_unmatched'
+        if need_translation() and blocked_http:
+            value, entry = attempt('wiki_browser', lambda: _browser(
+                base, directory, playback, lines, cancel, deadline, preserve_sources=True))
+            if value:
+                documents = value[2] if len(value) > 2 else [(value[0], value[1][0], title)]
+                accepted = False
+                for rows, address, name in documents:
+                    if supplement(web_lyrics.source_id(address), rows, (address,),
+                                  provider_id=address[:256], title=name):accepted = True
+                entry['state'] = 'verified' if accepted else 'whole_lyrics_mismatch'
         local_annotations()
 
+    def wiki_has_additional_text():
+        originals = tuple(line.original for line in lines)
+        return any(snapshot['source'] in ('namu', 'sidem') and len(snapshot['lines']) > len(lines)
+                   and not _whole(lines, snapshot['lines'])
+                   and has_ordered_overlap(originals, tuple(line.original for line in snapshot['lines']))
+                   for snapshot in snapshots)
+
+    # An observed wiki gap can warrant a clock lookup even when every
+    # currently displayed Spotify row already has an onset.
+    if (wiki_has_additional_text() and not have_document('LRCLIB')
+            and not any(item['source'] == 'LRCLIB' for item in attempts)):
+        try_lrclib()
+
     # Wiki originals can be a reference, but cannot supply any native onset.
-    if need_timing() and lines:
+    if need_timing() and lines and not have_document('ALSong'):
         if not any(item['source'] == 'ALSong' for item in attempts):
             value, entry = attempt('ALSong', lambda: alsong_provider.fetch_alsong(playback, reference=lines,
-                fetch=lambda *args: _request('ALSong', alsong_provider._request, cancel, deadline, *args)))
+                fetch=lambda *args: _request('ALSong', alsong_provider._request, cancel, deadline, *args),
+                merge_partial=True))
             accept(value, entry)
-    if need_timing() and lines:
+    if lines and not have_document('LyricsPlus') and (need_timing() or wiki_has_additional_text()):
         value, entry = attempt('LyricsPlus', lambda: lyricsplus_provider.fetch_lyricsplus(playback, reference=lines,
-            fetch=lambda params: _request('LyricsPlus', lyricsplus_provider._request, cancel, deadline, params)))
+            fetch=lambda params: _request('LyricsPlus', lyricsplus_provider._request, cancel, deadline, params),
+            merge_partial=True))
         accept(value, entry)
-    times = _timed(direct, lines)
-    timed = sum(stamp is not None for stamp in times)
-    translated = sum(bool(row.korean.strip()) for row in lines)
-    missing = ([] if lines else ['originals'])
-    if not lines or timed != len(lines):missing.append('timing')
-    if not lines or translated != len(lines):missing.append('korean_translation')
-    return {'lines': tuple(lines), 'direct': direct, 'sources': sources, 'attempts': attempts,
-            'complete': not missing, 'missing': missing,
-            'counts': {'lines': len(lines), 'timed': timed, 'translated': translated}}
+    if cancel.is_set():raise _Cancelled()
+    return result()

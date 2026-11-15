@@ -9,6 +9,54 @@ from media import Playback
 
 
 class AudioProcessTests(unittest.TestCase):
+    def test_realtime_can_stop_and_resume_without_restarting_capture(self):
+        from audio_job import MODEL_FILES
+        from audio_capture_cache import REALTIME_PAUSE_NAME
+        with tempfile.TemporaryDirectory() as directory:
+            base=Path(directory)
+            model=base/'models'/'whisper-small'
+            model.mkdir(parents=True)
+            for name in MODEL_FILES:(model/name).touch()
+            (base/'audio_worker.py').write_text(
+                "import json,sys,time\nfrom pathlib import Path\n"
+                "folder=Path(sys.argv[-1]).parent\n"
+                "if sys.argv[1]=='--realtime':\n"
+                "    print(json.dumps({'kind':'realtime_status'}),flush=True)\n"
+                "    time.sleep(20)\n"
+                "elif sys.argv[1]=='--analyze':\n"
+                "    print(json.dumps({'kind':'result','result':{'times':[1]}}),flush=True)\n"
+                "else:\n"
+                "    deadline=time.monotonic()+20\n"
+                "    while not (folder/'complete').exists():\n"
+                "        assert time.monotonic()<deadline\n"
+                "        time.sleep(.02)\n"
+                "    print(json.dumps({'kind':'captured'}),flush=True)\n",encoding='utf-8')
+            messages=queue.Queue()
+            song=Song('a','Example','Artist','Album',(Line('例文です','',''),))
+            job=AudioJob(base,song,Playback(duration=100),messages,realtime_enabled=False)
+            try:
+                marker=job.request_path.with_name(REALTIME_PAUSE_NAME)
+                capture=job.process
+                self.assertTrue(marker.exists())
+                self.assertIsNone(job.realtime_thread)
+                job.set_realtime_enabled(True)
+                self.assertEqual(messages.get(timeout=8)[1][1]['kind'],'realtime_status')
+                first=job.realtime_process
+                job.set_realtime_enabled(False)
+                self.assertTrue(marker.exists())
+                self.assertIsNotNone(first.poll())
+                self.assertIsNone(capture.poll())
+                job.set_realtime_enabled(True)
+                self.assertFalse(marker.exists())
+                self.assertEqual(messages.get(timeout=8)[1][1]['kind'],'realtime_status')
+                self.assertIsNot(job.realtime_process,first)
+                job.set_realtime_enabled(False)
+                job.request_path.with_name('complete').touch()
+                job.thread.join(timeout=8)
+                self.assertFalse(job.thread.is_alive())
+                self.assertEqual([messages.get_nowait()[1][1]['kind'] for _ in range(3)],['progress','result','finished'])
+            finally:job.close()
+
     def test_final_turbo_is_selected_only_when_gpu_allowed_and_local_files_complete(self):
         from unittest.mock import Mock,patch
         from audio_job import MODEL_FILES,FINAL_GPU_MODEL_FILES

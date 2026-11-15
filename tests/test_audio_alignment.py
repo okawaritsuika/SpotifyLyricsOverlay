@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import Mock,patch
-from audio_alignment import line_candidates,recover_bounded_gaps
+from audio_alignment import align_lyrics,line_candidates,recover_bounded_gaps
 from types import SimpleNamespace
 from lyrics import Line
 
@@ -9,11 +9,46 @@ def segment(text,start=10,probability=.8):
     return {'text':text,'words':[{'word':text,'start':start,'end':start+2,'probability':probability}]}
 
 
+def mock_torch():
+    return SimpleNamespace(get_num_threads=lambda:2,get_num_interop_threads=lambda:2,
+                           set_num_threads=Mock(),set_num_interop_threads=Mock())
+
+
 class AlignmentTests(unittest.TestCase):
+    def test_bounded_dialogue_requires_recognized_original_and_agreeing_forced_alignment(self):
+        request={'model':'local','duration':50,'lines':['朝の窓を開けよう','美希：「待っていたよ！」','夜を歩いて行こう'],
+                 'confirmed_times':[12,None,19],'row_kinds':['singing','dialogue','singing'],
+                 'capture_window':[12,19],'incremental':True}
+        audio=bytearray(50*16000)
+        torch=mock_torch()
+        cases=[('待っていたよ',.9,.75,16),('待っていたよ',.9,1.49,None),
+               ('待っていた',.9,.75,None),('待っていたよ',.4,.75,None)]
+        for recognized,probability,forced,expected in cases:
+            with self.subTest(recognized=recognized,probability=probability,forced=forced):
+                model=Mock()
+                model.transcribe_original.return_value=([SimpleNamespace(
+                    compression_ratio=1,avg_logprob=-.3,end=4.8,words=[
+                        SimpleNamespace(word='朝の窓を開けよう',start=0,end=2,probability=.9),
+                        SimpleNamespace(word=recognized,start=4,end=4.8,probability=probability)])],None)
+                value=segment('「待っていたよ！」',forced)
+                value['words'][0]['end']=forced+.4
+                model.align.return_value=SimpleNamespace(to_dict=lambda:{'segments':[value]})
+                with patch.dict('sys.modules',{'torch':torch}), \
+                     patch('audio_runtime.load_final_model',return_value=(model,{'device':'cpu'})):
+                    result=align_lyrics(request,audio,0,Mock())
+                self.assertEqual(result['times'],[None,expected,None])
+                self.assertEqual(len(model.transcribe_original.call_args.args[0]),7*16000)
+                if recognized=='待っていた' or probability<.55:
+                    model.align.assert_not_called()
+                else:
+                    samples,text=model.align.call_args.args
+                    self.assertEqual(text,'「待っていたよ！」')
+                    self.assertLess(len(samples),3*16000)
+
     def test_gpu_alignment_failure_releases_model_and_retries_cpu_once(self):
         from audio_alignment import align_lyrics
         gpu=Mock();cpu=Mock();emit=Mock();expected={'times':[1],'matched':1}
-        modules={'torch':SimpleNamespace(set_num_threads=Mock(),set_num_interop_threads=Mock())}
+        modules={'torch':mock_torch()}
         with patch.dict('sys.modules',modules),patch('audio_runtime.load_final_model',side_effect=[
                 (gpu,{'device':'cuda'}),(cpu,{'device':'cpu','model':'whisper-small'})]) as load, \
              patch('audio_alignment._align_with_model',side_effect=[RuntimeError('private payload'),expected]) as align:
@@ -29,7 +64,7 @@ class AlignmentTests(unittest.TestCase):
 
     def test_cpu_alignment_error_is_not_retried(self):
         from audio_alignment import align_lyrics
-        modules={'torch':SimpleNamespace(set_num_threads=Mock(),set_num_interop_threads=Mock())}
+        modules={'torch':mock_torch()}
         with patch.dict('sys.modules',modules),patch('audio_runtime.load_final_model',return_value=(Mock(),{'device':'cpu'})) as load, \
              patch('audio_alignment._align_with_model',side_effect=RuntimeError('failure')):
             with self.assertRaises(RuntimeError):align_lyrics({'model':'local'},[0],0,Mock())

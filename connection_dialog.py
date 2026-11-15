@@ -3,7 +3,7 @@ import tkinter as tk
 from tkinter import ttk
 
 
-BG, PANEL, TEXT, MUTED, ACCENT = '#10151f', '#1d2635', '#f4f7fc', '#afbbcf', '#99e3c8'
+from ui_theme import BG,PANEL,TEXT,MUTED,ACCENT,BORDER,HOVER,SELECTED
 
 
 class ConnectionDialog:
@@ -41,7 +41,7 @@ class ConnectionDialog:
         self.window.bind('<MouseWheel>',self.scroll)
         self.window.bind('<Escape>',lambda _:self.close())
 
-        status=tk.Frame(self.body,bg=PANEL,padx=14,pady=10,highlightthickness=1,highlightbackground='#35455a')
+        status=tk.Frame(self.body,bg=PANEL,padx=14,pady=10,highlightthickness=1,highlightbackground=BORDER)
         status.grid(row=0,column=0,sticky='ew',pady=(0,10))
         tk.Label(status,text='현재 연결 상태',bg=PANEL,fg=ACCENT,anchor='w',
                  font=('맑은 고딕',9,'bold')).pack(fill='x')
@@ -89,8 +89,6 @@ class ConnectionDialog:
 
         footer=tk.Frame(self.window,bg=BG)
         footer.grid(row=2,column=0,sticky='ew',padx=20,pady=(10,14))
-        self.advanced_button=self.button(footer,'고급 설정',lambda:app.safe(app.open_reader_settings))
-        self.advanced_button.pack(side='left')
         self.close_button=self.button(footer,'완료',self.close)
         self.close_button.pack(side='right')
         self.refresh()
@@ -108,8 +106,9 @@ class ConnectionDialog:
         return frame
 
     def button(self,parent,text,command,primary=False):
-        button=tk.Button(parent,text=text,command=command,bg=ACCENT if primary else '#29374b',
-                         fg=BG if primary else TEXT,activebackground=ACCENT,activeforeground=BG,
+        button=tk.Button(parent,text=text,command=command,bg=ACCENT if primary else BG,
+                         fg=PANEL if primary else TEXT,activebackground=ACCENT if primary else HOVER,
+                         activeforeground=PANEL if primary else TEXT,
                          relief='flat',bd=0,padx=12,pady=6,cursor='hand2',font=('맑은 고딕',10),
                          highlightthickness=1,highlightbackground=PANEL,highlightcolor=ACCENT)
         button.bind('<FocusIn>',self.reveal_focus)
@@ -149,7 +148,7 @@ class ConnectionDialog:
         for button,enabled in ((self.public_button,self.app.public_background.get()),
                                (self.lyricsplus_button,self.app.lyricsplus_background.get()),
                                (self.alsong_button,self.app.alsong_background.get())):
-            button.configure(bg='#24463e' if enabled else '#29374b',fg=ACCENT if enabled else TEXT)
+            button.configure(bg=SELECTED if enabled else BG,fg=ACCENT if enabled else TEXT)
 
     def connect_spotify(self):
         self.app.safe(self.app.connect_spotify);self.refresh()

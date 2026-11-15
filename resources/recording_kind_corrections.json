@@ -4,6 +4,48 @@
   "note": "Exact release, recording ID and title evidence. Studio records remain separate; instrumental arrangements do not establish vocal work associations.",
   "entries": [
     {
+      "release_id": "d151734f-a0c0-4363-a27f-0a431ffbae31",
+      "release_title": "THE IDOLM@STER SHINY COLORS シャイニーPRオファー Vol.1",
+      "kind": "spoken",
+      "source_urls": ["https://shinycolors.lantis.jp/releaseinfo/lacm-24531/"],
+      "recordings": [{"id": "d986f4e7-970b-46b2-8879-94c0ae30933f", "title": "スペシャルオーディオドラマ「acquired taste」"}]
+    },
+    {
+      "release_id": "2e40b259-fd44-442b-a819-dd5e14b3a26e",
+      "release_title": "THE IDOLM@STER SHINY COLORS \"円環 -Halo around-\" 01",
+      "kind": "spoken",
+      "source_urls": ["https://shinycolors.lantis.jp/releaseinfo/lacm-24701/"],
+      "recordings": [{"id": "afeef40f-f84c-4ae2-9202-76e8af314eaa", "title": "スペシャルオーディオドラマ「回号のインタトワィニング・ギア」"}]
+    },
+    {
+      "release_id": "78d23f95-6a7b-4392-b1fc-61cb7daac113",
+      "release_title": "THE IDOLM@STER SHINY COLORS \"円環 -Halo around-\" 02",
+      "kind": "spoken",
+      "source_urls": ["https://shinycolors.lantis.jp/releaseinfo/lacm-24702/"],
+      "recordings": [{"id": "d7b01986-38ea-40e9-b4d3-0243c83d9e0d", "title": "スペシャルオーディオドラマ「Like a dog!」"}]
+    },
+    {
+      "release_id": "8909af75-1d9c-4b3f-af6b-edf6c0837a91",
+      "release_title": "THE IDOLM@STER SHINY COLORS \"円環 -Halo around-\" 04",
+      "kind": "spoken",
+      "source_urls": ["https://shinycolors.lantis.jp/releaseinfo/lacm-24704/"],
+      "recordings": [{"id": "a51d87f1-5664-4deb-959b-56a36686a043", "title": "スペシャルオーディオドラマ「廻り、束ねて」"}]
+    },
+    {
+      "release_id": "b63f8633-3be2-4f77-a0ca-288d9de368bd",
+      "release_title": "THE IDOLM@STER SHINY COLORS ECHOES 01",
+      "kind": "spoken",
+      "source_urls": ["https://shinycolors.lantis.jp/releaseinfo/lacm-24541/"],
+      "recordings": [{"id": "077e07fe-5de1-4b68-9475-af16f21c990a", "title": "スペシャルオーディオドラマ「輝け！ワーキング・ガール」"}]
+    },
+    {
+      "release_id": "4b367ff5-ce03-4a44-89e1-2c49b77e75e0",
+      "release_title": "THE IDOLM@STER SHINY COLORS ECHOES 08",
+      "kind": "spoken",
+      "source_urls": ["https://shinycolors.lantis.jp/releaseinfo/lacm-24548/"],
+      "recordings": [{"id": "ab6880d4-5511-40b5-b967-9537256a0501", "title": "スペシャルオーディオドラマ「眠たい話をしてる。」"}]
+    },
+    {
       "release_id": "a2772e7f-8163-4105-b629-3411ff811334",
       "release_title": "THE IDOLM@STER ANIM@TION MASTER 生っすかSPECIAL 弦楽四重奏 初恋組曲",
       "kind": "instrumental",

@@ -91,6 +91,15 @@ class DesktopSpotifyTests(unittest.TestCase):
         self.service.open(track(id='https://open.spotify.com/track/' + TRACK + '?si=share'))
         self.launch.assert_called_once_with('spotify:track:' + TRACK)
 
+    def test_work_playlist_opens_only_the_normalized_playlist_uri(self):
+        self.assertEqual(self.service.open_playlist('https://open.spotify.com/playlist/' + TRACK + '?si=share'), TRACK)
+        self.launch.assert_called_once_with('spotify:playlist:' + TRACK)
+        self.launch.reset_mock()
+        with self.assertRaises(ValueError):
+            self.service.open_playlist('https://open.spotify.com/track/' + TRACK)
+        self.launch.assert_not_called()
+        self.controls.assert_not_called()
+
     def test_browser_fallback_uses_canonical_url_not_untrusted_track_url(self):
         self.launch.side_effect = OSError('no client')
         self.service.open(track(url='https://untrusted.example'))

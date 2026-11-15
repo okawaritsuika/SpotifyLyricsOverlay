@@ -1,5 +1,6 @@
 """A searchable music dictionary alongside the existing lyric overlay."""
 from pathlib import Path
+import json
 import queue
 import re
 import threading
@@ -11,21 +12,20 @@ import webbrowser
 
 from artist_names import artist_label, character_name_only, name_key
 from artist_colors import _artist_ranges
-from explorer_widgets import CatalogList
+from explorer_widgets import CatalogList, BG, PANEL, TEXT, MUTED, ACCENT, BORDER, HOVER, SELECTED
 from explorer_symbols import series_symbol
-from explorer_library import (ExplorerLibrary, SERIES, SERIES_COLORS, SONG_SORTS, artists_label,
+from explorer_library import (ExplorerLibrary, SERIES, SONG_SORTS, artists_label,
     artist_key, availability, build_performer_lookup, cached_candidates, group_duplicate_songs,
     matches_query, performers, related_songs, resolve_group_members, search_key, series_label,
     song_release_date, sort_songs)
 from local_library import LocalLibrary
 from live_catalog import LiveCatalog
-from group_credits import is_project_credit, save_group_credits, with_character_voices
-from song_catalog import SongCatalog, refresh_catalog
+from group_credits import is_project_credit, with_character_voices
+from song_catalog import PERSONAL_CATALOG_NAME, SongCatalog, parse_personal_song_json
 from song_aliases import alias_information, search_aliases, title_readings
-from imas_people_sources import refresh_people
 from spotify_catalog import SpotifyCatalogError, parse_track_id, rank_candidates
 from spotify_desktop import DesktopSpotify
-from ui_theme import BG, PANEL, TEXT, MUTED, ACCENT, ControlHint
+from ui_theme import ControlHint
 from windows import work_area
 
 
@@ -35,9 +35,11 @@ SONG_KINDS = {'': '전체 유형', 'song': '노래', 'instrumental': '연주 · 
 
 
 def readable_color(value):
-    """Keep the character's hue legible on the dictionary's dark panels."""
+    """Shade bright character colors for legibility on the white panels."""
     if not isinstance(value, str) or not re.fullmatch(r'#[0-9a-fA-F]{6}', value):return None
-    return '#' + ''.join(f'{round(int(value[i:i+2],16)*.45+255*.55):02x}' for i in (1,3,5))
+    rgb = tuple(int(value[i:i+2], 16) for i in (1, 3, 5))
+    factor = min(1, 103 / max(1, sum(channel * weight for channel, weight in zip(rgb, (.213, .715, .072)))))
+    return '#' + ''.join(f'{round(channel * factor):02x}' for channel in rgb)
 
 
 def voice_label(person):
@@ -69,7 +71,8 @@ def open_url(url):
 class ExplorerDialog:
     def __init__(self, app):
         self.app, self.directory = app, app.store.directory
-        self.catalog = SongCatalog(update_path=self.directory / 'song_catalog.json')
+        self.catalog = SongCatalog(update_path=self.directory / 'song_catalog.json',
+                                   personal_path=self.directory / PERSONAL_CATALOG_NAME)
         self.live_catalog = LiveCatalog(update_path=self.directory / 'live_catalog.json')
         self.library = ExplorerLibrary(self.directory)
         self.local = LocalLibrary(self.directory)
@@ -89,8 +92,6 @@ class ExplorerDialog:
         self.song_live_count_source = None
         self.song_live_count_catalog = None
         self.live_search_after = None
-        self.live_update_active = False
-        self.music_update_active = False
         self.closed = False
         self.busy = False
         self.auto_links = None
@@ -126,11 +127,11 @@ class ExplorerDialog:
         self.count_label.pack(side='right', padx=(20, 0))
         self.notebook = ttk.Notebook(window, style='Explorer.TNotebook')
         self.notebook.pack(fill='both', expand=True, padx=18)
-        self.song_tab = ttk.Frame(self.notebook, padding=(4, 12, 4, 4))
-        self.person_tab = ttk.Frame(self.notebook, padding=(4, 12, 4, 4))
-        self.local_tab = ttk.Frame(self.notebook, padding=(4, 12, 4, 4))
-        self.live_tab = ttk.Frame(self.notebook, padding=(4, 12, 4, 4))
-        self.settings_tab = ttk.Frame(self.notebook)
+        self.song_tab = ttk.Frame(self.notebook, style='Explorer.TFrame', padding=(4, 12, 4, 4))
+        self.person_tab = ttk.Frame(self.notebook, style='Explorer.TFrame', padding=(4, 12, 4, 4))
+        self.local_tab = ttk.Frame(self.notebook, style='Explorer.TFrame', padding=(4, 12, 4, 4))
+        self.live_tab = ttk.Frame(self.notebook, style='Explorer.TFrame', padding=(4, 12, 4, 4))
+        self.settings_tab = ttk.Frame(self.notebook, style='Explorer.TFrame')
         for tab, label in [(self.song_tab, '곡 라이브러리'), (self.person_tab, '유닛 · 아이돌'),
                            (self.live_tab, '라이브'), (self.local_tab, '로컬 파일'),
                            (self.settings_tab, '연결 · 업데이트')]:
@@ -141,21 +142,21 @@ class ExplorerDialog:
         self._live_page()
         self._settings_page()
         self.notebook.bind('<<NotebookTabChanged>>', self.tab_changed)
-        footer = ttk.Frame(window, padding=(20, 8))
+        footer = ttk.Frame(window, style='Explorer.TFrame', padding=(20, 8))
         footer.pack(side='bottom', fill='x', before=self.notebook)
         footer.columnconfigure(0, weight=1)
         self.status = tk.StringVar(value='곡을 선택해 녹음 정보와 재생 경로를 확인하세요.  ·  Ctrl+F 검색')
-        self.status_label = ttk.Label(footer, textvariable=self.status, foreground=MUTED, wraplength=920)
+        self.status_label = ttk.Label(footer, style='Explorer.TLabel', textvariable=self.status, foreground=MUTED, wraplength=920)
         self.status_label.grid(row=0, column=0, sticky='ew')
         self.cancel_button = self.button(footer, '취소', self.cancel_job)
         self.cancel_button.grid(row=0, column=1, padx=(12, 0))
         self.cancel_button.configure(state='disabled')
-        self.progress = ttk.Progressbar(footer, mode='indeterminate')
+        self.progress = ttk.Progressbar(footer, style='Explorer.Horizontal.TProgressbar', mode='indeterminate')
         self.progress.grid(row=1, column=0, columnspan=2, sticky='ew', pady=(6, 0))
         self.progress.grid_remove()
-        self.auto_status_label=ttk.Label(footer,textvariable=self.auto_status,foreground=MUTED,wraplength=920)
+        self.auto_status_label=ttk.Label(footer, style='Explorer.TLabel',textvariable=self.auto_status,foreground=MUTED,wraplength=920)
         self.auto_status_label.grid(row=2,column=0,sticky='w',pady=(4,0))
-        ttk.Checkbutton(footer,text='자동 연결',variable=self.auto_enabled,
+        ttk.Checkbutton(footer, style='Explorer.TCheckbutton',text='자동 연결',variable=self.auto_enabled,
                         command=self.toggle_auto_links).grid(row=2,column=1,padx=(12,0))
         window.bind('<Configure>', self._resize, add='+')
         self.filter_songs()
@@ -233,7 +234,7 @@ class ExplorerDialog:
         track = self.spotify.current_track()
         songs = self.catalog.songs
         linked = [song for song in songs if track and
-                  (self.library.linked_track(song['id']) or {}).get('id') == track['id']]
+                  (self.track_for(song) or {}).get('id') == track['id']]
         candidates = linked or [song for song in songs if search_key(title) in
             {search_key(value) for value in [song['title'], *song.get('aliases', [])]}]
         album = search_key(getattr(playback, 'album', ''))
@@ -288,24 +289,47 @@ class ExplorerDialog:
     def _styles(self):
         style = ttk.Style(self.window)
         size = font.Font(self.window, font=('Malgun Gothic', 10)).metrics('linespace')
-        style.configure('Explorer.Treeview', rowheight=max(36, size+14), font=('Malgun Gothic', 10))
+        style.configure('Explorer.Treeview', rowheight=max(36, size+14), font=('Malgun Gothic', 10),
+                        background=PANEL, fieldbackground=PANEL, foreground=TEXT)
+        style.map('Explorer.Treeview', background=[('selected', SELECTED)], foreground=[('selected', TEXT)])
+        style.configure('Explorer.Treeview.Heading', background=HOVER, foreground=TEXT)
+        style.map('Explorer.Treeview.Heading', background=[('active', SELECTED)])
         style.configure('Explorer.TNotebook', background=BG, borderwidth=0)
         style.configure('Explorer.TNotebook.Tab', padding=(16, 9), background=PANEL, foreground=MUTED)
-        style.map('Explorer.TNotebook.Tab', background=[('selected', '#30474c')], foreground=[('selected', ACCENT)])
+        style.map('Explorer.TNotebook.Tab', background=[('selected', SELECTED), ('active', HOVER)],
+                  foreground=[('selected', ACCENT)])
+        for name in ('TFrame', 'TLabel', 'TLabelframe', 'TPanedwindow', 'TCheckbutton'):
+            style.configure('Explorer.'+name, background=BG, foreground=TEXT, bordercolor=BORDER)
+        style.configure('Explorer.TLabelframe.Label', background=BG, foreground=ACCENT)
+        style.configure('Explorer.TCheckbutton', indicatorbackground=PANEL, indicatorforeground=ACCENT)
+        style.map('Explorer.TCheckbutton', background=[('active', HOVER)],
+                  indicatorbackground=[('selected', ACCENT), ('!selected', PANEL)],
+                  indicatorforeground=[('selected', PANEL)])
+        for name in ('TEntry', 'TCombobox'):
+            style.configure('Explorer.'+name, background=PANEL, fieldbackground=PANEL, foreground=TEXT,
+                            insertcolor=TEXT, arrowcolor=MUTED, bordercolor=BORDER,
+                            lightcolor=PANEL, darkcolor=PANEL, selectbackground=SELECTED, selectforeground=TEXT)
+            style.map('Explorer.'+name, fieldbackground=[('readonly', PANEL), ('disabled', BG)],
+                      foreground=[('readonly', TEXT), ('disabled', MUTED)])
+        for orient in ('Vertical', 'Horizontal'):
+            style.configure('Explorer.'+orient+'.TScrollbar', background=HOVER, arrowcolor=MUTED,
+                            troughcolor=BG, bordercolor=BORDER, lightcolor=HOVER, darkcolor=HOVER)
+            style.map('Explorer.'+orient+'.TScrollbar', background=[('active', SELECTED)])
+        style.configure('Explorer.Horizontal.TProgressbar', background=ACCENT, troughcolor=SELECTED)
 
     def button(self, parent, text, command, accent=False):
         return tk.Button(parent, text=text, command=lambda: self.safe(command), bg=ACCENT if accent else PANEL,
-            fg=BG if accent else TEXT, activebackground='#b3eedb' if accent else '#35455a',
-            activeforeground=BG if accent else TEXT, disabledforeground='#718297', relief='flat',
-            borderwidth=0, highlightthickness=1, highlightbackground=PANEL, highlightcolor=ACCENT,
+            fg=PANEL if accent else TEXT, activebackground='#8a1947' if accent else HOVER,
+            activeforeground=PANEL if accent else TEXT, disabledforeground=MUTED, relief='flat',
+            borderwidth=0, highlightthickness=1, highlightbackground=BORDER, highlightcolor=ACCENT,
             font=('Malgun Gothic', 10), padx=12, pady=7, cursor='hand2')
 
     def menu_button(self, parent, text, choices):
-        button = tk.Menubutton(parent, text=text, bg=PANEL, fg=TEXT, activebackground='#35455a',
+        button = tk.Menubutton(parent, text=text, bg=PANEL, fg=TEXT, activebackground=HOVER,
             activeforeground=TEXT, relief='flat', borderwidth=0, highlightthickness=1,
-            highlightbackground='#35455a', highlightcolor=ACCENT, takefocus=True,
+            highlightbackground=BORDER, highlightcolor=ACCENT, takefocus=True,
             font=('Malgun Gothic', 10), padx=12, pady=7, cursor='hand2', direction='below')
-        menu = tk.Menu(button, tearoff=False, bg=PANEL, fg=TEXT, activebackground='#345a62',
+        menu = tk.Menu(button, tearoff=False, bg=PANEL, fg=TEXT, activebackground=SELECTED,
                        activeforeground=TEXT, font=('Malgun Gothic', 10))
         for label, command in choices:
             if label is None:menu.add_separator()
@@ -327,7 +351,7 @@ class ExplorerDialog:
             self.auto_status_label.configure(wraplength=max(400,event.width-220))
 
     def wrapping_label(self, parent, **options):
-        label = ttk.Label(parent, wraplength=700, justify='left', **options)
+        label = ttk.Label(parent, style='Explorer.TLabel', wraplength=700, justify='left', **options)
         parent.bind('<Configure>', lambda event: label.configure(
             wraplength=max(160, event.width-40)), add='+')
         return label
@@ -338,7 +362,7 @@ class ExplorerDialog:
             event.width-min(430, max(334, int(event.width*.40)))))
 
     def tree(self, parent, columns):
-        frame = ttk.Frame(parent)
+        frame = ttk.Frame(parent, style='Explorer.TFrame')
         frame.rowconfigure(0, weight=1);frame.columnconfigure(0, weight=1)
         tree = ttk.Treeview(frame, columns=[col[0] for col in columns], show='headings', height=1,
                             selectmode='browse', style='Explorer.Treeview')
@@ -346,12 +370,12 @@ class ExplorerDialog:
             tree.heading(name, text=label)
             tree.column(name, width=width, minwidth=60, stretch=True)
         tree.grid(row=0, column=0, sticky='nsew')
-        scroll = ttk.Scrollbar(frame, orient='vertical', command=tree.yview)
+        scroll = ttk.Scrollbar(frame, style='Explorer.Vertical.TScrollbar', orient='vertical', command=tree.yview)
         scroll.grid(row=0, column=1, sticky='ns');tree.configure(yscrollcommand=scroll.set)
-        horizontal = ttk.Scrollbar(frame, orient='horizontal', command=tree.xview)
+        horizontal = ttk.Scrollbar(frame, style='Explorer.Horizontal.TScrollbar', orient='horizontal', command=tree.xview)
         horizontal.grid(row=1, column=0, sticky='ew');tree.configure(xscrollcommand=horizontal.set)
         tree.tag_configure('even', background=PANEL)
-        tree.tag_configure('odd', background='#192231')
+        tree.tag_configure('odd', background=HOVER)
         return frame, tree
 
     def text_panel(self, parent):
@@ -359,16 +383,16 @@ class ExplorerDialog:
         frame.rowconfigure(0, weight=1);frame.columnconfigure(0, weight=1)
         text = tk.Text(frame, bg=PANEL, fg=TEXT, font=('Malgun Gothic', 10), relief='flat',
                        wrap='word', padx=18, pady=14, width=28, height=1, cursor='arrow',
-                       selectbackground='#345a62', insertbackground=TEXT, takefocus=True)
+                       selectbackground=SELECTED, selectforeground=TEXT, insertbackground=TEXT, takefocus=True)
         text.grid(row=0, column=0, sticky='nsew')
-        scroll = ttk.Scrollbar(frame, command=text.yview)
+        scroll = ttk.Scrollbar(frame, style='Explorer.Vertical.TScrollbar', command=text.yview)
         scroll.grid(row=0, column=1, sticky='ns');text.configure(yscrollcommand=scroll.set)
         text.tag_configure('title', font=('Malgun Gothic', 15, 'bold'), spacing3=10)
         text.tag_configure('label', foreground=ACCENT, font=('Malgun Gothic', 9, 'bold'), spacing1=12, spacing3=4)
         text.tag_configure('muted', foreground=MUTED, spacing3=6)
         text.tag_configure('body', spacing3=5)
         text.tag_configure('link', foreground=ACCENT, underline=True, spacing3=6)
-        text.tag_configure('active_link', background='#345a62')
+        text.tag_configure('active_link', background=SELECTED)
         text.bind('<Key-Return>', self.activate_text_link)
         text.bind('<Tab>', lambda event:self.move_text_link(event, 1))
         text.bind('<Shift-Tab>', lambda event:self.move_text_link(event, -1))
@@ -430,10 +454,10 @@ class ExplorerDialog:
     def update_series_buttons(self):
         for key, button in self.series_buttons.items():
             selected = self.series.get() == SERIES[key]
-            button.configure(bg='#30474c' if selected else PANEL,
-                fg=SERIES_COLORS[key] if selected else TEXT,
+            button.configure(bg=SELECTED if selected else PANEL,
+                fg=ACCENT if selected else TEXT,
                 relief='sunken' if selected else 'flat',
-                highlightbackground=SERIES_COLORS[key] if selected else '#2c3849')
+                highlightbackground=ACCENT if selected else BORDER)
 
     def activate_text_link(self, event):
         text = event.widget
@@ -471,11 +495,11 @@ class ExplorerDialog:
                 or {'name': name, 'display': artist_label([name], 'THE IDOLM@STER'), 'kind': 'unknown'})
 
     def _song_page(self):
-        top = ttk.Frame(self.song_tab);top.pack(fill='x', pady=(0, 10))
+        top = ttk.Frame(self.song_tab, style='Explorer.TFrame');top.pack(fill='x', pady=(0, 10))
         top.columnconfigure(1, weight=1)
-        ttk.Label(top, text='검색', foreground=MUTED).grid(row=0, column=0, padx=(0, 10))
+        ttk.Label(top, style='Explorer.TLabel', text='검색', foreground=MUTED).grid(row=0, column=0, padx=(0, 10))
         self.query = tk.StringVar()
-        self.search = ttk.Entry(top, textvariable=self.query)
+        self.search = ttk.Entry(top, style='Explorer.TEntry', textvariable=self.query)
         self.search.grid(row=0, column=1, sticky='ew', padx=(0, 8))
         self.search.bind('<Return>', lambda _: self.filter_songs())
         self.query.trace_add('write', self.schedule_search)
@@ -485,9 +509,10 @@ class ExplorerDialog:
         random, _ = self.menu_button(top, '랜덤 ▾', [('새로운 곡 발견', self.discover),
                                                     ('랜덤으로 재생', self.random_play)])
         random.grid(row=0, column=3)
+        self.button(top, '곡 추가…', self.add_song_dialog).grid(row=0, column=4, padx=(8, 0))
         ControlHint(self.search, '곡명 · 아이돌 · 유닛 · 앨범 검색  /  Ctrl+F')
         self.series = tk.StringVar(value=SERIES[''])
-        self.series_bar = ttk.Frame(self.song_tab)
+        self.series_bar = ttk.Frame(self.song_tab, style='Explorer.TFrame')
         self.series_bar.pack(fill='x', pady=(0, 8))
         self.series_buttons = {}
         labels = {'': '전체', '765': '765프로', 'million': '밀리언', 'cinderella': '신데렐라',
@@ -501,48 +526,48 @@ class ExplorerDialog:
             ControlHint(button, SERIES[key]+' 곡 보기')
             self.series_buttons[key] = button
         self.series_bar.bind('<Configure>', self.layout_series_buttons)
-        filters = ttk.Frame(self.song_tab);filters.pack(fill='x', pady=(0, 10))
+        filters = ttk.Frame(self.song_tab, style='Explorer.TFrame');filters.pack(fill='x', pady=(0, 10))
         self.song_kind = tk.StringVar(value=SONG_KINDS[''])
-        self.kind_filter = ttk.Combobox(filters, values=list(SONG_KINDS.values()),
+        self.kind_filter = ttk.Combobox(filters, style='Explorer.TCombobox', values=list(SONG_KINDS.values()),
                                        textvariable=self.song_kind, state='readonly', width=14)
         self.kind_filter.pack(side='left', padx=(8, 0))
         self.kind_filter.bind('<<ComboboxSelected>>', lambda _: self.filter_songs())
         ControlHint(self.kind_filter, '노래, 연주·반주, 드라마·토크 자료를 나누어 볼 수 있습니다.')
         self.only_favorites = tk.BooleanVar()
-        ttk.Checkbutton(filters, text='즐겨찾기', variable=self.only_favorites, command=self.filter_songs).pack(side='left', padx=12)
+        ttk.Checkbutton(filters, style='Explorer.TCheckbutton', text='즐겨찾기', variable=self.only_favorites, command=self.filter_songs).pack(side='left', padx=12)
         self.only_playable = tk.BooleanVar()
-        ttk.Checkbutton(filters, text='Spotify 연결한 곡', variable=self.only_playable, command=self.filter_songs).pack(side='left')
+        ttk.Checkbutton(filters, style='Explorer.TCheckbutton', text='Spotify 연결한 곡', variable=self.only_playable, command=self.filter_songs).pack(side='left')
         self.hide_duplicates = tk.BooleanVar(value=self.library.hide_duplicates)
-        self.duplicates_button = ttk.Checkbutton(filters, text='중복곡 제외', variable=self.hide_duplicates,
+        self.duplicates_button = ttk.Checkbutton(filters, style='Explorer.TCheckbutton', text='중복곡 제외', variable=self.hide_duplicates,
                                                 command=lambda:self.safe(self.toggle_duplicates))
         self.duplicates_button.pack(side='left', padx=12)
         self.button(filters, '초기화', self.reset_filters).pack(side='right')
-        results = ttk.Frame(self.song_tab);results.pack(fill='x', pady=(0, 8))
+        results = ttk.Frame(self.song_tab, style='Explorer.TFrame');results.pack(fill='x', pady=(0, 8))
         results.columnconfigure(0, weight=1)
-        self.results_label = ttk.Label(results, text='', foreground=MUTED, font=('Malgun Gothic', 9), width=1)
+        self.results_label = ttk.Label(results, style='Explorer.TLabel', text='', foreground=MUTED, font=('Malgun Gothic', 9), width=1)
         self.results_label.grid(row=0, column=0, sticky='ew')
-        ttk.Label(results, text='정렬', foreground=MUTED).grid(row=0, column=1, padx=(8, 6))
+        ttk.Label(results, style='Explorer.TLabel', text='정렬', foreground=MUTED).grid(row=0, column=1, padx=(8, 6))
         self.song_sort = tk.StringVar(value=SONG_SORTS[self.library.song_sort])
-        self.sort_combo = ttk.Combobox(results, values=list(SONG_SORTS.values()),
+        self.sort_combo = ttk.Combobox(results, style='Explorer.TCombobox', values=list(SONG_SORTS.values()),
             textvariable=self.song_sort, state='readonly', width=25)
         self.sort_combo.grid(row=0, column=2, sticky='e')
         self.sort_combo.bind('<<ComboboxSelected>>', lambda _:self.safe(self.change_song_sort))
         ControlHint(self.sort_combo, '현재 검색 결과 전체를 정렬합니다. 라이브 횟수는 수록 공연 기준이며, 같은 공연은 한 번으로 셉니다.')
-        panes = ttk.Panedwindow(self.song_tab, orient='horizontal');panes.pack(fill='both', expand=True)
-        listing = ttk.Frame(panes)
+        panes = ttk.Panedwindow(self.song_tab, style='Explorer.TPanedwindow', orient='horizontal');panes.pack(fill='both', expand=True)
+        listing = ttk.Frame(panes, style='Explorer.TFrame')
         self.song_tree = CatalogList(listing, ('title', 'artists', 'state'),
                                      empty_text='검색 결과가 없습니다. 검색어나 필터를 바꿔 보세요.')
         self.song_tree.pack(fill='both', expand=True)
         self.song_tree.bind('<<TreeviewSelect>>', self.select_song)
         self.song_tree.bind('<Double-1>', lambda _: self.safe(self.play_selected))
         self.song_tree.bind('<<ListActivate>>', lambda _: self.safe(self.play_selected))
-        paging = ttk.Frame(listing);paging.pack(side='bottom', fill='x', before=self.song_tree, pady=(8, 0))
+        paging = ttk.Frame(listing, style='Explorer.TFrame');paging.pack(side='bottom', fill='x', before=self.song_tree, pady=(8, 0))
         self.previous_page = self.button(paging, '‹ 이전', lambda: self.change_page(-1));self.previous_page.pack(side='left')
-        self.page_label = ttk.Label(paging, text='', foreground=MUTED);self.page_label.pack(side='left', padx=10)
+        self.page_label = ttk.Label(paging, style='Explorer.TLabel', text='', foreground=MUTED);self.page_label.pack(side='left', padx=10)
         self.next_page = self.button(paging, '다음 ›', lambda: self.change_page(1));self.next_page.pack(side='right')
-        detail = ttk.Frame(panes, padding=(14, 0, 0, 0))
+        detail = ttk.Frame(panes, style='Explorer.TFrame', padding=(14, 0, 0, 0))
         frame, self.song_detail = self.text_panel(detail);frame.pack(fill='both', expand=True)
-        actions = ttk.Frame(detail);actions.pack(side='bottom', fill='x', before=frame, pady=(8, 0))
+        actions = ttk.Frame(detail, style='Explorer.TFrame');actions.pack(side='bottom', fill='x', before=frame, pady=(8, 0))
         actions.columnconfigure(0, weight=1);actions.columnconfigure(1, weight=1)
         self.favorite_button = self.button(actions, '☆ 즐겨찾기', self.favorite)
         self.favorite_button.grid(row=0, column=0, sticky='ew', padx=(0, 4), pady=3)
@@ -599,14 +624,14 @@ class ExplorerDialog:
             (not series or series in song.get('series', [])) and matches_query(song, self.query.get())
             and (not kind or song.get('kind', song.get('type', 'unknown')) == kind)
             and (not self.only_favorites.get() or self.library.is_favorite(song['id']))
-            and (not self.only_playable.get() or self.library.linked_track(song['id']))]
+            and (not self.only_playable.get() or self.track_for(song))]
         self.duplicate_groups = {}
         self.filtered = matches
         if self.hide_duplicates.get():
             self.filtered = []
             for group in group_duplicate_songs(matches):
                 def preferred(song):
-                    track = self.library.linked_track(song['id'])
+                    track = self.track_for(song)
                     return (bool(preserve_selected and song['id']!=selected_id),
                             not self.library.is_favorite(song['id']),
                             not bool(track and track.get('is_playable') is not False),
@@ -646,7 +671,7 @@ class ExplorerDialog:
         self.song_tree.delete(*self.song_tree.get_children())
         start = self.page * PAGE_SIZE
         for index, song in enumerate(self.filtered[start:start+PAGE_SIZE]):
-            state = availability(self.library.linked_track(song['id']))
+            state = availability(self.track_for(song))
             if self.local.for_song(song['id']):state += ' · 로컬'
             title = ('★ ' if self.library.is_favorite(song['id']) else '') + song['title']
             versions = self.duplicate_groups.get(song['id'], [])
@@ -791,11 +816,12 @@ class ExplorerDialog:
             self.write_panel(self.song_detail, [('곡을 찾아보세요', 'title'),
                 ('시리즈를 고르거나 곡·아이돌·유닛 이름을 검색하세요.', 'body'),
                 ('검색 결과가 없으면 필터를 초기화해 보세요.', 'muted')]);return
-        track = self.library.linked_track(song['id'])
+        track = self.track_for(song)
         self.favorite_button.configure(text='★ 즐겨찾는 곡' if self.library.is_favorite(song['id']) else '☆ 즐겨찾기')
         self.play_button.configure(state='normal' if not self.busy else 'disabled',
             text='Spotify 재생' if track else 'Spotify에서 찾아 재생')
         rows = self.series_rows(song.get('series', [])) + [(song['title'], 'title')]
+        if song.get('personal'):rows.append(('내가 추가한 곡','muted'))
         aliases = alias_information(song)
         if aliases['korean_titles']:rows.append(('한국어 제목: '+' · '.join(aliases['korean_titles']),'body'))
         if aliases['readings']:rows.append(('한글 검색 표기: '+aliases['readings'][0],'muted'))
@@ -867,7 +893,7 @@ class ExplorerDialog:
             for item in duplicates:
                 label = ('● ' if item['id'] == song['id'] else '○ ') + self.song_artists_label(item)
                 label += ' · ' + (item.get('album') or '앨범 미확인') + ' · ' + duration_label(item.get('duration'))
-                if self.library.linked_track(item['id']):label += ' · Spotify 연결'
+                if self.track_for(item):label += ' · Spotify 연결'
                 rows.append((label, 'body', lambda item=item:self.choose_song(item)))
         kind = song.get('kind', song.get('type'))
         if kind in ('spoken', 'instrumental'):rows += [(SONG_KINDS[kind], 'muted')]
@@ -894,6 +920,9 @@ class ExplorerDialog:
                 if isinstance(recording, dict):
                     rows.append((recording.get('title') or recording.get('album') or '제목 미확인', 'body'))
         rows += [('재생 연결', 'label'), (availability(track), 'body')]
+        if song.get('spotify_url'):
+            rows.append(('공개 Spotify 트랙 열기', 'body',
+                         lambda url=song['spotify_url']:open_url(url)))
         if track:
             rows += [(track.get('title') or '', 'body'), (track.get('album') or '', 'muted')]
             if track.get('checked_at'):rows.append(('확인: '+str(track['checked_at']), 'muted'))
@@ -924,7 +953,7 @@ class ExplorerDialog:
         window.title('발매 정보 · '+song['title']);window.configure(bg=BG);window.attributes('-topmost', False)
         window.geometry('720x540');window.minsize(480, 340)
         window.bind('<Escape>', lambda _:window.destroy())
-        body = ttk.Frame(window, padding=14);body.pack(fill='both', expand=True)
+        body = ttk.Frame(window, style='Explorer.TFrame', padding=14);body.pack(fill='both', expand=True)
         frame, text = self.text_panel(body);frame.pack(fill='both', expand=True)
         rows = [(song['title'], 'title'), ('이 녹음에 연결된 발매 자료입니다. 매체는 발매판 전체 구성입니다.', 'muted')]
         for index, release in enumerate(release_editions(song), 1):
@@ -961,6 +990,89 @@ class ExplorerDialog:
             self.page = index // PAGE_SIZE;self.render_page();self.song_tree.see(song['id'])
         self.show_song_detail()
 
+    def add_song_dialog(self):
+        window=tk.Toplevel(self.window)
+        window.title('내 사전에 곡 추가')
+        window.transient(self.window)
+        body=ttk.Frame(window,padding=16)
+        body.pack(fill='both',expand=True)
+        body.columnconfigure(1,weight=1)
+        fields=(('title','곡명 (필수)'),('artists','가창자 (필수, 한 줄에 한 명)'),('album','앨범'),
+                ('release_date','발매일 (YYYY-MM-DD)'),('spotify_url','Spotify 곡 링크'),
+                ('source_url','출처 링크'))
+        values={}
+        for index,(field,label) in enumerate(fields):
+            ttk.Label(body,text=label).grid(row=index,column=0,sticky='w',padx=(0,12),pady=4)
+            entry=values[field]=(tk.Text(body,height=2,width=36,font=('Malgun Gothic',10)) if field=='artists'
+                                 else ttk.Entry(body,width=36))
+            entry.grid(row=index,column=1,sticky='ew',pady=4)
+        series={label:key for key,label in SERIES.items() if key}
+        ttk.Label(body,text='시리즈').grid(row=len(fields),column=0,sticky='w')
+        selection=ttk.Combobox(body,state='readonly',values=list(series))
+        selection.set(SERIES['other'])
+        selection.grid(row=len(fields),column=1,sticky='ew',pady=4)
+        status=tk.StringVar()
+        ttk.Label(body,textvariable=status,wraplength=450).grid(
+            row=len(fields)+1,column=0,columnspan=2,sticky='w',pady=(8,0))
+
+        def read_fields():
+            result={field:entry.get().strip() for field,entry in values.items() if field!='artists'}
+            result['artists']=[name.strip() for name in values['artists'].get('1.0','end-1c').splitlines()
+                               if name.strip()]
+            return {**result,'series':series[selection.get()]}
+
+        def copy_prompt():
+            request=read_fields()
+            labels=', '.join(series.values())
+            prompt=('이 곡의 정확한 녹음을 공식 음반 페이지나 Spotify에서 확인해 줘. '
+                    '곡명과 가창자는 확인이 필요해. 나머지 미확인 항목은 빈 문자열로 두고, '
+                    '가능하면 근거 링크를 source_url에 넣어 줘. 날짜는 YYYY-MM-DD 형식으로 써 줘. '
+                    f'series는 {labels} 중 하나로, 결과는 아래 필드의 JSON 객체 하나만 반환해 줘.\n'
+                    +json.dumps(request,ensure_ascii=False))
+            window.clipboard_clear()
+            window.clipboard_append(prompt)
+            status.set('요청문을 복사했습니다. ChatGPT에 붙여넣어 확인하세요.')
+
+        def load_json():
+            try:
+                song=parse_personal_song_json(window.clipboard_get())
+            except (ValueError,tk.TclError) as error:
+                status.set(str(error) if isinstance(error,ValueError) else 'ChatGPT가 반환한 JSON을 먼저 복사하세요.')
+                return
+            for field,entry in values.items():
+                if field=='artists':
+                    entry.delete('1.0','end')
+                    entry.insert('1.0','\n'.join(song[field]))
+                else:
+                    entry.delete(0,'end')
+                    entry.insert(0,song[field])
+            selection.set(SERIES[song['series']])
+            status.set('입력란에 채웠습니다. 출처와 곡 정보를 확인한 뒤 저장하세요.')
+
+        def save():
+            try:
+                result=self.catalog.add_personal_song(read_fields())
+            except (ValueError,OSError) as error:
+                messagebox.showerror('곡을 추가할 수 없습니다',str(error),parent=window)
+                return
+            window.destroy()
+            if self.auto_links:self.auto_links.update(self.catalog.songs)
+            self.live_match_cache.clear()
+            self.notebook.select(self.song_tab)
+            self.reset_filters()
+            self.query.set(result['song']['title'])
+            self.filter_songs()
+            self.choose_song(result['song'])
+            self.status.set('내 사전에 곡을 추가했습니다.' if result['added'] else '이미 등록된 곡입니다.')
+
+        actions=ttk.Frame(body)
+        actions.grid(row=len(fields)+2,column=0,columnspan=2,sticky='ew',pady=(12,0))
+        ttk.Button(actions,text='ChatGPT 요청문 복사',command=copy_prompt).pack(side='left')
+        ttk.Button(actions,text='JSON 붙여넣기',command=load_json).pack(side='left',padx=6)
+        ttk.Button(actions,text='저장',command=save).pack(side='right')
+        ttk.Button(actions,text='취소',command=window.destroy).pack(side='right',padx=6)
+        values['title'].focus_set()
+
     def discover(self):
         songs = self.discovery_songs()
         song = self.library.choose(songs)
@@ -970,8 +1082,8 @@ class ExplorerDialog:
 
     def random_play(self):
         songs = self.discovery_songs()
-        linked = [song for song in songs if self.library.linked_track(song['id']) and
-                  self.library.linked_track(song['id']).get('is_playable') is not False]
+        linked = [song for song in songs if (track := self.track_for(song)) and
+                  track.get('is_playable') is not False]
         song = self.library.choose(linked or songs)
         if not song:self.status.set('조건에 맞는 곡이 없습니다. 필터를 바꿔 보세요.');return
         self.choose_song(song)
@@ -985,17 +1097,25 @@ class ExplorerDialog:
         return [song for song in self.filtered
                 if song.get('kind', song.get('type')) not in ('spoken', 'instrumental', 'unknown')]
 
+    def track_for(self, song):
+        track = self.library.linked_track(song['id'])
+        if track or not song.get('personal') or song['id'] in self.library.value.get('automatic_link_exclusions', ()):
+            return track
+        identifier = parse_track_id(song.get('spotify_url',''))
+        if identifier:
+            return dict(id=identifier,title=song['title'],artists=song['artists'],album=song.get('album',''))
+
     def play_selected(self):
         song = self.selected_song
         if not song:return
-        track = self.library.linked_track(song['id'])
+        track = self.track_for(song)
         if not track:self.search_spotify(play_after=True);return
         def work():
             if self.cancel.is_set():return False
             return self.spotify.play(track, cancel=self.cancel)
         def done(result):
             if result:
-                if (self.library.linked_track(song['id']) or {}).get('id') == track['id']:
+                if (self.track_for(song) or {}).get('id') == track['id']:
                     from datetime import datetime, timezone
                     self.library.link_spotify(song['id'], {**track, 'is_playable': True,
                         'checked_at': datetime.now(timezone.utc).isoformat(timespec='seconds')})
@@ -1006,8 +1126,9 @@ class ExplorerDialog:
 
     def open_spotify(self):
         if not self.selected_song:return
-        track = self.library.linked_track(self.selected_song['id'])
+        track = self.track_for(self.selected_song)
         if track:self.spotify.open(track)
+        elif self.selected_song.get('spotify_url'):open_url(self.selected_song['spotify_url'])
         else:open_url('https://open.spotify.com/search/' + quote(self.selected_song['title'], safe=''))
 
     def open_song_source(self):
@@ -1040,7 +1161,7 @@ class ExplorerDialog:
         window.geometry('940x560');window.minsize(720, 450)
         window.protocol('WM_DELETE_WINDOW', window.destroy)
         window.bind('<Escape>',lambda _:window.destroy())
-        body = ttk.Frame(window, padding=18);body.pack(fill='both', expand=True)
+        body = ttk.Frame(window, style='Explorer.TFrame', padding=18);body.pack(fill='both', expand=True)
         self.wrapping_label(body, text=song['title'], font=('Malgun Gothic', 14, 'bold')).pack(anchor='w')
         self.wrapping_label(body, text=('녹음을 연결하면 재생합니다. ' if play_after else '')+
                             '가창자 · 앨범 · 버전을 확인하세요. Spotify 곡 링크를 붙여 넣어도 됩니다.',
@@ -1057,9 +1178,9 @@ class ExplorerDialog:
                 info.set(('버전 차이 주의 · ' if track.get('version_conflict') else '') + availability(track) + ' · '+ ' / '.join(track.get('match_reasons') or []))
         tree.bind('<<TreeviewSelect>>', selected)
         url = tk.StringVar()
-        ttk.Label(body, text='또는 Spotify 곡 링크 붙여 넣기').pack(anchor='w')
-        ttk.Entry(body, textvariable=url).pack(fill='x', pady=5)
-        actions = ttk.Frame(body);actions.pack(fill='x', pady=(8,0))
+        ttk.Label(body, style='Explorer.TLabel', text='또는 Spotify 곡 링크 붙여 넣기').pack(anchor='w')
+        ttk.Entry(body, style='Explorer.TEntry', textvariable=url).pack(fill='x', pady=5)
+        actions = ttk.Frame(body, style='Explorer.TFrame');actions.pack(fill='x', pady=(8,0))
         actions.columnconfigure(0,weight=1);actions.columnconfigure(1,weight=1)
         def save(track):
             if self.closed or not window.winfo_exists():return
@@ -1100,22 +1221,22 @@ class ExplorerDialog:
         self.library.unlink_spotify(song['id']);window.destroy();self.filter_songs()
 
     def _person_page(self):
-        top = ttk.Frame(self.person_tab);top.pack(fill='x', pady=(0,12));top.columnconfigure(0,weight=1)
+        top = ttk.Frame(self.person_tab, style='Explorer.TFrame');top.pack(fill='x', pady=(0,12));top.columnconfigure(0,weight=1)
         self.person_query = tk.StringVar()
-        self.person_search = ttk.Entry(top, textvariable=self.person_query)
+        self.person_search = ttk.Entry(top, style='Explorer.TEntry', textvariable=self.person_query)
         self.person_search.grid(row=0,column=0,sticky='ew',padx=(0,8))
         self.person_query.trace_add('write', lambda *_: self.filter_people())
         self.person_kind = tk.StringVar(value='유닛')
-        combo = ttk.Combobox(top, textvariable=self.person_kind, values=['유닛','아이돌','전체'], state='readonly', width=10)
+        combo = ttk.Combobox(top, style='Explorer.TCombobox', textvariable=self.person_kind, values=['유닛','아이돌','전체'], state='readonly', width=10)
         combo.grid(row=0,column=1);combo.bind('<<ComboboxSelected>>',lambda _:self.filter_people())
         ControlHint(self.person_search, '아이돌 · 유닛 · 캐릭터 · 성우 이름 검색')
-        panes = ttk.Panedwindow(self.person_tab,orient='horizontal');panes.pack(fill='both',expand=True)
+        panes = ttk.Panedwindow(self.person_tab, style='Explorer.TPanedwindow',orient='horizontal');panes.pack(fill='both',expand=True)
         self.person_tree = CatalogList(panes, ('name', 'cv', 'series'),
                                       empty_text='다른 이름이나 별칭을 검색해 보세요.')
         self.person_tree.bind('<<TreeviewSelect>>',self.select_person)
         self.person_tree.bind('<<ListActivate>>', lambda _:self.safe(self.person_songs))
         self.person_tree.bind('<Double-1>', lambda _:self.safe(self.person_songs))
-        detail = ttk.Frame(panes,padding=(14,0,0,0))
+        detail = ttk.Frame(panes, style='Explorer.TFrame',padding=(14,0,0,0))
         panel,self.person_detail = self.text_panel(detail);panel.pack(fill='both',expand=True)
         self.person_songs_button = self.button(detail,'참여한 곡 보기',self.person_songs,True)
         self.person_songs_button.pack(fill='x',pady=(8,0))
@@ -1231,42 +1352,42 @@ class ExplorerDialog:
 
     def _live_page(self):
         self.index_lives()
-        top = ttk.Frame(self.live_tab);top.pack(fill='x', pady=(0, 10));top.columnconfigure(0, weight=1)
+        top = ttk.Frame(self.live_tab, style='Explorer.TFrame');top.pack(fill='x', pady=(0, 10));top.columnconfigure(0, weight=1)
         self.live_query = tk.StringVar()
-        self.live_search = ttk.Entry(top, textvariable=self.live_query)
+        self.live_search = ttk.Entry(top, style='Explorer.TEntry', textvariable=self.live_query)
         self.live_search.grid(row=0, column=0, sticky='ew', padx=(0, 8))
         ControlHint(self.live_search, '공연명 · 곡목 · 시리즈 · 장소 · 출처 검색  /  Ctrl+F')
         self.live_query.trace_add('write', self.schedule_live_search)
         self.live_year = tk.StringVar(value='전체 연도')
         years = sorted({event['date'][:4] for event in self.live_catalog.events}, reverse=True)
-        self.live_year_combo = ttk.Combobox(top, textvariable=self.live_year,
+        self.live_year_combo = ttk.Combobox(top, style='Explorer.TCombobox', textvariable=self.live_year,
             values=['전체 연도']+years, state='readonly', width=11)
         self.live_year_combo.grid(row=0, column=1)
         self.live_year_combo.bind('<<ComboboxSelected>>', lambda _:self.filter_lives())
-        self.live_update_button = self.button(top, '라이브 자료 업데이트', self.update_live_catalog)
+        self.live_update_button = self.button(top, 'GitHub 자료 업데이트…', self.app.open_updates)
         self.live_update_button.grid(row=0, column=2, padx=(8,0))
         self.live_scope = tk.StringVar(value=self.live_scope_text())
         self.wrapping_label(self.live_tab, textvariable=self.live_scope,
                             foreground=MUTED).pack(anchor='w', pady=(0, 10))
-        self.live_results_label = ttk.Label(self.live_tab, text='', foreground=MUTED, font=('Malgun Gothic',9))
+        self.live_results_label = ttk.Label(self.live_tab, style='Explorer.TLabel', text='', foreground=MUTED, font=('Malgun Gothic',9))
         self.live_results_label.pack(anchor='w', fill='x', pady=(0,8))
-        panes = ttk.Panedwindow(self.live_tab, orient='horizontal');panes.pack(fill='both', expand=True)
-        listing = ttk.Frame(panes)
+        panes = ttk.Panedwindow(self.live_tab, style='Explorer.TPanedwindow', orient='horizontal');panes.pack(fill='both', expand=True)
+        listing = ttk.Frame(panes, style='Explorer.TFrame')
         frame, self.live_tree = self.tree(listing,[('date','공연일',105),('title','라이브 / 공연',280),('source','출처',110)])
         frame.pack(fill='both',expand=True)
         self.live_tree.column('date', width=105, minwidth=105, stretch=False)
         self.live_tree.column('title', minwidth=180)
         self.live_tree.column('source', width=110, minwidth=100, stretch=False)
         self.live_tree.bind('<<TreeviewSelect>>', self.select_live)
-        paging = ttk.Frame(listing);paging.pack(fill='x', pady=(8,0))
+        paging = ttk.Frame(listing, style='Explorer.TFrame');paging.pack(fill='x', pady=(8,0))
         self.live_previous_page = self.button(paging, '‹ 이전', lambda:self.change_live_page(-1))
         self.live_previous_page.pack(side='left')
-        self.live_page_label = ttk.Label(paging,text='',foreground=MUTED);self.live_page_label.pack(side='left',padx=10)
+        self.live_page_label = ttk.Label(paging, style='Explorer.TLabel',text='',foreground=MUTED);self.live_page_label.pack(side='left',padx=10)
         self.live_next_page = self.button(paging, '다음 ›', lambda:self.change_live_page(1))
         self.live_next_page.pack(side='right')
-        detail = ttk.Frame(panes, padding=(14,0,0,0))
+        detail = ttk.Frame(panes, style='Explorer.TFrame', padding=(14,0,0,0))
         panel, self.live_detail = self.text_panel(detail);panel.pack(fill='both', expand=True)
-        actions = ttk.Frame(detail);actions.pack(side='bottom',fill='x',before=panel,pady=(8,0))
+        actions = ttk.Frame(detail, style='Explorer.TFrame');actions.pack(side='bottom',fill='x',before=panel,pady=(8,0))
         actions.columnconfigure(0,weight=1);actions.columnconfigure(1,weight=1)
         self.live_source_button = self.button(actions, '공연 기록 출처 열기', self.open_live_source)
         self.live_source_button.grid(row=0,column=0,columnspan=2,sticky='ew',pady=(0,4))
@@ -1432,18 +1553,18 @@ class ExplorerDialog:
         if self.selected_live and self.selected_live.get(field):open_url(self.selected_live[field])
 
     def _local_page(self):
-        top=ttk.Frame(self.local_tab);top.pack(fill='x',pady=(0,12))
+        top=ttk.Frame(self.local_tab, style='Explorer.TFrame');top.pack(fill='x',pady=(0,12))
         self.button(top,'음악 폴더 추가 / 다시 읽기',self.scan_folder,True).pack(side='left')
         self.button(top,'Spotify 로컬 파일 안내',self.local_help).pack(side='left',padx=8)
-        ttk.Label(self.local_tab,text='선택한 폴더의 제목·가창자·앨범을 읽습니다. 음원 파일은 수정하거나 전송하지 않습니다.',foreground=MUTED,wraplength=1000).pack(anchor='w',pady=(0,10))
+        ttk.Label(self.local_tab, style='Explorer.TLabel',text='선택한 폴더의 제목·가창자·앨범을 읽습니다. 음원 파일은 수정하거나 전송하지 않습니다.',foreground=MUTED,wraplength=1000).pack(anchor='w',pady=(0,10))
         self.local_target=tk.StringVar(value='먼저 곡 탐색에서 연결할 곡을 선택하세요.')
-        ttk.Label(self.local_tab,textvariable=self.local_target,foreground=ACCENT,wraplength=1000).pack(anchor='w',pady=(0,8))
+        ttk.Label(self.local_tab, style='Explorer.TLabel',textvariable=self.local_target,foreground=ACCENT,wraplength=1000).pack(anchor='w',pady=(0,8))
         frame,self.local_tree=self.tree(self.local_tab,[('title','로컬 음원',280),('artists','가창자',220),('album','앨범',230),('duration','길이',65),('state','파일 상태',110)])
         frame.pack(fill='both',expand=True)
         self.local_tree.bind('<<TreeviewSelect>>',self.select_local)
         self.local_path=tk.StringVar()
-        ttk.Label(self.local_tab,textvariable=self.local_path,foreground=MUTED,wraplength=1000).pack(anchor='w',pady=8)
-        actions=ttk.Frame(self.local_tab);actions.pack(fill='x')
+        ttk.Label(self.local_tab, style='Explorer.TLabel',textvariable=self.local_path,foreground=MUTED,wraplength=1000).pack(anchor='w',pady=8)
+        actions=ttk.Frame(self.local_tab, style='Explorer.TFrame');actions.pack(fill='x')
         self.button(actions,'선택한 곡에 연결',self.link_local,True).pack(side='left')
         self.button(actions,'이 음원으로 곡 검색',self.search_local_title).pack(side='left',padx=8)
         self.button(actions,'기본 음악 앱으로 열기',self.open_local).pack(side='left')
@@ -1509,46 +1630,40 @@ class ExplorerDialog:
 
     def local_help(self):
         window=tk.Toplevel(self.window);window.title('Spotify에 로컬 음악 연결');window.configure(bg=BG);window.attributes('-topmost',False)
-        body=ttk.Frame(window,padding=24);body.pack(fill='both',expand=True)
-        ttk.Label(body,text='내 파일을 Spotify에서도 듣기',font=('Malgun Gothic',15,'bold')).pack(anchor='w')
+        body=ttk.Frame(window, style='Explorer.TFrame',padding=24);body.pack(fill='both',expand=True)
+        ttk.Label(body, style='Explorer.TLabel',text='내 파일을 Spotify에서도 듣기',font=('Malgun Gothic',15,'bold')).pack(anchor='w')
         text=('1. Spotify 데스크톱 앱의 설정을 엽니다.\n\n2. 로컬 파일 표시를 켜고, 음악이 있는 폴더를 소스로 추가합니다.\n\n'
               '3. Spotify의 로컬 파일 목록에서 곡을 선택하고 원하는 플레이리스트에 넣습니다.\n\n'
               '이 사전에서 곡과 파일을 연결하면 경로를 기억합니다. Spotify에 자동 업로드되거나 자동 등록되는 것은 아닙니다.\n'
               '다른 기기에서도 해당 파일을 사용할 수 있어야 합니다.')
-        ttk.Label(body,text=text,wraplength=600,justify='left').pack(anchor='w',pady=18)
+        ttk.Label(body, style='Explorer.TLabel',text=text,wraplength=600,justify='left').pack(anchor='w',pady=18)
         self.button(body,'Spotify 공식 안내 열기',lambda:open_url('https://support.spotify.com/article/local-files/'),True).pack(anchor='w')
 
     def _settings_page(self):
         canvas=tk.Canvas(self.settings_tab,bg=BG,highlightthickness=0)
-        scrollbar=ttk.Scrollbar(self.settings_tab,command=canvas.yview);scrollbar.pack(side='right',fill='y')
+        scrollbar=ttk.Scrollbar(self.settings_tab, style='Explorer.Vertical.TScrollbar',command=canvas.yview);scrollbar.pack(side='right',fill='y')
         canvas.pack(side='left',fill='both',expand=True);canvas.configure(yscrollcommand=scrollbar.set)
-        body=ttk.Frame(canvas,padding=(6,16));item=canvas.create_window((0,0),window=body,anchor='nw')
+        body=ttk.Frame(canvas, style='Explorer.TFrame',padding=(6,16));item=canvas.create_window((0,0),window=body,anchor='nw')
         body.bind('<Configure>',lambda _:canvas.configure(scrollregion=canvas.bbox('all')))
         canvas.bind('<Configure>',lambda event:canvas.itemconfigure(item,width=event.width))
-        account=ttk.LabelFrame(body,text='Spotify 연결',padding=18);account.pack(fill='x',pady=(0,14))
+        account=ttk.LabelFrame(body, style='Explorer.TLabelframe',text='Spotify 연결',padding=18);account.pack(fill='x',pady=(0,14))
         self.account_status=tk.StringVar()
         self.wrapping_label(account,textvariable=self.account_status,foreground=ACCENT,font=('Malgun Gothic',11,'bold')).pack(anchor='w')
         self.wrapping_label(account,text='Spotify에 한 번 로그인하면 가사와 곡 찾기에 같은 연결을 사용합니다. 이미 로그인했다면 그대로 이용하세요.',foreground=MUTED).pack(anchor='w',pady=(6,10))
-        actions=ttk.Frame(account);actions.pack(fill='x',pady=(10,0))
+        actions=ttk.Frame(account, style='Explorer.TFrame');actions.pack(fill='x',pady=(10,0))
         self.login_button=self.button(actions,'Spotify 로그인',self.connect_spotify,True)
         self.login_button.pack(side='left')
-        self.button(actions,'연결 설정 열기',self.app.open_connection).pack(side='left',padx=8)
         self.button(actions,'상태 새로고침',self.refresh_settings).pack(side='right')
         self.wrapping_label(account,text='재생할 곡을 Spotify에 연결하면 해당 곡을 엽니다. 자동 재생되지 않으면 Spotify의 재생 버튼을 눌러주세요.',foreground=MUTED).pack(anchor='w',pady=(10,0))
-        update=ttk.LabelFrame(body,text='음악 · 인물 자료 갱신',padding=18);update.pack(fill='x',pady=(0,14))
+        update=ttk.LabelFrame(body, style='Explorer.TLabelframe',text='공개 사전 자료',padding=18);update.pack(fill='x',pady=(0,14))
         self.update_status=tk.StringVar()
         self.wrapping_label(update,textvariable=self.update_status,foreground=ACCENT).pack(anchor='w')
-        self.wrapping_label(update,text='공개 곡·녹음 자료와 캐릭터·성우·색상 자료를 순서대로 확인합니다. 자료량에 따라 몇 분 걸릴 수 있습니다.\n오류·취소 시 현재 저장된 자료를 유지하며, 즐겨찾기와 Spotify·로컬 연결은 별도 보관합니다.',foreground=MUTED).pack(anchor='w',pady=10)
-        self.button(update,'음악 · 인물 자료 업데이트',self.update_catalog,True).pack(anchor='w')
+        self.wrapping_label(update,text='검토한 곡·인물·공연 자료를 GitHub 배포에서 받습니다.',foreground=MUTED).pack(anchor='w',pady=10)
+        self.button(update,'GitHub 자료 업데이트…',self.app.open_updates,True).pack(anchor='w')
         self.source_status=tk.StringVar()
         self.wrapping_label(update,textvariable=self.source_status).pack(anchor='w',pady=(12,0))
-        live_update=ttk.LabelFrame(body,text='라이브 공연 자료 갱신',padding=18);live_update.pack(fill='x',pady=(0,14))
         self.live_update_status=tk.StringVar()
-        self.wrapping_label(live_update,textvariable=self.live_update_status,foreground=ACCENT).pack(anchor='w')
-        self.wrapping_label(live_update,text='공개 공연·곡목 기록을 다시 확인합니다. 공식 자료와 팬 데이터베이스 기록은 출처별로 표시합니다.\n음악 자료 갱신과 별도이며, 오류·취소 시 현재 저장된 자료를 유지합니다.',
-                            foreground=MUTED).pack(anchor='w',pady=10)
-        self.live_settings_update_button=self.button(live_update,'라이브 자료 업데이트',self.update_live_catalog,True)
-        self.live_settings_update_button.pack(anchor='w')
+        self.wrapping_label(update,textvariable=self.live_update_status,foreground=ACCENT).pack(anchor='w',pady=(10,0))
         self.wrapping_label(body,text='수록 범위는 출처의 공개 자료에 따릅니다. 미확인 정보는 빈칸으로 남기며, 전곡·최신 발매 전체 수록을 보장하지 않습니다.',foreground=MUTED).pack(anchor='w')
         self.window.bind('<MouseWheel>',lambda event:canvas.yview_scroll(-int(event.delta/120),'units')
                          if self.notebook.select()==str(self.settings_tab) else None,add='+')
@@ -1559,7 +1674,8 @@ class ExplorerDialog:
 
     def refresh_settings(self):
         self.account_status.set('Spotify 연결됨 · 가사와 곡 찾기에 함께 사용 중' if self.spotify.connected else 'Spotify에 로그인해 곡 후보를 찾아보세요.')
-        self.login_button.configure(text='연결 상태 보기' if self.spotify.connected else 'Spotify 로그인')
+        self.login_button.configure(text='Spotify 연결됨' if self.spotify.connected else 'Spotify 로그인',
+                                    state='disabled' if self.spotify.connected else 'normal')
         self.update_status.set(f"{len(self.catalog.songs):,}개 곡·녹음 자료  ·  자료 생성: {getattr(self.catalog,'generated_at','') or '미확인'}")
         sources=getattr(self.catalog,'sources',[]) or []
         lines=[]
@@ -1570,76 +1686,10 @@ class ExplorerDialog:
 
     def connect_spotify(self):
         if self.busy:self.status.set('현재 작업을 마치거나 취소한 뒤 Spotify를 연결해 주세요.');return
-        if self.spotify.connected:
-            self.app.open_connection()
-            return
+        if self.spotify.connected:return
         self.app.connect_spotify()
         self.status.set('열린 Spotify 창에서 한 번 로그인하세요. 기존 가사 연결에도 함께 적용됩니다.')
         self.refresh_settings()
-
-    def update_catalog(self):
-        if self.busy:self.status.set('현재 작업이 끝난 뒤 다시 시도해 주세요.');return
-        def work():
-            try:stats=refresh_catalog(self.directory/'song_catalog.json',progress=self.report_progress,cancel=self.cancel)
-            except (OSError,ValueError) as error:stats={'updated':False,'errors':[str(error)],'message':str(error)}
-            if self.cancel.is_set() or stats.get('cancelled'):return stats
-            try:people=refresh_people(self.directory/'imas_db_people.json',progress=self.report_progress,cancel=self.cancel)
-            except (OSError,ValueError) as error:people={'updated':False,'errors':[str(error)],'message':str(error)}
-            return {**stats,'people':people}
-        def done(stats):
-            self.music_update_active=False
-            self.catalog.reload()
-            if self.auto_links:self.auto_links.update(self.catalog.songs)
-            self.live_match_cache.clear()
-            self.people = performers(external=getattr(self.catalog, 'performers', []),
-                                     database_path=self.directory/'imas_db_people.json')
-            self.index_people()
-            if self.auto_links:self.auto_links.people=self.people
-            self.filter_songs();self.filter_people();self.refresh_settings()
-            if stats.get('cancelled'):self.status.set('음악 자료 업데이트를 취소했습니다.')
-            elif not stats.get('updated'):self.status.set('음악 자료 갱신 실패 · 현재 저장된 자료 유지'+
-                (' · '+stats['message'] if stats.get('message') else ''))
-            else:self.status.set(f'음악 자료를 갱신했습니다 · {len(self.catalog.songs):,}개' + (' · 일부 출처 실패, 해당 자료는 이전 내용 유지' if stats.get('errors') else ''))
-            people=stats.get('people')
-            if people:
-                if people.get('updated'):message=f"인물 자료 갱신 · 캐릭터 {people.get('characters',len(self.people)):,}명"
-                elif people.get('cancelled'):message='인물 자료 갱신을 취소했습니다.'
-                else:message='인물 자료 갱신 실패 · 현재 저장된 자료 유지'+(' · '+people['message'] if people.get('message') else '')
-                self.status.set(self.status.get()+'  /  '+message)
-            if stats.get('updated') or (people and people.get('updated')):
-                try:
-                    save_group_credits(self.people, self.directory/'group_credits.json')
-                    if hasattr(self.app,'update_track_title'):self.app.update_track_title()
-                except (OSError,ValueError):
-                    self.status.set(self.status.get()+' · 가사창 멤버 자료 저장 실패, 이전 자료 유지')
-        self.music_update_active=True
-        self.run_job('음악 · 인물 자료를 업데이트하는 중…',work,done)
-
-    def reload_live_records(self):
-        self.live_catalog.reload()
-        self.live_match_cache.clear()
-        self.song_live_count_source = None
-        self.index_lives();self.filter_lives();self.refresh_settings()
-        if self.song_sort_key().startswith('live_'):self.filter_songs(preserve_selected=True)
-        else:self.show_song_detail()
-
-    def update_live_catalog(self):
-        if self.busy:self.status.set('현재 작업이 끝난 뒤 다시 시도해 주세요.');return
-        def work():
-            from live_catalog_update import refresh_live_catalog
-            return refresh_live_catalog(self.directory/'live_catalog.json',
-                                        progress=self.report_progress,cancel=self.cancel)
-        def done(stats):
-            self.live_update_active=False;self.reload_live_records()
-            if stats.get('cancelled'):
-                self.status.set('라이브 자료 업데이트를 취소했습니다. 현재 저장된 자료를 표시합니다.')
-            elif not stats.get('updated'):
-                self.status.set(stats.get('message') or '라이브 자료를 갱신하지 못해 현재 저장된 자료를 유지합니다.')
-            else:
-                self.status.set(f'라이브 자료를 갱신했습니다 · 공연 {len(self.live_order):,}회 · 곡목 {self.live_setlist_count:,}개'+
-                    (f" · 일부 기록 수집 실패 {len(stats['errors']):,}건, 수록 범위를 확인하세요." if stats.get('errors') else ''))
-        self.live_update_active=True
-        self.run_job('라이브 공연 자료를 업데이트하는 중…',work,done)
 
     def report_progress(self,value):
         self.events.put(('progress',value))
@@ -1672,18 +1722,9 @@ class ExplorerDialog:
                 self.busy=False;self.progress.stop();self.progress.grid_remove();self.cancel_button.configure(state='disabled')
                 if self.cancel.is_set():
                     self.catalog.reload();self.live_match_cache.clear();self.refresh_local();self.refresh_settings()
-                    if self.live_update_active:self.reload_live_records()
-                    self.live_update_active=False
-                    if self.music_update_active:
-                        self.people=performers(external=getattr(self.catalog,'performers',[]),
-                                               database_path=self.directory/'imas_db_people.json')
-                        if self.auto_links:
-                            self.auto_links.update(self.catalog.songs);self.auto_links.people=self.people
-                        self.index_people();self.filter_people();self.filter_songs()
-                    self.music_update_active=False
                     self.status.set('작업을 취소했습니다.')
                 elif event[0]=='error':
-                    self.live_update_active=False;self.music_update_active=False;self.status.set(str(event[1]))
+                    self.status.set(str(event[1]))
                 else:self.safe(lambda:event[1](event[2]))
                 self.show_song_detail()
         except queue.Empty:pass

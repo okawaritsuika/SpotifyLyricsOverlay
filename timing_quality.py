@@ -35,6 +35,15 @@ def automatic_times(timing):
             for stamp,origin in zip(timing['times'],timing_origins(timing))]
 
 
+def cleared_rows(timing):
+    """Rows the user explicitly left empty for rerecording."""
+    rows = timing.get('cleared_rows')
+    if not isinstance(rows, list):
+        return set()
+    times = timing['times']
+    return {index for index in rows if type(index) is int and 0 <= index < len(times) and times[index] is None}
+
+
 def recover_legacy_origins(current,draft,before):
     """Recover only unchanged machine stamps with a matching pre-analysis backup."""
     if current.get('origins') is not None or current.get('source')!='직접 기록 / 음원 분석':return current,0

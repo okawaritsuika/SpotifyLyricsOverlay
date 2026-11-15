@@ -66,6 +66,18 @@ class AudioRuntimeTests(unittest.TestCase):
         self.assertEqual(result[1]['model'],'whisper-turbo')
         self.assertEqual(events.call_args.kwargs['runtime'],result[1])
 
+    def test_final_model_cache_reuses_only_the_same_runtime_request(self):
+        cache={}
+        request={'model':'models/whisper-small','final_model_cache':cache}
+        first,factory,*_=self.runtime(request,final=True)
+        factory.assert_called_once()
+        second,factory,*_=self.runtime(request,final=True)
+        self.assertIs(second[0],first[0])
+        factory.assert_not_called()
+        cuda,factory,*_=self.runtime({**request,'final_device':'auto'},final=True)
+        factory.assert_called_once()
+        self.assertEqual(cuda[1]['device'],'cuda')
+
     def test_final_cpu_ignores_explicit_final_gpu_model(self):
         result,factory,_,cuda_count,prepare,_,_,_=self.runtime({'model':'models/whisper-small',
             'final_model':'models/whisper-turbo','final_device':'cpu'},final=True)

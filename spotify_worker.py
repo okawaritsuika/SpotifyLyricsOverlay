@@ -377,12 +377,14 @@ class SpotifyBrowser:
         except Exception:
             self.finish_catalog(error='Spotify 검색 화면을 열지 못했습니다. 기존 Spotify 연결을 확인해 주세요.',code='browser')
 
-    def status(self,state,text):
+    def status(self,state,text,*,lyrics_missing=False):
         key=self.pending['key'] if self.pending else ''
         kind='metadata_status' if self.pending and self.pending.get('metadata_only') else 'status'
-        value=(kind,state,text,self.authenticated,key)
+        value=(kind,state,text,self.authenticated,key,lyrics_missing)
         if value!=self.last_status:
-            self.last_status=value;emit(kind,state=state,text=text,authenticated=self.authenticated,key=key)
+            self.last_status=value
+            details={'lyrics_missing':True} if lyrics_missing else {}
+            emit(kind,state=state,text=text,authenticated=self.authenticated,key=key,**details)
 
     def install_hooks(self):
         # CoreWebView2 and GetContentAsync must be accessed on their GUI thread.
@@ -703,7 +705,7 @@ class SpotifyBrowser:
             if event[1]!=self.generation:return
             self.fetching=False;self.active_query=''
             code=event[2]
-            if code==404:self.status('not_found','이 곡은 Spotify 가사 API에서 가사를 제공하지 않습니다.')
+            if code==404:self.status('not_found','이 곡은 Spotify 가사 API에서 가사를 제공하지 않습니다.',lyrics_missing=True)
             elif code==401:
                 self.authenticated=False;self.authorization=''
                 if self.auth_retries<1:
@@ -761,6 +763,13 @@ def main():
                                 width=900,height=720,hidden=not visible,focus=visible)
     if not visible:window.events.initialized+=prepare_background_window
     stopped=threading.Event();commands=queue.Queue()
+    browser=SpotifyBrowser(window,commands,stopped,login_requested=visible,
+                           diagnostics=os.environ.get('SPOTIFY_CATALOG_DIAGNOSTICS')=='1')
+    def closing():
+        if visible and not stopped.is_set() and not browser.authenticated:
+            emit('status',state='login_required',authenticated=False,login_cancelled=True,
+                 text='Spotify 로그인 창을 닫았습니다.')
+    window.events.closing+=closing
     window.events.closed+=lambda:stopped.set()
     def control():
         for line in sys.stdin:
@@ -772,8 +781,7 @@ def main():
         commands.put({'action':'close'})
     def run():
         threading.Thread(target=control,daemon=True,name='spotify-control').start()
-        try:SpotifyBrowser(window,commands,stopped,login_requested=visible,
-                           diagnostics=os.environ.get('SPOTIFY_CATALOG_DIAGNOSTICS')=='1').run()
+        try:browser.run()
         except Exception as error:
             if not stopped.is_set():emit('status',state='error',text=f'Spotify 연결 브라우저 실패 ({type(error).__name__}) · 연결을 다시 시도하세요.')
         finally:

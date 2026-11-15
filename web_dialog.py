@@ -12,7 +12,7 @@ class WebLyricsDialog:
         self.fetch_identity=None
         self.window=tk.Toplevel(app.root)
         w=self.window
-        w.title('나무위키 · SideM 위키 가사 가져오기')
+        w.title('위키 · 아이마스 가사 가져오기')
         w.geometry('760x650');w.minsize(560,530);w.attributes('-topmost',False)
         w.columnconfigure(0,weight=1);w.rowconfigure(2,weight=1)
         fields=ttk.Frame(w,padding=12);fields.grid(row=0,column=0,sticky='ew');fields.columnconfigure(1,weight=1)
@@ -23,7 +23,7 @@ class WebLyricsDialog:
         for row,(label,var) in enumerate([('곡 제목',self.title),('아티스트',self.artist),('앨범',self.album),('문서 URL',self.url)]):
             ttk.Label(fields,text=label).grid(row=row,column=0,sticky='w',padx=(0,10),pady=3)
             ttk.Entry(fields,textvariable=var).grid(row=row,column=1,sticky='ew',pady=3)
-        self.status=tk.StringVar(value='문서의 한국어 번역을 사용하고 후리가나는 자동 생성합니다. 독음은 틀릴 수 있습니다.')
+        self.status=tk.StringVar(value='위키 URL을 가져오거나 SideM·학원마스·샤이니 컬러즈 출처에서 일본어 원문을 찾을 수 있습니다.')
         self.status_label=ttk.Label(w,textvariable=self.status,wraplength=680,justify='left')
         self.status_label.grid(row=1,column=0,sticky='ew',padx=12,pady=4)
         self.notebook=ttk.Notebook(w);self.notebook.grid(row=2,column=0,sticky='nsew',padx=12,pady=8)
@@ -44,20 +44,23 @@ class WebLyricsDialog:
         footer.columnconfigure(1,weight=1)
         self.fetch_button=app.button(footer,'URL 가져오기',self.fetch);self.fetch_button.grid(row=0,column=0,sticky='w',padx=3)
         app.button(footer,'붙여넣기 분석',self.parse).grid(row=0,column=1,sticky='w',padx=3)
+        self.imas_button=app.button(footer,'아이마스 원문 찾기',lambda:self.fetch(imas=True))
+        self.imas_button.grid(row=0,column=2,sticky='e',padx=3)
         app.button(footer,'확장 수신 폴더',app.choose_extension_inbox).grid(row=1,column=0,sticky='w',padx=3,pady=(5,0))
         self.save_button=app.button(footer,'가사 저장 / 덮어쓰기',self.save,state='disabled')
         self.save_button.grid(row=1,column=1,sticky='e',padx=3,pady=(5,0))
         w.bind('<Configure>',lambda e:self.status_label.configure(wraplength=max(300,e.width-30)) if e.widget is w else None)
         w.protocol('WM_DELETE_WINDOW',self.close)
 
-    def fetch(self):
+    def fetch(self,*,imas=False):
         if self.fetch_identity is not None:return
         title=self.title.get().strip()
         if not title:raise ValueError('곡 제목을 입력하세요.')
         self.fetch_identity=self.identity()
         self.fetch_button.configure(state='disabled')
-        self.app.fetch_web_lyrics(title,self.artist.get(),self.album.get(),self.url.get(),self)
-        self.status.set('문서에서 가사 표를 확인하고 있습니다…')
+        self.imas_button.configure(state='disabled')
+        self.app.fetch_web_lyrics(title,self.artist.get(),self.album.get(),self.url.get(),self,imas=imas)
+        self.status.set('아이마스 전용 출처에서 원문을 찾고 있습니다…' if imas else '문서에서 가사 표를 확인하고 있습니다…')
 
     def identity(self):
         return tuple(v.get().strip() for v in (self.title,self.artist,self.album,self.url))
@@ -74,6 +77,7 @@ class WebLyricsDialog:
         identity=self.fetch_identity
         self.fetch_identity=None
         self.fetch_button.configure(state='normal')
+        self.imas_button.configure(state='normal')
         if identity!=self.identity():
             self.status.set('조회 중 곡 정보가 바뀌었습니다. 바뀐 정보로 다시 가져오세요.')
             return

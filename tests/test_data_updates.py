@@ -57,6 +57,20 @@ class DataUpdateTests(unittest.TestCase):
         data_updates.stage_package(package, self.data)
         return data_updates.apply_pending(self.data)
 
+    def catalogs(self, stamp, title='Reviewed song'):
+        source = 'https://example.com/source'
+        return {
+            'song_catalog.json': {'schema_version': 1, 'generated_at': stamp, 'sources': [],
+                'songs': [{'id': 'official:example', 'title': title, 'artists': ['Singer'],
+                           'series': ['765'], 'source_url': source}]},
+            'live_catalog.json': {'schema_version': 1, 'coverage': 'partial', 'verified_at': stamp,
+                'events': [{'id': 'show', 'title': 'Show', 'date': '2026-01-01', 'series': ['765'],
+                            'source_url': source, 'songs': [{'title': title}]}]},
+            'imas_db_people.json': {'schema_version': 1, 'verified_at': stamp[:10],
+                'generated_at': stamp, 'characters': [{'name': 'Singer'}]},
+            'group_credits.json': {'schema_version': 2, 'groups': [], 'members': []},
+        }
+
     def snapshot(self):
         return {path.relative_to(self.data).as_posix(): path.read_bytes()
                 for path in self.data.rglob('*.json') if not any(part.startswith('.') for part in path.relative_to(self.data).parts)}
@@ -72,6 +86,121 @@ class DataUpdateTests(unittest.TestCase):
         self.assertEqual(self.snapshot(), before)
         self.assertTrue((self.data / data_updates.PENDING).is_file())
         self.assertEqual(len(data_updates.validate_package(package)), 3)
+
+    def test_release_edits_apply_on_missing_files_and_preserve_local_edits(self):
+        alsong = {'duration': 100, 'provider_id': '123', 'lines': list(self.song.to_dict()['lines']), 'times': [10, 20]}
+        released_edits = {
+            'singer_edits': {'0': ['Singer'], '1': {'carry': ['Singer']}, '2': []},
+            'singer_rosters': ['Singer', 'Guest'],
+            'lyric_text_edits': {'0': 'corrected original', '1': {'reading': 'reading', 'korean': ''}},
+            'confirmed_alsong': alsong,
+        }
+        local_edits = {
+            'singer_edits': {'0': []},
+            'singer_rosters': ['Guest', 'Singer'],
+            'lyric_text_edits': {'0': {'korean': 'local translation'}},
+            'confirmed_alsong': {**alsong, 'provider_id': '456'},
+        }
+        existing = 'a' * 64 + '.json'
+        missing = 'b' * 64 + '.json'
+        for folder, value in local_edits.items():
+            self.write(f'{folder}/{existing}', value)
+        documents = {f'{folder}/{filename}': value for folder, value in released_edits.items()
+                     for filename in (existing, missing)}
+        result = self.stage_apply(documents)
+        self.assertEqual(result['added_files'], len(released_edits))
+        self.assertEqual(result['updated_files'], 0)
+        for folder, value in released_edits.items():
+            self.assertEqual(self.read(f'{folder}/{missing}'), value)
+            self.assertEqual(self.read(f'{folder}/{existing}'), local_edits[folder])
+
+    def test_release_edits_reject_fields_outside_the_runtime_schema(self):
+        invalid_edits = {
+            'singer_edits': {'0': {'carry': ['Singer'], 'private': 'metadata'}},
+            'singer_rosters': {'names': ['Singer'], 'private': 'metadata'},
+            'lyric_text_edits': {'0': {'korean': 'translation', 'private': 'metadata'}},
+            'confirmed_alsong': {'duration': 100, 'provider_id': '123', 'lines': self.song.to_dict()['lines'],
+                                 'times': [10, 20], 'private': 'metadata'},
+        }
+        for folder, value in invalid_edits.items():
+            with self.subTest(folder=folder), self.assertRaises(ValueError):
+                data_updates.validate_package(self.pack({f"{folder}/{'a' * 64}.json": value}))
+
+    def test_new_alsong_binding_does_not_shadow_existing_clock(self):
+        key = 'Song\0Artist\0Album'
+        name = 'confirmed_alsong/' + hashlib.sha256(key.encode()).hexdigest() + '.json'
+        rows = self.song.to_dict()['lines']
+        self.write('library.json', [self.song.to_dict()])
+        self.write('timings/' + self.song.id + '.json', self.clock(times=[5, 10]))
+        result = self.stage_apply({name: {'duration': 100, 'provider_id': '123',
+                                          'lines': rows, 'times': [10, 20]}})
+        self.assertEqual(result['deferred_files'], 1)
+        self.assertFalse((self.data / name).exists())
+
+    def test_reviewed_catalogs_replace_legacy_scrape_and_do_not_roll_back(self):
+        current = self.catalogs('2027-06-01T00:00:00Z')
+        self.write('song_catalog.json', self.catalogs('2028-01-01T00:00:00Z', 'Legacy song')['song_catalog.json'])
+        self.write('personal_catalog.json', {'tracks': [{'title': 'Private song'}]})
+        private = (self.data / 'personal_catalog.json').read_bytes()
+        with patch.object(data_updates, 'resource_dir', return_value=self.root):
+            result = self.stage_apply(current)
+            self.assertEqual(result['added_files'], 3)
+            self.assertEqual(result['updated_files'], 1)
+            self.assertEqual(self.read('song_catalog.json')['songs'][0]['title'], 'Reviewed song')
+            self.assertEqual(self.read('group_credits.json')[data_updates.CATALOG_RELEASE_STAMP],
+                             '2027-06-01T00:00:00+00:00')
+            older = self.stage_apply(self.catalogs('2027-05-31T00:00:00+09:00', 'Older song'))
+            self.assertEqual(older['unchanged_files'], 4)
+            self.assertEqual(self.read('song_catalog.json')['songs'][0]['title'], 'Reviewed song')
+        self.assertEqual((self.data / 'personal_catalog.json').read_bytes(), private)
+
+    def test_newer_bundled_catalogs_win_and_group_only_update_has_own_revision(self):
+        bundled = self.catalogs('2027-06-01T00:00:00Z')
+        for name, value in bundled.items():
+            atomic_json(self.root / 'resources' / name, value)
+        older = self.catalogs('2027-05-01T00:00:00Z', 'Older song')
+        older['group_credits.json']['generated_at'] = '2027-06-02T00:00:00Z'
+        with patch.object(data_updates, 'resource_dir', return_value=self.root):
+            result = self.stage_apply(older)
+        self.assertEqual(result['unchanged_files'], 3)
+        self.assertEqual(result['added_files'], 1)
+        self.assertFalse((self.data / 'song_catalog.json').exists())
+        self.assertEqual(self.read('group_credits.json')[data_updates.CATALOG_RELEASE_STAMP],
+                         '2027-06-02T00:00:00+00:00')
+
+    def test_new_app_bundle_takes_precedence_over_older_installed_snapshots(self):
+        from explorer_library import people_database_snapshot
+        from live_catalog import LiveCatalog
+        from song_catalog import SongCatalog
+
+        bundled = self.root / 'resources'
+        package = self.catalogs('2027-06-01T00:00:00Z', 'Older song')
+        with patch.object(data_updates, 'resource_dir', return_value=self.root):
+            self.stage_apply(package)
+        for name, value in self.catalogs('2027-06-02T00:00:00Z', 'Bundled song').items():
+            atomic_json(bundled / name, value)
+        songs = SongCatalog(bundled / 'song_catalog.json', self.data / 'song_catalog.json')
+        shows = LiveCatalog(bundled / 'live_catalog.json', self.data / 'live_catalog.json')
+        people = people_database_snapshot(bundled, self.data / 'imas_db_people.json')
+        self.assertEqual(songs.songs[0]['title'], 'Bundled song')
+        self.assertEqual(shows.events[0]['songs'][0]['title'], 'Bundled song')
+        self.assertEqual(people['verified_at'], '2027-06-02')
+
+    def test_incomplete_and_invalid_catalog_packages_fail_before_staging(self):
+        complete = self.catalogs('2027-06-01T00:00:00Z')
+        incomplete = {name: value for name, value in complete.items() if name != 'group_credits.json'}
+        invalid = [
+            {'song_catalog.json': {**complete['song_catalog.json'], 'songs': []}},
+            {'live_catalog.json': {**complete['live_catalog.json'], 'events': [{}]}},
+            {'imas_db_people.json': {**complete['imas_db_people.json'], 'characters': [42]}},
+            {'group_credits.json': {**complete['group_credits.json'], 'generated_at': 'unknown'}},
+            {'personal_catalog.json': {'tracks': []}},
+        ]
+        for documents in [incomplete, *({**complete, **bad} for bad in invalid)]:
+            with self.subTest(documents=documents.keys()):
+                with self.assertRaises(ValueError):
+                    data_updates.stage_package(self.pack(documents), self.data)
+        self.assertFalse((self.data / data_updates.PENDING).exists())
 
     def test_blank_translation_uses_annotations_and_does_not_invalidate_manual_clock(self):
         original = Song(self.song.id, 'Song', 'Artist', 'Album', (Line('first', '', 'my translation'), self.song.lines[1]))
@@ -102,6 +231,28 @@ class DataUpdateTests(unittest.TestCase):
                 self.assertGreaterEqual(result['deferred_files'], 1)
                 # Different package bytes are needed for the next subtest.
                 (self.data / data_updates.RECEIPTS).unlink()
+
+    def test_clock_update_preserves_explicit_local_clear_and_fills_other_gap(self):
+        self.write('library.json', [self.song.to_dict()])
+        name = 'timings/' + self.song.id + '.json'
+        self.write(name, {**self.clock(times=[None, None]), 'origins': [None, None], 'cleared_rows': [0]})
+        self.stage_apply({name: self.clock()})
+        self.assertEqual(self.read(name)['cleared_rows'], [0])
+        self.assertEqual(self.read(name)['times'], [None, 20])
+
+    def test_conflicting_alsong_row_layout_defers_timing_update(self):
+        key = 'Song\0Artist\0Album'
+        identity = 'memory-' + hashlib.sha256(key.encode()).hexdigest()[:24]
+        name = 'live_timings/' + hashlib.sha256(identity.encode()).hexdigest() + '.json'
+        saved = {'signature': original_signature(self.song), 'times': [None, None],
+                 'added_alsong_rows': [{'before': 0, 'text': 'local row', 'time': None, 'cleared': True}]}
+        incoming = {'signature': saved['signature'], 'times': [10, 20],
+                    'added_alsong_rows': [{'before': 1, 'text': 'shared row', 'time': None, 'cleared': True}]}
+        self.write('library.json', [self.song.to_dict()])
+        self.write(name, saved)
+        result = self.stage_apply({name: incoming})
+        self.assertEqual(result['deferred_files'], 1)
+        self.assertEqual(self.read(name), saved)
 
     def test_incompatible_row_count_or_originals_cannot_replace_saved_work(self):
         edited = Song(self.song.id, 'Song', 'Artist', 'Album', (Line('user correction', '', 'mine'),))

@@ -12,6 +12,7 @@ from lyric_match import match_lyrics
 from public_lyrics import fetch_public_lyrics
 from storage import validate_times
 from artist_metadata import ArtistMetadata,playback_request,request_identity
+from artist_credit_overrides import ArtistCreditOverrides,orchestra_singer_credits
 from spotify_api import select_track,text_key
 from spotify_catalog import catalog_diagnostic_record
 from app_paths import worker_command, worker_environment
@@ -72,10 +73,12 @@ class BackgroundLyrics:
     def __init__(self,base,directory,messages,job_factory=SpotifyJob,fetch=fetch_public_lyrics,reports_status=None):
         self.base=Path(base);self.profile=Path(directory)/'spotify_profile';self.messages=messages
         self.job_factory=job_factory;self.fetch=fetch;self.job=None;self.playback=None
+        self.merge_metadata=fetch is fetch_public_lyrics
         self.reports_status=(fetch is fetch_public_lyrics) if reports_status is None else reports_status
         self.key='';self.request_key='';self.generation=0;self.enabled=False;self.closed=False
         self.cached_sync=False;self.spotify_pending=False
         self.spotify_sync_present=False;self._spotify_sync_hint=False;self._spotify_timed_result=False
+        self.spotify_missing_lyrics=''
         self.public_enabled=True
         self.public_running=False;self.public_done=False;self.public_retry=0;self.retry_at=0
         self.status='공개 가사 대기 · Spotify 직접 연결은 로그인 필요'
@@ -85,8 +88,10 @@ class BackgroundLyrics:
         self.spotify_last_error='';self.spotify_exit_code=None
         self.spotify_catalog_diagnostics=[]
         self.artist_metadata=ArtistMetadata(directory)
+        self.artist_credit_overrides=ArtistCreditOverrides(directory)
         self.artist_pool_path=Path(directory)/'spotify_public_tracks.json'
         self.artist_pool_stamp=None;self.artist_pool={}
+        self.catalog_credits=None;self.catalog_credits_stamp=None
         self.metadata_attempted=None;self.metadata_pending=False
         self._catalog_lock=threading.Lock();self._catalog_waiters={}
 
@@ -193,6 +198,10 @@ class BackgroundLyrics:
 
     def display_artists(self,playback):
         """Complete verified credits, or () until known; never changes playback identity."""
+        names=self.artist_credit_overrides.get(playback) or orchestra_singer_credits(playback)
+        if names:return names
+        names=self._catalog_display_artists(playback)
+        if names:return names
         names=self.artist_metadata.get(playback)
         if names:return names
         request=playback_request(playback)
@@ -212,6 +221,19 @@ class BackgroundLyrics:
         track=select_track(request,self.artist_pool.get(text_key(playback.title),[]))
         if track and self.artist_metadata.put(playback,track):return tuple(track['artists'])
         return ()
+
+    def _catalog_display_artists(self,playback):
+        if not playback.title:return ()
+        from song_catalog import SongCatalog,RESOURCE_PATH
+        from catalog_display import CatalogDisplayCredits
+        update=self.artist_metadata.path.parent/'song_catalog.json'
+        paths=(RESOURCE_PATH,update)
+        stamp=tuple((path.stat().st_mtime_ns,path.stat().st_size) if path.is_file() else None for path in paths)
+        if self.catalog_credits is None or stamp!=self.catalog_credits_stamp:
+            catalog=SongCatalog(update_path=update)
+            self.catalog_credits=CatalogDisplayCredits(catalog.songs,catalog.performers)
+            self.catalog_credits_stamp=stamp
+        return self.catalog_credits.get(playback)
 
     def observe(self,playback,enabled=True,public_enabled=True,cached_sync=False,spotify_sync_present=False):
         if self.closed:return
@@ -254,11 +276,8 @@ class BackgroundLyrics:
             self._schedule_spotify_retry()
         self._retry_spotify()
         if not public_enabled or not playback.has_timeline or not playback.artist:return
-        if self.spotify_sync_present:
-            self.status='Spotify 싱크 사용 · LRCLIB 조회 생략'
-            return
         if self.spotify_pending:
-            self.status='Spotify 싱크 확인 대기 · 필요할 때 LRCLIB 보조 조회'
+            self.status='Spotify 응답 대기 · 이후 LRCLIB 보조 조회'
             return
         if not self.public_done and not self.public_running and time.monotonic()>=self.retry_at:
             self.public_running=True;request_key=self.request_key
@@ -267,6 +286,7 @@ class BackgroundLyrics:
                 statuses=[]
                 try:
                     options={'report':statuses.append} if self.reports_status else {}
+                    if self.merge_metadata:options['merge_metadata']=True
                     result=self.fetch(playback,**options);error=False
                 except Exception:
                     result=None;error=True
@@ -279,8 +299,8 @@ class BackgroundLyrics:
         if self.closed or not isinstance(event,dict):return None
         if sender=='public':
             self.public_running=False
-            if (not self.enabled or not self.public_enabled or self.cached_sync or self.spotify_sync_present
-                    or self.spotify_pending or event.get('key')!=self.request_key):return None
+            if (not self.enabled or not self.public_enabled or self.cached_sync
+                    or event.get('key')!=self.request_key):return None
             if event.get('error'):
                 self.public_retry+=1;self.retry_at=time.monotonic()+15
                 self.public_done=self.public_retry>=2
@@ -335,11 +355,15 @@ class BackgroundLyrics:
             key=event.get('key')
             if key and key!=self.request_key:return None
             self.spotify_state=event.get('state','error');self.spotify_status=event.get('text','Spotify 연결 확인 중')
+            if key and self.spotify_state=='not_found' and event.get('lyrics_missing') is True:
+                self.spotify_missing_lyrics=key
             if (self.spotify_state in ('not_found','unsynced','error','login_required','closed')
                     and (key==self.request_key or not key and self.spotify_state in ('error','login_required','closed'))):
                 self.spotify_pending=False
             if self.spotify_state=='error':self.spotify_last_error=self.spotify_status
-            elif self.spotify_state=='login_required':self.spotify_retry_at=0
+            elif self.spotify_state=='login_required':
+                self.spotify_retry_at=0
+                if event.get('login_cancelled') is True:self.spotify_requested=False
             elif self.spotify_state=='closed' and not self.spotify_last_error:self.spotify_last_error=self.spotify_status
         elif kind=='lyrics' and self.enabled and not self.cached_sync and event.get('key')==self.request_key:
             self.spotify_pending=False
@@ -350,6 +374,7 @@ class BackgroundLyrics:
             validate_times(times,len(lines))
             if any(t is not None and t>self.playback.duration+2 for t in times):return None
             self._spotify_timed_result=any(t is not None for t in times)
+            self.spotify_missing_lyrics=''
             self.spotify_sync_present=self._spotify_sync_hint or self._spotify_timed_result
             self.spotify_retry_count=0;self.spotify_retry_at=0
             return self.key,{'source':'Spotify','lines':lines,'times':times,'provider_id':event.get('track_id','')}
@@ -363,6 +388,106 @@ class BackgroundLyrics:
 
     def close(self):
         self.closed=True;self.disconnect()
+
+
+class PlaybackLyricMerge:
+    """Coalesce source changes and deliver only the latest recording merge."""
+    def __init__(self, messages):
+        self.messages = messages
+        self.lock = threading.Lock()
+        self.serial = 0
+        self.generation = 0
+        self.pending = None
+        self.running = False
+        self.sources = {}
+
+    def reset(self):
+        self.sources.clear()
+        with self.lock:
+            self.serial += 1
+            self.generation += 1
+            self.pending = None
+
+    def remember(self, snapshot):
+        return self._remember(self.sources, snapshot)
+
+    @staticmethod
+    def _remember(sources, snapshot):
+        key = snapshot['source'].casefold(), snapshot.get('provider_id')
+        previous = sources.get(key)
+        if snapshot == previous:
+            return False
+        if previous:
+            if (tuple(line.original for line in snapshot['lines'])==
+                    tuple(line.original for line in previous['lines'])):
+                lines=tuple(Line(line.original,line.reading or old.reading,line.korean or old.korean)
+                            for old,line in zip(previous['lines'],snapshot['lines']))
+                weaker=(previous['recording_verified'] and not snapshot['recording_verified']
+                        or not previous['annotation_only'] and snapshot['annotation_only'])
+                times=(previous['times'] if weaker else tuple(old if stamp is None else stamp
+                       for old,stamp in zip(previous['times'],snapshot['times'])))
+                try:validate_times(list(times),len(lines))
+                except ValueError:times=previous['times']
+                snapshot={**(previous if weaker else snapshot),'lines':lines,'times':times}
+            def evidence(value):
+                return (sum(stamp is not None for stamp in value['times']),
+                        sum(bool(line.reading) + bool(line.korean) for line in value['lines']),
+                        len(value['lines']))
+            if snapshot == previous or evidence(snapshot) < evidence(previous):
+                return False
+        sources[key] = snapshot
+        return True
+
+    def has_source(self, source):
+        return any(name == source.casefold() for name, _ in self.sources)
+
+    def submit(self, playback, context, local_snapshots, reader_snapshots=()):
+        # Reader documents become sources only after their current receipt applies.
+        sources = self.sources.copy()
+        for snapshot in reader_snapshots:
+            self._remember(sources, snapshot)
+        with self.lock:
+            self.serial += 1
+            self.pending = self.serial, playback, context, (*sources.values(), *local_snapshots)
+            if self.running:
+                return
+            self.running = True
+        threading.Thread(target=self._run, daemon=True, name='playback-lyric-merge').start()
+
+    def _run(self):
+        from lyric_merge import merge_lyrics
+        while True:
+            with self.lock:
+                work = self.pending
+                self.pending = None
+                if work is None:
+                    self.running = False
+                    return
+            serial, playback, context, snapshots = work
+            try:
+                result = merge_lyrics(playback, snapshots)
+                old = context[1]
+                if old and result['lines']:
+                    owned={row['original_index']:index for index,row in enumerate(result['rows'])
+                           if row['original_source'].casefold()=='manual'
+                           and row['original_index']<len(old.lines)
+                           and old.lines[row['original_index']].original==result['lines'][index].original}
+                    result['previous_rows'] = (owned if len(owned)==len(old.lines)
+                                               else previous_row_mapping(old.lines, result['lines']))
+                error = None
+            except (ValueError, TypeError, KeyError) as failure:
+                result, error = None, failure
+            with self.lock:
+                if serial == self.serial:
+                    self.messages.put(('merged_lyrics', (serial, playback, context, result, error)))
+
+
+def previous_row_mapping(old, new):
+    originals = tuple(line.original for line in old)
+    if originals == tuple(line.original for line in new):
+        return {index:index for index in range(len(old))}
+    mapping, _ = native_line_mapping(originals, new, onsets_only=True)
+    return mapping
 
 
 def _mapped_provider_times(result,lines):

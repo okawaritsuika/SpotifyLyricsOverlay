@@ -11,6 +11,23 @@ from urllib.request import Request, urlopen
 from lyrics import normalized
 
 
+DEFAULT_LYRIC_ADVANCE_MS = 150
+MAX_LYRIC_ADVANCE_MS = 500
+
+
+def lyric_advance_ms(value):
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        return DEFAULT_LYRIC_ADVANCE_MS
+    if not -math.inf < value < math.inf:
+        return DEFAULT_LYRIC_ADVANCE_MS
+    return max(0, min(MAX_LYRIC_ADVANCE_MS, round(value)))
+
+
+def lyric_display_time(stamp, advance_ms, offset=0):
+    """Convert a recording-clock onset to its nonnegative display time."""
+    return max(0, stamp + offset - advance_ms / 1000)
+
+
 @dataclass(frozen=True)
 class Cue:
     time: float
@@ -77,7 +94,7 @@ def stamp_line(times, index, position, offset=0):
 
 def edit_manual_time(timing,index,stamp):
     """A user correction outranks machine anchors, never other user anchors."""
-    from timing_quality import timing_origins,automatic_times
+    from timing_quality import timing_origins,automatic_times,cleared_rows
     from storage import validate_times
     times=list(timing['times']);origins=timing_origins(timing);automatic=automatic_times(timing)
     if stamp is not None:
@@ -87,7 +104,13 @@ def edit_manual_time(timing,index,stamp):
                 times[other]=None;origins[other]=None
     times[index]=stamp;origins[index]='manual' if stamp is not None else None
     validate_times(times,len(times))
-    return {**timing,'times':times,'origins':origins,'automatic_times':automatic}
+    result = {**timing,'times':times,'origins':origins,'automatic_times':automatic}
+    cleared = cleared_rows(result)
+    if cleared:
+        result['cleared_rows'] = sorted(cleared)
+    else:
+        result.pop('cleared_rows',None)
+    return result
 
 
 def restore_auto_time(timing,index,candidate=None):
@@ -98,6 +121,8 @@ def restore_auto_time(timing,index,candidate=None):
     after=next((x for x in updated['times'][index+1:] if x is not None),math.inf)
     if value is not None and math.isfinite(value) and value>=0 and before<value<after:
         updated['times'][index]=value;updated['origins'][index]='audio'
+    if 'cleared_rows' in updated:
+        updated['cleared_rows'] = [row for row in updated['cleared_rows'] if row != index]
     return updated
 
 

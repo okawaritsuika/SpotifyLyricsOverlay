@@ -237,7 +237,7 @@ class PublicArtistFallbackTests(unittest.TestCase):
         if previous is not None:
             os.utime(self.public_path, ns=(previous + 1_000_000_000, previous + 1_000_000_000))
 
-    def test_offline_session_uses_matching_public_credits_without_merging_localized_release(self):
+    def test_offline_session_prefers_confirmed_catalog_cast_over_incomplete_spotify_credits(self):
         english = ['Haruka Amami (CV: Eriko Nakamura)', 'Iori Minase (CV: Rie Kugimiya)',
                    'Makoto Kikuchi (CV: Hiromi Hirata)', 'Hibiki Ganaha (CV: Manami Numakura)',
                    'Nana Abe (CV: Marie Miyake)', 'Anzu Futaba (CV: Hiromi Igarashi)',
@@ -255,8 +255,11 @@ class PublicArtistFallbackTests(unittest.TestCase):
         original_key = playback.key
         self.service.observe(playback, enabled=False, public_enabled=False, cached_sync=True)
         self.assertFalse(self.service.spotify_authenticated)
-        self.assertEqual(self.service.display_artists(playback), tuple(english))
-        self.assertEqual(ArtistMetadata(self.temp.name).get(playback), tuple(english))
+        names=self.service.display_artists(playback)
+        self.assertIn('大崎甘奈',names)
+        self.assertIn('大崎甜花',names)
+        self.assertIn('奥空心白',names)
+        self.assertEqual(ArtistMetadata(self.temp.name).get(playback), ())
         self.assertEqual(playback.key, original_key)
         self.assertEqual(playback.artist, english[0])
         self.assertIsNone(self.service.job)

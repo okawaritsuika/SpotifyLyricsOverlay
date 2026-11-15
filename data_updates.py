@@ -15,8 +15,10 @@ import tempfile
 from zipfile import BadZipFile, ZipFile
 
 import public_data as public
+from app_paths import CATALOG_RELEASE_STAMP, catalog_snapshot_time, resource_dir
 from lyrics import Song
 from storage import Store, atomic_json, validate_times
+from timing_quality import cleared_rows
 
 
 MAX_ARCHIVE_BYTES = 128 * 1024 * 1024
@@ -27,12 +29,14 @@ MAX_RATIO = 200
 PENDING = '.pending-data-update.json'
 RECEIPTS = '.data-update-receipts.json'
 STAGING = '.data-updates'
+CATALOG_FILES = frozenset(('song_catalog.json', 'live_catalog.json', 'imas_db_people.json', 'group_credits.json'))
 ROOT_FILES = {'_manifest.json', 'library.json', 'settings.json', 'artist_metadata.json',
               'explorer_library.json', 'spotify_public_tracks.json', 'wiki_documents.json',
               'wiki_lyric_parts.json', 'lyric_parts.json', 'ai_translations/imports.json',
-              'playlist_lyrics/index.json'}
+              'playlist_lyrics/index.json'} | CATALOG_FILES
+EDIT_FOLDERS = {'singer_edits', 'singer_rosters', 'lyric_text_edits', 'confirmed_alsong'}
 FOLDERS = {'timings', 'live_timings', 'native_timings', 'lyrics_cache', 'lyric_annotations',
-           'ai_translations/history', 'playlist_lyrics/tracks', 'user_lyrics', 'manual_annotations'}
+           'ai_translations/history', 'playlist_lyrics/tracks', 'user_lyrics', 'manual_annotations'} | EDIT_FOLDERS
 MANIFEST_KEYS = {'schema_version', 'files', 'bytes', 'categories', 'library_songs',
                  'playlist_tracks', 'translation_documents', 'translated_rows', 'public_tracks',
                  'recording_links', 'user_lyric_overrides', 'privacy', 'rights'}
@@ -92,6 +96,46 @@ def _imports(value):
     return {'version': 1, 'documents': result}
 
 
+def _catalog_revisions(documents):
+    stamps = {name: catalog_snapshot_time(documents.get(name)) for name in CATALOG_FILES}
+    if stamps['group_credits.json'] is None:
+        # The original group bundle has no timestamp. Its inputs are the
+        # song/performer snapshot and the supplemental character snapshot.
+        stamps['group_credits.json'] = max((stamps[name] for name in
+            ('song_catalog.json', 'imas_db_people.json') if stamps[name] is not None), default=None)
+    return stamps
+
+
+def _validate_catalogs(documents, sizes):
+    included = CATALOG_FILES.intersection(documents)
+    if not included:
+        return
+    if included != CATALOG_FILES:
+        raise ValueError('The reviewed catalog update must include all four snapshots')
+    from explorer_library import valid_people_snapshot
+    from group_credits import MAX_BYTES as group_limit, valid_snapshot as valid_groups
+    from live_catalog import MAX_BYTES as live_limit, valid_catalog as valid_live
+    from song_catalog import MAX_CATALOG_BYTES, valid_catalog as valid_songs
+
+    validators = {
+        'song_catalog.json': (MAX_CATALOG_BYTES, valid_songs),
+        'live_catalog.json': (live_limit, valid_live),
+        'imas_db_people.json': (group_limit, valid_people_snapshot),
+        'group_credits.json': (group_limit, valid_groups),
+    }
+    revisions = _catalog_revisions(documents)
+    for name, (limit, valid) in validators.items():
+        snapshot = documents[name]
+        if (sizes[name] > limit or not valid(snapshot) or CATALOG_RELEASE_STAMP in snapshot
+                or revisions[name] is None
+                or 'generated_at' in snapshot and catalog_snapshot_time(snapshot, ('generated_at',)) is None):
+            raise ValueError(f'Invalid reviewed catalog snapshot: {name}')
+    characters = documents['imas_db_people.json']['characters']
+    if len(characters) > 5000 or any(not isinstance(row, dict) or not isinstance(row.get('name'), str)
+                                     or not row['name'].strip() for row in characters):
+        raise ValueError('Invalid reviewed character entries')
+
+
 def _validate_documents(documents, sizes):
     manifest = documents.get('_manifest.json')
     if (not isinstance(manifest, dict) or set(manifest) - MANIFEST_KEYS
@@ -104,8 +148,9 @@ def _validate_documents(documents, sizes):
     if not isinstance(library, list):raise ValueError('Invalid library update')
     songs = {row['id']: row for row in library}
     if len(songs) != len(library):raise ValueError('Duplicate public song')
+    _validate_catalogs(documents, sizes)
     for name, value in documents.items():
-        if name == '_manifest.json':continue
+        if name == '_manifest.json' or name in CATALOG_FILES:continue
         folder, _, filename = name.rpartition('/')
         for version in ('version', 'schema_version'):
             if isinstance(value, dict) and version in value and (type(value[version]) is not int or value[version] != 1):
@@ -157,6 +202,10 @@ def _validate_documents(documents, sizes):
             from playlist_lyrics_store import _direct
             _direct(clean.get('direct'), clean['track'], decoded=True)
         elif folder == 'user_lyrics':clean = public._user_lyrics(value)
+        elif folder == 'singer_edits':clean = public._singer_edits(value)
+        elif folder == 'singer_rosters':clean = public._singer_roster(value)
+        elif folder == 'lyric_text_edits':clean = public._lyric_text_edits(value)
+        elif folder == 'confirmed_alsong':clean = public._confirmed_alsong(value)
         elif folder == 'manual_annotations':
             clean = {**{key: public._text(value[key]) for key in ('title', 'artist') if key in value},
                      'lines': public._rows(value['lines'])}
@@ -282,12 +331,15 @@ def _timing(left, right):
         if key in left or key in right:
             if left.get(key) != right.get(key):return None
     if left.get('offset', 0) != right.get('offset', 0):return None
+    if any(left.get(key, []) != right.get(key, []) for key in ('added_alsong_rows', 'removed_alsong_rows')):
+        return None
     old, incoming = left.get('times'), right.get('times')
     if not isinstance(old, list) or not isinstance(incoming, list) or len(old) != len(incoming):return None
     try:validate_times(old, len(old))
     except ValueError:return None
     if any(a is not None and b is not None and a != b for a, b in zip(old, incoming)):return None
-    times = [b if a is None else a for a, b in zip(old, incoming)]
+    cleared = cleared_rows(left)
+    times = [b if a is None and index not in cleared else a for index, (a, b) in enumerate(zip(old, incoming))]
     try:validate_times(times, len(times))
     except ValueError:return None
     result = deepcopy(left)
@@ -381,7 +433,9 @@ def _clock_authorities(root, documents, library, settings):
             for name in mapped:paths.setdefault(name, set()).update(keys)
     def nonempty(value):
         return isinstance(value, dict) and (any(stamp is not None for stamp in value.get('times', []))
-                                            or value.get('offset', 0) != 0 or nonempty(value.get('fallback')))
+                                            or value.get('offset', 0) != 0 or value.get('cleared_rows')
+                                            or value.get('added_alsong_rows') or value.get('removed_alsong_rows')
+                                            or nonempty(value.get('fallback')))
     for name, value in current.items():
         key = _recording_key(value)
         if nonempty(value.get('direct')):
@@ -400,7 +454,7 @@ def _clock_authorities(root, documents, library, settings):
 
 def _merge_document(name, left, right, protected_keys):
     folder = name.rpartition('/')[0]
-    if name == 'settings.json':return deepcopy(left)
+    if name == 'settings.json' or folder in EDIT_FOLDERS:return deepcopy(left)
     if folder in ('timings', 'live_timings', 'native_timings'):return _timing(left, right)
     if folder in ('lyrics_cache', 'ai_translations/history', 'playlist_lyrics/tracks', 'user_lyrics', 'manual_annotations'):
         if _recording_key(right) in protected_keys:return deepcopy(left)
@@ -456,8 +510,32 @@ def _merge_document(name, left, right, protected_keys):
     return None
 
 
+def _plan_catalogs(root, documents):
+    changes, added, unchanged = {}, set(), set()
+    if not CATALOG_FILES.intersection(documents):
+        return changes, added, unchanged
+    bundled = resource_dir() / 'resources'
+    bundled_stamps = _catalog_revisions({name: _read(bundled / name) for name in CATALOG_FILES})
+    incoming_stamps = _catalog_revisions(documents)
+    for name in sorted(CATALOG_FILES):
+        stamp = incoming_stamps[name]
+        if bundled_stamps[name] is not None and stamp < bundled_stamps[name]:
+            unchanged.add(name)
+            continue
+        current = _read(root / name)
+        last_release = catalog_snapshot_time(current, (CATALOG_RELEASE_STAMP,))
+        if last_release is not None and stamp <= last_release:
+            unchanged.add(name)
+            continue
+        changes[name] = {**documents[name], CATALOG_RELEASE_STAMP: stamp.isoformat()}
+        if current is None:
+            added.add(name)
+    return changes, added, unchanged
+
+
 def _plan(root, documents):
-    changes, deferred, unchanged, added = {}, set(), set(), set()
+    changes, added, unchanged = _plan_catalogs(root, documents)
+    deferred = set()
     existing_library = _read(root / 'library.json', [])
     settings = _read(root / 'settings.json', {})
     if not isinstance(existing_library, list) or not isinstance(settings, dict):raise ValueError('Invalid current library/settings')
@@ -487,6 +565,8 @@ def _plan(root, documents):
     _safe(native_directory)
     has_native = any(native_directory.glob('*.json'))
     clock_paths, clock_authorities, unknown_clocks = _clock_authorities(root, documents, existing_library, settings)
+    protected_alsong = {hashlib.sha256(key.encode()).hexdigest()
+                       for key in protected_keys | deleted | clock_authorities.keys()}
 
     def other_clock(name, value, exceptions=()):
         keys = set(clock_paths.get(name, ()))
@@ -514,10 +594,12 @@ def _plan(root, documents):
             if not (root / 'library.json').exists():added.add('library.json')
         else:unchanged.add('library.json')
     for name, value in sorted(documents.items()):
-        if name in ('_manifest.json', 'library.json'):continue
+        if name in ('_manifest.json', 'library.json') or name in CATALOG_FILES:continue
         if name.startswith(('timings/', 'lyric_annotations/')) and Path(name).stem in blocked_ids:
             deferred.add(name);continue
         if isinstance(value, dict) and _recording_key(value) in deleted:
+            deferred.add(name);continue
+        if name.startswith('confirmed_alsong/') and Path(name).stem in protected_alsong:
             deferred.add(name);continue
         if name == 'ai_translations/imports.json' and deleted_histories:
             value = {**value, 'documents': {key: rows for key, rows in value['documents'].items() if key not in deleted_histories}}

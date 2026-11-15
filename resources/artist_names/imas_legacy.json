@@ -3252,6 +3252,30 @@
       ]
     },
     {
+      "name": "矢作紗友里",
+      "ko": "야하기 사유리",
+      "kind": "voice_actor",
+      "franchise": "Dearly Stars",
+      "aliases": [
+        "Sayuri Yahagi",
+        "Yahagi Sayuri"
+      ],
+      "source_urls": [
+        "https://www.imenterprise.jp/profile_list.php",
+        "https://github.com/imas/imasparql/blob/master/RDFs/876.rdf"
+      ]
+    },
+    {
+      "name": "ゆりん",
+      "ko": "유린",
+      "kind": "voice_actor",
+      "franchise": "Dearly Stars",
+      "aliases": [],
+      "source_urls": [
+        "https://github.com/imas/imasparql/blob/master/RDFs/876.rdf"
+      ]
+    },
+    {
       "name": "上水流 宇宙",
       "ko": "카미즈루 코스모",
       "kind": "idol",
@@ -4617,7 +4641,7 @@
   ],
   "coverage": {
     "verified_date": "2026-10-01",
-    "entry_count": 317,
+    "entry_count": 319,
     "counts": {
       "765AS": {
         "idol": 14,
@@ -4637,7 +4661,7 @@
       "Dearly Stars": {
         "idol": 2,
         "group": 1,
-        "voice_actor": 2
+        "voice_actor": 4
       },
       "vα-liv": {
         "idol": 3,
@@ -4659,7 +4683,7 @@
       "765AS": "13명 전원 + 가창 크레딧이 있는 사무원 오토나시 코토리. 현재 성우 12명 및 코토리 성우, 이전 유키호 성우의 두 활동명.",
       "Million Live": "765AS와 중복되지 않는 MILLIONSTARS 39명 전원 및 39명 성우. 765AS와 합쳐 밀리시타52명.",
       "SideM": "현재 로스터49명 전원, 정규16유닛 전원, 315 ALLSTARS/315 STARS. 현 성우49명 및 이전 츠쿠모 카즈키 성우1명.",
-      "Dearly Stars": "주인공3명 중 아키즈키 료 및 산페이 유코는 SideM 항목과 공유. 히다카 아이·미즈타니 에리와 성우2명 추가.",
+      "Dearly Stars": "아키즈키 료와 산페이 유코는 SideM 항목과 공유. 히다카 아이·미즈타니 에리와 성우, 사쿠라이 유메코·스즈키 아야네의 성우를 포함.",
       "vα-liv": "공식 로스터3명 전원 및 프로젝트 그룹.",
       "Starlit Season / 961": "오쿠조라 코하쿠·레온·시이카·아야 및 성우4명, Project LUMINOUS·DIAMANT·ZWEIGLANZ."
     },

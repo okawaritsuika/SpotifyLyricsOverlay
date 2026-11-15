@@ -6,13 +6,17 @@ import unittest
 
 from batch_translation import BatchTranslationStore
 from explorer_library import ExplorerLibrary
+from lyric_annotations import LyricTextEdits
 from lyric_cache import LyricCache
 from lyric_edits import save_lyric_edit
 from lyrics import Line, Song, match_recording
+from live_timing import LiveTimingStore
 from media import Playback
 from playlist_lyrics_store import PlaylistLyricsStore
 from public_data import collect_public_data, export_public_data
+from song_catalog import PERSONAL_CATALOG_NAME, SongCatalog
 from storage import Store
+from user_annotations import SingerEdits, SingerRoster
 
 
 class PublicDataTests(unittest.TestCase):
@@ -102,11 +106,85 @@ class PublicDataTests(unittest.TestCase):
                 with self.assertRaises(ValueError):export_public_data(self.source, self.output)
                 self.assertFalse(self.output.exists())
 
+    def test_recording_edits_keep_reader_keys_and_explicit_blanks(self):
+        recording_key = 'Song\0Artist\0Album'
+        layout = recording_key, ('One', 'Two', 'Three', 'Four')
+        roster = SingerRoster(self.source)
+        roster.select(recording_key)
+        roster.save(('Singer B', 'Singer A'))
+        singers = SingerEdits(self.source)
+        singers.select(layout)
+        singers.save(0, ('Singer A',))
+        singers.save(1, ('Singer B',))
+        singers.save(1, (), keep_carry=True)
+        lyrics = LyricTextEdits(Store(self.source))
+        lyrics.select(layout)
+        lyrics.save(0, 'Corrected original')
+        lyrics.save(1, 'Reading', field='reading')
+        lyrics.save(1, '', field='korean')
+
+        export_public_data(self.source, self.output)
+
+        shipped_roster = SingerRoster(self.output)
+        shipped_roster.select(recording_key)
+        self.assertEqual(shipped_roster.names, ('Singer B', 'Singer A'))
+        shipped_singers = SingerEdits(self.output)
+        shipped_singers.select(layout)
+        self.assertIsNone(shipped_singers.error)
+        self.assertEqual(shipped_singers.overrides, (('Singer A',), (), ('Singer B',), ('Singer B',)))
+        shipped_lyrics = LyricTextEdits(Store(self.output))
+        shipped_lyrics.select(layout)
+        self.assertIsNone(shipped_lyrics.error)
+        self.assertEqual(shipped_lyrics.original(0), 'Corrected original')
+        self.assertEqual(shipped_lyrics.reading(1), 'Reading')
+        self.assertEqual(shipped_lyrics.translation(1), '')
+
+    def test_recording_edits_reject_private_text(self):
+        for folder, document in (
+                ('singer_rosters', ['owner@example.test']),
+                ('singer_edits', {'0': {'carry': ['owner@example.test']}}),
+                ('lyric_text_edits', {'0': {'korean': 'owner@example.test'}})):
+            with self.subTest(folder=folder):
+                name = folder + '/' + 'a' * 64 + '.json'
+                self.write(name, document)
+                with self.assertRaisesRegex(ValueError, 'Cannot safely export ' + folder):
+                    export_public_data(self.source, self.output)
+                self.assertFalse(self.output.exists())
+                (self.source / name).unlink()
+
+    def test_confirmed_alsong_and_its_manual_timing_keep_the_saved_layout(self):
+        key = hashlib.sha256(b'Song\0Artist\0Album').hexdigest()
+        song = Song('alsong-' + key[:24] + '-123', 'Song', 'Artist', 'Album',
+                    (Line('First', '', ''), Line('Second', '', ''), Line('Third', '', '')))
+        confirmed = {'duration': 100, 'provider_id': '123', 'lines': list(song.to_dict()['lines']),
+                     'times': [1, 3, 5]}
+        filename = 'confirmed_alsong/' + key + '.json'
+        self.write(filename, {**confirmed, 'password': 'private-value'})
+        timing = {'times': [1, None, 5], 'offset': .25, 'cleared_rows': [1],
+                  'removed_alsong_rows': [1],
+                  'added_alsong_rows': [{'before': 2, 'text': 'Added line', 'time': 4, 'cleared': False}]}
+        LiveTimingStore(self.source).save(song, timing)
+
+        export_public_data(self.source, self.output)
+
+        self.assertEqual(json.loads((self.output / filename).read_bytes()), confirmed)
+        result = LiveTimingStore(self.output).load(song)
+        self.assertEqual({field: result[field] for field in timing}, timing)
+
     def test_official_album_name_is_not_mistaken_for_email(self):
         self.write('spotify_public_tracks.json', {'schema_version': 1, 'tracks': [
             {**self.track, 'album': 'THE IDOLM@STER.KR OST'}]})
         result = collect_public_data(self.source)
         self.assertEqual(result['spotify_public_tracks.json']['tracks'][0]['album'], 'THE IDOLM@STER.KR OST')
+
+    def test_personal_songs_and_their_spotify_links_are_excluded(self):
+        self.source.mkdir()
+        catalog = SongCatalog(self.root / 'missing-bundle.json', personal_path=self.source / PERSONAL_CATALOG_NAME)
+        row = catalog.add_personal_song(dict(title='My private track', artists=['Personal artist']))['song']
+        ExplorerLibrary(self.source).link_spotify(row['id'], self.track)
+        documents = collect_public_data(self.source)
+        self.assertNotIn(PERSONAL_CATALOG_NAME, documents)
+        self.assertEqual(documents['explorer_library.json']['spotify'], {})
 
     def test_output_must_be_empty_and_separate_from_source(self):
         self.fixture()

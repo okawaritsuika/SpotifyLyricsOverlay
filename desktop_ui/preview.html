@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src data:; base-uri 'none'; form-action 'none'">
+  <title>가사 미리보기</title>
+  <link rel="stylesheet" href="fonts.css">
+  <link rel="stylesheet" href="appearance.css">
+  <link rel="stylesheet" href="preview.css">
+  <script type="module" src="preview.js"></script>
+</head>
+<body>
+  <header class="preview-window-controls"><span>미리보기</span><button type="button" aria-label="미리보기 닫기" title="닫기">×</button></header>
+  <section class="preview-overlay" aria-label="가사 미리보기">
+    <div class="preview-tools" aria-hidden="true" hidden><span>가사 표시 설정</span><span>클릭 통과</span><span>헤더 숨기기</span><span>더 보기 ▾</span></div>
+    <main class="appearance-preview"></main>
+    <footer class="preview-transport" aria-hidden="true"><span data-transport="previous first play"></span><time>1:24 / 4:26</time><span data-transport="volume last next"></span></footer>
+  </section>
+</body>
+</html>

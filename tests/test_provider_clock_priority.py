@@ -21,7 +21,8 @@ class ProviderClockPriorityTests(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory()
         self.store = Store(self.temp.name)
         self.store.save_settings({'online': False, 'auto_audio': False, 'web_auto': False,
-                                  'borderless': False, 'use_estimate': True, 'reader_mode': 'chrome'})
+                                  'borderless': False, 'use_estimate': True, 'reader_mode': 'chrome',
+                                  'lyric_advance_ms': 0})
         self.root = tk.Tk(); self.root.withdraw()
         self.app = LyricsApp(self.root, self.store, start_services=False)
         self.playback = Playback('Song', 'Singer', 'Album', 12, 90, False, time.monotonic())

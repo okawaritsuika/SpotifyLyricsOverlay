@@ -130,11 +130,13 @@ def _track(value):
     return result
 
 
-def _direct(value, depth=0):
+def _direct(value, depth=0, *, cached=False):
     if value is None:return None
-    if depth > 1 or value['source'] not in {'Spotify', 'LRCLIB', 'ALSong', 'LyricsPlus'}:
+    source = value['source']
+    if depth > 1 or (source not in {'Spotify', 'LRCLIB', 'ALSong', 'LyricsPlus'}
+                     and not (cached and source == 'Merged')):
         raise ValueError('Invalid lyric provider')
-    result = {'source': value['source'], 'lines': _rows(value['lines']), 'times': value['times']}
+    result = {'source': source, 'lines': _rows(value['lines']), 'times': value['times']}
     validate_times(result['times'], len(result['lines']))
     identifier = value.get('provider_id')
     if identifier is not None:
@@ -176,6 +178,30 @@ def _history(value):
     return result
 
 
+def _timing_rows(value, count):
+    if (not isinstance(value, list)
+            or any(type(index) is not int or not 0 <= index < count for index in value)
+            or value != sorted(set(value))):
+        raise ValueError('Invalid timing row indices')
+    return value
+
+
+def _alsong_insertions(value, count):
+    if not isinstance(value, list):
+        raise ValueError('Invalid ALSong insertions')
+    result = []
+    for row in value:
+        row = _object(row)
+        before, cleared = row['before'], row['cleared']
+        text, stamp = _text(row['text']), row['time']
+        if (type(before) is not int or not 0 <= before < count + len(result)
+                or type(cleared) is not bool or not text.strip() or any(c in text for c in '\r\n\0')):
+            raise ValueError('Invalid ALSong insertion')
+        validate_times([stamp], 1)
+        result.append({'before': before, 'text': text, 'time': stamp, 'cleared': cleared})
+    return result
+
+
 def _timing(value):
     value = _object(value)
     times = value['times']
@@ -200,14 +226,37 @@ def _timing(value):
         result['automatic_times'] = value['automatic_times']
     if 'analyzed_ranges' in value:
         result['analyzed_ranges'] = [[_number(stamp) for stamp in pair] for pair in value['analyzed_ranges']]
+    if 'cleared_rows' in value:
+        cleared = _timing_rows(value['cleared_rows'], len(times))
+        if any(times[index] is not None for index in cleared):
+            raise ValueError('Cleared row has a timestamp')
+        result['cleared_rows'] = cleared
+    if 'added_alsong_rows' in value:
+        result['added_alsong_rows'] = _alsong_insertions(value['added_alsong_rows'], len(times))
+    if 'removed_alsong_rows' in value:
+        count = len(times) + len(result.get('added_alsong_rows', []))
+        removed = _timing_rows(value['removed_alsong_rows'], count)
+        if removed and len(removed) == count:
+            raise ValueError('ALSong must retain at least one line')
+        result['removed_alsong_rows'] = removed
     return result
+
+
+def _confirmed_alsong(value):
+    value = _object(value)
+    duration, identifier = _number(value['duration']), _text(value['provider_id'])
+    if duration <= 0 or not identifier.isascii() or not identifier.isdecimal():
+        raise ValueError('Invalid confirmed ALSong recording')
+    lines, times = _rows(value['lines']), value['times']
+    validate_times(times, len(lines))
+    return {'duration': duration, 'provider_id': identifier, 'lines': lines, 'times': times}
 
 
 def _cache(value):
     key = _text(value['key'])
     if len(key.split('\0')) != 3:raise ValueError('Invalid recording cache identity')
     result = {'version': 1, 'key': key, 'duration': _number(value['duration']),
-              'saved_at': 0, 'lines': _rows(value['lines']), 'direct': _direct(value.get('direct'))}
+              'saved_at': 0, 'lines': _rows(value['lines']), 'direct': _direct(value.get('direct'), cached=True)}
     if value.get('reuse') is not None:
         reuse = value['reuse']
         result['reuse'] = {'source_key': _text(reuse['source_key']),
@@ -231,6 +280,47 @@ def _user_lyrics(value):
     if url := _url(value.get('source', {}).get('url')):source['url'] = url
     return {'schema_version': 1, 'title': _text(value['title']), 'artists': _strings(value['artists']),
             'source': source, 'lines': _rows(value['lines'], annotations=True)}
+
+
+def _edit_rows(value):
+    rows = _object(value)
+    if any(not index.isascii() or not index.isdecimal() or str(int(index)) != index for index in rows):
+        raise ValueError('Invalid edit row index')
+    return rows.items()
+
+
+def _singer_roster(value):
+    from user_annotations import SingerRoster
+
+    names = _strings(value)
+    if not SingerRoster.valid_names(names):
+        raise ValueError('Invalid singer roster')
+    return names
+
+
+def _singer_edits(value):
+    from user_annotations import MAX_SINGERS_PER_LINE
+
+    rows = {}
+    for index, row in _edit_rows(value):
+        carry = isinstance(row, dict) and row.keys() == {'carry'}
+        names = _strings(row['carry'] if carry else row)
+        if (len(names) > MAX_SINGERS_PER_LINE
+                or any(not name.strip() or len(name) > 4000 or '\0' in name for name in names)):
+            raise ValueError('Invalid singer edit')
+        rows[index] = {'carry': names} if carry else names
+    return rows
+
+
+def _lyric_text_edits(value):
+    from lyric_annotations import LyricTextEdits
+
+    rows = {}
+    for index, row in _edit_rows(value):
+        if not LyricTextEdits.valid_row(row):
+            raise ValueError('Invalid lyric text edit')
+        rows[index] = _text(row) if isinstance(row, str) else {field: _text(text) for field, text in row.items()}
+    return rows
 
 
 def _parts(value):
@@ -288,7 +378,9 @@ def collect_public_data(source):
     add('settings.json', lambda value: _edited_settings(value, documents.get('library.json', [])))
     folders = {'timings': _timing, 'live_timings': _timing, 'native_timings': _timing,
                'lyrics_cache': _cache, 'ai_translations/history': _history,
-               'playlist_lyrics/tracks': _playlist, 'user_lyrics': _user_lyrics}
+               'playlist_lyrics/tracks': _playlist, 'user_lyrics': _user_lyrics, 'confirmed_alsong': _confirmed_alsong,
+               'singer_rosters': _singer_roster, 'singer_edits': _singer_edits,
+               'lyric_text_edits': _lyric_text_edits}
     for folder, cleaner in folders.items():
         _safe_path(source / folder)
         for path in sorted((source / folder).glob('*.json')):
@@ -322,7 +414,7 @@ def collect_public_data(source):
         for row in value['tracks']]})
     add('explorer_library.json', lambda value: {'schema_version': 1, 'spotify': {
         _identifier(key, SONG_ID): {**_track(row), 'url': 'https://open.spotify.com/track/' + row['id']}
-        for key, row in value.get('spotify', {}).items()}})
+        for key, row in value.get('spotify', {}).items() if not key.startswith('personal:')}})
     for name in ('wiki_lyric_parts.json', 'lyric_parts.json'):add(name, _parts)
     add('wiki_documents.json', lambda value: {
         _identifier(key): {'url': url, 'learned': True} for key, item in value.items()

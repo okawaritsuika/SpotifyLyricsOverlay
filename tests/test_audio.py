@@ -181,13 +181,14 @@ class AudioUITests(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.app.start_audio()
 
-    def test_context_option_toggles_and_persists_automatic_analysis_without_playback(self):
-        self.assertIn('Spotify',self.app.context_menu.entrycget(0,'label'))
+    def test_developer_option_toggles_and_persists_automatic_analysis_without_playback(self):
+        self.app.open_developer_mode()
+        button=self.app.manual_sync_dialog.auto_audio_button
         with patch('auto_audio.ready'):
-            self.app.context_menu.invoke(0)
+            button.invoke()
         self.assertTrue(self.app.auto_analyzer.enabled)
         self.assertTrue(self.store.settings()['auto_audio'])
-        self.app.context_menu.invoke(0)
+        button.invoke()
         self.assertFalse(self.app.auto_analyzer.enabled)
         self.assertFalse(self.store.settings()['auto_audio'])
 

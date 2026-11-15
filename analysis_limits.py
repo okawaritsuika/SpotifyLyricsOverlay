@@ -27,7 +27,7 @@ def apply_analysis_limits(cpu_percent=CPU_PERCENT,memory_mb=MEMORY_MB,gpu=False)
     global _job
     if _job is not None:return _job
     if os.name!='nt':raise ValueError('음원 분석의 자원 제한은 Windows에서만 지원합니다.')
-    if not 1<=cpu_percent<=(20 if gpu else 5) or not 64<=memory_mb<=(4096 if gpu else 1024):raise ValueError('분석 자원 제한값이 올바르지 않습니다.')
+    if not 1<=cpu_percent<=(20 if gpu else 5) or not 64<=memory_mb<=4096:raise ValueError('분석 자원 제한값이 올바르지 않습니다.')
     class CpuRate(ctypes.Structure):
         _fields_=[('flags',wintypes.DWORD),('rate',wintypes.DWORD)]
     class Basic(ctypes.Structure):

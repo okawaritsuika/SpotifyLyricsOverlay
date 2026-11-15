@@ -40,7 +40,10 @@ class CompactRuntimeTests(unittest.TestCase):
     def test_installer_calls_compaction_and_disables_pip_cache(self):
         root=Path(__file__).resolve().parents[1]
         script=(root/'setup-audio.ps1').read_text(encoding='utf-8-sig')
-        self.assertEqual(script.count('--no-cache-dir --no-compile'),2)
+        pip_installs=[line for line in script.splitlines() if '-m pip install' in line]
+        self.assertGreaterEqual(len(pip_installs),2)
+        for command in pip_installs:
+            self.assertIn('--no-cache-dir --no-compile',command)
         self.assertLess(script.index('--install-model'),script.index('compact_audio_runtime.py'))
         self.assertLess(script.index('compact_audio_runtime.py'),script.index("Write-Output '음원 분석 준비 완료"))
         from package_release import MODULES

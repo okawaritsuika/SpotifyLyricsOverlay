@@ -8,6 +8,7 @@ import threading
 
 from storage import atomic_json
 from app_paths import frozen, runtime_dir, worker_command, worker_environment
+from audio_capture_cache import REALTIME_PAUSE_NAME, discard_retry_capture
 
 
 MODEL_FILES = ('model.bin', 'config.json', 'tokenizer.json', 'vocabulary.txt')
@@ -32,25 +33,42 @@ def ready(base):
 
 class AudioJob:
     def __init__(self, base, song, playback, messages, max_start_position=3, memory_only=False, start_index=None, realtime_device='cpu', defer_lyrics=False,
-                 incremental=False,confirmed_times=None,analyzed_ranges=None,capture_from=0):
+                 incremental=False,confirmed_times=None,analyzed_ranges=None,capture_from=0,alignment=None,
+                 capture_window=None,row_kinds=None,capture_cache=None,cached_capture=None,
+                 playlist_analysis=False,realtime_enabled=True):
         self.song, self.messages = song, messages
         self.memory_only=memory_only
         self.memory_lines=[line.original for line in song.lines] if memory_only and not defer_lyrics else None
+        self.memory_readings=None
         self.waiting_for_lyrics=defer_lyrics
         self.capture_complete=False
         self.capture_started=False
+        self.playlist_analysis=bool(playlist_analysis)
+        self.analysis_committed=None
+        self.capture_cache=capture_cache
+        self.capture_duration=playback.duration
         self.capture_start_position=playback.position()
         self.incremental=bool(incremental)
         self.skip_final=start_index is not None and not self.incremental
         self.temp = tempfile.TemporaryDirectory(prefix='spotify-lyrics-audio-')
         self.cancelled = threading.Event()
+        self.realtime_enabled=realtime_enabled
         self.realtime_stop=threading.Event();self.realtime_process=None;self.realtime_thread=None
         self.process_lock = threading.Lock()
         folder = Path(self.temp.name)
+        runtime = runtime_dir() if frozen() else Path(base)
         request = {'key': playback.key, 'duration': playback.duration,
                    'max_start_position':max_start_position,
                    'lines': [line.original for line in song.lines] if song else [],
-                   'model': str((runtime_dir() if frozen() else Path(base)) / 'models' / 'whisper-small')}
+                   'model': str(runtime / 'models' / 'whisper-small')}
+        if capture_cache is not None:request['capture_cache']=str(Path(capture_cache).resolve())
+        if cached_capture is not None:request['cached_capture']=str(Path(cached_capture).resolve())
+        if playlist_analysis:request['playlist_analysis']=True
+        if alignment:
+            from japanese_alignment import alignment_options
+            request.update(alignment_options(alignment,runtime))
+        if song and not defer_lyrics:
+            self._set_readings(song,request,memory_only)
         if memory_only and not defer_lyrics:
             request.pop('lines');request['memory_lines']=True
         if self.skip_final:request.update(allow_partial=True,start_index=start_index)
@@ -61,17 +79,22 @@ class AudioJob:
             if start_index is not None:request['start_index']=start_index
         if defer_lyrics:
             request.pop('lines');request.update(allow_partial=True,defer_lyrics=True)
-        request['realtime']=all((Path(request['model'])/name).is_file() for name in MODEL_FILES)
+        if capture_window is not None:
+            request.update(capture_window=capture_window,row_kinds=row_kinds)
+        request['realtime']=(not playlist_analysis and cached_capture is None and capture_window is None
+                             and all((Path(request['model'])/name).is_file() for name in MODEL_FILES))
         if realtime_device in ('auto','cuda'):
             request['realtime_device']=realtime_device
             request['final_device']=realtime_device
-            accelerated=(runtime_dir() if frozen() else Path(base))/'models'/'whisper-medium'
-            if all((accelerated/name).is_file() for name in ('model.bin','config.json','tokenizer.json')):
+            accelerated=runtime/'models'/'whisper-medium'
+            if all((accelerated/name).is_file() for name in MODEL_FILES):
                 request['realtime_model']=str(accelerated)
-            final_model=(runtime_dir() if frozen() else Path(base))/'models'/'whisper-turbo'
+            final_model=runtime/'models'/'whisper-turbo'
             if all((final_model/name).is_file() for name in FINAL_GPU_MODEL_FILES):
                 request['final_model']=str(final_model)
             request['live_window_seconds']=8.0
+        if request.get('romaji_realtime'):
+            request['live_window_seconds']=max(6.0,request.get('live_window_seconds',0))
         request['final_cpu_percent']=20 if realtime_device in ('auto','cuda') else 1 if request['realtime'] else 3
         self.playback_key=playback.key
         atomic_json(folder / 'request.json', request)
@@ -83,15 +106,25 @@ class AudioJob:
         self.analysis_request_path=self.request_path
         self.request=request
         try:
+            if request['realtime'] and not realtime_enabled:
+                self.request_path.with_name(REALTIME_PAUSE_NAME).touch()
             self.process = self._launch([str(self.request_path)])
         except Exception:
             self.temp.cleanup()
             raise
         self.thread = threading.Thread(target=self._read, name='audio-job-results', daemon=True)
-        if request['realtime'] and not defer_lyrics:
-            self.realtime_thread=threading.Thread(target=self._read_realtime,name='audio-realtime-results',daemon=True)
-            self.realtime_thread.start()
+        with self.process_lock:
+            self._start_realtime_locked()
         self.thread.start()
+
+    def _set_readings(self,song,request,memory_only):
+        from japanese_alignment import DEFAULT_PROFILE
+        if not request.get('alignment_engine') or request.get('romaji_profile',DEFAULT_PROFILE)=='baseline':
+            return
+        readings=[line.reading or None for line in song.lines]
+        if any(readings):
+            if memory_only:self.memory_readings=readings
+            else:request['line_readings']=readings
 
     def bind_lyrics(self,song,memory_only=False,start_index=None,analysis_context=None):
         """Attach lyrics to the already running capture without losing its prefix."""
@@ -105,6 +138,7 @@ class AudioJob:
             lines=[line.original for line in song.lines]
             if memory_only:request['memory_lines']=True
             else:request['lines']=lines
+            self._set_readings(song,request,memory_only)
             if start_index is not None:request['start_index']=start_index
             # The capture child may still be reading its initial request. Keep
             # it immutable; only later model children receive the bound request.
@@ -114,10 +148,32 @@ class AudioJob:
             self.memory_lines=lines if memory_only else None
             self.analysis_request_path=bound_path
             self.waiting_for_lyrics=False
-            if request['realtime'] and not self.realtime_stop.is_set():
-                self.realtime_thread=threading.Thread(target=self._read_realtime,name='audio-realtime-results',daemon=True)
-                self.realtime_thread.start()
+            self._start_realtime_locked()
             return True
+
+    def _start_realtime_locked(self):
+        if (not self.realtime_enabled or not self.request['realtime'] or self.waiting_for_lyrics
+                or self.capture_complete or self.cancelled.is_set()
+                or self.realtime_thread and self.realtime_thread.is_alive()):
+            return
+        self.realtime_stop.clear()
+        self.realtime_process=None
+        self.realtime_thread=threading.Thread(target=self._read_realtime,name='audio-realtime-results',daemon=True)
+        self.realtime_thread.start()
+
+    def set_realtime_enabled(self, enabled):
+        with self.process_lock:
+            if self.realtime_enabled == enabled or not self.request['realtime'] or self.capture_complete or self.cancelled.is_set():
+                return
+            marker = self.request_path.with_name(REALTIME_PAUSE_NAME)
+            if enabled:
+                marker.unlink(missing_ok=True)
+            else:
+                marker.touch()
+                self.realtime_stop.set()
+            self.realtime_enabled=enabled
+            if enabled:self._start_realtime_locked()
+        if not enabled:self._stop_realtime()
 
     def _launch(self, arguments):
         memory_lines=self.memory_only and self.memory_lines is not None
@@ -131,7 +187,9 @@ class AudioJob:
             | getattr(subprocess, priority, 0))
         if memory_lines:
             try:
-                json.dump(self.memory_lines,process.stdin,ensure_ascii=False)
+                payload=({'lines':self.memory_lines,'line_readings':self.memory_readings}
+                         if self.memory_readings else self.memory_lines)
+                json.dump(payload,process.stdin,ensure_ascii=False)
                 process.stdin.close()
             except Exception:
                 process.terminate();process.wait()
@@ -258,10 +316,11 @@ class AudioJob:
                 if locked:REALTIME_LOCK.release()
 
     def _stop_realtime(self):
-        self.realtime_stop.set()
         with self.process_lock:
+            self.realtime_stop.set()
             if self.realtime_process and self.realtime_process.poll() is None:self.realtime_process.terminate()
-        if self.realtime_thread:self.realtime_thread.join(timeout=5)
+            thread=self.realtime_thread
+        if thread:thread.join(timeout=5)
 
     def cancel(self):
         self.cancelled.set()
@@ -276,6 +335,12 @@ class AudioJob:
         if not self.incremental or self.waiting_for_lyrics:
             self.cancel();return
         self.request_path.with_name('finish-capture').touch()
+
+    def release_retry_capture(self):
+        if self.capture_cache:
+            try:discard_retry_capture(self.capture_cache, self.playback_key, self.capture_duration)
+            except OSError:return False
+        return True
 
     def close(self):
         self.cancel()

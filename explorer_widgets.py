@@ -3,8 +3,11 @@ import math
 import tkinter as tk
 from tkinter import font, ttk
 
-from ui_theme import BG, PANEL, TEXT, MUTED, ACCENT
 from explorer_symbols import series_symbol
+
+
+BG, PANEL, TEXT, MUTED, ACCENT = '#f7f6f8', '#ffffff', '#27232c', '#605765', '#a82359'
+BORDER, HOVER, SELECTED = '#ddd6df', '#f4eff4', '#fbe4ee'
 
 
 class CatalogList(tk.Frame):
@@ -16,7 +19,7 @@ class CatalogList(tk.Frame):
     row_height = 92
 
     def __init__(self, parent, columns, empty_text='검색 결과가 없습니다.'):
-        super().__init__(parent, bg=BG, highlightthickness=1, highlightbackground='#2c3849')
+        super().__init__(parent, bg=BG, highlightthickness=1, highlightbackground=BORDER)
         self.columns = tuple(columns)
         self.empty_text = empty_text
         self._rows, self._order = {}, []
@@ -27,7 +30,7 @@ class CatalogList(tk.Frame):
         self._link_click = False
         self.canvas = tk.Canvas(self, bg=PANEL, highlightthickness=0, takefocus=True,
                                 cursor='arrow', yscrollincrement=1)
-        self.scrollbar = ttk.Scrollbar(self, orient='vertical', command=self.yview)
+        self.scrollbar = ttk.Scrollbar(self, orient='vertical', command=self.yview, style='Explorer.Vertical.TScrollbar')
         self.scrollbar.pack(side='right', fill='y')
         self.canvas.pack(side='left', fill='both', expand=True)
         self.canvas.configure(yscrollcommand=self._scrolled)
@@ -228,7 +231,7 @@ class CatalogList(tk.Frame):
             identity = self._order[index];row = self._rows[identity]
             y = index*self.row_height
             selected = identity == self._selected
-            background = '#263b43' if selected else '#253041' if identity == self._hover else PANEL
+            background = SELECTED if selected else HOVER if identity == self._hover else PANEL
             self.canvas.create_rectangle(0, y, width, y+self.row_height, fill=background,
                                          outline='', tags='rows')
             if selected:
@@ -246,7 +249,7 @@ class CatalogList(tk.Frame):
                        self.title_link_font if callable(title_command) else self.title_font,
                        extra_tags=('row_title',), command=title_command)
             if badge:
-                color = ACCENT if 'Spotify' in badge else '#ffc18f' if '제한' in badge else MUTED
+                color = ACCENT if 'Spotify' in badge else '#8b471f' if '제한' in badge else MUTED
                 self._text(width-badge_width, y+11, badge, badge_width-10, self.small_font, color)
             self._text(16, y+33, row['subtitle'], width-32, self.small_font, MUTED)
             people = row['preview']
@@ -278,7 +281,7 @@ class CatalogList(tk.Frame):
                                                 fill=dot, outline='', tags=('rows', 'performer_color'))
                     self._text(x, y+71, f'+{remaining}명', more_width, self.small_font, MUTED)
             self.canvas.create_line(14, y+self.row_height-1, width-14, y+self.row_height-1,
-                                    fill='#2c3849', tags='rows')
+                                    fill=BORDER, tags='rows')
         if self.canvas.focus_get() is self.canvas:
             self.configure(highlightbackground=ACCENT)
-        else:self.configure(highlightbackground='#2c3849')
+        else:self.configure(highlightbackground=BORDER)

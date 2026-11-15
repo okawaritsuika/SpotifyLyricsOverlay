@@ -8,7 +8,7 @@ import webbrowser
 
 from artist_metadata import playback_request, request_identity, validated_track
 from background_lyrics import CatalogSearchError
-from spotify_catalog import SpotifyCatalogError, parse_track_id
+from spotify_catalog import SpotifyCatalogError, parse_playlist_id, parse_track_id
 from spotify_controls import TrackPlayRequest
 
 
@@ -88,6 +88,17 @@ class DesktopSpotify:
         track_id = parse_track_id(track.get('id'))
         if not track_id:raise ValueError('연결할 Spotify 곡 링크가 올바르지 않습니다.')
         self._open(track_id)
+
+    @staticmethod
+    def open_playlist(value):
+        playlist_id = parse_playlist_id(value)
+        if not playlist_id:
+            raise ValueError('Spotify 재생목록 공유 링크를 입력해 주세요.')
+        try:
+            os.startfile('spotify:playlist:' + playlist_id)
+        except (OSError, AttributeError) as error:
+            raise ValueError('Spotify 데스크톱 앱에서 재생목록을 열지 못했습니다.') from error
+        return playlist_id
 
     def play(self, track, cancel=None, timeout=8):
         """Open and invoke the requested row; verify a new Windows playing sample.

@@ -56,6 +56,14 @@ class InstallerTests(unittest.TestCase):
             limits.assert_called_once_with(cpu_percent=2,memory_mb=1024)
             self.assertEqual(call.call_args.args[0][-4:],['-File',str(self.base/'setup-audio.ps1'),'-Python','C:/test path/python.exe'])
 
+    def test_medium_download_requests_the_validated_revision(self):
+        from audio_worker import install_model
+        with patch('huggingface_hub.snapshot_download') as download:
+            install_model(self.base/'whisper-medium','medium')
+        self.assertEqual(download.call_args.args,('Systran/faster-whisper-medium',))
+        self.assertEqual(download.call_args.kwargs['revision'],'7832330bcea9a8d5fd6d6637c49fe5d256e98277')
+        self.assertEqual(download.call_args.kwargs['local_dir'],str(self.base/'whisper-medium'))
+
     @unittest.skipUnless(os.name=='nt','Windows installer protocol')
     def test_actual_powershell_worker_passes_unicode_and_spaced_arguments_without_install(self):
         script="param([string]$Python)\n[Console]::OutputEncoding = New-Object System.Text.UTF8Encoding\nWrite-Output '1/3 설치 통신 확인'\nWrite-Output $Python\n"
@@ -89,7 +97,7 @@ class InstallerUITests(unittest.TestCase):
 
     def test_installed_state_blocks_duplicate_download_and_minimum_window_fits(self):
         self.app.open_audio_install();dialog=self.app.audio_install_dialog
-        with patch('audio_install.ready'):
+        with patch('audio_install.ready'),patch('audio_install.gpu_upgrade_needed',return_value=False):
             dialog.refresh();self.assertEqual(str(dialog.download['state']),'disabled')
         dialog.window.geometry('520x360+20+20');self.root.update();self.root.update()
         for widget in (dialog.download,dialog.cancel,dialog.done,dialog.log):
@@ -97,6 +105,13 @@ class InstallerUITests(unittest.TestCase):
             self.assertLessEqual(widget.winfo_rootx()+widget.winfo_width(),dialog.window.winfo_rootx()+dialog.window.winfo_width())
             self.assertLessEqual(widget.winfo_rooty()+widget.winfo_height(),dialog.window.winfo_rooty()+dialog.window.winfo_height())
         self.assertGreater(dialog.log.winfo_height(),40)
+
+    def test_existing_cpu_install_can_add_recommended_gpu_model(self):
+        self.app.open_audio_install();dialog=self.app.audio_install_dialog
+        with patch('audio_install.ready'),patch('audio_install.gpu_upgrade_needed',return_value=True):
+            dialog.refresh()
+        self.assertEqual(str(dialog.download['state']),'normal')
+        self.assertIn('GPU 실시간 분석용',dialog.status.cget('text'))
 
     def test_compaction_failure_can_retry_even_when_model_is_already_present(self):
         self.app.open_audio_install();dialog=self.app.audio_install_dialog

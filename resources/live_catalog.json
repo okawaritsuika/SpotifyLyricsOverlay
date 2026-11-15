@@ -1,18 +1,18 @@
 {
   "schema_version": 1,
   "coverage": "partial",
-  "verified_at": "2026-10-02T13:30:27+00:00",
-  "generated_at": "2026-10-02T13:30:27+00:00",
+  "verified_at": "2026-11-14T14:22:35+00:00",
+  "generated_at": "2026-11-14T14:22:35+00:00",
   "note": "아이마스 DB의 2013년 이후 수록 공연과 공식 자료를 함께 정리했습니다. 출처에 없는 공연·미확인 항목은 포함되지 않으며, 전체 공연 이력은 아닙니다.",
   "collection_report": {
-    "indexed_pages": 342,
-    "successful_pages": 335,
+    "indexed_pages": 344,
+    "successful_pages": 337,
     "failed_pages": 4,
-    "events": 436,
+    "events": 445,
     "non_event_pages": 3,
-    "song_rows": 10105,
-    "network_requests": 0,
-    "cache_hits": 340,
+    "song_rows": 10164,
+    "network_requests": 342,
+    "cache_hits": 0,
     "index_urls": [
       "https://imas-db.jp/song/event/shinycolors_283production_msp.html",
       "https://imas-db.jp/song/event/million_14th_day1.html",
@@ -22,6 +22,8 @@
       "https://imas-db.jp/song/event/gakuen_shirube_fukui.html",
       "https://imas-db.jp/song/event/gakuen_shirube_fukuoka.html",
       "https://imas-db.jp/song/event/gakuen_shirube_iwate.html",
+      "https://imas-db.jp/song/event/gakuen_shirube_final_day1.html",
+      "https://imas-db.jp/song/event/gakuen_shirube_final_day2.html",
       "https://imas-db.jp/song/event/cinderella_cg_ptb.html",
       "https://imas-db.jp/song/event/765as_dualtwin_amimam.html",
       "https://imas-db.jp/song/event/765as_dualtwin_azurit.html",
@@ -384,6 +386,8 @@
       "https://imas-db.jp/song/event/gakuen_shirube_fukui.html",
       "https://imas-db.jp/song/event/gakuen_shirube_fukuoka.html",
       "https://imas-db.jp/song/event/gakuen_shirube_iwate.html",
+      "https://imas-db.jp/song/event/gakuen_shirube_final_day1.html",
+      "https://imas-db.jp/song/event/gakuen_shirube_final_day2.html",
       "https://imas-db.jp/song/event/cinderella_cg_ptb.html",
       "https://imas-db.jp/song/event/765as_dualtwin_amimam.html",
       "https://imas-db.jp/song/event/765as_dualtwin_azurit.html",
@@ -727,9 +731,9 @@
       }
     ],
     "index_url": "https://imas-db.jp/song/event/",
-    "checked_at": "2026-10-02T13:30:29+00:00",
+    "checked_at": "2026-11-14T14:22:35+00:00",
     "source_kind": "fan_database",
-    "setlist_entries": 10279,
+    "setlist_entries": 10384,
     "official_gap_supplement": {
       "events": 7,
       "setlist_entries": 174,
@@ -745,9 +749,2225 @@
         "https://www.lantis.jp/imas/release_LACA-9398.html"
       ],
       "verified_at": "2026-10-02T13:05:18+00:00"
+    },
+    "recent_source_supplement": {
+      "checked_at": "2026-11-14T14:22:35+00:00",
+      "events": 7,
+      "setlist_entries": 46,
+      "source_urls": [
+        "https://asobistage.asobistore.jp/event/valiv_bd2026_letora/ticket",
+        "https://idolmaster-official.jp/news/01_19841",
+        "https://idolmaster-official.jp/news/01_20133",
+        "https://idolmaster-official.jp/news/01_20193",
+        "https://idolmaster-official.jp/news/01_20323",
+        "https://imas-history.com/entry/2026/10/20/084705",
+        "https://music765plus.com/ヴイアライヴ_歌関連活動_876_2026",
+        "https://pylonport.bandainamcomusiclive.co.jp/news/936",
+        "https://shinkaifes.pjblue.com/",
+        "https://www.zan-live.com/ja/live/detail/11035"
+      ]
     }
   },
   "events": [
+    {
+      "id": "valiv-letora-birthday-2026",
+      "title": "レトラ BIRTHDAY ONLINE LIVE 2026",
+      "date": "2026-11-11",
+      "series": [
+        "other",
+        "cinderella",
+        "million",
+        "shiny"
+      ],
+      "series_names": [
+        "vα-liv",
+        "シンデレラガールズ",
+        "ミリオンライブ！",
+        "シャイニーカラーズ"
+      ],
+      "brand_ids": [
+        "10",
+        "4",
+        "5",
+        "8"
+      ],
+      "source_url": "https://idolmaster-official.jp/news/01_20323",
+      "source_name": "아이돌마스터 공식 포털 · 공연 세트리스트",
+      "source_kind": "official",
+      "date_source_url": "https://asobistage.asobistore.jp/event/valiv_bd2026_letora/ticket",
+      "setlist_source_url": "https://idolmaster-official.jp/news/01_20323",
+      "date_basis": "official_event_announcement",
+      "retrieved_at": "2026-11-14T14:22:35+00:00",
+      "setlist_coverage": "official_performance_setlist",
+      "venue": "ASOBI STAGE",
+      "songs": [
+        {
+          "title": "Monochromatic",
+          "artists": [
+            "レトラ"
+          ],
+          "series": [
+            "other"
+          ],
+          "series_names": [
+            "vα-liv"
+          ],
+          "brand_ids": [
+            "10"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_number": "1",
+          "artist_basis": "official_performance_credit"
+        },
+        {
+          "title": "Wandering Dream Chaser",
+          "artists": [
+            "レトラ",
+            "灯里愛夏",
+            "上水流宇宙"
+          ],
+          "series": [
+            "shiny"
+          ],
+          "series_names": [
+            "シャイニーカラーズ"
+          ],
+          "brand_ids": [
+            "8"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_number": "2",
+          "artist_basis": "official_performance_credit"
+        },
+        {
+          "title": "Glass",
+          "artists": [
+            "レトラ",
+            "灯里愛夏",
+            "上水流宇宙"
+          ],
+          "series": [
+            "other"
+          ],
+          "series_names": [
+            "vα-liv"
+          ],
+          "brand_ids": [
+            "10"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_number": "3",
+          "artist_basis": "official_performance_credit"
+        },
+        {
+          "title": "Breaker",
+          "artists": [
+            "レトラ"
+          ],
+          "series": [
+            "other"
+          ],
+          "series_names": [
+            "vα-liv"
+          ],
+          "brand_ids": [
+            "10"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_number": "4",
+          "artist_basis": "official_performance_credit"
+        },
+        {
+          "title": "Trancing Pulse",
+          "artists": [
+            "レトラ"
+          ],
+          "series": [
+            "cinderella"
+          ],
+          "series_names": [
+            "シンデレラガールズ"
+          ],
+          "brand_ids": [
+            "4"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_number": "5",
+          "artist_basis": "official_performance_credit"
+        },
+        {
+          "title": "スタートリップ",
+          "artists": [
+            "レトラ",
+            "ジュリア"
+          ],
+          "series": [
+            "million"
+          ],
+          "series_names": [
+            "ミリオンライブ！"
+          ],
+          "brand_ids": [
+            "5"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_number": "6",
+          "artist_basis": "official_performance_credit"
+        },
+        {
+          "title": "思い出の花束、二度目の恋。",
+          "artists": [
+            "レトラ"
+          ],
+          "series": [
+            "other"
+          ],
+          "series_names": [
+            "vα-liv"
+          ],
+          "brand_ids": [
+            "10"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_number": "7",
+          "artist_basis": "official_performance_credit"
+        },
+        {
+          "title": "理論武装して",
+          "artists": [
+            "レトラ"
+          ],
+          "series": [
+            "other"
+          ],
+          "series_names": [
+            "vα-liv"
+          ],
+          "brand_ids": [
+            "10"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_number": "8",
+          "artist_basis": "official_performance_credit"
+        },
+        {
+          "title": "群青イニシエーション",
+          "artists": [
+            "レトラ"
+          ],
+          "series": [
+            "other"
+          ],
+          "series_names": [
+            "vα-liv"
+          ],
+          "brand_ids": [
+            "10"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_title": "群青イニシエーション (Obrigada Acoustic Ver.)",
+          "performance_number": "9",
+          "artist_basis": "official_performance_credit"
+        }
+      ],
+      "recording_version_unverified": true,
+      "official_sources": []
+    },
+    {
+      "id": "imasdb-72006e30af7f25dc9ed3",
+      "title": "学園アイドルマスター LIVE TOUR -標- ファイナル公演 [DAY2]",
+      "date": "2026-11-08",
+      "brand_ids": [
+        "11"
+      ],
+      "series": [
+        "gakuen"
+      ],
+      "series_names": [
+        "学園アイドルマスター"
+      ],
+      "source_url": "https://imas-db.jp/song/event/gakuen_shirube_final_day2.html",
+      "source_name": "アイマスDB (비공식 팬 데이터베이스)",
+      "source_kind": "fan_database",
+      "source_policy_url": "https://info.imas-db.jp/about/",
+      "setlist_source_url": "https://imas-db.jp/song/event/gakuen_shirube_final_day2.html",
+      "date_source_url": "https://idolmaster-official.jp/live_event/gkmas_livetour_shirube/information/final.php",
+      "date_basis": "official_schedule_and_source_table",
+      "retrieved_at": "2026-11-14T14:16:53.862267+00:00",
+      "setlist_coverage": "source_table",
+      "songs": [
+        {
+          "title": "め",
+          "performance_number": "1",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "川村玲奈"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "ミラクルナナウ(ﾟ∀ﾟ)！",
+          "performance_number": "2",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "七瀬つむぎ , 花岩香奈 , 薄井友里 , 松田彩音"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "ORDER FAKE",
+          "performance_number": "3",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "小鹿なお"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "Roar",
+          "performance_number": "4",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "陽高真白"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "Howling over the World",
+          "performance_number": "5",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "全員 (※ 飯田ヒカル を除く)"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "ハッピーミルフィーユ",
+          "performance_number": "6",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "長月あおい , 小鹿なお , 川村玲奈 , 天音ゆかり"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "36℃ U・B・U",
+          "performance_number": "7",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "薄井友里"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "ワタシカワイイアヒルノコ",
+          "performance_number": "8",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "伊藤舞音"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "Agitato",
+          "performance_number": "9",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "七瀬つむぎ , 薄井友里 , 春咲暖"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "雨上がりのアイリス",
+          "performance_number": "10",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "Re;IRIS ( 長月あおい , 小鹿なお , 飯田ヒカル )"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "L'Espoir",
+          "performance_number": "11",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "七瀬つむぎ"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "Ride on Beat",
+          "performance_number": "12",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "湊みや"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "濡羽色の薄明",
+          "performance_number": "13",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "performance_title": "濡羽色の薄明 (新曲)",
+          "artists": [
+            "天音ゆかり"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "「ねえ、言っちゃうよ。」",
+          "performance_number": "14",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "小鹿なお , 春咲暖 , 陽高真白"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "ときめきエモーション",
+          "performance_number": "15",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "REVERSI ( 花岩香奈 , 湊みや )"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "FANTASTIC GATHERING!",
+          "performance_number": "16",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "performance_title": "FANTASTIC GATHERING! (新曲)",
+          "artists": [
+            "飯田ヒカル , 陽高真白"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "クライアイ",
+          "performance_number": "17",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "天音ゆかり"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "海奏ララバイ",
+          "performance_number": "18",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "春咲暖"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "Fighting My Way",
+          "performance_number": "19",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "長月あおい"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "グースーピー",
+          "performance_number": "20",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "松田彩音"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "仮装狂騒曲",
+          "performance_number": "21",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "伊藤舞音 , 湊みや , 春咲暖 , 陽高真白"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "アンバランス",
+          "performance_number": "22",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "乖轟 ( 天音ゆかり , 七瀬つむぎ )"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "クロスファイア",
+          "performance_number": "23",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "performance_title": "クロスファイア (新曲)",
+          "artists": [
+            "長月あおい , 松田彩音"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "白線",
+          "performance_number": "24",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "花岩香奈"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "古今東西ちょちょいのちょい",
+          "performance_number": "25",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "伊藤舞音 , 川村玲奈 , 薄井友里"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "修楽旅行",
+          "performance_number": "26",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "全員 (※ 飯田ヒカル を除く)"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "初",
+          "performance_number": "27",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "performance_title": "初 (Orchestra ver.)",
+          "artists": [
+            "全員 (※ 飯田ヒカル を除く)"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "ガラクタロード",
+          "performance_number": "28",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "全員 (※ 飯田ヒカル を除く)"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "標",
+          "performance_number": "29",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "全員 / 会場のプロデューサー"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        }
+      ],
+      "recording_version_unverified": true,
+      "source_table_index": 1,
+      "source_table_label": "セットリスト",
+      "section_labels": [],
+      "excluded_non_song_rows": 0,
+      "setlist_notes": [
+        "(*) 27-29曲目はアンコール"
+      ],
+      "source_date_text": [
+        "2026/11/08(日) Kアリーナ横浜, 開場15:30/開演17:00 詳細"
+      ],
+      "venue": "Kアリーナ横浜",
+      "official_sources": [
+        {
+          "name": "학원 아이돌마스터 공식 공연 일정",
+          "url": "https://idolmaster-official.jp/live_event/gkmas_livetour_shirube/information/final.php"
+        },
+        {
+          "name": "학원 아이돌마스터 공식 세트리스트 플레이리스트",
+          "url": "https://lnk.to/2XyswI"
+        }
+      ]
+    },
+    {
+      "id": "imasdb-c561f5d0f1922cdc7337",
+      "title": "学園アイドルマスター LIVE TOUR -標- ファイナル公演 [DAY1]",
+      "date": "2026-11-07",
+      "brand_ids": [
+        "11"
+      ],
+      "series": [
+        "gakuen"
+      ],
+      "series_names": [
+        "学園アイドルマスター"
+      ],
+      "source_url": "https://imas-db.jp/song/event/gakuen_shirube_final_day1.html",
+      "source_name": "アイマスDB (비공식 팬 데이터베이스)",
+      "source_kind": "fan_database",
+      "source_policy_url": "https://info.imas-db.jp/about/",
+      "setlist_source_url": "https://imas-db.jp/song/event/gakuen_shirube_final_day1.html",
+      "date_source_url": "https://idolmaster-official.jp/live_event/gkmas_livetour_shirube/information/final.php",
+      "date_basis": "official_schedule_and_source_table",
+      "retrieved_at": "2026-11-14T14:16:52.839908+00:00",
+      "setlist_coverage": "source_table",
+      "songs": [
+        {
+          "title": "標",
+          "performance_number": "1",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "performance_title": "標 (Piano ver.)",
+          "artists": [
+            "全員 / 会場のプロデューサー"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "みちなるひろがる",
+          "performance_number": "2",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "ゆめぱしー ( 伊藤舞音 , 川村玲奈 )"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "神かわいい",
+          "performance_number": "3",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "飯田ヒカル"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "クライアイ",
+          "performance_number": "4",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "天音ゆかり"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "ENDLESS DANCE",
+          "performance_number": "5",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "全員"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "nazonazo",
+          "performance_number": "6",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "長月あおい"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "春と光",
+          "performance_number": "7",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "松田彩音"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "サンフェーデッド",
+          "performance_number": "8",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "川村玲奈"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "ツキノカメ",
+          "performance_number": "9",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "春咲暖"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "Luna say maybe",
+          "performance_number": "10",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "小鹿なお"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "キミとセミブルー",
+          "performance_number": "11",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "飯田ヒカル , 伊藤舞音 , 湊みや"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "Feel Jewel Dream",
+          "performance_number": "12",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "七瀬つむぎ"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "「ねえ、言っちゃうよ。」",
+          "performance_number": "13",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "花岩香奈 , 湊みや , 川村玲奈"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "重なる夜空の痕跡に",
+          "performance_number": "14",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "薄井友里"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "空と約束",
+          "performance_number": "15",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "伊藤舞音"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "Star-mine",
+          "performance_number": "16",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "Begrazia ( 松田彩音 , 陽高真白 , 春咲暖 )"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "Private Glitter",
+          "performance_number": "17",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "湊みや"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "いつかのわたし",
+          "performance_number": "18",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "花岩香奈"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "SUGAR FLAVOR",
+          "performance_number": "19",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "RippleSign ( 七瀬つむぎ , 薄井友里 )"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "Cosmetic",
+          "performance_number": "20",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "陽高真白"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "Agitato",
+          "performance_number": "21",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "長月あおい , 花岩香奈 , 松田彩音"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "慟哭のコンチェルト",
+          "performance_number": "22",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "performance_title": "慟哭のコンチェルト (新曲)",
+          "artists": [
+            "小鹿なお , 春咲暖"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "ミラクルナナウ(ﾟ∀ﾟ)！",
+          "performance_number": "23",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "七瀬つむぎ , 花岩香奈 , 薄井友里 , 松田彩音"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "ハッピーミルフィーユ",
+          "performance_number": "24",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "長月あおい , 小鹿なお , 飯田ヒカル , 川村玲奈 , 天音ゆかり"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "仮装狂騒曲",
+          "performance_number": "25",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "伊藤舞音 , 湊みや , 春咲暖 , 陽高真白"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "修楽旅行",
+          "performance_number": "26",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "全員"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "ガラクタロード",
+          "performance_number": "27",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "全員"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "アンバランス",
+          "performance_number": "28",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "performance_title": "アンバランス (新曲)",
+          "artists": [
+            "乖轟 ( 天音ゆかり , 七瀬つむぎ )"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "Campus mode!!",
+          "performance_number": "29",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "artists": [
+            "全員"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        },
+        {
+          "title": "初",
+          "performance_number": "30",
+          "recording_version_unverified": true,
+          "series_basis": "event_section_brand",
+          "brand_ids": [
+            "11"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "performance_title": "初 (Orchestra ver.)",
+          "artists": [
+            "全員"
+          ],
+          "artist_basis": "fan_database_performance_credit"
+        }
+      ],
+      "recording_version_unverified": true,
+      "source_table_index": 1,
+      "source_table_label": "セットリスト",
+      "section_labels": [],
+      "excluded_non_song_rows": 0,
+      "setlist_notes": [
+        "(*) 28-30曲目はアンコール"
+      ],
+      "source_date_text": [
+        "2026/11/07(土) Kアリーナ横浜, 開場15:30/開演17:00 詳細"
+      ],
+      "venue": "Kアリーナ横浜",
+      "official_sources": [
+        {
+          "name": "학원 아이돌마스터 공식 공연 일정",
+          "url": "https://idolmaster-official.jp/live_event/gkmas_livetour_shirube/information/final.php"
+        },
+        {
+          "name": "학원 아이돌마스터 공식 세트리스트 플레이리스트",
+          "url": "https://lnk.to/ryPrMboo"
+        }
+      ]
+    },
+    {
+      "id": "765-miki-comic-frontier-2026",
+      "title": "MIKI HOSHII SOLO SHOWCASE「THE FUTURE SPOTLIGHT」in Comic Frontier",
+      "date": "2026-11-01",
+      "series": [
+        "765",
+        "million"
+      ],
+      "series_names": [
+        "765PRO ALLSTARS",
+        "ミリオンライブ！"
+      ],
+      "brand_ids": [
+        "1",
+        "5"
+      ],
+      "source_url": "https://imas-history.com/entry/2026/10/20/084705",
+      "source_name": "HISTORY OF IM@S WORLD · 비공식 공연 기록",
+      "source_kind": "fan_database",
+      "date_source_url": "https://idolmaster-official.jp/news/01_20133",
+      "setlist_source_url": "https://imas-history.com/entry/2026/10/20/084705",
+      "date_basis": "official_event_announcement",
+      "retrieved_at": "2026-11-14T14:22:35+00:00",
+      "setlist_coverage": "reported_performance_setlist",
+      "venue": "Indonesia Convention Exhibition (ICE) BSD",
+      "songs": [
+        {
+          "title": "relations",
+          "artists": [
+            "星井美希"
+          ],
+          "series": [
+            "765"
+          ],
+          "series_names": [
+            "765PRO ALLSTARS"
+          ],
+          "brand_ids": [
+            "1"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_number": "1",
+          "artist_basis": "reported_performance_credit"
+        },
+        {
+          "title": "マリオネットの心",
+          "artists": [
+            "星井美希"
+          ],
+          "series": [
+            "765",
+            "million"
+          ],
+          "series_names": [
+            "765PRO ALLSTARS",
+            "ミリオンライブ！"
+          ],
+          "brand_ids": [
+            "1",
+            "5"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_number": "2",
+          "artist_basis": "reported_performance_credit"
+        },
+        {
+          "title": "Nostalgia",
+          "artists": [
+            "星井美希"
+          ],
+          "series": [
+            "765"
+          ],
+          "series_names": [
+            "765PRO ALLSTARS"
+          ],
+          "brand_ids": [
+            "1"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_number": "3",
+          "artist_basis": "reported_performance_credit"
+        },
+        {
+          "title": "追憶のサンドグラス",
+          "artists": [
+            "星井美希"
+          ],
+          "series": [
+            "765",
+            "million"
+          ],
+          "series_names": [
+            "765PRO ALLSTARS",
+            "ミリオンライブ！"
+          ],
+          "brand_ids": [
+            "1",
+            "5"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_number": "4",
+          "artist_basis": "reported_performance_credit"
+        },
+        {
+          "title": "Marionetteは眠らない",
+          "artists": [
+            "星井美希"
+          ],
+          "series": [
+            "million"
+          ],
+          "series_names": [
+            "ミリオンライブ！"
+          ],
+          "brand_ids": [
+            "5"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_number": "5",
+          "artist_basis": "reported_performance_credit"
+        },
+        {
+          "title": "ダンス・ダンス・ダンス",
+          "artists": [
+            "星井美希"
+          ],
+          "series": [
+            "765",
+            "million"
+          ],
+          "series_names": [
+            "765PRO ALLSTARS",
+            "ミリオンライブ！"
+          ],
+          "brand_ids": [
+            "1",
+            "5"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_number": "6",
+          "artist_basis": "reported_performance_credit"
+        },
+        {
+          "title": "ショッキングな彼",
+          "artists": [
+            "星井美希"
+          ],
+          "series": [
+            "765"
+          ],
+          "series_names": [
+            "765PRO ALLSTARS"
+          ],
+          "brand_ids": [
+            "1"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_number": "7",
+          "artist_basis": "reported_performance_credit"
+        },
+        {
+          "title": "Day of the future",
+          "artists": [
+            "星井美希"
+          ],
+          "series": [
+            "765"
+          ],
+          "series_names": [
+            "765PRO ALLSTARS"
+          ],
+          "brand_ids": [
+            "1"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_number": "8",
+          "artist_basis": "reported_performance_credit"
+        }
+      ],
+      "recording_version_unverified": true,
+      "official_sources": [
+        {
+          "name": "아이돌마스터 공식 포털 · 공연 공지",
+          "url": "https://idolmaster-official.jp/news/01_20133"
+        }
+      ],
+      "note": "공연 일정은 공식 포털, 8곡의 공연 순서는 공개 공연 기록과 현장 후기를 대조했습니다."
+    },
+    {
+      "id": "valiv-manaka-birthday-2026",
+      "title": "灯里愛夏 BIRTHDAY ONLINE LIVE 2026 延期公演",
+      "date": "2026-10-28",
+      "series": [
+        "other",
+        "cinderella"
+      ],
+      "series_names": [
+        "vα-liv",
+        "シンデレラガールズ"
+      ],
+      "brand_ids": [
+        "10",
+        "4"
+      ],
+      "source_url": "https://idolmaster-official.jp/news/01_20193",
+      "source_name": "아이돌마스터 공식 포털 · 공연 세트리스트",
+      "source_kind": "official",
+      "date_source_url": "https://www.zan-live.com/ja/live/detail/11035",
+      "setlist_source_url": "https://idolmaster-official.jp/news/01_20193",
+      "date_basis": "official_event_announcement",
+      "retrieved_at": "2026-11-14T14:22:35+00:00",
+      "setlist_coverage": "official_performance_setlist",
+      "venue": "Z-aN",
+      "songs": [
+        {
+          "title": "ともすれば、(中略)アイドル",
+          "artists": [
+            "灯里愛夏"
+          ],
+          "series": [
+            "other"
+          ],
+          "series_names": [
+            "vα-liv"
+          ],
+          "brand_ids": [
+            "10"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_number": "1",
+          "artist_basis": "official_performance_credit"
+        },
+        {
+          "title": "虹の王国の物語～エトワールを目指して～",
+          "artists": [
+            "灯里愛夏"
+          ],
+          "series": [
+            "other"
+          ],
+          "series_names": [
+            "vα-liv"
+          ],
+          "brand_ids": [
+            "10"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_number": "2",
+          "artist_basis": "official_performance_credit"
+        },
+        {
+          "title": "モーレツ☆世直しギルティ！",
+          "artists": [
+            "灯里愛夏",
+            "上水流宇宙",
+            "レトラ"
+          ],
+          "series": [
+            "cinderella"
+          ],
+          "series_names": [
+            "シンデレラガールズ"
+          ],
+          "brand_ids": [
+            "4"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "song_title": "モーレツ★世直しギルティ!",
+          "performance_number": "3",
+          "artist_basis": "official_performance_credit"
+        },
+        {
+          "title": "エキセントリック・ラブ",
+          "artists": [
+            "灯里愛夏"
+          ],
+          "series": [
+            "other"
+          ],
+          "series_names": [
+            "vα-liv"
+          ],
+          "brand_ids": [
+            "10"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_number": "4",
+          "artist_basis": "official_performance_credit"
+        },
+        {
+          "title": "楽園",
+          "artists": [
+            "灯里愛夏",
+            "関裕美"
+          ],
+          "series": [
+            "cinderella"
+          ],
+          "series_names": [
+            "シンデレラガールズ"
+          ],
+          "brand_ids": [
+            "4"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_number": "5",
+          "artist_basis": "official_performance_credit"
+        },
+        {
+          "title": "はらぺこ泣き虫",
+          "artists": [
+            "灯里愛夏"
+          ],
+          "series": [
+            "other"
+          ],
+          "series_names": [
+            "vα-liv"
+          ],
+          "brand_ids": [
+            "10"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_number": "6",
+          "artist_basis": "official_performance_credit"
+        },
+        {
+          "title": "サイン・オブ・ホープ",
+          "artists": [
+            "灯里愛夏"
+          ],
+          "series": [
+            "other"
+          ],
+          "series_names": [
+            "vα-liv"
+          ],
+          "brand_ids": [
+            "10"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_number": "7",
+          "artist_basis": "official_performance_credit"
+        },
+        {
+          "title": "あっちこっちプリンセス",
+          "artists": [
+            "灯里愛夏"
+          ],
+          "series": [
+            "other"
+          ],
+          "series_names": [
+            "vα-liv"
+          ],
+          "brand_ids": [
+            "10"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_number": "8",
+          "artist_basis": "official_performance_credit"
+        }
+      ],
+      "recording_version_unverified": true,
+      "official_sources": []
+    },
+    {
+      "id": "million-special-solo-records-2026",
+      "title": "THE IDOLM@STER MILLION LIVE! SPECIAL SOLO RECORDS ギネス世界記録達成記念イベント",
+      "date": "2026-10-25",
+      "series": [
+        "million"
+      ],
+      "series_names": [
+        "ミリオンライブ！"
+      ],
+      "brand_ids": [
+        "5"
+      ],
+      "source_url": "https://pylonport.bandainamcomusiclive.co.jp/news/936",
+      "source_name": "반다이남코 뮤직 라이브 · 공식 공연 리포트",
+      "source_kind": "official",
+      "date_source_url": "https://pylonport.bandainamcomusiclive.co.jp/news/936",
+      "setlist_source_url": "https://pylonport.bandainamcomusiclive.co.jp/news/936",
+      "date_basis": "official_event_announcement",
+      "retrieved_at": "2026-11-14T14:22:35+00:00",
+      "setlist_coverage": "official_performance_setlist",
+      "venue": "ダンスホール新世紀",
+      "songs": [
+        {
+          "title": "Brand New Theater!",
+          "artists": [
+            "中村繪里子",
+            "若林直美",
+            "山崎はるか",
+            "諏訪彩花",
+            "山口立花子",
+            "末柄里恵"
+          ],
+          "series": [
+            "million"
+          ],
+          "series_names": [
+            "ミリオンライブ！"
+          ],
+          "brand_ids": [
+            "5"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_number": "1",
+          "artist_basis": "official_performance_credit"
+        },
+        {
+          "title": "夢にかけるRainbow",
+          "artists": [
+            "中村繪里子",
+            "若林直美",
+            "山崎はるか",
+            "諏訪彩花",
+            "山口立花子",
+            "末柄里恵"
+          ],
+          "series": [
+            "million"
+          ],
+          "series_names": [
+            "ミリオンライブ！"
+          ],
+          "brand_ids": [
+            "5"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_number": "2",
+          "artist_basis": "official_performance_credit"
+        },
+        {
+          "title": "Crossing!",
+          "artists": [
+            "中村繪里子",
+            "若林直美",
+            "山崎はるか",
+            "諏訪彩花",
+            "山口立花子",
+            "末柄里恵"
+          ],
+          "series": [
+            "million"
+          ],
+          "series_names": [
+            "ミリオンライブ！"
+          ],
+          "brand_ids": [
+            "5"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_number": "3",
+          "artist_basis": "official_performance_credit"
+        }
+      ],
+      "recording_version_unverified": true,
+      "official_sources": []
+    },
+    {
+      "id": "shinkaifes-2026-day2-valiv",
+      "title": "深海フェス2026「超・深海」DAY2 — vα-liv",
+      "date": "2026-10-18",
+      "series": [
+        "other",
+        "gakuen"
+      ],
+      "series_names": [
+        "vα-liv",
+        "学園アイドルマスター"
+      ],
+      "brand_ids": [
+        "10",
+        "11"
+      ],
+      "source_url": "https://music765plus.com/ヴイアライヴ_歌関連活動_876_2026",
+      "source_name": "アイドルマスター楽曲メモ · 출연자 공개 자료 기록",
+      "source_kind": "fan_database",
+      "date_source_url": "https://shinkaifes.pjblue.com/",
+      "setlist_source_url": "https://music765plus.com/ヴイアライヴ_歌関連活動_876_2026",
+      "date_basis": "official_event_announcement",
+      "retrieved_at": "2026-11-14T14:22:35+00:00",
+      "setlist_coverage": "reported_idol_performance_setlist",
+      "venue": "渋谷ストリーム ホール 6F (GRAND STAGE)",
+      "songs": [
+        {
+          "title": "あっちこっちプリンセス",
+          "artists": [
+            "灯里愛夏"
+          ],
+          "series": [
+            "other"
+          ],
+          "series_names": [
+            "vα-liv"
+          ],
+          "brand_ids": [
+            "10"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_number": "1",
+          "artist_basis": "reported_performance_credit"
+        },
+        {
+          "title": "ミラクルナナウ(ﾟ∀ﾟ)！",
+          "artists": [
+            "灯里愛夏"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "brand_ids": [
+            "11"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_number": "2",
+          "artist_basis": "reported_performance_credit"
+        },
+        {
+          "title": "ともすれば、（中略）アイドル",
+          "artists": [
+            "灯里愛夏"
+          ],
+          "series": [
+            "other"
+          ],
+          "series_names": [
+            "vα-liv"
+          ],
+          "brand_ids": [
+            "10"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_number": "3",
+          "artist_basis": "reported_performance_credit"
+        }
+      ],
+      "recording_version_unverified": true,
+      "official_sources": [
+        {
+          "name": "주최사 ProjectBLUE 공식 공연 일정",
+          "url": "https://shinkaifes.pjblue.com/"
+        },
+        {
+          "name": "토모리 마나카 공개 세트리스트",
+          "url": "https://x.com/TomoriManaka/status/2111771454186602622"
+        }
+      ],
+      "note": "vα-liv의 GRAND STAGE 가창 무대를 수록했습니다."
+    },
+    {
+      "id": "shinkaifes-2026-day1-valiv",
+      "title": "深海フェス2026「超・深海」DAY1 — vα-liv",
+      "date": "2026-10-17",
+      "series": [
+        "other",
+        "gakuen"
+      ],
+      "series_names": [
+        "vα-liv",
+        "学園アイドルマスター"
+      ],
+      "brand_ids": [
+        "10",
+        "11"
+      ],
+      "source_url": "https://music765plus.com/ヴイアライヴ_歌関連活動_876_2026",
+      "source_name": "アイドルマスター楽曲メモ · 출연자 공개 자료 기록",
+      "source_kind": "fan_database",
+      "date_source_url": "https://shinkaifes.pjblue.com/",
+      "setlist_source_url": "https://music765plus.com/ヴイアライヴ_歌関連活動_876_2026",
+      "date_basis": "official_event_announcement",
+      "retrieved_at": "2026-11-14T14:22:35+00:00",
+      "setlist_coverage": "reported_idol_performance_setlist",
+      "venue": "渋谷ストリーム ホール 6F (GRAND STAGE)",
+      "songs": [
+        {
+          "title": "きみの一等星",
+          "artists": [
+            "レトラ"
+          ],
+          "series": [
+            "other"
+          ],
+          "series_names": [
+            "vα-liv"
+          ],
+          "brand_ids": [
+            "10"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_section": "レトラ",
+          "performance_number": "1",
+          "artist_basis": "reported_performance_credit"
+        },
+        {
+          "title": "群青イニシエーション",
+          "artists": [
+            "レトラ"
+          ],
+          "series": [
+            "other"
+          ],
+          "series_names": [
+            "vα-liv"
+          ],
+          "brand_ids": [
+            "10"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_section": "レトラ",
+          "performance_number": "2",
+          "artist_basis": "reported_performance_credit"
+        },
+        {
+          "title": "一体いつから",
+          "artists": [
+            "レトラ"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "brand_ids": [
+            "11"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_section": "レトラ",
+          "performance_number": "3",
+          "artist_basis": "reported_performance_credit"
+        },
+        {
+          "title": "思い出の花束、二度目の恋。",
+          "artists": [
+            "レトラ"
+          ],
+          "series": [
+            "other"
+          ],
+          "series_names": [
+            "vα-liv"
+          ],
+          "brand_ids": [
+            "10"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_section": "レトラ",
+          "performance_number": "4",
+          "artist_basis": "reported_performance_credit"
+        },
+        {
+          "title": "ZeroGravity",
+          "artists": [
+            "上水流宇宙"
+          ],
+          "series": [
+            "other"
+          ],
+          "series_names": [
+            "vα-liv"
+          ],
+          "brand_ids": [
+            "10"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_section": "上水流宇宙",
+          "performance_number": "5",
+          "artist_basis": "reported_performance_credit"
+        },
+        {
+          "title": "ヨルニテ",
+          "artists": [
+            "上水流宇宙"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "brand_ids": [
+            "11"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_section": "上水流宇宙",
+          "performance_number": "6",
+          "artist_basis": "reported_performance_credit"
+        },
+        {
+          "title": "クライヤ",
+          "artists": [
+            "上水流宇宙"
+          ],
+          "series": [
+            "other"
+          ],
+          "series_names": [
+            "vα-liv"
+          ],
+          "brand_ids": [
+            "10"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_section": "上水流宇宙",
+          "performance_number": "7",
+          "artist_basis": "reported_performance_credit"
+        }
+      ],
+      "recording_version_unverified": true,
+      "official_sources": [
+        {
+          "name": "주최사 ProjectBLUE 공식 공연 일정",
+          "url": "https://shinkaifes.pjblue.com/"
+        },
+        {
+          "name": "레토라 공개 세트리스트",
+          "url": "https://x.com/UtagawaLetora/status/2111437991805915221"
+        },
+        {
+          "name": "카미즈루 코스모 공개 세트리스트",
+          "url": "https://x.com/KamizuruCosmo/status/2111427606608580726"
+        }
+      ],
+      "note": "vα-liv의 GRAND STAGE 가창 무대를 수록했습니다. DJ 세트와 다른 출연자의 곡은 제외했습니다."
+    },
     {
       "id": "imasdb-38fd69f735d14e02cb0b",
       "title": "283 PRODUCTION Solo Live Collection -Master ShowPiece- — DAY2",
@@ -5564,6 +7784,201 @@
           "url": "https://pylonport.bandainamcomusiclive.co.jp/report/843"
         }
       ]
+    },
+    {
+      "id": "valiv-cosmo-birthday-2026",
+      "title": "上水流宇宙 BIRTHDAY ONLINE LIVE 2026",
+      "date": "2026-09-12",
+      "series": [
+        "other",
+        "765",
+        "cinderella",
+        "million",
+        "gakuen"
+      ],
+      "series_names": [
+        "vα-liv",
+        "765PRO ALLSTARS",
+        "シンデレラガールズ",
+        "ミリオンライブ！",
+        "学園アイドルマスター"
+      ],
+      "brand_ids": [
+        "10",
+        "1",
+        "4",
+        "5",
+        "11"
+      ],
+      "source_url": "https://idolmaster-official.jp/news/01_19841",
+      "source_name": "아이돌마스터 공식 포털 · 공연 세트리스트",
+      "source_kind": "official",
+      "date_source_url": "https://idolmaster-official.jp/news/01_19841",
+      "setlist_source_url": "https://idolmaster-official.jp/news/01_19841",
+      "date_basis": "official_event_announcement",
+      "retrieved_at": "2026-11-14T14:22:35+00:00",
+      "setlist_coverage": "official_performance_setlist",
+      "venue": "ASOBI STAGE",
+      "songs": [
+        {
+          "title": "Star Impression",
+          "artists": [
+            "上水流宇宙"
+          ],
+          "series": [
+            "million"
+          ],
+          "series_names": [
+            "ミリオンライブ！"
+          ],
+          "brand_ids": [
+            "5"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_number": "1",
+          "artist_basis": "official_performance_credit"
+        },
+        {
+          "title": "公転周期",
+          "artists": [
+            "上水流宇宙"
+          ],
+          "series": [
+            "other"
+          ],
+          "series_names": [
+            "vα-liv"
+          ],
+          "brand_ids": [
+            "10"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_number": "2",
+          "artist_basis": "official_performance_credit"
+        },
+        {
+          "title": "一体いつから",
+          "artists": [
+            "上水流宇宙"
+          ],
+          "series": [
+            "gakuen"
+          ],
+          "series_names": [
+            "学園アイドルマスター"
+          ],
+          "brand_ids": [
+            "11"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_number": "3",
+          "artist_basis": "official_performance_credit"
+        },
+        {
+          "title": "Beat the World!!!",
+          "artists": [
+            "上水流宇宙",
+            "灯里愛夏",
+            "レトラ"
+          ],
+          "series": [
+            "million"
+          ],
+          "series_names": [
+            "ミリオンライブ！"
+          ],
+          "brand_ids": [
+            "5"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_number": "4",
+          "artist_basis": "official_performance_credit"
+        },
+        {
+          "title": "踊るFLAGSHIP",
+          "artists": [
+            "上水流宇宙"
+          ],
+          "series": [
+            "cinderella"
+          ],
+          "series_names": [
+            "シンデレラガールズ"
+          ],
+          "brand_ids": [
+            "4"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "song_title": "躍るFLAGSHIP",
+          "performance_number": "5",
+          "artist_basis": "official_performance_credit"
+        },
+        {
+          "title": "フラワーガール",
+          "artists": [
+            "上水流宇宙",
+            "四条貴音"
+          ],
+          "series": [
+            "765"
+          ],
+          "series_names": [
+            "765PRO ALLSTARS"
+          ],
+          "brand_ids": [
+            "1"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_number": "6",
+          "artist_basis": "official_performance_credit"
+        },
+        {
+          "title": "Nova Chro",
+          "artists": [
+            "上水流宇宙"
+          ],
+          "series": [
+            "other"
+          ],
+          "series_names": [
+            "vα-liv"
+          ],
+          "brand_ids": [
+            "10"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_number": "7",
+          "artist_basis": "official_performance_credit"
+        },
+        {
+          "title": "ZeroGravity",
+          "artists": [
+            "上水流宇宙"
+          ],
+          "series": [
+            "other"
+          ],
+          "series_names": [
+            "vα-liv"
+          ],
+          "brand_ids": [
+            "10"
+          ],
+          "series_basis": "explicit_song_brand",
+          "recording_version_unverified": true,
+          "performance_number": "8",
+          "artist_basis": "official_performance_credit"
+        }
+      ],
+      "recording_version_unverified": true,
+      "official_sources": []
     },
     {
       "id": "sidem-11th-day1",

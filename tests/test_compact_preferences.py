@@ -72,88 +72,37 @@ class CompactPreferencesUITests(unittest.TestCase):
         self.temp.cleanup()
 
     def select_priority(self, key, priority):
-        combo = self.dialog.compact_combos[key]
+        combo = self.dialog.combos[key]
         combo.current(priority)
         combo.event_generate('<<ComboboxSelected>>')
         self.root.update()
 
-    def test_all_targets_have_readonly_choices_and_apply_selection_immediately(self):
-        self.assertEqual(set(self.dialog.compact_combos), {key for key, _ in COMPACT_TARGETS})
-        for key, combo in self.dialog.compact_combos.items():
-            self.assertEqual(str(combo.cget('state')), 'readonly')
-            self.assertEqual(tuple(combo.cget('values')), COMPACT_PRIORITIES)
-            self.assertEqual(combo.current(), DEFAULT_COMPACT_LAYOUT['priorities'][key])
-        original_styles = deepcopy(self.app.text_styles)
-        with patch.object(self.app, 'apply_appearance', wraps=self.app.apply_appearance) as apply:
-            self.select_priority('reading', 4)
-            self.assertTrue(apply.called)
-        self.assertEqual(self.app.compact_layout['priorities']['reading'], 4)
-        self.assertEqual(self.app.text_styles, original_styles)
+    def test_selection_remains_draft_until_apply(self):
+        self.assertEqual(set(self.dialog.combos), {key for key, _ in COMPACT_TARGETS})
+        before=deepcopy(self.app.compact_layout)
+        self.select_priority('reading', 4)
+        self.assertEqual(self.app.compact_layout,before)
+        self.assertEqual(self.dialog.draft()['compact_layout']['priorities']['reading'],4)
+        self.dialog.apply()
+        self.assertEqual(self.app.compact_layout['priorities']['reading'],4)
+        self.assertEqual(self.store.settings()['compact_layout']['priorities']['reading'],4)
 
-    def test_shrink_only_disables_priorities_without_discarding_choices(self):
-        self.select_priority('title', 6)
-        self.select_priority('artists', 0)
-        self.select_priority('korean', 3)
-        priorities = dict(self.app.compact_layout['priorities'])
-        self.dialog.compact_radios['shrink_only'].invoke()
-        self.root.update()
-        self.assertEqual(self.app.compact_layout['mode'], 'shrink_only')
-        self.assertTrue(all(str(combo.cget('state')) == 'disabled' for combo in self.dialog.compact_combos.values()))
-        self.assertEqual(self.app.compact_layout['priorities'], priorities)
-        self.dialog.compact_radios['auto_hide'].invoke()
-        self.root.update()
-        self.assertEqual(self.app.compact_layout['mode'], 'auto_hide')
-        self.assertTrue(all(str(combo.cget('state')) == 'readonly' for combo in self.dialog.compact_combos.values()))
-        self.assertEqual(self.app.compact_layout['priorities'], priorities)
-
-    def test_close_saves_mode_and_priorities_and_reopening_restores_controls(self):
-        self.select_priority('reading', 0)
-        self.select_priority('original', 5)
-        self.dialog.compact_radios['shrink_only'].invoke()
-        expected = deepcopy(self.app.compact_layout)
+    def test_shrink_only_keeps_draft_priorities_and_cancel(self):
+        before=deepcopy(self.app.compact_layout)
+        self.select_priority('title',6)
+        self.dialog.compact_mode.set('shrink_only'); self.dialog.update()
+        self.assertTrue(all(str(combo.cget('state'))=='disabled' for combo in self.dialog.combos.values()))
+        self.dialog.compact_mode.set('auto_hide'); self.dialog.update()
+        self.assertEqual(self.dialog.draft()['compact_layout']['priorities']['title'],6)
         self.dialog.close()
-        self.assertEqual(self.store.settings()['compact_layout'], expected)
-        self.app.open_appearance()
-        self.dialog = self.app.appearance_dialog
-        self.root.update()
-        self.assertEqual(self.dialog.compact_mode.get(), 'shrink_only')
-        self.assertEqual(self.dialog.compact_combos['reading'].current(), 0)
-        self.assertEqual(self.dialog.compact_combos['original'].current(), 5)
-        self.assertTrue(all(str(combo.cget('state')) == 'disabled' for combo in self.dialog.compact_combos.values()))
+        self.assertEqual(self.app.compact_layout,before)
 
-    def test_reset_restores_default_order_and_reenables_choices(self):
-        self.select_priority('title', 5)
-        self.select_priority('korean', 2)
-        self.dialog.compact_radios['shrink_only'].invoke()
+    def test_reset_restores_draft_defaults(self):
+        self.select_priority('title',5)
+        self.dialog.compact_mode.set('shrink_only'); self.dialog.update()
         self.dialog.reset()
-        self.root.update()
-        self.assertEqual(self.app.compact_layout, DEFAULT_COMPACT_LAYOUT)
-        self.assertEqual(self.dialog.compact_mode.get(), 'auto_hide')
-        for key, combo in self.dialog.compact_combos.items():
-            self.assertEqual(str(combo.cget('state')), 'readonly')
-            self.assertEqual(combo.current(), DEFAULT_COMPACT_LAYOUT['priorities'][key])
-        self.dialog.close()
-        self.assertEqual(self.store.settings()['compact_layout'], DEFAULT_COMPACT_LAYOUT)
-
-    def test_both_tabs_fit_at_minimum_window_size(self):
-        self.dialog.window.geometry('560x510+20+20')
-        for tab in (self.dialog.typography_tab, self.dialog.compact_tab):
-            self.dialog.notebook.select(tab)
-            self.root.update()
-            self.root.update()
-            self.assert_controls_fit(self.dialog.window)
-
-    def assert_controls_fit(self, window):
-        def visit(widget):
-            for child in widget.winfo_children():
-                if child.winfo_ismapped() and (isinstance(child, tk.Button) or child.winfo_class() in ('TCombobox', 'TSpinbox', 'TRadiobutton')):
-                    self.assertGreater(child.winfo_width(), 15)
-                    self.assertGreaterEqual(child.winfo_rootx(), window.winfo_rootx())
-                    self.assertLessEqual(child.winfo_rootx() + child.winfo_width(), window.winfo_rootx() + window.winfo_width())
-                    self.assertLessEqual(child.winfo_rooty() + child.winfo_height(), window.winfo_rooty() + window.winfo_height())
-                visit(child)
-        visit(window)
-
+        self.assertEqual(self.dialog.draft()['compact_layout'],DEFAULT_COMPACT_LAYOUT)
+        self.assertTrue(all(str(combo.cget('state'))=='readonly' for combo in self.dialog.combos.values()))
 
 if __name__ == '__main__':
     unittest.main()

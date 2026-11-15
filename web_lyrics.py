@@ -7,6 +7,7 @@ from urllib.error import HTTPError
 from urllib.parse import quote,urlparse,unquote
 from urllib.request import Request,urlopen
 
+from lyric_match import align_phrases, phrase_key
 from lyrics import Line,Song,normalized
 
 JA=re.compile(r'[\u3040-\u30ff\u3400-\u9fff]')
@@ -153,7 +154,7 @@ def _duplicate_table_container(table,lines,candidates,references):
     return False
 
 
-def parse_html(html,expected_title,reader=reading,source='namu',reference_lines=()):
+def parse_html(html,expected_title,reader=reading,source='namu',reference_lines=(),*,merge_partial=False):
     from bs4 import BeautifulSoup
     soup=BeautifulSoup(html,'html.parser')
     heading=soup.find('h1')
@@ -171,6 +172,7 @@ def parse_html(html,expected_title,reader=reading,source='namu',reference_lines=
         if element.name=='table': candidates.append(element)
     if not candidates: raise ValueError('가사 표를 찾지 못했습니다. 표를 복사해서 가져올 수 있습니다.')
     parsed_tables=[]
+    references=tuple(getattr(line,'original',line) for line in reference_lines) if merge_partial else ()
     for table in candidates:
         # Parse each candidate independently; editing the outer table would
         # otherwise also alter every nested version's source nodes.
@@ -179,9 +181,27 @@ def parse_html(html,expected_title,reader=reading,source='namu',reference_lines=
             item.decompose()
         for br in content.find_all('br'): br.replace_with('\n')
         for cell in content.find_all(['td','th','p','div']): cell.append('\n')
-        try: parsed=parse_table_text(content.get_text(),reader,source=source)
+        try:
+            parsed=parse_table_text(content.get_text(),reader,strict=not bool(references),source=source)
         except ValueError: continue
         parsed_tables.append((table,parsed))
+    if references:
+        approved=[]
+        size=sum(len(phrase_key(row)) for row in references)
+        for table,parsed in parsed_tables:
+            if _duplicate_table_container(table,parsed,parsed_tables,reference_lines):continue
+            originals=tuple(line.original for line in parsed)
+            keys=tuple(map(phrase_key,originals))
+            matches=align_phrases(references,originals)
+            common=sum(len(key) for block in matches for key in keys[block.right:block.right_end])
+            length=sum(map(len,keys))
+            if common and common>=.72*size and common>=.60*length:
+                approved.append(((common,common/length),keys,parsed))
+        if not approved:raise ValueError('현재 곡과 구절 순서가 일치하는 가사 표를 찾지 못했습니다.')
+        best_score=max(score for score,_,_ in approved)
+        best=[(keys,rows) for score,keys,rows in approved if score==best_score]
+        if len({keys for keys,_ in best})>1:raise ValueError('가사 표에 서로 다른 버전이 있어 선택을 보류했습니다.')
+        return max((rows for _,rows in best),key=lambda rows:sum(bool(row.korean) for row in rows)),document_title
     best=None
     for table,parsed in parsed_tables:
         if _duplicate_table_container(table,parsed,parsed_tables,reference_lines):continue
@@ -190,7 +210,7 @@ def parse_html(html,expected_title,reader=reading,source='namu',reference_lines=
     return best,document_title
 
 
-def fetch_lyrics(title,url='',fetch=None,reference_lines=()):
+def fetch_lyrics(title,url='',fetch=None,reference_lines=(),*,merge_partial=False):
     url=validate_url(url or namu_url(title))
     source=source_id(url)
     label='SideM KO 위키' if source=='sidem' else '나무위키'
@@ -205,7 +225,8 @@ def fetch_lyrics(title,url='',fetch=None,reference_lines=()):
             if error.code in (403,429):
                 raise ValueError(f'{label}가 자동 접근을 제한했습니다. 원본 브라우저에서 확인하거나 가사 표를 복사해 가져오세요.') from error
             raise ValueError(f'{label} 문서를 가져오지 못했습니다 (HTTP {error.code}).') from error
-    lines,document_title=parse_html((fetch or request)(url),title,source=source,reference_lines=reference_lines)
+    lines,document_title=parse_html((fetch or request)(url),title,source=source,reference_lines=reference_lines,
+                                    merge_partial=merge_partial)
     return lines,{'url':url,'title':document_title,'fetched_at':datetime.now(timezone.utc).isoformat(),
                   'translation':label+'의 한국어 번역','reading':'로컬 자동 히라가나 독음'}
 
