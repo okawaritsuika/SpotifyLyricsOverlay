@@ -165,6 +165,7 @@ class LyricsApp:
         except (OSError,ValueError) as error:
             self.batch_translations=None;self.batch_translation_error=str(error)
         self.translation_dialog = None
+        self.translation_resource_dialog = None
         self.batch_translation_source = None
         self.song, self.timing = None, None
         self.playback = Playback()
@@ -206,6 +207,10 @@ class LyricsApp:
         self.lyric_cache=LyricCache(store.directory/'lyrics_cache')
         from playlist_lyrics_job import PlaylistLyricsJob
         self.playlist_lyrics=PlaylistLyricsJob(self)
+        from spotify_translation_sources import SpotifyTranslationSources
+        self.spotify_translation_sources=SpotifyTranslationSources(self)
+        from personal_resources import PersonalResources
+        self.personal_resources=PersonalResources(self)
         self.restoring_cache=False;self.cache_hit=False;self.cache_load_ms=None;self.cache_reuse=None;self.screen_cache_tainted=False
         self.cache_tracking=None
         self.spotify_current=None;self.spotify_observed_at=0
@@ -1249,12 +1254,18 @@ class LyricsApp:
             width,height,x,y = self.overlay_rect()
             return dict(x=x,y=y,width=width,height=height)
         elif action == 'menu':
-            x,y = payload.get('x'),payload.get('y')
-            if type(x) is not int or type(y) is not int or max(abs(x),abs(y))>32768:
-                raise ValueError('가사창 메뉴 위치를 확인하세요.')
             if self.locked:
                 return False
-            self.popup_menu(self.context_menu,x,y)
+            return [None if item is None else {key:value for key,value in item.items() if key!='command'}
+                    for item in self.menu_items()]
+        elif action == 'menuSelect':
+            index = payload.get('index')
+            items = self.menu_items()
+            if type(index) is not int or not 0<=index<len(items) or items[index] is None:
+                raise ValueError('지원하지 않는 가사창 메뉴입니다.')
+            if self.locked:
+                return False
+            items[index]['command']()
         elif action == 'key':
             self.electron_overlay_key(payload.get('key'),payload.get('phase'))
         else:
@@ -2316,6 +2327,7 @@ class LyricsApp:
         collector=getattr(self,'missing_audio_collector',None)
         if collector and collector.playlist_request and collector.playlist_request.receive(sender,event):return
         if self.playlist_lyrics.receive(sender,event):return
+        if self.spotify_translation_sources.receive(sender,event):return
         if self.catalog_sync.receive(sender,event):return
         current_worker=sender is self.background_lyrics.job
         received=self.background_lyrics.receive(sender,event)
@@ -2953,7 +2965,10 @@ class LyricsApp:
         if self.services_started:
             self.safe(self.playlist_lyrics.tick,interactive=False)
             preparing = self.missing_audio_collector and self.missing_audio_collector.playlist_request
-            self.safe(lambda:self.catalog_sync.tick(allow_search=not (self.playlist_lyrics.owns_spotify or preparing)),interactive=False)
+            self.safe(lambda:self.catalog_sync.tick(allow_search=not (self.playlist_lyrics.owns_spotify or preparing
+                                                                     or self.spotify_translation_sources.busy)),interactive=False)
+        if self.spotify_translation_sources.busy:
+            self.safe(self.spotify_translation_sources.tick,interactive=False)
         if self.track_notice_until and time.monotonic()>=self.track_notice_until:
             self.show_track_notice('')
         while True:
@@ -4057,11 +4072,71 @@ class LyricsApp:
 
     def open_batch_translation(self):
         if self.batch_translation_error:raise ValueError(self.batch_translation_error)
-        if self.translation_dialog:
-            self.translation_dialog.window.deiconify();self.translation_dialog.window.lift();return
-        if self.locked:self.toggle_lock()
-        from batch_translation_dialog import BatchTranslationDialog
-        self.translation_dialog=BatchTranslationDialog(self)
+        if not self.translation_dialog:
+            if self.locked:self.toggle_lock()
+            from batch_translation_dialog import BatchTranslationDialog
+            self.translation_dialog=BatchTranslationDialog(self)
+        self.raise_translation_window(self.translation_dialog.window)
+
+    def open_translation_resources(self):
+        if self.translation_resource_dialog:
+            self.translation_resource_dialog.refresh()
+        else:
+            if self.locked:self.toggle_lock()
+            from translation_resource_dialog import TranslationResourceDialog
+            self.translation_resource_dialog=TranslationResourceDialog(self)
+        self.raise_translation_window(self.translation_resource_dialog.window)
+
+    @staticmethod
+    def raise_translation_window(window):
+        window.deiconify()
+        # Developer mode runs in Electron, so a new Tk window can initially open behind it.
+        def activate():
+            window.attributes('-topmost', True)
+            window.lift()
+            window.focus_force()
+            window.after(175, lambda: window.attributes('-topmost', False) if window.winfo_exists() else None)
+        window.after_idle(activate)
+
+    def translation_resource_details(self,ident):
+        return self.personal_resources.details(ident)
+
+    def list_translation_resources(self):
+        return self.personal_resources.refresh()
+
+    def set_translation_resource_included(self,ident,included):
+        self.spotify_translation_sources.set_included(self.personal_resources.spotify_track(ident),included)
+        if self.translation_dialog:self.translation_dialog.refresh_requests()
+
+    def translation_resource_actions(self,ident):
+        return self.personal_resources.actions(ident)
+
+    def update_translation_resource(self,ident,index,field,value):
+        item,timing=self.personal_resources.update(ident,index,field,value,parse_time)
+        if self.playback.key==item.key:
+            self.lyric_text_edits.select(None)
+            self.singer_edits.select(None)
+            self.singer_roster.key=None
+            if timing is not None and self.song and self.song.id==item.clock[1].id:
+                if self.temporary_alsong:
+                    self.reload_managed_alsong_timing()
+                else:
+                    self.timing=timing
+                    if self.live_lyrics.is_temporary(self.song):self.live_lyrics.timing=timing
+                    self.time_cache=None
+            self.last_render=None
+            self.render()
+            if self.manual_sync_dialog and self.manual_sync_dialog.originals:
+                self.manual_sync_dialog.update_times()
+            if self.editor:self.editor_refresh()
+        if field=='korean' and self.translation_dialog:self.translation_dialog.refresh_requests()
+
+    def reload_managed_alsong_timing(self):
+        link=self.temporary_alsong
+        if not link:return
+        provider_id=link.source.id.rsplit('-',1)[-1]
+        self.link_temporary_alsong(dict(provider_id=provider_id,lines=link.source.lines,times=link.provider_times),
+                                   confirmed=link.confirmed)
 
     def fill_batch_annotations(self,title,artist,album,lines,*,preserve_supplied=False):
         if self.batch_translation_error:return tuple(lines)
@@ -4077,20 +4152,30 @@ class LyricsApp:
             self.batch_translation_error=str(error)
             self.notify('AI 번역용 원문 보관 실패: '+str(error),12)
 
-    def collect_translation_documents(self):
+    def collect_translation_documents(self, *, spotify_only=False):
         """Keep all available originals for repeatable, offline AI requests."""
         if self.batch_translation_error:raise ValueError(self.batch_translation_error)
         archive=self.batch_translations
-        for track in self.playlist_lyrics.store.metadata():
-            saved=self.playlist_lyrics.store.load(track['id'])
+        imported={track['id']:track['included'] for track in self.spotify_translation_sources.records()}
+        tracks=(tuple(track_id for track_id,included in imported.items() if included) if spotify_only
+                else (track['id'] for track in self.playlist_lyrics.store.metadata()))
+        selected=set()
+        excluded=set()
+        for track_id in tracks:
+            saved=self.playlist_lyrics.store.load(track_id)
             if saved:
-                archive.capture(track['title'],track['artists'][0],track['album'],saved['lines'])
+                stored=saved['track']
+                doc_id=archive.capture(stored['title'],stored['artists'][0],stored['album'],saved['lines'])
+                if track_id in imported:
+                    (selected if imported[track_id] else excluded).add(doc_id)
+        if spotify_only:
+            return archive.documents(selected)
         for playback,cached in self.lyric_cache.entries():
             archive.capture(playback.title,playback.artist,playback.album,cached['lines'])
         for song in self.songs:
             if song.lines:
                 archive.capture(song.title,song.artist,song.album,self.lyric_annotations.display_lines(song))
-        return archive.documents()
+        return archive.documents(excluded=excluded-selected)
 
     def refresh_batch_translations(self):
         if not self.song or self.screen_cache_tainted or self.song is self.screen_song:return
@@ -4124,6 +4209,7 @@ class LyricsApp:
         result=self.batch_translations.apply_reply(text)
         self.last_render=None;self.render()
         if self.editor:self.editor_refresh()
+        if self.translation_resource_dialog:self.translation_resource_dialog.refresh()
         if result['lines']:
             notice=f"AI 번역 신규 저장 · {result['songs']}곡 {result['lines']}구절"
         elif result.get('changed_latin_lines'):
@@ -4812,6 +4898,7 @@ class LyricsApp:
         if self.manual_sync_dialog:self.manual_sync_dialog.close()
         self.hide_track_title_tip()
         if self.translation_dialog:self.translation_dialog.close()
+        if self.translation_resource_dialog:self.translation_resource_dialog.close()
         if self.explorer_dialog:self.explorer_dialog.close()
         if self.volume_popup:self.volume_popup.close()
         for hint in self.control_hints:hint.hide()
@@ -4861,6 +4948,7 @@ class LyricsApp:
             self.sync_reanalysis_dialog.close()
         self.catalog_sync.close()
         self.playlist_lyrics.close()
+        self.spotify_translation_sources.close()
         self.audio_installer.close()
         if self.audio_install_dialog:self.audio_install_dialog.close()
         self.extension_inbox.close()

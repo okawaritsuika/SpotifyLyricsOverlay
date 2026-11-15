@@ -101,6 +101,86 @@ class BatchTranslationOverlayTests(unittest.TestCase):
         self.assertEqual(self.app.display_lines[1].korean,'새 번역 2')
         self.assertEqual(self.app.song.fingerprint,self.song.fingerprint)
 
+    def test_developer_imports_spotify_originals_and_manages_saved_translation(self):
+        track={'id':'F'*22,'title':'Spotify test','artists':['Singer'],'album':'Spotify album','duration':90}
+        source=self.app.spotify_translation_sources
+        with patch('spotify_translation_sources._public_track', return_value=track), \
+                patch.object(self.app.background_lyrics,'spotify_authenticated',True), \
+                patch.object(self.app.background_lyrics,'job') as worker:
+            source.start('https://open.spotify.com/track/'+track['id'])
+            deadline=time.monotonic()+2
+            while not worker.send.called and time.monotonic()<deadline:
+                source.tick();time.sleep(.01)
+            command=worker.send.call_args.args[0]
+            self.app.receive_background_lyrics(worker,dict(kind='batch_lyrics_result',
+                provider_id=track['id'],request_id=command['request_id'],
+                lines=[{'text':'風の音を聞く','time':None}]))
+        self.assertEqual(source.imported,1)
+        workspace=self.app.workspace
+        workspace.developer('open',{'tool':'translation'})
+        dialog=self.app.translation_dialog
+        dialog.poll_spotify_import()
+        deadline=time.monotonic()+5
+        while dialog.preparing and time.monotonic()<deadline:
+            self.root.update();time.sleep(.01)
+        self.assertFalse(dialog.preparing)
+        self.assertEqual([doc['title'] for doc in dialog.batches[0]['songs']],['Spotify test'])
+        self.assertIn('風の音を聞く',dialog.batches[0]['prompt'])
+        dialog.apply_reply(self.reply(dialog.batches[0]))
+        workspace.developer('open',{'tool':'translationResources'})
+        self.assertIsNotNone(self.app.translation_resource_dialog)
+        item=next(item for item in self.app.list_translation_resources() if item['title']=='Spotify test')
+        self.assertEqual(item['translated'],1)
+        self.app.set_translation_resource_included(item['id'],False)
+        self.assertFalse(self.app.collect_translation_documents(spotify_only=True))
+        self.assertNotIn('Spotify test',[doc['title'] for doc in self.app.collect_translation_documents()])
+        self.assertEqual(self.app.translation_resource_details(item['id'])[0]['korean'],'새 번역 1')
+        self.assertEqual(self.app.playlist_lyrics.store.load(track['id'])['direct']['times'],[None])
+        self.app.set_translation_resource_included(item['id'],True)
+        self.assertEqual(self.app.collect_translation_documents(spotify_only=True)[0]['title'],'Spotify test')
+
+    def test_personal_resources_show_existing_manual_rows_and_ignore_provider_clocks(self):
+        from user_annotations import SingerEdits, SingerRoster
+        from lyric_annotations import LyricTextEdits
+        from storage import atomic_json
+        self.app.settings.setdefault('lyric_sources', {})[self.song.id]={'user_override':True}
+        self.store.save_timing(self.song,{'times':[1,6],'origins':['manual','audio'],'offset':.25})
+        key=(self.playback.key,tuple(line.original for line in self.lines))
+        text=LyricTextEdits(self.store);text.select(key)
+        text.save(0,'青い空を眺める')
+        text.save(0,'직접 쓴 번역',field='korean')
+        roster=SingerRoster(self.store.directory);roster.select(self.playback.key);roster.save(('가수 A','가수 B'))
+        singers=SingerEdits(self.store.directory);singers.select(key);singers.save(0,('가수 B',))
+        atomic_json(self.store.directory/'live_timings'/('f'*64+'.json'),
+                    {'times':[3],'origins':['manual'],'offset':0})
+        self.app.lyric_cache.save(Playback('자동 가사','가수','앨범',duration=90), self.lines)
+        result=self.app.list_translation_resources()
+        self.assertEqual([item['title'] for item in result],['Batch test','제목 미확인'])
+        item=result[0]
+        self.assertEqual((item['manual_sync'],item['translated'],item['original'],item['performers']),(1,1,2,3))
+        self.assertEqual(item['roster'],('가수 A','가수 B'))
+        first,second=self.app.translation_resource_details(item['id'])
+        self.assertEqual((first['original'],first['korean'],first['time'],first['performers']),
+                         ('青い空を眺める','직접 쓴 번역',1.25,('가수 B',)))
+        self.assertIsNone(second['time'])
+        self.assertEqual(self.app.translation_resource_details(result[1]['id'])[0]['time'],3)
+        self.assertFalse(self.app.translation_resource_actions(result[1]['id']))
+        self.assertIn('timing',self.app.translation_resource_actions(item['id']))
+        self.app.update_translation_resource(item['id'],0,'timing','00:02.250')
+        self.assertEqual(self.store.timing(self.song)['times'],[2,6])
+        self.app.update_translation_resource(item['id'],0,'korean','수정한 번역')
+        self.app.update_translation_resource(item['id'],0,'singers',['가수 A'])
+        self.app.update_translation_resource(item['id'],0,'original',None)
+        self.app.update_translation_resource(item['id'],None,'roster',None)
+        self.app.list_translation_resources()
+        changed=self.app.translation_resource_details(item['id'])[0]
+        self.assertEqual((changed['original'],changed['korean'],changed['time'],changed['performers']),
+                         (self.lines[0].original,'수정한 번역',2.25,('가수 A',)))
+        self.assertFalse(roster.path.exists())
+        self.app.update_translation_resource(item['id'],0,'timing',None)
+        self.assertEqual(self.store.timing(self.song)['times'],[None,6])
+        self.assertEqual(self.store.library()[0].lines,self.lines)
+
     def test_reviewed_translations_show_localized_calls_with_corrected_originals(self):
         self.app.settings.setdefault('lyric_sources', {})[self.song.id] = {'user_override': True}
         song = Song(self.song.id, self.song.title, self.song.artist, self.song.album, (

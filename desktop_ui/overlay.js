@@ -194,16 +194,12 @@ for (const edge of resizeEdges) {
 document.addEventListener('click', event => {
   const button = event.target.closest('button[data-action]');
   if (!button || state?.locked) return;
-  const action = button.dataset.action;
-  if (action === 'menu') {
-    const rect = button.getBoundingClientRect();
-    send(action,{x:Math.round(screenX+rect.left),y:Math.round(screenY+rect.bottom)});
-  } else send(action);
+  send(button.dataset.action);
 });
 
 document.addEventListener('contextmenu', event => {
   event.preventDefault();
-  if (!state?.locked) send('menu',{x:event.screenX,y:event.screenY});
+  if (!state?.locked) send('menu');
 });
 
 document.addEventListener('pointerdown', event => {
@@ -221,12 +217,15 @@ document.addEventListener('pointermove', event => {
   if (drag?.id === event.pointerId) window.lyricOverlay.resize('move',drag.edge,event.screenX,event.screenY);
 });
 
-document.addEventListener('lostpointercapture', event => {
+function finishDrag(event) {
   if (drag?.id !== event.pointerId) return;
-  drag.grip?.classList.remove('active');
-  window.lyricOverlay.resize('end',drag.edge,event.screenX,event.screenY);
+  const {edge,grip} = drag;
   drag = undefined;
-});
+  grip?.classList.remove('active');
+  window.lyricOverlay.resize('end',edge,event.screenX,event.screenY);
+}
+
+for (const event of ['pointerup','pointercancel','lostpointercapture']) document.addEventListener(event,finishDrag);
 
 function onKey(event, phase) {
   if (state?.locked || event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey || event.isComposing) return;

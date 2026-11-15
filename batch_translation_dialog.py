@@ -4,6 +4,8 @@ import threading
 import tkinter as tk
 from tkinter import ttk
 
+from batch_translation import is_latin_only
+
 
 class BatchTranslationDialog:
     def __init__(self, app):
@@ -16,6 +18,9 @@ class BatchTranslationDialog:
         self._prepare_poll_id = None
         self._prepare_thread = None
         self.preparing = False
+        self._refresh_pending = False
+        self._spotify_poll_id = None
+        self._spotify_input = None
         self.window = tk.Toplevel(app.root)
         w = self.window
         w.title('번역 없는 곡 · AI 일괄 번역')
@@ -23,8 +28,8 @@ class BatchTranslationDialog:
         w.minsize(640, 600)
         w.attributes('-topmost', False)
         w.columnconfigure(0, weight=1)
-        w.rowconfigure(4, weight=1)
-        self.help = ttk.Label(w, text='1. 지시문을 복사해 AI에게 요청하세요.  2. AI 답변 전체를 복사하면 번역이 채워집니다.\n저장된 원문에서 번역이 비어 있는 구절만 모읍니다. 원문이 없는 곡은 먼저 가사를 가져오세요.', wraplength=785)
+        w.rowconfigure(5, weight=1)
+        self.help = ttk.Label(w, text='1. 번역 지시문을 복사해 AI에 붙여넣으세요.  2. 받은 답변 전체를 복사하거나 직접 붙여넣으면 번역을 저장합니다.\nSpotify 곡 링크로 일본어 원문을 가져오거나, 이미 저장된 가사로 요청할 수 있습니다.', wraplength=785)
         self.help.grid(row=0, column=0, sticky='ew', padx=12, pady=(10, 6))
 
         options = ttk.Frame(w)
@@ -36,9 +41,18 @@ class BatchTranslationDialog:
         ttk.Label(options, text='곡 (1–50)').pack(side='left')
         self.prepare_button = app.button(options, '묶음 만들기 / 새로고침', lambda: self.invoke(self.prepare))
         self.prepare_button.pack(side='right')
+        source = ttk.Frame(w)
+        source.grid(row=2, column=0, sticky='ew', padx=12, pady=(0, 4))
+        self.spotify_only = tk.BooleanVar(w, value=False)
+        self.spotify_message = tk.StringVar(w)
+        self.spotify_button = app.button(source, 'Spotify 원문 가져오기…', lambda: self.invoke(self.open_spotify_input))
+        self.spotify_button.grid(row=0, column=0, sticky='w')
+        ttk.Checkbutton(source, text='이번 도구로 가져온 곡만', variable=self.spotify_only,
+                        command=self.refresh_requests).grid(row=0, column=1, sticky='w', padx=8)
+        self.spotify_status = ttk.Label(source, textvariable=self.spotify_message, wraplength=610)
 
         navigation = ttk.Frame(w)
-        navigation.grid(row=2, column=0, sticky='ew', padx=12, pady=4)
+        navigation.grid(row=3, column=0, sticky='ew', padx=12, pady=4)
         navigation.columnconfigure(1, weight=1)
         self.previous_button = app.button(navigation, '이전', lambda: self.move(-1))
         self.previous_button.grid(row=0, column=0, padx=(0, 6))
@@ -49,7 +63,7 @@ class BatchTranslationDialog:
         self.next_button.grid(row=0, column=2, padx=(6, 0))
 
         songs_frame = ttk.Frame(w)
-        songs_frame.grid(row=3, column=0, sticky='ew', padx=12, pady=4)
+        songs_frame.grid(row=4, column=0, sticky='ew', padx=12, pady=4)
         songs_frame.columnconfigure(0, weight=1)
         self.songs = ttk.Treeview(songs_frame, columns=('title', 'artist', 'missing'), show='headings', height=3)
         for key, label, width in (('title', '곡 제목', 270), ('artist', '아티스트', 200), ('missing', '요청 구절', 85)):
@@ -61,16 +75,16 @@ class BatchTranslationDialog:
         self.songs.configure(yscrollcommand=scroll.set)
 
         self.notebook = ttk.Notebook(w)
-        self.notebook.grid(row=4, column=0, sticky='nsew', padx=12, pady=4)
+        self.notebook.grid(row=5, column=0, sticky='nsew', padx=12, pady=4)
         self.prompt_frame, self.reply_frame = ttk.Frame(self.notebook), ttk.Frame(self.notebook)
         self.prompt = self.text_tab(self.prompt_frame, 'AI 지시문')
         self.prompt.configure(state='disabled')
         self.reply = self.text_tab(self.reply_frame, '답변 직접 붙여넣기')
         self.auto_apply = tk.BooleanVar(w, value=True)
         self.auto_button = ttk.Checkbutton(w, text='이 창이 열려 있을 때 복사한 AI 답변 자동 적용', variable=self.auto_apply, command=self.toggle_auto)
-        self.auto_button.grid(row=5, column=0, sticky='w', padx=12, pady=4)
+        self.auto_button.grid(row=6, column=0, sticky='w', padx=12, pady=4)
         result_frame = ttk.LabelFrame(w, text='번역 저장 확인', padding=(8, 4))
-        result_frame.grid(row=6, column=0, sticky='ew', padx=12, pady=4)
+        result_frame.grid(row=7, column=0, sticky='ew', padx=12, pady=4)
         self.result_status = tk.StringVar(w, value='아직 이 창에서 처리한 답변이 없습니다.')
         self.result_label = ttk.Label(result_frame, textvariable=self.result_status, wraplength=765)
         self.result_label.pack(fill='x')
@@ -80,10 +94,10 @@ class BatchTranslationDialog:
         self.update_saved_summary(self.app.batch_translations.summary())
         self.status = tk.StringVar(w)
         self.status_label = ttk.Label(w, textvariable=self.status, wraplength=785)
-        self.status_label.grid(row=7, column=0, sticky='ew', padx=12, pady=4)
+        self.status_label.grid(row=8, column=0, sticky='ew', padx=12, pady=4)
 
         footer = ttk.Frame(w)
-        footer.grid(row=8, column=0, sticky='ew', padx=9, pady=(4, 10))
+        footer.grid(row=9, column=0, sticky='ew', padx=9, pady=(4, 10))
         self.buttons = []
         for column, (label, action) in enumerate((('지시문 복사', self.copy_prompt), ('답변 붙여넣기', self.paste_reply), ('답변 적용', self.apply_manual), ('닫기', self.close))):
             footer.columnconfigure(column, weight=1)
@@ -100,6 +114,7 @@ class BatchTranslationDialog:
         self.update_choices(0)
         self.show_batch()
         self.invoke(self.prepare)
+        if self.app.spotify_translation_sources.busy:self.poll_spotify_import()
         self._poll_id = w.after(800, self.poll_clipboard)
 
     def text_tab(self, frame, title):
@@ -123,7 +138,7 @@ class BatchTranslationDialog:
 
     def resize(self, event):
         if event.widget is self.window:
-            for label in (self.help, self.status_label):
+            for label in (self.help, self.status_label, self.spotify_status):
                 label.configure(wraplength=max(300, event.width - 28))
             for label in (self.result_label, self.saved_label):
                 label.configure(wraplength=max(300, event.width - 48))
@@ -136,6 +151,58 @@ class BatchTranslationDialog:
             action()
         except (ValueError, OSError, tk.TclError) as error:
             self.status.set(str(error))
+
+    def open_spotify_input(self):
+        if self._spotify_input and self._spotify_input.winfo_exists():
+            self._spotify_input.lift()
+            return
+        window = self._spotify_input = tk.Toplevel(self.window)
+        window.title('Spotify 원문 가져오기')
+        window.transient(self.window)
+        window.geometry('570x340')
+        window.minsize(460, 280)
+        window.columnconfigure(0, weight=1)
+        window.rowconfigure(1, weight=1)
+        ttk.Label(window, text='Spotify에서 공유한 곡 링크를 붙여넣으세요. 여러 곡은 줄을 나누어 넣으세요.',
+                  wraplength=430).grid(row=0, column=0, sticky='ew', padx=12, pady=(12, 6))
+        links = tk.Text(window, wrap='word', height=6, undo=True)
+        links.grid(row=1, column=0, sticky='nsew', padx=12, pady=4)
+        message = ttk.Label(window, wraplength=430)
+        message.grid(row=2, column=0, sticky='ew', padx=12, pady=4)
+
+        def start():
+            try:self.app.spotify_translation_sources.start(links.get('1.0', 'end-1c'))
+            except (OSError, ValueError) as error:
+                message.configure(text=str(error))
+                return
+            window.destroy()
+            self.poll_spotify_import()
+
+        actions = ttk.Frame(window)
+        actions.grid(row=3, column=0, sticky='e', padx=12, pady=(4, 12))
+        self.app.button(actions, '닫기', window.destroy).pack(side='left', padx=4)
+        self.app.button(actions, '가져오기', start).pack(side='left')
+        links.focus_set()
+
+    def poll_spotify_import(self):
+        self._spotify_poll_id = None
+        if self.closed:return
+        source = self.app.spotify_translation_sources
+        self.spotify_message.set(source.status)
+        self.spotify_status.grid(row=1, column=0, columnspan=2, sticky='w', pady=(3, 0))
+        self.spotify_button.configure(state='disabled' if source.busy else 'normal')
+        if source.busy:
+            self._spotify_poll_id = self.window.after(250, self.poll_spotify_import)
+        elif source.imported:
+            self.spotify_only.set(True)
+            self.refresh_requests()
+            if self.app.translation_resource_dialog:self.app.translation_resource_dialog.refresh()
+
+    def refresh_requests(self):
+        if self.preparing:
+            self._refresh_pending = True
+        else:
+            self.invoke(self.prepare)
 
     def prepare(self):
         if self.preparing:
@@ -150,15 +217,18 @@ class BatchTranslationDialog:
         self.window.configure(cursor='wait')
         self.prepare_button.configure(state='disabled')
         self.size_input.configure(state='disabled')
+        self.copy_button.configure(state='disabled')
         self.preparing = True
         results = queue.Queue(maxsize=1)
         app = self.app
+        spotify_only = self.spotify_only.get()
 
         def build():
             # Both operations use stored documents only. Never access a Tk
             # variable or schedule a Tk callback from the worker thread.
             try:
-                documents = app.collect_translation_documents()
+                documents = (app.collect_translation_documents(spotify_only=True)
+                             if spotify_only else app.collect_translation_documents())
                 batches = app.batch_translations.prepare(documents, songs_per_batch=count)
                 results.put((True, batches))
             except Exception as error:
@@ -181,7 +251,12 @@ class BatchTranslationDialog:
         self.window.configure(cursor='')
         self.prepare_button.configure(state='normal')
         self.size_input.configure(state='normal')
+        if self._refresh_pending:
+            self._refresh_pending = False
+            self.refresh_requests()
+            return
         if not success:
+            self.show_batch()
             self.status.set(f'묶음을 만들지 못했습니다: {result}')
             return
         batches = result
@@ -195,7 +270,8 @@ class BatchTranslationDialog:
 
     @staticmethod
     def missing_lines(song):
-        return sum(bool(line.original.strip()) and not line.korean.strip() for line in song['lines'])
+        return sum(bool(line.original.strip()) and not line.korean.strip() and not is_latin_only(line.original)
+                   for line in song['lines'])
 
     def update_choices(self, selected):
         labels = []
@@ -220,7 +296,7 @@ class BatchTranslationDialog:
             for song in batch['songs']:
                 self.songs.insert('', 'end', values=(song['title'], song['artist'], self.missing_lines(song)))
         self.prompt.configure(state='disabled')
-        self.copy_button.configure(state='normal' if batch else 'disabled')
+        self.copy_button.configure(state='normal' if batch and not self.preparing else 'disabled')
         self.previous_button.configure(state='normal' if index > 0 else 'disabled')
         self.next_button.configure(state='normal' if batch and index + 1 < len(self.batches) else 'disabled')
 
@@ -231,6 +307,7 @@ class BatchTranslationDialog:
             self.show_batch()
 
     def copy_prompt(self):
+        if self.preparing:return
         index = self.batch_choice.current()
         if not 0 <= index < len(self.batches):
             return
@@ -322,6 +399,9 @@ class BatchTranslationDialog:
         if self._prepare_poll_id is not None:
             self.window.after_cancel(self._prepare_poll_id)
             self._prepare_poll_id = None
+        if self._spotify_poll_id is not None:
+            self.window.after_cancel(self._spotify_poll_id)
+            self._spotify_poll_id = None
         if self.app.translation_dialog is self:
             self.app.translation_dialog = None
 

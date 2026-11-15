@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, nativeImage, protocol, screen, session } = require('electron');
+const { app, BrowserWindow, ipcMain, Menu, nativeImage, protocol, screen, session } = require('electron');
 const fs = require('node:fs');
 const path = require('node:path');
 const readline = require('node:readline');
@@ -135,6 +135,7 @@ function updateOverlay(state) {
     popup.webContents.once('render-process-gone', () => { if (!popup.isDestroyed()) popup.destroy(); });
     popup.once('closed', () => {
       overlay = undefined;
+      overlayDrag = overlayBoundsSave = overlayMenu = overlayMenuRequest = undefined;
       overlayFailed = true;
       keepOverlay = false;
       send({overlayFailed:true});
@@ -151,8 +152,10 @@ function updateOverlay(state) {
 }
 
 let overlayDrag;
-let savingOverlayBounds = false;
+let overlayBoundsSave;
 let appliedOverlayBounds;
+let overlayMenu;
+let overlayMenuRequest;
 
 function sameBounds(first, second) {
   return first && ['x','y','width','height'].every(key => first[key] === second[key]);
@@ -166,7 +169,8 @@ function applyOverlayBounds(bounds) {
 }
 
 function drawOverlay() {
-  if (!overlayDrag && !savingOverlayBounds) applyOverlayBounds(overlayState.bounds);
+  if (overlayState.locked || !overlayState.visible) closeOverlayMenu();
+  if (!overlayDrag && !overlayBoundsSave) applyOverlayBounds(overlayState.bounds);
   overlay.setIgnoreMouseEvents(overlayState.locked === true);
   overlay.webContents.send('overlay:state',overlayState);
   if (overlayState.visible && !overlay.isVisible()) overlay.showInactive();
@@ -180,13 +184,43 @@ ipcMain.on('overlay:ready', event => {
   send({overlayReady:true,hwnd});
 });
 
+function closeOverlayMenu() {
+  overlayMenuRequest = undefined;
+  overlayMenu?.closePopup(overlay);
+  overlayMenu = undefined;
+}
+
+async function showOverlayMenu() {
+  if (overlayMenu || overlayMenuRequest) {
+    closeOverlayMenu();
+    return false;
+  }
+  const owner = overlay;
+  const pendingMenu = requestPython('overlay.menu',{});
+  overlayMenuRequest = pendingMenu;
+  let items;
+  try {
+    items = await pendingMenu;
+    if (overlayMenuRequest !== pendingMenu) return false;
+  } finally {
+    if (overlayMenuRequest === pendingMenu) overlayMenuRequest = undefined;
+  }
+  if (!Array.isArray(items) || owner.isDestroyed() || !overlayState.visible || overlayState.locked) return false;
+  const menu = Menu.buildFromTemplate(items.map((item,index) => item ? {
+    label:item.label,
+    ...(typeof item.checked === 'boolean' ? {type:'checkbox',checked:item.checked} : {}),
+    click:() => requestPython('overlay.menuSelect',{index}).catch(error => console.error(error.message)),
+  } : {type:'separator'}));
+  overlayMenu = menu;
+  menu.popup({window:owner,callback:() => { if (overlayMenu === menu) overlayMenu = undefined; }});
+  return true;
+}
+
 ipcMain.handle('overlay:action', (event, action, payload) => {
   if (!isOverlaySender(event) || !overlayActions.has(action) || !payload ||
       typeof payload !== 'object' || Array.isArray(payload)) throw new Error('지원하지 않는 가사창 동작입니다.');
-  if (action === 'menu') {
-    if (!Number.isInteger(payload.x) || !Number.isInteger(payload.y)) throw new Error('메뉴 위치를 확인하세요.');
-    payload = screen.dipToScreenPoint(payload);
-  }
+  if (action === 'menu') return showOverlayMenu();
+  closeOverlayMenu();
   return requestPython(`overlay.${action}`,payload);
 });
 
@@ -201,27 +235,38 @@ function draggedBounds(drag, x, y, minimumWidth, minimumHeight) {
 }
 
 ipcMain.on('overlay:resize', async (event, phase, edge, x, y) => {
-  if (!isOverlaySender(event) || overlayState?.locked || savingOverlayBounds) return;
+  if (!isOverlaySender(event)) return;
   if (phase === 'end' && overlayDrag) {
-    const bounds = screen.dipToScreenRect(null,overlay.getBounds());
-    const resize = overlayDrag.edge !== 'move';
+    const finished = overlayDrag;
+    const actual = overlay.getBounds();
     overlayDrag = undefined;
-    if (sameBounds(appliedOverlayBounds,bounds)) return;
-    savingOverlayBounds = true;
+    if (sameBounds(finished.bounds,actual)) {
+      if (finished.acceptedBounds) applyOverlayBounds(finished.acceptedBounds);
+      return;
+    }
+    const bounds = screen.dipToScreenRect(null,actual);
+    const resize = finished.edge !== 'move';
+    if (sameBounds(overlayBoundsSave ?? appliedOverlayBounds,bounds)) return;
+    overlayBoundsSave = bounds;
     appliedOverlayBounds = undefined;
+    let accepted;
     try {
-      const accepted = await requestPython('overlay.bounds',{bounds,resize});
-      if (accepted) applyOverlayBounds(accepted);
+      accepted = await requestPython('overlay.bounds',{bounds,resize});
     } catch (error) {
       console.error(error.message);
-      applyOverlayBounds(overlayState.bounds);
     } finally {
-      savingOverlayBounds = false;
+      if (overlayBoundsSave === bounds) {
+        overlayBoundsSave = undefined;
+        const corrected = accepted || overlayState.bounds;
+        if (overlayDrag) overlayDrag.acceptedBounds = corrected;
+        else applyOverlayBounds(corrected);
+      }
     }
     return;
   }
-  if (!(Number.isFinite(x) && Number.isFinite(y))) return;
+  if (overlayState?.locked || !(Number.isFinite(x) && Number.isFinite(y))) return;
   if (phase === 'start' && (edge === 'move' || resizeEdges.has(edge))) {
+    closeOverlayMenu();
     overlayDrag = {edge,x,y,bounds:overlay.getBounds()};
   } else if (phase === 'move' && overlayDrag) {
     const [width,height] = overlayState.minSize ?? [240,100];

@@ -78,6 +78,18 @@ class SingerRoster:
             atomic_json(self.path, names)
             self.names = names
 
+    def remove(self):
+        """Restore automatic performer choices for the selected recording."""
+        if self.error:
+            raise self.error
+        if self.path is None:
+            raise ValueError('가창자 명단을 초기화할 곡을 선택하세요.')
+        if self.names is None:
+            return False
+        self.path.unlink(missing_ok=True)
+        self.names = None
+        return True
+
     @staticmethod
     def valid_names(names):
         return (len(names) <= len(SINGER_KEYS) and all(_text(name, True) for name in names)

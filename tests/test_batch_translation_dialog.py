@@ -18,6 +18,8 @@ class BatchTranslationDialogTests(unittest.TestCase):
         self.backend = SimpleNamespace(prepare=Mock(side_effect=self.make_batches), is_reply=Mock(side_effect=lambda text: text.startswith('REPLY:')),
                                        summary=Mock(return_value={'total_songs':10,'total_lines':524}))
         self.app = SimpleNamespace(root=self.root, translation_dialog=None, batch_translations=self.backend,
+                                   spotify_translation_sources=SimpleNamespace(busy=False, status='', imported=0),
+                                   translation_resource_dialog=None,
                                    collect_translation_documents=Mock(return_value=self.documents),
                                    apply_translation_reply=Mock(return_value={'batch_id': 'batch-5-0', 'songs': 5, 'lines': 5, 'remaining': 0,
                                        'received_songs':5,'received_lines':5,'already_lines':0,'preserved_lines':0,
@@ -76,6 +78,18 @@ class BatchTranslationDialogTests(unittest.TestCase):
             self.dialog.prepare_button.invoke()
             self.assertIs(self.dialog.batches, previous)
             self.assertIn('1부터 50', self.dialog.status.get())
+
+    def test_completed_spotify_import_prepares_only_imported_originals(self):
+        source = self.app.spotify_translation_sources
+        source.status = 'Spotify 원문 가져오기 · 1곡'
+        source.imported = 1
+        self.app.collect_translation_documents.return_value = self.documents[:1]
+        self.dialog.poll_spotify_import()
+        self.wait_prepared()
+        self.app.collect_translation_documents.assert_called_with(spotify_only=True)
+        self.assertTrue(self.dialog.spotify_only.get())
+        self.assertEqual(self.dialog.spotify_message.get(), source.status)
+        self.assertEqual(len(self.dialog.batches[0]['songs']), 1)
         self.assertEqual(self.backend.prepare.call_count, 2)
 
     def test_copy_prompt_and_navigation_preserve_complete_text(self):

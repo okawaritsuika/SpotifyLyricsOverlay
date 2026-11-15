@@ -291,6 +291,12 @@ class ManualSyncDialog:
             self.singer_input_button = self.button(timing_tools,text='가창자 입력',
                                                     command=lambda:app.safe(app.toggle_singer_input))
             self.singer_input_button.pack(side='right')
+            translation_tools = ttk.Menubutton(timing_tools,text='번역 도구')
+            translation_menu = tk.Menu(translation_tools,tearoff=False)
+            translation_menu.add_command(label='AI 일괄 번역',command=lambda:app.safe(app.open_batch_translation))
+            translation_menu.add_command(label='내 자료 관리',command=lambda:app.safe(app.open_translation_resources))
+            translation_tools.configure(menu=translation_menu)
+            translation_tools.pack(side='right',padx=(0,5))
         self.edit_hint = ttk.Label(window, text='← → 소절 이동   Q/W/E/R −5/−2/+1/+5초   ↑ 앞 줄 끝   ↓ 다음 시작'
                                    '   가사·후리가나·번역 더블클릭')
         self.edit_hint.grid(row=5,column=0,sticky='w',padx=14,pady=(0,5))

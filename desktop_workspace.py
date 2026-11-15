@@ -447,7 +447,8 @@ class DesktopWorkspace:
             raise ValueError('재생목록을 분석하는 동안 Spotify 재생 위치를 바꿀 수 없습니다.')
         if action == 'open':
             tools={'connection':app.open_connection,'audio':app.open_audio,
-                   'alsong':dialog.open_alsong,'collection':dialog.open_collection}
+                   'alsong':dialog.open_alsong,'collection':dialog.open_collection,
+                   'translation':app.open_batch_translation,'translationResources':app.open_translation_resources}
             name = payload.get('tool')
             if not isinstance(name,str) or name not in tools:
                 raise ValueError('도구를 찾지 못했습니다.')

@@ -185,12 +185,14 @@ class BatchTranslationStore:
                 self._fill_cache=None
         return document['id']
 
-    def documents(self):
+    def documents(self, identifiers=None, *, excluded=()):
+        if identifiers is None:
+            identifiers=(path.stem for path in self.history_directory.glob('*.json'))
         result=[]
-        for path in sorted(self.history_directory.glob('*.json')):
-            if not _DOC_ID.fullmatch(path.stem):continue
+        for identifier in sorted(identifiers):
+            if not _DOC_ID.fullmatch(identifier) or identifier in excluded:continue
             with self.lock:
-                document=self._history(path.stem)
+                document=self._history(identifier)
                 if document is not None:result.append({**document, 'lines': self._filled(document)})
         return result
 
@@ -265,6 +267,42 @@ class BatchTranslationStore:
         try:_reply(text);return True
         except (ValueError, TypeError, UnicodeError):return False
 
+    def _save_imports(self, updated):
+        value={'version': 1, 'documents': updated}
+        if len(json.dumps(value, ensure_ascii=False, indent=2).encode('utf-8')) > MAX_IMPORT_BYTES:
+            raise ValueError('저장할 AI 번역이 크기 한도를 넘었습니다.')
+        atomic_json(self.imports_path, value)
+        self.imports=updated
+        self.revision+=1
+        self._fill_cache=None
+
+    def remove_translation(self, identifier, index):
+        """Remove one imported translation. The requested row is zero-based."""
+        return self._change_translation(identifier, index, None)
+
+    def update_translation(self, identifier, index, korean):
+        """Update one existing imported translation. The requested row is zero-based."""
+        if not _text(korean, True):
+            raise ValueError('AI 번역에 저장할 문장을 입력하세요.')
+        return self._change_translation(identifier, index, korean.strip())
+
+    def _change_translation(self, identifier, index, korean):
+        if (not isinstance(identifier, str) or not _DOC_ID.fullmatch(identifier)
+                or type(index) is not int or not 0 <= index < MAX_ROWS):
+            raise ValueError('수정할 AI 번역 구절을 확인하세요.')
+        key=str(index+1)
+        with self.lock:
+            current=self.imports.get(identifier, {})
+            if key not in current or current[key] == korean:return False
+            updated=self.imports.copy()
+            rows=current.copy()
+            if korean is None:del rows[key]
+            else:rows[key]=korean
+            if rows:updated[identifier]=rows
+            else:del updated[identifier]
+            self._save_imports(updated)
+            return True
+
     def apply_reply(self, text):
         supplied=_reply(text)
         with self.lock:
@@ -326,12 +364,7 @@ class BatchTranslationStore:
             updated={identifier: dict(rows) for identifier, rows in self.imports.items()}
             for identifier, rows in additions.items():updated.setdefault(identifier, {}).update(rows)
             if additions:
-                value={'version': 1, 'documents': updated}
-                if len(json.dumps(value, ensure_ascii=False, indent=2).encode('utf-8')) > MAX_IMPORT_BYTES:
-                    raise ValueError('저장할 AI 번역이 크기 한도를 넘었습니다.')
-                atomic_json(self.imports_path, value)
-                self.imports=updated
-                self.revision+=1
+                self._save_imports(updated)
             remaining=0
             for identifier, expected in manifest['songs'].items():
                 document=requested[identifier]

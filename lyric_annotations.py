@@ -430,21 +430,36 @@ class LyricTextEdits:
         row = self.rows.get(index)
         return row.get('reading') if isinstance(row, dict) else None
 
-    def save(self, index, text, *, field='original'):
+    def _edit_values(self, index, field):
         if self.error:
             raise self.error
-        if self.key is None or not 0 <= index < len(self.key[1]):
+        if (field not in ('original', 'reading', 'korean') or type(index) is not int
+                or self.key is None or not 0 <= index < len(self.key[1])):
             raise ValueError('수정할 가사 줄을 다시 선택하세요.')
+        row = self.rows.get(index)
+        return row.copy() if isinstance(row, dict) else {'original': row} if row else {}
+
+    def save(self, index, text, *, field='original'):
+        values = self._edit_values(index, field)
         label = {'original': '가사', 'reading': '후리가나', 'korean': '번역'}[field]
         text = text.strip()
         if (not text and field == 'original') or any(c in text for c in '\r\n\0'):
             raise ValueError(f'한 줄로 입력하세요. ({label})')
-        row = self.rows.get(index)
-        values = row.copy() if isinstance(row, dict) else {'original': row} if row else {}
         if field == 'reading' and not text or field == 'original' and text == self.key[1][index]:
             values.pop(field, None)
         else:
             values[field] = text
+        self._store_values(index, values)
+
+    def remove(self, index, field):
+        """Revert only the given explicit correction in the selected layout."""
+        values = self._edit_values(index, field)
+        if field not in values:
+            return False
+        del values[field]
+        return self._store_values(index, values)
+
+    def _store_values(self, index, values):
         rows = self.rows.copy()
         if 'korean' in values or 'reading' in values:
             rows[index] = values
@@ -455,3 +470,5 @@ class LyricTextEdits:
         if rows != self.rows:
             atomic_json(self.path, rows)
             self.rows = rows
+            return True
+        return False
