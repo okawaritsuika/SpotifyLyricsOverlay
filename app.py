@@ -1,7 +1,7 @@
 """Japanese / reading / Korean desktop lyrics with user-controlled timing."""
 from pathlib import Path
 import sys
-from app_paths import resource_dir, default_data_dir, seed_data, frozen
+from app_paths import resource_dir, default_data_dir, seed_data, frozen, webview2_available
 
 BASE = resource_dir()
 if (BASE / '.deps').is_dir():
@@ -21,6 +21,7 @@ import time
 import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
 from types import SimpleNamespace
+import webbrowser
 
 from lyrics import Line, Song, import_folder, match_song, match_recording, normalized
 from lyric_match import match_lyrics,is_short_recording
@@ -336,7 +337,7 @@ class LyricsApp:
                     self.notify(str(error),12)
             self.screen_lyrics.start()
             if self.online.get() and self.settings.get('spotify_connected') and self.settings.get('spotify_authenticated',True):
-                self.safe(lambda:self.background_lyrics.connect(visible=False),interactive=False)
+                self.safe(partial(self.connect_spotify,visible=False),interactive=False)
             self.monitor.start()
             self.hotkeys.start()
             self.lifecycle.start()
@@ -1927,15 +1928,23 @@ class LyricsApp:
             try:self.save_current_timing(self.timing)
             except (OSError,ValueError):pass
 
-    def connect_spotify(self):
-        if frozen():
-            from optional_runtime import installed
-            if not installed('browser'):
-                self.open_browser_install()
+    def connect_spotify(self, *, visible=True):
+        if frozen() and not webview2_available():
+            self.background_lyrics.spotify_state='error'
+            self.background_lyrics.spotify_status='Spotify 연결에 Microsoft Edge WebView2 Runtime이 필요합니다.'
+            if visible:
                 if not self.settings.get('connection_setup_seen'):
                     self.settings['connection_setup_seen']=True
                     self.save_settings()
-                return
+                if messagebox.askyesno('Microsoft Edge WebView2 설치',
+                        'Spotify 연결에 Microsoft Edge WebView2 Runtime이 필요합니다.\n'
+                        '설치한 뒤 Spotify 연결을 다시 누르세요.\n\nMicrosoft 설치 페이지를 여시겠어요?',
+                        parent=self.root):
+                    webbrowser.open('https://developer.microsoft.com/microsoft-edge/webview2/#download')
+            return
+        if not visible:
+            self.background_lyrics.connect(visible=False)
+            return
         if not self.settings.get('spotify_connected'):
             self.settings.setdefault('spotify_authenticated',False)
         self.online.set(True)
@@ -3160,11 +3169,6 @@ class LyricsApp:
             if self.services_started and not self.lyrics_deleted():self.safe(lambda:self.internal_reader.observe(self.reader_bridge.snapshot()),interactive=False)
             if self.connection_dialog:self.connection_dialog.refresh()
         self.root.after(80, self.tick)
-
-    def open_browser_install(self):
-        dialog=getattr(self,'browser_install_dialog',None)
-        if dialog:dialog.window.lift()
-        else:self.browser_install_dialog=AudioInstallDialog(self,kind='browser')
 
     def complete_saved_lyrics(self,lines):
         if not self.song or self.live_lyrics.is_temporary(self.song):return False
@@ -4858,8 +4862,6 @@ class LyricsApp:
         self.catalog_sync.close()
         self.playlist_lyrics.close()
         self.audio_installer.close()
-        if getattr(self,'browser_installer',None):self.browser_installer.close()
-        if getattr(self,'browser_install_dialog',None):self.browser_install_dialog.close()
         if self.audio_install_dialog:self.audio_install_dialog.close()
         self.extension_inbox.close()
         self.internal_reader.close()

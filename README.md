@@ -6,16 +6,17 @@
 ## Windows EXE 배포
 
 [최신 Windows 배포 다운로드](https://github.com/okawaritsuika/SpotifyLyricsOverlay/releases/latest)에서
-**Windows x64 ZIP**을 내려받으세요. 기존 사용자도 0.1.1은 실행 중인 앱을 먼저 닫고 새 폴더에 ZIP을 모두 푼 뒤
-`SpotifyLyricsOverlay.exe`를 실행하세요. 현재 화면에 필요한 `electron-runtime/` 폴더는 EXE 옆에 두세요.
+**Windows x64 ZIP**을 내려받아 모두 푼 뒤 `SpotifyLyricsOverlay.exe`를 실행하세요.
+현재 화면에 필요한 `electron-runtime/` 폴더는 EXE 옆에 두세요.
+이미 `electron-runtime/`이 있는 버전을 쓰고 있다면 앱 안에서 프로그램을 업데이트할 수 있습니다.
 릴리스의 별도 EXE는 앱 내 프로그램 업데이트용 파일입니다.
-저장 가사·한국어 번역·싱크·음악 사전은 포함하며, AI 모델·음원 분석 엔진과
-추가 브라우저 연결 모듈은 필요할 때 설치하는 선택 기능입니다.
+Spotify 연결 모듈과 저장 가사·한국어 번역·싱크·음악 사전을 포함합니다.
+AI 모델과 음원 분석 엔진은 필요한 경우에 설치합니다.
 로그인 정보·개인 설정·브라우저 프로필·최근 기록은 배포에 넣지 않습니다.
 포함 범위, 사용자 데이터 위치와 빌드 방법은 [DISTRIBUTION.md](DISTRIBUTION.md)를 참고하세요.
 
 앱 시작 후 새 프로그램이나 사전·가사 자료를 자동으로 확인하고 새 항목이 있으면 알립니다.
-0.1.1 EXE를 실행한 뒤 **더 보기 → 프로그램·자료 업데이트**에서 새 자료를 받거나, 음악 사전의 **자료 갱신…**을 이용하세요.
+**더 보기 → 프로그램·자료 업데이트**에서 새 자료를 받거나, 음악 사전의 **자료 갱신…**을 이용하세요.
 자료는 새 곡과 비어 있는 항목에 추가하고 기존 시각·보정·직접 수정한 가사와 번역을 보존합니다.
 원문이나 시각이 충돌하는 자료는 자동으로 적용하지 않습니다.
 
@@ -190,7 +191,8 @@ SideM 문서에는 같은 제목의 나무위키 후보를 별도로 생성합�
 
 ## 처음 연결하기
 
-Spotify에 연결하지 않은 상태로 앱을 처음 실행하면 Spotify 로그인 창이 열립니다. Windows EXE에서 브라우저 모듈 설치가 필요하면 **브라우저 다운로드·설치**를 누르고, 설치가 끝나면 같은 창의 **Spotify 로그인**을 누르세요.
+Spotify에 연결하지 않은 상태로 앱을 처음 실행하면 Spotify 로그인 창이 열립니다.
+Windows에 WebView2 Runtime이 없을 때만 설치 안내가 표시됩니다. 안내에서 Microsoft 공식 다운로드 페이지를 열어 WebView2를 설치한 뒤 **Spotify 연결**을 다시 누르세요.
 
 사전만 쓰려면 연결 창을 닫으세요. 나중에 **더 보기 → 개발자 모드 → 가사 연결**에서 Spotify에 로그인하거나 다른 가사 제공자를 켤 수 있습니다.
 
@@ -378,10 +380,10 @@ Spotify 가사 화면에서 전체 원문을 읽었을 때, 저장된 모든 구
 이 방식에서는 확장을 꺼도 연결되며, 기존 확장을 계속 켜둘 때는 새로고침으로 v2.6.0을 적용하세요.
 Chrome 방식으로 돌아가면 같은 곡도 다시 연결합니다.
 
-`setup.ps1`은 내부 브라우저 모듈도 함께 설치합니다. 기존 설치에 모듈만 추가할 때는 `setup-browser.ps1`을 실행합니다.
-Windows의 WebView2 Runtime이 필요하며 브라우저 엔진 전체를 앱 ZIP에 넣지 않습니다.
+Windows EXE에 내부 브라우저 모듈이 들어 있으며 Windows의 WebView2 Runtime을 사용합니다.
+소스로 실행할 때는 `setup.ps1`이 모듈도 설치합니다. 소스 설치에 모듈만 추가할 때는 `setup-browser.ps1`을 실행합니다.
 새 설치는 내부 방식을 기본으로 사용하고 사용자가 저장한 선택은 유지합니다.
-내부 모듈이 없으면 설치 안내를 표시하고 내부 선택을 유지합니다. 별도 프로필은 데이터 폴더의 `browser_profile/`입니다.
+내부 브라우저 프로필은 데이터 폴더의 `browser_profile/`입니다.
 Chrome 프로필·쿠키는 복사하지 않습니다. 접속 정보와 웹 캐시는 WebView2가 이 프로필에서 관리하며,
 가사 추출 결과는 메모리 파이프로 앱에 전달하고, 앱은 검증한 결과를 `data/lyrics_cache/`에 보관합니다.
 
@@ -690,7 +692,7 @@ PC와 앱을 켜고 Spotify를 계속 재생하면 사용자 조작 없이 처�
 `audio_progress.py`는 자동·직접 분석의 단계별 진행률과 남은 시간 추정을 메모리에서 계산하며,
 `tests/test_audio_progress.py`와 `tests/test_audio_progress_ui.py`에서 상태 전이·창 재열기·작은 창 배치를 검사합니다.
 `internal_reader.py`는 내부 브라우저 프로세스와 앱 표시 응답을 연결하고, `browser_worker.py`는
-선택 설치 WebView2 실행·제한된 문서 후보 탐색을 담당합니다. `native_page.js`는 확장과 동일한
+WebView2 실행·제한된 문서 후보 탐색을 담당합니다. `native_page.js`는 확장과 동일한
 DOM 파서·문서 대조 함수를 사용합니다. `reader_dialog.py`는 연결 방식·상태·후보 선택 UI입니다.
 관련 검사는 `tests/test_internal_reader.py`, `tests/test_reader_dialog.py`에서 실행합니다.
 `audio_alignment.py`는 제공 가사의 음원 정렬과 구절별 후보 검사를 담당합니다.

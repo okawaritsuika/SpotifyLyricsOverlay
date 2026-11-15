@@ -28,12 +28,14 @@ def restore_pipes():
 
 if __name__ == '__main__':
     restore_pipes()
+    browser_workers = ('spotify_worker', 'browser_worker')
+    module = sys.argv[2] if len(sys.argv) >= 3 and sys.argv[1] == '--worker' else None
     from app_paths import prepare_external_processes
-    prepare_external_processes()
-    if len(sys.argv) >= 3 and sys.argv[1] == '--worker':
+    if module not in browser_workers:
+        prepare_external_processes()
+    if module is not None:
         import runpy
-        module = sys.argv[2]
-        if module not in ('spotify_controls', 'optional_runtime', 'app_updates'):raise SystemExit(2)
+        if module not in ('spotify_controls', 'optional_runtime', 'app_updates') + browser_workers:raise SystemExit(2)
         sys.argv = [module] + (['--worker'] if module == 'app_updates' else []) + sys.argv[3:]
         runpy.run_module(module, run_name='__main__')
     elif len(sys.argv) == 3 and sys.argv[1] == '--self-test':
@@ -78,7 +80,8 @@ if __name__ == '__main__':
         result['media_runtime']=bool(GlobalSystemMediaTransportControlsSessionManager and OcrEngine)
         result['automation_runtime']=bool(uiautomation.GetRootControl())
         from importlib.util import find_spec
-        result['optional_bundled']=[name for name in ('torch','faster_whisper','webview') if find_spec(name)]
+        result['browser_module']=bool(find_spec('webview') and find_spec('clr'))
+        result['optional_bundled']=[name for name in ('torch','faster_whisper') if find_spec(name)]
         app.close()
         (directory/'self-test.json').write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8')
     else:

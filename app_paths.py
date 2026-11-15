@@ -52,6 +52,29 @@ def runtime_dir():
     return user_dir() / 'runtime' if frozen() else resource_dir()
 
 
+def webview2_available():
+    import ctypes
+
+    loader = resource_dir() / 'webview/lib/runtimes/win-x64/native/WebView2Loader.dll'
+    get_version = ctypes.WinDLL(str(loader)).GetAvailableCoreWebView2BrowserVersionString
+    get_version.argtypes = (ctypes.c_wchar_p, ctypes.POINTER(ctypes.c_void_p))
+    get_version.restype = ctypes.c_long
+    version = ctypes.c_void_p()
+    result = get_version(None, ctypes.byref(version))
+    try:
+        if result == 0:
+            return bool(version.value)
+        if result & 0xFFFFFFFF == 0x80070002:  # No installed WebView2 runtime.
+            return False
+        raise ctypes.WinError(result)
+    finally:
+        if version.value:
+            free = ctypes.windll.ole32.CoTaskMemFree
+            free.argtypes = (ctypes.c_void_p,)
+            free.restype = None
+            free(version)
+
+
 def seed_data(directory):
     """Copy public defaults once, preserving every existing user file."""
     source = resource_dir() / 'resources/seed_data'
@@ -74,7 +97,7 @@ def worker_command(base, module, optional=False):
         if optional:
             python = runtime_dir() / 'python/python.exe'
             if not python.is_file():
-                raise ValueError('선택 기능 설치가 필요합니다. 연결 설정 또는 AI 설치 화면에서 다운로드하세요.')
+                raise ValueError('AI 음원 분석 설치가 필요합니다. AI 설치 화면에서 다운로드하세요.')
             # The embedded interpreter is isolated, so add only bundled sources.
             code = 'import runpy,sys;sys.path.insert(0,sys.argv.pop(1));p=sys.argv.pop(1);sys.argv[0]=p;runpy.run_path(p,run_name="__main__")'
             return [str(python), '-X', 'utf8', '-c', code, str(base), str(Path(base) / (module + '.py'))]

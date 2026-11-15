@@ -21,8 +21,8 @@ def ready(base):
     from process_audio import ensure_supported
     ensure_supported()
     if frozen():
-        from optional_runtime import installed
-        missing=[] if installed('audio') else ['optional runtime']
+        from optional_runtime import audio_installed
+        missing=[] if audio_installed() else ['optional runtime']
     else:
         missing = [name for name in ('faster_whisper','stable_whisper','torch','torchaudio')
                    if importlib.util.find_spec(name) is None]

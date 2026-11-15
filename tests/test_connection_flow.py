@@ -61,23 +61,43 @@ class ConnectionFlowTests(unittest.TestCase):
         self.app.show_startup()
         self.assertIsNone(self.service.job)
 
-    def test_installer_can_be_dismissed_or_continue_directly_to_login(self):
-        with patch('app.frozen',return_value=True),patch('optional_runtime.installed',return_value=False) as installed:
+    def test_missing_webview2_offers_microsoft_page_then_login_after_install(self):
+        with patch('app.frozen',return_value=True), \
+                patch('app.webview2_available',return_value=False) as available, \
+                patch('app.messagebox.askyesno',return_value=False) as prompt, \
+                patch('app.webbrowser.open') as open_page:
             self.app.show_startup()
-            dialog=self.app.browser_install_dialog
             self.assertIsNone(self.service.job)
-            dialog.done.invoke()
+            self.assertIn('WebView2',prompt.call_args.args[0])
+            open_page.assert_not_called()
             self.app.settings=self.store.settings()
             self.app.show_startup()
-            self.assertIsNone(self.app.browser_install_dialog)
+            prompt.assert_called_once()
+            prompt.return_value=True
             self.app.show_startup(connect=True)
-            dialog=self.app.browser_install_dialog
-            installed.return_value=True
-            dialog.refresh()
-            self.assertEqual(dialog.download.cget('text'),'Spotify 로그인')
-            dialog.download.invoke()
-            self.assertIsNone(self.app.browser_install_dialog)
+            open_page.assert_called_once_with('https://developer.microsoft.com/microsoft-edge/webview2/#download')
+            self.assertIsNone(self.service.job)
+            available.return_value=True
+            self.app.show_startup(connect=True)
             self.assertTrue(self.service.job.visible)
+            self.assertEqual(prompt.call_count,2)
+
+    def test_packaged_first_run_with_webview2_opens_login_directly(self):
+        with patch('app.frozen',return_value=True),patch('app.webview2_available',return_value=True), \
+                patch('app.messagebox.askyesno') as prompt:
+            self.app.show_startup()
+            self.assertTrue(self.service.job.visible)
+            prompt.assert_not_called()
+
+    def test_missing_webview2_preserves_saved_connection_during_automatic_reconnect(self):
+        self.app.settings.update(spotify_connected=True,spotify_authenticated=True)
+        with patch('app.frozen',return_value=True),patch('app.webview2_available',return_value=False), \
+                patch('app.messagebox.askyesno') as prompt:
+            self.app.connect_spotify(visible=False)
+            self.assertIsNone(self.service.job)
+            self.assertIn('WebView2',self.service.spotify_status)
+            self.assertTrue(self.app.settings['spotify_authenticated'])
+            prompt.assert_not_called()
 
     def test_developer_connection_button_reuses_existing_dialog(self):
         self.app.open_developer_mode()

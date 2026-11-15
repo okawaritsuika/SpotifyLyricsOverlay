@@ -6,13 +6,12 @@ import subprocess
 import threading
 import time
 from web_lyrics import validate_url
-from app_paths import frozen, worker_command, worker_environment
+from app_paths import frozen, webview2_available, worker_command, worker_environment
 
 
 def available(base):
     if frozen():
-        from optional_runtime import installed
-        return installed('browser')
+        return webview2_available()
     return (Path(base)/'.browser_deps'/'webview').is_dir() or importlib.util.find_spec('webview') is not None
 
 
@@ -23,7 +22,7 @@ class BrowserJob:
         self.cancelled=threading.Event()
         self.messages=messages
         environment=worker_environment(base,browser=True)
-        self.process=subprocess.Popen(worker_command(base,'browser_worker',optional=True),
+        self.process=subprocess.Popen(worker_command(base,'browser_worker'),
             stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.DEVNULL,encoding='utf-8',env=environment,
             creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0)|getattr(subprocess,'BELOW_NORMAL_PRIORITY_CLASS',0))
         self.process.stdin.write(json.dumps({'state':state,'visible':visible,'selected_url':selected_url,
@@ -86,7 +85,7 @@ class InternalReader:
         if value and not available(self.base):
             self.enabled=False
             if self.job:self.job.cancel();self.job=None
-            self.status=('내부 브라우저 설치가 필요합니다. 가사 연결 → Spotify 연결에서 설치하세요.' if frozen()
+            self.status=('내부 브라우저에 Microsoft Edge WebView2 Runtime이 필요합니다. 가사 연결 → Spotify 연결에서 설치 페이지를 열 수 있습니다.' if frozen()
                          else '내부 브라우저 설치가 필요합니다. setup-browser.ps1을 실행하세요.')
             raise ValueError(self.status)
         self.enabled=value

@@ -1,6 +1,7 @@
 """Build a Windows EXE from public allowlisted files, without optional AI models."""
 import argparse
 from importlib import metadata
+from importlib.util import find_spec
 from pathlib import Path
 import re
 import shutil
@@ -80,6 +81,8 @@ def build(version, output_dir, electron_runtime=None):
     if not re.fullmatch(r'[0-9]+\.[0-9]+\.[0-9]+(?:[-.][A-Za-z0-9]+)*',version):raise ValueError('버전 형식을 확인하세요.')
     from app_version import VERSION
     if version != VERSION:raise ValueError('빌드 버전과 app_version.VERSION이 일치해야 합니다.')
+    if find_spec('webview') is None or find_spec('clr') is None:
+        raise ValueError('빌드 환경에 브라우저 모듈을 설치하세요: python -m pip install -r requirements-build.txt')
     base=Path(__file__).resolve().parent
     from package_release import release_paths, MODULES
     paths=release_paths(base)
@@ -98,15 +101,18 @@ def build(version, output_dir, electron_runtime=None):
         relative=path.relative_to(base)
         if relative.parts[0] in ('resources','extension','desktop_ui') or (len(relative.parts)==1 and
                 (path.suffix=='.py' or path.name in ('native_page.js','requirements-audio.txt',
-                                                    'requirements-audio-gpu.txt','requirements-browser.txt'))):
+                                                    'requirements-audio-gpu.txt'))):
             arguments += ['--add-data',str(path)+';'+str(relative.parent)]
     for module in list(MODULES)+['app_paths','optional_runtime','spotify_controls']:
         arguments += ['--hidden-import',module]
     for package in ('pykakasi','unidic_lite','fugashi','uiautomation','winrt'):
         arguments += ['--collect-all',package]
+    # The standard hooks collect WebView2 and pythonnet DLLs. The webview
+    # JavaScript bridge files also need to be available as package data.
+    arguments += ['--hidden-import','webview.platforms.winforms','--collect-data','webview']
     for package in ('torch','torchaudio','torchvision','scipy','faster_whisper','stable_whisper','whisper','numpy','ctranslate2',
                     'onnx','onnxruntime','pyopenjtalk','pyshiro','av','speechbrain','nnAudio','singer_identity',
-                    'webview','clr','pythonnet','PyQt5','PyQt6','PySide6','pytest'):
+                    'PyQt5','PyQt6','PySide6','pytest'):
         arguments += ['--exclude-module',package]
     import PyInstaller.__main__
     PyInstaller.__main__.run(arguments)

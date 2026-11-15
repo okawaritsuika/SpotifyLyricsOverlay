@@ -25,9 +25,8 @@ def gpu_upgrade_needed(base):
 
 
 class AudioInstaller:
-    def __init__(self,base,kind='audio'):
+    def __init__(self,base):
         self.base=Path(base);self.process=None;self.thread=None
-        self.kind=kind
         self.lock=threading.RLock();self.cancelled=threading.Event()
         self.running=False;self.status='설치 전';self.lines=deque(maxlen=160)
 
@@ -52,7 +51,7 @@ class AudioInstaller:
                 PYTHONPATH=sysconfig.get_path('purelib'))
             command=[str(executable),'-X','utf8',str(self.base/'audio_install.py'),'--worker',str(self.base),str(python)]
             if frozen():
-                command=worker_command(self.base,'optional_runtime')+[self.kind]
+                command=worker_command(self.base,'optional_runtime')+['audio']
                 env=worker_environment(self.base)
             with self.lock:
                 if self.cancelled.is_set():return
@@ -70,9 +69,8 @@ class AudioInstaller:
                 elif code:self.status='설치 실패 · 아래 내용을 확인하고 다시 다운로드를 누르세요.'
                 else:
                     importlib.invalidate_caches()
-                    if self.kind=='audio':ready(self.base)
-                    self.status=('설치 완료 · Spotify 로그인을 눌러 계속하세요.' if self.kind=='browser'
-                                 else '설치 완료 · 자동 분석을 켜거나 분석 대기를 시작하세요.')
+                    ready(self.base)
+                    self.status='설치 완료 · 자동 분석을 켜거나 분석 대기를 시작하세요.'
         except Exception as error:
             with self.lock:
                 self.status='설치 실패 · 다시 시도할 수 있습니다.'
@@ -99,11 +97,9 @@ class AudioInstaller:
 
 
 class AudioInstallDialog:
-    def __init__(self,app,kind='audio'):
+    def __init__(self,app):
         self.app=app;self.last_lines=None;self.after=None
-        self.kind=kind
-        if kind=='browser' and not getattr(app,'browser_installer',None):app.browser_installer=AudioInstaller(app.audio_installer.base,kind=kind)
-        self.installer=app.browser_installer if kind=='browser' else app.audio_installer
+        self.installer=app.audio_installer
         self.window=tk.Toplevel(app.root);self.window.title('AI 음원 분석 · 선택 설치')
         self.window.geometry('600x400');self.window.minsize(520,360)
         self.window.columnconfigure(0,weight=1);self.window.rowconfigure(2,weight=1)
@@ -116,11 +112,6 @@ class AudioInstallDialog:
             '이 창을 닫아도 설치는 계속됩니다. 취소하려면 설치 취소를 누르세요.',
             justify='left',anchor='w',wraplength=570)
         self.help.grid(row=0,column=0,sticky='ew',padx=12,pady=10)
-        if kind=='browser':
-            self.window.title('Spotify 연결')
-            self.help.configure(text='Spotify에 로그인하려면 브라우저 모듈을 한 번 설치하세요.\n'
-                'Python 공식 사이트와 PyPI에서 다운로드하며 Microsoft Edge WebView2 Runtime이 필요합니다.\n'
-                '사전만 사용하려면 이 창을 닫으세요. 나중에 가사 연결에서 로그인할 수 있습니다.')
         self.status=tk.Label(self.window,justify='left',anchor='w',wraplength=570)
         self.status.grid(row=1,column=0,sticky='ew',padx=12,pady=(0,6))
         frame=tk.Frame(self.window);frame.grid(row=2,column=0,sticky='nsew',padx=12)
@@ -131,7 +122,6 @@ class AudioInstallDialog:
         self.log.configure(yscrollcommand=scroll.set)
         actions=tk.Frame(self.window);actions.grid(row=3,column=0,sticky='ew',padx=12,pady=10)
         self.download=tk.Button(actions,text='AI 다운로드·설치',command=lambda:app.safe(self.start))
-        if kind=='browser':self.download.configure(text='브라우저 다운로드·설치')
         self.download.pack(side='left')
         self.cancel=tk.Button(actions,text='설치 취소',command=lambda:app.safe(self.cancel_install))
         self.cancel.pack(side='left',padx=8)
@@ -146,10 +136,6 @@ class AudioInstallDialog:
     def start(self):
         self.installer.start();self.refresh()
 
-    def login(self):
-        self.close()
-        self.app.connect_spotify()
-
     def cancel_install(self):
         # Cancelling a package install may need a moment; keep the UI responsive.
         threading.Thread(target=self.installer.cancel,daemon=True).start()
@@ -159,27 +145,16 @@ class AudioInstallDialog:
         running,status,lines=self.installer.snapshot()
         installed=False
         if not running:
-            if self.kind=='browser':
-                from optional_runtime import installed as runtime_installed
-                installed=runtime_installed('browser')
-            else:
-                try:ready(self.installer.base);installed=True
-                except ValueError:pass
-                if installed and gpu_upgrade_needed(self.installer.base):
-                    installed=False
-                    if status=='설치 전':status='CPU 분석 가능 · GPU 실시간 분석용 모델과 런타임을 추가할 수 있습니다.'
+            try:ready(self.installer.base);installed=True
+            except ValueError:pass
+            if installed and gpu_upgrade_needed(self.installer.base):
+                installed=False
+                if status=='설치 전':status='CPU 분석 가능 · GPU 실시간 분석용 모델과 런타임을 추가할 수 있습니다.'
             if installed and status=='설치 전':
-                status=('이미 설치되어 있습니다. Spotify 로그인을 눌러 계속하세요.' if self.kind=='browser'
-                        else '이미 설치되어 있습니다. 추가 다운로드 없이 분석할 수 있습니다.')
+                status='이미 설치되어 있습니다. 추가 다운로드 없이 분석할 수 있습니다.'
         self.status.configure(text=status)
         retry='실패' in status or '취소됨' in status
-        if self.kind=='browser':
-            can_login=installed and not retry
-            self.download.configure(text='Spotify 로그인' if can_login else '브라우저 다운로드·설치',
-                                    state='disabled' if running else 'normal',
-                                    command=lambda:self.app.safe(self.login if can_login else self.start))
-        else:
-            self.download.configure(state='disabled' if running or installed and not retry else 'normal')
+        self.download.configure(state='disabled' if running or installed and not retry else 'normal')
         self.cancel.configure(state='normal' if running else 'disabled')
         if lines!=self.last_lines:
             self.log.configure(state='normal');self.log.delete('1.0','end')
@@ -190,8 +165,7 @@ class AudioInstallDialog:
         if self.after:self.window.after_cancel(self.after);self.after=None
         if self.installer.running:self.app.notify('선택 기능 설치는 계속 진행됩니다. 설치창을 다시 열어 상태를 확인하거나 취소할 수 있습니다.',10)
         self.window.destroy()
-        if self.kind=='browser':self.app.browser_install_dialog=None
-        else:self.app.audio_install_dialog=None
+        self.app.audio_install_dialog=None
 
 
 def worker(base,python):

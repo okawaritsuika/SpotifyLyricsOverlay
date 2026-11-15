@@ -38,8 +38,8 @@ class OptionalRuntimeTests(unittest.TestCase):
             with patch.object(optional_runtime,'runtime_dir',return_value=root), \
                  patch.object(optional_runtime,'ensure_python',return_value=root/'python/python.exe'), \
                  patch.object(optional_runtime,'command',side_effect=OSError('failed')):
-                with self.assertRaises(OSError):optional_runtime.install('browser')
-            self.assertFalse((root/'browser-installed.json').exists())
+                with self.assertRaises(OSError):optional_runtime.install('audio')
+            self.assertFalse((root/'audio-installed.json').exists())
 
     def test_nvidia_driver_adds_live_model_without_replacing_cpu_torch(self):
         with tempfile.TemporaryDirectory() as folder:

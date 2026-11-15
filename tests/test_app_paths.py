@@ -30,13 +30,13 @@ class ReleasePathsTests(unittest.TestCase):
 
     def test_frozen_worker_reenters_exe_without_python_arguments(self):
         with patch.object(app_paths,'frozen',return_value=True), patch.object(app_paths.sys,'executable','overlay.exe'):
-            self.assertEqual(app_paths.worker_command(Path('.'),'spotify_controls'),['overlay.exe','--worker','spotify_controls'])
+            for module in ('spotify_controls','spotify_worker','browser_worker'):
+                self.assertEqual(app_paths.worker_command(Path('.'),module),['overlay.exe','--worker',module])
 
     def test_optional_runtime_never_downloads_during_availability_check(self):
-        from optional_runtime import installed
+        from optional_runtime import audio_installed
         with tempfile.TemporaryDirectory() as folder, patch('optional_runtime.runtime_dir',return_value=Path(folder)):
-            self.assertFalse(installed('browser'))
-            self.assertFalse(installed('audio'))
+            self.assertFalse(audio_installed())
 
 
 if __name__=='__main__':unittest.main()

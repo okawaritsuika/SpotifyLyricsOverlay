@@ -31,7 +31,7 @@ class SpotifyJob:
     def __init__(self,base,profile,messages,visible=False):
         self.messages=messages;self.closed=False;self.lock=threading.Lock()
         environment=worker_environment(base,browser=True)
-        self.process=subprocess.Popen(worker_command(base,'spotify_worker',optional=True),
+        self.process=subprocess.Popen(worker_command(base,'spotify_worker'),
             stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.DEVNULL,encoding='utf-8',env=environment,
             creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0)|getattr(subprocess,'BELOW_NORMAL_PRIORITY_CLASS',0))
         self.send({'profile':str(profile),'visible':visible})
