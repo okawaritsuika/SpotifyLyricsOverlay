@@ -110,6 +110,21 @@ class BackgroundLyricsTests(unittest.TestCase):
         self.assertEqual(len(DeferredThread.pending),1)
         self.assertEqual(self.finish_public(),(self.playback.key,result()))
 
+    def test_complete_spotify_lyrics_skip_public_lookup_for_the_same_recording(self):
+        self.service.connect(visible=False)
+        self.service.observe(self.playback)
+        self.assertTrue(self.service.awaiting_spotify)
+        self.assertIsNotNone(self.service.receive(self.service.job, self.spotify_event()))
+        self.assertFalse(self.service.awaiting_spotify)
+        self.assertTrue(self.service.spotify_has_complete_sync)
+        self.service.observe(self.playback)
+        self.assertEqual(DeferredThread.pending, [])
+        self.assertEqual(self.service.status, 'Spotify 가사·싱크 연결됨')
+        self.service.observe(replace(self.playback, title='Next track'))
+        self.assertFalse(self.service.spotify_has_complete_sync)
+        self.assertTrue(self.service.awaiting_spotify)
+        self.assertEqual(DeferredThread.pending, [])
+
     def test_spotify_hint_does_not_suppress_public_without_a_complete_cache(self):
         self.service.observe(self.playback,spotify_sync_present=True)
         self.assertTrue(self.service.public_enabled)
@@ -138,6 +153,20 @@ class BackgroundLyricsTests(unittest.TestCase):
                             'state':'error','text':'failed'})
         self.service.observe(self.playback)
         self.assertEqual(DeferredThread.pending,[])
+
+    def test_public_failure_in_flight_cannot_replace_spotify_progress(self):
+        self.fetch.side_effect = [TimeoutError('offline'), result()]
+        self.service.observe(self.playback)
+        self.service.connect(visible=False)
+        self.service.observe(self.playback)
+        self.assertTrue(self.service.awaiting_spotify)
+        self.assertIsNone(self.finish_public())
+        self.assertIn('Spotify 응답 대기', self.service.status)
+        self.assertEqual(self.service.public_retry, 0)
+        self.service.receive(self.service.job, {'kind':'status','key':self.service.request_key,
+                             'state':'not_found','text':'Spotify 가사 없음'})
+        self.service.observe(self.playback)
+        self.assertEqual(self.finish_public(), (self.playback.key, result()))
 
     def test_valid_unsynced_response_releases_received_sync_but_keeps_current_cache_hint(self):
         self.service.connect()
@@ -333,6 +362,19 @@ class BackgroundLyricsTests(unittest.TestCase):
         self.assertEqual(accepted[1]['times'], [10, 20, 30])
         self.assertIsNone(self.service.receive(object(), self.spotify_event()))
 
+    def test_lookup_passes_only_verified_metadata_for_the_exact_recording(self):
+        track = {'id':'a' * 22, 'title':'Test Song', 'album':'Album', 'artists':['Singer'], 'duration':90}
+        self.assertTrue(self.service.artist_metadata.put(self.playback, track))
+        self.service.connect(visible=False)
+        self.service.observe(self.playback, public_enabled=False)
+        self.assertEqual(self.service.job.commands[-1]['verified_track'], track)
+        self.service.observe(replace(self.playback, duration=91), public_enabled=False)
+        self.assertNotIn('verified_track', self.service.job.commands[-1])
+        no_album = replace(self.playback, album='')
+        self.assertTrue(self.service.artist_metadata.put(no_album, track))
+        self.service.observe(no_album, public_enabled=False)
+        self.assertNotIn('verified_track', self.service.job.commands[-1])
+
     def test_spotify_timestamps_beyond_current_recording_are_rejected(self):
         self.service.observe(self.playback)
         self.service.connect()
@@ -418,6 +460,22 @@ class BackgroundLyricsTests(unittest.TestCase):
         self.now.return_value = 1000
         self.service.observe(self.playback, public_enabled=False)
         self.assertIsNone(self.service.job)
+
+    def test_worker_recovery_holds_public_fallback_until_spotify_retries_end(self):
+        self.connected_spotify()
+        self.finish_spotify()
+        self.service.observe(self.playback)
+        self.assertTrue(self.service.awaiting_spotify)
+        self.assertEqual(DeferredThread.pending, [])
+        for when in (105, 120):
+            self.now.return_value = when
+            self.service.observe(self.playback)
+            self.assertTrue(self.service.awaiting_spotify)
+            self.assertEqual(DeferredThread.pending, [])
+            self.finish_spotify()
+        self.service.observe(self.playback)
+        self.assertFalse(self.service.awaiting_spotify)
+        self.assertEqual(self.finish_public(), (self.playback.key, result()))
 
     def test_valid_lyrics_reset_recovery_budget_but_authenticated_status_does_not(self):
         self.connected_spotify()

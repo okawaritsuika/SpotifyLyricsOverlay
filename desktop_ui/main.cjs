@@ -48,10 +48,28 @@ if (!Number.isInteger(port) || port < 1 || port > 65535 || !/^[a-f0-9]{64}$/.tes
   app.exit(1);
 }
 const channel = net.createConnection({ host: '127.0.0.1', port });
-const send = data => channel.write(JSON.stringify(data) + '\n');
-channel.on('connect', () => channel.write(secret + '\n'));
-channel.on('error', () => app.exit(1));
-channel.on('close', () => app.quit());
+const disconnectedMessage = '가사 앱과의 연결이 끊겼습니다.';
+let disconnected = false;
+const send = data => {
+  if (!disconnected) channel.write(JSON.stringify(data) + '\n');
+};
+
+function disconnect() {
+  if (disconnected) return;
+  disconnected = true;
+  quitting = true;
+  for (const waiter of pending.values()) {
+    clearTimeout(waiter.timeout);
+    waiter.reject(new Error(disconnectedMessage));
+  }
+  pending.clear();
+  channel.destroy();
+  app.quit();
+}
+
+channel.on('connect', () => { if (!disconnected) channel.write(secret + '\n'); });
+channel.on('error', disconnect);
+channel.on('close', disconnect);
 
 function show(next) {
   view = next;
@@ -68,6 +86,7 @@ function show(next) {
 }
 
 function requestPython(method, payload) {
+  if (disconnected) return Promise.reject(new Error(disconnectedMessage));
   return new Promise((resolve, reject) => {
     const id = ++sequence;
     const timeout = setTimeout(() => {
@@ -323,10 +342,12 @@ ipcMain.on('preview:resize', (event, phase, edge, x, y) => {
 });
 
 readline.createInterface({ input: channel, crlfDelay: Infinity })
+  .on('error', disconnect)
   .on('line', line => {
+    if (disconnected) return;
     let message;
     try { message = JSON.parse(line); } catch { return; }
-    if (message.close) { app.quit(); return; }
+    if (message.close) { disconnect(); return; }
     if (views.has(message.view)) { show(message.view); return; }
     if (message.activateOverlay) {
       if (overlay && !overlay.isDestroyed() && overlayState?.visible) overlay.showInactive();
@@ -416,6 +437,7 @@ async function createWorkspace() {
 app.setName('아이마스 가사 오버레이');
 app.setAppUserModelId('SpotifyLyricsOverlay.Workspace');
 app.whenReady().then(() => {
+  if (disconnected) return;
   const local = session.defaultSession;
   local.protocol.handle('overlay-ui', request => {
     const url = new URL(request.url);

@@ -196,6 +196,26 @@ class ConnectionFlowTests(unittest.TestCase):
         self.assertIn('미확인',detail)
         self.assertNotIn('찾지 못',headline+detail)
 
+    def test_current_spotify_lookup_precedes_previous_public_failure(self):
+        self.app.set_playback(Playback('Test Song','Singer','Album',12,90,True,time.monotonic()))
+        self.app.connect_spotify()
+        self.app.public_background.set(True)
+        self.service.spotify_authenticated=True
+        self.service.spotify_state='not_found'
+        self.service.spotify_pending=True
+        self.service.public_done=True
+        self.service.public_retry=2
+        headline,detail=self.app.connection_status()
+        self.assertEqual(headline,'Spotify 가사를 찾고 있어요')
+        self.assertIn('먼저',detail)
+
+    def test_public_retry_shows_progress_until_last_attempt(self):
+        self.app.set_playback(Playback('Test Song','Singer','Album',12,90,True,time.monotonic()))
+        self.app.online.set(True);self.app.public_background.set(True)
+        self.service.public_retry=1
+        self.service.public_done=False
+        self.assertEqual(self.app.connection_status()[0],'공개 가사를 다시 확인하고 있어요')
+
     def test_public_rejection_is_visible_even_with_spotify_signed_in(self):
         self.app.connect_spotify()
         self.service.spotify_authenticated=True;self.service.spotify_state='not_found'
@@ -220,7 +240,8 @@ class ConnectionFlowTests(unittest.TestCase):
         self.app.set_playback(Playback('Test Song','Singer','Album',12,90,True,time.monotonic()))
         self.app.connect_spotify()
         self.app.receive_background_lyrics(self.service.job,{
-            'kind':'status','state':'not_found','authenticated':True,'text':'이 곡의 가사를 찾지 못했습니다.'})
+            'kind':'status','key':self.service.request_key,'state':'not_found','authenticated':True,
+            'text':'이 곡의 가사를 찾지 못했습니다.'})
         headline,detail=self.app.connection_status()
         self.assertIn('가사를 찾지 못',headline)
         self.assertIn('다른 곡',detail)

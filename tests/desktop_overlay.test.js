@@ -11,14 +11,16 @@ function overlaySource(filename) {
 
 function electronFixture() {
   const requests = [];
+  let quits = 0;
   const channel = new EventEmitter();
   channel.write = text => requests.push(JSON.parse(text));
+  channel.destroy = () => channel.emit('close');
   const replies = new EventEmitter();
   const ipc = new Map();
   const ipcMain = { on: (name, callback) => ipc.set(name, callback),
     handle: (name, callback) => ipc.set(name, callback) };
   const app = Object.assign(new EventEmitter(), { setName() {}, setAppUserModelId() {},
-    whenReady: () => new Promise(() => {}) });
+    whenReady: () => new Promise(() => {}), quit: () => { quits++; }, exit: () => { quits++; } });
   let bounds = { x: 10, y: 20, width: 500, height: 300 };
   const frame = { url: 'overlay-ui://workspace/desktop_ui/overlay.html' };
   const window = { webContents: { mainFrame: frame, isLoadingMainFrame: () => false, send() {} },
@@ -50,8 +52,36 @@ function electronFixture() {
     action: (name, payload) => ipc.get('overlay:action')(event, name, payload),
     update: bounds => receive({ overlay: { visible: true, bounds } }),
     reply: (request, result) => receive({ id: request.id, result }),
+    closeFromApp: () => receive({ close: true }),
+    quitCount: () => quits,
+    reset: error => {
+      channel.emit('error',error);
+      replies.emit('error',error);
+      channel.emit('close');
+    },
   };
 }
+
+test('a connection reset is handled by both the socket and its line reader', async () => {
+  const overlay = electronFixture();
+  const opening = overlay.action('menu', {});
+  const result = assert.rejects(opening, /연결이 끊겼습니다/);
+  const reset = Object.assign(new Error('read ECONNRESET'), { code: 'ECONNRESET' });
+  assert.doesNotThrow(() => overlay.reset(reset));
+  await result;
+  await assert.rejects(overlay.action('play', {}), /연결이 끊겼습니다/);
+  assert.equal(overlay.requests.length, 1);
+  assert.equal(overlay.quitCount(), 1);
+});
+
+test('a normal close also settles pending requests and quits only once', async () => {
+  const overlay = electronFixture();
+  const saving = overlay.action('play', {});
+  const result = assert.rejects(saving, /연결이 끊겼습니다/);
+  overlay.closeFromApp();
+  await result;
+  assert.equal(overlay.quitCount(), 1);
+});
 
 test('a second drag moves immediately, even while the first position is being saved', async () => {
   const overlay = electronFixture();

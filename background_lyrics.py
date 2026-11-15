@@ -2,6 +2,7 @@
 import json
 from pathlib import Path
 import secrets
+import stat
 import subprocess
 import threading
 import time
@@ -11,14 +12,20 @@ from lyric_follow import native_line_mapping
 from lyric_match import match_lyrics
 from public_lyrics import fetch_public_lyrics
 from storage import validate_times
-from artist_metadata import ArtistMetadata,playback_request,request_identity
+from artist_metadata import ArtistMetadata,playback_request,request_identity,validated_track
 from artist_credit_overrides import ArtistCreditOverrides,orchestra_singer_credits
 from spotify_api import select_track,text_key
 from spotify_catalog import catalog_diagnostic_record
-from app_paths import worker_command, worker_environment
+from app_paths import resource_dir, worker_command, worker_environment
 
 
 CATALOG_TIMEOUT=35
+
+
+def _file_stamp(path):
+    try:info=path.stat()
+    except OSError:return None
+    return (info.st_mtime_ns,info.st_size) if stat.S_ISREG(info.st_mode) else None
 
 
 class CatalogSearchError(Exception):
@@ -30,7 +37,7 @@ class CatalogSearchError(Exception):
 class SpotifyJob:
     def __init__(self,base,profile,messages,visible=False):
         self.messages=messages;self.closed=False;self.lock=threading.Lock()
-        environment=worker_environment(base,browser=True)
+        environment=worker_environment(base,browser=True,reuse_frozen_bundle=True)
         self.process=subprocess.Popen(worker_command(base,'spotify_worker'),
             stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.DEVNULL,encoding='utf-8',env=environment,
             creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0)|getattr(subprocess,'BELOW_NORMAL_PRIORITY_CLASS',0))
@@ -70,7 +77,8 @@ class SpotifyJob:
 
 
 class BackgroundLyrics:
-    def __init__(self,base,directory,messages,job_factory=SpotifyJob,fetch=fetch_public_lyrics,reports_status=None):
+    def __init__(self,base,directory,messages,job_factory=SpotifyJob,fetch=fetch_public_lyrics,reports_status=None,
+                 *,defer_catalog=False):
         self.base=Path(base);self.profile=Path(directory)/'spotify_profile';self.messages=messages
         self.job_factory=job_factory;self.fetch=fetch;self.job=None;self.playback=None
         self.merge_metadata=fetch is fetch_public_lyrics
@@ -78,6 +86,7 @@ class BackgroundLyrics:
         self.key='';self.request_key='';self.generation=0;self.enabled=False;self.closed=False
         self.cached_sync=False;self.spotify_pending=False
         self.spotify_sync_present=False;self._spotify_sync_hint=False;self._spotify_timed_result=False
+        self.spotify_has_complete_sync=False
         self.spotify_missing_lyrics=''
         self.public_enabled=True
         self.public_running=False;self.public_done=False;self.public_retry=0;self.retry_at=0
@@ -92,8 +101,15 @@ class BackgroundLyrics:
         self.artist_pool_path=Path(directory)/'spotify_public_tracks.json'
         self.artist_pool_stamp=None;self.artist_pool={}
         self.catalog_credits=None;self.catalog_credits_stamp=None
+        self.defer_catalog=defer_catalog;self.artist_catalog_loading=None
+        self.artist_catalog_held=False
+        self.artist_catalog_paths=(resource_dir()/'resources'/'song_catalog.json',Path(directory)/'song_catalog.json')
         self.metadata_attempted=None;self.metadata_pending=False
         self._catalog_lock=threading.Lock();self._catalog_waiters={}
+
+    @property
+    def awaiting_spotify(self):
+        return bool(self.enabled and self.spotify_requested and (self.spotify_pending or self.spotify_retry_at))
 
     def catalog_search(self,title,artist='',album='',cancel=None):
         """Read search facts through the existing signed-in WebView, off the UI thread."""
@@ -189,11 +205,17 @@ class BackgroundLyrics:
                      'album':p.album,'duration':p.duration}
             if self.cached_sync:
                 identity=request_identity(playback_request(p))
-                if (not self.enabled or not self.spotify_requested or identity is None
-                        or self.display_artists(p) or identity==self.metadata_attempted):return
+                if (not self.enabled or not self.spotify_requested or identity is None or self.artist_catalog_held
+                        or self.display_artists(p) or self.artist_catalog_loading is not None
+                        or identity==self.metadata_attempted):return
                 self.metadata_attempted=identity;self.metadata_pending=True
                 command['metadata_only']=True
-            else:self.spotify_pending=True
+            else:
+                self.spotify_pending=True
+                request=playback_request(p)
+                entry=self.artist_metadata.entries.get(request_identity(request))
+                if entry and p.album.strip() and (track:=validated_track(request,entry.get('track'))):
+                    command['verified_track']=track
             self.job.send(command)
 
     def display_artists(self,playback):
@@ -208,38 +230,73 @@ class BackgroundLyrics:
         if request_identity(request) is None or not request['album'].strip():return ()
         # The catalog may already hold the full credit list even when the web
         # search failed. Reuse only a uniquely matching recording, offline too.
-        try:
-            info=self.artist_pool_path.stat()
-        except OSError:return ()
-        stamp=(info.st_mtime_ns,info.st_size)
-        if stamp!=self.artist_pool_stamp:
-            from catalog_autolink import cached_pool
-            pool={}
-            for track in cached_pool(self.artist_pool_path.parent):
-                pool.setdefault(text_key(track['title']),[]).append(track)
-            self.artist_pool=pool;self.artist_pool_stamp=stamp
+        if not self.defer_catalog:
+            stamp=_file_stamp(self.artist_pool_path)
+            if stamp is None:return ()
+            if stamp!=self.artist_pool_stamp:
+                self.artist_pool=self._read_artist_pool();self.artist_pool_stamp=stamp
         track=select_track(request,self.artist_pool.get(text_key(playback.title),[]))
         if track and self.artist_metadata.put(playback,track):return tuple(track['artists'])
         return ()
 
     def _catalog_display_artists(self,playback):
         if not playback.title:return ()
-        from song_catalog import SongCatalog,RESOURCE_PATH
+        if self.defer_catalog:
+            self._defer_artist_catalog()
+        else:
+            stamp=tuple(_file_stamp(path) for path in self.artist_catalog_paths)
+            if self.catalog_credits is None or stamp!=self.catalog_credits_stamp:
+                self.catalog_credits=self._read_catalog_credits();self.catalog_credits_stamp=stamp
+        return self.catalog_credits.get(playback) if self.catalog_credits is not None else ()
+
+    def _read_catalog_credits(self):
+        from song_catalog import SongCatalog
         from catalog_display import CatalogDisplayCredits
-        update=self.artist_metadata.path.parent/'song_catalog.json'
-        paths=(RESOURCE_PATH,update)
-        stamp=tuple((path.stat().st_mtime_ns,path.stat().st_size) if path.is_file() else None for path in paths)
-        if self.catalog_credits is None or stamp!=self.catalog_credits_stamp:
-            catalog=SongCatalog(update_path=update)
-            self.catalog_credits=CatalogDisplayCredits(catalog.songs,catalog.performers)
-            self.catalog_credits_stamp=stamp
-        return self.catalog_credits.get(playback)
+        catalog=SongCatalog(*self.artist_catalog_paths)
+        return CatalogDisplayCredits(catalog.songs,catalog.performers)
+
+    def _read_artist_pool(self):
+        from catalog_autolink import cached_pool
+        pool={}
+        for track in cached_pool(self.artist_pool_path.parent):
+            pool.setdefault(text_key(track['title']),[]).append(track)
+        return pool
+
+    def _artist_catalog_stamp(self):
+        return tuple(_file_stamp(path) for path in self.artist_catalog_paths),_file_stamp(self.artist_pool_path)
+
+    def _defer_artist_catalog(self):
+        if self.closed or self.artist_catalog_held or self.artist_catalog_loading is not None:return
+        stamp=self._artist_catalog_stamp()
+        current=self.catalog_credits_stamp,self.artist_pool_stamp
+        if stamp==current:return
+        self.artist_catalog_loading=stamp
+        credits,pool=self.catalog_credits,self.artist_pool
+        def load():
+            new_credits,new_pool=credits,pool
+            try:
+                if stamp[0]!=current[0]:new_credits=self._read_catalog_credits()
+                if stamp[1]!=current[1]:new_pool=self._read_artist_pool() if stamp[1] is not None else {}
+            finally:
+                if not self.closed:self.messages.put(('artist_catalog_ready',(self,stamp,new_credits,new_pool)))
+        threading.Thread(target=load,daemon=True,name='artist-catalog').start()
+
+    def accept_artist_catalog(self,value):
+        owner,stamp,credits,pool=value
+        if self.closed or owner is not self or stamp!=self.artist_catalog_loading:return False
+        self.artist_catalog_loading=None
+        if stamp!=self._artist_catalog_stamp():return False
+        self.catalog_credits_stamp,self.artist_pool_stamp=stamp
+        self.catalog_credits,self.artist_pool=credits,pool
+        return True
 
     def observe(self,playback,enabled=True,public_enabled=True,cached_sync=False,spotify_sync_present=False):
         if self.closed:return
         changed_recording=(self.playback is None or playback.key!=self.key
                            or abs(playback.duration-self.playback.duration)>.5)
-        if changed_recording:self._spotify_timed_result=False
+        if changed_recording:
+            self._spotify_timed_result=False
+            self.spotify_has_complete_sync=False
         self._spotify_sync_hint=bool(spotify_sync_present)
         self.spotify_sync_present=self._spotify_sync_hint or self._spotify_timed_result
         was_cached=self.cached_sync;self.cached_sync=bool(cached_sync)
@@ -276,7 +333,10 @@ class BackgroundLyrics:
             self._schedule_spotify_retry()
         self._retry_spotify()
         if not public_enabled or not playback.has_timeline or not playback.artist:return
-        if self.spotify_pending:
+        if self.spotify_has_complete_sync:
+            self.status='Spotify 가사·싱크 연결됨'
+            return
+        if self.awaiting_spotify:
             self.status='Spotify 응답 대기 · 이후 LRCLIB 보조 조회'
             return
         if not self.public_done and not self.public_running and time.monotonic()>=self.retry_at:
@@ -299,12 +359,14 @@ class BackgroundLyrics:
         if self.closed or not isinstance(event,dict):return None
         if sender=='public':
             self.public_running=False
-            if (not self.enabled or not self.public_enabled or self.cached_sync
+            if (not self.enabled or not self.public_enabled or self.cached_sync or self.spotify_has_complete_sync
                     or event.get('key')!=self.request_key):return None
             if event.get('error'):
+                if self.awaiting_spotify:return None
                 self.public_retry+=1;self.retry_at=time.monotonic()+15
                 self.public_done=self.public_retry>=2
-                self.status='LRCLIB 조회 실패' + (' · 자동 재시도 대기' if not self.public_done else ' · 싱크 존재 여부 미확인')
+                self.status=('LRCLIB 조회 실패 · 싱크 존재 여부 미확인' if self.public_done
+                             else 'LRCLIB 다시 확인 대기')
                 return None
             self.public_done=True;self.public_retry=0;self.retry_at=0;result=event.get('result')
             reported=event.get('provider_status')
@@ -374,6 +436,10 @@ class BackgroundLyrics:
             validate_times(times,len(lines))
             if any(t is not None and t>self.playback.duration+2 for t in times):return None
             self._spotify_timed_result=any(t is not None for t in times)
+            self.spotify_has_complete_sync=all(t is not None for t in times)
+            if self.spotify_has_complete_sync:
+                self.public_retry=0;self.retry_at=0
+                if self.public_enabled:self.status='Spotify 가사·싱크 연결됨'
             self.spotify_missing_lyrics=''
             self.spotify_sync_present=self._spotify_sync_hint or self._spotify_timed_result
             self.spotify_retry_count=0;self.spotify_retry_at=0
@@ -383,6 +449,7 @@ class BackgroundLyrics:
     def disconnect(self):
         self._cancel_catalog('Spotify 연결을 해제하여 곡 검색을 취소했습니다.','cancelled')
         self.spotify_requested=False;self.spotify_retry_at=0;self.spotify_pending=False;self.metadata_pending=False
+        self.spotify_has_complete_sync=False
         if self.job:self.job.close();self.job=None
         self.spotify_authenticated=False;self.spotify_state='login_required';self.spotify_status='Spotify 연결 안 됨'
 

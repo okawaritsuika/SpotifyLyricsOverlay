@@ -46,6 +46,7 @@ def release_paths(base):
     paths += [base/'tools'/'enrich_imas_db_people.py']
     paths += [base/'tools'/'collect_spotify_links.py']
     paths += [base/'tools'/'audit_playlist_lyrics.py']
+    paths += [base/'tools'/'build_saved_playback_seed.py']
     paths += [base/'tools'/'build_song_readings.py']
     paths += [base/'tools'/'benchmark_japanese_alignment.py']
     paths += [base/'tools'/name for name in ('benchmark_romaji_profiles.py', 'report_romaji_failures.py')]

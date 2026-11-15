@@ -1,6 +1,8 @@
 """Exercise Tk state transitions with temporary data and no external services."""
 from pathlib import Path
+import queue
 import tempfile
+import threading
 import time
 import tkinter as tk
 import unittest
@@ -44,6 +46,52 @@ class UITests(unittest.TestCase):
         self.app.set_playback(Playback('Unregistered','other','',5,120,False,time.monotonic()))
         self.assertIsNone(self.app.song)
         self.assertNotIn('가사 예시',self.app.korean_label.cget('text'))
+
+    def test_background_readings_never_delay_lyrics_or_apply_previous_track(self):
+        first=Song(self.a.id,self.a.title,self.a.artist,self.a.album,
+                   (Line('最初の歌詞','','첫 곡'),Line('読める','よめる','')))
+        second=Song(self.b.id,self.b.title,self.b.artist,self.b.album,
+                    (Line('次の歌詞','','다음 곡'),Line('見える','みえる','')))
+        self.app.songs=[first,second]
+        self.app.services_started=True
+        started=threading.Event();release=threading.Event()
+
+        def convert(lines):
+            original=lines[0].original
+            if original==first.lines[0].original:
+                started.set()
+                release.wait(5)
+            return tuple(line.reading or '自動 '+line.original for line in lines)
+
+        def next_reading_result():
+            deadline=time.monotonic()+5
+            while time.monotonic()<deadline:
+                try:kind,value=self.app.messages.get(timeout=max(0,deadline-time.monotonic()))
+                except queue.Empty:break
+                if kind=='lyric_readings':return value
+            self.fail('Background reading result did not arrive')
+
+        with patch('app.readings_for_display',side_effect=convert) as converter, \
+                patch.object(self.app.background_lyrics,'display_artists',return_value=()):
+            try:
+                self.playback(first)
+                self.assertTrue(started.wait(5))
+                self.assertEqual(self.app.korean_label.cget('text'),'첫 곡')
+                self.assertEqual(self.app.line_readings,('','よめる'))
+                self.playback(second)
+                self.assertEqual(self.app.korean_label.cget('text'),'다음 곡')
+                self.assertEqual(self.app.line_readings,('','みえる'))
+                self.assertEqual(converter.call_count,1)
+            finally:
+                release.set()
+            first_result=next_reading_result()
+            self.app.receive_lyric_readings(*first_result)
+            self.assertEqual(self.app.line_readings,('','みえる'))
+            second_result=next_reading_result()
+            self.app.receive_lyric_readings(*second_result)
+            self.app.render()
+            self.assertEqual(self.app.line_readings,('自動 次の歌詞','みえる'))
+            self.assertEqual(converter.call_count,2)
 
     def test_volume_panel_is_reused_and_closed_with_overlay(self):
         with patch('volume_popup.SpotifyVolumeController'):

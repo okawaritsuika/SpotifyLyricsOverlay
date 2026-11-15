@@ -55,6 +55,26 @@ class SpotifySearchNavigationTests(unittest.TestCase):
         self.assertEqual(self.browser.active_query,'1/3 Artist')
         self.assertGreater(self.browser.search_deadline,0)
 
+    def test_verified_current_recording_requests_lyrics_without_search_navigation(self):
+        track={'id':'1'*22,'title':'1/3','artists':['Artist'],'album':'Album','duration':200}
+        pending={'key':'song','title':'1/3','artist':'Artist','album':'Album','duration':200,
+                 'verified_track':track}
+        self.browser.pending=pending
+        with patch('spotify_worker.emit'),patch.object(self.browser,'fetch_current_lyrics') as fetch:
+            self.browser.begin_search()
+        fetch.assert_called_once_with(track)
+        self.assertEqual(self.callbacks,[])
+
+    def test_cached_track_for_different_album_still_requires_search(self):
+        track={'id':'1'*22,'title':'1/3','artists':['Artist'],'album':'Other','duration':200}
+        self.browser.pending={'key':'song','title':'1/3','artist':'Artist','album':'Album','duration':200,
+                              'verified_track':track}
+        with patch('spotify_worker.emit'),patch.object(self.browser,'fetch_current_lyrics') as fetch:
+            self.browser.begin_search()
+        fetch.assert_not_called()
+        self.callbacks.pop()()
+        self.core.Navigate.assert_called_once_with('https://open.spotify.com/search/1%2F3%20Artist')
+
     def test_same_current_search_still_uses_reload(self):
         self.window.get_current_url.return_value='https://open.spotify.com/search/1%2F3'
         with patch.object(self.browser,'reload') as reload:

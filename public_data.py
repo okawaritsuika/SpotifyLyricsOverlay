@@ -30,6 +30,16 @@ PRIVATE_TEXT = re.compile(
     r'(?:access_token|refresh_token|client_secret|password)\s*[=:])', re.I)
 SOURCE_LABELS = {'Spotify', 'LRCLIB', 'ALSong', 'LyricsPlus', 'reviewed_translation',
                  'existing_local_cache', 'playlist_lyrics', 'reviewed_source_correction', 'manual_review'}
+PROVIDERS = {'Spotify', 'LRCLIB', 'ALSong', 'LyricsPlus'}
+MERGED_PROVIDERS = {'Merged', 'manual', 'imas_timetag'}
+SNAPSHOT_HOSTS = {
+    'sidem': 'sidem-ko.fandom.com', 'imas_sidem': 'disgaearobkt.hatenadiary.jp',
+    'imas_shiny': 'shinycolors.wiki', 'SideM 파트 기록': 'sidemental.hatenablog.com',
+    'UtaTen': 'utaten.com', 'JOYSOUND': 'www.joysound.com', 'Ameblo': 'ameblo.jp',
+}
+SNAPSHOT_SOURCES = PROVIDERS | set(SNAPSHOT_HOSTS) | {
+    'manual', 'imas_timetag', 'namu', 'cache', 'local', 'audio',
+}
 TIMING_SOURCES = {'직접 기록', '직접 기록 / 음원 분석', '직접 저장한 싱크',
                   '구절별 수동 / 음원 분석', '음원 분석', 'LRCLIB'}
 AUDIO_METHODS = {'supplied-lyrics-alignment', 'bounded-gap-alignment-v1',
@@ -87,7 +97,7 @@ def _rows(value, annotations=False):
     return rows
 
 
-def _url(value):
+def _url(value, extra_host=None):
     """Only public recording or lyric URLs; strip query/fragment tracking."""
     if not isinstance(value, str):return ''
     try:
@@ -103,7 +113,7 @@ def _url(value):
             if not re.fullmatch(r'/(?:embed/)?(?:track|album|artist)/[A-Za-z0-9]{22}/?', path):return ''
         elif host == 'namu.wiki':
             if not path.startswith('/w/'):return ''
-        else:return ''
+        elif host is None or host != extra_host or not path.strip('/'):return ''
         _text(unquote(path))
         return urlunsplit(('https', host, path, '', ''))
     except ValueError:
@@ -130,20 +140,76 @@ def _track(value):
     return result
 
 
-def _direct(value, depth=0, *, cached=False):
+def _provider_id(source, value):
+    if value is None:return None
+    if source == 'imas_timetag':
+        from imas_timetag import validate_url
+        return validate_url(value)
+    if source == 'Spotify':return _identifier(value, TRACK_ID)
+    if source in ('ALSong', 'LRCLIB'):
+        if (type(value) is int and 0 <= value < 2**63
+                or isinstance(value, str) and re.fullmatch(r'[0-9]{1,30}', value)):
+            return value
+        raise ValueError('Invalid public provider identifier')
+    if source in SNAPSHOT_HOSTS or source == 'namu':
+        host = 'namu.wiki' if source == 'namu' else SNAPSHOT_HOSTS[source]
+        if isinstance(value, str) and urlsplit(value).hostname == host:
+            return _url(value, host) or None
+    return None
+
+
+def _direct(value, depth=0, *, cached=False, merged=False):
     if value is None:return None
     source = value['source']
-    if depth > 1 or (source not in {'Spotify', 'LRCLIB', 'ALSong', 'LyricsPlus'}
+    if depth > 1 or (source not in PROVIDERS and not (merged and source in MERGED_PROVIDERS)
                      and not (cached and source == 'Merged')):
         raise ValueError('Invalid lyric provider')
     result = {'source': source, 'lines': _rows(value['lines']), 'times': value['times']}
     validate_times(result['times'], len(result['lines']))
-    identifier = value.get('provider_id')
-    if identifier is not None:
-        identifier = _text(identifier) if isinstance(identifier, str) else _number(identifier)
-    result['provider_id'] = identifier
+    result['provider_id'] = _provider_id(source, value.get('provider_id'))
     if value.get('fallback') is not None:result['fallback'] = _direct(value['fallback'], depth + 1)
     return result
+
+
+def _merge(value, rows):
+    from lyric_merge import decode_merge
+
+    def source(value, allowed=SNAPSHOT_SOURCES):
+        if value not in allowed:raise ValueError('Invalid public lyric source')
+        return value
+
+    def reference(item, fields):
+        name = source(item['source'])
+        return {'source': name, 'provider_id': _provider_id(name, item.get('provider_id')),
+                **{key: _number(item[key]) for key in fields}}
+
+    snapshots = []
+    for item in value['snapshots']:
+        name = source(item['source'])
+        snapshots.append({**_fields(item, ('title', 'artist', 'album')), 'source': name,
+            'lines': _rows(item['lines']), 'times': item['times'], 'kinds': item['kinds'],
+            'provider_id': _provider_id(name, item.get('provider_id')),
+            'track_id': _identifier(item['track_id'], TRACK_ID) if item.get('track_id') is not None else None,
+            'duration': _number(item['duration']) if item.get('duration') is not None else None,
+            'recording_verified': item['recording_verified'], 'annotation_only': item['annotation_only']})
+    provenance = []
+    for row in value['rows']:
+        original = source(row['original_source'])
+        confidence = row['confidence']
+        if confidence not in (None, 'high', 'medium'):raise ValueError('Invalid public lyric confidence')
+        provenance.append({'kind': row['kind'], 'original_source': original,
+            'original_provider_id': _provider_id(original, row.get('original_provider_id')),
+            'original_index': _number(row['original_index']),
+            'reading_source': source(row['reading_source'], SNAPSHOT_SOURCES | {None, 'generated'}),
+            'translation_source': source(row['translation_source'], SNAPSHOT_SOURCES | {None}),
+            'source_rows': [reference(item, ('start', 'end')) for item in row['source_rows']],
+            'timings': [{**reference(item, ('index', 'raw_seconds', 'seconds')), 'status': item['status']}
+                        for item in row['timings']],
+            'selected_source': row['selected_source'], 'selected_time': row['selected_time'],
+            'status': row['status'], 'confidence': confidence, 'manual': row['manual']})
+    cleaned = {'snapshots': snapshots, 'rows': provenance}
+    decode_merge(cleaned, len(rows))
+    return cleaned
 
 
 def _song(value):
@@ -256,7 +322,9 @@ def _cache(value):
     key = _text(value['key'])
     if len(key.split('\0')) != 3:raise ValueError('Invalid recording cache identity')
     result = {'version': 1, 'key': key, 'duration': _number(value['duration']),
-              'saved_at': 0, 'lines': _rows(value['lines']), 'direct': _direct(value.get('direct'), cached=True)}
+              'saved_at': 0, 'lines': _rows(value['lines']),
+              'direct': _direct(value.get('direct'), cached=True, merged='merge' in value)}
+    if 'merge' in value:result['merge'] = _merge(value['merge'], result['lines'])
     if value.get('reuse') is not None:
         reuse = value['reuse']
         result['reuse'] = {'source_key': _text(reuse['source_key']),
@@ -266,13 +334,43 @@ def _cache(value):
 
 def _playlist(value):
     from lyrics import Line
+    from playlist_lyrics_store import _decode_recording_merge, _direct as runtime_direct
     from public_lyrics import reviewed_original_conflict
     track, rows = _track(value['track']), _rows(value['lines'])
+    lines = tuple(Line(**row) for row in rows)
     if reviewed_original_conflict(track['title'], track['artists'][0], track['album'], track['duration'],
-                                  tuple(Line(**row) for row in rows)):
+                                  lines):
         return None  # The runtime already rejects this independently reviewed wrong-song upload.
-    return {'schema_version': 1, 'track': track, 'lines': rows,
-            'direct': _direct(value.get('direct')), 'sources': _sources(value.get('sources', []))}
+    merged = 'merge' in value
+    result = {'schema_version': 1, 'track': track, 'lines': rows,
+              'direct': _direct(value.get('direct'), merged=merged), 'sources': _sources(value.get('sources', []))}
+    direct = runtime_direct(result['direct'], track, decoded=True, merged=merged)
+    if merged:
+        result['merge'] = _merge(value['merge'], rows)
+        _decode_recording_merge(result['merge'], lines, direct, track)
+    return result
+
+
+def _artist_credit_overrides(value):
+    from artist_metadata import _text as valid_artist_text, validated_track
+
+    entries = value['entries']
+    if value['version'] != 1 or not isinstance(entries, list) or len(entries) > 128:
+        raise ValueError('Invalid public singer credit overrides')
+    result = []
+    seen = set()
+    for item in entries:
+        if item.get('evidence_kind') != 'user_confirmed_audio_and_credits':continue
+        track = _track(item['track'])
+        request = {name: track[name] for name in ('title', 'album', 'duration')}
+        request['artist'] = track['artists'][0]
+        names = _strings(item['artists'])
+        if (not validated_track(request, track) or track['id'] in seen or not 0 < len(names) <= 200
+                or any(not valid_artist_text(name, True) or len(name) > 512 for name in names)):
+            raise ValueError('Invalid public singer credit override')
+        seen.add(track['id'])
+        result.append({'track': track, 'artists': names, 'evidence_kind': 'user_confirmed_audio_and_credits'})
+    return {'version': 1, 'entries': result}
 
 
 def _user_lyrics(value):
@@ -405,6 +503,7 @@ def collect_public_data(source):
         return {'version': 1, 'documents': result}
 
     add('ai_translations/imports.json', imports)
+    add('artist_credit_overrides.json', _artist_credit_overrides)
     add('artist_metadata.json', lambda value: {'version': 1, 'entries': [
         {'request': {**_fields(row['request'], ('title', 'artist', 'album')),
                      'duration': _number(row['request']['duration'])}, 'track': _track(row['track'])}

@@ -2,6 +2,7 @@ from dataclasses import replace
 import unittest
 import queue
 import tempfile
+import threading
 from unittest.mock import patch
 from background_lyrics import BackgroundLyrics
 from catalog_display import CatalogDisplayCredits
@@ -73,6 +74,55 @@ class CatalogDisplayTests(unittest.TestCase):
                 self.assertEqual(service.display_artists(playback),('Singer A',))
             self.assertEqual(service.artist_metadata.get(playback),('Wrong singer',))
             self.assertEqual(playback.artist,'Wrong singer')
+
+    def test_deferred_catalog_uses_verified_metadata_until_index_is_ready(self):
+        playback=Playback('Song','Cached Singer','Album',duration=240)
+        songs=[dict(id='solo',title='Song',album='Album',duration=240,artists=['Catalog Singer'])]
+        credits=CatalogDisplayCredits(songs,[])
+        started=threading.Event();release=threading.Event()
+
+        def load():
+            started.set()
+            release.wait(5)
+            return credits
+
+        with tempfile.TemporaryDirectory() as directory:
+            messages=queue.Queue()
+            service=BackgroundLyrics('.',directory,messages,defer_catalog=True)
+            track=dict(id='a'*22,title='Song',album='Album',duration=240,artists=['Cached Singer'])
+            self.assertTrue(service.artist_metadata.put(playback,track))
+            with patch.object(service,'_read_catalog_credits',side_effect=load) as reader:
+                try:
+                    self.assertEqual(service.display_artists(playback),('Cached Singer',))
+                    self.assertTrue(started.wait(5))
+                    self.assertEqual(service.display_artists(playback),('Cached Singer',))
+                    self.assertTrue(messages.empty())
+                finally:
+                    release.set()
+                kind,value=messages.get(timeout=5)
+                self.assertEqual(kind,'artist_catalog_ready')
+                self.assertTrue(service.accept_artist_catalog(value))
+                self.assertEqual(service.display_artists(playback),('Catalog Singer',))
+                reader.assert_called_once()
+
+    def test_deferred_catalog_reloads_if_updated_before_adoption(self):
+        playback=Playback('Song','Original Singer','Album',duration=240)
+        with tempfile.TemporaryDirectory() as directory:
+            messages=queue.Queue()
+            service=BackgroundLyrics('.',directory,messages,defer_catalog=True)
+            initial=CatalogDisplayCredits([],[])
+            updated=CatalogDisplayCredits([dict(id='solo',title='Song',album='Album',duration=240,
+                                                 artists=['Updated Singer'])],[])
+            with patch.object(service,'_read_catalog_credits',side_effect=[initial,updated]) as reader:
+                self.assertEqual(service.display_artists(playback),())
+                _,value=messages.get(timeout=5)
+                service.artist_catalog_paths[1].write_text('{}',encoding='utf-8')
+                self.assertFalse(service.accept_artist_catalog(value))
+                self.assertEqual(service.display_artists(playback),())
+                _,value=messages.get(timeout=5)
+                self.assertTrue(service.accept_artist_catalog(value))
+                self.assertEqual(service.display_artists(playback),('Updated Singer',))
+                self.assertEqual(reader.call_count,2)
 
 
 if __name__=='__main__':unittest.main()

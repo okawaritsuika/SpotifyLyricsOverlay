@@ -15,6 +15,7 @@ from functools import partial
 import hashlib
 from io import BytesIO
 import math
+import os
 import queue
 import threading
 import time
@@ -34,7 +35,7 @@ from audio_capture_cache import CAPTURE_NAME, discard_private_capture, find_capt
 from audio_install import AudioInstaller, AudioInstallDialog
 from audio_progress import AudioProgress, TERMINAL
 from audio_sync import merge_candidates
-from timing_quality import timing_origins,saved_rows
+from timing_quality import cleared_rows,timing_origins,saved_rows
 from native_timing import NativeTiming
 from auto_audio import AutoAnalyzer
 from recording_context import RecordingContexts
@@ -44,7 +45,7 @@ from web_dialog import WebLyricsDialog
 from manual_dialog import ManualLyricsDialog
 from manual_sync_dialog import ManualSyncDialog
 from batch_translation import BatchTranslationStore, is_latin_only, preserves_latin_phrases
-from web_lyrics import fetch_lyrics, make_song, source_id
+from web_lyrics import JA, fetch_lyrics, make_song, source_id
 import imas_lyrics
 from extension_inbox import ExtensionInbox
 from lyric_annotations import LyricAnnotations,LyricTextEdits,match_annotations,match_verified_annotations,readings_for_display
@@ -183,6 +184,9 @@ class LyricsApp:
         self.singer_input_changed_row=None
         self.queued_lyric_seek=None
         self.line_readings=()
+        self.line_reading_request=None
+        self.line_reading_worker=None
+        self.line_reading_queue=queue.Queue(maxsize=1)
         self.reader_bridge=ReaderBridge(messages=self.messages,document_urls=read_json(store.directory/'wiki_documents.json',{}),
                                         preserve_sources=True)
         self.internal_reader=InternalReader(BASE,self.reader_bridge,self.messages,profile=store.directory/'browser_profile')
@@ -194,7 +198,10 @@ class LyricsApp:
         self.update_dialog=None;self.update_controller=None
         self.screen_lyrics=ScreenLyricsMonitor(self.messages)
         self.screen_song=None
-        self.background_lyrics=BackgroundLyrics(BASE,store.directory,self.messages)
+        self.background_lyrics=BackgroundLyrics(BASE,store.directory,self.messages,defer_catalog=start_services)
+        self.initial_playback_paint_pending=start_services
+        self.initial_playback_paint_callback=None
+        self.background_lyrics.artist_catalog_held=start_services
         from catalog_sync import CatalogSync
         self.catalog_sync=CatalogSync(self)
         self.lyricsplus_job=ProviderSyncJob(self.messages,partial(fetch_lyricsplus,merge_partial=True),reports_status=True)
@@ -212,6 +219,10 @@ class LyricsApp:
         from personal_resources import PersonalResources
         self.personal_resources=PersonalResources(self)
         self.restoring_cache=False;self.cache_hit=False;self.cache_load_ms=None;self.cache_reuse=None;self.screen_cache_tainted=False
+        self.bundled_manual_key=None
+        self.related_cache_request=None
+        self.related_cache_running=False
+        self.related_cache_pending=None
         self.cache_tracking=None
         self.spotify_current=None;self.spotify_observed_at=0
         self.spotify_source_index=None;self.spotify_anchor=None
@@ -1721,7 +1732,12 @@ class LyricsApp:
             elif snapshot.has_timeline and abs(snapshot.duration-self.temporary_alsong.duration)>2:
                 self.unlink_temporary_alsong()
         if cache_changed:
+            if self.initial_playback_paint_callback is not None:
+                self.root.after_cancel(self.initial_playback_paint_callback)
+                self.initial_playback_paint_callback=None
             self.sync_lookup_started=time.monotonic()
+            self.bundled_manual_key=None
+            self.related_cache_request=None
             self.lyric_merge_job.reset()
             self.current_lyric_merge=None
             self.merge_reader_receipts.clear()
@@ -1746,6 +1762,7 @@ class LyricsApp:
             if changed:
                 # Paint the new track before the local lyric search can block Tk.
                 self.root.update_idletasks()
+                if self.electron_overlay_active:self.workspace.publish_developer_playback(snapshot.position())
             self.restore_cached_lyrics()
             if not self.temporary_alsong and not self.lyrics_deleted():
                 try:self.restore_confirmed_alsong()
@@ -1770,9 +1787,26 @@ class LyricsApp:
                 self.fetch_web_lyrics(snapshot.title,snapshot.artist,snapshot.album,playback=snapshot,imas=True)
         # Cache restore can consume the reader's freshness window on a slow
         # track change. Publish the accepted observation after that work too.
-        if cache_changed:self.reader_bridge.observe(snapshot)
+        if cache_changed:
+            self.reader_bridge.observe(snapshot)
+            if snapshot.has_timeline and self.initial_playback_paint_pending:
+                self.initial_playback_paint_callback=self.root.after_idle(self.finish_initial_playback_paint)
 
-    def restore_cached_lyrics(self):
+    def finish_initial_playback_paint(self):
+        self.initial_playback_paint_callback=None
+        if self.closed or self.closing or not self.playback.has_timeline:return
+        if self.pending_height_fit is not None or self.electron_overlay_publish is not None:
+            self.initial_playback_paint_callback=self.root.after(10,self.finish_initial_playback_paint)
+            return
+        # The first exact-cache result, including an empty result, can now paint.
+        self.initial_playback_paint_pending=False
+        self.background_lyrics.artist_catalog_held=False
+        self.displayed_artists()
+        pending=self.related_cache_pending
+        self.related_cache_pending=None
+        if pending and pending[0] is self.related_cache_request:self.run_related_lyrics(*pending)
+
+    def restore_cached_lyrics(self, *, related_lookup=None):
         if self.temporary_alsong or self.lyrics_deleted():return
         if self.user_lyric_override():
             cached=self.lyric_cache.load(self.playback)
@@ -1792,6 +1826,18 @@ class LyricsApp:
         self.cache_hit=False;self.cache_reuse=None;self.cache_tracking=None
         self.batch_translation_source=None
         cached=self.lyric_cache.load(self.playback)
+        bundled_data=resource_dir()/'resources'/'seed_data'
+        local_clock=self.timing if self.song else None
+        if not local_clock or not (local_clock.get('offset') or cleared_rows(local_clock)
+                or any(origin=='manual' for origin in timing_origins(local_clock))):
+            cached=self.lyric_cache.prefer_bundled_manual(self.playback,cached,
+                bundled_data=bundled_data,timing_store=self.live_lyrics.timing_store)
+        direct=cached.get('direct') if cached else None
+        if (not cached or not direct or not any(stamp is not None for stamp in direct['times'])
+                or any(not line.korean.strip() for line in cached['lines'])):
+            immutable=LyricCache(bundled_data/'lyrics_cache').load(self.playback)
+            cached=self.lyric_cache.supplement_exact(cached,immutable)
+        manual_timing=cached.get('manual_timing') if cached else None
         saved_playlist=self.playlist_lyrics.store.find(self.playback)
         self.local_playlist_track=((self.playback.key,self.playback.duration),
                                    saved_playlist['track']['id'] if saved_playlist else None)
@@ -1800,10 +1846,12 @@ class LyricsApp:
                 saved_playlist={**saved_playlist,'merge':{'snapshots':saved_playlist['snapshots'],
                                                           'rows':saved_playlist['merge_rows']}}
             track=saved_playlist['track']
+            if not self.background_lyrics.artist_metadata.get(self.playback):
+                self.background_lyrics.artist_metadata.put(self.playback,track)
             source=(track['title'],track['artists'][0],track['album'])
             self.batch_translation_source=(self.playback.key,source)
             saved_playlist={**saved_playlist,'lines':self.fill_batch_annotations(*source,saved_playlist['lines'])}
-            if cached and len(cached['lines'])==1 and len(saved_playlist['lines'])>1:
+            if cached and not manual_timing and len(cached['lines'])==1 and len(saved_playlist['lines'])>1:
                 direct=cached.get('direct')
                 if (direct and direct['source']=='LyricsPlus' and direct['times']==[0.0]
                         and normalized(cached['lines'][0].original)==''.join(
@@ -1837,15 +1885,13 @@ class LyricsApp:
         related=[]
         linked_reference=None
         clock=mapped_times(cached['direct'],cached['lines']) if cached and cached.get('direct') else []
-        if not cached or not clock or any(stamp is None for stamp in clock):
-            if saved_playlist:
-                linked_reference=self.playlist_lyrics.store.find_linked_reference(
-                    self.playback,saved_playlist,self.live_lyrics.timing_store,self.lyric_cache)
-            # An exact text cache must not hide a useful clock on another
-            # release, and a weak cache must not mask the durable collection.
-            related=[value for value in (
-                self.lyric_cache.load_related(self.playback,timing_store=self.live_lyrics.timing_store),
-                self.playlist_lyrics.store.find_related(self.playback,timing_store=self.live_lyrics.timing_store)) if value]
+        if not manual_timing and (not cached or not clock or any(stamp is None for stamp in clock)):
+            if related_lookup is not None:
+                related,linked_reference=related_lookup
+            elif self.services_started:
+                self.start_related_lyrics(saved_playlist)
+            else:
+                related,linked_reference=self.load_related_lyrics(self.playback,saved_playlist)
             if not cached and related:
                 from recording_reuse import related_quality
                 cached=max(related,key=related_quality)
@@ -1893,7 +1939,11 @@ class LyricsApp:
                 matches=match_annotations(lines,self.lyric_annotations.display_lines(base))
                 lines=tuple(Line(old.original,current.reading or old.reading,current.korean or old.korean) if current else old
                             for old,current in zip(lines,matches))
-            if cached.get('merge') and not cached.get('reuse'):
+            if manual_timing:
+                self.bundled_manual_key=self.playback.key
+                self.select_song(self.live_lyrics.receive_merged(self.playback,None,lines,manual_timing))
+                if cached['direct']:self.receive_direct_lyrics(self.playback.key,cached['direct'])
+            elif cached.get('merge') and not cached.get('reuse'):
                 self.apply_merged_lyrics({**cached['merge'],'lines':lines,'direct':cached['direct']},base)
             else:
                 self.select_song(self.live_lyrics.receive(self.playback,base,lines))
@@ -1913,6 +1963,7 @@ class LyricsApp:
             self.cache_hit=True
         except ValueError:
             # A user's edited library can supersede text from an older cache.
+            self.bundled_manual_key=None
             self.cache_reuse=None
             self.cache_tracking=None
             self.live_lyrics.clear();self.direct_result=None;self.direct_map_cache=None
@@ -1923,6 +1974,50 @@ class LyricsApp:
             self.cache_load_ms=round((time.perf_counter()-started)*1000,3)
         if self.cache_hit:self.capture_translation_lyrics()
         if playlist_added:self.queue_lyric_merge()
+
+    def load_related_lyrics(self,playback,saved_playlist):
+        from playlist_lyrics_store import PlaylistLyricsStore
+        # Separate stores keep a previous track's background scan from holding
+        # the locks used by exact lookups and saves on the Tk thread.
+        cache=LyricCache(self.lyric_cache.directory)
+        playlist=PlaylistLyricsStore(self.store.directory)
+        timing_store=LiveTimingStore(self.store.directory)
+        reference=(playlist.find_linked_reference(playback,saved_playlist,timing_store,cache)
+                   if saved_playlist else None)
+        related=[value for value in (cache.load_related(playback,timing_store=timing_store),
+                                     playlist.find_related(playback,timing_store=timing_store)) if value]
+        return related,reference
+
+    def start_related_lyrics(self,saved_playlist):
+        if self.related_cache_request is not None:return
+        request=object()
+        self.related_cache_request=request
+        work=(request,self.playback,saved_playlist)
+        if self.related_cache_running or self.initial_playback_paint_pending:
+            self.related_cache_pending=work
+            return
+        self.run_related_lyrics(*work)
+
+    def run_related_lyrics(self,request,playback,saved_playlist):
+        self.related_cache_running=True
+        def run():
+            try:result=self.load_related_lyrics(playback,saved_playlist)
+            except (OSError,ValueError):result=([],None)
+            self.messages.put(('related_lyrics',(request,playback,result)))
+        threading.Thread(target=run,daemon=True,name='saved-lyric-supplements').start()
+
+    def receive_related_lyrics(self,request,playback,result):
+        self.related_cache_running=False
+        pending=self.related_cache_pending
+        self.related_cache_pending=None
+        if pending and not self.closed and not self.closing:self.run_related_lyrics(*pending)
+        if (request is not self.related_cache_request or playback.key!=self.playback.key
+                or abs(playback.duration-self.playback.duration)>.5 or self.has_complete_sync()
+                or self.timing and (cleared_rows(self.timing) or self.timing.get('offset')
+                    or 'manual' in timing_origins(self.timing))):return
+        if not result[0] and result[1] is None:return
+        self.restore_cached_lyrics(related_lookup=result)
+        self.last_render=None
 
     def cache_current_lyrics(self):
         if (self.temporary_alsong or self.restoring_cache or self.screen_cache_tainted
@@ -1990,8 +2085,7 @@ class LyricsApp:
         has_clock=self.has_spotify_timing() or self.has_complete_sync()
         translated=bool(self.display_lines) and all(line.korean.strip() for line in self.display_lines)
         service=self.background_lyrics
-        waiting=bool(service.key==self.playback.key and
-                     (service.spotify_pending or service.spotify_state in ('connecting','reconnecting')))
+        waiting=service.key==self.playback.key and service.awaiting_spotify
         for job, preference, cached_sync, waiting_for_primary in (
                 (self.lyricsplus_job,self.lyricsplus_background,has_clock,waiting),
                 (self.alsong_job,self.alsong_background,has_clock and translated,False)):
@@ -2142,10 +2236,6 @@ class LyricsApp:
             return headline,'정확한 줄별 시간이 없는 구절은 추정 진행이나 직접 보정을 사용합니다.'
         if connected and service.spotify_state=='reconnecting':
             return 'Spotify 연결을 복구하고 있어요',service.spotify_status
-        if self.online.get() and self.settings.get('spotify_connected') and service.spotify_state=='error':
-            if service.spotify_authenticated:
-                return 'Spotify 가사를 가져오지 못했어요','로그인은 완료됐어요. '+service.spotify_status
-            return '연결을 다시 확인해 주세요',service.spotify_status
         if not self.online.get():return '가사 연결이 꺼져 있어요','아래에서 사용할 연결 방식을 선택하세요.'
         if service.spotify_state=='connecting':
             if service.spotify_authenticated or self.settings.get('spotify_authenticated'):
@@ -2154,13 +2244,29 @@ class LyricsApp:
         if self.settings.get('spotify_connected') and service.spotify_state=='login_required' and not service.spotify_authenticated:
             return 'Spotify 연결이 필요해요','Spotify 연결을 눌러 로그인해 주세요.'
         if not self.playback.has_timeline:return 'Spotify에서 노래를 틀어 주세요','재생 중인 곡을 자동으로 찾아 연결합니다.'
+        if service.awaiting_spotify:
+            return 'Spotify 가사를 찾고 있어요','현재 곡의 Spotify 가사를 먼저 확인하고 있습니다.'
+        if self.lyric_merge_job.running:
+            return '가사를 연결하고 있어요','가져온 가사를 현재 곡에 맞추고 있습니다.'
+        if self.public_background.get():
+            if service.public_running:
+                return '공개 가사를 찾고 있어요','공개 출처에서 현재 곡을 확인하고 있습니다.'
+            if service.public_retry:
+                if not service.public_done:return '공개 가사를 다시 확인하고 있어요',service.status
+                return '공개 가사 조회에 실패했어요',service.status
+        if connected and service.spotify_state=='error':
+            if service.spotify_authenticated:
+                return 'Spotify 가사를 가져오지 못했어요','로그인은 완료됐어요. '+service.spotify_status
+            return '연결을 다시 확인해 주세요',service.spotify_status
         if service.spotify_authenticated:
-            if service.spotify_state=='not_found':return '이 곡의 Spotify 가사를 찾지 못했어요','다른 곡은 자동으로 다시 확인합니다. 공개 싱크 켜기로 보조 가사를 찾아볼 수도 있어요.'
+            if service.spotify_state=='not_found':
+                if self.public_background.get():
+                    if service.public_done:return '확인한 출처에서 가사를 찾지 못했어요',service.status
+                    return '공개 가사를 확인할 예정이에요','Spotify에서 가사를 찾지 못해 공개 출처를 확인합니다.'
+                return '이 곡의 Spotify 가사를 찾지 못했어요','다른 곡은 자동으로 다시 확인합니다. 공개 싱크 켜기로 보조 가사를 찾아볼 수도 있어요.'
             if service.spotify_state=='unsynced':return '가사는 있지만 줄별 시간이 없어요','원문을 표시하고 추정 진행이나 직접 보정을 사용할 수 있습니다.'
             return 'Spotify 가사를 찾고 있어요','연결이 끝나면 창을 닫아도 됩니다.'
         if self.public_background.get():
-            if service.public_running:return '가사를 찾고 있어요','현재 재생 중인 곡의 공개 가사를 확인하고 있습니다.'
-            if service.public_retry:return '공개 가사 조회에 실패했어요',service.status
             if service.public_done:return '이번 공개 가사 조회를 마쳤어요',service.status
             return '로그인 없이 사용할 준비가 됐어요','곡이 바뀌면 공개 가사를 자동으로 찾습니다.'
         if self.lyricsplus_background.get():return 'LyricsPlus 싱크를 확인하고 있어요',self.lyricsplus_job.status
@@ -2260,7 +2366,8 @@ class LyricsApp:
         sources=self.lyric_merge_job
         return (self.has_complete_sync()
                 and (not service.spotify_requested or sources.has_source('Spotify'))
-                and (not self.public_background.get() or sources.has_source('LRCLIB'))
+                and (not self.public_background.get() or sources.has_source('LRCLIB')
+                     or service.key==self.playback.key and service.spotify_has_complete_sync)
                 and not (service.key==self.playback.key and (service.spotify_pending or service.public_running)))
 
     def current_reference(self):
@@ -2284,8 +2391,9 @@ class LyricsApp:
         external=bool(bound and (self.has_spotify_clock() or self.has_direct_sync() or self.has_saved_sync()))
         temporary=self.live_lyrics.is_temporary(self.song)
         service=self.background_lyrics
-        pending=(service.spotify_pending or service.spotify_state in ('connecting','reconnecting')) if self.settings.get('spotify_connected') else False
-        pending=pending or (self.public_background.get() and not service.cached_sync and not service.public_done)
+        pending=bool(self.settings.get('spotify_connected') and service.awaiting_spotify)
+        pending=pending or (self.public_background.get() and not service.cached_sync and not service.public_done
+                            and not (service.key==self.playback.key and service.spotify_has_complete_sync))
         pending=pending or (self.lyricsplus_background.get() and self.lyricsplus_job.pending)
         pending=pending or (self.alsong_background.get() and self.alsong_job.pending)
         # Capture can begin before lyrics arrive. Only model work waits for
@@ -2363,7 +2471,9 @@ class LyricsApp:
         linked=self.settings.get('links',{}).get(self.playback.key)
         base=match_recording(self.songs,self.playback.title,self.playback.artist,self.playback.album,linked)
         old=self.song if self.is_bound() and not self.screen_cache_tainted else None
-        locked=self.user_lyric_override(base) if base else False
+        bundled_layout=bool(old and self.live_lyrics.is_temporary(old) and self.bundled_manual_key==self.playback.key)
+        if bundled_layout:base=None
+        locked=bundled_layout or bool(base and self.user_lyric_override(base))
         snapshots=[]
         base_lines=self.lyric_annotations.display_lines(base) if base else ()
         if base:
@@ -2551,6 +2661,9 @@ class LyricsApp:
             self.user_annotation_signature=None;self.user_annotation_rows=();self.line_singers=()
             if self.line_readings:self.last_render=None
             self.line_readings=()
+            if self.line_reading_request is not None:
+                self.line_reading_request=None
+                self.discard_pending_readings()
             return
         saved=match_saved_annotations(self.playback,self.display_lines,self.songs,
                                       self.lyric_annotations.display_lines)
@@ -2600,10 +2713,59 @@ class LyricsApp:
                 self.live_lyrics.lines=merged
             self.translated_count=sum(bool(line.korean.strip()) for line in merged)
             self.last_render=None
-        readings=readings_for_display(self.display_lines)
+        if self.services_started:
+            self.refresh_readings_in_background()
+        else:self.set_display_readings(readings_for_display(self.display_lines))
+
+    def set_display_readings(self,readings):
         if readings!=self.line_readings:
             self.line_readings=readings
             self.last_render=None
+
+    def display_reading_inputs(self):
+        rows=[]
+        for index,line in enumerate(self.display_lines):
+            row=self.annotation_row(index)
+            supplied=self.lyric_text_edits.reading(row)
+            corrected=self.lyric_text_edits.original(row)
+            if supplied is not None:rows.append(('',supplied))
+            elif corrected is not None:rows.append((corrected,''))
+            else:rows.append((line.original,line.reading))
+        return tuple(rows)
+
+    def refresh_readings_in_background(self):
+        rows=self.display_reading_inputs()
+        request=(self.playback.key,self.song.id,rows)
+        previous=self.line_reading_request
+        if request==previous:return
+        retained=dict(zip(previous[2],self.line_readings)) if previous and previous[:2]==request[:2] else {}
+        self.line_reading_request=request
+        self.set_display_readings(tuple(retained.get(row,row[1]) for row in rows))
+        self.discard_pending_readings()
+        if not any(not supplied.strip() and JA.search(text) for text,supplied in rows):return
+        self.line_reading_queue.put_nowait(request)
+        if self.line_reading_worker is None:
+            # Reuse the converter initialized in this thread across tracks.
+            self.line_reading_worker=threading.Thread(target=self.convert_readings,daemon=True,name='lyric-readings')
+            self.line_reading_worker.start()
+
+    def discard_pending_readings(self):
+        try:self.line_reading_queue.get_nowait()
+        except queue.Empty:pass
+
+    def convert_readings(self):
+        while not (self.closed or self.closing):
+            try:request=self.line_reading_queue.get(timeout=1)
+            except queue.Empty:continue
+            lines=tuple(Line(text,supplied,'') for text,supplied in request[2])
+            readings=readings_for_display(lines)
+            self.messages.put(('lyric_readings',(request,readings)))
+
+    def receive_lyric_readings(self,request,readings):
+        if (request!=self.line_reading_request or not self.song or not self.playback.has_timeline
+                or self.screen_cache_tainted or request[:2]!=(self.playback.key,self.song.id)
+                or request[2]!=self.display_reading_inputs()):return
+        self.set_display_readings(readings)
 
     def current_line_singers(self,index=None):
         if not self.song or not self.line_singers:return ()
@@ -2660,7 +2822,8 @@ class LyricsApp:
         return True
 
     def complete_direct_originals(self):
-        if not self.direct_result or not self.live_lyrics.is_temporary(self.song):return
+        if (not self.direct_result or not self.live_lyrics.is_temporary(self.song)
+                or self.bundled_manual_key==self.playback.key):return
         from lyric_completion import complete_lines,expand_timing,restore_spotify_rows
         from lyrics import Song
         completed=restore_spotify_rows(self.display_lines,self.direct_result[2],self.timing)
@@ -3011,6 +3174,12 @@ class LyricsApp:
                 self.safe(lambda: self.receive_timing(*value),interactive=False)
             elif kind == 'background_lyrics':
                 self.safe(lambda:self.receive_background_lyrics(*value),interactive=False)
+            elif kind == 'artist_catalog_ready':
+                if self.background_lyrics.accept_artist_catalog(value):self.last_render=None
+            elif kind == 'lyric_readings':
+                self.receive_lyric_readings(*value)
+            elif kind == 'related_lyrics':
+                self.safe(lambda:self.receive_related_lyrics(*value),interactive=False)
             elif kind == 'merged_lyrics':
                 self.safe(lambda:self.receive_merged_lyrics(*value),interactive=False)
             elif kind == 'lyricsplus':
@@ -3163,6 +3332,7 @@ class LyricsApp:
             'spotify_clock_active':self.has_spotify_clock(),
             'direct_sync_untimed_rows':sum(t is None for t in self.direct_times()),
             'display_version':2,'translated_lines':self.translated_count,
+            'app_process_id':os.getpid(),
             'reading_lines':sum(bool(value.strip()) for value in self.line_readings),
             'current_reading_available':bool(self.reading_label.cget('text')) if self.song else False,
             'user_annotated_lines':sum(bool(row.korean or row.reading or row.singers) for row in self.user_annotation_rows),
@@ -3319,8 +3489,12 @@ class LyricsApp:
         if is_latin_only(corrected or line.original):
             return ''
         if corrected is not None:
-            return readings_for_display((Line(corrected, '', ''),))[0]
-        return self.line_readings[index] if index < len(self.line_readings) else line.reading
+            if not self.services_started:
+                return readings_for_display((Line(corrected, '', ''),))[0]
+            request=self.line_reading_request
+            if not request or index>=len(request[2]) or request[2][index]!=(corrected,''):return ''
+        if index<len(self.line_readings):return self.line_readings[index]
+        return '' if corrected is not None else line.reading
 
     def display_lyric_translation(self, index, original_visible=True):
         corrected = self.lyric_text_edits.translation(self.annotation_row(index))
@@ -4970,7 +5144,50 @@ class LyricsApp:
         self.root.destroy()
 
 
+def enable_timing_trace():
+    """Opt-in, local timing diagnostics without credentials or lyric contents."""
+    import cProfile
+    import json
+    import os
+    from functools import wraps
+
+    folder=os.environ.get('SPOTIFY_LYRICS_TIMING_DIR')
+    if not folder:return
+    directory=Path(folder)
+    directory.mkdir(parents=True,exist_ok=True)
+    destination=directory/('app-'+str(os.getpid())+'.jsonl')
+
+    def instrument(name):
+        original=getattr(LyricsApp,name)
+        @wraps(original)
+        def timed(self,*args,**kwargs):
+            changed=name=='set_playback' and args[0].key!=self.playback.key
+            profile=cProfile.Profile() if changed and os.environ.get('SPOTIFY_LYRICS_TIMING_PROFILE')=='1' else None
+            started=time.perf_counter()
+            if profile:profile.enable()
+            try:return original(self,*args,**kwargs)
+            finally:
+                elapsed=(time.perf_counter()-started)*1000
+                if profile:
+                    profile.disable()
+                    profile.dump_stats(str(directory/('track-'+str(os.getpid())+'.prof')))
+                if changed or elapsed>=100 or name in ('receive_background_lyrics','publish_electron_overlay'):
+                    value={'stage':name,'at':time.monotonic(),'ms':round(elapsed,3),
+                           'track':hashlib.sha256(self.playback.key.encode()).hexdigest(),
+                           'rows':len(self.display_lines),'layout_pending':self.pending_height_fit is not None,
+                           'snapshot_age_ms':round((time.monotonic()-self.playback.captured)*1000,3)}
+                    try:
+                        with destination.open('a',encoding='utf-8') as output:
+                            output.write(json.dumps(value)+'\n')
+                    except OSError:pass
+        setattr(LyricsApp,name,timed)
+    for name in ('set_playback','restore_cached_lyrics','render','receive_background_lyrics',
+                 'receive_merged_lyrics','publish_electron_overlay','tick','fit_height'):
+        instrument(name)
+
+
 def main():
+    enable_timing_trace()
     parser = argparse.ArgumentParser()
     parser.add_argument('--data-dir', type=Path, default=default_data_dir())
     parser.add_argument('--import-folder', type=Path)
@@ -4998,7 +5215,9 @@ def main():
         from data_updates import apply_pending
         try:args.data_update_result=apply_pending(args.data_dir)
         except (ValueError,OSError) as error:args.data_update_error=str(error)
-        if needs_seed:seed_data(args.data_dir)
+        if needs_seed:
+            try:seed_data(args.data_dir)
+            except (ValueError,OSError) as error:args.data_update_error=str(error)
         clear_spotify_exit(args.data_dir)
         args.window_activation = activation
         run(args)

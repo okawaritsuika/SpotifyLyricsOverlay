@@ -318,8 +318,11 @@ class SpotifyApiTests(unittest.TestCase):
         with patch('spotify_worker.emit') as output,patch('spotify_worker.threading.Thread') as thread:
             browser.receive(('search','query',payload))
         thread.return_value.start.assert_called_once()
-        self.assertEqual(output.call_args.args,('metadata',))
-        self.assertEqual(output.call_args.kwargs['track']['artists'],['如月千早','四条貴音'])
+        metadata,status=output.call_args_list
+        self.assertEqual(metadata.args,('metadata',))
+        self.assertEqual(metadata.kwargs['track']['artists'],['如月千早','四条貴音'])
+        self.assertEqual(status.args,('status',))
+        self.assertEqual(status.kwargs['state'],'searching')
 
     def test_wrong_album_or_stale_search_never_supplies_metadata(self):
         browser,payload=self.metadata_search(album='Different album')

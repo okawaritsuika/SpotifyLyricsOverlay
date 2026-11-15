@@ -184,6 +184,78 @@ class LyricCache:
         except _FAILURES:
             return None
 
+    @staticmethod
+    def supplement_exact(cached, bundled):
+        """Fill an exact recording from the release without replacing local annotations."""
+        if not cached or not bundled:return cached or bundled
+        local, supplied = cached['lines'], bundled['lines']
+        if tuple(row.original for row in local) != tuple(row.original for row in supplied):
+            return cached
+        lines = tuple(Line(row.original, row.reading if row.reading.strip() else extra.reading,
+                           row.korean if row.korean.strip() else extra.korean)
+                      for row, extra in zip(local, supplied))
+        direct = cached.get('direct')
+        if not direct or not any(stamp is not None for stamp in direct['times']):
+            direct = bundled.get('direct') or direct
+        return {**cached, 'lines': lines, 'direct': direct}
+
+    def prefer_bundled_manual(self, playback, cached, *, bundled_data, timing_store):
+        """Recover an exact lyric layout for saved manual or audio timestamps."""
+        from live_timing import LiveTimingStore, original_signature
+        from lyrics import Song
+        from storage import read_json
+        from timing_quality import cleared_rows, manual_priority, timing_origins
+
+        def saved_times(store, identities, *, include_audio=False):
+            matches = []
+            for identity in identities:
+                raw = read_json(store.path(Song(*identity, ())), {})
+                if not isinstance(raw, dict):raise ValueError('Invalid saved timing document')
+                if raw and (manual_priority(raw) or cleared_rows(raw)
+                            or raw.get('removed_alsong_rows') or raw.get('added_alsong_rows')
+                            or include_audio and 'audio' in timing_origins(raw)):
+                    matches.append((identity, raw))
+            return matches
+
+        def paired(candidate, store, matches, *, require_stamp):
+            if not candidate:return None
+            song = Song(*matches[0][0], candidate['lines'])
+            signature = original_signature(song)
+            for _, raw in matches:
+                if raw.get('signature') != signature:continue
+                timing = store.clean(raw, song)
+                stamps = [stamp for stamp in timing['times'] if stamp is not None]
+                if require_stamp and not stamps:continue
+                if all(stamp + timing['offset'] <= duration + 2 for stamp in stamps):
+                    return {**candidate, 'manual_timing': timing}
+            return None
+
+        try:
+            key, duration = _identity(playback)
+            if not playback.album.strip():return cached
+            suffix = hashlib.sha256(key.encode()).hexdigest()[:24]
+            bundle = Path(bundled_data)
+            bundled_store = LiveTimingStore(bundle)
+            identities = tuple((prefix + suffix, playback.title, playback.artist, playback.album)
+                               for prefix in ('memory-', 'completed-'))
+            local = saved_times(timing_store, identities)
+            # Local manual data remains authoritative even if its lyric layout was evicted.
+            store = timing_store if local else bundled_store
+            matches = local or saved_times(bundled_store, identities, include_audio=True)
+            if not matches:return cached
+
+            result = paired(cached, store, matches, require_stamp=not local)
+            if result:return cached if local else result
+            result = paired(LyricCache(bundle / 'lyrics_cache').load(playback), store,
+                            matches, require_stamp=not local)
+            if result:return result
+
+            from playlist_lyrics_store import PlaylistLyricsStore
+            recording = PlaylistLyricsStore(bundle).find(playback)
+            return paired(recording, store, matches, require_stamp=not local) or cached
+        except _FAILURES:
+            return cached
+
     def entries(self):
         """Enumerate validated recordings for the local translation worklist."""
         from media import Playback

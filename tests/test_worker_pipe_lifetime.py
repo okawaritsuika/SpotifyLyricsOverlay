@@ -1,12 +1,14 @@
 """Synthetic worker pipes exercise process cleanup without WebView or network."""
 from pathlib import Path
 import io
+import os
 import queue
+import subprocess
 import tempfile
 import threading
 from types import SimpleNamespace
 import unittest
-from unittest.mock import Mock
+from unittest.mock import Mock, patch
 
 from background_lyrics import SpotifyJob
 from internal_reader import BrowserJob
@@ -60,14 +62,67 @@ class WorkerPipeLifetimeTests(unittest.TestCase):
 
     def test_reader_ignores_non_object_frames_before_a_valid_result(self):
         job=BrowserJob.__new__(BrowserJob)
-        job.messages=queue.Queue();job.cancelled=threading.Event()
+        job.messages=queue.Queue();job.cancelled=threading.Event();job._stop_input=threading.Event()
         job.process=SimpleNamespace(stdout=io.StringIO('null\n[]\n{"kind":"choices","urls":[]}\n'),
-                                    stdin=SimpleNamespace(close=Mock(side_effect=OSError('broken pipe'))),
                                     wait=Mock(return_value=0))
         job._read()
         events=[job.messages.get_nowait()[1][1] for _ in range(job.messages.qsize())]
         self.assertEqual(events,[{'kind':'choices','urls':[]},{'kind':'finished'}])
         job.process.wait.assert_called_once_with(timeout=1)
+
+    def test_frozen_reader_inherits_parent_bundle_environment(self):
+        inherited={'PYINSTALLER_RESET_ENVIRONMENT':'1','_PYI_APPLICATION_HOME_DIR':'synthetic-bundle'}
+        with patch.dict(os.environ,inherited), patch('app_paths.frozen',return_value=True), \
+                patch('internal_reader.subprocess.Popen') as launch, patch('internal_reader.threading.Thread'):
+            BrowserJob('.',{'token':'test','track':'one'},queue.Queue())
+        environment=launch.call_args.kwargs['env']
+        self.assertNotIn('PYINSTALLER_RESET_ENVIRONMENT',environment)
+        self.assertEqual(environment['_PYI_APPLICATION_HOME_DIR'],'synthetic-bundle')
+
+    def test_cancel_does_not_wait_for_blocked_startup_pipe(self):
+        writing=threading.Event();exited=threading.Event();closed=threading.Event()
+        waiting=threading.Event();allow_terminate=threading.Event()
+
+        def write(value):
+            writing.set()
+            exited.wait(5)
+            raise BrokenPipeError
+
+        def wait(timeout):
+            if not exited.is_set():
+                waiting.set()
+                allow_terminate.wait(5)
+                raise subprocess.TimeoutExpired('test reader',timeout)
+            return -1
+
+        class Output:
+            def __iter__(self):
+                exited.wait(5)
+                return iter(())
+
+            def close(self):pass
+
+        stream=Mock(write=Mock(side_effect=write),close=Mock(side_effect=closed.set))
+        process=SimpleNamespace(stdin=stream,stdout=Output(),wait=wait,terminate=Mock(side_effect=exited.set))
+        messages=queue.Queue()
+        with patch('internal_reader.subprocess.Popen',return_value=process):
+            job=BrowserJob('.',{'token':'test','track':'one','full_reference_lines':['歌詞'*6000]},messages)
+        try:
+            self.assertTrue(writing.wait(5))
+            self.assertFalse(closed.is_set())
+            job.cancel()
+            self.assertTrue(waiting.wait(5))
+            self.assertTrue(job.cancelled.is_set())
+            self.assertFalse(exited.is_set())
+            self.assertFalse(closed.is_set())
+        finally:
+            allow_terminate.set()
+        self.assertTrue(closed.wait(5))
+        job.thread.join(timeout=5)
+        self.assertFalse(job.thread.is_alive())
+        process.terminate.assert_called_once()
+        stream.write.assert_called_once()
+        self.assertEqual(messages.get_nowait()[1][1],{'kind':'finished'})
 
 
 if __name__=='__main__':unittest.main()

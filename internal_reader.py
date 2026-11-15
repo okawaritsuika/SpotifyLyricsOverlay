@@ -20,16 +20,39 @@ class BrowserJob:
         self.key=state['token']+':'+state['track']
         self.state=state
         self.cancelled=threading.Event()
+        self._stop_input=threading.Event()
         self.messages=messages
-        environment=worker_environment(base,browser=True)
+        environment=worker_environment(base,browser=True,reuse_frozen_bundle=True)
         self.process=subprocess.Popen(worker_command(base,'browser_worker'),
             stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.DEVNULL,encoding='utf-8',env=environment,
             creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0)|getattr(subprocess,'BELOW_NORMAL_PRIORITY_CLASS',0))
-        self.process.stdin.write(json.dumps({'state':state,'visible':visible,'selected_url':selected_url,
-                                            'profile':str(profile or Path(base)/'data/browser_profile')},ensure_ascii=False)+'\n')
-        self.process.stdin.flush()
+        request={'state':state,'visible':visible,'selected_url':selected_url,
+                 'profile':str(profile or Path(base)/'data/browser_profile')}
+        threading.Thread(target=self._write,args=(request,),daemon=True,name='internal-browser-input').start()
         self.thread=threading.Thread(target=self._read,daemon=True,name='internal-lyric-browser')
         self.thread.start()
+
+    def _write(self,request):
+        # The child may still be starting when a full lyric snapshot exceeds
+        # the pipe buffer. Only this thread owns stdin, including shutdown.
+        stream=self.process.stdin
+        try:
+            if self.cancelled.is_set():return
+            stream.write(json.dumps(request,ensure_ascii=False)+'\n')
+            stream.flush()
+            self._stop_input.wait()
+            if self.cancelled.is_set():
+                stream.write('{"action":"close"}\n');stream.flush()
+        except (OSError,ValueError):pass
+        finally:
+            try:stream.close()
+            except OSError:pass
+
+    def _wait_for_exit(self,timeout):
+        try:return self.process.wait(timeout=timeout)
+        except subprocess.TimeoutExpired:
+            self.process.terminate()
+            return self.process.wait(timeout=3)
 
     def _read(self):
         terminal=False
@@ -43,11 +66,8 @@ class BrowserJob:
                 self.messages.put(('internal_reader',(self,event)))
         finally:
             self.process.stdout.close()
-            try:self.process.stdin.close()
-            except OSError:pass
-            try:code=self.process.wait(timeout=1)
-            except subprocess.TimeoutExpired:
-                self.process.terminate();code=self.process.wait(timeout=3)
+            try:code=self._wait_for_exit(1)
+            finally:self._stop_input.set()
             if not terminal and not self.cancelled.is_set():
                 self.messages.put(('internal_reader',(self,{'kind':'error','text':f'내부 브라우저 종료 (코드 {code}) · 연결 설정에서 다시 시도하세요.'})))
             self.messages.put(('internal_reader',(self,{'kind':'finished'})))
@@ -55,13 +75,8 @@ class BrowserJob:
     def cancel(self):
         if self.cancelled.is_set():return
         self.cancelled.set()
-        try:
-            self.process.stdin.write('{"action":"close"}\n');self.process.stdin.flush()
-        except (OSError,ValueError):pass
-        def cleanup():
-            try:self.process.wait(timeout=3)
-            except subprocess.TimeoutExpired:self.process.terminate();self.process.wait(timeout=3)
-        threading.Thread(target=cleanup,daemon=True,name='internal-browser-cleanup').start()
+        self._stop_input.set()
+        threading.Thread(target=self._wait_for_exit,args=(3,),daemon=True,name='internal-browser-cleanup').start()
 
     def close(self):
         self.cancel();self.thread.join(timeout=4)

@@ -1,4 +1,6 @@
 import tempfile
+import threading
+from time import monotonic, sleep
 import tkinter as tk
 import unittest
 from unittest.mock import patch
@@ -21,6 +23,83 @@ class PlaylistOverlayTests(unittest.TestCase):
 
     def tearDown(self):
         self.app.close();self.temp.cleanup()
+
+    def assert_first_paint_releases_lookups(self, lines):
+        playback=Playback('Initial track','Singer','Album',duration=100.)
+        if lines:self.assertTrue(self.app.lyric_cache.save(playback,lines))
+        self.app.services_started=True
+        self.app.initial_playback_paint_pending=True
+        self.app.background_lyrics.defer_catalog=True
+        self.app.background_lyrics.artist_catalog_held=True
+        self.app.workspace.overlay_requested=self.app.workspace.ready=True
+        events=[]
+
+        def publish(_position):
+            events.append(('publish',len(self.app.display_lines)))
+
+        start_thread=threading.Thread.start
+
+        def start(worker):
+            if worker.name in ('artist-catalog','saved-lyric-supplements'):
+                events.append((worker.name,len(self.app.display_lines)))
+            else:start_thread(worker)
+
+        with patch.object(threading.Thread,'start',start), \
+                patch.object(self.app.workspace,'publish_developer_playback',side_effect=publish), \
+                patch.object(self.app.background_lyrics,'observe'), \
+                patch.object(self.app,'observe_lyricsplus'):
+            self.app.set_playback(playback)
+            self.assertTrue(self.app.initial_playback_paint_pending)
+            self.assertTrue(all(event[0]=='publish' for event in events))
+            self.app.render()
+            deadline=monotonic()+2
+            while self.app.initial_playback_paint_pending and monotonic()<deadline:
+                self.root.update()
+                sleep(.01)
+
+        self.assertFalse(self.app.initial_playback_paint_pending)
+        self.assertIsNone(self.app.related_cache_pending)
+        rows=len(lines)
+        self.assertIn(('publish',rows),events)
+        for worker in ('artist-catalog','saved-lyric-supplements'):
+            self.assertIn((worker,rows),events)
+            self.assertLess(events.index(('publish',rows)),events.index((worker,rows)))
+
+    def test_initial_cached_lyrics_publish_before_background_lookups(self):
+        self.assert_first_paint_releases_lookups((Line('First saved line','','번역'),))
+
+    def test_initial_cache_miss_releases_background_lookups(self):
+        self.assert_first_paint_releases_lookups(())
+
+    def test_exact_lyrics_display_while_related_lookup_is_still_blocked(self):
+        playback=Playback(title='Fixture song',artist='Fixture artist',album='Album',duration=100.)
+        lines=(Line('青い空を見上げて','','푸른 하늘'),Line('花が咲く季節に','','꽃이 피는 계절'))
+        self.app.lyric_cache.save(playback,lines)
+        started=threading.Event();release=threading.Event();finished=threading.Event()
+        def slow_lookup(*args):
+            started.set()
+            release.wait(5)
+            finished.set()
+            return [],None
+        self.app.services_started=True
+        try:
+            with patch.object(self.app,'load_related_lyrics',side_effect=slow_lookup), \
+                    patch.object(self.app.background_lyrics,'observe'), \
+                    patch.object(self.app,'observe_lyricsplus'):
+                self.app.set_playback(playback)
+                self.assertTrue(started.wait(1))
+                self.assertFalse(finished.is_set())
+                self.assertEqual(self.app.display_lines,lines)
+                self.assertEqual(self.app.original_label.cget('text'),lines[0].original)
+                request=self.app.related_cache_request
+                self.app.set_playback(Playback('Other','Singer','Album',duration=80))
+                with patch.object(self.app,'restore_cached_lyrics') as restore:
+                    self.app.receive_related_lyrics(request,playback,([{'lines':lines}],None))
+                    restore.assert_not_called()
+        finally:
+            release.set()
+            finished.wait(2)
+            self.app.services_started=False
 
     def test_requested_batch_survives_spotify_exit(self):
         self.app.playlist_lyrics.value['shutdown_requested']=True

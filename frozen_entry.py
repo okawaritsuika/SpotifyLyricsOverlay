@@ -41,6 +41,7 @@ if __name__ == '__main__':
     elif len(sys.argv) == 3 and sys.argv[1] == '--self-test':
         import json
         from pathlib import Path
+        import ssl
         import tkinter as tk
         from app_paths import seed_data, resource_dir
         from app import LyricsApp
@@ -48,10 +49,42 @@ if __name__ == '__main__':
         from media import Playback
         from storage import Store
         from web_lyrics import reading
+        tls=ssl.create_default_context()
+        if not tls.check_hostname or tls.verify_mode != ssl.CERT_REQUIRED:
+            raise RuntimeError('Frozen TLS certificate verification is unavailable.')
         directory=Path(sys.argv[2]).resolve()
         seed_data(directory)
         root=tk.Tk()
         app=LyricsApp(root,Store(directory),start_services=False)
+        if os.environ.get('SPOTIFY_LYRICS_SELF_TEST_SAVED_PLAYBACK') == '1':
+            from timing_quality import timing_origins
+            from time import perf_counter
+
+            def check_saved(title, digest, rows, *, translated=0, spotify=0, manual=0):
+                entry=resource_dir()/'resources'/'seed_data'/'lyrics_cache'/(digest+'.json')
+                value=json.loads(entry.read_bytes())
+                playback=Playback(*value['key'].split('\0'),duration=value['duration'])
+                started=perf_counter()
+                app.set_playback(playback)
+                app.render()
+                elapsed=round((perf_counter()-started)*1000,1)
+                result={'rows':len(app.display_lines), 'translated':app.translated_count,
+                        'spotify':sum(stamp is not None for stamp in app.direct_times()),
+                        'manual':timing_origins(app.timing).count('manual'), 'elapsed_ms':elapsed}
+                if (playback.title!=title or result['rows']!=rows or result['translated']<translated
+                        or result['spotify']<spotify or result['manual']<manual):
+                    raise ValueError('Packaged saved playback verification failed: '+str(result))
+                return result
+
+            root.withdraw()
+            result={
+                'BEAM':check_saved('BEAM','f1b6951ad369b3e977766df83a289e8c2b090c690c7ace535a5563edd58f8f13',
+                                   47,translated=41,spotify=47),
+                'FANTASTIC GATHERING!':check_saved('FANTASTIC GATHERING!',
+                    '869c2cc3e20477c6ea96b6119ac665c9781f11edebb9dd0dd7d7d648e3a07137',85,manual=81)}
+            app.close()
+            (directory/'self-test.json').write_text(json.dumps(result,indent=2),encoding='utf-8')
+            raise SystemExit(0)
         root.update()
         app.open_explorer()
         root.update()
@@ -72,6 +105,7 @@ if __name__ == '__main__':
                 'update_dialog':bool(app.update_dialog),
                 'local_analysis_dialog':bool(app.local_analysis_dialog.window.winfo_exists()),
                 'sync_reanalysis_dialog':bool(app.sync_reanalysis_dialog.window.winfo_exists()),
+                'tls_runtime':True,
                 'lyric_advance_ms':app.lyric_advance_ms,
                 'local_analysis_worker':(resource_dir()/'local_analysis_worker.py').is_file()}
         from winrt.windows.media.control import GlobalSystemMediaTransportControlsSessionManager
@@ -82,6 +116,11 @@ if __name__ == '__main__':
         from importlib.util import find_spec
         result['browser_module']=bool(find_spec('webview') and find_spec('clr'))
         result['optional_bundled']=[name for name in ('torch','faster_whisper') if find_spec(name)]
+        if os.environ.get('SPOTIFY_LYRICS_SELF_TEST_PROVIDERS') == '1':
+            from alsong_provider import search_alsong
+            from public_lyrics import _request
+            result['alsong_matches']=len(search_alsong('チャンピオン','星井美希'))
+            result['public_matches']=len(_request({'track_name':'Imagine','artist_name':'John Lennon'}))
         app.close()
         (directory/'self-test.json').write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8')
     else:

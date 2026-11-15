@@ -8,8 +8,10 @@ import unittest
 from unittest.mock import patch
 
 from lyric_cache import LyricCache, MAX_ENTRY_BYTES, MAX_ROWS, MAX_TEXT
-from lyrics import Line
+from live_timing import LiveTimingStore
+from lyrics import Line, Song
 from media import Playback
+from playlist_lyrics_store import PlaylistLyricsStore
 
 
 class LyricCacheTests(unittest.TestCase):
@@ -34,6 +36,138 @@ class LyricCacheTests(unittest.TestCase):
 
     def write(self, value):
         self.path().write_text(json.dumps(value, ensure_ascii=False), encoding='utf-8')
+
+    def manual_song(self, lines, prefix='memory-'):
+        title, artist, album = self.playback.key.split('\0')
+        return Song(prefix + self.path().stem[:24], title, artist, album, lines)
+
+    def bundled_manual(self):
+        bundled = self.directory.parent / 'seed'
+        self.assertTrue(LyricCache(bundled / 'lyrics_cache').save(self.playback, self.lines))
+        LiveTimingStore(bundled).save(self.manual_song(self.lines), {
+            'times':[1,10.5], 'origins':['manual','audio'], 'offset':.25})
+        return bundled
+
+    def test_bundled_layout_recovers_manual_clock_after_writable_cache_loses_layout(self):
+        bundle = self.bundled_manual()
+        player_clock = LiveTimingStore(self.directory.parent)
+        stale = self.lines[:1]
+        self.assertTrue(self.cache.save(self.playback, stale))
+        player_clock.save(self.manual_song(stale), {'times':[None]})
+        local = self.cache.load(self.playback)
+        recovered = self.cache.prefer_bundled_manual(self.playback, local, bundled_data=bundle,
+                                                   timing_store=player_clock)
+        self.assertEqual(recovered['lines'], self.lines)
+        self.assertEqual(recovered['manual_timing']['times'], [1,10.5])
+        self.assertEqual(recovered['manual_timing']['origins'], ['manual','audio'])
+        self.assertEqual(recovered['manual_timing']['offset'], .25)
+        self.assertEqual(self.cache.load(self.playback), local)
+        self.assertEqual(player_clock.load(self.manual_song(stale))['times'], [None])
+
+    def test_bundled_clock_preserves_local_annotation_on_exact_layout(self):
+        bundle = self.bundled_manual()
+        player_clock = LiveTimingStore(self.directory.parent)
+        local_lines = tuple(replace(row,korean='Reviewed locally') for row in self.lines)
+        self.assertTrue(self.cache.save(self.playback,local_lines))
+        local = self.cache.load(self.playback)
+        recovered = self.cache.prefer_bundled_manual(self.playback, local, bundled_data=bundle,
+                                                   timing_store=player_clock)
+        self.assertEqual(recovered['lines'], local_lines)
+        self.assertEqual(recovered['manual_timing']['times'], [1,10.5])
+
+    def test_bundled_clock_can_use_an_exact_writable_layout_without_a_seed_cache_entry(self):
+        bundle = self.directory.parent / 'seed'
+        player_clock = LiveTimingStore(self.directory.parent)
+        LiveTimingStore(bundle).save(self.manual_song(self.lines), {'times':[1,10.5]})
+        self.assertTrue(self.cache.save(self.playback, self.lines, self.direct))
+        local = self.cache.load(self.playback)
+        recovered = self.cache.prefer_bundled_manual(self.playback, local, bundled_data=bundle,
+                                                   timing_store=player_clock)
+        self.assertEqual(recovered, {**local, 'manual_timing':LiveTimingStore(bundle).load(self.manual_song(self.lines))})
+
+    def test_bundled_clock_can_use_the_exact_playlist_recording_without_a_seed_cache_entry(self):
+        bundle = self.directory.parent / 'seed'
+        player_clock = LiveTimingStore(self.directory.parent)
+        LiveTimingStore(bundle).save(self.manual_song(self.lines, 'completed-'), {'times':[1,10.5]})
+        track = {'id':'p'*22, 'title':self.playback.title, 'artists':[self.playback.artist],
+                 'album':self.playback.album, 'duration':self.playback.duration}
+        provider = {**self.direct, 'provider_id':track['id']}
+        self.assertTrue(PlaylistLyricsStore(bundle).save(track, self.lines, provider))
+        self.assertTrue(self.cache.save(self.playback, self.lines[:1]))
+        local = self.cache.load(self.playback)
+        recovered = self.cache.prefer_bundled_manual(self.playback, local, bundled_data=bundle,
+                                                   timing_store=player_clock)
+        self.assertEqual(recovered['track']['id'], track['id'])
+        self.assertEqual(recovered['lines'], self.lines)
+        self.assertEqual(recovered['manual_timing']['times'], [1,10.5])
+        different = replace(self.playback, duration=self.playback.duration+20)
+        self.assertIsNone(self.cache.prefer_bundled_manual(different, None, bundled_data=bundle,
+                                                         timing_store=player_clock))
+
+    def test_no_manual_timing_skips_the_bundled_cache_and_playlist_index(self):
+        bundle = self.directory.parent / 'seed'
+        player_clock = LiveTimingStore(self.directory.parent)
+        with patch.object(LyricCache, 'load') as load, patch.object(PlaylistLyricsStore, 'find') as find:
+            self.assertIsNone(self.cache.prefer_bundled_manual(self.playback, None, bundled_data=bundle,
+                                                             timing_store=player_clock))
+        load.assert_not_called()
+        find.assert_not_called()
+
+    def test_bundled_clock_is_never_substituted_for_a_local_manual_clock(self):
+        bundle = self.bundled_manual()
+        player_clock = LiveTimingStore(self.directory.parent)
+        local_lines = self.lines[:1]
+        self.assertTrue(self.cache.save(self.playback, local_lines))
+        local = self.cache.load(self.playback)
+        song = self.manual_song(local_lines)
+        for timing in ({'times':[42],'origins':['manual']}, {'times':[None],'cleared_rows':[0]}):
+            with self.subTest(timing=timing):
+                player_clock.save(song,timing)
+                self.assertIs(self.cache.prefer_bundled_manual(self.playback, local, bundled_data=bundle,
+                                                             timing_store=player_clock), local)
+        # Even after eviction, a local manual clock with an unknown layout is left alone.
+        self.assertIsNone(self.cache.prefer_bundled_manual(self.playback, None, bundled_data=bundle,
+                                                        timing_store=player_clock))
+
+    def test_bundled_exact_lyrics_fill_an_older_cache_without_replacing_local_edits(self):
+        local = {'lines': (replace(self.lines[0], korean='Local'), replace(self.lines[1], korean='')),
+                 'direct':None}
+        bundle = {'lines':self.lines,'direct':self.direct}
+        resolved = LyricCache.supplement_exact(local,bundle)
+        self.assertEqual(tuple(row.korean for row in resolved['lines']), ('Local',self.lines[1].korean))
+        self.assertIs(resolved['direct'],self.direct)
+        self.assertIs(LyricCache.supplement_exact(None,bundle),bundle)
+        self.assertIs(LyricCache.supplement_exact(local,{**bundle,'lines':self.lines[:1]}),local)
+
+    def test_bundled_audio_clock_uses_its_exact_saved_lyric_layout(self):
+        bundle = self.bundled_manual()
+        player_clock = LiveTimingStore(self.directory.parent)
+        LiveTimingStore(bundle).save(self.manual_song(self.lines),{
+            'times':[1,10.5],'origins':['audio','audio'],'audio_finalized':True})
+        recovered = self.cache.prefer_bundled_manual(self.playback,None,bundled_data=bundle,
+                                                    timing_store=player_clock)
+        self.assertEqual(recovered['manual_timing']['origins'],['audio','audio'])
+        self.assertEqual(recovered['lines'],self.lines)
+
+    def test_bundled_clock_can_pair_with_local_manual_times_after_cache_eviction(self):
+        bundle = self.bundled_manual()
+        player_clock = LiveTimingStore(self.directory.parent)
+        player_clock.save(self.manual_song(self.lines),{'times':[42,99],'origins':['manual','manual']})
+        recovered = self.cache.prefer_bundled_manual(self.playback, None, bundled_data=bundle,
+                                                   timing_store=player_clock)
+        self.assertEqual(recovered['lines'],self.lines)
+        self.assertEqual(recovered['manual_timing']['times'],[42,99])
+
+    def test_bundled_clock_requires_exact_recording_and_valid_line_signature(self):
+        bundle = self.bundled_manual()
+        player_clock = LiveTimingStore(self.directory.parent)
+        for changes in ({'duration':210}, {'album':'Other'}):
+            playback = replace(self.playback,**changes)
+            self.assertIsNone(self.cache.prefer_bundled_manual(playback,None,bundled_data=bundle,
+                                                            timing_store=player_clock))
+        LiveTimingStore(bundle).save(self.manual_song(self.lines[:1]),{'times':[15]})
+        self.assertIsNone(self.cache.prefer_bundled_manual(self.playback,None,bundled_data=bundle,
+                                                        timing_store=player_clock))
 
     def test_fresh_instance_restores_original_reading_translation_and_direct_timing(self):
         with patch('lyric_cache.time.time', return_value=1234.5):

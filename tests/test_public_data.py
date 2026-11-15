@@ -3,12 +3,16 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from zipfile import ZIP_DEFLATED, ZipFile
 
+from artist_credit_overrides import ArtistCreditOverrides
 from batch_translation import BatchTranslationStore
+from data_updates import validate_package
 from explorer_library import ExplorerLibrary
 from lyric_annotations import LyricTextEdits
 from lyric_cache import LyricCache
 from lyric_edits import save_lyric_edit
+from lyric_merge import make_snapshot, merge_lyrics
 from lyrics import Line, Song, match_recording
 from live_timing import LiveTimingStore
 from media import Playback
@@ -105,6 +109,51 @@ class PublicDataTests(unittest.TestCase):
                     'lines': [{'original': 'song', 'reading': '', 'korean': private}]}])
                 with self.assertRaises(ValueError):export_public_data(self.source, self.output)
                 self.assertFalse(self.output.exists())
+
+    def test_merged_clocks_and_reviewed_credits_survive_the_public_archive(self):
+        playback = Playback('Song', 'Artist', 'Album', duration=100)
+        lines = (Line('First line', '', ''), Line('Second line', '', '번역'))
+        track_id = self.track['id']
+        snapshots = (
+            make_snapshot('Spotify', lines, [5, None], provider_id=track_id, track_id=track_id,
+                          recording_verified=True),
+            make_snapshot('manual', lines, [None, 10], track_id=track_id, recording_verified=True),
+        )
+        result = merge_lyrics(playback, snapshots, track_id=track_id)
+        self.assertEqual(result['direct']['source'], 'Merged')
+        self.assertTrue(PlaylistLyricsStore(self.source).save(self.track, result['lines'], result['direct'],
+                        snapshots=result['snapshots'], merge_rows=result['rows']))
+        cache = LyricCache(self.source / 'lyrics_cache')
+        self.assertTrue(cache.save(playback, result['lines'], result['direct'],
+                                  merge={'snapshots': result['snapshots'], 'rows': result['rows']}))
+        paths = (cache._path(playback.key), self.source / 'playlist_lyrics' / 'tracks' / (track_id + '.json'))
+        for path in paths:
+            value = json.loads(path.read_text(encoding='utf-8'))
+            value['merge']['snapshots'][0]['access_token'] = 'private-source-value'
+            value['merge']['rows'][0]['timings'][0]['path'] = 'private-path-value'
+            self.write(path.relative_to(self.source).as_posix(), value)
+        self.write('artist_credit_overrides.json', {'version': 1, 'entries': [{
+            'track': self.track, 'artists': ['Reviewed singer'],
+            'evidence_kind': 'user_confirmed_audio_and_credits', 'note': 'private-review-note',
+            'confirmed_at': 'private-review-time',
+        }]})
+
+        export_public_data(self.source, self.output)
+
+        released = PlaylistLyricsStore(self.output).load(track_id)
+        self.assertEqual(released['direct']['times'], [5, 10])
+        self.assertEqual(released['merge_rows'][1]['selected_source'], 'manual')
+        released_cache = LyricCache(self.output / 'lyrics_cache').load(playback)
+        self.assertEqual(released_cache['direct']['times'], [5, 10])
+        self.assertEqual(released_cache['merge']['rows'][1]['selected_source'], 'manual')
+        self.assertEqual(ArtistCreditOverrides(self.output).get(playback), ('Reviewed singer',))
+        archive = self.root / 'public.zip'
+        with ZipFile(archive, 'w', compression=ZIP_DEFLATED) as zip_file:
+            for path in self.output.rglob('*.json'):
+                self.assertNotIn('private-', path.read_text(encoding='utf-8'))
+                zip_file.write(path, path.relative_to(self.output).as_posix())
+        documents = validate_package(archive)
+        self.assertIn('artist_credit_overrides.json', documents)
 
     def test_recording_edits_keep_reader_keys_and_explicit_blanks(self):
         recording_key = 'Song\0Artist\0Album'

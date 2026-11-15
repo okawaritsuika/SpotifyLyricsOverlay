@@ -19,6 +19,23 @@ from spotify_catalog import catalog_diagnostic_record,catalog_request_diagnostic
 from spotify_playlist import observed_request,playlist_request_diagnostic,playlist_template,playlist_page
 
 MAX_RESPONSE=4_000_000
+LYRICS_TIMING_LOCK=threading.Lock()
+
+
+def trace_lyrics(phase,generation=None,*,started_ns=None,http_status=None):
+    directory=os.environ.get('SPOTIFY_LYRICS_TIMING_DIR')
+    if not directory:return
+    timestamp=time.monotonic_ns()
+    pid=os.getpid()
+    entry={'phase':phase,'pid':pid,'monotonic_ns':timestamp}
+    if generation is not None:entry['generation']=generation
+    if started_ns is not None:entry['elapsed_ms']=round((timestamp-started_ns)/1_000_000,3)
+    if http_status is not None:entry['http_status']=http_status
+    try:
+        with LYRICS_TIMING_LOCK, (Path(directory)/f'spotify-worker-{pid}.jsonl').open('a',encoding='utf-8') as log:
+            log.write(json.dumps(entry)+'\n')
+    except OSError:
+        pass
 
 
 def playlist_track_shapes(payload):
@@ -107,7 +124,7 @@ class NoRedirect(HTTPRedirectHandler):
         return None
 
 
-def fetch_lyrics(track_id,authorization,client_token=''):
+def fetch_lyrics(track_id,authorization,client_token='',*,generation=None):
     # Native lyric requests carrying account authorization have this fixed host.
     import re
     if not re.fullmatch(r'[A-Za-z0-9]{22}',track_id):raise ValueError('track id')
@@ -115,8 +132,13 @@ def fetch_lyrics(track_id,authorization,client_token=''):
     if client_token:headers['client-token']=client_token
     request=Request('https://spclient.wg.spotify.com/color-lyrics/v2/track/'+track_id+
                     '?format=json&vocalRemoval=false&market=from_token',headers=headers)
+    started_ns=time.monotonic_ns()
+    if generation is not None:trace_lyrics('http_open',generation)
     with build_opener(NoRedirect()).open(request,timeout=12) as response:
+        if generation is not None:
+            trace_lyrics('http_headers',generation,started_ns=started_ns,http_status=response.status)
         data=response.read(MAX_RESPONSE+1)
+        if generation is not None:trace_lyrics('http_body',generation,started_ns=started_ns)
         if len(data)>MAX_RESPONSE:raise ValueError('response size')
         return json.loads(data)
 
@@ -511,14 +533,40 @@ class SpotifyBrowser:
 
     def begin_search(self):
         if not self.pending or not self.authenticated:return
+        if not self.pending.get('metadata_only') and self.pending.get('album'):
+            candidate=validated_track(self.pending,self.pending.get('verified_track'))
+            if candidate:
+                self.active_query=''
+                self.fetch_current_lyrics(candidate)
+                return
         self.active_query=search_query(self.pending);self.fetching=False
         self.search_deadline=time.monotonic()+25
+        trace_lyrics('web_search_started',self.generation)
         self.status('searching','Spotify에서 현재 곡과 싱크를 확인하는 중')
         url='https://open.spotify.com/search/'+quote(self.active_query,safe='')
         if self.window.get_current_url()==url:
             # Assigning the same WebView2 Source does not trigger another request.
             self.reload()
         else:self.navigate_search(url)
+
+    def fetch_current_lyrics(self,candidate):
+        self.fetching=True;self.search_deadline=0
+        generation,key=self.generation,self.pending['key']
+        trace_lyrics('fetch_started',generation)
+        self.status('searching','Spotify에서 현재 곡의 가사를 가져오는 중')
+        authorization,client=self.authorization,self.client_token
+        def fetch():
+            try:
+                payload=fetch_lyrics(candidate['id'],authorization,client,generation=generation)
+                trace_lyrics('fetch_queued',generation)
+                self.network.put(('lyrics',generation,key,candidate,payload))
+            except HTTPError as error:
+                trace_lyrics('fetch_error',generation,http_status=int(error.code))
+                self.network.put(('fetch_error',generation,int(error.code)))
+            except Exception:
+                trace_lyrics('fetch_error',generation)
+                self.network.put(('fetch_error',generation,0))
+        threading.Thread(target=fetch,daemon=True,name='spotify-lyrics-api').start()
 
     def navigate_search(self,url):
         # pywebview's Source=System.Uri(url) expands %2F on this runtime,
@@ -596,6 +644,7 @@ class SpotifyBrowser:
             self.generation+=1;self.auth_retries=0
             self.pending=command if isinstance(command.get('key'),str) and command.get('key') and command.get('title') else None
             self.active_query='';self.fetching=False;self.search_deadline=0
+            if self.pending:trace_lyrics('lookup_received',self.generation)
             if self.pending and self.authenticated:self.begin_search()
             elif self.pending and not self.auth_deadline:
                 # Each track needs a terminal response after login has failed;
@@ -644,6 +693,7 @@ class SpotifyBrowser:
                 self.batch_credentials=None
                 self.auth_deadline=0
                 if first:
+                    trace_lyrics('authenticated',self.generation)
                     self.window.hide()
                     self.status('ready','Spotify 계정 연결됨 · 화면 없이 가사 조회 가능')
                     self.begin_search()
@@ -676,18 +726,10 @@ class SpotifyBrowser:
                 self.search_deadline=0;self.active_query=''
                 self.status('ready' if metadata else 'not_found','Spotify 가수 정보 확인 완료')
                 return
-            self.fetching=True;self.search_deadline=0
-            generation,key=self.generation,self.pending['key']
-            authorization,client=self.authorization,self.client_token
-            def fetch():
-                try:
-                    payload=fetch_lyrics(candidate['id'],authorization,client)
-                    self.network.put(('lyrics',generation,key,candidate,payload))
-                except HTTPError as error:self.network.put(('fetch_error',generation,int(error.code)))
-                except Exception:self.network.put(('fetch_error',generation,0))
-            threading.Thread(target=fetch,daemon=True,name='spotify-lyrics-api').start()
+            self.fetch_current_lyrics(candidate)
         elif kind=='lyrics':
             if event[1]!=self.generation:return
+            trace_lyrics('result_received',event[1])
             self.fetching=False;self.active_query=''
             try:lines=lyric_lines(event[4],event[3]['duration'])
             except ValueError:
@@ -697,10 +739,13 @@ class SpotifyBrowser:
                 except (KeyError,TypeError,ValueError):
                     self.status('error','Spotify 가사 응답을 확인하지 못했습니다. 연결을 다시 시도하세요.');return
             emit('lyrics',key=event[2],source='Spotify',track_id=event[3]['id'],lines=lines)
-            self.window.hide()
+            trace_lyrics('lyrics_emitted',event[1])
+            # Authentication already hides the login window. Avoid a synchronous
+            # WebView UI-thread call on every lyric response.
             if all(line['time'] is not None for line in lines):
                 self.status('ready','Spotify 싱크 연결됨 · 최소화하거나 가사창을 닫아도 됩니다.')
             else:self.status('unsynced','Spotify 원문 연결됨 · 현재 줄별 싱크를 사용할 수 없습니다.')
+            trace_lyrics('lyrics_status_emitted',event[1])
         elif kind=='fetch_error':
             if event[1]!=self.generation:return
             self.fetching=False;self.active_query=''
@@ -729,6 +774,7 @@ class SpotifyBrowser:
     def run(self):
         if not self.window.events.loaded.wait(20):raise TimeoutError('startup')
         self.install_hooks()
+        trace_lyrics('webview_ready')
         self.window.load_url('https://accounts.spotify.com/login?continue=https%3A%2F%2Fopen.spotify.com%2F'
                              if self.login_requested else 'https://open.spotify.com/')
         while not self.stopped.is_set():
@@ -753,6 +799,7 @@ class SpotifyBrowser:
 
 
 def main():
+    trace_lyrics('worker_started')
     request=json.loads(sys.stdin.readline())
     profile=Path(request['profile']).resolve();profile.mkdir(parents=True,exist_ok=True)
     import webview

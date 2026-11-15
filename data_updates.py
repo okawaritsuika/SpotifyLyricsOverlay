@@ -30,7 +30,7 @@ PENDING = '.pending-data-update.json'
 RECEIPTS = '.data-update-receipts.json'
 STAGING = '.data-updates'
 CATALOG_FILES = frozenset(('song_catalog.json', 'live_catalog.json', 'imas_db_people.json', 'group_credits.json'))
-ROOT_FILES = {'_manifest.json', 'library.json', 'settings.json', 'artist_metadata.json',
+ROOT_FILES = {'_manifest.json', 'library.json', 'settings.json', 'artist_metadata.json', 'artist_credit_overrides.json',
               'explorer_library.json', 'spotify_public_tracks.json', 'wiki_documents.json',
               'wiki_lyric_parts.json', 'lyric_parts.json', 'ai_translations/imports.json',
               'playlist_lyrics/index.json'} | CATALOG_FILES
@@ -158,6 +158,7 @@ def _validate_documents(documents, sizes):
         if name == 'library.json':clean = [public._song(row) for row in value]
         elif name == 'settings.json':clean = public._edited_settings(value, library)
         elif name == 'ai_translations/imports.json':clean = _imports(value)
+        elif name == 'artist_credit_overrides.json':clean = public._artist_credit_overrides(value)
         elif name == 'artist_metadata.json':
             if len(value['entries']) > 512:raise ValueError('Artist metadata update too large')
             clean = {'version': 1, 'entries': [
@@ -199,8 +200,6 @@ def _validate_documents(documents, sizes):
         elif folder == 'playlist_lyrics/tracks':
             clean = public._playlist(value)
             if clean is None or clean['track']['id'] + '.json' != filename:raise ValueError('Invalid playlist lyric identity')
-            from playlist_lyrics_store import _direct
-            _direct(clean.get('direct'), clean['track'], decoded=True)
         elif folder == 'user_lyrics':clean = public._user_lyrics(value)
         elif folder == 'singer_edits':clean = public._singer_edits(value)
         elif folder == 'singer_rosters':clean = public._singer_roster(value)
@@ -391,7 +390,7 @@ def _recording_key(value):
     return None
 
 
-def _clock_authorities(root, documents, library, settings):
+def _clock_authorities(root, documents, library, settings, read):
     """Map all known clock namespaces to exact recording identities.
 
     Unknown hashes can defer unidentifiable incoming clocks, while recordings
@@ -404,7 +403,7 @@ def _clock_authorities(root, documents, library, settings):
     for folder in ('lyrics_cache', 'playlist_lyrics/tracks'):
         _safe(root / folder)
         for path in (root / folder).glob('*.json'):
-            value = _read(path)
+            value = read(path)
             if isinstance(value, dict):current[path.relative_to(root).as_posix()] = value
     candidates.extend(current.values())
     candidates.extend(library)
@@ -444,7 +443,7 @@ def _clock_authorities(root, documents, library, settings):
     for folder in ('timings', 'live_timings', 'native_timings'):
         _safe(root / folder)
         for path in (root / folder).glob('*.json'):
-            value = _read(path)
+            value = read(path)
             if not nonempty(value):continue
             name = path.relative_to(root).as_posix()
             if name not in paths:unknown.add(name)
@@ -467,10 +466,13 @@ def _merge_document(name, left, right, protected_keys):
         # provider may be adopted only against the exact current original rows.
         if folder in ('lyrics_cache', 'playlist_lyrics/tracks'):
             direct = right.get('direct')
-            if left.get('direct') is None and direct and _same_rows(left['lines'], direct['lines']):result['direct'] = deepcopy(direct)
+            if (left.get('direct') is None and direct and 'merge' not in left
+                    and _same_rows(left['lines'], direct['lines'])):
+                result['direct'] = deepcopy(direct)
+                if 'merge' in right:result['merge'] = deepcopy(right['merge'])
             elif isinstance(left.get('direct'), dict) and isinstance(direct, dict):
                 previous = left['direct']
-                if (all(previous.get(key) == direct.get(key) for key in ('source', 'provider_id'))
+                if ('merge' not in left and all(previous.get(key) == direct.get(key) for key in ('source', 'provider_id'))
                         and _same_rows(previous.get('lines'), direct.get('lines'))):
                     merged_clock = _timing(previous, direct)
                     if merged_clock is not None:result['direct'] = merged_clock
@@ -502,6 +504,7 @@ def _merge_document(name, left, right, protected_keys):
     if name == 'wiki_documents.json':return _dictionary(left, right)
     fields = {'spotify_public_tracks.json': ('tracks', lambda item: item['id'], 50000),
               'artist_metadata.json': ('entries', lambda item: tuple(item['request'][key] for key in ('title', 'artist', 'album', 'duration')), 512),
+              'artist_credit_overrides.json': ('entries', lambda item: item['track']['id'], 128),
               'wiki_lyric_parts.json': ('recordings', lambda item: (item['title'], tuple(item['artists']), item['album'], item['text_sha256']), 5000),
               'lyric_parts.json': ('recordings', lambda item: (item['title'], tuple(item['artists']), item['album'], item['text_sha256']), 5000)}
     if name in fields:
@@ -533,11 +536,11 @@ def _plan_catalogs(root, documents):
     return changes, added, unchanged
 
 
-def _plan(root, documents):
+def _plan(root, documents, *, read=_read):
     changes, added, unchanged = _plan_catalogs(root, documents)
     deferred = set()
-    existing_library = _read(root / 'library.json', [])
-    settings = _read(root / 'settings.json', {})
+    existing_library = read(root / 'library.json', [])
+    settings = read(root / 'settings.json', {})
     if not isinstance(existing_library, list) or not isinstance(settings, dict):raise ValueError('Invalid current library/settings')
     Store(root).library()
     protected, protected_keys = _protected_keys(settings, existing_library)
@@ -564,7 +567,7 @@ def _plan(root, documents):
     native_directory = root / 'native_timings'
     _safe(native_directory)
     has_native = any(native_directory.glob('*.json'))
-    clock_paths, clock_authorities, unknown_clocks = _clock_authorities(root, documents, existing_library, settings)
+    clock_paths, clock_authorities, unknown_clocks = _clock_authorities(root, documents, existing_library, settings, read)
     protected_alsong = {hashlib.sha256(key.encode()).hexdigest()
                        for key in protected_keys | deleted | clock_authorities.keys()}
 
@@ -578,9 +581,11 @@ def _plan(root, documents):
 
     def propose(name, incoming):
         path = root / name
-        current = changes.get(name, _read(path))
+        current = changes[name] if name in changes else read(path)
         if current is None:
             changes[name] = deepcopy(incoming);added.add(name)
+        elif current == incoming:
+            if name not in changes:unchanged.add(name)
         else:
             try:merged = _merge_document(name, current, incoming, protected_keys)
             except (KeyError, TypeError, ValueError):merged = None
@@ -628,7 +633,7 @@ def _plan(root, documents):
             filename = Path(name).name
             legacy = native_aliases.get(filename)
             if legacy is not None:
-                previous = _read(native_directory / legacy)
+                previous = read(native_directory / legacy)
                 if previous is not None:
                     merged_clock = _timing(previous, value)
                     if merged_clock is None:deferred.add(name);continue
@@ -638,14 +643,16 @@ def _plan(root, documents):
                 # An unidentifiable new hash could hide an active legacy clock.
                 deferred.add(name);continue
         if name.startswith(('timings/', 'live_timings/', 'native_timings/')):
-            current_clock = _read(root / name)
+            current_clock = read(root / name)
             if current_clock != value and other_clock(name, value, clock_exceptions):
                 deferred.add(name);continue
         if name.startswith(('lyrics_cache/', 'playlist_lyrics/tracks/')) and value.get('direct') is not None:
-            current_value = _read(root / name, {})
+            current_value = read(root / name, {})
             previous = current_value.get('direct')
             if previous != value['direct'] and other_clock(name, value):
                 value = {**value, 'direct': deepcopy(previous)}
+                if 'merge' in current_value:value['merge'] = deepcopy(current_value['merge'])
+                else:value.pop('merge', None)
                 deferred.add(name)
         if name.startswith('lyric_annotations/'):
             song = songs.get(Path(name).stem)

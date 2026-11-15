@@ -97,6 +97,9 @@ def build(version, output_dir, electron_runtime=None):
                '--specpath',str(base/'build'),'--noupx',
                '--add-data',str(base/'LICENSE')+';.',
                '--add-data',str(notices)+';THIRD_PARTY_LICENSES']
+    # Some Windows build interpreters load an extra distrust policy beside ssl.py.
+    ssl_policy=Path(sys.base_prefix)/'Lib'/'codex-rejected-cas.pem'
+    if ssl_policy.is_file():arguments+=['--add-data',str(ssl_policy)+';.']
     for path in paths:
         relative=path.relative_to(base)
         if relative.parts[0] in ('resources','extension','desktop_ui') or (len(relative.parts)==1 and

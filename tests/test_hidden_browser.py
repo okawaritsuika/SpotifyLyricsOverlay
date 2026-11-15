@@ -153,11 +153,14 @@ class HiddenBrowserTests(unittest.TestCase):
     def test_worker_console_stays_hidden_even_for_an_explicit_original_window(self):
         for visible in (False,True):
             with self.subTest(visible=visible):
-                process=SimpleNamespace(stdin=io.StringIO())
-                with patch('internal_reader.subprocess.Popen',return_value=process) as launch,patch('internal_reader.threading.Thread'):
-                    BrowserJob('.',{'token':'synthetic','track':'synthetic'},queue.Queue(),visible=visible)
+                process=SimpleNamespace(stdin=Mock())
+                with patch('internal_reader.subprocess.Popen',return_value=process) as launch,patch('internal_reader.threading.Thread') as threads:
+                    job=BrowserJob('.',{'token':'synthetic','track':'synthetic'},queue.Queue(),visible=visible)
+                job._stop_input.set()
+                writer=threads.call_args_list[0].kwargs
+                writer['target'](*writer['args'])
                 self.assertTrue(launch.call_args.kwargs['creationflags']&subprocess.CREATE_NO_WINDOW)
-                self.assertEqual(json.loads(process.stdin.getvalue())['visible'],visible)
+                self.assertEqual(json.loads(process.stdin.write.call_args.args[0])['visible'],visible)
 
 
 if __name__=='__main__':unittest.main()
